@@ -7,6 +7,9 @@
 package estaciondetrabajo;
 
 import java.awt.FlowLayout;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -32,23 +35,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        menu = new javax.swing.JMenuBar();
+        menuRegistros = new javax.swing.JMenu();
+        menuItemAltaUsuario = new javax.swing.JMenuItem();
+        menuItemAltaCategoria = new javax.swing.JMenuItem();
+        menuItemAltaServicio = new javax.swing.JMenuItem();
+        menuItemAltaPromocion = new javax.swing.JMenuItem();
+        menuItemActualizarServicio = new javax.swing.JMenuItem();
+        menuItemRealizarReserva = new javax.swing.JMenuItem();
+        menuItemActualizarEstadoReserva = new javax.swing.JMenu();
+        menuConsultas = new javax.swing.JMenu();
+        menuItemVerInfoCliente = new javax.swing.JMenuItem();
+        menuItemVerInfoProveedor = new javax.swing.JMenuItem();
+        menuItemVerInfoServicio = new javax.swing.JMenuItem();
+        menuItemVerInfoPromocion = new javax.swing.JMenuItem();
+        menuItemVerInfoReserva = new javax.swing.JMenuItem();
+        menuBorrados = new javax.swing.JMenu();
+        menuItemCancelarReserva = new javax.swing.JMenuItem();
 
         jMenuItem6.setText("jMenuItem6");
 
@@ -57,100 +60,148 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.FlowLayout());
 
-        jMenu1.setText("Registros");
+        menuRegistros.setText("Registros");
 
-        jMenuItem1.setText("Alta de Usuario");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuItemAltaUsuario.setText("Alta de Usuario");
+        menuItemAltaUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuItemAltaUsuarioActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menuRegistros.add(menuItemAltaUsuario);
 
-        jMenuItem2.setText("Alta de Categoría");
-        jMenu1.add(jMenuItem2);
+        menuItemAltaCategoria.setText("Alta de Categoría");
+        menuRegistros.add(menuItemAltaCategoria);
 
-        jMenuItem3.setText("Alta de Servicio");
-        jMenu1.add(jMenuItem3);
+        menuItemAltaServicio.setText("Alta de Servicio");
+        menuRegistros.add(menuItemAltaServicio);
 
-        jMenuItem10.setText("Alta de Promoción");
-        jMenu1.add(jMenuItem10);
+        menuItemAltaPromocion.setText("Alta de Promoción");
+        menuRegistros.add(menuItemAltaPromocion);
 
-        jMenuItem14.setText("Actualizar Servicio");
-        jMenu1.add(jMenuItem14);
+        menuItemActualizarServicio.setText("Actualizar Servicio");
+        menuRegistros.add(menuItemActualizarServicio);
 
-        jMenuItem9.setText("Realizar Reserva");
-        jMenu1.add(jMenuItem9);
+        menuItemRealizarReserva.setText("Realizar Reserva");
+        menuRegistros.add(menuItemRealizarReserva);
 
-        jMenu4.setText("Actualizar estado de Reserva");
-        jMenu1.add(jMenu4);
+        menuItemActualizarEstadoReserva.setText("Actualizar estado de Reserva");
+        menuRegistros.add(menuItemActualizarEstadoReserva);
 
-        jMenuBar1.add(jMenu1);
+        menu.add(menuRegistros);
 
-        jMenu2.setText("Consultas");
+        menuConsultas.setText("Consultas");
 
-        jMenuItem4.setText("Ver Información de Cliente");
-        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuItemVerInfoCliente.setText("Ver Información de Cliente");
+        menuItemVerInfoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem4MouseClicked(evt);
+                menuItemVerInfoClienteMouseClicked(evt);
             }
         });
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        menuItemVerInfoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                menuItemVerInfoClienteActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        menuConsultas.add(menuItemVerInfoCliente);
 
-        jMenuItem5.setText("Ver Información de Proveedor");
-        jMenu2.add(jMenuItem5);
+        menuItemVerInfoProveedor.setText("Ver Información de Proveedor");
+        menuItemVerInfoProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemVerInfoProveedorActionPerformed(evt);
+            }
+        });
+        menuConsultas.add(menuItemVerInfoProveedor);
 
-        jMenuItem11.setText("Ver Información de Servicio");
-        jMenu2.add(jMenuItem11);
+        menuItemVerInfoServicio.setText("Ver Información de Servicio");
+        menuConsultas.add(menuItemVerInfoServicio);
 
-        jMenuItem12.setText("Ver Información de Promoción");
-        jMenu2.add(jMenuItem12);
+        menuItemVerInfoPromocion.setText("Ver Información de Promoción");
+        menuConsultas.add(menuItemVerInfoPromocion);
 
-        jMenuItem13.setText("Ver Información de Reserva");
-        jMenu2.add(jMenuItem13);
+        menuItemVerInfoReserva.setText("Ver Información de Reserva");
+        menuConsultas.add(menuItemVerInfoReserva);
 
-        jMenuBar1.add(jMenu2);
+        menu.add(menuConsultas);
 
-        jMenu3.setText("Borrados");
+        menuBorrados.setText("Borrados");
 
-        jMenuItem8.setText("Cancelar Reserva");
-        jMenu3.add(jMenuItem8);
+        menuItemCancelarReserva.setText("Cancelar Reserva");
+        menuBorrados.add(menuItemCancelarReserva);
 
-        jMenuBar1.add(jMenu3);
+        menu.add(menuBorrados);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menu);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menuItemAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        if (v == null) {
-            v = new VerInformacionDeCliente();
-            getContentPane().add(v);
-            v.setSize(rootPane.size());
+    }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
+   
+    private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
+        if (verInformacionDeCliente == null) {
+            verInformacionDeCliente = new VerInformacionDeCliente();
+            verInformacionDeCliente.setSize(rootPane.size());
+            //verInformacionDeCliente.moveToFront();
+            getContentPane().add(verInformacionDeCliente);
+            internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
+            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+                if (internalFrame.getKey() != "verInformacionDeCliente") {
+                    internalFrame.getValue().setVisible(false);
+                } else internalFrame.getValue().setVisible(true);
+            }
+            /*
+             if (verInformacionDeProveedor != null) verInformacionDeProveedor.setVisible(false);
+             if (verInformacionDePromocion != null) verInformacionDePromocion.setVisible(false);
+             if (verInformacionDeReserva != null) verInformacionDeReserva.setVisible(false);
+             if (verInformacionDeServicio != null) verInformacionDeServicio.setVisible(false);
+             if (cancelarReserva != null) cancelarReserva.setVisible(false);
+             */
+        } else if (!verInformacionDeCliente.isVisible()) {
+            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+                if (internalFrame.getKey() != "verInformacionDeCliente") {
+                    internalFrame.getValue().setVisible(false);
+                } else internalFrame.getValue().setVisible(true);
+            }
+            verInformacionDeCliente.setVisible(rootPaneCheckingEnabled);
+            verInformacionDeCliente.moveToFront();
         }
-        if (!v.isVisible()) {            
-            v.setVisible(rootPaneCheckingEnabled);
-        }
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
 
-    private void jMenuItem4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MouseClicked
+    private void menuItemVerInfoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4MouseClicked
+    }//GEN-LAST:event_menuItemVerInfoClienteMouseClicked
+
+    private void menuItemVerInfoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoProveedorActionPerformed
+        if (verInformacionDeProveedor == null) {
+            verInformacionDeProveedor = new VerInformacionDeProveedor();
+            getContentPane().add(verInformacionDeProveedor);
+            verInformacionDeProveedor.setSize(rootPane.size());
+            //verInformacionDeCliente.moveToFront();
+            internalFrames.put("verInformacionDeProveedor", verInformacionDeProveedor);
+            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+                if (internalFrame.getKey() != "verInformacionDeProveedor") {
+                    internalFrame.getValue().setVisible(false);
+                } else internalFrame.getValue().setVisible(true);
+            }
+        } else if (!verInformacionDeProveedor.isVisible()) {  
+            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+                if (internalFrame.getKey() != "verInformacionDeProveedor") {
+                    internalFrame.getValue().setVisible(false);
+                } else internalFrame.getValue().setVisible(true);
+            }
+            //verInformacionDeProveedor.setVisible(rootPaneCheckingEnabled);
+            verInformacionDeCliente.moveToFront();
+        }
+    }//GEN-LAST:event_menuItemVerInfoProveedorActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -181,28 +232,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    HashMap<String, JInternalFrame> internalFrames = new HashMap<String, JInternalFrame>();
     //Variables nuestras
-    private VerInformacionDeCliente v;
+    private VerInformacionDeCliente verInformacionDeCliente;
+    private VerInformacionDePromocion verInformacionDePromocion;
+    private VerInformacionDeProveedor verInformacionDeProveedor;
+    private VerInformacionDeReserva verInformacionDeReserva;
+    private VerInformacionDeServicio verInformacionDeServicio;
+    private CancelarReserva cancelarReserva;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenuBar menu;
+    private javax.swing.JMenu menuBorrados;
+    private javax.swing.JMenu menuConsultas;
+    private javax.swing.JMenu menuItemActualizarEstadoReserva;
+    private javax.swing.JMenuItem menuItemActualizarServicio;
+    private javax.swing.JMenuItem menuItemAltaCategoria;
+    private javax.swing.JMenuItem menuItemAltaPromocion;
+    private javax.swing.JMenuItem menuItemAltaServicio;
+    private javax.swing.JMenuItem menuItemAltaUsuario;
+    private javax.swing.JMenuItem menuItemCancelarReserva;
+    private javax.swing.JMenuItem menuItemRealizarReserva;
+    private javax.swing.JMenuItem menuItemVerInfoCliente;
+    private javax.swing.JMenuItem menuItemVerInfoPromocion;
+    private javax.swing.JMenuItem menuItemVerInfoProveedor;
+    private javax.swing.JMenuItem menuItemVerInfoReserva;
+    private javax.swing.JMenuItem menuItemVerInfoServicio;
+    private javax.swing.JMenu menuRegistros;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,7 @@ public class EstacionDeTrabajo {
         System.out.println("ea");
         VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
         ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setSize(640, 480);
     }
     
 }

@@ -6,6 +6,8 @@
 
 package estaciondetrabajo;
 
+import java.awt.FlowLayout;
+
 /**
  *
  * @author marccio.silva
@@ -35,10 +37,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
 
         jMenuItem6.setText("jMenuItem6");
 
@@ -49,7 +59,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Registros");
 
-        jMenuItem1.setText("Chorolo");
+        jMenuItem1.setText("Alta de Usuario");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -57,25 +67,60 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Ea");
+        jMenuItem2.setText("Alta de Categoría");
         jMenu1.add(jMenuItem2);
 
-        jMenuItem3.setText("eaaeae");
+        jMenuItem3.setText("Alta de Servicio");
         jMenu1.add(jMenuItem3);
+
+        jMenuItem10.setText("Alta de Promoción");
+        jMenu1.add(jMenuItem10);
+
+        jMenuItem14.setText("Actualizar Servicio");
+        jMenu1.add(jMenuItem14);
+
+        jMenuItem9.setText("Realizar Reserva");
+        jMenu1.add(jMenuItem9);
+
+        jMenu4.setText("Actualizar estado de Reserva");
+        jMenu1.add(jMenu4);
 
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
 
-        jMenuItem4.setText("jMenuItem4");
+        jMenuItem4.setText("Ver Información de Cliente");
+        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem4MouseClicked(evt);
+            }
+        });
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
-        jMenuItem5.setText("tu vieja");
+        jMenuItem5.setText("Ver Información de Proveedor");
         jMenu2.add(jMenuItem5);
+
+        jMenuItem11.setText("Ver Información de Servicio");
+        jMenu2.add(jMenuItem11);
+
+        jMenuItem12.setText("Ver Información de Promoción");
+        jMenu2.add(jMenuItem12);
+
+        jMenuItem13.setText("Ver Información de Reserva");
+        jMenu2.add(jMenuItem13);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Borrados");
+
+        jMenuItem8.setText("Cancelar Reserva");
+        jMenu3.add(jMenuItem8);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -86,6 +131,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if (v == null) {
+            v = new VerInformacionDeCliente();
+            getContentPane().add(v);
+            v.setSize(rootPane.size());
+        }
+        if (!v.isVisible()) {            
+            v.setVisible(rootPaneCheckingEnabled);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -122,17 +182,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
 
+    //Variables nuestras
+    private VerInformacionDeCliente v;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

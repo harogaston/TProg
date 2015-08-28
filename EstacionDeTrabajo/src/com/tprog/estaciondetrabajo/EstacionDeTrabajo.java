@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package estaciondetrabajo;
+package com.tprog.estaciondetrabajo;
 
 /**
  *
@@ -20,6 +20,7 @@ public class EstacionDeTrabajo {
         VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
         ventanaPrincipal.setVisible(true);
         ventanaPrincipal.setSize(640, 480);
+        ventanaPrincipal.setLocationRelativeTo( null );
     }
     
 }

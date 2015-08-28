@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package estaciondetrabajo;
+package com.tprog.estaciondetrabajo;
 
 import java.util.HashMap;
 

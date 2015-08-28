@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 
-package estaciondetrabajo;
+package com.tprog.estaciondetrabajo;
 
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JInternalFrame;
+
 /**
  *
  * @author marccio.silva
@@ -86,6 +87,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(640, 480));
         setPreferredSize(new java.awt.Dimension(640, 480));
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
 
         menuRegistros.setText("Registros");
 
@@ -206,6 +212,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelarReservaActionPerformed
         showInternalFrame("cancelarReserva");
     }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        int width = this.getWidth();
+        int height = (int) (width/1.33);
+        this.setSize(width, height);
+    }//GEN-LAST:event_formComponentResized
 
     /**
      * @param args the command line arguments

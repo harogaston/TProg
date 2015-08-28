@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package estaciondetrabajo;
+package com.tprog.estaciondetrabajo;
 
 /**
  *
  * @author marccio.silva
  */
-public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
+public class CancelarReserva extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerInformacionDeReserva
+     * Creates new form CancelarReserva
      */
-    public VerInformacionDeReserva() {
+    public CancelarReserva() {
         initComponents();
     }
 
@@ -29,7 +29,6 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         setBorder(null);
-        setPreferredSize(new java.awt.Dimension(640, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

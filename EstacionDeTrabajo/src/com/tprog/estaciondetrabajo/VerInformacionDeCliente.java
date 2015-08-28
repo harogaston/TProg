@@ -4,10 +4,11 @@
  * and open the template in the editor.
  */
 
-package estaciondetrabajo;
+package com.tprog.estaciondetrabajo;
 
 import java.util.HashMap;
 import java.util.Map;
+import com.tprog.logica.dt.DTMinCliente;
 
 /**
  *
@@ -85,38 +86,36 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(listaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonMostrar)
-                .addGap(169, 169, 169))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonSalir)
-                        .addGap(201, 201, 201)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 617, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(listaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonMostrar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(botonSalir)
+                .addGap(282, 282, 282))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonMostrar)
                     .addComponent(listaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                .addGap(69, 69, 69)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(botonSalir)
-                .addContainerGap())
+                .addGap(46, 46, 46)
+                .addComponent(botonSalir))
         );
 
         pack();
@@ -139,9 +138,22 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         //Aca se trae un set de DTMinCliente para agregar al combobox
         clientes.clear();
         listaClientes.removeAllItems();
-        clientes.put("Pepito", "Pepito es un aventurero, le gusta pagar por travestis y después descuartizarlos/as y tirar las partes en contenedores separados por más de 3 km.");
-        clientes.put("Juan Carlos", "Él es Juan Carlos; el de los pantalones cortos y los huevos largos.");
-        clientes.put("Ramón", "A Ramón le gusta el helado");
+        DTMinCliente dt0 = new DTMinCliente("pendorcho64", "juanperez@gmail.com");
+        clientes.put(dt0.getNickname(), dt0.getEmail());
+        DTMinCliente dt1 = new DTMinCliente("12340", "asdf@gmail.com");
+        clientes.put(dt1.getNickname(), dt1.getEmail());
+        DTMinCliente dt2 = new DTMinCliente("12341", "asdfasdf@gmail.com");
+        clientes.put(dt2.getNickname(), dt2.getEmail());
+        DTMinCliente dt3 = new DTMinCliente("12342", "qwer@gmail.com");
+        clientes.put(dt3.getNickname(), dt3.getEmail());
+        DTMinCliente dt4 = new DTMinCliente("12343", "fgd@gmail.com");
+        clientes.put(dt4.getNickname(), dt4.getEmail());
+        DTMinCliente dt5 = new DTMinCliente("12344", "qyu125@gmail.com");
+        clientes.put(dt5.getNickname(), dt5.getEmail());
+        //simulo lo que seria el listarClientes()
+        //clientes.put("Pepito", "Pepito es un aventurero, le gusta pagar por travestis y después descuartizarlos/as y tirar las partes en contenedores separados por más de 3 km.");
+        //clientes.put("Juan Carlos", "Él es Juan Carlos; el de los pantalones cortos y los huevos largos.");
+        //clientes.put("Ramón", "A Ramón le gusta el helado");
         for (Map.Entry<String, String> cliente : clientes.entrySet()) {
             listaClientes.addItem(cliente.getKey());
         }        

@@ -4,18 +4,18 @@
  * and open the template in the editor.
  */
 
-package estaciondetrabajo;
+package com.tprog.estaciondetrabajo;
 
 /**
  *
  * @author marccio.silva
  */
-public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
+public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerInformacionDeServicio
+     * Creates new form VerInformacionDeReserva
      */
-    public VerInformacionDeServicio() {
+    public VerInformacionDeReserva() {
         initComponents();
     }
 

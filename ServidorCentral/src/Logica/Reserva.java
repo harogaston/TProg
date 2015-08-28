@@ -9,12 +9,17 @@ package Logica;
  *
  * @author Martins
  */
+import java.util.HashSet;
+import java.util.Set;
+import Logica.LineaReserva;
+
 public class Reserva {
     private String idReserva;
     private String fcreacion; // pasar a date en un futuro muy cercano
     private EstadoReserva estado;
     private float precioTotal;
-    //Set<LineaReserva> lReserva = new HashSet<LineaReserva>(); // agregar al agregar Linea reserva
+    Set<LineaReserva> lineasReserva = new HashSet<LineaReserva>(); 
+    
     public enum EstadoReserva{
         Registrada,Cancelada,Pagada,Facturada
     }
@@ -49,4 +54,5 @@ public class Reserva {
     public void setPrecioTotal(float p){
         this.precioTotal = p;
     }
+    
 }

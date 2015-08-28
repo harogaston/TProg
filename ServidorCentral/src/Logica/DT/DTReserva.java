@@ -11,15 +11,20 @@ package Logica.DT;
  *
  * @author MarG
  */
+import java.util.HashSet;
+import java.util.Set;
+
 public class DTReserva {
     private String idReserva;
     private String fcreacion; // pasar a date en un futuro muy cercano
     private EstadoReserva estado;
     private float precioTotal;
-    //Set<LineaReserva> lReserva = new HashSet<LineaReserva>(); // agregar al agregar Linea reserva
+    Set<DTLineaReserva> lineasReserva = new HashSet<DTLineaReserva>(); // agregar al agregar Linea reserva
+    
     public enum EstadoReserva{
         Registrada,Cancelada,Pagada,Facturada
     }
+    
     public DTReserva(String id, String creacion, EstadoReserva estado, float p){
         this.idReserva = id;
         this.fcreacion = creacion;
@@ -41,5 +46,7 @@ public class DTReserva {
     public float getPrecioTotal(){
         return precioTotal;
     }
-    
+    public Set<DTLineaReserva> getDTLineasReserva(){
+        return this.lineasReserva;
+    }
 }

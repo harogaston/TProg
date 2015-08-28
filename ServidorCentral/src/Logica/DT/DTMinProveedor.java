@@ -7,15 +7,17 @@ package Logica.DT;
 
 /**
  *
- * @author Martins
+ * @author sofia
  */
-public class DTMinCliente {
-    private String nickname;
-    private String email;
+public class DTMinProveedor {
+    private final String nickname;
+    private final String email;
+    private final String empresa;
     
-    public DTMinCliente(String nick, String em){
+    public DTMinProveedor(String nick, String email, String emp){
         this.nickname = nick;
-        this.email = em;
+        this.email = email;
+        this.empresa = emp;
     }
     
     public String getNickname(){
@@ -24,6 +26,10 @@ public class DTMinCliente {
     
     public String getEmail(){
         return this.email;
+    }
+    
+    public String getEmpresa(){
+        return this.empresa;
     }
     
 }

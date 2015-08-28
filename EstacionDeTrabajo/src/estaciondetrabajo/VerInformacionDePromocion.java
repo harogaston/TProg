@@ -33,6 +33,9 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         cancelar = new javax.swing.JButton();
 
+        setBorder(null);
+        setPreferredSize(new java.awt.Dimension(640, 480));
+
         jLabel1.setText("Ver Información de Promoción");
 
         cancelar.setText("Cancelar");
@@ -49,7 +52,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(96, 96, 96)
                 .addComponent(jLabel1)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(365, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cancelar)
@@ -60,7 +63,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addComponent(cancelar)
                 .addGap(53, 53, 53))
         );

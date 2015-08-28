@@ -6,7 +6,7 @@
 
 package estaciondetrabajo;
 
-import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JInternalFrame;
@@ -16,12 +16,37 @@ import javax.swing.JInternalFrame;
  * @author marccio.silva
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
     /**
+
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
+        //inicializo hash
+        internalFrames = new HashMap<>();
+        //inicializo internal frames
+        verInformacionDeCliente = new VerInformacionDeCliente();
+        verInformacionDePromocion = new VerInformacionDePromocion();
+        verInformacionDeProveedor = new VerInformacionDeProveedor();
+        verInformacionDeReserva = new VerInformacionDeReserva();
+        verInformacionDeServicio = new VerInformacionDeServicio();
+        cancelarReserva = new CancelarReserva();
+        //las agrego al content pane
+        getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
+        getContentPane().add(verInformacionDePromocion, BorderLayout.CENTER);
+        getContentPane().add(verInformacionDeProveedor, BorderLayout.CENTER);
+        getContentPane().add(verInformacionDeReserva, BorderLayout.CENTER);
+        getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
+        getContentPane().add(cancelarReserva, BorderLayout.CENTER);
+        //las agrego al hash
+        internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
+        internalFrames.put("verInformacionDePromocion", verInformacionDePromocion);
+        internalFrames.put("verInformacionDeProveedor", verInformacionDeProveedor);
+        internalFrames.put("verInformacionDeReserva", verInformacionDeReserva);
+        internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
+        internalFrames.put("cancelarReserva", cancelarReserva);
+        //inicializacion autogenerada
         initComponents();
+        
     }
 
     /**
@@ -58,7 +83,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.FlowLayout());
+        setMaximumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(640, 480));
+        setPreferredSize(new java.awt.Dimension(640, 480));
+        setResizable(false);
 
         menuRegistros.setText("Registros");
 
@@ -93,11 +121,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuConsultas.setText("Consultas");
 
         menuItemVerInfoCliente.setText("Ver Información de Cliente");
-        menuItemVerInfoCliente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuItemVerInfoClienteMouseClicked(evt);
-            }
-        });
         menuItemVerInfoCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemVerInfoClienteActionPerformed(evt);
@@ -114,12 +137,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuConsultas.add(menuItemVerInfoProveedor);
 
         menuItemVerInfoServicio.setText("Ver Información de Servicio");
+        menuItemVerInfoServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemVerInfoServicioActionPerformed(evt);
+            }
+        });
         menuConsultas.add(menuItemVerInfoServicio);
 
         menuItemVerInfoPromocion.setText("Ver Información de Promoción");
+        menuItemVerInfoPromocion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemVerInfoPromocionActionPerformed(evt);
+            }
+        });
         menuConsultas.add(menuItemVerInfoPromocion);
 
         menuItemVerInfoReserva.setText("Ver Información de Reserva");
+        menuItemVerInfoReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemVerInfoReservaActionPerformed(evt);
+            }
+        });
         menuConsultas.add(menuItemVerInfoReserva);
 
         menu.add(menuConsultas);
@@ -127,6 +165,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuBorrados.setText("Borrados");
 
         menuItemCancelarReserva.setText("Cancelar Reserva");
+        menuItemCancelarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCancelarReservaActionPerformed(evt);
+            }
+        });
         menuBorrados.add(menuItemCancelarReserva);
 
         menu.add(menuBorrados);
@@ -141,61 +184,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
    
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
-        if (verInformacionDeCliente == null) {
-            verInformacionDeCliente = new VerInformacionDeCliente();
-            verInformacionDeCliente.setSize(rootPane.size());
-            //verInformacionDeCliente.moveToFront();
-            getContentPane().add(verInformacionDeCliente);
-            internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
-            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-                if (internalFrame.getKey() != "verInformacionDeCliente") {
-                    internalFrame.getValue().setVisible(false);
-                } else internalFrame.getValue().setVisible(true);
-            }
-            /*
-             if (verInformacionDeProveedor != null) verInformacionDeProveedor.setVisible(false);
-             if (verInformacionDePromocion != null) verInformacionDePromocion.setVisible(false);
-             if (verInformacionDeReserva != null) verInformacionDeReserva.setVisible(false);
-             if (verInformacionDeServicio != null) verInformacionDeServicio.setVisible(false);
-             if (cancelarReserva != null) cancelarReserva.setVisible(false);
-             */
-        } else if (!verInformacionDeCliente.isVisible()) {
-            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-                if (internalFrame.getKey() != "verInformacionDeCliente") {
-                    internalFrame.getValue().setVisible(false);
-                } else internalFrame.getValue().setVisible(true);
-            }
-            verInformacionDeCliente.setVisible(rootPaneCheckingEnabled);
-            verInformacionDeCliente.moveToFront();
-        }
+        showInternalFrame("verInformacionDeCliente");
     }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
 
-    private void menuItemVerInfoClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_menuItemVerInfoClienteMouseClicked
-
     private void menuItemVerInfoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoProveedorActionPerformed
-        if (verInformacionDeProveedor == null) {
-            verInformacionDeProveedor = new VerInformacionDeProveedor();
-            getContentPane().add(verInformacionDeProveedor);
-            verInformacionDeProveedor.setSize(rootPane.size());
-            //verInformacionDeCliente.moveToFront();
-            internalFrames.put("verInformacionDeProveedor", verInformacionDeProveedor);
-            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-                if (internalFrame.getKey() != "verInformacionDeProveedor") {
-                    internalFrame.getValue().setVisible(false);
-                } else internalFrame.getValue().setVisible(true);
-            }
-        } else if (!verInformacionDeProveedor.isVisible()) {  
-            for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-                if (internalFrame.getKey() != "verInformacionDeProveedor") {
-                    internalFrame.getValue().setVisible(false);
-                } else internalFrame.getValue().setVisible(true);
-            }
-            //verInformacionDeProveedor.setVisible(rootPaneCheckingEnabled);
-            verInformacionDeCliente.moveToFront();
-        }
+        showInternalFrame("verInformacionDeProveedor");
     }//GEN-LAST:event_menuItemVerInfoProveedorActionPerformed
+
+    private void menuItemVerInfoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoServicioActionPerformed
+        showInternalFrame("verInformacionDeServicio");
+    }//GEN-LAST:event_menuItemVerInfoServicioActionPerformed
+
+    private void menuItemVerInfoPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoPromocionActionPerformed
+    //verInformacionDePromocion
+        showInternalFrame("verInformacionDePromocion");
+    }//GEN-LAST:event_menuItemVerInfoPromocionActionPerformed
+
+    private void menuItemVerInfoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoReservaActionPerformed
+        showInternalFrame("verInformacionDeReserva");
+    }//GEN-LAST:event_menuItemVerInfoReservaActionPerformed
+
+    private void menuItemCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelarReservaActionPerformed
+        showInternalFrame("cancelarReserva");
+    }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,7 +244,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
     }
     
-    HashMap<String, JInternalFrame> internalFrames = new HashMap<String, JInternalFrame>();
+    //Operaciones auxiliares
+    private void showInternalFrame(String id) {
+        //muestra el internal frame identificado por id
+        //solo funciona si el internal frame fue agregado al hash
+        for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+            if (internalFrame.getKey() != id) {
+                internalFrame.getValue().setVisible(false);
+            } else internalFrame.getValue().setVisible(true);
+        }
+    }
+    
+    HashMap<String, JInternalFrame> internalFrames;
     //Variables nuestras
     private VerInformacionDeCliente verInformacionDeCliente;
     private VerInformacionDePromocion verInformacionDePromocion;

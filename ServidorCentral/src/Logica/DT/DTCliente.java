@@ -5,7 +5,6 @@
  */
 package Logica.DT;
 
-import Logica.DT.DTUsuario;
 import java.util.Date;
 
 /**

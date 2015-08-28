@@ -17,10 +17,10 @@ public class Usuario {
     private String apellido;
     private String email;
     private String imagen;
-    private String fechaNacimiento; // pasar a Date en caso de poderse
+    private Date fechaNacimiento; // pasar a Date en caso de poderse
     
     public Usuario(String nick, String nom, String ap, String email,
-            String imag, String fN){
+            String imag, Date fN){
         this.nickname = nick;
         this.nombre = nom;
         this.apellido = ap;
@@ -46,7 +46,7 @@ public class Usuario {
      public String getImagen(){
         return imagen;
     }
-     public String getFechaNacimiento(){
+     public Date getFechaNacimiento(){
         return fechaNacimiento;
     }
      
@@ -67,7 +67,7 @@ public class Usuario {
      public void setImagen(String imag){
         this.imagen = imag;
     }
-     public void setFechaNacimiento(String fecha){
+     public void setFechaNacimiento(Date fecha){
         this.fechaNacimiento = fecha;
     }
     

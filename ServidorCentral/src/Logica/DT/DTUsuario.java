@@ -57,25 +57,5 @@ public class DTUsuario {
      public Date getFechaNacimiento(){
         return  fechaNacimiento;
     }
-     
-    // Setters
-    
-    public void setNombre(String nom){
-        nombre = nom;
-    }
-    public void setApellido(String ap){
-        apellido = ap;
-    }
-    public void setNickname(String nick){
-        nickname = nick;
-    }
-    public void setEmail(String em){
-        email = em;
-    }
-     public void setImagen(String imag){
-        imagen = imag;
-    }
-     public void setFechaNacimiento(Date fecha){
-        fechaNacimiento = fecha;
-    }
+
 }

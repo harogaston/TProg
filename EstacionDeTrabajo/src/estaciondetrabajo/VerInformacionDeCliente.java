@@ -6,7 +6,8 @@
 
 package estaciondetrabajo;
 
-import javax.swing.SwingUtilities;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -30,57 +31,138 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        scrollPane = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        buttonCancelar = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
+        listaClientes = new javax.swing.JComboBox();
+        botonMostrar = new javax.swing.JButton();
+        label = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        detalleCliente = new javax.swing.JTextArea();
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("TEST");
-        scrollPane.setViewportView(jTextArea1);
-
-        buttonCancelar.setText("Cancelar");
-        buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCancelarActionPerformed(evt);
+        setBorder(null);
+        setToolTipText("");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
             }
         });
+
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+
+        listaClientes.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                listaClientesComponentAdded(evt);
+            }
+        });
+        listaClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaClientesActionPerformed(evt);
+            }
+        });
+
+        botonMostrar.setText("Mostrar");
+        botonMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonMostrarActionPerformed(evt);
+            }
+        });
+
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("Seleccione un cliente del Sistema y haga click en 'Mostrar' para ver su información");
+
+        detalleCliente.setColumns(20);
+        detalleCliente.setLineWrap(true);
+        detalleCliente.setRows(5);
+        detalleCliente.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(detalleCliente);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(label, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(listaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonMostrar)
+                .addGap(169, 169, 169))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(buttonCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(118, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonSalir)
+                        .addGap(201, 201, 201)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
-                .addComponent(buttonCancelar)
+                .addGap(28, 28, 28)
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonMostrar)
+                    .addComponent(listaClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(botonSalir)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        detalleCliente.setText("");
+        detalleCliente.setVisible(false);
         this.dispose();
-    }//GEN-LAST:event_buttonCancelarActionPerformed
+    }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void listaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaClientesActionPerformed
 
+    private void listaClientesComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaClientesComponentAdded
+    }//GEN-LAST:event_listaClientesComponentAdded
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //Aca se trae un set de DTMinCliente para agregar al combobox
+        clientes.clear();
+        listaClientes.removeAllItems();
+        clientes.put("Pepito", "Pepito es un aventurero, le gusta pagar por travestis y después descuartizarlos/as y tirar las partes en contenedores separados por más de 3 km.");
+        clientes.put("Juan Carlos", "Él es Juan Carlos; el de los pantalones cortos y los huevos largos.");
+        clientes.put("Ramón", "A Ramón le gusta el helado");
+        for (Map.Entry<String, String> cliente : clientes.entrySet()) {
+            listaClientes.addItem(cliente.getKey());
+        }        
+    }//GEN-LAST:event_formComponentShown
+
+    private void botonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarActionPerformed
+        String cliente = (String) listaClientes.getSelectedItem();
+        if (cliente != null) {
+            detalleCliente.setVisible(true);
+            detalleCliente.setText(clientes.get(cliente));
+        }
+    }//GEN-LAST:event_botonMostrarActionPerformed
+
+    //Variables nuestras
+    HashMap<String, String> clientes = new HashMap<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonCancelar;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JScrollPane scrollPane;
+    private javax.swing.JButton botonMostrar;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JTextArea detalleCliente;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label;
+    private javax.swing.JComboBox listaClientes;
     // End of variables declaration//GEN-END:variables
 }

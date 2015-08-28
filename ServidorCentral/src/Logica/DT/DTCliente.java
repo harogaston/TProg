@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class DTCliente extends DTUsuario {
     
-    public DTCliente(String nick, String nom, String ap, String email,String imagen, String fecha){
+    public DTCliente(String nick, String nom, String ap, String email,String imagen, Date fecha){
             super(nick,nom,ap,email,imagen,fecha);
     }
     

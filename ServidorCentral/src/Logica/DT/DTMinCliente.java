@@ -17,4 +17,13 @@ public class DTMinCliente {
         this.nickname = nick;
         this.email = em;
     }
+    
+    public String getNickname(){
+        return this.nickname;
+    }
+    
+    public String getEmail(){
+        return this.email;
+    }
+    
 }

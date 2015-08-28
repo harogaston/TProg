@@ -17,10 +17,10 @@ public class DTUsuario {
     private String apellido;
     private String email;
     private String imagen;
-    private String fechaNacimiento; // hay q pasarlo a Date si se puede
+    private Date fechaNacimiento; // hay q pasarlo a Date si se puede
     
     public DTUsuario(String nick, String nom, String ap, String em,
-            String imag, String fN){
+            String imag, Date fN){
         this.nickname = nick;
         this.nombre = nom;
         this.apellido = ap;
@@ -34,7 +34,6 @@ public class DTUsuario {
         this.apellido = "";
         this.email = "";
         this.imagen = "";
-        this.fechaNacimiento  = "";
     }
     
    
@@ -55,7 +54,7 @@ public class DTUsuario {
      public String getImagen(){
         return imagen;
     }
-     public String getFechaNacimiento(){
+     public Date getFechaNacimiento(){
         return  fechaNacimiento;
     }
      
@@ -76,7 +75,7 @@ public class DTUsuario {
      public void setImagen(String imag){
         imagen = imag;
     }
-     public void setFechaNacimiento(String fecha){
+     public void setFechaNacimiento(Date fecha){
         fechaNacimiento = fecha;
     }
 }

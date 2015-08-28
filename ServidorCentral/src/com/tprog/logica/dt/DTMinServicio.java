@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica.DT;
+package com.tprog.logica.dt;
 
 /**
  *
  * @author sofia
  */
-public class DTMinPromocion {
+public class DTMinServicio {
     
     private final String nicknameP;
-    private final String idPromocion;
+    private final String idServicio;
     
-    public DTMinPromocion(String prov, String id) {
+    public DTMinServicio(String prov, String id) {
         this.nicknameP = prov;
-        this.idPromocion = id;
+        this.idServicio = id;
     }
     
     public String getNicknameP(){
@@ -24,7 +24,7 @@ public class DTMinPromocion {
     }
     
     public String getIdServicio(){
-        return this.idPromocion;
+        return this.idServicio;
     }
     
 }

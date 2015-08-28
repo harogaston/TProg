@@ -10,7 +10,6 @@ import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JInternalFrame;
-
 /**
  *
  * @author marccio.silva

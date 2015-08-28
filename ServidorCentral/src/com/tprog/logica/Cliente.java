@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package com.tprog.logica;
 
 /**
  *
  * @author Martins
  */
-import Logica.DT.DTCliente;
-import Logica.DT.DTMinCliente;
+import com.tprog.logica.dt.DTCliente;
+import com.tprog.logica.dt.DTMinCliente;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Date;

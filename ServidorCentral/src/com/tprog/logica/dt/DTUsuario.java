@@ -3,32 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package com.tprog.logica.dt;
 
 /**
  *
  * @author Martins
  */
 import java.util.Date;
-public class Usuario {
+public class DTUsuario {
     
     private String nickname;
     private String nombre;
     private String apellido;
     private String email;
     private String imagen;
-    private Date fechaNacimiento; // pasar a Date en caso de poderse
+    private Date fechaNacimiento; // hay q pasarlo a Date si se puede
     
-    public Usuario(String nick, String nom, String ap, String email,
+    public DTUsuario(String nick, String nom, String ap, String em,
             String imag, Date fN){
         this.nickname = nick;
         this.nombre = nom;
         this.apellido = ap;
-        this.email = email;
+        this.email = em;
         this.imagen = imag;
         this.fechaNacimiento  = fN;
     }
+    public DTUsuario(){
+        this.nickname = "";
+        this.nombre = "";
+        this.apellido = "";
+        this.email = "";
+        this.imagen = "";
+    }
     
+   
     //Getters
     
     public String getNombre(){
@@ -47,28 +55,7 @@ public class Usuario {
         return imagen;
     }
      public Date getFechaNacimiento(){
-        return fechaNacimiento;
+        return  fechaNacimiento;
     }
-     
-    // Setters
-    
-    public void setNombre(String nom){
-        this.nombre = nom;
-    }
-    public void setApellido(String ap){
-        this.apellido = ap;
-    }
-    public void setNickname(String nick){
-        this.nickname = nick;
-    }
-    public void setEmail(String em){
-        this.email = em;
-    }
-     public void setImagen(String imag){
-        this.imagen = imag;
-    }
-     public void setFechaNacimiento(Date fecha){
-        this.fechaNacimiento = fecha;
-    }
-    
+
 }

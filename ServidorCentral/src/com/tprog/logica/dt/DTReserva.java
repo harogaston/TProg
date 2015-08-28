@@ -3,34 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Logica;
+package com.tprog.logica.dt;
+
+
 
 /**
  *
- * @author Martins
+ * @author MarG
  */
 import java.util.HashSet;
 import java.util.Set;
-import Logica.LineaReserva;
 
-public class Reserva {
+public class DTReserva {
     private String idReserva;
     private String fcreacion; // pasar a date en un futuro muy cercano
     private EstadoReserva estado;
     private float precioTotal;
-    Set<LineaReserva> lineasReserva = new HashSet<LineaReserva>(); 
+    Set<DTLineaReserva> lineasReserva = new HashSet<DTLineaReserva>(); // agregar al agregar Linea reserva
     
     public enum EstadoReserva{
         Registrada,Cancelada,Pagada,Facturada
     }
     
-    public Reserva(String id, String creacion, EstadoReserva estado, float p){
+    public DTReserva(String id, String creacion, EstadoReserva estado, float p){
         this.idReserva = id;
         this.fcreacion = creacion;
         this.estado = estado;
         this.precioTotal = p;
     }
-    
     public String getIdReserva(){
         return idReserva;
     }    
@@ -46,13 +46,7 @@ public class Reserva {
     public float getPrecioTotal(){
         return precioTotal;
     }
-    
-    public void setEstadoReserva(EstadoReserva est){
-        this.estado = est;
+    public Set<DTLineaReserva> getDTLineasReserva(){
+        return this.lineasReserva;
     }
-    
-    public void setPrecioTotal(float p){
-        this.precioTotal = p;
-    }
-    
 }

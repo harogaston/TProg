@@ -11,13 +11,13 @@ import java.util.*;
  */
 public class DTProveedor extends DTUsuario {
     private final String empresa;
-    private final String web;
+    private final String webEmpresa;
     
-    public DTProveedor(String nick, String nom, String ap, String email,String imagen, Date fecha,
-            String emp, String web){
-            super(nick,nom,ap,email,imagen,fecha);
-            this.empresa = emp;
-            this.web = web;
+    public DTProveedor(String nickname, String nombre, String apellido, String email,
+			String imagen, Date fechaN, String empresa, String webEmpresa){
+        super(nickname, nombre, apellido, email, imagen, fechaN);
+        this.empresa = empresa;
+        this.webEmpresa = webEmpresa;
     }
     
     String getEmpresa(){
@@ -25,7 +25,7 @@ public class DTProveedor extends DTUsuario {
     }
     
     String getWeb(){
-        return this.web;
+        return this.webEmpresa;
     }
     
 }

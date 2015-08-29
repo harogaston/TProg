@@ -5,10 +5,81 @@
  */
 package com.tprog.logica;
 
+import java.util.Map;
+import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTPromocion;
+import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  *
- * @author MarG
+ * @author gaston
  */
 public class Promocion {
-    
+
+	private final String idPromocion;
+	private float descuento;
+	private float total;
+	
+	private Proveedor proveedor;
+	private Map<String, Servicio> servicios;
+	
+	public Promocion(String idPromocion, float descuento, Proveedor proveedor){
+		this.idPromocion = idPromocion;
+		this.descuento = descuento;
+		this.proveedor = proveedor;
+		servicios = new HashMap();
+	}
+	
+	public DTMinPromocion crearDTMin(){
+		DTMinPromocion nuevoDT = new DTMinPromocion(this.proveedor.getNickname(), this.idPromocion);
+		return nuevoDT;
+	}
+	
+	public DTPromocion crearDT(){
+		Set<DTMinServicio> nuevoSet = new HashSet();
+		for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
+			Servicio serv = it.next();
+			DTMinServicio temp = serv.CrearDTMin();
+			nuevoSet.add(temp);
+		}
+		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);
+		return nuevoDT;
+	}
+	
+	public void addServicio(Servicio s){
+		servicios.put(s.getIdServicio(), s);
+		this.total += s.getPrecio() * this.descuento;
+	}
+	
+	public void setIdPromocion(String idPromocion){
+		this.idPromocion = idPromocion;
+	}
+	
+	public void setDescuento(float descuento){
+		this.descuento = descuento;
+	}
+	
+	public void setProveedor(Proveedor proveedor){
+		this.proveedor = proveedor;
+	}
+	
+	public String getIdPromocion(){
+		return this.idPromocion;
+	}
+	
+	public float getDescuento(){
+		return this.descuento;
+	}
+	
+	public float getTotal(){
+		return this.total;
+	}
+	
+	public String getNicknameProveedor(){
+		return this.proveedor.getNickname();
+	}
 }

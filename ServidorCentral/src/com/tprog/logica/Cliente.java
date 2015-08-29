@@ -16,21 +16,21 @@ import java.util.Map;
 import java.util.Date;
 
 public class Cliente extends Usuario {
-    Map<String, Reserva> reservas = new HashMap<String, Reserva>(); // habilitar al haber reserva
+    Map<String, Reserva> reservas;
     
-    public Cliente(String nick, String nom, String ap, String email,String imagen, Date fecha){
-            super(nick,nom,ap,email,imagen,fecha);
-    }
+    public Cliente(String nickname, String nombre, String apellido, String email, String imagen, Date fechaN){
+            super(nickname, nombre, apellido, email, imagen, fechaN);
+		this.reservas = new HashMap();
+	}
             
     public DTCliente crearDTCliente(){
-        DTCliente dt = new DTCliente(getNickname(),getNombre(),getApellido(),getEmail(),getImagen(),
-        getFechaNacimiento());
-        
+        DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email, 
+				this.imagen, this.fechaNacimiento);
         return dt;
     }
     
     public DTMinCliente crearDTMin(){
-        DTMinCliente dt = new DTMinCliente(getNickname(),getEmail());
+        DTMinCliente dt = new DTMinCliente(this.nickname, this.email);
         return dt;
     }
 }

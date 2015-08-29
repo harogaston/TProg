@@ -12,31 +12,23 @@ package com.tprog.logica.dt;
 import java.util.Date;
 public class DTUsuario {
     
-    private String nickname;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private String imagen;
-    private Date fechaNacimiento; // hay q pasarlo a Date si se puede
+    protected String nickname;
+    protected String nombre;
+    protected String apellido;
+    protected String email;
+    protected String imagen;
+    protected Date fechaNacimiento;
     
-    public DTUsuario(String nick, String nom, String ap, String em,
-            String imag, Date fN){
-        this.nickname = nick;
-        this.nombre = nom;
-        this.apellido = ap;
-        this.email = em;
-        this.imagen = imag;
-        this.fechaNacimiento  = fN;
+    public DTUsuario(String nickname, String nombre, String apellido, String empresa,
+            String imagen, Date fechaN){
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = empresa;
+        this.imagen = imagen;
+        this.fechaNacimiento  = fechaN;
     }
-    public DTUsuario(){
-        this.nickname = "";
-        this.nombre = "";
-        this.apellido = "";
-        this.email = "";
-        this.imagen = "";
-    }
-    
-   
+
     //Getters
     
     public String getNombre(){

@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class Promocion {
 
-	private String idPromocion;
+	private final String idPromocion;
 	private float descuento;
 	private float total;
 	

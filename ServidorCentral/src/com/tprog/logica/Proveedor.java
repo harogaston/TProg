@@ -50,10 +50,13 @@ public class Proveedor extends Usuario {
 	public Set<String> getServicios() {
 		Set<String> nuevoSet;
 		if (!servicios.isEmpty()) {
-			nuevoSet = servicios.keySet();
-			return nuevoSet;
-		}
-
+                    nuevoSet = servicios.keySet();
+                    return nuevoSet;
+		} else {
+                    return new HashSet();
+                }
+        }
+        
 	public Set<DTMinPromocion> listarPromociones() {
 		Set<DTMinPromocion> nuevoSet = new HashSet();
 		for (Iterator<Promocion> it = promociones.values().iterator(); it.hasNext();) {

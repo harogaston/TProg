@@ -23,7 +23,7 @@ public class DTMinPromocion {
         return this.nicknameP;
     }
     
-    public String getIdServicio(){
+    public String getIdPromocion(){
         return this.idPromocion;
     }
     

@@ -46,7 +46,7 @@ public class ManejadorProductos {
             if(!promociones.get(dtP.getNicknameP()).isEmpty() 
                     && !promociones.get(dtP.getIdPromocion()).containsKey(dtP.getIdPromocion())){
                 Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
-                result = p.crearDT();
+                result =i p.crearDT();
             }        
         }
         return result;
@@ -124,7 +124,22 @@ public class ManejadorProductos {
     }
     
     public boolean idServicioDisponible(String idServicio, String nicknameP){
-        return true;
+        boolean result = true;
+        if (!servicios.isEmpty() && servicios.containsKey(nicknameP) &&
+                !servicios.get(nicknameP).isEmpty() && 
+                servicios.get(nicknameP).containsKey(idServicio)){
+            result = false;
+        }
+        return result;
+    }
+    
+    public boolean esCategoriaSimple(String cat){
+        boolean result = false;
+        if (!categorias.isEmpty() && categorias.containsKey(cat)){
+            Categoria c = categorias.get(cat);
+            result = cat.esCategoriaSimple();
+        }
+        return result;
     }
     
     public void altaServicio(DTServicio dtS){

@@ -19,8 +19,9 @@ public class SeleccionadorDosListas extends javax.swing.JPanel {
      * Creates new form seleccionadorDosListas
      */
     public SeleccionadorDosListas() {
-        lista1 = new Vector<>();
-        lista2 = new Vector<>();
+        initComponents();
+        //Esto es lo único que hay que modificar; para determinar los elementos
+        //iniciales de las listas
         lista1.add("Chorolo1");
         lista1.add("Chorolo2");
         lista1.add("Chorolo3");
@@ -29,7 +30,6 @@ public class SeleccionadorDosListas extends javax.swing.JPanel {
         lista2.add("Chorolo8");
         lista2.add("Chorolo9");
         lista2.add("Chorolo66");        
-        initComponents();
     }
 
     /**
@@ -133,14 +133,14 @@ public class SeleccionadorDosListas extends javax.swing.JPanel {
         lista2Interfaz.updateUI();
     }//GEN-LAST:event_removeButtonActionPerformed
 
-    Vector<String> lista1;
-    Vector<String> lista2;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList lista1Interfaz;
+    private Vector<String> lista1 = new Vector();
     private javax.swing.JList lista2Interfaz;
+    private Vector<String> lista2 = new Vector();
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

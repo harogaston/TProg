@@ -10,5 +10,11 @@ package com.tprog.logica;
  * @author gaston
  */
 public class Simple extends Categoria{
-	
+    
+    public Categoria(){
+    }
+    
+    public boolean esCategoriaSimple(){
+        return true;
+    }
 }

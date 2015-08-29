@@ -18,7 +18,7 @@ public class DTServicio {
     private final DTUbicacion origen;
     private final DTUbicacion destino;
     
-    public DTServicio(String prov, String id, String desc, float p,
+    public DTServicio(String id, String desc, float p,
             String[] img, DTUbicacion origen, DTUbicacion destino) {
         this.idServicio = id;
         this.descripcion = desc;

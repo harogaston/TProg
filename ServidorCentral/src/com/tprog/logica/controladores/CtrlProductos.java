@@ -6,6 +6,7 @@
 package com.tprog.logica.controladores;
 import com.tprog.logica.dt.*;
 import com.tprog.logica.*;
+import com.tprog.logica.manejadores.*;
 import java.util.*;
 /**
  *
@@ -111,7 +112,8 @@ public class CtrlProductos {
     }
     
     public Set<DTMinProveedor> listarProveedores(){
-        return null;
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        return mu.listarProveedores();
     }
     
     public void seleccionarProveedor(String nick){
@@ -119,7 +121,9 @@ public class CtrlProductos {
     }
     
     public boolean idServicioDisponible(String idServicio){
-        return true;
+        this.dtS = new DTMinServicio(this.nicknameP, idServicio);
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.idServicioDisponible(idServicio, this.nicknameP);
     }
     
     public void seleccionarOrigen(DTUbicacion dtU){
@@ -130,8 +134,9 @@ public class CtrlProductos {
         this.destino = dtU;
     }
     
-    public boolean seleccionarCategoriaHoja(String idCat){
-        return true;
+    public boolean seleccionarCategoriaSimple(String idCat){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.esCategoriaSimple(idCat);
     }
     
     public void altaServicio(String descripcion, float Precio, String[] imagenes){

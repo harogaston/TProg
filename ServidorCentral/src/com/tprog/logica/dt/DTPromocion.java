@@ -11,10 +11,10 @@ import  java.util.*;
  */
 public class DTPromocion {
     
-    private final String idPromocion;
-    private final float descuento;
-    private final float total;
-    private final Set<DTMinServicio> servicios;
+    private String idPromocion;
+    private float descuento;
+    private float total;
+    private Set<DTMinServicio> servicios;
     
     public DTPromocion(String id, float desc, float total,
             Set<DTMinServicio> serv) {
@@ -35,5 +35,9 @@ public class DTPromocion {
     public float getTotal(){
         return this.total;
     }
+	
+	public Set<DTMinServicio> getServicios(){
+		return this.servicios;
+	}
     
 }

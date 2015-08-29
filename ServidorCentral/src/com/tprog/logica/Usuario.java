@@ -12,21 +12,21 @@ package com.tprog.logica;
 import java.util.Date;
 public class Usuario {
     
-    private String nickname;
-    private String nombre;
-    private String apellido;
-    private String email;
-    private String imagen;
-    private Date fechaNacimiento; // pasar a Date en caso de poderse
+    protected String nickname;
+    protected String nombre;
+    protected String apellido;
+    protected String email;
+    protected String imagen;
+    protected Date fechaNacimiento; // pasar a Date en caso de poderse
     
-    public Usuario(String nick, String nom, String ap, String email,
-            String imag, Date fN){
-        this.nickname = nick;
-        this.nombre = nom;
-        this.apellido = ap;
+    public Usuario(String nickname, String nombre, String apellido, String email,
+            String imagen, Date fechaN){
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
-        this.imagen = imag;
-        this.fechaNacimiento  = fN;
+        this.imagen = imagen;
+        this.fechaNacimiento  = fechaN;
     }
     
     //Getters
@@ -52,23 +52,23 @@ public class Usuario {
      
     // Setters
     
-    public void setNombre(String nom){
-        this.nombre = nom;
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
-    public void setApellido(String ap){
-        this.apellido = ap;
+    public void setApellido(String apellido){
+        this.apellido = apellido;
     }
-    public void setNickname(String nick){
-        this.nickname = nick;
+    public void setNickname(String nickname){
+        this.nickname = nickname;
     }
-    public void setEmail(String em){
-        this.email = em;
+    public void setEmail(String email){
+        this.email = email;
     }
-     public void setImagen(String imag){
-        this.imagen = imag;
+     public void setImagen(String imagen){
+        this.imagen = imagen;
     }
-     public void setFechaNacimiento(Date fecha){
-        this.fechaNacimiento = fecha;
+     public void setFechaNacimiento(Date fechaN){
+        this.fechaNacimiento = fechaN;
     }
     
 }

@@ -32,6 +32,10 @@ public class DTServicio {
         return this.idServicio;
     }
     
+	public String getDescripcion(){
+		return this.descripcion;
+	}
+	
     public float getPrecio(){
         return this.precio;
     }

@@ -14,9 +14,9 @@ public class DTMinPromocion {
     private final String nicknameP;
     private final String idPromocion;
     
-    public DTMinPromocion(String prov, String id) {
-        this.nicknameP = prov;
-        this.idPromocion = id;
+    public DTMinPromocion(String proveedor, String idPromocion) {
+        this.nicknameP = proveedor;
+        this.idPromocion = idPromocion;
     }
     
     public String getNicknameP(){

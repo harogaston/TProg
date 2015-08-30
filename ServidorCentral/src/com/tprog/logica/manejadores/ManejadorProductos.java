@@ -141,6 +141,7 @@ public class ManejadorProductos {
                 if (!categorias.isEmpty() && categorias.containsKey(idPadre)){
                     Categoria padre = categorias.get(idPadre);
                     if (!esCategoriaSimple(idPadre)){
+                        Categoria padreC = (Compuesta) padre;
                         padre.add(c);
                     } else {
                         categorias.remove(idPadre);

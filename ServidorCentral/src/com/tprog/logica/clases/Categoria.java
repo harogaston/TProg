@@ -17,7 +17,6 @@ public interface Categoria {
     public boolean esCategoriaSimple();
     public String getIdCategoria();
     public void setPadre(Compuesta padre);
-    public void add(Categoria c);
     public Compuesta getPadre();
 	
 

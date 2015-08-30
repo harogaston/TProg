@@ -7,15 +7,11 @@ package com.tprog.logica.dt;
 
 import java.util.Date;
 
-/**
- *
- * @author Martins
- */
 public class DTCliente extends DTUsuario {
-    
-    public DTCliente(String nickname, String nombre, String apellido, String email, 
-			String imagen, Date fechaN){
-        super(nickname, nombre, apellido, email, imagen, fechaN);
-    }
-    
+
+	public DTCliente(String nickname, String nombre, String apellido, String email,
+			String imagen, Date fechaN) {
+		super(nickname, nombre, apellido, email, imagen, fechaN);
+	}
+
 }

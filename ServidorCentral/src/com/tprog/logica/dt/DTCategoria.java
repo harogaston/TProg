@@ -4,25 +4,24 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.dt;
-import java.util.*;
-/**
- *
- * @author sofia
- */
+
+import java.util.Set;
+
 public class DTCategoria {
-    private final String idCategoria;
-    private final Set<DTCategoria> catHijas;
-    
-    public DTCategoria(String id, Set<DTCategoria> sons){
-        this.idCategoria = id;
-        this.catHijas = sons;
-    }
-    
-    public String getIdCategoria(){
-        return this.idCategoria;
-    }
-    
-    public Set<DTCategoria> getCategoriasHijas(){
-        return this.catHijas;
-    }
+
+	private final String idCategoria;
+	private final Set<DTCategoria> subCategorias;
+
+	public DTCategoria(String idCategoria, Set<DTCategoria> subCategorias) {
+		this.idCategoria = idCategoria;
+		this.subCategorias = subCategorias;
+	}
+
+	public String getIdCategoria() {
+		return this.idCategoria;
+	}
+
+	public Set<DTCategoria> getSubCategorias() {
+		return this.subCategorias;
+	}
 }

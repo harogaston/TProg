@@ -5,10 +5,7 @@
  */
 package com.tprog.logica.dt;
 
-/**
- *
- * @author gaston
- */
-public enum EstadoReserva{
-    Registrada,Cancelada,Pagada,Facturada
+public enum EstadoReserva {
+
+	Registrada, Cancelada, Pagada, Facturada
 }

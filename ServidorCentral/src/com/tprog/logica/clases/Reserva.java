@@ -8,7 +8,7 @@ package com.tprog.logica.clases;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.EstadoReserva;
 
 /**
@@ -72,8 +72,16 @@ public class Reserva {
     }
     
     public DTReserva crearDTReserva(){
+        Set<DTLineaReserva> dtsLR = new HashSet();
+
+	Iterator<LineaReserva> it = lineasReserva.iterator();
+	while (it.hasNext()) {
+		LineaReserva l = it.next();
+		DTLineaReserva temp = l.crearDTLineaReserva();
+		dtsLR.add(temp);
+	}
         DTReserva dt = new DTReserva(this.idReserva, this.fcreacion, this.estado, 
-                this.precioTotal, this.lineasReserva);
+                this.precioTotal, dtsLR);
         return dt;
     }
     

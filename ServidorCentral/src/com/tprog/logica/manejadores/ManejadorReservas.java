@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.manejadores;
-import com.tprog.logica.*;
+import com.tprog.logica.clases.Reserva;
 import com.tprog.logica.dt.*;
 import java.util.*;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class ManejadorReservas {
         reservas = new HashMap();
     }
     
-    public static ManejadorReservas getinstance(){
+    public static ManejadorReservas getInstance(){
         if (instancia==null)
             instancia = new ManejadorReservas();
         return instancia;

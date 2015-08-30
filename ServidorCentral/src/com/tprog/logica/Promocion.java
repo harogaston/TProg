@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class Promocion {
 
-	private final String idPromocion;
+	private String idPromocion;
 	private float descuento;
 	private float total;
 	
@@ -43,7 +43,7 @@ public class Promocion {
 		Set<DTMinServicio> nuevoSet = new HashSet();
 		for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
 			Servicio serv = it.next();
-			DTMinServicio temp = serv.CrearDTMin();
+			DTMinServicio temp = serv.crearDTMin();
 			nuevoSet.add(temp);
 		}
 		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);

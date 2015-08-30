@@ -14,9 +14,9 @@ public class DTMinServicio {
     private final String nicknameP;
     private final String idServicio;
     
-    public DTMinServicio(String prov, String id) {
-        this.nicknameP = prov;
-        this.idServicio = id;
+    public DTMinServicio(String proveedor, String idServicio) {
+        this.nicknameP = proveedor;
+        this.idServicio = idServicio;
     }
     
     public String getNicknameP(){

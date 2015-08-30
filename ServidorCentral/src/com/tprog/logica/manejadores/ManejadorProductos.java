@@ -32,41 +32,51 @@ public class ManejadorProductos {
             servicios = new HashMap();
             promociones = new HashMap();
             ubicaciones = new HashMap();
-            raices = new HashSet();
+            root = new Simple("Categorias");
 	}
 
 	private Map<String, Categoria> categorias;
-	private Set<Categoria> raices;
+	private Categoria root;
 	private Map<String, Pais> ubicaciones;
 	private Map<String, Map<String, Servicio>> servicios;
 	private Map<String, Map<String, Promocion>> promociones;
 
 	public Set<DTMinPromocion> listarPromociones() {
-		return null;
+            Set<DTMinPromocion> result = new HashSet();
+            if (!promociones.isEmpty()){
+                for (Map<String, Promocion> mapaPromocion : promociones.values()){
+                    if(!mapaPromocion.isEmpty()){
+                        for (Promocion p : mapaPromocion.values()){
+                            result.add(p.crearDTMin());
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
-		DTPromocion result = null;
-		if (!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) {
-			if (!promociones.get(dtP.getNicknameP()).isEmpty()
-					&& !promociones.get(dtP.getIdPromocion()).containsKey(dtP.getIdPromocion())) {
-				Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
-				result = p.crearDT();
-			}
-		}
-		return result;
+            DTPromocion result = null;
+            if (!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) {
+                    if (!promociones.get(dtP.getNicknameP()).isEmpty()
+                                    && !promociones.get(dtP.getIdPromocion()).containsKey(dtP.getIdPromocion())) {
+                            Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
+                            result = p.crearDT();
+                    }
+            }
+            return result;
 	}
 
 	public DTServicio infoServicio(DTMinServicio dtS) {
-		DTServicio result = null;
-		if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) {
-			if (!servicios.get(dtS.getNicknameP()).isEmpty()
-					&& !servicios.get(dtS.getIdServicio()).containsKey(dtS.getIdServicio())) {
-				Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
-				result = s.crearDT();
-			}
-		}
-		return result;
+            DTServicio result = null;
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) {
+                    if (!servicios.get(dtS.getNicknameP()).isEmpty()
+                                    && !servicios.get(dtS.getIdServicio()).containsKey(dtS.getIdServicio())) {
+                            Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                            result = s.crearDT();
+                    }
+            }
+            return result;
 	}
 
 	public Set<String> listarCategorias() {
@@ -88,27 +98,46 @@ public class ManejadorProductos {
 		return null;
 	}
 
-	public void cambiarPrecio(String nicknameP, String idServicio,
+	public void cambiarPrecio(DTMinServicio dtS,
 			float nuevoPrecio) {
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                    && !servicios.get(dtS.getNicknameP()).isEmpty()
+                    && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                s.setPrecio(nuevoPrecio);
+            }
 	}
 
-	public void cambiarDescripcion(String nicknameP, String idServicio,
-			String nuevaD) {
-	}
+	public void cambiarDescripcion(DTMinServicio dtS, String descripcion) {
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                    && !servicios.get(dtS.getNicknameP()).isEmpty()
+                    && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                s.setDescripcion(descripcion);
+            }
+        }
 
 	public Set<String> listarImagenes(String nicknameP, String idServicio) {
 		return null;
 	}
 
-	public void agregarImagen(String nicknameP, String idServicio, String img) {
+	public void agregarImagen(DTMinServicio dtS , String img) {
 	}
 
-	public void quitarImagen(String nicknameP, String idServicio) {
+	public void quitarImagen(DTMinServicio dtS, String img) {
 	}
 
 	public Set<DTUbicacion> listarCiudades() {
 		return null;
 	}
+        
+        public boolean agregarCategoria(String idCategoria){
+            return true;
+        }
+        
+        public boolean quitarCategoria(String idCategoria){
+            return true;
+        }
 
 	public void cambiarOrigen(DTMinServicio dtS, DTUbicacion dtU) {
 	}
@@ -119,7 +148,16 @@ public class ManejadorProductos {
 	public Set<String> listarCategoriasServicio(DTMinServicio dtS) {
 		return null;
 	}
-
+        
+        public boolean esCategoriaPadre(String idCategoria){
+            boolean result = false;
+            if (!categorias.isEmpty() && categorias.containsKey(idCategoria)){
+                Categoria padre = categorias.get(idCategoria);
+                result = padre.esCategoriaPadre();
+            }
+            return result;
+        }
+        
 	public boolean esCategoriaSimpleAgregar(DTMinServicio dtS, String cat) {
 		return true;
 	}
@@ -129,31 +167,30 @@ public class ManejadorProductos {
 	}
 
 	public boolean idCategoriaDisponible(String idCategoria) {
-		return true;
+            return (!categorias.isEmpty() && !categorias.containsKey(idCategoria));
 	}
 
 	public void altaCategoria(String idCategoria, String idPadre) {
             Categoria c = new Simple(idCategoria);
+            categorias.put(idCategoria, c);
             if (idPadre == "") {
-                categorias.put (idCategoria, c);
-                raices.add(c);
-            } else {
-                if (!categorias.isEmpty() && categorias.containsKey(idPadre)){
-                    Categoria padre = categorias.get(idPadre);
-                    if (!esCategoriaSimple(idPadre)){
-                        Categoria padreC = (Compuesta) padre;
-                        padre.add(c);
+                idPadre = "Categorias";  
+            } 
+            if (!categorias.isEmpty() && categorias.containsKey(idPadre)){
+                Categoria padre = categorias.get(idPadre);
+                if (!padre.esCategoriaSimple()){
+                    Compuesta padreC = (Compuesta) padre;
+                    padreC.add(c);
+                } else {
+                    categorias.remove(idPadre);
+                    Compuesta nuevoPadre = new Compuesta(idPadre);
+                    nuevoPadre.add(c);
+                    categorias.put(idPadre, nuevoPadre);
+                    if (idPadre == "Categorias"){
+                        root = nuevoPadre;
                     } else {
-                        categorias.remove(idPadre);
-                        Compuesta nuevoPadre = new Compuesta(idPadre);
-                        nuevoPadre.add(c);
-                        if (raices.contains(padre)){
-                            raices.remove(padre);
-                            raices.add(nuevoPadre);
-                        } else {
-                            Compuesta abuelo = padre.getPadre();
-                            abuelo.add(nuevoPadre);
-                        }
+                        Compuesta abuelo = padre.getPadre();
+                        abuelo.add(nuevoPadre);
                     }
                 }
             }
@@ -178,7 +215,9 @@ public class ManejadorProductos {
 		return result;
 	}
 
-	public void altaServicio(DTServicio dtS) {
+	public void altaServicio(DTServicio dtS, String nicknameP, Set<String> listaCategorias) {
+            //ManejadorUsuario mu = ManejadorUsuario.getInstance();
+            
 	}
 
 	public void agregarServicio(String idServicio) {

@@ -46,7 +46,7 @@ public interface ICtrlProductos {
 	public boolean idServicioDisponible(String idServicio);
 	public void seleccionarOrigen(DTUbicacion origen);
 	public void seleccionarDestino(DTUbicacion destino);
-	public boolean seleccionarCategoriaHoja(String idCategoria);
+	public boolean seleccionarCategoriaSimple(String idCategoria);
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes);
 	public Set<String> listarServiciosProveedor();
 	public void agregarServicio(String idServicio);

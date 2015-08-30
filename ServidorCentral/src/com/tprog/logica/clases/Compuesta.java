@@ -64,4 +64,9 @@ public class Compuesta implements Categoria{
     public void remove (Categoria cat) {
         this.subCategorias.remove(cat);
     }
+    
+    @Override
+    public boolean esCategoriaPadre(){
+        return true;
+    }
 }

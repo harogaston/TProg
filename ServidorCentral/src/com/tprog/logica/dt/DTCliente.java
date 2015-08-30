@@ -13,5 +13,8 @@ public class DTCliente extends DTUsuario {
 			String imagen, Date fechaN) {
 		super(nickname, nombre, apellido, email, imagen, fechaN);
 	}
-
+	
+	public DTCliente(DTUsuario dtU){
+		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
+	}
 }

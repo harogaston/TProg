@@ -4,33 +4,38 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.manejadores;
-import com.tprog.logica.clases.Proveedor;
-import com.tprog.logica.clases.Cliente;
-import com.tprog.logica.dt.*;
-import java.util.*;
 
-/**
- *
- * @author sofia
- */
+import com.tprog.logica.clases.Cliente;
+import com.tprog.logica.clases.Proveedor;
+import com.tprog.logica.dt.DTCliente;
+import com.tprog.logica.dt.DTMinCliente;
+import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinProveedor;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTProveedor;
+import com.tprog.logica.dt.DTReserva;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class ManejadorUsuarios {
     
-    private ManejadorUsuarios() {
+	private static ManejadorUsuarios instace = null;
+	
+	private Map<String, Proveedor> proveedores;
+    private Map<String, Cliente> clientes;
+    
+	private ManejadorUsuarios() {
         proveedores = new HashMap();
         clientes = new HashMap();
     }
     
-    public static ManejadorUsuarios getInstance() {
-        return ManejadorUsuariosHolder.INSTANCE;
-    }
-    
-    private static class ManejadorUsuariosHolder {
-
-        private static final ManejadorUsuarios INSTANCE = new ManejadorUsuarios();
-    }
-    
-    private Map<String, Proveedor> proveedores;
-    private Map<String, Cliente> clientes;
+	public static ManejadorUsuarios getInstance(){
+		if (instace == null)
+			instace = new ManejadorUsuarios();
+		return instace;
+	}
 
     public Set<DTMinProveedor> listarProveedores(){
         Set<DTMinProveedor> result = new HashSet();
@@ -53,4 +58,32 @@ public class ManejadorUsuarios {
     public void agregarReserva(String nickname, DTReserva dt){
         
     }
+
+	public Set<DTMinCliente> listarClientes() {
+		return null;
+	}
+
+	public DTCliente infoCliente(String nickname) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public DTProveedor infoProveedor(String nicknameP) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public boolean verificarNickname(String nicknameU) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public boolean verificarEmail(String email) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public void altaCliente(DTCliente nuevoDT) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	public void altaProveedor(DTProveedor nuevoDT) {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
 }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.manejadores;
-import com.tprog.logica.*;
+import com.tprog.logica.clases.Reserva;
 import com.tprog.logica.dt.*;
 import java.util.*;
 import java.util.HashMap;
@@ -17,14 +17,14 @@ import java.io.Serializable;
  */
 public class ManejadorReservas {
     
-    private Map<String, Reserva> reservas;
+    private Map<Integer, Reserva> reservas;
     private static ManejadorReservas instancia=null;
     
     private ManejadorReservas(){
         reservas = new HashMap();
     }
     
-    public static ManejadorReservas getinstance(){
+    public static ManejadorReservas getInstance(){
         if (instancia==null)
             instancia = new ManejadorReservas();
         return instancia;
@@ -45,17 +45,17 @@ public class ManejadorReservas {
         return set;
     }
     
-    public DTReserva infoReserva(String idReserva){
+    public DTReserva infoReserva(int idReserva){
             Reserva  r = reservas.get(idReserva);
             return r.crearDTReserva();
     }
-    public boolean cambiarEstadoReserva(String idReserva,EstadoReserva nuevoEstado){
+    public boolean cambiarEstadoReserva(int idReserva,EstadoReserva nuevoEstado){
             Reserva  r = reservas.get(idReserva);
             
             return r.cambiarEstadoReserva(nuevoEstado);
     }
     
-    public void eliminarReserva(String idReserva){
+    public void eliminarReserva(int idReserva){
             Reserva  r = reservas.get(idReserva);
             r.eliminar();
             // sacar del map

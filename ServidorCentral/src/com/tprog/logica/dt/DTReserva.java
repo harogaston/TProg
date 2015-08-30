@@ -13,28 +13,21 @@ import com.tprog.logica.clases.LineaReserva;
 
 public class DTReserva {
 
-	private String idReserva;
+	private int idReserva;
 	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
 	Set<DTLineaReserva> lineasReserva;
 
-	public DTReserva(String idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<LineaReserva> lineasReserva) {
+	public DTReserva(int idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineasReserva) {
 		this.idReserva = idReserva;
 		this.fCreacion = fCreacion;
 		this.estado = estado;
 		this.precioTotal = precioTotal;
-		this.lineasReserva = new HashSet();
+		this.lineasReserva = lineasReserva;
+        }
 
-		Iterator<LineaReserva> it = lineasReserva.iterator();
-		while (it.hasNext()) {
-			LineaReserva l = it.next();
-			DTLineaReserva temp = l.crearDTLineaReserva();
-			this.lineasReserva.add(temp);
-		}
-	}
-
-	public String getIdReserva() {
+	public int getIdReserva() {
 		return idReserva;
 	}
 

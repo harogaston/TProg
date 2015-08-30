@@ -8,7 +8,7 @@ package com.tprog.logica.clases;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.EstadoReserva;
 
 /**
@@ -26,21 +26,22 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class Reserva {
-    private String idReserva;
+    private static int idReserva;
     private Date fcreacion; // pasar a date en un futuro muy cercano
     private EstadoReserva estado;
     private float precioTotal;
     Set<LineaReserva> lineasReserva;  
     
-    public Reserva(String id, Date creacion, EstadoReserva estado, float p){
-        this.idReserva = id;
+    public Reserva(Date creacion, EstadoReserva estado, float p){
+        this.idReserva = Reserva.idReserva;
+        Reserva.idReserva++;
         this.fcreacion = creacion;
         this.estado = estado;
         this.precioTotal = p;
         this.lineasReserva = new HashSet();
     }
     
-    public String getIdReserva(){
+    public int getIdReserva(){
         return idReserva;
     }    
     
@@ -72,8 +73,16 @@ public class Reserva {
     }
     
     public DTReserva crearDTReserva(){
+        Set<DTLineaReserva> dtsLR = new HashSet();
+
+	Iterator<LineaReserva> it = lineasReserva.iterator();
+	while (it.hasNext()) {
+		LineaReserva l = it.next();
+		DTLineaReserva temp = l.crearDTLineaReserva();
+		dtsLR.add(temp);
+	}
         DTReserva dt = new DTReserva(this.idReserva, this.fcreacion, this.estado, 
-                this.precioTotal, this.lineasReserva);
+                this.precioTotal, dtsLR);
         return dt;
     }
     

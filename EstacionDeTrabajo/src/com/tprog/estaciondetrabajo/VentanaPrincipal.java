@@ -31,6 +31,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         verInformacionDeReserva = new VerInformacionDeReserva();
         verInformacionDeServicio = new VerInformacionDeServicio();
         cancelarReserva = new CancelarReserva();
+        altaUsuario = new AltaUsuario();
         //las agrego al content pane
         getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
         getContentPane().add(verInformacionDePromocion, BorderLayout.CENTER);
@@ -38,6 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(verInformacionDeReserva, BorderLayout.CENTER);
         getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
         getContentPane().add(cancelarReserva, BorderLayout.CENTER);
+        getContentPane().add(altaUsuario, BorderLayout.CENTER);
         //las agrego al hash
         internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
         internalFrames.put("verInformacionDePromocion", verInformacionDePromocion);
@@ -45,6 +47,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         internalFrames.put("verInformacionDeReserva", verInformacionDeReserva);
         internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
         internalFrames.put("cancelarReserva", cancelarReserva);
+        internalFrames.put("altaUsuario", altaUsuario);
         //inicializacion autogenerada
         initComponents();
         
@@ -69,7 +72,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemAltaPromocion = new javax.swing.JMenuItem();
         menuItemActualizarServicio = new javax.swing.JMenuItem();
         menuItemRealizarReserva = new javax.swing.JMenuItem();
-        menuItemActualizarEstadoReserva = new javax.swing.JMenu();
+        menuItemActualizarEstadoReserva = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         menuItemVerInfoCliente = new javax.swing.JMenuItem();
         menuItemVerInfoProveedor = new javax.swing.JMenuItem();
@@ -117,7 +120,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemRealizarReserva.setText("Realizar Reserva");
         menuRegistros.add(menuItemRealizarReserva);
 
-        menuItemActualizarEstadoReserva.setText("Actualizar estado de Reserva");
+        menuItemActualizarEstadoReserva.setText("Actualizar Estado Reserva");
         menuRegistros.add(menuItemActualizarEstadoReserva);
 
         menu.add(menuRegistros);
@@ -184,7 +187,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaUsuarioActionPerformed
-        // TODO add your handling code here:
+        showInternalFrame("altaUsuario");
     }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
    
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
@@ -273,13 +276,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VerInformacionDeReserva verInformacionDeReserva;
     private VerInformacionDeServicio verInformacionDeServicio;
     private CancelarReserva cancelarReserva;
+    private AltaUsuario altaUsuario;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menu;
     private javax.swing.JMenu menuBorrados;
     private javax.swing.JMenu menuConsultas;
-    private javax.swing.JMenu menuItemActualizarEstadoReserva;
+    private javax.swing.JMenuItem menuItemActualizarEstadoReserva;
     private javax.swing.JMenuItem menuItemActualizarServicio;
     private javax.swing.JMenuItem menuItemAltaCategoria;
     private javax.swing.JMenuItem menuItemAltaPromocion;

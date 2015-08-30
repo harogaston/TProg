@@ -52,11 +52,11 @@
                 <Property name="text" type="java.lang.String" value="Realizar Reserva"/>
               </Properties>
             </MenuItem>
-            <Menu class="javax.swing.JMenu" name="menuItemActualizarEstadoReserva">
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemActualizarEstadoReserva">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Actualizar estado de Reserva"/>
+                <Property name="text" type="java.lang.String" value="Actualizar Estado Reserva"/>
               </Properties>
-            </Menu>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuConsultas">

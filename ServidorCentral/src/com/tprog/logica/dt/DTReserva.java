@@ -5,14 +5,15 @@
  */
 package com.tprog.logica.dt;
 
+import java.util.HashSet;
+import java.util.Set;
 
+import com.tprog.logica.dt.EstadoReserva;
 
 /**
  *
  * @author MarG
  */
-import java.util.HashSet;
-import java.util.Set;
 
 public class DTReserva {
     private String idReserva;
@@ -20,10 +21,6 @@ public class DTReserva {
     private EstadoReserva estado;
     private float precioTotal;
     Set<DTLineaReserva> lineasReserva = new HashSet<DTLineaReserva>(); // agregar al agregar Linea reserva
-    
-    public enum EstadoReserva{
-        Registrada,Cancelada,Pagada,Facturada
-    }
     
     public DTReserva(String id, String creacion, EstadoReserva estado, float p){
         this.idReserva = id;

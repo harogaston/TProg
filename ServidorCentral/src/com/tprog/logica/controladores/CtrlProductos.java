@@ -4,15 +4,16 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.controladores;
+
+import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.dt.*;
-import com.tprog.logica.*;
 import com.tprog.logica.manejadores.*;
 import java.util.*;
 /**
  *
  * @author sofia
  */
-public class CtrlProductos {
+public class CtrlProductos implements ICtrlProductos{
     private DTMinPromocion dtP;
     private DTMinServicio dtS;
     private String categoriaPadre;
@@ -23,16 +24,16 @@ public class CtrlProductos {
     private DTUbicacion destino;
     
     public CtrlProductos(){
-     this.dtP = null;
-     this.dtS = null;
-     this.categoriaPadre = "";
-     this.nicknameP = "";
-     this.listaServicios = new HashSet();
-     this.listaCategorias = new HashSet();
-     this.origen = null;
-     this.destino = null;
+		this.dtP = null;
+		this.dtS = null;
+		this.categoriaPadre = "";
+		this.nicknameP = "";
+		this.listaServicios = new HashSet();
+		this.listaCategorias = new HashSet();
+		this.origen = null;
+		this.destino = null;
     }
-    
+	
     public Set<DTMinPromocion> listarPromociones(){
         return null;
     }
@@ -134,9 +135,9 @@ public class CtrlProductos {
         this.destino = dtU;
     }
     
-    public boolean seleccionarCategoriaSimple(String idCat){
+    public boolean seleccionarCategoriaHoja(String idCategoria){
         ManejadorProductos mp = ManejadorProductos.getInstance();
-        return mp.esCategoriaSimple(idCat);
+        return mp.esCategoriaSimple(idCategoria);
     }
     
     public void altaServicio(String descripcion, float Precio, Set<String> imagenes){
@@ -156,5 +157,5 @@ public class CtrlProductos {
     
     public void altaPromocion(float descuento){
     }
-      
+	
 }

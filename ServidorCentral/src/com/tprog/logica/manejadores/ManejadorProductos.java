@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.manejadores;
-import com.tprog.logica.*;
+import com.tprog.logica.clases.Pais;
+import com.tprog.logica.clases.Categoria;
+import com.tprog.logica.clases.Promocion;
+import com.tprog.logica.clases.Servicio;
 import com.tprog.logica.dt.*;
 import java.util.*;
 
@@ -46,7 +49,7 @@ public class ManejadorProductos {
             if(!promociones.get(dtP.getNicknameP()).isEmpty() 
                     && !promociones.get(dtP.getIdPromocion()).containsKey(dtP.getIdPromocion())){
                 Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
-                result =i p.crearDT();
+                result = p.crearDT();
             }        
         }
         return result;
@@ -137,7 +140,7 @@ public class ManejadorProductos {
         boolean result = false;
         if (!categorias.isEmpty() && categorias.containsKey(cat)){
             Categoria c = categorias.get(cat);
-            result = cat.esCategoriaSimple();
+            result = c.esCategoriaSimple();
         }
         return result;
     }

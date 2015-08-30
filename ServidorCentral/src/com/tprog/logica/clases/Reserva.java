@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tprog.logica;
+package com.tprog.logica.clases;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.dt.EstadoReserva;
 
 /**
  *
  * @author Martins
  */
-import java.util.HashSet;
-import java.util.Set;
-import com.tprog.logica.LineaReserva;
 
 public class Reserva {
     private String idReserva;
@@ -19,10 +22,6 @@ public class Reserva {
     private EstadoReserva estado;
     private float precioTotal;
     Set<LineaReserva> lineasReserva = new HashSet<LineaReserva>(); 
-    
-    public enum EstadoReserva{
-        Registrada,Cancelada,Pagada,Facturada
-    }
     
     public Reserva(String id, String creacion, EstadoReserva estado, float p){
         this.idReserva = id;

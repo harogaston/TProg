@@ -26,21 +26,22 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class Reserva {
-    private String idReserva;
+    private static int idReserva;
     private Date fcreacion; // pasar a date en un futuro muy cercano
     private EstadoReserva estado;
     private float precioTotal;
     Set<LineaReserva> lineasReserva;  
     
-    public Reserva(String id, Date creacion, EstadoReserva estado, float p){
-        this.idReserva = id;
+    public Reserva(Date creacion, EstadoReserva estado, float p){
+        this.idReserva = Reserva.idReserva;
+        Reserva.idReserva++;
         this.fcreacion = creacion;
         this.estado = estado;
         this.precioTotal = p;
         this.lineasReserva = new HashSet();
     }
     
-    public String getIdReserva(){
+    public int getIdReserva(){
         return idReserva;
     }    
     

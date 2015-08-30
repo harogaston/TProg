@@ -21,7 +21,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
 import com.tprog.logica.dt.*;
 
 
@@ -56,27 +55,14 @@ public class ManejadorUsuarios {
     }
     
     public Set<DTMinServicio> listarServiciosProveedor(String nickname){
-            Proveedor prov = proveedores.get(nickname);
-            return prov.listarServicios();
+            return null; 
     }
     
     public Set<DTMinPromocion> listarPromocionesProveedor(String nickname){
-            Proveedor prov = proveedores.get(nickname);
-            return prov.listarPromociones();
+            return null;
     }
     public void agregarReserva(String nickname, DTReserva dt){
-            Reserva res = new Reserva(dt.getFCreacion(),dt.getEstadoReserva(),0);
-            Iterator<DTLineaReserva> it = dt.getLineasReserva().iterator();
-            while (it.hasNext()) {
-                    DTLineaReserva l = it.next();
-                    LineaReserva temp = new LineaReserva(l.getCantidad(),l.getFechaInicio(),
-                            l.getFechaFin(),l.getServicio(),l.getPromocion(),l.getPrecio());
-                    res.agregarLineaReserva(temp);
-            }
-            ManejadorReservas mr = ManejadorReservas.getInstance();
-            mr.agregarReserva(res);
-            Cliente cliente = clientes.get(nickname);
-            cliente.agregarReserva(res);
+        
     }
 
 	public Set<DTMinCliente> listarClientes() {

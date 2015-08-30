@@ -24,16 +24,17 @@ public class CtrlReservas implements ICtrlReservas{
         private DTMinPromocion dtP;
         private DTMinServicio dtS;
         private DTReserva dtR;
-        private String idReserva;
+        private int idReserva;
         private Set<DTLineaReserva> lineasReserva;
         private float precioTotal;
+        
         
         public CtrlReservas(){
                 this.nickname = "";
                 this.dtP = null;
                 this.dtS = null;
                 this.dtR = null;
-                this.idReserva = "";
+                this.idReserva = -1;
                 this.precioTotal = 0;
     
         }
@@ -87,7 +88,7 @@ public class CtrlReservas implements ICtrlReservas{
 	public DTReserva mostrarReservaTemporal(){
                 Date fecha = new Date();
                 EstadoReserva estado = EstadoReserva.Registrada;
-                return (dtR = new DTReserva(-1,fecha,estado,precioTotal,lineasReserva));
+                return (dtR = new DTReserva(-1,fecha,estado,precioTotal,lineasReserva)); ///////// 
         }
 	public void altaReserva(){
                 ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
@@ -97,7 +98,7 @@ public class CtrlReservas implements ICtrlReservas{
                 ManejadorReservas mr = ManejadorReservas.getInstance();
                 return mr.listarReservas();
         }
-	public void seleccionarReserva(String idReserva){
+	public void seleccionarReserva(int idReserva){
                 this.idReserva = idReserva;
         }
 	public DTReserva infoReserva(){

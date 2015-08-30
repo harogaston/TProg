@@ -7,28 +7,32 @@ package com.tprog.logica.manejadores;
 
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Categoria;
+import com.tprog.logica.clases.Simple;
+import com.tprog.logica.clases.Compuesta;
 import com.tprog.logica.clases.Promocion;
 import com.tprog.logica.clases.Servicio;
 import com.tprog.logica.dt.*;
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class ManejadorProductos {
 
-	private static ManejadorProductos instace = null;
-
 	public static ManejadorProductos getInstance() {
-		if (instace == null) {
-			instace = new ManejadorProductos();
-		}
-		return instace;
-	}
-
+            return ManejadorProductosHolder.INSTANCE;
+        }
+    
+        private static class ManejadorProductosHolder {
+            private static final ManejadorProductos INSTANCE = new ManejadorProductos();
+        }
+        
 	protected ManejadorProductos() {
-		categorias = new HashMap();
-		servicios = new HashMap();
-		promociones = new HashMap();
-		ubicaciones = new HashMap();
-		raices = new HashSet();
+            categorias = new HashMap();
+            servicios = new HashMap();
+            promociones = new HashMap();
+            ubicaciones = new HashMap();
+            raices = new HashSet();
 	}
 
 	private Map<String, Categoria> categorias;
@@ -70,7 +74,14 @@ public class ManejadorProductos {
 	}
 
 	public Set<DTMinServicio> listarServiciosCategoria(String cat) {
-		return null;
+            Set<DTMinServicio> result;
+            if (!categorias.isEmpty() && categorias.containsKey(cat)){
+                Categoria c = categorias.get(cat);
+                result = c.listarServicios();
+            } else{
+                result = new HashSet();
+            }
+            return result;
 	}
 
 	public Set<DTMinServicio> listarServicios() {
@@ -122,7 +133,31 @@ public class ManejadorProductos {
 	}
 
 	public void altaCategoria(String idCategoria, String idPadre) {
-	}
+            Categoria c = new Simple(idCategoria);
+            if (idPadre == "") {
+                categorias.put (idCategoria, c);
+                raices.add(c);
+            } else {
+                if (!categorias.isEmpty() && categorias.containsKey(idPadre)){
+                    Categoria padre = categorias.get(idPadre);
+                    if (!esCategoriaSimple(idPadre)){
+                        Categoria padreC = (Compuesta) padre;
+                        padre.add(c);
+                    } else {
+                        categorias.remove(idPadre);
+                        Compuesta nuevoPadre = new Compuesta(idPadre);
+                        nuevoPadre.add(c);
+                        if (raices.contains(padre)){
+                            raices.remove(padre);
+                            raices.add(nuevoPadre);
+                        } else {
+                            Compuesta abuelo = padre.getPadre();
+                            abuelo.add(nuevoPadre);
+                        }
+                    }
+                }
+            }
+        }
 
 	public boolean idServicioDisponible(String idServicio, String nicknameP) {
 		boolean result = true;
@@ -163,4 +198,5 @@ public class ManejadorProductos {
         public float getPrecioServicio(DTMinServicio dtS){
                 return 0; // no hecho
         }
+
 }

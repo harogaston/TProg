@@ -25,7 +25,7 @@ public interface ICtrlReservas {
 	public DTReserva mostrarReservaTemporal();
 	public void altaReserva();
 	public Set<DTMinReserva> listarReservas();
-	public void seleccionarReserva(String idReserva);
+	public void seleccionarReserva(int idReserva);
 	public DTReserva infoReserva();
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 	public void eliminarReserva();

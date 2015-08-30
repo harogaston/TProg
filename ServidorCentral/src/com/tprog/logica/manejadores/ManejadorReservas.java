@@ -19,15 +19,15 @@ public class ManejadorReservas {
 	private Map<Integer, Reserva> reservas;
 	private static ManejadorReservas instance = null;
 
-	private ManejadorReservas() {
-		reservas = new HashMap();
-	}
-
 	public static ManejadorReservas getInstance() {
 		if (instance == null) {
 			instance = new ManejadorReservas();
 		}
 		return instance;
+	}
+
+	private ManejadorReservas() {
+		reservas = new HashMap();
 	}
 
 	public void agregarReserva(Reserva r) {
@@ -50,16 +50,17 @@ public class ManejadorReservas {
 		return r.crearDTReserva();
 	}
 
-	public boolean cambiarEstadoReserva(String idReserva, EstadoReserva nuevoEstado) {
+	public boolean cambiarEstadoReserva(int idReserva, EstadoReserva nuevoEstado) {
 		Reserva r = reservas.get(idReserva);
 
 		return r.cambiarEstadoReserva(nuevoEstado);
 	}
 
-	public void eliminarReserva(String idReserva) {
+	public void eliminarReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
 		r.eliminar();
 		// sacar del map
 		this.reservas.remove(r);
+
 	}
 }

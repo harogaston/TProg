@@ -10,6 +10,10 @@ package com.tprog.logica;
  * @author MarG
  */
 import java.util.Date;
+import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.Servicio;
+import com.tprog.logica.Promocion;
+
 public class LineaReserva {
     private int Cantidad;
     private Date FechaInicio;
@@ -71,6 +75,11 @@ public class LineaReserva {
     public void setPromocion(Promocion p){
         this.promocion = p;
     }
+    
+    public DTLineaReserva crearDTLineaReserva(){
+        DTLineaReserva dt = new DTLineaReserva(this.Cantidad, this.FechaInicio,this.FechaFin,this.servicio.getIdServicio(),this.promocion.getIdPromocion(),this.Precio );
+        return dt;
+     }
     
 }
 

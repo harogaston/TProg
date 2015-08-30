@@ -8,14 +8,11 @@ package com.tprog.logica.interfaces;
 import com.tprog.logica.controladores.CtrlProductos;
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.controladores.CtrlReservas;
-/**
- *
- * @author gaston
- */
+
 public class Fabrica {
 	private static Fabrica instace = null;
 	
-	private Fabrica(){};
+	protected Fabrica(){};
 	
 	public static Fabrica getInstance(){
 		if (instace == null)

@@ -19,11 +19,11 @@ public class LineaReserva {
     private Date FechaInicio;
     private Date FechaFin;
     private float Precio;
-    private Servicio servicio;
-    private Promocion promocion;
+    private String servicio;
+    private String promocion;
             
             
-    public LineaReserva(int c,Date fi, Date ff, Servicio s, Promocion p, float pre){
+    public LineaReserva(int c,Date fi, Date ff, String s, String p, float pre){
         this.Cantidad = c;
         this.FechaInicio = fi;
         this.FechaFin = ff;
@@ -44,11 +44,11 @@ public class LineaReserva {
         return this.FechaFin;
     }
     
-    public Servicio getServicio(){
+    public String getServicio(){
         return this.servicio;
     }
     
-    public Promocion getPromocion(){
+    public String getPromocion(){
         return this.promocion;
     }
     
@@ -68,16 +68,16 @@ public class LineaReserva {
         this.FechaFin = ffin;
     }
     
-    public void setServicio(Servicio s){
+    public void setServicio(String s){
         this.servicio = s;
     }
     
-    public void setPromocion(Promocion p){
+    public void setPromocion(String p){
         this.promocion = p;
     }
     
     public DTLineaReserva crearDTLineaReserva(){
-        DTLineaReserva dt = new DTLineaReserva(this.Cantidad, this.FechaInicio,this.FechaFin,this.servicio.getIdServicio(),this.promocion.getIdPromocion(),this.Precio );
+        DTLineaReserva dt = new DTLineaReserva(this.Cantidad, this.FechaInicio,this.FechaFin,this.servicio,this.promocion,this.Precio );
         return dt;
      }
     

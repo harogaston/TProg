@@ -6,6 +6,7 @@
 
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.estaciondetrabajo.customComponents.SeleccionadorDosListas;
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,9 +84,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
-        setPreferredSize(new java.awt.Dimension(640, 480));
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {

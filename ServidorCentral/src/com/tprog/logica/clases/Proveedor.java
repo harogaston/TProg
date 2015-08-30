@@ -13,6 +13,7 @@ import java.util.Map;
 import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinServicio;
 import java.util.Date;
 
 /**
@@ -47,20 +48,18 @@ public class Proveedor extends Usuario {
 		return nuevoDT;
 	}
 
-	public Set<String> getServicios() {
-		Set<String> nuevoSet;
-		if (!servicios.isEmpty()) {
-                    nuevoSet = servicios.keySet();
-                    return nuevoSet;
-		} else {
-                    return new HashSet();
-                }
-        }
+	public Set<DTMinServicio> listarServicios() {
+		Set<DTMinServicio> nuevoSet = new HashSet();
+		for (Servicio serv : servicios.values()) {
+			DTMinServicio temp = serv.crearDTMin();
+			nuevoSet.add(temp);
+		}
+		return nuevoSet;
+    }
         
 	public Set<DTMinPromocion> listarPromociones() {
 		Set<DTMinPromocion> nuevoSet = new HashSet();
-		for (Iterator<Promocion> it = promociones.values().iterator(); it.hasNext();) {
-			Promocion promo = it.next();
+		for (Promocion promo : promociones.values()) {
 			DTMinPromocion temp = promo.crearDTMin();
 			nuevoSet.add(temp);
 		}

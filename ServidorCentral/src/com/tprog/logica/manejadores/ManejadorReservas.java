@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.manejadores;
-import com.tprog.logica.*;
+import com.tprog.logica.clases.*;
 import com.tprog.logica.dt.*;
 import java.util.*;
 import java.util.HashMap;

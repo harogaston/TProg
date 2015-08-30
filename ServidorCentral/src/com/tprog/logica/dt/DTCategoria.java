@@ -9,8 +9,8 @@ import java.util.Set;
 
 public class DTCategoria {
 
-	private final String idCategoria;
-	private final Set<DTCategoria> subCategorias;
+	private String idCategoria;
+	private Set<DTCategoria> subCategorias;
 
 	public DTCategoria(String idCategoria, Set<DTCategoria> subCategorias) {
 		this.idCategoria = idCategoria;

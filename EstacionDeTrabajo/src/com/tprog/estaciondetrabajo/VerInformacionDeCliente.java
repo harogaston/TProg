@@ -58,6 +58,9 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
         });
 
         jTabbedPane1.setBorder(null);
@@ -103,46 +106,43 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         tabInfoLayout.setHorizontalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabInfoLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
                 .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(botonSalir)
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
-            .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tabInfoLayout.createSequentialGroup()
                     .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(tabInfoLayout.createSequentialGroup()
-                            .addGap(43, 43, 43)
-                            .addComponent(listaClientesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(botonMostrarCliente))
+                            .addGap(90, 90, 90)
+                            .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(tabInfoLayout.createSequentialGroup()
+                                    .addComponent(botonSalir)
+                                    .addGap(263, 263, 263))))
                         .addGroup(tabInfoLayout.createSequentialGroup()
-                            .addGap(12, 12, 12)
-                            .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(91, Short.MAX_VALUE)))
+                            .addGap(29, 29, 29)
+                            .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabInfoLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(listaClientesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonMostrarCliente)))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         tabInfoLayout.setVerticalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
-                .addContainerGap(165, Short.MAX_VALUE)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imagenUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(listaClientesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonMostrarCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imagenUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(botonSalir)
-                .addGap(66, 66, 66))
-            .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tabInfoLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(32, 32, 32)
-                    .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(listaClientesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botonMostrarCliente))
-                    .addContainerGap(245, Short.MAX_VALUE)))
+                .addGap(52, 52, 52))
         );
 
         label.getAccessibleContext().setAccessibleDescription("");
@@ -248,19 +248,9 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaClientesInterfazInterfazActionPerformed
-
-    private void listaClientesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazComponentAdded
-    }//GEN-LAST:event_listaClientesInterfazInterfazComponentAdded
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //Aca se trae un set de DTMinCliente para agregar al combobox
-        hashClientes.clear();
-        listaClientes.clear();
-        imagenUsuario.setIcon(null);
-        //listaClientes.removeAllItems();
+        //carga de prueba
         DTMinCliente dt0 = new DTMinCliente("pendorcho64", "juanperez@gmail.com");
         hashClientes.put(dt0.getNickname(), dt0.getEmail());
         DTMinCliente dt1 = new DTMinCliente("12340", "asdf@gmail.com");
@@ -274,27 +264,10 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         DTMinCliente dt5 = new DTMinCliente("12344", "qyu125@gmail.com");
         hashClientes.put(dt5.getNickname(), dt5.getEmail());
         listaClientesInterfaz.updateUI();
-        //simulo lo que seria el listarClientes()
-        //clientes.put("Pepito", "Pepito es un aventurero, le gusta pagar por travestis y después descuartizarlos/as y tirar las partes en contenedores separados por más de 3 km.");
-        //clientes.put("Juan Carlos", "Él es Juan Carlos; el de los pantalones cortos y los huevos largos.");
-        //clientes.put("Ramón", "A Ramón le gusta el helado");
         for (Map.Entry<String, String> cliente : hashClientes.entrySet()) {
             listaClientes.add(cliente.getKey());
         } 
     }//GEN-LAST:event_formComponentShown
-
-    private void botonMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarClienteActionPerformed
-        String cliente = (String) listaClientesInterfaz.getSelectedItem();
-        if (cliente != null) {
-            detalleCliente.setVisible(true);
-            detalleCliente.setText(hashClientes.get(cliente));
-            //imagenUsuario.setIcon(new ImageIcon("/home/marccio/Pictures/marco_horando_1.jpg"));
-            if (cliente != "pendorcho64")
-                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar.jpg")));
-            else imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar2.jpg")));
-            
-        }
-    }//GEN-LAST:event_botonMostrarClienteActionPerformed
 
     private void listaReservasInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazComponentAdded
         // TODO add your handling code here:
@@ -305,8 +278,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
 
     private void botonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalir1ActionPerformed
-        detalleCliente.setText("");
-        detalleCliente.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_botonSalir1ActionPerformed
 
@@ -317,6 +288,39 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             //detalleCliente.setText(hashClientes.get(cliente));
         }        
     }//GEN-LAST:event_botonMostrarReservaActionPerformed
+
+    private void botonMostrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarClienteActionPerformed
+        String cliente = (String) listaClientesInterfaz.getSelectedItem();
+        if (cliente != null) {
+            detalleCliente.setVisible(true);
+            detalleCliente.setText(hashClientes.get(cliente));
+            //imagenUsuario.setIcon(new ImageIcon("/home/marccio/Pictures/marco_horando_1.jpg"));
+            if (cliente != "pendorcho64")
+                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar.jpg")));
+            else 
+                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar2.jpg")));
+            //además falta cargar la lista de reservas del usuario acá, y dejar 
+            //que se muestre hasta que se esconda el component jTabbedPane
+        }
+    }//GEN-LAST:event_botonMostrarClienteActionPerformed
+
+    private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaClientesInterfazInterfazActionPerformed
+
+    private void listaClientesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazComponentAdded
+
+    }//GEN-LAST:event_listaClientesInterfazInterfazComponentAdded
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        //al ser ocultado el componente se deja todo como antes
+        hashClientes.clear();
+        listaClientes.clear();
+        imagenUsuario.setIcon(null);
+        jTabbedPane1.setSelectedIndex(0);
+        listaClientesInterfaz.setSelectedItem(null);
+        detalleCliente.setText("");        
+    }//GEN-LAST:event_formComponentHidden
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonMostrarCliente;

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Date;
 
 public class Cliente extends Usuario {
-    Map<String, Reserva> reservas;
+    Map<Integer, Reserva> reservas;
     
     public Cliente(String nickname, String nombre, String apellido, String email, String imagen, Date fechaN){
             super(nickname, nombre, apellido, email, imagen, fechaN);
@@ -32,5 +32,9 @@ public class Cliente extends Usuario {
     public DTMinCliente crearDTMin(){
         DTMinCliente dt = new DTMinCliente(this.nickname, this.email);
         return dt;
+    }
+    
+    public void agregarReserva(Reserva reserva){
+        reservas.put(reserva.getIdReserva(), reserva); 
     }
 }

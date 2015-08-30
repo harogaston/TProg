@@ -6,10 +6,11 @@
 package com.tprog.logica.manejadores;
 
 import com.tprog.logica.clases.Cliente;
-import com.tprog.logica.clases.Proveedor;
 import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.clases.Proveedor;
 import com.tprog.logica.clases.Reserva;
 import com.tprog.logica.dt.DTCliente;
+import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinProveedor;
@@ -18,62 +19,60 @@ import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTReserva;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import com.tprog.logica.dt.*;
-
-
-
 public class ManejadorUsuarios {
-    
+
 	private static ManejadorUsuarios instace = null;
-	
+
 	private Map<String, Proveedor> proveedores;
-    private Map<String, Cliente> clientes;
-    
+	private Map<String, Cliente> clientes;
+
 	private ManejadorUsuarios() {
-        proveedores = new HashMap();
-        clientes = new HashMap();
-    }
-    
-	public static ManejadorUsuarios getInstance(){
-		if (instace == null)
+		proveedores = new HashMap();
+		clientes = new HashMap();
+	}
+
+	public static ManejadorUsuarios getInstance() {
+		if (instace == null) {
 			instace = new ManejadorUsuarios();
+		}
 		return instace;
 	}
 
-    public Set<DTMinProveedor> listarProveedores(){
-        Set<DTMinProveedor> lista = new HashSet();
-        if (!proveedores.isEmpty()){
-            for(Proveedor p : proveedores.values()){
-                DTMinProveedor dtMin = p.crearDTMin();
-                lista.add(dtMin);
-            }  
-        }
-        return lista;
-    }
-    
-    public Set<DTMinServicio> listarServiciosProveedor(String nickname){
+	public Set<DTMinProveedor> listarProveedores() {
+		Set<DTMinProveedor> lista = new HashSet();
+		if (!proveedores.isEmpty()) {
+			for (Proveedor p : proveedores.values()) {
+				DTMinProveedor dtMin = p.crearDTMin();
+				lista.add(dtMin);
+			}
+		}
+		return lista;
+	}
+
+	public Set<DTMinServicio> listarServiciosProveedor(String nickname) {
 		Proveedor p = proveedores.get(nickname);
 		return p.listarServicios();
-    }
-    
-    public Set<DTMinPromocion> listarPromocionesProveedor(String nickname){
-        Proveedor p = proveedores.get(nickname);
+	}
+
+	public Set<DTMinPromocion> listarPromocionesProveedor(String nickname) {
+		Proveedor p = proveedores.get(nickname);
 		return p.listarPromociones();
-    }
-    public void agregarReserva(String nickname, DTReserva dt){
-        
-    }
+	}
+
+	public void agregarReserva(String nickname, DTReserva dt) {
+	}
 
 	public Set<DTMinCliente> listarClientes() {
-        Set<DTMinCliente> nuevoSet = new HashSet();
-		if (!clientes.isEmpty()){
-            for(Cliente c : clientes.values()){
-                nuevoSet.add(c.crearDTMin());
-            }
-        }
+		Set<DTMinCliente> nuevoSet = new HashSet();
+		if (!clientes.isEmpty()) {
+			for (Cliente c : clientes.values()) {
+				nuevoSet.add(c.crearDTMin());
+			}
+		}
 		return nuevoSet;
 	}
 
@@ -89,28 +88,29 @@ public class ManejadorUsuarios {
 
 	public boolean verificarNickname(String nicknameU) {
 		boolean existeProveedor = proveedores.containsKey(nicknameU);
-		if(!existeProveedor){
+		if (!existeProveedor) {
 			boolean existeCliente = clientes.containsKey(nicknameU);
 			return !existeCliente;
-		}
-		else{
+		} else {
 			return false;
 		}
 	}
 
 	public boolean verificarEmail(String email) {
-        if (!proveedores.isEmpty()){
-            for(Proveedor p : proveedores.values()){
-                if (email.equals(p.getEmail()))
+		if (!proveedores.isEmpty()) {
+			for (Proveedor p : proveedores.values()) {
+				if (email.equals(p.getEmail())) {
 					return false;
-            }
-        }
-        if (!clientes.isEmpty()){
-            for(Cliente c : clientes.values()){
-                if (email.equals(c.getEmail()))
+				}
+			}
+		}
+		if (!clientes.isEmpty()) {
+			for (Cliente c : clientes.values()) {
+				if (email.equals(c.getEmail())) {
 					return false;
-            }
-        }
+				}
+			}
+		}
 		return true;
 	}
 

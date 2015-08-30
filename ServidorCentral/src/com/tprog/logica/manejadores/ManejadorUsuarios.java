@@ -7,6 +7,8 @@ package com.tprog.logica.manejadores;
 
 import com.tprog.logica.clases.Cliente;
 import com.tprog.logica.clases.Proveedor;
+import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.clases.Reserva;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinPromocion;
@@ -18,6 +20,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import com.tprog.logica.dt.*;
+
+
 
 public class ManejadorUsuarios {
     

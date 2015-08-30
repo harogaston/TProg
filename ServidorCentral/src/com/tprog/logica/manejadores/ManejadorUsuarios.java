@@ -38,52 +38,83 @@ public class ManejadorUsuarios {
 	}
 
     public Set<DTMinProveedor> listarProveedores(){
-        Set<DTMinProveedor> result = new HashSet();
+        Set<DTMinProveedor> lista = new HashSet();
         if (!proveedores.isEmpty()){
             for(Proveedor p : proveedores.values()){
                 DTMinProveedor dtMin = p.crearDTMin();
-                result.add(dtMin);
+                lista.add(dtMin);
             }  
         }
-        return result;
+        return lista;
     }
     
     public Set<DTMinServicio> listarServiciosProveedor(String nickname){
-            return null; 
+		Proveedor p = proveedores.get(nickname);
+		return p.listarServicios();
     }
     
     public Set<DTMinPromocion> listarPromocionesProveedor(String nickname){
-            return null;
+        Proveedor p = proveedores.get(nickname);
+		return p.listarPromociones();
     }
     public void agregarReserva(String nickname, DTReserva dt){
         
     }
 
 	public Set<DTMinCliente> listarClientes() {
-		return null;
+        Set<DTMinCliente> nuevoSet = new HashSet();
+		if (!clientes.isEmpty()){
+            for(Cliente c : clientes.values()){
+                nuevoSet.add(c.crearDTMin());
+            }
+        }
+		return nuevoSet;
 	}
 
 	public DTCliente infoCliente(String nickname) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Cliente c = clientes.get(nickname);
+		return c.crearDT();
 	}
 
 	public DTProveedor infoProveedor(String nicknameP) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Proveedor p = proveedores.get(nicknameP);
+		return p.crearDT();
 	}
 
 	public boolean verificarNickname(String nicknameU) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		boolean existeProveedor = proveedores.containsKey(nicknameU);
+		if(!existeProveedor){
+			boolean existeCliente = clientes.containsKey(nicknameU);
+			return !existeCliente;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public boolean verificarEmail(String email) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!proveedores.isEmpty()){
+            for(Proveedor p : proveedores.values()){
+                if (email.equals(p.getEmail()))
+					return false;
+            }
+        }
+        if (!clientes.isEmpty()){
+            for(Cliente c : clientes.values()){
+                if (email.equals(c.getEmail()))
+					return false;
+            }
+        }
+		return true;
 	}
 
-	public void altaCliente(DTCliente nuevoDT) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public void altaCliente(DTCliente dtC) {
+		Cliente nuevoCliente = new Cliente(dtC);
+		clientes.put(dtC.getNickname(), nuevoCliente);
 	}
 
-	public void altaProveedor(DTProveedor nuevoDT) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public void altaProveedor(DTProveedor dtP) {
+		Proveedor nuevoProveedor = new Proveedor(dtP);
+		proveedores.put(dtP.getNickname(), nuevoProveedor);
 	}
 }

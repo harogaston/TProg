@@ -25,11 +25,11 @@ public class DTProveedor extends DTUsuario {
 		this.webEmpresa = webEmpresa;
 	}
 	
-	String getEmpresa() {
+	public String getEmpresa() {
 		return this.empresa;
 	}
 
-	String getWebEmpresa() {
+	public String getWebEmpresa() {
 		return this.webEmpresa;
 	}
 

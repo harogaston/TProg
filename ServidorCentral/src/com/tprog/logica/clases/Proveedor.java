@@ -5,21 +5,16 @@
  */
 package com.tprog.logica.clases;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Map;
-import com.tprog.logica.dt.DTMinProveedor;
-import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTProveedor;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-/**
- *
- * @author gaston
- */
 public class Proveedor extends Usuario {
 
 	private String empresa;
@@ -33,6 +28,14 @@ public class Proveedor extends Usuario {
 		super(nick, nom, ap, email, imagen, fecha);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
+		this.promociones = new HashMap();
+		this.servicios = new HashMap();
+	}
+
+	public Proveedor(DTProveedor dtP) {
+		super(dtP.getNickname(), dtP.getNombre(), dtP.getApellido(), dtP.getEmail(), dtP.getImagen(), dtP.getFechaNacimiento());
+		this.empresa = dtP.getEmpresa();
+		this.webEmpresa = dtP.getWebEmpresa();
 		this.promociones = new HashMap();
 		this.servicios = new HashMap();
 	}
@@ -55,8 +58,8 @@ public class Proveedor extends Usuario {
 			nuevoSet.add(temp);
 		}
 		return nuevoSet;
-    }
-        
+	}
+
 	public Set<DTMinPromocion> listarPromociones() {
 		Set<DTMinPromocion> nuevoSet = new HashSet();
 		for (Promocion promo : promociones.values()) {
@@ -74,20 +77,19 @@ public class Proveedor extends Usuario {
 		promociones.put(p.getIdPromocion(), p);
 	}
 
-	public void setEmpresa(String empresa){
+	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
 
-	public void setWebEmpresa(String webEmpresa){
+	public void setWebEmpresa(String webEmpresa) {
 		this.webEmpresa = webEmpresa;
 	}
-	
-	public String getEmpresa(){
+
+	public String getEmpresa() {
 		return this.empresa;
 	}
-	
-	public String getWebEmpresa(){
+
+	public String getWebEmpresa() {
 		return this.webEmpresa;
 	}
 }
-

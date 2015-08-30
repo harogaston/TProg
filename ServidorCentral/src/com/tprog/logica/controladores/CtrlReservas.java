@@ -5,10 +5,18 @@
  */
 package com.tprog.logica.controladores;
 
+import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTReserva;
+import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.interfaces.ICtrlReservas;
-import com.tprog.logica.dt.*;
-import com.tprog.logica.manejadores.*;
-import java.util.*;
+import com.tprog.logica.manejadores.ManejadorProductos;
+import com.tprog.logica.manejadores.ManejadorReservas;
+import com.tprog.logica.manejadores.ManejadorUsuarios;
+import java.util.Date;
+import java.util.Set;
 
 public class CtrlReservas implements ICtrlReservas{
         
@@ -79,7 +87,7 @@ public class CtrlReservas implements ICtrlReservas{
 	public DTReserva mostrarReservaTemporal(){
                 Date fecha = new Date();
                 EstadoReserva estado = EstadoReserva.Registrada;
-                return (dtR = new DTReserva(this.nickname,fecha,estado,precioTotal,lineasReserva));
+                return (dtR = new DTReserva(-1,fecha,estado,precioTotal,lineasReserva));
         }
 	public void altaReserva(){
                 ManejadorUsuarios mu = ManejadorUsuarios.getInstance();

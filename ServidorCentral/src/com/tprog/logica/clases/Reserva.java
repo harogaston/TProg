@@ -10,12 +10,6 @@ import java.util.Set;
 
 import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.EstadoReserva;
-
-/**
- *
- * @author Martins
- */
-
 import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTMinReserva;
@@ -26,13 +20,13 @@ import java.util.Date;
 import java.util.Iterator;
 
 public class Reserva {
-    private String idReserva;
+    private int idReserva;
     private Date fcreacion; // pasar a date en un futuro muy cercano
     private EstadoReserva estado;
     private float precioTotal;
     Set<LineaReserva> lineasReserva;  
     
-    public Reserva(String id, Date creacion, EstadoReserva estado, float p){
+    public Reserva(int id, Date creacion, EstadoReserva estado, float p){
         this.idReserva = id;
         this.fcreacion = creacion;
         this.estado = estado;
@@ -40,7 +34,7 @@ public class Reserva {
         this.lineasReserva = new HashSet();
     }
     
-    public String getIdReserva(){
+    public int getIdReserva(){
         return idReserva;
     }    
     

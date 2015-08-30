@@ -5,19 +5,14 @@
  */
 package com.tprog.logica.interfaces;
 
-import java.util.Set;
-import java.util.Date;
-
 import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTReserva;
-import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.EstadoReserva;
+import java.util.Date;
+import java.util.Set;
 
-/**
- *
- * @author gaston
- */
 public interface ICtrlReservas {
 	public void seleccionarCliente(String nickname);
 	public Set<DTMinPromocion> listarPromociones();

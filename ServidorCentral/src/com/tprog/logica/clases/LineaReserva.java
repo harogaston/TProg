@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tprog.logica;
+package com.tprog.logica.clases;
 
 /**
  *
@@ -11,8 +11,8 @@ package com.tprog.logica;
  */
 import java.util.Date;
 import com.tprog.logica.dt.DTLineaReserva;
-import com.tprog.logica.Servicio;
-import com.tprog.logica.Promocion;
+import com.tprog.logica.clases.Servicio;
+import com.tprog.logica.clases.Promocion;
 
 public class LineaReserva {
     private int Cantidad;

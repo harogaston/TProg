@@ -4,28 +4,27 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.dt;
-import java.util.*;
-/**
- *
- * @author sofia
- */
+
+import java.util.Date;
+
 public class DTProveedor extends DTUsuario {
-    private final String empresa;
-    private final String webEmpresa;
-    
-    public DTProveedor(String nickname, String nombre, String apellido, String email,
-			String imagen, Date fechaN, String empresa, String webEmpresa){
-        super(nickname, nombre, apellido, email, imagen, fechaN);
-        this.empresa = empresa;
-        this.webEmpresa = webEmpresa;
-    }
-    
-    String getEmpresa(){
-        return this.empresa;
-    }
-    
-    String getWeb(){
-        return this.webEmpresa;
-    }
-    
+
+	private final String empresa;
+	private final String webEmpresa;
+
+	public DTProveedor(String nickname, String nombre, String apellido, String email,
+			String imagen, Date fechaN, String empresa, String webEmpresa) {
+		super(nickname, nombre, apellido, email, imagen, fechaN);
+		this.empresa = empresa;
+		this.webEmpresa = webEmpresa;
+	}
+
+	String getEmpresa() {
+		return this.empresa;
+	}
+
+	String getWebEmpresa() {
+		return this.webEmpresa;
+	}
+
 }

@@ -5,26 +5,22 @@
  */
 package com.tprog.logica.dt;
 
-/**
- *
- * @author sofia
- */
 public class DTMinServicio {
-    
-    private final String nicknameP;
-    private final String idServicio;
-    
-    public DTMinServicio(String proveedor, String idServicio) {
-        this.nicknameP = proveedor;
-        this.idServicio = idServicio;
-    }
-    
-    public String getNicknameP(){
-        return this.nicknameP;
-    }
-    
-    public String getIdServicio(){
-        return this.idServicio;
-    }
-    
+
+	private final String nicknameP;
+	private final String idServicio;
+
+	public DTMinServicio(String nicknameP, String idServicio) {
+		this.nicknameP = nicknameP;
+		this.idServicio = idServicio;
+	}
+
+	public String getNicknameP() {
+		return this.nicknameP;
+	}
+
+	public String getIdServicio() {
+		return this.idServicio;
+	}
+
 }

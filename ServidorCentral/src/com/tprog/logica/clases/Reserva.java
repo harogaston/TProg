@@ -3,18 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tprog.logica;
+package com.tprog.logica.clases;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.dt.EstadoReserva;
 
 /**
  *
  * @author Martins
  */
-import com.tprog.logica.EstadoReserva;
+
+import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTMinReserva;
 import java.util.HashSet;
 import java.util.Set;
-import com.tprog.logica.LineaReserva;
+import com.tprog.logica.clases.LineaReserva;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -24,8 +31,6 @@ public class Reserva {
     private EstadoReserva estado;
     private float precioTotal;
     Set<LineaReserva> lineasReserva;  
-    
-    
     
     public Reserva(String id, Date creacion, EstadoReserva estado, float p){
         this.idReserva = id;

@@ -5,25 +5,23 @@
  */
 package com.tprog.logica.dt;
 
-/**
- *
- * @author MarG
- */
 import java.util.Date;
+
 public class DTMinReserva {
-    private String idReserva;
-    private Date creacion;
-    
-    public DTMinReserva(String id, Date crea){
-        this.idReserva = id;
-        this.creacion = crea;
-    }
-    
-    public String getIdReserva(){
-        return idReserva;
-    }
-    
-    public Date getFCreacion(){
-        return creacion;
-    }
+
+	private String idReserva;
+	private Date fechaCreacion;
+
+	public DTMinReserva(String idReserva, Date fechaCreacion) {
+		this.idReserva = idReserva;
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public String getIdReserva() {
+		return idReserva;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
 }

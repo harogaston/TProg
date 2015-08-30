@@ -3,19 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tprog.logica;
+package com.tprog.logica.controladores;
 
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 /**
  *
  * @author gaston
  */
-public class Simple extends Categoria{
-    
-    public Simple(String idCategoria){
-		super(idCategoria);
-    }
-    
-    public boolean esCategoriaSimple(){
-        return true;
-    }
+public class CtrlUsuarios implements ICtrlUsuarios{
+	
 }

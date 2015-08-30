@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tprog.logica;
+package com.tprog.logica.dt;
 
-/**
- *
- * @author gaston
- */
-public class Compuesta extends Categoria{
-	
+public enum EstadoReserva {
+
+	Registrada, Cancelada, Pagada, Facturada
 }

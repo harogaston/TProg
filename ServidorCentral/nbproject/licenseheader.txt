@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Header Test
+<#if licenseLast??>
+${licenseLast}
+</#if>

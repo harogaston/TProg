@@ -5,25 +5,22 @@
  */
 package com.tprog.logica.dt;
 
-/**
- *
- * @author Martins
- */
 public class DTMinCliente {
-    private String nickname;
-    private String email;
-    
-    public DTMinCliente(String nick, String em){
-        this.nickname = nick;
-        this.email = em;
-    }
-    
-    public String getNickname(){
-        return this.nickname;
-    }
-    
-    public String getEmail(){
-        return this.email;
-    }
-    
+
+	private String nickname;
+	private String email;
+
+	public DTMinCliente(String nickname, String email) {
+		this.nickname = nickname;
+		this.email = email;
+	}
+
+	public String getNickname() {
+		return this.nickname;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
 }

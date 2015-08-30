@@ -156,4 +156,11 @@ public class ManejadorProductos {
 	public void altaPromocion(DTPromocion dtP) {
 	}
 
+        public float getPrecioPromocion(DTMinPromocion dtP){
+                return 0; // no hecho
+        }
+        
+        public float getPrecioServicio(DTMinServicio dtS){
+                return 0; // no hecho
+        }
 }

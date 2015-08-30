@@ -19,20 +19,13 @@ public class DTReserva {
 	private float precioTotal;
 	Set<DTLineaReserva> lineasReserva;
 
-	public DTReserva(String idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<LineaReserva> lineasReserva) {
+	public DTReserva(String idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineasReserva) {
 		this.idReserva = idReserva;
 		this.fCreacion = fCreacion;
 		this.estado = estado;
 		this.precioTotal = precioTotal;
-		this.lineasReserva = new HashSet();
-
-		Iterator<LineaReserva> it = lineasReserva.iterator();
-		while (it.hasNext()) {
-			LineaReserva l = it.next();
-			DTLineaReserva temp = l.crearDTLineaReserva();
-			this.lineasReserva.add(temp);
-		}
-	}
+		this.lineasReserva = lineasReserva;
+        }
 
 	public String getIdReserva() {
 		return idReserva;

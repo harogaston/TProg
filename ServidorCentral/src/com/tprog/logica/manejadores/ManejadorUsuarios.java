@@ -42,4 +42,15 @@ public class ManejadorUsuarios {
         }
         return result;
     }
+    
+    public Set<DTMinServicio> listarServiciosProveedor(String nickname){
+            return null; 
+    }
+    
+    public Set<DTMinPromocion> listarPromocionesProveedor(String nickname){
+            return null;
+    }
+    public void agregarReserva(String nickname, DTReserva dt){
+        
+    }
 }

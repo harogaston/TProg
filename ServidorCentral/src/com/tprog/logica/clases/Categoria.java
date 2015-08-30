@@ -1,26 +1,24 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Header Test
  */
 package com.tprog.logica.clases;
-import java.util.*;
-        
+import com.tprog.logica.dt.DTMinServicio;
+import java.util.Set;
+import java.util.HashSet;
+
 /**
  *
- * @author gaston
+ * @author sofia
  */
-public abstract class Categoria {
-    private String idCategoria;
-    
-    public Categoria(String id){
-        this.idCategoria = id;
-    }
-    
-    public abstract boolean esCategoriaSimple();
+public interface Categoria {
+
+  
+    public Set<DTMinServicio> listarServicios();
+    public boolean esCategoriaSimple();
+    public String getIdCategoria();
+    public void setPadre(Compuesta padre);
+    public void add(Categoria c);
+    public Compuesta getPadre();
 	
-	public String getIdCategoria(){
-		return this.idCategoria;
-	}
 
 }

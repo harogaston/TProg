@@ -84,7 +84,7 @@ public class ManejadorProductos {
             String nuevaD){
     }
     
-    public String[] listarImagenes (String nicknameP, String idServicio){
+    public Set<String> listarImagenes (String nicknameP, String idServicio){
         return null;
     }
     

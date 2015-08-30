@@ -5,6 +5,7 @@
  */
 package com.tprog.logica.dt;
 
+import java.util.Set;
 /**
  *
  * @author sofia
@@ -14,16 +15,16 @@ public class DTServicio {
     private final String idServicio;
     private final String descripcion;
     private final float precio;
-    private final String[] imagenes;
+    private final Set<String> imagenes;
     private final DTUbicacion origen;
     private final DTUbicacion destino;
-    
-    public DTServicio(String id, String desc, float p,
-            String[] img, DTUbicacion origen, DTUbicacion destino) {
-        this.idServicio = id;
-        this.descripcion = desc;
-        this.precio = p;
-        this.imagenes = img;
+
+	public DTServicio(String idServicio, String descripcion, float precio,
+            Set<String> imgagenes, DTUbicacion origen, DTUbicacion destino) {
+        this.idServicio = idServicio;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagenes = imgagenes;
         this.origen = origen;
         this.destino = destino;
     }
@@ -40,7 +41,7 @@ public class DTServicio {
         return this.precio;
     }
     
-    public String[] getImagenes(){
+    public Set<String> getImagenes(){
         return this.imagenes;
     }
     

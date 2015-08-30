@@ -11,7 +11,8 @@ package com.tprog.logica;
  */
 public class Simple extends Categoria{
     
-    public Categoria(){
+    public Simple(String idCategoria){
+		super(idCategoria);
     }
     
     public boolean esCategoriaSimple(){

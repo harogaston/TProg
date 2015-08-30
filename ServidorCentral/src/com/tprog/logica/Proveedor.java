@@ -61,7 +61,7 @@ public class Proveedor extends Usuario {
 		Set<DTMinPromocion> nuevoSet = new HashSet();
 		for (Iterator<Promocion> it = promociones.values().iterator(); it.hasNext();) {
 			Promocion promo = it.next();
-			DTMinPromocion temp = promo.CrearDTMin();
+			DTMinPromocion temp = promo.crearDTMin();
 			nuevoSet.add(temp);
 		}
 		return nuevoSet;

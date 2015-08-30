@@ -139,7 +139,7 @@ public class CtrlProductos {
         return mp.esCategoriaSimple(idCat);
     }
     
-    public void altaServicio(String descripcion, float Precio, String[] imagenes){
+    public void altaServicio(String descripcion, float Precio, Set<String> imagenes){
     }
     
     public Set<String> listarServiciosProveedor(){

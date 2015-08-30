@@ -7,6 +7,8 @@ package com.tprog.logica.manejadores;
 
 import com.tprog.logica.clases.Cliente;
 import com.tprog.logica.clases.Proveedor;
+import com.tprog.logica.clases.LineaReserva;
+import com.tprog.logica.clases.Reserva;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinPromocion;
@@ -18,6 +20,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+
+import com.tprog.logica.dt.*;
+
+
 
 public class ManejadorUsuarios {
     
@@ -49,14 +56,27 @@ public class ManejadorUsuarios {
     }
     
     public Set<DTMinServicio> listarServiciosProveedor(String nickname){
-            return null; 
+            Proveedor prov = proveedores.get(nickname);
+            return prov.listarServicios();
     }
     
     public Set<DTMinPromocion> listarPromocionesProveedor(String nickname){
-            return null;
+            Proveedor prov = proveedores.get(nickname);
+            return prov.listarPromociones();
     }
     public void agregarReserva(String nickname, DTReserva dt){
-        
+            Reserva res = new Reserva(dt.getFCreacion(),dt.getEstadoReserva(),0);
+            Iterator<DTLineaReserva> it = dt.getLineasReserva().iterator();
+            while (it.hasNext()) {
+                    DTLineaReserva l = it.next();
+                    LineaReserva temp = new LineaReserva(l.getCantidad(),l.getFechaInicio(),
+                            l.getFechaFin(),l.getServicio(),l.getPromocion(),l.getPrecio());
+                    res.agregarLineaReserva(temp);
+            }
+            ManejadorReservas mr = ManejadorReservas.getInstance();
+            mr.agregarReserva(res);
+            Cliente cliente = clientes.get(nickname);
+            cliente.agregarReserva(res);
     }
 
 	public Set<DTMinCliente> listarClientes() {

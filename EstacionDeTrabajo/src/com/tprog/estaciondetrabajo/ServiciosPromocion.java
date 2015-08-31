@@ -16,7 +16,7 @@ import java.util.Vector;
  *
  * @author marccio
  */
-public class ServiciosSistema extends javax.swing.JInternalFrame {
+public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ReservasCliente
@@ -24,7 +24,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
      * @param ctrlProductos
      * @param padre
      */
-    public ServiciosSistema(VerInformacionDeServicio padre, Set<DTMinServicio> servicios, CtrlProductos ctrlProductos) {
+    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMinServicio> servicios, CtrlProductos ctrlProductos) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlProductos = ctrlProductos;
@@ -89,7 +89,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
-        jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
+        jLabel1.setText("<html>Seleccione algun servicio de la promocion para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         pack();
@@ -124,6 +124,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        listaServicios.clear();
         detalleServicio.setText("");
         detalleServicio.setVisible(false);
         this.dispose();
@@ -134,7 +135,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
 
     CtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
-    VerInformacionDeServicio padre;
+    VerInformacionDePromocion padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleServicio;

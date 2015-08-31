@@ -254,6 +254,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new VentanaPrincipal().setVisible(true);
             }
@@ -265,7 +266,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //muestra el internal frame identificado por id
         //solo funciona si el internal frame fue agregado al hash
         for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-            if (internalFrame.getKey() != id) {
+            if (!internalFrame.getKey().equals(id)) {
                 internalFrame.getValue().setVisible(false);
             } else internalFrame.getValue().setVisible(true);
         }

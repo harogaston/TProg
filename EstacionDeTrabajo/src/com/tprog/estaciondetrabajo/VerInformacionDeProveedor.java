@@ -8,10 +8,8 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinProveedor;
-import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
-import java.util.Collections;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -227,7 +225,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel imagenUsuario;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaProveedoresInterfaz;
-    private Vector<String> listaProveedores = new Vector();
+    private Vector<String> listaProveedores = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
     private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables

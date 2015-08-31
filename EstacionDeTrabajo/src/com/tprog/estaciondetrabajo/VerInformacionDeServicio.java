@@ -7,7 +7,6 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.controladores.CtrlProductos;
-import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import java.awt.BorderLayout;
@@ -36,7 +35,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         //el comboBox solo funciona con Vector o List
         if (setCategorias != null) {
             for (String categoria : setCategorias) {
-                setCategorias.add(categoria);
+                listaCategorias.add(categoria);
             }
         }
     }
@@ -191,7 +190,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
     private javax.swing.JButton botonServicios;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaCategoriasInterfaz;
-    private Vector<String> listaCategorias = new Vector();
+    private Vector<String> listaCategorias = new Vector<>();
     private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

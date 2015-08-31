@@ -63,9 +63,6 @@ public class ManejadorUsuarios {
 		return p.listarPromociones();
 	}
 
-	public void agregarReserva(String nickname, DTReserva dt) {
-	}
-
 	public Set<DTMinCliente> listarClientes() {
 		Set<DTMinCliente> nuevoSet = new HashSet();
 		if (!clientes.isEmpty()) {
@@ -122,5 +119,9 @@ public class ManejadorUsuarios {
 	public void altaProveedor(DTProveedor dtP) {
 		Proveedor nuevoProveedor = new Proveedor(dtP);
 		proveedores.put(dtP.getNickname(), nuevoProveedor);
+	}
+
+	public Cliente getCliente(String nickname) {
+		return clientes.get(nickname);
 	}
 }

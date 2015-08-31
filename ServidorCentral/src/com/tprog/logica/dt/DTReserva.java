@@ -5,11 +5,8 @@
  */
 package com.tprog.logica.dt;
 
-import java.util.Iterator;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Date;
-import com.tprog.logica.clases.LineaReserva;
+import java.util.Set;
 
 public class DTReserva {
 
@@ -25,7 +22,7 @@ public class DTReserva {
 		this.estado = estado;
 		this.precioTotal = precioTotal;
 		this.lineasReserva = lineasReserva;
-        }
+	}
 
 	public int getIdReserva() {
 		return idReserva;

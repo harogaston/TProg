@@ -6,21 +6,20 @@
 package com.tprog.logica.dt;
 
 import java.util.Date;
-import java.util.Set;
 import java.util.HashSet;
-import com.tprog.logica.dt.DTMinReserva;
+import java.util.Set;
 
 public class DTCliente extends DTUsuario {
 
 	private Set<DTMinReserva> reservas;
-	
+
 	public DTCliente(String nickname, String nombre, String apellido, String email,
 			String imagen, Date fechaN, Set<DTMinReserva> reservas) {
 		super(nickname, nombre, apellido, email, imagen, fechaN);
 		this.reservas = reservas;
 	}
-	
-	public DTCliente(DTUsuario dtU){
+
+	public DTCliente(DTUsuario dtU) {
 		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
 		this.reservas = new HashSet();
 	}

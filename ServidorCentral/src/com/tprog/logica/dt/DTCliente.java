@@ -8,7 +8,6 @@ package com.tprog.logica.dt;
 import java.util.Date;
 import java.util.Set;
 import java.util.HashSet;
-import com.tprog.logica.dt.DTMinReserva;
 
 public class DTCliente extends DTUsuario {
 
@@ -28,4 +27,19 @@ public class DTCliente extends DTUsuario {
         public Set<DTMinReserva> getReservas(){
             return reservas;
         }
+
+    @Override
+    public String toString() {
+        String output = super.toString();
+        int i = 1;
+        for (DTMinReserva dt : reservas) {
+            output.concat("Reserva " + Integer.toString(i) + "\n");
+            output.concat(dt.toString());
+            i++;
+        }
+        return output;
+    }
+        
+        
+        
 }

@@ -50,4 +50,15 @@ public class DTUsuario {
 		return fechaNacimiento;
 	}
 
+    @Override
+    public String toString() {
+        return "Nickname: " + nickname
+                + "\n" + "Nombre: " + nombre
+                + "\n" + "Apellido: " + apellido
+                + "\n" + "Email: " + email
+                + "\n" + "Fecha de nacimiento: " + fechaNacimiento.toString() + "\n";
+    }
+        
+        
+
 }

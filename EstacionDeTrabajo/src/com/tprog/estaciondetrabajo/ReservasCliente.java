@@ -130,7 +130,6 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox listaReservasInterfaz;
-    private LinkedHashMap<String, String> hashReservas = new LinkedHashMap<>();
     private Vector<String> listaReservas = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
     // End of variables declaration//GEN-END:variables

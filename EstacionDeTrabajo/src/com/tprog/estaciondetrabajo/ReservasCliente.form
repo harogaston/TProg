@@ -43,7 +43,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(listaReservas)"/>
-        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private LinkedHashMap&lt;String, String&gt; hashReservas = new LinkedHashMap&lt;&gt;();&#xa;private Vector&lt;String&gt; listaReservas = new Vector&lt;&gt;();"/>
+        <AuxValue name="JavaCodeGenerator_DeclarationPost" type="java.lang.String" value="private Vector&lt;String&gt; listaReservas = new Vector&lt;&gt;();"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

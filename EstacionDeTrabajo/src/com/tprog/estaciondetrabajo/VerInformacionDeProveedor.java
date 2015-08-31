@@ -56,7 +56,11 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setBorder(null);
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(650, 450));
@@ -95,49 +99,48 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setText("<html>Seleccione un proveedor del Sistema y haga click en 'Mostrar' para ver su información</html>");
+        label.setMaximumSize(new java.awt.Dimension(40, 15));
 
         javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
         tabInfo.setLayout(tabInfoLayout);
         tabInfoLayout.setHorizontalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabInfoLayout.createSequentialGroup()
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabInfoLayout.createSequentialGroup()
-                            .addGap(90, 90, 90)
-                            .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(tabInfoLayout.createSequentialGroup()
-                                    .addComponent(botonSalir)
-                                    .addGap(263, 263, 263))))
-                        .addGroup(tabInfoLayout.createSequentialGroup()
-                            .addGap(29, 29, 29)
-                            .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tabInfoLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(listaProveedorInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonMostrarProveedor)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(tabInfoLayout.createSequentialGroup()
+                                .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1))
+                            .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(tabInfoLayout.createSequentialGroup()
+                                .addComponent(listaProveedorInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(botonMostrarProveedor))))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(botonSalir)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         tabInfoLayout.setVerticalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(listaProveedorInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonMostrarProveedor))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(listaProveedorInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonMostrarProveedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(imagenUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
                 .addComponent(botonSalir)
-                .addGap(52, 52, 52))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ver información", tabInfo);
@@ -182,56 +185,42 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabReservaLayout.createSequentialGroup()
                 .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(tabReservaLayout.createSequentialGroup()
-                            .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(tabReservaLayout.createSequentialGroup()
-                                    .addGap(44, 44, 44)
-                                    .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(botonMostrarServicio))
-                                .addGroup(tabReservaLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)))
                     .addGroup(tabReservaLayout.createSequentialGroup()
-                        .addGap(271, 271, 271)
-                        .addComponent(botonSalir1)))
-                .addContainerGap(73, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabReservaLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(botonMostrarServicio))
+                    .addGroup(tabReservaLayout.createSequentialGroup()
+                        .addGap(262, 262, 262)
+                        .addComponent(botonSalir1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabReservaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(91, 91, 91))
         );
         tabReservaLayout.setVerticalGroup(
             tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabReservaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabReservaLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(botonMostrarServicio))
-                .addGap(32, 32, 32)
+                .addGap(12, 12, 12)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(botonSalir1)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(botonSalir1))
         );
 
         jTabbedPane1.addTab("Reservas", tabReserva);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 642, 415));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -305,6 +294,20 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             listaProveedores.add(cliente.getKey());
         } 
     }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        //al ser ocultado el componente se deja todo como antes
+        hashProveedores.clear();
+        listaProveedores.clear();
+        hashServicios.clear();
+        listaServicios.clear();
+        imagenUsuario.setIcon(null);
+        jTabbedPane1.setSelectedIndex(0);
+        listaProveedorInterfaz.setSelectedItem(null);
+        listaServiciosInterfaz.setSelectedItem(null);
+        detalleProveedor.setText("");        
+        detalleServicio.setText("");        
+    }//GEN-LAST:event_formComponentHidden
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonMostrarProveedor;

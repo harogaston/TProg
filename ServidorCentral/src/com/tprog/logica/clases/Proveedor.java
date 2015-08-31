@@ -5,20 +5,16 @@
  */
 package com.tprog.logica.clases;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.HashMap;
-import java.util.Map;
-import com.tprog.logica.dt.DTMinProveedor;
-import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinProveedor;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTProveedor;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
-/**
- *
- * @author gaston
- */
 public class Proveedor extends Usuario {
 
 	private String empresa;
@@ -36,6 +32,14 @@ public class Proveedor extends Usuario {
 		this.servicios = new HashMap();
 	}
 
+	public Proveedor(DTProveedor dtP) {
+		super(dtP.getNickname(), dtP.getNombre(), dtP.getApellido(), dtP.getEmail(), dtP.getImagen(), dtP.getFechaNacimiento());
+		this.empresa = dtP.getEmpresa();
+		this.webEmpresa = dtP.getWebEmpresa();
+		this.promociones = new HashMap();
+		this.servicios = new HashMap();
+	}
+
 	public DTMinProveedor crearDTMin() {
 		DTMinProveedor nuevoDT = new DTMinProveedor(this.nickname, this.email, this.webEmpresa);
 		return nuevoDT;
@@ -47,20 +51,18 @@ public class Proveedor extends Usuario {
 		return nuevoDT;
 	}
 
-	public Set<String> getServicios() {
-		Set<String> nuevoSet;
-		if (!servicios.isEmpty()) {
-                    nuevoSet = servicios.keySet();
-                    return nuevoSet;
-		} else {
-                    return new HashSet();
-                }
-        }
-        
+	public Set<DTMinServicio> listarServicios() {
+		Set<DTMinServicio> nuevoSet = new HashSet();
+		for (Servicio serv : servicios.values()) {
+			DTMinServicio temp = serv.crearDTMin();
+			nuevoSet.add(temp);
+		}
+		return nuevoSet;
+	}
+
 	public Set<DTMinPromocion> listarPromociones() {
 		Set<DTMinPromocion> nuevoSet = new HashSet();
-		for (Iterator<Promocion> it = promociones.values().iterator(); it.hasNext();) {
-			Promocion promo = it.next();
+		for (Promocion promo : promociones.values()) {
 			DTMinPromocion temp = promo.crearDTMin();
 			nuevoSet.add(temp);
 		}
@@ -75,20 +77,19 @@ public class Proveedor extends Usuario {
 		promociones.put(p.getIdPromocion(), p);
 	}
 
-	public void setEmpresa(String empresa){
+	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
 
-	public void setWebEmpresa(String webEmpresa){
+	public void setWebEmpresa(String webEmpresa) {
 		this.webEmpresa = webEmpresa;
 	}
-	
-	public String getEmpresa(){
+
+	public String getEmpresa() {
 		return this.empresa;
 	}
-	
-	public String getWebEmpresa(){
+
+	public String getWebEmpresa() {
 		return this.webEmpresa;
 	}
 }
-

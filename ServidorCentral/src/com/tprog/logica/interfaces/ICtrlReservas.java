@@ -23,7 +23,7 @@ public interface ICtrlReservas {
 	public Set<DTMinServicio> listarServiciosProveedor();
 	public Set<DTMinPromocion> listarPromocionesProveedor();
 	public DTReserva mostrarReservaTemporal();
-	public void altaReserva();
+	public void altaReserva()throws Exception;
 	public Set<DTMinReserva> listarReservas();
 	public void seleccionarReserva(int idReserva);
 	public DTReserva infoReserva();

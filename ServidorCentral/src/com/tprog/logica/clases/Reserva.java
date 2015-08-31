@@ -7,8 +7,11 @@ package com.tprog.logica.clases;
 
 import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.EstadoReserva;
+import com.tprog.logica.manejadores.ManejadorProductos;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,18 +21,38 @@ public class Reserva {
 
 	private int idReserva;
 	private static int contador;
-	private Date fcreacion;
+	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
-	Set<LineaReserva> lineasReserva;
+	private Set<LineaReserva> lineasReserva;
 
-	public Reserva(Date creacion, EstadoReserva estado, float p) {
+	public Reserva(DTReserva dtR, String nicknameP) throws Exception{
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
-		this.fcreacion = creacion;
-		this.estado = estado;
-		this.precioTotal = p;
+		this.fCreacion = dtR.getFCreacion();
+		this.estado = dtR.getEstadoReserva();
 		this.lineasReserva = new HashSet();
+		this.precioTotal = dtR.getPrecioTotal();
+		
+		// Creo y agrego las lineasReserva
+		ManejadorProductos mp = ManejadorProductos.getInstance();
+		LineaReserva linea; // debe declararse fuera de los if
+		for (DTLineaReserva dtLinea : dtR.getLineasReserva()){
+			if (!dtLinea.getServicio().equals("")) {
+				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
+				Servicio s = mp.getServicio(dtMinS);
+				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
+			}
+			else if (!dtLinea.getPromocion().equals("")) {
+				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
+				Promocion p = mp.getPromocion(dtMinP);
+				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
+			}
+			else {
+				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
+			}
+			lineasReserva.add(linea);
+		}
 	}
 
 	public int getIdReserva() {
@@ -37,7 +60,7 @@ public class Reserva {
 	}
 
 	public Date getFCreacion() {
-		return fcreacion;
+		return fCreacion;
 	}
 
 	public EstadoReserva getEstadoReserva() {
@@ -72,13 +95,13 @@ public class Reserva {
 			DTLineaReserva temp = l.crearDTLineaReserva();
 			dtsLR.add(temp);
 		}
-		DTReserva dt = new DTReserva(this.idReserva, this.fcreacion, this.estado,
+		DTReserva dt = new DTReserva(this.idReserva, this.fCreacion, this.estado,
 				this.precioTotal, dtsLR);
 		return dt;
 	}
 
 	public DTMinReserva crearDTMinReserva() {
-		DTMinReserva dt = new DTMinReserva(this.idReserva, this.fcreacion);
+		DTMinReserva dt = new DTMinReserva(this.idReserva, this.fCreacion);
 		return dt;
 	}
 

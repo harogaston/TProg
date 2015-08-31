@@ -5,6 +5,7 @@
  */
 package com.tprog.logica.manejadores;
 
+import com.tprog.logica.clases.Cliente;
 import com.tprog.logica.clases.Reserva;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
@@ -28,10 +29,6 @@ public class ManejadorReservas {
 
 	private ManejadorReservas() {
 		reservas = new HashMap();
-	}
-
-	public void agregarReserva(Reserva r) {
-		reservas.put(r.getIdReserva(), r);
 	}
 
 	public Set<DTMinReserva> listarReservas() {
@@ -62,5 +59,11 @@ public class ManejadorReservas {
 		// sacar del map
 		this.reservas.remove(r);
 
+	}
+
+	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
+		Reserva nuevaReserva = new Reserva(dtR, nicknameP);
+		reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
+		cliente.agregarReserva(nuevaReserva);
 	}
 }

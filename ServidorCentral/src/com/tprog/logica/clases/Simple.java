@@ -64,5 +64,10 @@ public class Simple implements Categoria{
     public boolean esCategoriaSimple(){
         return true;
     }
+    
+    @Override
+    public boolean esCategoriaPadre(){
+        return this.servicios.isEmpty();
+    }
 
 }

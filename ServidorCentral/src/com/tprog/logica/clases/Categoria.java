@@ -16,8 +16,8 @@ public interface Categoria {
     public Set<DTMinServicio> listarServicios();
     public boolean esCategoriaSimple();
     public String getIdCategoria();
-    public void setPadre(Compuesta padre);
     public Compuesta getPadre();
-	
+    public boolean esCategoriaPadre();
+    public void setPadre(Compuesta padre);
 
 }

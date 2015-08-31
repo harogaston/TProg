@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.HashSet;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ManejadorProductos {
 
@@ -79,8 +80,8 @@ public class ManejadorProductos {
             return result;
 	}
 
-	public Set<String> listarCategorias() {
-		return null;
+	public DefaultMutableTreeNode listarCategorias() {
+            return root.listarCategorias();
 	}
 
 	public Set<DTMinServicio> listarServiciosCategoria(String cat) {

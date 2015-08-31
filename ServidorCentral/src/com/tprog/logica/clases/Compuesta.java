@@ -8,6 +8,7 @@ package com.tprog.logica.clases;
 import java.util.Set;
 import java.util.HashSet;
 import com.tprog.logica.dt.DTMinServicio;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -68,5 +69,16 @@ public class Compuesta implements Categoria{
     @Override
     public boolean esCategoriaPadre(){
         return true;
+    }
+    
+    @Override 
+    public DefaultMutableTreeNode listarCategorias(){
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(this.idCategoria);
+        if (!this.subCategorias.isEmpty()){
+            for (Categoria c : this.subCategorias){
+                result.add (c.listarCategorias());
+            }
+        }
+        return result;
     }
 }

@@ -5,9 +5,10 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
+import com.tprog.logica.controladores.CtrlProductos;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
@@ -15,17 +16,18 @@ import java.util.Vector;
  *
  * @author marccio
  */
-public class ServiciosProveedor extends javax.swing.JInternalFrame {
+public class ServiciosSistema extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ReservasCliente
-     * @param idCliente
+     * @param servicios
+     * @param ctrlProductos
      * @param padre
      */
-    public ServiciosProveedor(VerInformacionDeCliente padre, Set<DTMinServicio> servicios, CtrlUsuarios ctrlUsuarios) {
+    public ServiciosSistema(VerInformacionDeServicio padre, Set<DTMinServicio> servicios, CtrlProductos ctrlProductos) {
         this.padre = padre;
         this.servicios = servicios;
-        this.ctrlUsuarios = ctrlUsuarios;
+        this.ctrlProductos = ctrlProductos;
         initComponents();
         //construyo lista para la interfaz usando el set
         for (DTMinServicio dt : servicios) {
@@ -104,8 +106,18 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
-            ctrlUsuarios.seleccionarServicio(servicio);
-            DTServicio dt = ctrlUsuarios.infoServicio();
+            //buscar servicio
+            DTMinServicio dt = null;
+            Iterator it = servicios.iterator();
+            boolean found = false;
+            while (it.hasNext() && !found) {
+                DTMinServicio tmp = (DTMinServicio) it.next();
+                if (tmp.getIdServicio() == servicio)
+                    dt = tmp; //es imposible que dt sea null al final del loop
+            }
+            ctrlProductos.seleccionarServicio(dt);
+            DTServicio dtServicio = ctrlProductos.infoServicio();
+            //imagenes
             detalleServicio.setVisible(true);
             detalleServicio.setText(dt.toString()); 
         }
@@ -116,13 +128,13 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         detalleServicio.setVisible(false);
         this.dispose();
         servicios = null;
-        ctrlUsuarios = null;
+        ctrlProductos = null;
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    CtrlUsuarios ctrlUsuarios;
+    CtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
-    VerInformacionDeCliente padre;
+    VerInformacionDeServicio padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleServicio;

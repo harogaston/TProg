@@ -22,4 +22,10 @@ public class DTUbicacion {
 	public String getPais() {
 		return this.pais;
 	}
+
+    @Override
+    public String toString() {
+        return "Ciudad: " + ciudad + ", Pais: " + pais;
+    }
+        
 }

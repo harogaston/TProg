@@ -104,8 +104,8 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
 
     private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
-        int reserva = Integer.parseInt(reservaSeleccionada);
         if (reservaSeleccionada != null) {
+            int reserva = Integer.parseInt(reservaSeleccionada);
             ctrlUsuarios.seleccionarReserva(reserva);
             DTReserva dt = ctrlUsuarios.infoReserva();
             detalleUsuario.setVisible(true);

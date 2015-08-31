@@ -161,15 +161,16 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        //pido de nuevo los datos en caso de que hayan cambiado
-        if (acaboDeSalir) {
-            cargarDatos();
-            acaboDeSalir = false;
-        }
+        cargarDatos();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-
+        listaProveedores.clear();
+        servicios = null;
+        imagenUsuario.setIcon(null);
+        listaProveedoresInterfaz.setSelectedItem(null);
+        detalleUsuario.setText("");        
+        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaProveedoresInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazActionPerformed
@@ -197,15 +198,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaProveedoresInterfazInterfazComponentAdded
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-                //al ser ocultado el componente se deja todo como antes
-        listaProveedores.clear();
-        servicios = null;
-        imagenUsuario.setIcon(null);
-        listaProveedoresInterfaz.setSelectedItem(null);
-        detalleUsuario.setText("");        
-        detalleUsuario.setVisible(false);
         this.dispose();
-        acaboDeSalir = true;
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void listaProveedoresInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazItemStateChanged
@@ -227,7 +220,6 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
     Set<DTMinServicio> servicios;
     CtrlUsuarios ctrlUsuarios;
-    boolean acaboDeSalir = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;

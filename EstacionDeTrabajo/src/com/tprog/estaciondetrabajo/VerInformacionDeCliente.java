@@ -33,7 +33,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     
     void cargarDatos() {
         //listaClientes
-        CtrlUsuarios ctrlUsuarios = new CtrlUsuarios();
+        ctrlUsuarios = new CtrlUsuarios();
         Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
@@ -180,7 +180,11 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             detalleUsuario.setVisible(true);
             DTCliente dt = ctrlUsuarios.infoCliente();
             detalleUsuario.setText(dt.toString());
-            imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource(dt.getImagen())));
+            try {
+                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource(dt.getImagen())));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             reservas = dt.getReservas();
             //cargo la lista de reservas del usuario acá, y cuando se pidan las reservas se muestran
         }

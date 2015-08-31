@@ -23,4 +23,12 @@ public class DTMinCliente {
 		return this.email;
 	}
 
+    @Override
+    public String toString() {
+        return "Nickname: " + nickname 
+                + "\n" + "Email: " + email + "\n";
+    }
+        
+        
+
 }

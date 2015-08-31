@@ -6,6 +6,13 @@
 
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.controladores.CtrlProductos;
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTMinServicio;
+import java.awt.BorderLayout;
+import java.util.Set;
+import java.util.Vector;
+
 /**
  *
  * @author marccio.silva
@@ -13,10 +20,24 @@ package com.tprog.estaciondetrabajo;
 public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerInformacionDeServicio
+     * Creates new form VerInformacionDeCliente
      */
     public VerInformacionDeServicio() {
         initComponents();
+        //Aca se trae un set de DTMinCliente para agregar al combobox
+        //carga de prueba
+        ctrlProductos = new CtrlProductos();
+    }
+    
+    void cargarDatos() {
+        Set<String> setCategorias = ctrlProductos.listarCategorias();
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+        if (setCategorias != null) {
+            for (String categoria : setCategorias) {
+                listaCategorias.add(categoria);
+            }
+        }
     }
 
     /**
@@ -28,24 +49,148 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBorder(null);
-        setPreferredSize(new java.awt.Dimension(640, 480));
+        tabInfo = new javax.swing.JPanel();
+        botonSalir = new javax.swing.JButton();
+        listaCategoriasInterfaz = new javax.swing.JComboBox(listaCategorias);
+        label = new javax.swing.JLabel();
+        botonServicios = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+        setBorder(null);
+        setToolTipText("");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
+
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+
+        listaCategoriasInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                listaCategoriasInterfazInterfazComponentAdded(evt);
+            }
+        });
+        listaCategoriasInterfaz.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listaCategoriasInterfazItemStateChanged(evt);
+            }
+        });
+        listaCategoriasInterfaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaCategoriasInterfazInterfazActionPerformed(evt);
+            }
+        });
+
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("<html>Seleccione una categoría del Sistema, y haga click en 'Ver Servicios' para ver sus servicios asociados</html>");
+
+        botonServicios.setText("Ver servicios");
+        botonServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonServiciosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
+        tabInfo.setLayout(tabInfoLayout);
+        tabInfoLayout.setHorizontalGroup(
+            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(botonServicios)
+                        .addGap(35, 35, 35)
+                        .addComponent(botonSalir))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(listaCategoriasInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+        tabInfoLayout.setVerticalGroup(
+            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addComponent(listaCategoriasInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonSalir)
+                    .addComponent(botonServicios))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
+
+        label.getAccessibleContext().setAccessibleDescription("");
+
+        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //pido de nuevo los datos en caso de que hayan cambiado
+        cargarDatos();
+    }//GEN-LAST:event_formComponentShown
 
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        listaCategorias.clear();
+        reservas = null;
+        listaCategoriasInterfaz.setSelectedItem(null);
+    }//GEN-LAST:event_formComponentHidden
+
+    private void listaCategoriasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaCategoriasInterfazInterfazActionPerformed
+        //seleccionarCliente
+        String categoria = (String) listaCategoriasInterfaz.getSelectedItem();
+        if (categoria != null) {
+            //cargo la lista de servicios de la categoria
+            listaServicios = ctrlProductos.listarServiciosCategoria(categoria);
+        }
+    }//GEN-LAST:event_listaCategoriasInterfazInterfazActionPerformed
+
+    private void listaCategoriasInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaCategoriasInterfazInterfazComponentAdded
+
+    }//GEN-LAST:event_listaCategoriasInterfazInterfazComponentAdded
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void listaCategoriasInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaCategoriasInterfazItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaCategoriasInterfazItemStateChanged
+
+    private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
+        String cliente = (String) listaCategoriasInterfaz.getSelectedItem();
+        if (cliente != null) {
+            ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
+            getContentPane().add(s, BorderLayout.CENTER);
+            s.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            s.setVisible(true);
+            getParent().add(s);
+        }
+    }//GEN-LAST:event_botonServiciosActionPerformed
+    
+    Set<DTMinServicio> listaServicios;
+    Set<DTMinReserva> reservas;
+    CtrlProductos ctrlProductos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonServicios;
+    private javax.swing.JLabel label;
+    private javax.swing.JComboBox listaCategoriasInterfaz;
+    private Vector<String> listaCategorias = new Vector<>();
+    private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

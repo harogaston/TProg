@@ -8,6 +8,7 @@ package com.tprog.logica.clases;
 import java.util.Set;
 import java.util.HashSet;
 import com.tprog.logica.dt.DTMinServicio;
+import javax.swing.tree.DefaultMutableTreeNode;
 /**
  *
  * @author gaston
@@ -69,5 +70,10 @@ public class Simple implements Categoria{
     public boolean esCategoriaPadre(){
         return this.servicios.isEmpty();
     }
-
+    
+    @Override
+    public DefaultMutableTreeNode listarCategorias(){
+        return new DefaultMutableTreeNode(this.idCategoria, false);
+    }
+    
 }

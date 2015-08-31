@@ -6,7 +6,6 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.estaciondetrabajo.customComponents.SeleccionadorDosListas;
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +47,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
         internalFrames.put("cancelarReserva", cancelarReserva);
         internalFrames.put("altaUsuario", altaUsuario);
+        //esconder todas
+        for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+            internalFrame.getValue().setVisible(false);
+        }
         //inicializacion autogenerada
         initComponents();
         
@@ -251,6 +254,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new VentanaPrincipal().setVisible(true);
             }
@@ -262,7 +266,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //muestra el internal frame identificado por id
         //solo funciona si el internal frame fue agregado al hash
         for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-            if (internalFrame.getKey() != id) {
+            if (!internalFrame.getKey().equals(id)) {
                 internalFrame.getValue().setVisible(false);
             } else internalFrame.getValue().setVisible(true);
         }

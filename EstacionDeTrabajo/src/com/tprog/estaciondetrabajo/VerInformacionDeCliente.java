@@ -6,10 +6,12 @@
 
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.controladores.CtrlUsuarios;
+import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinCliente;
-import java.awt.Image;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import com.tprog.logica.dt.DTMinReserva;
+import java.awt.BorderLayout;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 
@@ -24,6 +26,21 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeCliente() {
         initComponents();
+        //Aca se trae un set de DTMinCliente para agregar al combobox
+        //carga de prueba
+        ctrlUsuarios = new CtrlUsuarios();
+    }
+    
+    void cargarDatos() {
+        //listaClientes
+        Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+        if (setClientes != null) {
+            for (DTMinCliente dt : setClientes) {
+                listaClientes.add(dt.getNickname());
+            }
+        }
     }
 
     /**
@@ -34,7 +51,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         tabInfo = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
@@ -118,7 +134,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
                         .addComponent(botonReservas)
                         .addGap(35, 35, 35)
                         .addComponent(botonSalir)))
-                .addContainerGap(377, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         tabInfoLayout.setVerticalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +150,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
                 .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(botonSalir)
                     .addComponent(botonReservas))
-                .addContainerGap(501, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         label.getAccessibleContext().setAccessibleDescription("");
@@ -145,51 +161,35 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        //Aca se trae un set de DTMinCliente para agregar al combobox
-        //carga de prueba
-        DTMinCliente dt0 = new DTMinCliente("pendorcho64", "juanperez@gmail.com");
-        hashClientes.put(dt0.getNickname(), dt0.getEmail());
-        DTMinCliente dt1 = new DTMinCliente("12340", "asdf@gmail.com");
-        hashClientes.put(dt1.getNickname(), dt1.getEmail());
-        DTMinCliente dt2 = new DTMinCliente("12341", "asdfasdf@gmail.com");
-        hashClientes.put(dt2.getNickname(), dt2.getEmail());
-        DTMinCliente dt3 = new DTMinCliente("12342", "qwer@gmail.com");
-        hashClientes.put(dt3.getNickname(), dt3.getEmail());
-        DTMinCliente dt4 = new DTMinCliente("12343", "fgd@gmail.com");
-        hashClientes.put(dt4.getNickname(), dt4.getEmail());
-        DTMinCliente dt5 = new DTMinCliente("12344", "qyu125@gmail.com");
-        hashClientes.put(dt5.getNickname(), dt5.getEmail());
-        listaClientesInterfaz.updateUI();
-        for (Map.Entry<String, String> cliente : hashClientes.entrySet()) {
-            listaClientes.add(cliente.getKey());
-        } 
+        //pido de nuevo los datos en caso de que hayan cambiado
+        cargarDatos();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        //al ser ocultado el componente se deja todo como antes
-        hashClientes.clear();
         listaClientes.clear();
-//        hashReservas.clear();
-//        listaReservas.clear();
+        reservas = null;
         imagenUsuario.setIcon(null);
-//        jTabbedPane1.setSelectedIndex(0);
         listaClientesInterfaz.setSelectedItem(null);
         detalleUsuario.setText("");        
-//        detalleReserva.setText("");
+        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed
+        //seleccionarCliente
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
         if (cliente != null) {
+            ctrlUsuarios.seleccionarCliente(cliente);
+            //muestro Text Area para la información del cliente
             detalleUsuario.setVisible(true);
-            detalleUsuario.setText(hashClientes.get(cliente));
-            //imagenUsuario.setIcon(new ImageIcon("/home/marccio/Pictures/marco_horando_1.jpg"));
-            if (cliente != "pendorcho64")
-            imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar.jpg")));
-            else imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar2.jpg")));
-            //además falta cargar la lista de reservas del usuario acá, y dejar
-            //que se muestre hasta que se esconda el component jTabbedPane
-
+            DTCliente dt = ctrlUsuarios.infoCliente();
+            detalleUsuario.setText(dt.toString());
+            try {
+                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource(dt.getImagen())));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            reservas = dt.getReservas();
+            //cargo la lista de reservas del usuario acá, y cuando se pidan las reservas se muestran
         }
     }//GEN-LAST:event_listaClientesInterfazInterfazActionPerformed
 
@@ -198,8 +198,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaClientesInterfazInterfazComponentAdded
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleUsuario.setText("");
-        detalleUsuario.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
@@ -210,12 +208,17 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     private void botonReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservasActionPerformed
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
         if (cliente != null) {
+            ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
+            getContentPane().add(r, BorderLayout.CENTER);
+            r.setBounds(10, 10, 100, 100);
             this.setVisible(false);
-            ReservasCliente r = new ReservasCliente(cliente, this);
             r.setVisible(true);
+            getParent().add(r);
         }
     }//GEN-LAST:event_botonReservasActionPerformed
 
+    Set<DTMinReserva> reservas;
+    CtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonReservas;
     private javax.swing.JButton botonSalir;
@@ -223,7 +226,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel imagenUsuario;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaClientesInterfaz;
-    private LinkedHashMap<String, String> hashClientes = new LinkedHashMap<>();
     private Vector<String> listaClientes = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
     private javax.swing.JPanel tabInfo;

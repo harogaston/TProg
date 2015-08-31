@@ -124,4 +124,9 @@ public class ManejadorUsuarios {
 	public Cliente getCliente(String nickname) {
 		return clientes.get(nickname);
 	}
+        
+        public Proveedor getProveedor(String nickname){
+                return proveedores.get(nickname);
+        }
 }
+

@@ -6,9 +6,11 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.dt.DTMinCliente;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import com.tprog.logica.controladores.CtrlUsuarios;
+import com.tprog.logica.dt.DTMinProveedor;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTProveedor;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 
@@ -19,10 +21,24 @@ import javax.swing.ImageIcon;
 public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerInformacionDeProveedor
+     * Creates new form VerInformacionDeCliente
      */
     public VerInformacionDeProveedor() {
         initComponents();
+        //Aca se trae un set de DTMinCliente para agregar al combobox
+        //carga de prueba
+        cargarDatos();
+    }
+    
+    void cargarDatos() {
+        //listaClientes
+        ctrlUsuarios = new CtrlUsuarios();
+        Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+        for (DTMinProveedor dt : setProveedores) {
+            listaProveedores.add(dt.getNickname());
+        }
     }
 
     /**
@@ -34,24 +50,17 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
         tabInfo = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
-        listaProveedorInterfaz = new javax.swing.JComboBox(listaProveedores);
-        botonMostrarProveedor = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        detalleProveedor = new javax.swing.JTextArea();
+        listaProveedoresInterfaz = new javax.swing.JComboBox(listaProveedores);
         label = new javax.swing.JLabel();
         imagenUsuario = new javax.swing.JLabel();
-        tabReserva = new javax.swing.JPanel();
-        label1 = new javax.swing.JLabel();
-        listaServiciosInterfaz = new javax.swing.JComboBox(listaServicios);
-        botonMostrarServicio = new javax.swing.JButton();
-        botonSalir1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        detalleServicio = new javax.swing.JTextArea();
+        panelUsuario = new javax.swing.JScrollPane();
+        detalleUsuario = new javax.swing.JTextArea();
+        botonServicios = new javax.swing.JButton();
 
         setBorder(null);
+        setToolTipText("");
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -60,10 +69,6 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
                 formComponentHidden(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTabbedPane1.setBorder(null);
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(650, 450));
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -72,34 +77,38 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        listaProveedorInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
+        listaProveedoresInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                listaProveedorInterfazInterfazComponentAdded(evt);
+                listaProveedoresInterfazInterfazComponentAdded(evt);
             }
         });
-        listaProveedorInterfaz.addActionListener(new java.awt.event.ActionListener() {
+        listaProveedoresInterfaz.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listaProveedoresInterfazItemStateChanged(evt);
+            }
+        });
+        listaProveedoresInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaProveedorInterfazInterfazActionPerformed(evt);
+                listaProveedoresInterfazInterfazActionPerformed(evt);
             }
         });
-
-        botonMostrarProveedor.setText("Mostrar");
-        botonMostrarProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonMostrarProveedorActionPerformed(evt);
-            }
-        });
-
-        detalleProveedor.setEditable(false);
-        detalleProveedor.setColumns(20);
-        detalleProveedor.setLineWrap(true);
-        detalleProveedor.setRows(5);
-        detalleProveedor.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(detalleProveedor);
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setText("<html>Seleccione un proveedor del Sistema y haga click en 'Mostrar' para ver su información</html>");
-        label.setMaximumSize(new java.awt.Dimension(40, 15));
+        label.setText("<html>Seleccione un proveedor del Sistema para ver su información</html>");
+
+        detalleUsuario.setEditable(false);
+        detalleUsuario.setColumns(20);
+        detalleUsuario.setLineWrap(true);
+        detalleUsuario.setRows(5);
+        detalleUsuario.setWrapStyleWord(true);
+        panelUsuario.setViewportView(detalleUsuario);
+
+        botonServicios.setText("Ver servicios");
+        botonServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonServiciosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
         tabInfo.setLayout(tabInfoLayout);
@@ -108,227 +117,116 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             .addGroup(tabInfoLayout.createSequentialGroup()
                 .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(tabInfoLayout.createSequentialGroup()
-                                .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1))
-                            .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(tabInfoLayout.createSequentialGroup()
-                                .addComponent(listaProveedorInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(botonMostrarProveedor))))
+                        .addGap(70, 70, 70)
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(266, 266, 266)
+                        .addGap(104, 104, 104)
+                        .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(tabInfoLayout.createSequentialGroup()
+                                .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(listaProveedoresInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(botonServicios)
+                        .addGap(35, 35, 35)
                         .addComponent(botonSalir)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
         tabInfoLayout.setVerticalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(listaProveedorInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonMostrarProveedor))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(botonSalir)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(listaProveedoresInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonSalir)
+                    .addComponent(botonServicios))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Ver información", tabInfo);
+        label.getAccessibleContext().setAccessibleDescription("");
 
-        label1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label1.setText("<html>Seleccione un servicio del proveedor y haga click en 'Mostrar' para ver su información</html>");
-        label1.setToolTipText("");
-
-        listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                listaServiciosInterfazInterfazComponentAdded(evt);
-            }
-        });
-        listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaServiciosInterfazInterfazActionPerformed(evt);
-            }
-        });
-
-        botonMostrarServicio.setText("Mostrar");
-        botonMostrarServicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonMostrarServicioActionPerformed(evt);
-            }
-        });
-
-        botonSalir1.setText("Salir");
-        botonSalir1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalir1ActionPerformed(evt);
-            }
-        });
-
-        detalleServicio.setEditable(false);
-        detalleServicio.setColumns(20);
-        detalleServicio.setRows(5);
-        jScrollPane2.setViewportView(detalleServicio);
-
-        javax.swing.GroupLayout tabReservaLayout = new javax.swing.GroupLayout(tabReserva);
-        tabReserva.setLayout(tabReservaLayout);
-        tabReservaLayout.setHorizontalGroup(
-            tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabReservaLayout.createSequentialGroup()
-                .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabReservaLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabReservaLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addComponent(botonMostrarServicio))
-                    .addGroup(tabReservaLayout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(botonSalir1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabReservaLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(91, 91, 91))
-        );
-        tabReservaLayout.setVerticalGroup(
-            tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabReservaLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(tabReservaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabReservaLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(botonMostrarServicio))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(botonSalir1))
-        );
-
-        jTabbedPane1.addTab("Reservas", tabReserva);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 642, 415));
+        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleProveedor.setText("");
-        detalleProveedor.setVisible(false);
-        this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
-    private void listaProveedorInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaProveedorInterfazInterfazComponentAdded
-
-    }//GEN-LAST:event_listaProveedorInterfazInterfazComponentAdded
-
-    private void listaProveedorInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedorInterfazInterfazActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaProveedorInterfazInterfazActionPerformed
-
-    private void botonMostrarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarProveedorActionPerformed
-        String cliente = (String) listaProveedorInterfaz.getSelectedItem();
-        if (cliente != null) {
-            detalleProveedor.setVisible(true);
-            detalleProveedor.setText(hashProveedores.get(cliente));
-            //imagenUsuario.setIcon(new ImageIcon("/home/marccio/Pictures/marco_horando_1.jpg"));
-            if (cliente != "pendorcho64")
-            imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar.jpg")));
-            else imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource("imagenes/avatar2.jpg")));
-            //además falta cargar la lista de reservas del usuario acá, y dejar
-            //que se muestre hasta que se esconda el component jTabbedPane
-
-        }
-    }//GEN-LAST:event_botonMostrarProveedorActionPerformed
-
-    private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
-
-    private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
-
-    private void botonMostrarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarServicioActionPerformed
-        String reserva = (String) listaServiciosInterfaz.getSelectedItem();
-        if (reserva != null) {
-            detalleServicio.setVisible(true);
-            //detalleCliente.setText(hashClientes.get(cliente));
-        }
-    }//GEN-LAST:event_botonMostrarServicioActionPerformed
-
-    private void botonSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalir1ActionPerformed
-        detalleProveedor.setText("");
-        detalleProveedor.setVisible(false);
-        this.dispose();
-    }//GEN-LAST:event_botonSalir1ActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        DTMinCliente dt0 = new DTMinCliente("pendorcho64", "juanperez@gmail.com");
-        hashProveedores.put(dt0.getNickname(), dt0.getEmail());
-        DTMinCliente dt1 = new DTMinCliente("12340", "asdf@gmail.com");
-        hashProveedores.put(dt1.getNickname(), dt1.getEmail());
-        DTMinCliente dt2 = new DTMinCliente("12341", "asdfasdf@gmail.com");
-        hashProveedores.put(dt2.getNickname(), dt2.getEmail());
-        DTMinCliente dt3 = new DTMinCliente("12342", "qwer@gmail.com");
-        hashProveedores.put(dt3.getNickname(), dt3.getEmail());
-        DTMinCliente dt4 = new DTMinCliente("12343", "fgd@gmail.com");
-        hashProveedores.put(dt4.getNickname(), dt4.getEmail());
-        DTMinCliente dt5 = new DTMinCliente("12344", "qyu125@gmail.com");
-        hashProveedores.put(dt5.getNickname(), dt5.getEmail());
-        listaProveedorInterfaz.updateUI();
-        for (Map.Entry<String, String> cliente : hashProveedores.entrySet()) {
-            listaProveedores.add(cliente.getKey());
-        } 
+        cargarDatos();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        //al ser ocultado el componente se deja todo como antes
-        hashProveedores.clear();
         listaProveedores.clear();
-        hashServicios.clear();
-        listaServicios.clear();
+        servicios = null;
         imagenUsuario.setIcon(null);
-        jTabbedPane1.setSelectedIndex(0);
-        listaProveedorInterfaz.setSelectedItem(null);
-        listaServiciosInterfaz.setSelectedItem(null);
-        detalleProveedor.setText("");        
-        detalleServicio.setText("");        
+        listaProveedoresInterfaz.setSelectedItem(null);
+        detalleUsuario.setText("");        
+        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
+    private void listaProveedoresInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazActionPerformed
+        //seleccionarCliente
+        String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
+        if (proveedor != null) {
+            ctrlUsuarios.seleccionarProveedor(proveedor);
+            //muestro Text Area para la información del proveedor
+            detalleUsuario.setVisible(true);
+            DTProveedor dt = ctrlUsuarios.infoProveedor();
+            detalleUsuario.setText(dt.toString());
+            try {
+                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeProveedor.class.getResource(dt.getImagen())));    
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            
+            //cargo la lista de servicios del usuario acá, y cuando se pidan los servicios se muestran
+            servicios = ctrlUsuarios.listarServiciosProveedor();
+        }
+    }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
+
+    private void listaProveedoresInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazComponentAdded
+
+    }//GEN-LAST:event_listaProveedoresInterfazInterfazComponentAdded
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void listaProveedoresInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaProveedoresInterfazItemStateChanged
+
+    private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
+        String cliente = (String) listaProveedoresInterfaz.getSelectedItem();
+        if (cliente != null) {
+              
+//            ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
+//            getContentPane().add(r, BorderLayout.CENTER);
+//            r.setBounds(10, 10, 100, 100);
+//            this.setVisible(false);
+//            r.setVisible(true);
+//            getParent().add(r);
+        }
+    }//GEN-LAST:event_botonServiciosActionPerformed
+
+    Set<DTMinServicio> servicios;
+    CtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonMostrarProveedor;
-    private javax.swing.JButton botonMostrarServicio;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JButton botonSalir1;
-    private javax.swing.JTextArea detalleProveedor;
-    private javax.swing.JTextArea detalleServicio;
+    private javax.swing.JButton botonServicios;
+    private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel imagenUsuario;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel label;
-    private javax.swing.JLabel label1;
-    private javax.swing.JComboBox listaProveedorInterfaz;
-    private LinkedHashMap<String, String> hashProveedores = new LinkedHashMap<>();
+    private javax.swing.JComboBox listaProveedoresInterfaz;
     private Vector<String> listaProveedores = new Vector<>();
-    private javax.swing.JComboBox listaServiciosInterfaz;
-    private LinkedHashMap<String, String> hashServicios = new LinkedHashMap<>();
-    private Vector<String> listaServicios = new Vector<>();
+    private javax.swing.JScrollPane panelUsuario;
     private javax.swing.JPanel tabInfo;
-    private javax.swing.JPanel tabReserva;
     // End of variables declaration//GEN-END:variables
 }

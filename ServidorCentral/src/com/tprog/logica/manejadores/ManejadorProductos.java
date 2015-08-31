@@ -6,9 +6,11 @@
 package com.tprog.logica.manejadores;
 
 import com.tprog.logica.clases.Categoria;
+import com.tprog.logica.clases.Ciudad;
 import com.tprog.logica.clases.Compuesta;
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Promocion;
+import com.tprog.logica.clases.Proveedor;
 import com.tprog.logica.clases.Servicio;
 import com.tprog.logica.clases.Simple;
 import com.tprog.logica.dt.DTMinPromocion;
@@ -18,8 +20,10 @@ import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 public class ManejadorProductos {
 
@@ -84,8 +88,8 @@ public class ManejadorProductos {
 		return result;
 	}
 
-	public Set<String> listarCategorias() {
-		return null;
+	public DefaultMutableTreeNode listarCategorias() {
+            return root.listarCategorias();
 	}
 
 	public Set<DTMinServicio> listarServiciosCategoria(String cat) {
@@ -100,8 +104,19 @@ public class ManejadorProductos {
 	}
 
 	public Set<DTMinServicio> listarServicios() {
-		return null;
-	}
+		Set<DTMinServicio> result = new HashSet();
+                 if (!this.servicios.isEmpty()) {
+                        for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
+                                if (!mapaServicio.isEmpty()) {
+                                        for (Servicio s : mapaServicio.values()) {
+                                        result.add(s.crearDTMin());
+                                        }
+                                }
+                        }   
+                }
+                return result;
+        }
+	
 
 	public void cambiarPrecio(DTMinServicio dtS,
 			float nuevoPrecio) {
@@ -221,26 +236,58 @@ public class ManejadorProductos {
 	}
 
 	public void altaServicio(DTServicio dtS, String nicknameP, Set<String> listaCategorias) {
-            //ManejadorUsuario mu = ManejadorUsuario.getInstance();
-
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+                Proveedor prov = mu.getProveedor(nicknameP);
+                Pais paisOrigen = new Pais(dtS.getOrigen().getPais());
+                Ciudad ciudadOrigen = new Ciudad(dtS.getOrigen().getCiudad());
+                boolean tienedestino;
+                Servicio s;
+                tienedestino = (dtS.getDestino().getCiudad() != null);
+                if ( tienedestino){
+                    Pais paisDestino = new Pais(dtS.getDestino().getPais());
+                    Ciudad ciudadDestino = new Ciudad(dtS.getDestino().getCiudad());
+                    s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,ciudadDestino,prov);
+                }else{
+                    s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,null,prov);
+                }
+                this.servicios.get(nicknameP).put(dtS.getIdServicio(),s); //tema del orden igual q en altaPromocion
+                prov.addServicio(s);
+                ///
+                /// falta la parte de categoria
+                
+                
 	}
 
 	public void agregarServicio(String idServicio) {
 	}
 
-	public boolean idPromocionDisponible(String idPromocion, String nicknameP) {
-		return true;
+	public boolean idPromocionDisponible(String idPromocion, String nicknameProv) {
+		Promocion pro = this.promociones.get(nicknameProv).get(idPromocion);
+                return (pro == null);
 	}
 
-	public void altaPromocion(DTPromocion dtP) {
-	}
+	public void altaPromocion(String idPromocion, float descuento, String nicknameProv, Set<String> servicios){
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+                Proveedor proveedor = mu.getProveedor(nicknameProv);
+                Promocion promo = new Promocion(idPromocion, descuento, proveedor);
+                this.promociones.get(nicknameProv).put(idPromocion, promo); // tema de orden de nicknameProv y id promocion (no estoy seguro)
+                Iterator<String> it = servicios.iterator();
+                while (it.hasNext()){
+                        String l = (String)it.next();
+                        Servicio temp = this.servicios.get(nicknameProv).get(l);
+                        promo.addServicio(temp);
+                        proveedor.addPromocion(promo);
+                }
+        }
 
 	public float getPrecioPromocion(DTMinPromocion dtP) {
-		return 0; // no hecho
+		Promocion promo = this.promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
+                return promo.getTotal();
 	}
 
 	public float getPrecioServicio(DTMinServicio dtS) {
-		return 0; // no hecho
+		Servicio ser = this.servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                return ser.getPrecio();
 	}
 
 	public Servicio getServicio(DTMinServicio dtMinS) {
@@ -250,4 +297,5 @@ public class ManejadorProductos {
 	public Promocion getPromocion(DTMinPromocion dtMinP) {
 		return promociones.get(dtMinP.getNicknameP()).get(dtMinP.getIdPromocion());
 	}
+        
 }

@@ -6,6 +6,7 @@
 package com.tprog.logica.manejadores;
 
 import com.tprog.logica.clases.Categoria;
+import com.tprog.logica.clases.Ciudad;
 import com.tprog.logica.clases.Compuesta;
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Promocion;
@@ -235,8 +236,26 @@ public class ManejadorProductos {
 	}
 
 	public void altaServicio(DTServicio dtS, String nicknameP, Set<String> listaCategorias) {
-            //ManejadorUsuario mu = ManejadorUsuario.getInstance();
-
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+                Proveedor prov = mu.getProveedor(nicknameP);
+                Pais paisOrigen = new Pais(dtS.getOrigen().getPais());
+                Ciudad ciudadOrigen = new Ciudad(dtS.getOrigen().getCiudad());
+                boolean tienedestino;
+                Servicio s;
+                tienedestino = (dtS.getDestino().getCiudad() != null);
+                if ( tienedestino){
+                    Pais paisDestino = new Pais(dtS.getDestino().getPais());
+                    Ciudad ciudadDestino = new Ciudad(dtS.getDestino().getCiudad());
+                    s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,ciudadDestino,prov);
+                }else{
+                    s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,null,prov);
+                }
+                this.servicios.get(nicknameP).put(dtS.getIdServicio(),s); //tema del orden igual q en altaPromocion
+                prov.addServicio(s);
+                ///
+                /// falta la parte de categoria
+                
+                
 	}
 
 	public void agregarServicio(String idServicio) {
@@ -251,7 +270,7 @@ public class ManejadorProductos {
                 ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
                 Proveedor proveedor = mu.getProveedor(nicknameProv);
                 Promocion promo = new Promocion(idPromocion, descuento, proveedor);
-                this.promociones.get(nicknameProv).put(idPromocion, promo);
+                this.promociones.get(nicknameProv).put(idPromocion, promo); // tema de orden de nicknameProv y id promocion (no estoy seguro)
                 Iterator<String> it = servicios.iterator();
                 while (it.hasNext()){
                         String l = (String)it.next();
@@ -262,7 +281,8 @@ public class ManejadorProductos {
         }
 
 	public float getPrecioPromocion(DTMinPromocion dtP) {
-		return 0; // no hecho
+		Promocion promo = this.promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
+                return promo.getTotal();
 	}
 
 	public float getPrecioServicio(DTMinServicio dtS) {

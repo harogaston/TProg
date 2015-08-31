@@ -5,7 +5,11 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.controladores.CtrlUsuarios;
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTReserva;
 import java.util.LinkedHashMap;
+import java.util.Set;
 import java.util.Vector;
 
 /**
@@ -19,10 +23,15 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
      * @param idCliente
      * @param padre
      */
-    public ReservasCliente(String idCliente, VerInformacionDeCliente padre) {
+    public ReservasCliente(VerInformacionDeCliente padre, Set<DTMinReserva> reservas, CtrlUsuarios ctrlUsuarios) {
         this.padre = padre;
-        this.idCliente = idCliente;
+        this.reservas = reservas;
+        this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
+        //construyo lista para la interfaz usando el set
+        for (DTMinReserva dt : reservas) {
+            listaReservas.add(Integer.toString(dt.getIdReserva()));
+        }
     }
 
     /**
@@ -38,8 +47,12 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         panelUsuario = new javax.swing.JScrollPane();
         detalleUsuario = new javax.swing.JTextArea();
         botonSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBorder(null);
+        setPreferredSize(new java.awt.Dimension(690, 435));
+        setVisible(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaReservasInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -56,6 +69,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
                 listaReservasInterfazInterfazActionPerformed(evt);
             }
         });
+        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -64,42 +78,18 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         detalleUsuario.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleUsuario);
 
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 128));
+
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listaReservasInterfaz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(75, 75, 75)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonSalir)
-                        .addGap(198, 198, 198))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(listaReservasInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                .addComponent(botonSalir)
-                .addContainerGap())
-        );
+        jLabel1.setText("<html>Seleccione alguna reserva del cliente para ver su información</html>");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -113,10 +103,13 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaReservasInterfazItemStateChanged
 
     private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
-        String cliente = (String) listaReservasInterfaz.getSelectedItem();
-        if (cliente != null) {
+        String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
+        int reserva = Integer.parseInt(reservaSeleccionada);
+        if (reservaSeleccionada != null) {
+            ctrlUsuarios.seleccionarReserva(reserva);
+            DTReserva dt = ctrlUsuarios.infoReserva();
             detalleUsuario.setVisible(true);
-            detalleUsuario.setText(hashReservas.get(cliente));
+            detalleUsuario.setText(dt.toString()); //imprimir lineas de reserva
         }
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
 
@@ -124,14 +117,18 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         detalleUsuario.setText("");
         detalleUsuario.setVisible(false);
         this.dispose();
+        reservas = null;
+        ctrlUsuarios = null;
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    CtrlUsuarios ctrlUsuarios;
+    Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;
-    String idCliente;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleUsuario;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox listaReservasInterfaz;
     private LinkedHashMap<String, String> hashReservas = new LinkedHashMap<>();
     private Vector<String> listaReservas = new Vector<>();

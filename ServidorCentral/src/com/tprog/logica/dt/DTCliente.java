@@ -24,4 +24,8 @@ public class DTCliente extends DTUsuario {
 		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
 		this.reservas = new HashSet();
 	}
+        
+        public Set<DTMinReserva> getReservas(){
+            return reservas;
+        }
 }

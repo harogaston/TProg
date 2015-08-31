@@ -8,7 +8,6 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
-import java.util.LinkedHashMap;
 import java.util.Set;
 import java.util.Vector;
 
@@ -20,7 +19,8 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ReservasCliente
-     * @param idCliente
+     * @param reservas
+     * @param ctrlUsuarios
      * @param padre
      */
     public ReservasCliente(VerInformacionDeCliente padre, Set<DTMinReserva> reservas, CtrlUsuarios ctrlUsuarios) {

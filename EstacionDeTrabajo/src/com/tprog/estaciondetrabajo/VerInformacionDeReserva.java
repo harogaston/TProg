@@ -6,7 +6,6 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.controladores.CtrlReservas;
-import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
 import java.util.Set;
@@ -100,7 +99,7 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
 
-        jLabel1.setText("<html>Seleccione alguna reserva del cliente para ver su información</html>");
+        jLabel1.setText("<html>Seleccione alguna reserva del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         pack();

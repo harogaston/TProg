@@ -24,4 +24,5 @@ public class DTCategoria {
 	public Set<DTCategoria> getSubCategorias() {
 		return this.subCategorias;
 	}
+
 }

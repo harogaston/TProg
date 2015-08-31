@@ -6,9 +6,8 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.controladores.CtrlUsuarios;
-import com.tprog.logica.dt.DTMinReserva;
-import com.tprog.logica.dt.DTReserva;
-import java.util.LinkedHashMap;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTServicio;
 import java.util.Set;
 import java.util.Vector;
 
@@ -16,21 +15,21 @@ import java.util.Vector;
  *
  * @author marccio
  */
-public class ReservasCliente extends javax.swing.JInternalFrame {
+public class ServiciosProveedor extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ReservasCliente
      * @param idCliente
      * @param padre
      */
-    public ReservasCliente(VerInformacionDeCliente padre, Set<DTMinReserva> reservas, CtrlUsuarios ctrlUsuarios) {
+    public ServiciosProveedor(VerInformacionDeCliente padre, Set<DTMinServicio> servicios, CtrlUsuarios ctrlUsuarios) {
         this.padre = padre;
-        this.reservas = reservas;
+        this.servicios = servicios;
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
         //construyo lista para la interfaz usando el set
-        for (DTMinReserva dt : reservas) {
-            listaReservas.add(Integer.toString(dt.getIdReserva()));
+        for (DTMinServicio dt : servicios) {
+            listaServicios.add(dt.getIdServicio());
         }
     }
 
@@ -43,7 +42,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        listaReservasInterfaz = new javax.swing.JComboBox(listaReservas);
+        listaServiciosInterfaz = new javax.swing.JComboBox(listaServicios);
         panelUsuario = new javax.swing.JScrollPane();
         detalleUsuario = new javax.swing.JTextArea();
         botonSalir = new javax.swing.JButton();
@@ -54,22 +53,22 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        listaReservasInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
+        listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
-                listaReservasInterfazInterfazComponentAdded(evt);
+                listaServiciosInterfazInterfazComponentAdded(evt);
             }
         });
-        listaReservasInterfaz.addItemListener(new java.awt.event.ItemListener() {
+        listaServiciosInterfaz.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                listaReservasInterfazItemStateChanged(evt);
+                listaServiciosInterfazItemStateChanged(evt);
             }
         });
-        listaReservasInterfaz.addActionListener(new java.awt.event.ActionListener() {
+        listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaReservasInterfazInterfazActionPerformed(evt);
+                listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -94,43 +93,42 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaReservasInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazComponentAdded
+    private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
 
-    }//GEN-LAST:event_listaReservasInterfazInterfazComponentAdded
+    }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
 
-    private void listaReservasInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaReservasInterfazItemStateChanged
+    private void listaServiciosInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaServiciosInterfazItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_listaReservasInterfazItemStateChanged
+    }//GEN-LAST:event_listaServiciosInterfazItemStateChanged
 
-    private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
-        String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
-        int reserva = Integer.parseInt(reservaSeleccionada);
-        if (reservaSeleccionada != null) {
-            ctrlUsuarios.seleccionarReserva(reserva);
-            DTReserva dt = ctrlUsuarios.infoReserva();
+    private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
+        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+        if (servicio != null) {
+            ctrlUsuarios.seleccionarServicio(servicio);
+            DTServicio dt = ctrlUsuarios.infoServicio();
             detalleUsuario.setVisible(true);
-            detalleUsuario.setText(dt.toString()); //imprimir lineas de reserva
+            detalleUsuario.setText(dt.toString()); 
         }
-    }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
+    }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         detalleUsuario.setText("");
         detalleUsuario.setVisible(false);
         this.dispose();
-        reservas = null;
+        servicios = null;
         ctrlUsuarios = null;
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
     CtrlUsuarios ctrlUsuarios;
-    Set<DTMinReserva> reservas;
+    Set<DTMinServicio> servicios;
     VerInformacionDeCliente padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JComboBox listaReservasInterfaz;
-    private Vector<String> listaReservas = new Vector<>();
+    private javax.swing.JComboBox listaServiciosInterfaz;
+    private Vector<String> listaServicios = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
     // End of variables declaration//GEN-END:variables
 }

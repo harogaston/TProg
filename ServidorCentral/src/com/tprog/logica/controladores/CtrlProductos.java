@@ -218,11 +218,15 @@ public class CtrlProductos implements ICtrlProductos{
     
     @Override
     public boolean idPromocionDisponible(String idPromocion){
-        return true;
+            this.dtP = new DTMinPromocion(this.nicknameP, idPromocion);
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            return mp.idPromocionDisponible(idPromocion, this.nicknameP);
     }
     
     @Override
     public void altaPromocion(float descuento){
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            mp.altaPromocion(this.dtP.getIdPromocion(), descuento, this.dtP.getNicknameP(), this.listaServicios);
     }
 	
 }

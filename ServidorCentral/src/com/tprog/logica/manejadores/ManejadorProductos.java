@@ -9,6 +9,7 @@ import com.tprog.logica.clases.Categoria;
 import com.tprog.logica.clases.Compuesta;
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Promocion;
+import com.tprog.logica.clases.Proveedor;
 import com.tprog.logica.clases.Servicio;
 import com.tprog.logica.clases.Simple;
 import com.tprog.logica.dt.DTMinPromocion;
@@ -18,6 +19,7 @@ import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -101,8 +103,19 @@ public class ManejadorProductos {
 	}
 
 	public Set<DTMinServicio> listarServicios() {
-		return null;
-	}
+		Set<DTMinServicio> result = new HashSet();
+                 if (!this.servicios.isEmpty()) {
+                        for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
+                                if (!mapaServicio.isEmpty()) {
+                                        for (Servicio s : mapaServicio.values()) {
+                                        result.add(s.crearDTMin());
+                                        }
+                                }
+                        }   
+                }
+                return result;
+        }
+	
 
 	public void cambiarPrecio(DTMinServicio dtS,
 			float nuevoPrecio) {
@@ -229,19 +242,32 @@ public class ManejadorProductos {
 	public void agregarServicio(String idServicio) {
 	}
 
-	public boolean idPromocionDisponible(String idPromocion, String nicknameP) {
-		return true;
+	public boolean idPromocionDisponible(String idPromocion, String nicknameProv) {
+		Promocion pro = this.promociones.get(nicknameProv).get(idPromocion);
+                return (pro == null);
 	}
 
-	public void altaPromocion(DTPromocion dtP) {
-	}
+	public void altaPromocion(String idPromocion, float descuento, String nicknameProv, Set<String> servicios){
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+                Proveedor proveedor = mu.getProveedor(nicknameProv);
+                Promocion promo = new Promocion(idPromocion, descuento, proveedor);
+                this.promociones.get(nicknameProv).put(idPromocion, promo);
+                Iterator<String> it = servicios.iterator();
+                while (it.hasNext()){
+                        String l = (String)it.next();
+                        Servicio temp = this.servicios.get(nicknameProv).get(l);
+                        promo.addServicio(temp);
+                        proveedor.addPromocion(promo);
+                }
+        }
 
 	public float getPrecioPromocion(DTMinPromocion dtP) {
 		return 0; // no hecho
 	}
 
 	public float getPrecioServicio(DTMinServicio dtS) {
-		return 0; // no hecho
+		Servicio ser = this.servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                return ser.getPrecio();
 	}
 
 	public Servicio getServicio(DTMinServicio dtMinS) {
@@ -251,4 +277,5 @@ public class ManejadorProductos {
 	public Promocion getPromocion(DTMinPromocion dtMinP) {
 		return promociones.get(dtMinP.getNicknameP()).get(dtMinP.getIdPromocion());
 	}
+        
 }

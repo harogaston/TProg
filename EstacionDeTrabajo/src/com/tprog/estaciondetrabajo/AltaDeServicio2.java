@@ -10,29 +10,36 @@ import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
+import java.awt.BorderLayout;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author marccio.silva
  */
-public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
+public class AltaDeServicio2 extends javax.swing.JInternalFrame {
+    private final AltaDeServicio1 padre;
 
     /**
      * Creates new form VerInformacionDeCliente
-     
+     * @param padre
      */
-    public VerInformacionDeProveedor() {
+    public AltaDeServicio2(AltaDeServicio1 padre) {
+        this.padre = padre;
+        setTitle("Alta de Servicio");
         initComponents();
     }
     
     void cargarDatos() {
         //listaClientes
         Fabrica f = Fabrica.getInstance();
-        ctrlUsuarios = f.getICtrlUsuarios();        
+        ctrlUsuarios = f.getICtrlUsuarios();   
+        ctrlProductos = f.getICtrlProductos();
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
@@ -57,7 +64,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         imagenUsuario = new javax.swing.JLabel();
         panelUsuario = new javax.swing.JScrollPane();
         detalleUsuario = new javax.swing.JTextArea();
-        botonServicios = new javax.swing.JButton();
+        buttonSeleccionarProveedor = new javax.swing.JButton();
 
         setBorder(null);
         setToolTipText("");
@@ -94,7 +101,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         });
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setText("<html>Seleccione un proveedor del Sistema para ver su información</html>");
+        label.setText("Seleccione el proveedor que va a dar de alta el Servicio.");
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -103,10 +110,10 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         detalleUsuario.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleUsuario);
 
-        botonServicios.setText("Ver servicios");
-        botonServicios.addActionListener(new java.awt.event.ActionListener() {
+        buttonSeleccionarProveedor.setText("Seleccionar Proveedor");
+        buttonSeleccionarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonServiciosActionPerformed(evt);
+                buttonSeleccionarProveedorActionPerformed(evt);
             }
         });
 
@@ -114,6 +121,10 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         tabInfo.setLayout(tabInfoLayout);
         tabInfoLayout.setHorizontalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(botonSalir)
+                .addGap(63, 63, 63))
             .addGroup(tabInfoLayout.createSequentialGroup()
                 .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabInfoLayout.createSequentialGroup()
@@ -124,14 +135,12 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
                         .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(tabInfoLayout.createSequentialGroup()
                                 .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(listaProveedoresInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(tabInfoLayout.createSequentialGroup()
                         .addGap(202, 202, 202)
-                        .addComponent(botonServicios)
-                        .addGap(35, 35, 35)
-                        .addComponent(botonSalir)))
+                        .addComponent(buttonSeleccionarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         tabInfoLayout.setVerticalGroup(
@@ -145,10 +154,10 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
                     .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(imagenUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonSalir)
-                    .addComponent(botonServicios))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addComponent(buttonSeleccionarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(botonSalir)
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         label.getAccessibleContext().setAccessibleDescription("");
@@ -181,13 +190,13 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             DTProveedor dt = ctrlUsuarios.infoProveedor();
             detalleUsuario.setText(dt.toString());
             try {
-                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeProveedor.class.getResource(dt.getImagen())));    
+                imagenUsuario.setIcon(new ImageIcon(AltaDeServicio2.class.getResource(dt.getImagen())));    
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
             
             //cargo la lista de servicios del usuario acá, y cuando se pidan los servicios se muestran
-            servicios = ctrlUsuarios.listarServiciosProveedor();
+            //servicios = ctrlUsuarios.listarServiciosProveedor();
         }
     }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
 
@@ -203,24 +212,30 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_listaProveedoresInterfazItemStateChanged
 
-    private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
-        String cliente = (String) listaProveedoresInterfaz.getSelectedItem();
-        if (cliente != null) {
-              
-//            ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
-//            getContentPane().add(r, BorderLayout.CENTER);
-//            r.setBounds(10, 10, 100, 100);
-//            this.setVisible(false);
-//            r.setVisible(true);
-//            getParent().add(r);
+    private void buttonSeleccionarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarProveedorActionPerformed
+       // String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();       
+       // if ((!proveedor.isEmpty()))  { 
+           // ctrlProductos.seleccionarProveedor(proveedor); 
+            AltaDeServicio3 as3 = new AltaDeServicio3(this, ctrlProductos);
+            getContentPane().add(as3, BorderLayout.CENTER);
+            as3.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            as3.setVisible(true);
+            getParent().add(as3);            
+        
+        /*
+        else{
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor.", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
         }
-    }//GEN-LAST:event_botonServiciosActionPerformed
+                */
+    }//GEN-LAST:event_buttonSeleccionarProveedorActionPerformed
 
     Set<DTMinServicio> servicios;
+    ICtrlProductos ctrlProductos;
     ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
-    private javax.swing.JButton botonServicios;
+    private javax.swing.JButton buttonSeleccionarProveedor;
     private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel imagenUsuario;
     private javax.swing.JLabel label;

@@ -245,7 +245,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaCategoriaActionPerformed
         showInternalFrame("altaCategoria");
     }//GEN-LAST:event_menuItemAltaCategoriaActionPerformed
-
+     private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+        showInternalFrame("altaDeServicio1");
+    } 
     /**
      * @param args the command line arguments
      */

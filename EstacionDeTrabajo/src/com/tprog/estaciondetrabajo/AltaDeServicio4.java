@@ -193,7 +193,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaCategoriasInterfazItemStateChanged
 
     private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
-        String cliente = (String) listaCategoriasInterfaz.getSelectedItem();
+        String categoria = (String) listaCategoriasInterfaz.getSelectedItem();
         
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 

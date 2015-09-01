@@ -30,7 +30,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         verInformacionDeReserva = new VerInformacionDeReserva();
         verInformacionDeServicio = new VerInformacionDeServicio();
         cancelarReserva = new CancelarReserva();
-        altaUsuario = new AltaUsuario();
+        altaDeUsuario1 = new AltaDeUsuario1();
         //las agrego al content pane
         getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
         getContentPane().add(verInformacionDePromocion, BorderLayout.CENTER);
@@ -38,7 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(verInformacionDeReserva, BorderLayout.CENTER);
         getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
         getContentPane().add(cancelarReserva, BorderLayout.CENTER);
-        getContentPane().add(altaUsuario, BorderLayout.CENTER);
+        getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
         //las agrego al hash
         internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
         internalFrames.put("verInformacionDePromocion", verInformacionDePromocion);
@@ -46,7 +46,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         internalFrames.put("verInformacionDeReserva", verInformacionDeReserva);
         internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
         internalFrames.put("cancelarReserva", cancelarReserva);
-        internalFrames.put("altaUsuario", altaUsuario);
+        internalFrames.put("altaDeUsuario1", altaDeUsuario1);
         //esconder todas
         for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
             internalFrame.getValue().setVisible(false);
@@ -190,9 +190,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaUsuarioActionPerformed
-        showInternalFrame("altaUsuario");
+        showInternalFrame("altaDeUsuario1");
     }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
-   
+
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
         showInternalFrame("verInformacionDeCliente");
     }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
@@ -262,7 +262,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     
     //Operaciones auxiliares
-    private void showInternalFrame(String id) {
+    public void showInternalFrame(String id) {
         //muestra el internal frame identificado por id
         //solo funciona si el internal frame fue agregado al hash
         for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
@@ -280,7 +280,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VerInformacionDeReserva verInformacionDeReserva;
     private VerInformacionDeServicio verInformacionDeServicio;
     private CancelarReserva cancelarReserva;
-    private AltaUsuario altaUsuario;
+    private AltaDeUsuario1 altaDeUsuario1;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

@@ -26,21 +26,23 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     private final AltaDeUsuario1 padre;
     private String ruta;
+    private final ICtrlUsuarios ictrlU;
 
     /**
      * Creates new form AltaDeUsuario2
      * @param padre
      */
-    public AltaDeUsuario2(AltaDeUsuario1 padre, String nickname, String email) {
+    public AltaDeUsuario2(AltaDeUsuario1 padre, String nickname, String email, ICtrlUsuarios ictrlU) {
         
         setTitle("Alta de Usuario");
         //ctrlU = new CtrlUsuarios();
-        fabrica = Fabrica.getInstance();
+        //fabrica = Fabrica.getInstance();
         this.padre = padre;
         this.nickname = nickname;
         this.email = email;
         
         initComponents();
+        this.ictrlU = ictrlU;
     }
 
     /**
@@ -372,7 +374,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         fechaNacimiento.setYear(anio);
         if (ok){
             DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, imagen, fechaNacimiento);
-            ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
+            //ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
             ictrlU.ingresarDatosUsuario(dtU, proveedor);
             if (proveedor){
                 System.out.println("proveee");
@@ -404,7 +406,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     
     String nickname;
     String email;
-    Fabrica fabrica;
+    //Fabrica fabrica;
     //CtrlUsuarios ctrlU ;
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
         "Octubre", "Noviembre", "Diciembre"};

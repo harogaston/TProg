@@ -133,7 +133,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         String email = textPaneEmail.getText();
         ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
         if (!(nickname.equals((""))) && (!(email.equals(""))) && (ictrlU.verificarNickname(nickname)) && (ictrlU.verificarEmail(email))) {
-            AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email);
+            AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ictrlU);
             getContentPane().add(au2, BorderLayout.CENTER);
             au2.setBounds(10, 10, 100, 100);
             this.setVisible(false);

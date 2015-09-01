@@ -57,6 +57,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Realizar Reserva"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemRealizarReservaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemActualizarEstadoReserva">
               <Properties>

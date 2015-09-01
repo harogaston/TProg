@@ -48,8 +48,8 @@ public interface ICtrlProductos {
 	public void seleccionarDestino(DTUbicacion destino);
 	public boolean seleccionarCategoriaSimple(String idCategoria);
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes);
-	public Set<String> listarServiciosProveedor();
-	public void agregarServicio(String idServicio);
+	public Set<DTMinServicio> listarServiciosProveedor();
+	public void agregarServicio(DTMinServicio dtS);
 	public boolean idPromocionDisponible(String idPromocion);
 	public void altaPromocion(float descuento);
 }

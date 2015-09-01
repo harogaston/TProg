@@ -125,7 +125,8 @@ public class CtrlProductos implements ICtrlProductos{
     
     @Override
     public Set<String> listarCategoriasServicio(){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarCategoriasServicio(dtS);
     }
     
     @Override
@@ -207,13 +208,14 @@ public class CtrlProductos implements ICtrlProductos{
     }
     
     @Override
-    public Set<String> listarServiciosProveedor(){
-        return null;
+    public Set<DTMinServicio> listarServiciosProveedor(){
+       ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+       return mu.listarServiciosProveedor(this.nicknameP);
     }
     
     @Override
-    public void agregarServicio(String idServicio){
-        
+    public void agregarServicio(DTMinServicio dtS){
+        this.listaServicios.add(dtS.getIdServicio());
     }
     
     @Override

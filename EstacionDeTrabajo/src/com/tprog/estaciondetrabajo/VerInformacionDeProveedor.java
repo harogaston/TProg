@@ -6,10 +6,11 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -25,14 +26,12 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeProveedor() {
         initComponents();
-        //Aca se trae un set de DTMinCliente para agregar al combobox
-        //carga de prueba
-        cargarDatos();
     }
     
     void cargarDatos() {
         //listaClientes
-        ctrlUsuarios = new CtrlUsuarios();
+        Fabrica f = Fabrica.getInstance();
+        ctrlUsuarios = f.getICtrlUsuarios();        
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
@@ -217,7 +216,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonServiciosActionPerformed
 
     Set<DTMinServicio> servicios;
-    CtrlUsuarios ctrlUsuarios;
+    ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;

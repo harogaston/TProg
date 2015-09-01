@@ -5,9 +5,9 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.util.Set;
 import java.util.Vector;
 
@@ -23,7 +23,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
      * @param ctrlUsuarios
      * @param padre
      */
-    public ReservasCliente(VerInformacionDeCliente padre, Set<DTMinReserva> reservas, CtrlUsuarios ctrlUsuarios) {
+    public ReservasCliente(VerInformacionDeCliente padre, Set<DTMinReserva> reservas, ICtrlUsuarios ctrlUsuarios) {
         this.padre = padre;
         this.reservas = reservas;
         this.ctrlUsuarios = ctrlUsuarios;
@@ -122,7 +122,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    CtrlUsuarios ctrlUsuarios;
+    ICtrlUsuarios ctrlUsuarios;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables

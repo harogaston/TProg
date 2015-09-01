@@ -5,9 +5,9 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlProductos;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -24,7 +24,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
      * @param ctrlProductos
      * @param padre
      */
-    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMinServicio> servicios, CtrlProductos ctrlProductos) {
+    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMinServicio> servicios, ICtrlProductos ctrlProductos) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlProductos = ctrlProductos;
@@ -133,7 +133,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    CtrlProductos ctrlProductos;
+    ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     VerInformacionDePromocion padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables

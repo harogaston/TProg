@@ -11,8 +11,8 @@ public class DTUbicacion {
 	private final String pais;
 
 	public DTUbicacion(String ciudad, String pais) {
-            this.ciudad = ciudad;
-            this.pais = pais;
+		this.ciudad = ciudad;
+		this.pais = pais;
 	}
 
 	public String getCiudad() {
@@ -20,12 +20,12 @@ public class DTUbicacion {
 	}
 
 	public String getPais() {
-            return this.pais;
+		return this.pais;
 	}
 
-    @Override
-    public String toString() {
-        return "Ciudad: " + ciudad + ", Pais: " + pais;
-    }
-        
+	@Override
+	public String toString() {
+		return "Ciudad: " + ciudad + ", Pais: " + pais;
+	}
+
 }

@@ -33,4 +33,11 @@ public class DTProveedor extends DTUsuario {
 		return this.webEmpresa;
 	}
 
+	@Override
+	public String toString() {
+		String output = super.toString();
+		output = output.concat("Empresa: " + empresa + "\n");
+		output = output.concat("Web Empresa: " + webEmpresa + "\n");
+		return output;
+	}
 }

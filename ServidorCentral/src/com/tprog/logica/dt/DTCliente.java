@@ -21,7 +21,7 @@ public class DTCliente extends DTUsuario {
 
 	public DTCliente(DTUsuario dtU) {
 		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
-		this.reservas = new HashSet();
+		this.reservas = new HashSet<>();
 	}
         
         public Set<DTMinReserva> getReservas(){
@@ -33,8 +33,8 @@ public class DTCliente extends DTUsuario {
         String output = super.toString();
         int i = 1;
         for (DTMinReserva dt : reservas) {
-            output.concat("Reserva " + Integer.toString(i) + "\n");
-            output.concat(dt.toString());
+            output = output.concat("Reserva " + Integer.toString(i) + "\n");
+            output = output.concat(dt.toString());
             i++;
         }
         return output;

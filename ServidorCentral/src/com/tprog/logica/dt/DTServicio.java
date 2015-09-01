@@ -50,14 +50,14 @@ public class DTServicio {
 		return this.destino;
 	}
 
-    @Override
-    public String toString() {
-        return "ID de servicio: " + idServicio
-                + "\n" + "Descripcion: "+ descripcion
-                + "\n" + "Precio: " + Float.toString(precio)
-                + "\n" + "Origen: " + origen.toString()
-                + "\n" + "Destino: " + destino.toString()
-                + "\n";
-    }
+	@Override
+	public String toString() {
+		return "ID de servicio: " + idServicio
+				+ "\n" + "Descripcion: " + descripcion
+				+ "\n" + "Precio: " + Float.toString(precio)
+				+ "\n" + "Origen: " + origen.toString()
+				+ "\n" + "Destino: " + destino.toString()
+				+ "\n";
+	}
 
 }

@@ -25,4 +25,8 @@ public class DTCategoria {
 		return this.subCategorias;
 	}
 
+	@Override
+	public String toString() {
+		return this.idCategoria;
+	}
 }

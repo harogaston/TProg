@@ -29,4 +29,10 @@ public class DTMinProveedor {
 		return this.empresa;
 	}
 
+	@Override
+	public String toString() {
+		return "Nickname: " + nickname
+				+ "\n" + "Email: " + email + "\n"
+				+ "\n" + "Empresa: " + empresa + "\n";
+	}
 }

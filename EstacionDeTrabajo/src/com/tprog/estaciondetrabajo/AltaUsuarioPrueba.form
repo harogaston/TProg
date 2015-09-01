@@ -247,7 +247,7 @@
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Component id="jComboBoxMeses" min="-2" max="-2" attributes="0"/>
+                                              <Component id="comboBoxMeses" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -308,7 +308,7 @@
                           </Group>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxMeses" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="comboBoxMeses" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
@@ -386,14 +386,14 @@
                 <Property name="text" type="java.lang.String" value="Im&#xe1;gen"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBoxMeses">
+            <Component class="javax.swing.JComboBox" name="comboBoxMeses">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="new javax.swing.DefaultComboBoxModel(meses)" type="code"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxMesesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxMesesActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">

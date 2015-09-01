@@ -17,12 +17,12 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author User
  */
-public class AltaUsuario extends javax.swing.JInternalFrame {
+public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form AltaUsuario
      */
-    public AltaUsuario() {
+    public AltaUsuarioPrueba() {
         setTitle("Alta de Usuario");
         initComponents();
     }

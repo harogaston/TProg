@@ -6,10 +6,11 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlProductos;
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTPromocion;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
 import java.util.Iterator;
 import java.util.Set;
@@ -26,12 +27,11 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
      */
     public VerInformacionDePromocion() {
         initComponents();
-        //Aca se trae un set de DTMinCliente para agregar al combobox
-        //carga de prueba
-        ctrlProductos = new CtrlProductos();
     }
     
     void cargarDatos() {
+        Fabrica f = Fabrica.getInstance();
+        ctrlProductos = f.getICtrlProductos();        
         setPromociones = ctrlProductos.listarPromociones();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
@@ -213,7 +213,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
     DTPromocion dtPromocionActual;
     Set<DTMinPromocion> setPromociones;
     Set<DTMinReserva> servicios;
-    CtrlProductos ctrlProductos;
+    ICtrlProductos ctrlProductos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;

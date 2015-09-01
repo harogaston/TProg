@@ -6,10 +6,11 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.util.Set;
 import java.util.Vector;
@@ -26,12 +27,12 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeCliente() {
         initComponents();
-        //Aca se trae un set de DTMinCliente para agregar al combobox
-        //carga de prueba
-        ctrlUsuarios = new CtrlUsuarios();
     }
     
     void cargarDatos() {
+        //pedir controlador
+        Fabrica f = Fabrica.getInstance();
+        ctrlUsuarios = f.getICtrlUsuarios();
         //listaClientes
         Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
         //construyo un vector con la informacion a mostrar, porque
@@ -218,7 +219,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonReservasActionPerformed
 
     Set<DTMinReserva> reservas;
-    CtrlUsuarios ctrlUsuarios;
+    ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonReservas;
     private javax.swing.JButton botonSalir;

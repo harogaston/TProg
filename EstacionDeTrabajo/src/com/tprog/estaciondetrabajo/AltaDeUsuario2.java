@@ -7,6 +7,9 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTUsuario;
+import com.tprog.logica.interfaces.Fabrica;
+import static com.tprog.logica.interfaces.Fabrica.getInstance;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.io.File;
 import static java.lang.Integer.parseInt;
@@ -31,7 +34,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     public AltaDeUsuario2(AltaDeUsuario1 padre, String nickname, String email) {
         
         setTitle("Alta de Usuario");
-        ctrlU = new CtrlUsuarios();
+        //ctrlU = new CtrlUsuarios();
+        fabrica = Fabrica.getInstance();
         this.padre = padre;
         this.nickname = nickname;
         this.email = email;
@@ -366,20 +370,20 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         fechaNacimiento.setDate(dia);
         fechaNacimiento.setMonth(mes);
         fechaNacimiento.setYear(anio);
-        
-        if (proveedor){
-            System.out.println("proveee");
-            String nombreEmpresa = textPaneNombreEmpresa.getText();
-            String linkEmpresa = textPaneLinkEmpresa.getText();
-            boolean okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+"))&&(nombreEmpresa.length() >= 1);
-            boolean okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+"))&&(linkEmpresa.length() >= 1);
-            ok = (ok && okNombreEmpresa && okLinkEmpresa);
-        }
-        if (ok)
-        {
+        if (ok){
             DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, imagen, fechaNacimiento);
-            ctrlU.ingresarDatosUsuario(dtU, proveedor);
-            if (proveedor) ctrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
+            ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
+            ictrlU.ingresarDatosUsuario(dtU, proveedor);
+            if (proveedor){
+                System.out.println("proveee");
+                String nombreEmpresa = textPaneNombreEmpresa.getText();
+                String linkEmpresa = textPaneLinkEmpresa.getText();
+                boolean okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+"))&&(nombreEmpresa.length() >= 1);
+                boolean okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+"))&&(linkEmpresa.length() >= 1);
+                boolean okP = (okNombreEmpresa && okLinkEmpresa);
+                if (okP) ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa); 
+            }
+            ictrlU.altaUsuario();
             JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
@@ -400,7 +404,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     
     String nickname;
     String email;
-    CtrlUsuarios ctrlU ;
+    Fabrica fabrica;
+    //CtrlUsuarios ctrlU ;
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
         "Octubre", "Noviembre", "Diciembre"};
     // Variables declaration - do not modify//GEN-BEGIN:variables

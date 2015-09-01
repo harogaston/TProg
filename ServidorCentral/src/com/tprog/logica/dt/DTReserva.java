@@ -5,36 +5,26 @@
  */
 package com.tprog.logica.dt;
 
-import java.util.Iterator;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Date;
-import com.tprog.logica.clases.LineaReserva;
+import java.util.Set;
 
 public class DTReserva {
 
-	private String idReserva;
+	private int idReserva;
 	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
 	Set<DTLineaReserva> lineasReserva;
 
-	public DTReserva(String idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<LineaReserva> lineasReserva) {
+	public DTReserva(int idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineasReserva) {
 		this.idReserva = idReserva;
 		this.fCreacion = fCreacion;
 		this.estado = estado;
 		this.precioTotal = precioTotal;
-		this.lineasReserva = new HashSet();
-
-		Iterator<LineaReserva> it = lineasReserva.iterator();
-		while (it.hasNext()) {
-			LineaReserva l = it.next();
-			DTLineaReserva temp = l.crearDTLineaReserva();
-			this.lineasReserva.add(temp);
-		}
+		this.lineasReserva = lineasReserva;
 	}
 
-	public String getIdReserva() {
+	public int getIdReserva() {
 		return idReserva;
 	}
 
@@ -53,4 +43,21 @@ public class DTReserva {
 	public Set<DTLineaReserva> getLineasReserva() {
 		return this.lineasReserva;
 	}
+
+	@Override
+	public String toString() {
+		String output = "ID de reserva: " + Integer.toString(idReserva)
+				+ "\n" + "Fecha de creacion" + fCreacion.toString()
+				+ "\n" + "Estado: " + estado.toString()
+				+ "\n" + "Precio total: " + Float.toString(precioTotal)
+				+ "\n" + "Lineas de reserva: " + "\n";
+		int i = 1;
+		for (DTLineaReserva dt : lineasReserva) {
+			output = output.concat("Linea " + Integer.toString(i) + "\n");
+			output = output.concat(dt.toString());
+			i++;
+		}
+		return output;
+	}
+
 }

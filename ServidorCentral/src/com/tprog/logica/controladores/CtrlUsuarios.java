@@ -8,96 +8,129 @@ package com.tprog.logica.controladores;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinProveedor;
+import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUsuario;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
+import com.tprog.logica.manejadores.ManejadorProductos;
+import com.tprog.logica.manejadores.ManejadorUsuarios;
+import com.tprog.logica.manejadores.ManejadorReservas;
 import java.util.Set;
-/**
- *
- * @author gaston
- */
-public class CtrlUsuarios implements ICtrlUsuarios{
 
+public class CtrlUsuarios implements ICtrlUsuarios {
+
+	private String nicknameU;
+	private String nicknameP;
+	private String email;
+	private DTUsuario dtU;
+	private boolean esProveedor;
+	private String empresa;
+	private String web;
+	private int idReserva;
+	private String idServicio;
+	
 	@Override
 	public Set<DTMinCliente> listarClientes() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarClientes();
 	}
 
 	@Override
 	public void seleccionarCliente(String nickname) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.nicknameU = nickname;
 	}
 
 	@Override
 	public DTCliente infoCliente() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.infoCliente(this.nicknameU);
 	}
 
 	@Override
 	public void seleccionarReserva(int idReserva) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.idReserva = idReserva;
 	}
 
 	@Override
 	public DTReserva infoReserva() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorReservas mu = ManejadorReservas.getInstance();
+		return mu.infoReserva(this.idReserva);
 	}
 
 	@Override
 	public boolean verificarNickname(String nickname) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.nicknameU = nickname;
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.verificarNickname(this.nicknameU);
 	}
 
 	@Override
 	public boolean verificarEmail(String email) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.email = email;
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.verificarEmail(this.email);	
 	}
 
 	@Override
 	public void ingresarDatosUsuario(DTUsuario dtU, boolean esProveedor) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.dtU = dtU;
+		this.esProveedor = esProveedor;
 	}
 
 	@Override
 	public void ingresarDatosProveedor(String empresa, String web) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.empresa = empresa;
+		this.web = web;
 	}
 
 	@Override
 	public void altaUsuario() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		if (esProveedor) {
+			DTCliente nuevoDT = new DTCliente(dtU);
+			mu.altaCliente(nuevoDT);
+		}
+		else{
+			DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
+			mu.altaProveedor(nuevoDT);
+		}
 	}
 
 	@Override
 	public Set<DTMinProveedor> listarProveedores() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarProveedores();	
 	}
 
 	@Override
 	public void seleccionarProveedor(String nickname) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.nicknameP = nickname;
 	}
 
 	@Override
 	public DTProveedor infoProveedor() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.infoProveedor(this.nicknameP);
 	}
 
 	@Override
-	public Set<String> listarServiciosProveedor() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public Set<DTMinServicio> listarServiciosProveedor() {
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarServiciosProveedor(this.nicknameP);
 	}
 
 	@Override
 	public void seleccionarServicio(String idServicio) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.idServicio = idServicio;
 	}
 
 	@Override
 	public DTServicio infoServicio() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		ManejadorProductos mp = ManejadorProductos.getInstance();
+		DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
+		return mp.infoServicio(nuevoDT);
 	}
-	
+
 }

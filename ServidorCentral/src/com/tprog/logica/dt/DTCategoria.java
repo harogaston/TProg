@@ -24,4 +24,9 @@ public class DTCategoria {
 	public Set<DTCategoria> getSubCategorias() {
 		return this.subCategorias;
 	}
+
+	@Override
+	public String toString() {
+		return this.idCategoria;
+	}
 }

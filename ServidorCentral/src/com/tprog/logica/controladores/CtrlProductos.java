@@ -9,6 +9,8 @@ import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.dt.*;
 import com.tprog.logica.manejadores.*;
 import java.util.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author sofia
@@ -17,6 +19,7 @@ public class CtrlProductos implements ICtrlProductos{
     private DTMinPromocion dtP;
     private DTMinServicio dtS;
     private String categoriaPadre;
+    private String idCategoria;
     private String nicknameP;
     private Set<String> listaServicios;
     private Set<String> listaCategorias;
@@ -24,138 +27,217 @@ public class CtrlProductos implements ICtrlProductos{
     private DTUbicacion destino;
     
     public CtrlProductos(){
-		this.dtP = null;
-		this.dtS = null;
-		this.categoriaPadre = "";
-		this.nicknameP = "";
-		this.listaServicios = new HashSet();
-		this.listaCategorias = new HashSet();
-		this.origen = null;
-		this.destino = null;
+        this.dtP = null;
+        this.dtS = null;
+        this.categoriaPadre = "";
+        this.idCategoria = "";
+        this.nicknameP = "";
+        this.listaServicios = new HashSet();
+        this.listaCategorias = new HashSet();
+        this.origen = null;
+        this.destino = null;
     }
 	
+    @Override
     public Set<DTMinPromocion> listarPromociones(){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarPromociones();
     }
     
+    @Override
     public void seleccionarPromocion(DTMinPromocion dtP){
         this.dtP = dtP;
     }
     
+    @Override
     public DTPromocion infoPromocion(){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.infoPromocion(dtP);
     }
     
+    @Override
     public void seleccionarServicio(DTMinServicio dtS){
         this.dtS = dtS;
     }
     
+    @Override
     public DTServicio infoServicio(){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.infoServicio(dtS);
     }
     
-    public Set<String> listarCategorias(){
-        return null;
+    @Override
+    public DefaultMutableTreeNode listarCategorias(){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarCategorias();
     }
     
+    @Override
     public Set<DTMinServicio> listarServiciosCategoria(String idCategoria){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarServiciosCategoria(idCategoria);
     }
     
+    @Override
     public Set<DTMinServicio> listarServicios(){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarServicios(); 
     }
     
+    @Override
     public void cambiarPrecio(float nuevoPrecio){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.cambiarPrecio(dtS, nuevoPrecio);
     }
     
-    public void cambiarDescripcion(String nuevaD){
+    @Override
+    public void cambiarDescripcion(String descripcion){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.cambiarDescripcion(dtS, descripcion);
     }
     
+    @Override
+    public Set<String> listarImagenes(){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarImagenes(dtS);
+    }
+    
+    @Override
     public void agregarImagen(String idImagen){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.agregarImagen(dtS, idImagen);
     }
     
+    @Override
     public void quitarImagen(String idImagen){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.quitarImagen(dtS, idImagen);
     }
     
-    public Set<DTUbicacion> listarCiudades(){
-        return null;
+    @Override
+    public DefaultMutableTreeNode listarCiudades(){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarCiudades();
     }
     
+    @Override
     public void cambiarOrigen(DTUbicacion dtU){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.cambiarOrigen(dtS, dtU);
     }
     
+    @Override
     public void cambiarDestino (DTUbicacion dtU){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.cambiarDestino(dtS, dtU);
     }
     
+    @Override
     public Set<String> listarCategoriasServicio(){
-        return null;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarCategoriasServicio(dtS);
     }
     
+    @Override
     public boolean agregarCategoria(String idCategoria){
-        return true;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.agregarCategoria(idCategoria);
     }
     
+    @Override
     public boolean quitarCategoria (String idCategoria){
-        return true;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.quitarCategoria(idCategoria);
     }
     
+    @Override
     public boolean seleccionarCategoriaPadre (String padre){
         this.categoriaPadre = padre;
-        return true;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.esCategoriaPadre(padre);
     }
     
+    @Override
     public boolean idCategoriaDisponible(String idCategoria){
-        return true;
+        this.idCategoria = idCategoria;
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.idCategoriaDisponible(idCategoria);
     }
     
+    @Override
     public void altaCategoria(){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        mp.altaCategoria(this.idCategoria, this.categoriaPadre);
     }
     
+    @Override
     public Set<DTMinProveedor> listarProveedores(){
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
         return mu.listarProveedores();
     }
     
+    @Override
     public void seleccionarProveedor(String nick){
         this.nicknameP = nick;
     }
     
+    @Override
     public boolean idServicioDisponible(String idServicio){
         this.dtS = new DTMinServicio(this.nicknameP, idServicio);
         ManejadorProductos mp = ManejadorProductos.getInstance();
         return mp.idServicioDisponible(idServicio, this.nicknameP);
     }
     
+    @Override
     public void seleccionarOrigen(DTUbicacion dtU){
         this.origen = dtU;
     }
     
+    @Override
     public void seleccionarDestino (DTUbicacion dtU){
         this.destino = dtU;
     }
     
-    public boolean seleccionarCategoriaHoja(String idCategoria){
+    @Override
+    public boolean seleccionarCategoriaSimple(String idCategoria){
         ManejadorProductos mp = ManejadorProductos.getInstance();
-        return mp.esCategoriaSimple(idCategoria);
+        boolean esValida = mp.esCategoriaSimple(idCategoria);
+        if (esValida){
+            this.listaCategorias.add(idCategoria);
+        }
+        return esValida;
     }
     
-    public void altaServicio(String descripcion, float Precio, Set<String> imagenes){
+    @Override
+    public void altaServicio(String descripcion, float precio, Set<String> imagenes){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        DTServicio serv = new DTServicio(this.dtS.getIdServicio(), descripcion,
+                precio, imagenes, this.origen, this.destino);
+        mp.altaServicio(serv, this.nicknameP, this.listaCategorias);
     }
     
-    public Set<String> listarServiciosProveedor(){
-        return null;
+    @Override
+    public Set<DTMinServicio> listarServiciosProveedor(){
+       ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+       return mu.listarServiciosProveedor(this.nicknameP);
     }
     
-    public void agregarServicio(String idServicio){
-        
+    @Override
+    public void agregarServicio(DTMinServicio dtS){
+        this.listaServicios.add(dtS.getIdServicio());
     }
     
+    @Override
     public boolean idPromocionDisponible(String idPromocion){
-        return true;
+            this.dtP = new DTMinPromocion(this.nicknameP, idPromocion);
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            return mp.idPromocionDisponible(idPromocion, this.nicknameP);
     }
     
+    @Override
     public void altaPromocion(float descuento){
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            mp.altaPromocion(this.dtP.getIdPromocion(), descuento, this.dtP.getNicknameP(), this.listaServicios);
     }
 	
 }

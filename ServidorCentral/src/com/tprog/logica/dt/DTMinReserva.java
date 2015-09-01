@@ -9,19 +9,26 @@ import java.util.Date;
 
 public class DTMinReserva {
 
-	private String idReserva;
+	private int idReserva;
 	private Date fechaCreacion;
 
-	public DTMinReserva(String idReserva, Date fechaCreacion) {
+	public DTMinReserva(int idReserva, Date fechaCreacion) {
 		this.idReserva = idReserva;
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public String getIdReserva() {
+	public int getIdReserva() {
 		return idReserva;
 	}
 
 	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
+
+	@Override
+	public String toString() {
+		return "ID de reserva: " + Integer.toString(idReserva)
+				+ "\n" + "Fecha de creacion: " + fechaCreacion.toString() + "\n";
+	}
+
 }

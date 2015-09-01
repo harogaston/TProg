@@ -11,6 +11,7 @@ import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTUsuario;
 import com.tprog.logica.dt.DTMinProveedor;
+import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTServicio;
 
@@ -32,7 +33,7 @@ public interface ICtrlUsuarios {
 	public Set<DTMinProveedor> listarProveedores();
 	public void seleccionarProveedor(String nickname);
 	public DTProveedor infoProveedor();
-	public Set<String> listarServiciosProveedor();
+	public Set<DTMinServicio> listarServiciosProveedor();
 	public void seleccionarServicio(String idServicio);
 	public DTServicio infoServicio();
 }

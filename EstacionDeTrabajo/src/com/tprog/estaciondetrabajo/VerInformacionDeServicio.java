@@ -6,6 +6,16 @@
 
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.BorderLayout;
+import java.util.Set;
+import java.util.Vector;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+
 /**
  *
  * @author marccio.silva
@@ -13,10 +23,19 @@ package com.tprog.estaciondetrabajo;
 public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerInformacionDeServicio
+     * Creates new form VerInformacionDeCliente
      */
     public VerInformacionDeServicio() {
         initComponents();
+    }
+    
+    void cargarDatos() {
+        Fabrica f = Fabrica.getInstance();
+        ctrlProductos = f.getICtrlProductos();
+        DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
+        arbolCategorias.removeAll();
+        arbolCategorias.setModel(new DefaultTreeModel(raiz));
+        arbolCategorias.updateUI();        
     }
 
     /**
@@ -28,24 +47,119 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBorder(null);
-        setPreferredSize(new java.awt.Dimension(640, 480));
+        tabInfo = new javax.swing.JPanel();
+        botonSalir = new javax.swing.JButton();
+        label = new javax.swing.JLabel();
+        botonServicios = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        arbolCategorias = new javax.swing.JTree();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+        setBorder(null);
+        setToolTipText("");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
+
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("<html>Seleccione una categoría del Sistema, y haga click en 'Ver Servicios' para ver sus servicios asociados</html>");
+
+        botonServicios.setText("Ver servicios");
+        botonServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonServiciosActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(arbolCategorias);
+
+        javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
+        tabInfo.setLayout(tabInfoLayout);
+        tabInfoLayout.setHorizontalGroup(
+            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(tabInfoLayout.createSequentialGroup()
+                                .addComponent(botonServicios)
+                                .addGap(35, 35, 35)
+                                .addComponent(botonSalir)))))
+                .addContainerGap(238, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 283, Short.MAX_VALUE)
+        tabInfoLayout.setVerticalGroup(
+            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonSalir)
+                    .addComponent(botonServicios))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
+
+        label.getAccessibleContext().setAccessibleDescription("");
+
+        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //pido de nuevo los datos en caso de que hayan cambiado
+        cargarDatos();
+    }//GEN-LAST:event_formComponentShown
 
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        reservas = null;
+    }//GEN-LAST:event_formComponentHidden
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
+        DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
+        if (nodo != null) {
+            //no se si asi o cast directamente a String
+            String categoria = nodo.getUserObject().toString();
+            listaServicios = ctrlProductos.listarServiciosCategoria(categoria);
+            ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
+            getContentPane().add(s, BorderLayout.CENTER);
+            s.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            s.setVisible(true);
+            getParent().add(s);
+        }
+    }//GEN-LAST:event_botonServiciosActionPerformed
+    
+    Set<DTMinServicio> listaServicios;
+    Set<DTMinReserva> reservas;
+    ICtrlProductos ctrlProductos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTree arbolCategorias;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonServicios;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label;
+    private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

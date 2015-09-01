@@ -6,7 +6,15 @@
 
 package com.tprog.estaciondetrabajo;
 
-import javax.swing.SwingUtilities;
+import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTPromocion;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.BorderLayout;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.Vector;
 
 /**
  *
@@ -15,10 +23,23 @@ import javax.swing.SwingUtilities;
 public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerInformacionDePromocion
+     * Creates new form VerInformacionDeCliente
      */
     public VerInformacionDePromocion() {
         initComponents();
+    }
+    
+    void cargarDatos() {
+        Fabrica f = Fabrica.getInstance();
+        ctrlProductos = f.getICtrlProductos();        
+        setPromociones = ctrlProductos.listarPromociones();
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+        if (setPromociones != null) {
+            for (DTMinPromocion promocion : setPromociones) {
+                listaPromociones.add(promocion.getIdPromocion());
+            }
+        }
     }
 
     /**
@@ -30,54 +51,177 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cancelar = new javax.swing.JButton();
+        tabInfo = new javax.swing.JPanel();
+        botonSalir = new javax.swing.JButton();
+        listaPromocionesInterfaz = new javax.swing.JComboBox(listaPromociones);
+        label = new javax.swing.JLabel();
+        botonServicios = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        detallePromocion = new javax.swing.JTextArea();
 
         setBorder(null);
-        setPreferredSize(new java.awt.Dimension(640, 480));
-
-        jLabel1.setText("Ver Información de Promoción");
-
-        cancelar.setText("Cancelar");
-        cancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarActionPerformed(evt);
+        setToolTipText("");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jLabel1)
-                .addContainerGap(365, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cancelar)
-                .addGap(143, 143, 143))
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+
+        listaPromocionesInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                listaPromocionesInterfazInterfazComponentAdded(evt);
+            }
+        });
+        listaPromocionesInterfaz.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listaPromocionesInterfazItemStateChanged(evt);
+            }
+        });
+        listaPromocionesInterfaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaPromocionesInterfazInterfazActionPerformed(evt);
+            }
+        });
+
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setText("<html>Seleccione una promocion del Sistema, y haga click en 'Ver Servicios' para ver sus servicios asociados</html>");
+
+        botonServicios.setText("Ver servicios");
+        botonServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonServiciosActionPerformed(evt);
+            }
+        });
+
+        detallePromocion.setColumns(20);
+        detallePromocion.setRows(5);
+        jScrollPane1.setViewportView(detallePromocion);
+
+        javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
+        tabInfo.setLayout(tabInfoLayout);
+        tabInfoLayout.setHorizontalGroup(
+            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(202, 202, 202)
+                        .addComponent(botonServicios)
+                        .addGap(35, 35, 35)
+                        .addComponent(botonSalir))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(listaPromocionesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(tabInfoLayout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
-                .addComponent(cancelar)
-                .addGap(53, 53, 53))
+        tabInfoLayout.setVerticalGroup(
+            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tabInfoLayout.createSequentialGroup()
+                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(listaPromocionesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonSalir)
+                    .addComponent(botonServicios))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
+
+        label.getAccessibleContext().setAccessibleDescription("");
+
+        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        //pido de nuevo los datos en caso de que hayan cambiado
+        cargarDatos();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        listaPromociones.clear();
+        servicios = null;
+        listaPromocionesInterfaz.setSelectedItem(null);
+    }//GEN-LAST:event_formComponentHidden
+
+    DTMinPromocion buscarDTMinPromocion(String id) {
+        DTMinPromocion dt = null;
+        Iterator it = setPromociones.iterator();
+        boolean found = false;
+        while (it.hasNext() && !found) {
+            DTMinPromocion tmp = (DTMinPromocion) it.next();
+            if (tmp.getIdPromocion().equals(id))
+                dt = tmp; //es imposible que dt sea null al final del loop
+        }
+        return dt;
+    }
+    
+    private void listaPromocionesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazActionPerformed
+        //seleccionarCliente
+        String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
+        if (promocion != null) {
+            DTMinPromocion dt = buscarDTMinPromocion(promocion);
+            ctrlProductos.seleccionarPromocion(dt);
+            detallePromocion.setVisible(true);
+            dtPromocionActual = ctrlProductos.infoPromocion();
+            detallePromocion.setText(dt.toString());
+        }
+    }//GEN-LAST:event_listaPromocionesInterfazInterfazActionPerformed
+
+    private void listaPromocionesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazComponentAdded
+
+    }//GEN-LAST:event_listaPromocionesInterfazInterfazComponentAdded
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_cancelarActionPerformed
+    }//GEN-LAST:event_botonSalirActionPerformed
 
+    private void listaPromocionesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaPromocionesInterfazItemStateChanged
 
+    private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
+        String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
+        if (promocion != null) {
+            ServiciosPromocion s = new ServiciosPromocion(this, dtPromocionActual.getServicios(), ctrlProductos);
+            getContentPane().add(s, BorderLayout.CENTER);
+            s.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            s.setVisible(true);
+            getParent().add(s);
+        }
+    }//GEN-LAST:event_botonServiciosActionPerformed
+    
+    DTPromocion dtPromocionActual;
+    Set<DTMinPromocion> setPromociones;
+    Set<DTMinReserva> servicios;
+    ICtrlProductos ctrlProductos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelar;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonServicios;
+    private javax.swing.JTextArea detallePromocion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label;
+    private javax.swing.JComboBox listaPromocionesInterfaz;
+    private Vector<String> listaPromociones = new Vector<>();
+    private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

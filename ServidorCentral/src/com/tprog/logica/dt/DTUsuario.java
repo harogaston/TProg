@@ -16,12 +16,12 @@ public class DTUsuario {
 	protected String imagen;
 	protected Date fechaNacimiento;
 
-	public DTUsuario(String nickname, String nombre, String apellido, String empresa,
+	public DTUsuario(String nickname, String nombre, String apellido, String email,
 			String imagen, Date fechaNacimiento) {
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.email = empresa;
+		this.email = email;
 		this.imagen = imagen;
 		this.fechaNacimiento = fechaNacimiento;
 	}
@@ -48,6 +48,15 @@ public class DTUsuario {
 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
+	}
+
+	@Override
+	public String toString() {
+		return "Nickname: " + nickname
+				+ "\n" + "Nombre: " + nombre
+				+ "\n" + "Apellido: " + apellido
+				+ "\n" + "Email: " + email
+				+ "\n" + "Fecha de nacimiento: " + fechaNacimiento.toString() + "\n";
 	}
 
 }

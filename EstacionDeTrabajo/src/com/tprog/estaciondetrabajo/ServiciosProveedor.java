@@ -8,6 +8,7 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.util.Set;
 import java.util.Vector;
 
@@ -22,7 +23,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
      * @param idCliente
      * @param padre
      */
-    public ServiciosProveedor(VerInformacionDeCliente padre, Set<DTMinServicio> servicios, CtrlUsuarios ctrlUsuarios) {
+    public ServiciosProveedor(VerInformacionDeProveedor padre, Set<DTMinServicio> servicios, ICtrlUsuarios ctrlUsuarios) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlUsuarios = ctrlUsuarios;
@@ -120,9 +121,9 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    CtrlUsuarios ctrlUsuarios;
+    ICtrlUsuarios ctrlUsuarios;
     Set<DTMinServicio> servicios;
-    VerInformacionDeCliente padre;
+    VerInformacionDeProveedor padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleServicio;

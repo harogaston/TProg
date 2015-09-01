@@ -11,6 +11,7 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
+import java.awt.BorderLayout;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -206,13 +207,12 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
         String cliente = (String) listaProveedoresInterfaz.getSelectedItem();
         if (cliente != null) {
-              
-//            ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
-//            getContentPane().add(r, BorderLayout.CENTER);
-//            r.setBounds(10, 10, 100, 100);
-//            this.setVisible(false);
-//            r.setVisible(true);
-//            getParent().add(r);
+            ServiciosProveedor s = new ServiciosProveedor(this, servicios, ctrlUsuarios);
+            getContentPane().add(s, BorderLayout.CENTER);
+            s.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            s.setVisible(true);
+            getParent().add(s);
         }
     }//GEN-LAST:event_botonServiciosActionPerformed
 

@@ -5,6 +5,7 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
@@ -16,14 +17,16 @@ import javax.swing.JOptionPane;
 public class AltaDeServicio3 extends javax.swing.JInternalFrame {
     private final AltaDeServicio2 padre;
     private final ICtrlProductos ctrlProductos;
+    private final String proveedor;
 
     /**
      * Creates new form AltaDeServicio3
      * @param padre
      * @param ctrlProductos
      */
-    public AltaDeServicio3(AltaDeServicio2 padre, ICtrlProductos ctrlProductos) {
+    public AltaDeServicio3(AltaDeServicio2 padre, ICtrlProductos ctrlProductos, String proveedor) {
         setTitle("Alta de Servicio");
+        this.proveedor = proveedor;
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
         initComponents();
@@ -128,20 +131,20 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
     private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
         // TODO add your handling code here:
         String nombreServicio = textPaneNombreServicio.getText();
-        boolean ok1 = (!nombreServicio.isEmpty());
-        
-        //boolean ok2 = ((ok1) && (ctrlProductos.idServicioDisponible(nombreServicio)));
-          //  if (ok2)
-            //JOptionPane.showMessageDialog(this, "Bien piola", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
-           AltaDeServicio4 as4 = new AltaDeServicio4(this, ctrlProductos);
-            getContentPane().add(as4, BorderLayout.CENTER);
-            as4.setBounds(10, 10, 100, 100);
-            this.setVisible(false);
-            as4.setVisible(true);
-            getParent().add(as4); 
-       /* else 
-            JOptionPane.showMessageDialog(this, "Cambia el nombre viteh", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
-               */
+        boolean ok1 = (!nombreServicio.isEmpty());   
+        boolean ok2 = ((ok1) && (ctrlProductos.idServicioDisponible(nombreServicio)));
+            if (ok2){
+                DTMinServicio dtmServicio = new DTMinServicio(proveedor, nombreServicio);
+                ctrlProductos.seleccionarServicio(dtmServicio);
+                AltaDeServicio4 as4 = new AltaDeServicio4(this, ctrlProductos);
+                getContentPane().add(as4, BorderLayout.CENTER);
+                as4.setBounds(10, 10, 100, 100);
+                this.setVisible(false);
+                as4.setVisible(true);
+                getParent().add(as4); 
+            }
+            else 
+                JOptionPane.showMessageDialog(this, "Cambia el nombre viteh", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);               
     }//GEN-LAST:event_buttonAceptarActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed

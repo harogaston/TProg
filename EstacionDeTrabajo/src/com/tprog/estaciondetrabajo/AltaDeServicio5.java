@@ -6,7 +6,16 @@
 
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.io.File;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import static java.lang.Integer.parseInt;
+import java.util.Set;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -41,7 +50,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         listaCiudadesOrigen = new javax.swing.JComboBox();
         listaCiudadesDestino = new javax.swing.JComboBox();
-        buttonSiguiente = new javax.swing.JButton();
+        buttonConfirmar = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
         buttonSalir = new javax.swing.JButton();
         checkBoxCiudadDestino = new javax.swing.JCheckBox();
@@ -51,6 +60,13 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textPanePrecio = new javax.swing.JTextPane();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        buttonImagen2 = new javax.swing.JButton();
+        buttonImagen3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jLabel1.setText("Ingrese los datos del servicio y haga click en \"Confirmar\".");
 
@@ -62,10 +78,10 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         listaCiudadesDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaCiudadesDestino.setFocusable(false);
 
-        buttonSiguiente.setText("Siguiente");
-        buttonSiguiente.addActionListener(new java.awt.event.ActionListener() {
+        buttonConfirmar.setText("Confirmar");
+        buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSiguienteActionPerformed(evt);
+                buttonConfirmarActionPerformed(evt);
             }
         });
 
@@ -99,85 +115,168 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
         jScrollPane2.setViewportView(textPanePrecio);
 
+        jLabel5.setText("Imágenes");
+
+        jButton1.setText("Imágen 1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonImagen2.setText("Imágen 2");
+        buttonImagen2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonImagen2ActionPerformed(evt);
+            }
+        });
+
+        buttonImagen3.setText("Imágen 3");
+        buttonImagen3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonImagen3ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("imag1");
+
+        jLabel7.setText("imag2");
+
+        jLabel8.setText("imag3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(108, 108, 108)
+                                .addComponent(buttonAtras)
+                                .addGap(55, 55, 55))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel3))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(checkBoxCiudadDestino))
-                        .addGap(113, 113, 113))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(listaCiudadesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonAtras))
-                        .addGap(55, 55, 55)))
-                .addComponent(buttonSiguiente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonSalir)
-                .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listaCiudadesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(37, 37, 37)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel4)
+                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(checkBoxCiudadDestino)
+                                                .addComponent(jLabel3)))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(72, 72, 72)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(listaCiudadesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(listaCiudadesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(64, 64, 64)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonConfirmar)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(buttonImagen2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel7))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jButton1)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel6))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(buttonImagen3)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel8)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(204, 204, 204)
+                                        .addComponent(buttonSalir))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(78, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)))
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(41, 41, 41)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(13, 13, 13)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(listaCiudadesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(checkBoxCiudadDestino)
-                .addGap(18, 18, 18)
-                .addComponent(listaCiudadesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonAtras)
-                            .addComponent(buttonSiguiente))
-                        .addGap(32, 32, 32))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(buttonSalir)
-                        .addGap(22, 22, 22))))
+                            .addComponent(jButton1)
+                            .addComponent(jLabel6))))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonImagen2)
+                            .addComponent(jLabel7))))
+                .addGap(15, 15, 15)
+                .addComponent(listaCiudadesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkBoxCiudadDestino)
+                    .addComponent(buttonImagen3)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(listaCiudadesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonAtras)
+                    .addComponent(buttonConfirmar)
+                    .addComponent(buttonSalir))
+                .addGap(32, 32, 32))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
+    private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
-      this.dispose();
-    }//GEN-LAST:event_buttonSiguienteActionPerformed
+     String descripcion = textPaneDescripcion.getText();
+     String precioString = textPanePrecio.getText();
+     boolean okDescripcion = !(descripcion.isEmpty());
+     boolean okPrecio = (precioString.matches("([0-9]|)+"))&&(precioString.length() >= 1);
+     int precio = 0;
+     if (okPrecio)  precio = parseInt(precioString);
+     Set<String> imagenes = null;
+     boolean okImagenes = true;
+     String ciudadOrigen = null;
+     String paisOrigen = null;
+    DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
+     ctrlProductos.seleccionarOrigen(origen);
+     if (checkBoxCiudadDestino.isSelected()){
+         String ciudadDestino = null;
+         String paisDestino = null;
+         DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
+     }
+     if ((okDescripcion)&&(okPrecio)&&(okImagenes))
+     ctrlProductos.altaServicio(descripcion, precio, imagenes);
+     else JOptionPane.showMessageDialog(this, "Llena bien los datos cabeza", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void checkBoxCiudadDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxCiudadDestinoActionPerformed
         // TODO add your handling code here:
@@ -187,6 +286,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
         // TODO add your handling code here:
+         this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
@@ -194,17 +294,69 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String ruta;
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+  	            "Imágenes JPG & PNG ", "jpg", "png");
+        fc.setFileFilter(filter);       
+  	            int seleccion = fc.showDialog(this, "Adjuntar");
+                    if (seleccion == JFileChooser.APPROVE_OPTION) {
+  	                // Para guardar la imagen.*******************************************
+  	                File file = fc.getSelectedFile();
+                        ruta = file.getPath();
+                    }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonImagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImagen2ActionPerformed
+        // TODO add your handling code here:
+        String ruta;
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+  	            "Imágenes JPG & PNG ", "jpg", "png");
+        fc.setFileFilter(filter);       
+  	            int seleccion = fc.showDialog(this, "Adjuntar");
+                    if (seleccion == JFileChooser.APPROVE_OPTION) {
+  	                // Para guardar la imagen.*******************************************
+  	                File file = fc.getSelectedFile();
+                        ruta = file.getPath();
+                    }
+    }//GEN-LAST:event_buttonImagen2ActionPerformed
+
+    private void buttonImagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImagen3ActionPerformed
+        // TODO add your handling code here:
+        String ruta;
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+  	            "Imágenes JPG & PNG ", "jpg", "png");
+        fc.setFileFilter(filter);       
+  	            int seleccion = fc.showDialog(this, "Adjuntar");
+                    if (seleccion == JFileChooser.APPROVE_OPTION) {
+  	                // Para guardar la imagen.*******************************************
+  	                File file = fc.getSelectedFile();
+                        ruta = file.getPath();
+                    }
+    }//GEN-LAST:event_buttonImagen3ActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;
+    private javax.swing.JButton buttonConfirmar;
+    private javax.swing.JButton buttonImagen2;
+    private javax.swing.JButton buttonImagen3;
     private javax.swing.JButton buttonSalir;
-    private javax.swing.JButton buttonSiguiente;
     private javax.swing.JCheckBox checkBoxCiudadDestino;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox listaCiudadesDestino;

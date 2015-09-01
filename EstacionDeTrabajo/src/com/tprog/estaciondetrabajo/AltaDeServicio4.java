@@ -10,6 +10,7 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.BorderLayout;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -172,7 +173,17 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
-        
+            DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
+            String categoria = null;
+            if (nodo != null)
+             categoria = nodo.toString();
+            boolean okCategoria = ctrlProductos.agregarCategoria(categoria);
+            AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
+            getContentPane().add(as5, BorderLayout.CENTER);
+            as5.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            as5.setVisible(true);
+            getParent().add(as5);  
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed

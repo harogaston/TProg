@@ -213,21 +213,21 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaProveedoresInterfazItemStateChanged
 
     private void buttonSeleccionarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarProveedorActionPerformed
-       // String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();       
-       // if ((!proveedor.isEmpty()))  { 
-           // ctrlProductos.seleccionarProveedor(proveedor); 
-            AltaDeServicio3 as3 = new AltaDeServicio3(this, ctrlProductos);
+      
+        String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
+        //String proveedor = "Jorgito_de_prueba";
+        if (!proveedor.isEmpty()) {
+            ctrlProductos.seleccionarProveedor(proveedor);
+            AltaDeServicio3 as3 = new AltaDeServicio3(this, ctrlProductos, proveedor);
             getContentPane().add(as3, BorderLayout.CENTER);
             as3.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             as3.setVisible(true);
             getParent().add(as3);            
-        
-        /*
+        }
         else{
             JOptionPane.showMessageDialog(this, "Seleccione un proveedor.", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
         }
-                */
     }//GEN-LAST:event_buttonSeleccionarProveedorActionPerformed
 
     Set<DTMinServicio> servicios;

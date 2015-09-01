@@ -29,25 +29,11 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
     void cargarDatos() {
         Fabrica f = Fabrica.getInstance();
         ctrlProductos = f.getICtrlProductos();
-        //ctrlProductos.listarCategorias();
-        //aca hay que construir el arbol y pum
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Categorias");
-        //creo nodos
-        DefaultMutableTreeNode b1 = new DefaultMutableTreeNode("Nodo1");
-        DefaultMutableTreeNode b2 = new DefaultMutableTreeNode("Nodo2");
-        DefaultMutableTreeNode b3 = new DefaultMutableTreeNode("Nodo3");
-        DefaultMutableTreeNode b4 = new DefaultMutableTreeNode("Nodo4");
-        DefaultMutableTreeNode b5 = new DefaultMutableTreeNode("Nodo5");
-        DefaultMutableTreeNode b6 = new DefaultMutableTreeNode("Nodo6");
-        //agrego nodos
-        b5.add(b6);
-        b4.add(b5);
-        b3.add(b4);
-        b1.add(b3);
-        b1.add(b2);
-        top.add(b1);
-        arbolCategorias.setModel(new DefaultTreeModel(top));
+        DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
+        arbolCategorias.removeAll();
+        arbolCategorias.setModel(new DefaultTreeModel(raiz));
         if (!casillaPadre.isSelected()) arbolCategorias.setEnabled(false);
+        arbolCategorias.updateUI();
     }
 
     /**

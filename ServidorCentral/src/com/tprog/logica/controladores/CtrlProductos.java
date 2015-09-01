@@ -9,6 +9,8 @@ import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.dt.*;
 import com.tprog.logica.manejadores.*;
 import java.util.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+
 /**
  *
  * @author sofia
@@ -65,8 +67,9 @@ public class CtrlProductos implements ICtrlProductos{
     }
     
     @Override
-    public Set<String> listarCategorias(){
-        return null;
+    public DefaultMutableTreeNode listarCategorias(){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarCategorias();
     }
     
     @Override
@@ -94,6 +97,12 @@ public class CtrlProductos implements ICtrlProductos{
     }
     
     @Override
+    public Set<String> listarImagenes(){
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        return mp.listarImagenes(dtS);
+    }
+    
+    @Override
     public void agregarImagen(String idImagen){
         ManejadorProductos mp = ManejadorProductos.getInstance();
         mp.agregarImagen(dtS, idImagen);
@@ -106,7 +115,7 @@ public class CtrlProductos implements ICtrlProductos{
     }
     
     @Override
-    public Set<DTUbicacion> listarCiudades(){
+    public DefaultMutableTreeNode listarCiudades(){
         ManejadorProductos mp = ManejadorProductos.getInstance();
         return mp.listarCiudades();
     }

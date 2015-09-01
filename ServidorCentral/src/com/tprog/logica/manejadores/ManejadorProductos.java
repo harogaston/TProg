@@ -77,15 +77,15 @@ public class ManejadorProductos {
 	}
 
 	public DTServicio infoServicio(DTMinServicio dtS) {
-		DTServicio result = null;
-		if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) {
-			if (!servicios.get(dtS.getNicknameP()).isEmpty()
-					&& !servicios.get(dtS.getIdServicio()).containsKey(dtS.getIdServicio())) {
-				Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
-				result = s.crearDT();
-			}
-		}
-		return result;
+            DTServicio result = null;
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) {
+                if (!servicios.get(dtS.getNicknameP()).isEmpty()
+                        && !servicios.get(dtS.getIdServicio()).containsKey(dtS.getIdServicio())) {
+                    Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                    result = s.crearDT();
+                }
+            }
+            return result;
 	}
 
 	public DefaultMutableTreeNode listarCategorias() {
@@ -93,52 +93,58 @@ public class ManejadorProductos {
 	}
 
 	public Set<DTMinServicio> listarServiciosCategoria(String cat) {
-		Set<DTMinServicio> result;
-		if (!categorias.isEmpty() && categorias.containsKey(cat)) {
-			Categoria c = categorias.get(cat);
-			result = c.listarServicios();
-		} else {
-			result = new HashSet();
-		}
-		return result;
+            Set<DTMinServicio> result;
+            if (!categorias.isEmpty() && categorias.containsKey(cat)) {
+                    Categoria c = categorias.get(cat);
+                    result = c.listarServicios();
+            } else {
+                    result = new HashSet();
+            }
+            return result;
 	}
 
 	public Set<DTMinServicio> listarServicios() {
-		Set<DTMinServicio> result = new HashSet();
-                 if (!this.servicios.isEmpty()) {
-                        for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
-                                if (!mapaServicio.isEmpty()) {
-                                        for (Servicio s : mapaServicio.values()) {
-                                        result.add(s.crearDTMin());
-                                        }
-                                }
-                        }   
+            Set<DTMinServicio> result = new HashSet();
+                if (!this.servicios.isEmpty()) {
+                    for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
+                        if (!mapaServicio.isEmpty()) {
+                            for (Servicio s : mapaServicio.values()) {
+                            result.add(s.crearDTMin());
+                            }
+                        }
+                    }   
                 }
                 return result;
         }
 	
 
 	public void cambiarPrecio(DTMinServicio dtS,
-			float nuevoPrecio) {
-		if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
-				&& !servicios.get(dtS.getNicknameP()).isEmpty()
-				&& servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
-			Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
-			s.setPrecio(nuevoPrecio);
-		}
+                float nuevoPrecio) {
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                            && !servicios.get(dtS.getNicknameP()).isEmpty()
+                            && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
+                    Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                    s.setPrecio(nuevoPrecio);
+            }
 	}
 
 	public void cambiarDescripcion(DTMinServicio dtS, String descripcion) {
-		if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
-				&& !servicios.get(dtS.getNicknameP()).isEmpty()
-				&& servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
-			Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
-			s.setDescripcion(descripcion);
-		}
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                    && !servicios.get(dtS.getNicknameP()).isEmpty()
+                    && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
+                Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                s.setDescripcion(descripcion);
+            }
 	}
 
-	public Set<String> listarImagenes(String nicknameP, String idServicio) {
-		return null;
+	public Set<String> listarImagenes(DTMinServicio dtS) {
+            Set<String> result = new HashSet();
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                    && !servicios.get(dtS.getNicknameP()).isEmpty()
+                    && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                result = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio()).listarImagenes();
+            }
+            return result;
 	}
 
 	public void agregarImagen(DTMinServicio dtS, String img) {
@@ -147,8 +153,20 @@ public class ManejadorProductos {
 	public void quitarImagen(DTMinServicio dtS, String img) {
 	}
 
-	public Set<DTUbicacion> listarCiudades() {
-		return null;
+	public DefaultMutableTreeNode listarCiudades() {
+            DefaultMutableTreeNode result = new DefaultMutableTreeNode();
+            if (!ubicaciones.isEmpty()){
+                for (Pais p : ubicaciones.values()){
+                    DefaultMutableTreeNode pais = new DefaultMutableTreeNode(p.getIdPais());
+                    result.add(pais);
+                    if (!p.getCiudades().isEmpty()){
+                        for (Ciudad c : p.getCiudades().values()){
+                            pais.add(new DefaultMutableTreeNode(c.getIdCiudad(), false));
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
 	public boolean agregarCategoria(String idCategoria) {
@@ -165,11 +183,26 @@ public class ManejadorProductos {
 	}
 
 	public void cambiarOrigen(DTMinServicio dtS, DTUbicacion dtU) {
-	
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                    && !servicios.get(dtS.getNicknameP()).isEmpty()
+                    && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                Pais p = ubicaciones.get(dtU.getPais());
+                Ciudad c = p.getCiudades().get(dtU.getCiudad());
+                s.setOrigen(c);
+            }
         }
 
 	public void cambiarDestino(DTMinServicio dtS, DTUbicacion dtU) {
-	}
+            if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
+                    && !servicios.get(dtS.getNicknameP()).isEmpty()
+                    && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                Pais p = ubicaciones.get(dtU.getPais());
+                Ciudad c = p.getCiudades().get(dtU.getCiudad());
+                s.setDestino(c);
+            }
+        }
 
 	public Set<String> listarCategoriasServicio(DTMinServicio dtS) {
             Set<String> result = new HashSet();
@@ -220,13 +253,13 @@ public class ManejadorProductos {
 	}
 
 	public boolean idCategoriaDisponible(String idCategoria) {
-		return (!categorias.isEmpty() && !categorias.containsKey(idCategoria));
+            return (categorias.isEmpty() || !categorias.containsKey(idCategoria));
 	}
 
 	public void altaCategoria(String idCategoria, String idPadre) {
 		Categoria c = new Simple(idCategoria);
 		categorias.put(idCategoria, c);
-		if (idPadre == "") {
+		if (idPadre.equals("")) {
 			idPadre = "Categorias";
 		}
 		if (!categorias.isEmpty() && categorias.containsKey(idPadre)) {
@@ -239,7 +272,7 @@ public class ManejadorProductos {
 				Compuesta nuevoPadre = new Compuesta(idPadre);
 				nuevoPadre.add(c);
 				categorias.put(idPadre, nuevoPadre);
-				if (idPadre == "Categorias") {
+				if (idPadre.equals("")) {
 					root = nuevoPadre;
 				} else {
 					Compuesta abuelo = padre.getPadre();
@@ -267,23 +300,21 @@ public class ManejadorProductos {
 		}
 		return result;
 	}
-
+        
 	public void altaServicio(DTServicio dtS, String nicknameP, Set<String> listaCategorias) {
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
             Proveedor prov = mu.getProveedor(nicknameP);
-            Pais paisOrigen = new Pais(dtS.getOrigen().getPais());
-            Ciudad ciudadOrigen = new Ciudad(dtS.getOrigen().getCiudad());
-            boolean tienedestino;
+            Pais paisOrigen = ubicaciones.get(dtS.getOrigen().getPais());
+            Ciudad ciudadOrigen = paisOrigen.getCiudades().get(dtS.getOrigen().getCiudad());
             Servicio s;
-            tienedestino = (dtS.getDestino().getCiudad() != null);
-            if (tienedestino){
-                Pais paisDestino = new Pais(dtS.getDestino().getPais());
-                Ciudad ciudadDestino = new Ciudad(dtS.getDestino().getCiudad());
+            if (dtS.getDestino() != null){
+                Pais paisDestino = ubicaciones.get(dtS.getDestino().getPais());
+                Ciudad ciudadDestino = paisDestino.getCiudades().get(dtS.getDestino().getCiudad());
                 s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,ciudadDestino,prov);
             }else{
                 s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,null,prov);
             }
-            this.servicios.get(nicknameP).put(dtS.getIdServicio(),s); //tema del orden igual q en altaPromocion
+            this.servicios.get(nicknameP).put(dtS.getIdServicio(),s);
             prov.addServicio(s);
             for (String idCategoria : listaCategorias){
                 if (!categorias.isEmpty() && categorias.containsKey(idCategoria)){
@@ -298,27 +329,27 @@ public class ManejadorProductos {
 	}
 
 	public void altaPromocion(String idPromocion, float descuento, String nicknameProv, Set<String> servicios){
-                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-                Proveedor proveedor = mu.getProveedor(nicknameProv);
-                Promocion promo = new Promocion(idPromocion, descuento, proveedor);
-                this.promociones.get(nicknameProv).put(idPromocion, promo); // tema de orden de nicknameProv y id promocion (no estoy seguro)
-                Iterator<String> it = servicios.iterator();
-                while (it.hasNext()){
-                        String l = (String)it.next();
-                        Servicio temp = this.servicios.get(nicknameProv).get(l);
-                        promo.addServicio(temp);
-                        proveedor.addPromocion(promo);
-                }
+            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+            Proveedor proveedor = mu.getProveedor(nicknameProv);
+            Promocion promo = new Promocion(idPromocion, descuento, proveedor);
+            this.promociones.get(nicknameProv).put(idPromocion, promo);
+            Iterator<String> it = servicios.iterator();
+            while (it.hasNext()){
+                String l = (String)it.next();
+                Servicio temp = this.servicios.get(nicknameProv).get(l);
+                promo.addServicio(temp);
+                proveedor.addPromocion(promo);
+            }
         }
 
 	public float getPrecioPromocion(DTMinPromocion dtP) {
-		Promocion promo = this.promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
-                return promo.getTotal();
+            Promocion promo = this.promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
+            return promo.getTotal();
 	}
 
 	public float getPrecioServicio(DTMinServicio dtS) {
-		Servicio ser = this.servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
-                return ser.getPrecio();
+            Servicio ser = this.servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+            return ser.getPrecio();
 	}
 
 	public Servicio getServicio(DTMinServicio dtMinS) {

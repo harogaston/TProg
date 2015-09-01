@@ -5,7 +5,9 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.controladores.CtrlUsuarios;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +20,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
      */
     public AltaDeUsuario1() {
         setTitle("Alta de Usuario");
+        ctrlU = new CtrlUsuarios();
         initComponents();
     }
 
@@ -123,15 +126,24 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         // TODO add your handling code here:
+        String nickname = textPaneNickname.getText();
+        String email = textPaneEmail.getText();
+        if (!(nickname.equals((""))) && (!(email.equals(""))) && (ctrlU.verificarNickname(nickname)) && (ctrlU.verificarEmail(email))) {
             AltaDeUsuario2 au2 = new AltaDeUsuario2(this);
             getContentPane().add(au2, BorderLayout.CENTER);
             au2.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             au2.setVisible(true);
             getParent().add(au2);
+        }
+        else{
+            System.out.println("mal");
+            JOptionPane.showMessageDialog(this, "Verifique sus datos por favor", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+        }
+              
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
-
+    CtrlUsuarios ctrlU ;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSiguiente;

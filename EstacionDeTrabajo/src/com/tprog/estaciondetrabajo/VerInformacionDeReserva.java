@@ -5,9 +5,10 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlReservas;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlReservas;
 import java.util.Set;
 import java.util.Vector;
 
@@ -21,11 +22,12 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
      * Creates new form ReservasCliente
      */
     public VerInformacionDeReserva() {
-        ctrlReservas = new CtrlReservas();
         initComponents();
     }
     
     void cargarDatos() {
+        Fabrica f = Fabrica.getInstance();
+        ctrlReservas = f.getICtrlReservas();
         //listaClientes
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
         //construyo un vector con la informacion a mostrar, porque
@@ -140,7 +142,7 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         detalleReserva.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
-    CtrlReservas ctrlReservas;
+    ICtrlReservas ctrlReservas;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables

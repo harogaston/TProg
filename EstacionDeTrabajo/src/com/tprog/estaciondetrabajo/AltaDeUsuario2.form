@@ -328,6 +328,9 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radioButtonProveedorActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="radioButtonCliente.setSelected(false);"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="labelNombreEmpresa">
       <Properties>

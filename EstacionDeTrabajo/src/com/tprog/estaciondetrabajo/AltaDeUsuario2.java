@@ -5,8 +5,13 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.controladores.CtrlUsuarios;
+import com.tprog.logica.dt.DTUsuario;
 import java.awt.BorderLayout;
 import java.io.File;
+import static java.lang.Integer.parseInt;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,10 +28,13 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
      * Creates new form AltaDeUsuario2
      * @param padre
      */
-    public AltaDeUsuario2(AltaDeUsuario1 padre) {
+    public AltaDeUsuario2(AltaDeUsuario1 padre, String nickname, String email) {
         
         setTitle("Alta de Usuario");
+        ctrlU = new CtrlUsuarios();
         this.padre = padre;
+        this.nickname = nickname;
+        this.email = email;
         
         initComponents();
     }
@@ -122,6 +130,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         });
 
         radioButtonProveedor.setText("Proveedor");
+        radioButtonCliente.setSelected(false);
         radioButtonProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioButtonProveedorActionPerformed(evt);
@@ -338,8 +347,45 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(this, "Todo piola viejita", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
+        String nombre = textPaneNombre.getText();
+        String apellido = textPaneApellido.getText();
+        String imagen = null;
+        String diaString = textPaneDia.getText();
+        int dia = parseInt(diaString);
+        //String mes = comboBoxMeses.getSelectedItem().toString();
+        int mes = comboBoxMeses.getSelectedIndex() + 1;
+        String anioString = textPaneAnio.getText();
+        int anio = parseInt(anioString);
+        boolean okNombre = (nombre.matches("([a-z]|[A-Z]|)+"))&&(nombre.length() >= 1);
+        boolean okApellido = (nombre.matches("([a-z]|[A-Z]|)+"))&&(apellido.length() >= 1);
+        boolean okDia = (diaString.matches("([0-9]|)+"))&&(diaString.length() >= 1);
+        boolean okAnio = (anioString.matches("([0-9]|)+"))&&(anioString.length() >= 1);
+        boolean proveedor = radioButtonProveedor.isSelected();
+        boolean ok = (okNombre && okApellido && okDia && okAnio);
+        Date fechaNacimiento = new Date();
+        fechaNacimiento.setDate(dia);
+        fechaNacimiento.setMonth(mes);
+        fechaNacimiento.setYear(anio);
+        
+        if (proveedor){
+            System.out.println("proveee");
+            String nombreEmpresa = textPaneNombreEmpresa.getText();
+            String linkEmpresa = textPaneLinkEmpresa.getText();
+            boolean okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+"))&&(nombreEmpresa.length() >= 1);
+            boolean okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+"))&&(linkEmpresa.length() >= 1);
+            ok = (ok && okNombreEmpresa && okLinkEmpresa);
+        }
+        if (ok)
+        {
+            DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, imagen, fechaNacimiento);
+            ctrlU.ingresarDatosUsuario(dtU, proveedor);
+            if (proveedor) ctrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
+            JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Verifique sus datos", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
@@ -351,8 +397,11 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
             this.setVisible(false);
             padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
-
-private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
+    
+    String nickname;
+    String email;
+    CtrlUsuarios ctrlU ;
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
         "Octubre", "Noviembre", "Diciembre"};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;

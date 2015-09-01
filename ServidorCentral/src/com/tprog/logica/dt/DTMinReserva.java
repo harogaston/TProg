@@ -25,12 +25,10 @@ public class DTMinReserva {
 		return fechaCreacion;
 	}
 
-    @Override
-    public String toString() {
-        return "ID de reserva: " + Integer.toString(idReserva)
-                + "\n" + "Fecha de creacion: " + fechaCreacion.toString() + "\n";
-    }
-        
-        
-        
+	@Override
+	public String toString() {
+		return "ID de reserva: " + Integer.toString(idReserva)
+				+ "\n" + "Fecha de creacion: " + fechaCreacion.toString() + "\n";
+	}
+
 }

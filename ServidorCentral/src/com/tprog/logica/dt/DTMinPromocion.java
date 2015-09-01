@@ -23,4 +23,9 @@ public class DTMinPromocion {
 		return this.idPromocion;
 	}
 
+	@Override
+	public String toString() {
+		return "Nickname del proveedor: " + nicknameP
+				+ "\n" + "ID de servicio: " + idPromocion + "\n";
+	}
 }

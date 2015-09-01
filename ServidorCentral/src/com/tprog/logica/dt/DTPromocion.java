@@ -37,20 +37,18 @@ public class DTPromocion {
 		return this.servicios;
 	}
 
-    @Override
-    public String toString() {
-        String output = "ID de promocion: " + idPromocion
-                + "\n" + "Descuento: " + Float.toString(descuento)
-                + "\n" + "Total: " + Float.toString(total)
-                + "\n" + "Servicios: " + "\n";
-        int i = 1;
-        for (DTMinServicio dt : servicios) {
-            output.concat("Servicio " + Integer.toString(i) + ": ");
-            output.concat(dt.toString());
-        }
-        return output;
-    }
-        
-        
+	@Override
+	public String toString() {
+		String output = "ID de promocion: " + idPromocion
+				+ "\n" + "Descuento: " + Float.toString(descuento)
+				+ "\n" + "Total: " + Float.toString(total)
+				+ "\n" + "Servicios: " + "\n";
+		int i = 1;
+		for (DTMinServicio dt : servicios) {
+			output = output.concat("Servicio " + Integer.toString(i) + ": ");
+			output = output.concat(dt.toString());
+		}
+		return output;
+	}
 
 }

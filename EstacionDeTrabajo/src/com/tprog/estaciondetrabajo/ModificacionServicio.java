@@ -172,7 +172,12 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonModificarCategoriasActionPerformed
 
     private void botonModificarImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarImagenesActionPerformed
-        // TODO add your handling code here:
+        ModificacionImagenes m = new ModificacionImagenes(this, ctrlProductos);
+        getContentPane().add(m, BorderLayout.CENTER);
+        m.setBounds(10, 10, 100, 100);
+        this.setVisible(false);
+        m.setVisible(true);
+        getParent().add(m);         
     }//GEN-LAST:event_botonModificarImagenesActionPerformed
 
     

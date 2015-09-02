@@ -39,8 +39,7 @@ public class Cliente extends Usuario {
 	}
 
 	public DTMinCliente crearDTMin() {
-		DTMinCliente dt = new DTMinCliente(this.nickname, this.email);
-		return dt;
+		return new DTMinCliente(this.nickname, this.email);
 	}
 
 	public void agregarReserva(Reserva reserva) {

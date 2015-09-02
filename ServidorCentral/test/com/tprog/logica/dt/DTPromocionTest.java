@@ -98,13 +98,13 @@ public class DTPromocionTest {
 				+ "\n" + "Servicios: " + "\n"
 				+ "Servicio " + Integer.toString(1) + ": "
 				+ "Nickname del proveedor: " + "Pepe"
-				+ "\n" + "ID de servicio: " + "123" + "\n"
+				+ "\n" + "ID de servicio: " + "550" + "\n"
 				+ "Servicio " + Integer.toString(2) + ": "
 				+ "Nickname del proveedor: " + "Pepe"
-				+ "\n" + "ID de servicio: " + "89" + "\n"
+				+ "\n" + "ID de servicio: " + "123" + "\n"
 				+ "Servicio " + Integer.toString(3) + ": "
 				+ "Nickname del proveedor: " + "Pepe"
-				+ "\n" + "ID de servicio: " + "550" + "\n";
+				+ "\n" + "ID de servicio: " + "89" + "\n";
 		String result = instance.toString();
 		assertEquals(expResult, result);
 	}

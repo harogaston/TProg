@@ -6,6 +6,7 @@
 package com.tprog.logica.dt;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class DTReserva {
@@ -21,6 +22,9 @@ public class DTReserva {
 		this.fCreacion = fCreacion;
 		this.estado = estado;
 		this.precioTotal = precioTotal;
+		if (lineasReserva == null) {
+			lineasReserva = new HashSet();
+		}
 		this.lineasReserva = lineasReserva;
 	}
 

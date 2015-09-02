@@ -138,9 +138,9 @@ public class SeleccionadorDosListas extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList lista1Interfaz;
-    private Vector<String> lista1 = new Vector();
+    private Vector<String> lista1 = new Vector<>();
     private javax.swing.JList lista2Interfaz;
-    private Vector<String> lista2 = new Vector();
+    private Vector<String> lista2 = new Vector<>();
     private javax.swing.JButton removeButton;
     // End of variables declaration//GEN-END:variables
 }

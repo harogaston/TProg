@@ -20,8 +20,16 @@ public class DTLineaReserva {
 		this.cantidad = cantidad;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.servicio = servicio;
-		this.promocion = promocion;
+		if (servicio == null) {
+			this.servicio = "";
+		} else {
+			this.servicio = servicio;
+		}
+		if (promocion == null) {
+			this.promocion = "";
+		} else {
+			this.promocion = promocion;
+		}
 		this.precio = precio;
 	}
 
@@ -49,15 +57,14 @@ public class DTLineaReserva {
 		return this.precio;
 	}
 
-    @Override
-    public String toString() {
-        return "Cantidad: " + Integer.toString(cantidad)
-                + "\n" + "Fecha de inicio=" + fechaInicio.toString()
-                + "\n" + "Fecha de fin=" + fechaFin.toString()
-                + "\n" + "Servicio=" + servicio 
-                + "\n" + "Promocion=" + promocion 
-                + "\n" + "Precio=" + Float.toString(precio) + "\n";
-    }
-        
-        
+	@Override
+	public String toString() {
+		return "Cantidad: " + Integer.toString(cantidad)
+				+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
+				+ "\n" + "Fecha de fin=" + fechaFin.toString()
+				+ "\n" + "Servicio=" + servicio
+				+ "\n" + "Promocion=" + promocion
+				+ "\n" + "Precio=" + Float.toString(precio) + "\n";
+	}
+
 }

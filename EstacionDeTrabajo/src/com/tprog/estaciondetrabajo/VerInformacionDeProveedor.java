@@ -6,12 +6,12 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinProveedor;
-import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
-import java.util.Collections;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
+import java.awt.BorderLayout;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
@@ -24,17 +24,16 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form VerInformacionDeCliente
+     
      */
     public VerInformacionDeProveedor() {
         initComponents();
-        //Aca se trae un set de DTMinCliente para agregar al combobox
-        //carga de prueba
-        cargarDatos();
     }
     
     void cargarDatos() {
         //listaClientes
-        ctrlUsuarios = new CtrlUsuarios();
+        Fabrica f = Fabrica.getInstance();
+        ctrlUsuarios = f.getICtrlUsuarios();        
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
@@ -161,15 +160,16 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        //pido de nuevo los datos en caso de que hayan cambiado
-        if (acaboDeSalir) {
-            cargarDatos();
-            acaboDeSalir = false;
-        }
+        cargarDatos();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-
+        listaProveedores.clear();
+        servicios = null;
+        imagenUsuario.setIcon(null);
+        listaProveedoresInterfaz.setSelectedItem(null);
+        detalleUsuario.setText("");        
+        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaProveedoresInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazActionPerformed
@@ -197,15 +197,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaProveedoresInterfazInterfazComponentAdded
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-                //al ser ocultado el componente se deja todo como antes
-        listaProveedores.clear();
-        servicios = null;
-        imagenUsuario.setIcon(null);
-        listaProveedoresInterfaz.setSelectedItem(null);
-        detalleUsuario.setText("");        
-        detalleUsuario.setVisible(false);
         this.dispose();
-        acaboDeSalir = true;
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void listaProveedoresInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazItemStateChanged
@@ -215,19 +207,17 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
         String cliente = (String) listaProveedoresInterfaz.getSelectedItem();
         if (cliente != null) {
-              
-//            ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
-//            getContentPane().add(r, BorderLayout.CENTER);
-//            r.setBounds(10, 10, 100, 100);
-//            this.setVisible(false);
-//            r.setVisible(true);
-//            getParent().add(r);
+            ServiciosProveedor s = new ServiciosProveedor(this, servicios, ctrlUsuarios);
+            getContentPane().add(s, BorderLayout.CENTER);
+            s.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            s.setVisible(true);
+            getParent().add(s);
         }
     }//GEN-LAST:event_botonServiciosActionPerformed
 
     Set<DTMinServicio> servicios;
-    CtrlUsuarios ctrlUsuarios;
-    boolean acaboDeSalir = false;
+    ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;
@@ -235,7 +225,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel imagenUsuario;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaProveedoresInterfaz;
-    private Vector<String> listaProveedores = new Vector();
+    private Vector<String> listaProveedores = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
     private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables

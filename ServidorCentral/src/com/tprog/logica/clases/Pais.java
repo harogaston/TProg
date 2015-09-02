@@ -24,6 +24,10 @@ public class Pais {
         return this.idPais;
     }
     
+    public Map<String, Ciudad> getCiudades(){
+        return this.ciudades;
+    }
+    
     public void setIdPais(String id){
         this.idPais = id;
     }

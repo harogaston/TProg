@@ -10,10 +10,6 @@ import java.util.HashSet;
 import com.tprog.logica.dt.DTMinServicio;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-/**
- *
- * @author gaston
- */
 public class Compuesta implements Categoria{
 
     private String idCategoria;

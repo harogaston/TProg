@@ -8,6 +8,7 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.util.Set;
 import java.util.Vector;
 
@@ -22,7 +23,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
      * @param idCliente
      * @param padre
      */
-    public ServiciosProveedor(VerInformacionDeCliente padre, Set<DTMinServicio> servicios, CtrlUsuarios ctrlUsuarios) {
+    public ServiciosProveedor(VerInformacionDeProveedor padre, Set<DTMinServicio> servicios, ICtrlUsuarios ctrlUsuarios) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlUsuarios = ctrlUsuarios;
@@ -44,7 +45,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
 
         listaServiciosInterfaz = new javax.swing.JComboBox(listaServicios);
         panelUsuario = new javax.swing.JScrollPane();
-        detalleUsuario = new javax.swing.JTextArea();
+        detalleServicio = new javax.swing.JTextArea();
         botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -70,12 +71,12 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         });
         getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
 
-        detalleUsuario.setEditable(false);
-        detalleUsuario.setColumns(20);
-        detalleUsuario.setLineWrap(true);
-        detalleUsuario.setRows(5);
-        detalleUsuario.setWrapStyleWord(true);
-        panelUsuario.setViewportView(detalleUsuario);
+        detalleServicio.setEditable(false);
+        detalleServicio.setColumns(20);
+        detalleServicio.setLineWrap(true);
+        detalleServicio.setRows(5);
+        detalleServicio.setWrapStyleWord(true);
+        panelUsuario.setViewportView(detalleServicio);
 
         getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 128));
 
@@ -106,26 +107,26 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         if (servicio != null) {
             ctrlUsuarios.seleccionarServicio(servicio);
             DTServicio dt = ctrlUsuarios.infoServicio();
-            detalleUsuario.setVisible(true);
-            detalleUsuario.setText(dt.toString()); 
+            detalleServicio.setVisible(true);
+            detalleServicio.setText(dt.toString()); 
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleUsuario.setText("");
-        detalleUsuario.setVisible(false);
+        detalleServicio.setText("");
+        detalleServicio.setVisible(false);
         this.dispose();
         servicios = null;
         ctrlUsuarios = null;
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    CtrlUsuarios ctrlUsuarios;
+    ICtrlUsuarios ctrlUsuarios;
     Set<DTMinServicio> servicios;
-    VerInformacionDeCliente padre;
+    VerInformacionDeProveedor padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
-    private javax.swing.JTextArea detalleUsuario;
+    private javax.swing.JTextArea detalleServicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox listaServiciosInterfaz;
     private Vector<String> listaServicios = new Vector<>();

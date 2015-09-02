@@ -24,6 +24,13 @@ public class Simple implements Categoria{
         this.padre = padre;
         this.servicios = new HashSet();
     }
+    public void agregarServicio(Servicio s){
+        this.servicios.add(s);
+    }
+    
+    public void quitarServicio(Servicio s){
+        this.servicios.remove(s);
+    }
     
     public Simple(String idCategoria){
 	this.idCategoria = idCategoria;

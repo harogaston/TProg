@@ -19,12 +19,12 @@ public class DTProveedor extends DTUsuario {
 		this.webEmpresa = webEmpresa;
 	}
 
-	public DTProveedor(DTUsuario dtU, String empresa, String webEmpresa){
+	public DTProveedor(DTUsuario dtU, String empresa, String webEmpresa) {
 		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
 	}
-	
+
 	public String getEmpresa() {
 		return this.empresa;
 	}
@@ -33,4 +33,11 @@ public class DTProveedor extends DTUsuario {
 		return this.webEmpresa;
 	}
 
+	@Override
+	public String toString() {
+		String output = super.toString();
+		output = output.concat("Empresa: " + empresa + "\n");
+		output = output.concat("Web Empresa: " + webEmpresa + "\n");
+		return output;
+	}
 }

@@ -6,10 +6,11 @@
 
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.util.Set;
 import java.util.Vector;
@@ -26,19 +27,20 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeCliente() {
         initComponents();
-        //Aca se trae un set de DTMinCliente para agregar al combobox
-        //carga de prueba
-        cargarDatos();
     }
     
     void cargarDatos() {
+        //pedir controlador
+        Fabrica f = Fabrica.getInstance();
+        ctrlUsuarios = f.getICtrlUsuarios();
         //listaClientes
-        ctrlUsuarios = new CtrlUsuarios();
         Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        for (DTMinCliente dt : setClientes) {
-            listaClientes.add(dt.getNickname());
+        if (setClientes != null) {
+            for (DTMinCliente dt : setClientes) {
+                listaClientes.add(dt.getNickname());
+            }
         }
     }
 
@@ -161,14 +163,16 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //pido de nuevo los datos en caso de que hayan cambiado
-        if (acaboDeSalir) {
-            cargarDatos();
-            acaboDeSalir = false;
-        }
+        cargarDatos();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-
+        listaClientes.clear();
+        reservas = null;
+        imagenUsuario.setIcon(null);
+        listaClientesInterfaz.setSelectedItem(null);
+        detalleUsuario.setText("");        
+        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed
@@ -195,15 +199,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaClientesInterfazInterfazComponentAdded
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-                //al ser ocultado el componente se deja todo como antes
-        listaClientes.clear();
-        reservas = null;
-        imagenUsuario.setIcon(null);
-        listaClientesInterfaz.setSelectedItem(null);
-        detalleUsuario.setText("");        
-        detalleUsuario.setVisible(false);
         this.dispose();
-        acaboDeSalir = true;
     }//GEN-LAST:event_botonSalirActionPerformed
 
     private void listaClientesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaClientesInterfazItemStateChanged
@@ -223,8 +219,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonReservasActionPerformed
 
     Set<DTMinReserva> reservas;
-    CtrlUsuarios ctrlUsuarios;
-    boolean acaboDeSalir = false;
+    ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonReservas;
     private javax.swing.JButton botonSalir;
@@ -232,7 +227,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel imagenUsuario;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaClientesInterfaz;
-    private Vector<String> listaClientes = new Vector();
+    private Vector<String> listaClientes = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
     private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables

@@ -353,11 +353,22 @@ public class ManejadorProductos {
 	}
 
 	public Servicio getServicio(DTMinServicio dtMinS) {
-		return servicios.get(dtMinS.getNicknameP()).get(dtMinS.getIdServicio());
+            if (dtMinS != null){
+                Map<String, Servicio> aux = servicios.get(dtMinS.getNicknameP());
+                 if (aux != null){
+                     return aux.get(dtMinS.getIdServicio());
+                 }else return null;
+		
+            }else return null;    
 	}
 
 	public Promocion getPromocion(DTMinPromocion dtMinP) {
-		return promociones.get(dtMinP.getNicknameP()).get(dtMinP.getIdPromocion());
+            if (dtMinP != null){
+                Map<String, Promocion> aux = promociones.get(dtMinP.getNicknameP());
+                if (aux != null){
+                        return aux.get(dtMinP.getIdPromocion());
+                }else return null;        
+            }else return null;   
 	}
         
 }

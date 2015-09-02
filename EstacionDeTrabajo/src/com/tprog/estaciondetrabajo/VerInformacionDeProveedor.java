@@ -12,9 +12,12 @@ import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.Set;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -188,11 +191,14 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             DTProveedor dt = ctrlUsuarios.infoProveedor();
             detalleUsuario.setText(dt.toString());
             try {
-                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeProveedor.class.getResource(dt.getImagen())));    
+                File f = new File(dt.getImagen());
+                Image img = ImageIO.read(f);
+                Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon imageIcon = new ImageIcon(dimg);
+                imagenUsuario.setIcon(imageIcon);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-            
+                System.out.println("La imagen no pudo ser cargada");
+            }            
             //cargo la lista de servicios del usuario acá, y cuando se pidan los servicios se muestran
             servicios = ctrlUsuarios.listarServiciosProveedor();
         }

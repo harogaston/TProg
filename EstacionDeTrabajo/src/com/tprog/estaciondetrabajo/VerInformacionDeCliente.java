@@ -12,10 +12,15 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Set;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -191,10 +196,15 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             DTCliente dt = ctrlUsuarios.infoCliente();
             detalleUsuario.setText(dt.toString());
             try {
-                imagenUsuario.setIcon(new ImageIcon(VerInformacionDeCliente.class.getResource(dt.getImagen())));
+                File f = new File(dt.getImagen());
+                Image img = ImageIO.read(f);
+                Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon imageIcon = new ImageIcon(dimg);
+                imagenUsuario.setIcon(imageIcon);
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("La imagen no pudo ser cargada");
             }
+            
             reservas = dt.getReservas();
             //cargo la lista de reservas del usuario acá, y cuando se pidan las reservas se muestran
         }

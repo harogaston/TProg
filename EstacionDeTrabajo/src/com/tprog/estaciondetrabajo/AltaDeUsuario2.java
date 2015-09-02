@@ -351,11 +351,11 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 				labelImagen.setIcon(imageIcon);
 				labelImagen.setHorizontalAlignment(JLabel.CENTER);
 				labelImagen.setVerticalAlignment(JLabel.CENTER);
+                                rutaImagen = ruta;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
     private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonClienteActionPerformed
@@ -382,7 +382,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// TODO add your handling code here:
 		String nombre = textPaneNombre.getText();
 		String apellido = textPaneApellido.getText();
-		String imagen = null;
 		String diaString = textPaneDia.getText();
 		String anioString = textPaneAnio.getText();
 		int anio = 0;
@@ -415,15 +414,15 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 			fechaNacimiento.setYear(anio);
 		}
 		if (ok) {
-			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, imagen, fechaNacimiento);
+			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
 			if (proveedor) {
 				nombreEmpresa = textPaneNombreEmpresa.getText();
 				linkEmpresa = textPaneLinkEmpresa.getText();
-				okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+")) && (nombreEmpresa.length() >= 1);
+//				okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+")) && (nombreEmpresa.length() >= 1);
 				okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+")) && (linkEmpresa.length() >= 1);
-				okP = (okNombreEmpresa && okLinkEmpresa);
-				if (okP) {
+//				okP = (okNombreEmpresa && okLinkEmpresa);
+				if (okLinkEmpresa) {
 					todoOk = true;
 					ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
 				} else {
@@ -462,6 +461,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
 	String nickname;
 	String email;
+        String rutaImagen = "";
     //Fabrica fabrica;
 	//CtrlUsuarios ctrlU ;
 	private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",

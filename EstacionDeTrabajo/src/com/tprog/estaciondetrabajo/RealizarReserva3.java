@@ -5,10 +5,10 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
-import com.tprog.logica.interfaces.ICtrlUsuarios;
+import com.tprog.logica.interfaces.ICtrlProductos;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
@@ -16,22 +16,16 @@ import java.util.Vector;
  *
  * @author marccio
  */
-public class ServiciosProveedor extends javax.swing.JInternalFrame {
+public class RealizarReserva3 extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ReservasCliente
-     * @param idCliente
      * @param padre
      */
-    public ServiciosProveedor(VerInformacionDeProveedor padre, Set<DTMinServicio> servicios, ICtrlUsuarios ctrlUsuarios) {
+    public RealizarReserva3(RealizarReserva2 padre) {
         this.padre = padre;
-        this.servicios = servicios;
-        this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
-        //construyo lista para la interfaz usando el set
-        for (DTMinServicio dt : servicios) {
-            listaServicios.add(dt.getIdServicio());
-        }
+        setTitle("Realizar Reserva");
     }
 
     /**
@@ -48,6 +42,8 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         detalleServicio = new javax.swing.JTextArea();
         botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        buttonVolver = new javax.swing.JButton();
+        buttonAgregar = new javax.swing.JButton();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
@@ -86,10 +82,21 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
 
-        jLabel1.setText("<html>Seleccione alguna reserva del cliente para ver su información</html>");
+        jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
+
+        buttonVolver.setText("Volver");
+        buttonVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(buttonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
+
+        buttonAgregar.setText("Agregar");
+        getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -105,27 +112,40 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
-            ctrlUsuarios.seleccionarServicio(servicio);
-            DTServicio dt = ctrlUsuarios.infoServicio();
+            //buscar servicio
+            DTMinServicio dt = null;
+            Iterator it = servicios.iterator();
+            boolean found = false;
+            while (it.hasNext() && !found) {
+                DTMinServicio tmp = (DTMinServicio) it.next();
+                if (tmp.getIdServicio().equals(servicio))
+                    dt = tmp; //es imposible que dt sea null al final del loop
+            }
+            ctrlProductos.seleccionarServicio(dt);
+            DTServicio dtServicio = ctrlProductos.infoServicio();
+            //imagenes
             detalleServicio.setVisible(true);
             detalleServicio.setText(dt.toString()); 
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleServicio.setText("");
-        detalleServicio.setVisible(false);
         this.dispose();
-        servicios = null;
-        ctrlUsuarios = null;
-        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
-    ICtrlUsuarios ctrlUsuarios;
+    private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.padre.setVisible(true);
+    }//GEN-LAST:event_buttonVolverActionPerformed
+
+    ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
-    VerInformacionDeProveedor padre;
+    RealizarReserva2 padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
+    private javax.swing.JButton buttonAgregar;
+    private javax.swing.JButton buttonVolver;
     private javax.swing.JTextArea detalleServicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox listaServiciosInterfaz;

@@ -47,6 +47,7 @@ public class DTPromocion {
 		for (DTMinServicio dt : servicios) {
 			output = output.concat("Servicio " + Integer.toString(i) + ": ");
 			output = output.concat(dt.toString());
+			i++;
 		}
 		return output;
 	}

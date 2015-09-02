@@ -6,13 +6,23 @@
 package com.tprog.logica.dt;
 
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.directory.InvalidAttributeValueException;
 
 public class DTCategoria {
 
-	private final String idCategoria;
-	private final Set<DTCategoria> subCategorias;
+	private String idCategoria;
+	private Set<DTCategoria> subCategorias;
 
 	public DTCategoria(String idCategoria, Set<DTCategoria> subCategorias) {
+		try {
+			if (idCategoria.equals("")) {
+				throw new InvalidAttributeValueException("No se ingresó un idCategoria");
+			}
+		} catch (InvalidAttributeValueException ex) {
+			Logger.getLogger(DTCategoria.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		this.idCategoria = idCategoria;
 		this.subCategorias = subCategorias;
 	}

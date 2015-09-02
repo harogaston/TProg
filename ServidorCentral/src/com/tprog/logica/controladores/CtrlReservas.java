@@ -38,7 +38,7 @@ public class CtrlReservas implements ICtrlReservas {
 		this.precioTotal = 0;
 
 	}
-        //ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+	//ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 
 	@Override
 	public void seleccionarCliente(String nickname) {
@@ -104,20 +104,18 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void altaReserva() throws Exception{
+	public void altaReserva() throws Exception {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		Cliente cliente = mu.getCliente(nickname);
 		ManejadorReservas mr = ManejadorReservas.getInstance();
-		if (!dtS.equals("")) {
+		if (dtS != null) {
 			mr.agregarReserva(cliente, dtR, dtS.getNicknameP());
-		}
-		else if(!dtP.equals("")){
+		} else if (dtP != null) {
 			mr.agregarReserva(cliente, dtR, dtP.getNicknameP());
-		}
-		else {
+		} else {
 			throw new Exception("No se seleccionó ningún servicio o promoción");
 		}
-		
+
 	}
 
 	@Override

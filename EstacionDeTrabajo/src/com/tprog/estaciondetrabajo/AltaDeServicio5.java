@@ -13,7 +13,9 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
 import java.util.Set;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -22,8 +24,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author ignacio.prandi
  */
 public class AltaDeServicio5 extends javax.swing.JInternalFrame {
-    private final ICtrlProductos ctrlProductos;
-    private final AltaDeServicio4 padre;
+    private ICtrlProductos ctrlProductos;
+    private AltaDeServicio4 padre;
 
     /**
      * Creates new form AltaDeServicio5
@@ -64,19 +66,25 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         buttonImagen2 = new javax.swing.JButton();
         buttonImagen3 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        labelImagen1 = new javax.swing.JLabel();
+        labelImagen2 = new javax.swing.JLabel();
+        labelImagen3 = new javax.swing.JLabel();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese los datos del servicio y haga click en \"Confirmar\".");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 11, 480, -1));
 
         jLabel2.setText("Ciudad de Origen");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 204, 147, -1));
 
         listaCiudadesOrigen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(listaCiudadesOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 166, -1));
 
         listaCiudadesDestino.setVisible(false);
         listaCiudadesDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         listaCiudadesDestino.setFocusable(false);
+        getContentPane().add(listaCiudadesDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 168, -1));
 
         buttonConfirmar.setText("Confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -84,6 +92,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonConfirmarActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 400, -1, -1));
 
         buttonAtras.setText("Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +100,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
         buttonSalir.setText("Salir");
         buttonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -98,6 +108,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, -1, -1));
 
         checkBoxCiudadDestino.setSelected(false);
         checkBoxCiudadDestino.setText("Ciudad de Destino");
@@ -106,16 +117,24 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 checkBoxCiudadDestinoActionPerformed(evt);
             }
         });
+        getContentPane().add(checkBoxCiudadDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         jLabel3.setText("Descripción");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 43, -1, -1));
 
         jScrollPane1.setViewportView(textPaneDescripcion);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 75, 169, -1));
+
         jLabel4.setText("Precio");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 104, -1, -1));
 
         jScrollPane2.setViewportView(textPanePrecio);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 164, 168, -1));
+
         jLabel5.setText("Imágenes");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 43, -1, -1));
 
         jButton1.setText("Imágen 1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +142,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
 
         buttonImagen2.setText("Imágen 2");
         buttonImagen2.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +150,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonImagen2ActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
 
         buttonImagen3.setText("Imágen 3");
         buttonImagen3.addActionListener(new java.awt.event.ActionListener() {
@@ -137,119 +158,17 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonImagen3ActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
 
-        jLabel6.setText("imag1");
+        labelImagen1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(labelImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 120, 80));
 
-        jLabel7.setText("imag2");
+        labelImagen2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(labelImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 120, 80));
 
-        jLabel8.setText("imag3");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(108, 108, 108)
-                                .addComponent(buttonAtras)
-                                .addGap(55, 55, 55))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(37, 37, 37)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel4)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(checkBoxCiudadDestino)
-                                                .addComponent(jLabel3)))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(72, 72, 72)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(listaCiudadesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(listaCiudadesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(64, 64, 64)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buttonConfirmar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(buttonImagen2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel7))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButton1)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel6))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(buttonImagen3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel8)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(204, 204, 204)
-                                        .addComponent(buttonSalir))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)))
-                .addGap(45, 45, 45))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel6))))
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonImagen2)
-                            .addComponent(jLabel7))))
-                .addGap(15, 15, 15)
-                .addComponent(listaCiudadesOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(checkBoxCiudadDestino)
-                    .addComponent(buttonImagen3)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listaCiudadesDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonAtras)
-                    .addComponent(buttonConfirmar)
-                    .addComponent(buttonSalir))
-                .addGap(32, 32, 32))
-        );
+        labelImagen3.setAutoscrolls(true);
+        labelImagen3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        getContentPane().add(labelImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 120, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,19 +182,30 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
      int precio = 0;
      if (okPrecio)  precio = parseInt(precioString);
      Set<String> imagenes = null;
+     imagenes.add(ruta1);
+     imagenes.add(ruta2);
+     imagenes.add(ruta2);
      boolean okImagenes = true;
      String ciudadOrigen = null;
-     String paisOrigen = null;
-    DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
+     ciudadOrigen = (String) listaCiudadesOrigen.getSelectedItem();
+     String paisOrigen = null; // falta
+     DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
      ctrlProductos.seleccionarOrigen(origen);
      if (checkBoxCiudadDestino.isSelected()){
          String ciudadDestino = null;
-         String paisDestino = null;
+         ciudadDestino = (String) listaCiudadesDestino.getSelectedItem();
+         String paisDestino = null; // falta
          DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
+         ctrlProductos.seleccionarDestino(destino);
      }
      if ((okDescripcion)&&(okPrecio)&&(okImagenes))
-     ctrlProductos.altaServicio(descripcion, precio, imagenes);
-     else JOptionPane.showMessageDialog(this, "Llena bien los datos cabeza", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+        ctrlProductos.altaServicio(descripcion, precio, imagenes);
+     else {
+         String error = "";
+         if (!okDescripcion) error = "Por favor ingrese una descripción.";
+         else if(!okPrecio) error = "Por favor verifique el precio.";
+         JOptionPane.showMessageDialog(this, "Error! "+error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+     }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void checkBoxCiudadDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxCiudadDestinoActionPerformed
@@ -296,8 +226,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String ruta;
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
   	            "Imágenes JPG & PNG ", "jpg", "png");
@@ -306,14 +234,21 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                     if (seleccion == JFileChooser.APPROVE_OPTION) {
   	                // Para guardar la imagen.*******************************************
   	                File file = fc.getSelectedFile();
-                        ruta = file.getPath();
+                        ruta1 = file.getPath();
+                        try {
+                            labelImagen1.setIcon(new ImageIcon(ruta1));
+                            labelImagen1.setHorizontalAlignment(JLabel.CENTER);
+                            labelImagen1.setVerticalAlignment(JLabel.CENTER);
+                         } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                         }
                     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonImagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImagen2ActionPerformed
         // TODO add your handling code here:
-        String ruta;
         JFileChooser fc = new JFileChooser();
+        String rutname = "";
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
   	            "Imágenes JPG & PNG ", "jpg", "png");
         fc.setFileFilter(filter);       
@@ -321,14 +256,21 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                     if (seleccion == JFileChooser.APPROVE_OPTION) {
   	                // Para guardar la imagen.*******************************************
   	                File file = fc.getSelectedFile();
-                        ruta = file.getPath();
+                        ruta2 = file.getPath();
+                        try {
+                            labelImagen2.setIcon(new ImageIcon(ruta2));
+                            labelImagen2.setHorizontalAlignment(JLabel.CENTER);
+                            labelImagen2.setVerticalAlignment(JLabel.CENTER);
+                         } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                         }
                     }
     }//GEN-LAST:event_buttonImagen2ActionPerformed
 
     private void buttonImagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImagen3ActionPerformed
         // TODO add your handling code here:
-        String ruta;
         JFileChooser fc = new JFileChooser();
+        String rutname = "";
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
   	            "Imágenes JPG & PNG ", "jpg", "png");
         fc.setFileFilter(filter);       
@@ -336,11 +278,20 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                     if (seleccion == JFileChooser.APPROVE_OPTION) {
   	                // Para guardar la imagen.*******************************************
   	                File file = fc.getSelectedFile();
-                        ruta = file.getPath();
+                        ruta3 = file.getPath();
+                        try {
+                            labelImagen3.setIcon(new ImageIcon(ruta3));
+                            labelImagen3.setHorizontalAlignment(JLabel.CENTER);
+                            labelImagen3.setVerticalAlignment(JLabel.CENTER);
+                         } catch (Exception e) {
+                            System.out.println(e.getMessage());
+                         }
                     }
     }//GEN-LAST:event_buttonImagen3ActionPerformed
     
-
+    String ruta1;
+    String ruta2;
+    String ruta3;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
@@ -354,11 +305,11 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelImagen1;
+    private javax.swing.JLabel labelImagen2;
+    private javax.swing.JLabel labelImagen3;
     private javax.swing.JComboBox listaCiudadesDestino;
     private javax.swing.JComboBox listaCiudadesOrigen;
     private javax.swing.JTextPane textPaneDescripcion;

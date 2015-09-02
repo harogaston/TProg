@@ -12,6 +12,7 @@ import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -20,7 +21,7 @@ import javax.swing.tree.DefaultTreeModel;
  * @author marccio.silva
  */
 public class AltaDeServicio4 extends javax.swing.JInternalFrame {
-    private final AltaDeServicio3 padre;
+    private AltaDeServicio3 padre;
 
     /**
      * Creates new form VerInformacionDeCliente
@@ -178,12 +179,16 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
             if (nodo != null)
              categoria = nodo.toString();
             boolean okCategoria = ctrlProductos.agregarCategoria(categoria);
-            AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
-            getContentPane().add(as5, BorderLayout.CENTER);
-            as5.setBounds(10, 10, 100, 100);
-            this.setVisible(false);
-            as5.setVisible(true);
-            getParent().add(as5);  
+            if (okCategoria){
+                AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
+                getContentPane().add(as5, BorderLayout.CENTER);
+                as5.setBounds(10, 10, 100, 100);
+                this.setVisible(false);
+                as5.setVisible(true);
+                getParent().add(as5);  
+            }
+            else
+                JOptionPane.showMessageDialog(this, "Error! Por favor ingrese una Categoría", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed

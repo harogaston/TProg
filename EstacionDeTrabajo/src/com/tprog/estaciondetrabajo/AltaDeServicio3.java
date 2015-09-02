@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class AltaDeServicio3 extends javax.swing.JInternalFrame {
-    private final AltaDeServicio2 padre;
-    private final ICtrlProductos ctrlProductos;
-    private final String proveedor;
+    private AltaDeServicio2 padre;
+    private ICtrlProductos ctrlProductos;
+    private String proveedor;
 
     /**
      * Creates new form AltaDeServicio3
@@ -131,6 +131,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
     private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
         // TODO add your handling code here:
         String nombreServicio = textPaneNombreServicio.getText();
+        String error = "";
         boolean ok1 = (!nombreServicio.isEmpty());   
         boolean ok2 = ((ok1) && (ctrlProductos.idServicioDisponible(nombreServicio)));
             if (ok2){
@@ -143,8 +144,11 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 as4.setVisible(true);
                 getParent().add(as4); 
             }
-            else 
-                JOptionPane.showMessageDialog(this, "Cambia el nombre viteh", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);               
+            else {
+                 if (!ok1) error = "Por favor ingrese el nombre del Servicio.";
+                 else if(!ok2) error ="Ya existe un Servicio con ese nombre.";
+                JOptionPane.showMessageDialog(this, "Error! ", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE); 
+            }
     }//GEN-LAST:event_buttonAceptarActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed

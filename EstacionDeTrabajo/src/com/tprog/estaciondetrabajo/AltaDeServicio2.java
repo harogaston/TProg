@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  * @author marccio.silva
  */
 public class AltaDeServicio2 extends javax.swing.JInternalFrame {
-    private final AltaDeServicio1 padre;
+    private AltaDeServicio1 padre;
 
     /**
      * Creates new form VerInformacionDeCliente

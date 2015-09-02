@@ -108,9 +108,9 @@ public class CtrlReservas implements ICtrlReservas {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		Cliente cliente = mu.getCliente(nickname);
 		ManejadorReservas mr = ManejadorReservas.getInstance();
-		if (!dtS.equals("")) {
+		if (dtS != null) {
 			mr.agregarReserva(cliente, dtR, dtS.getNicknameP());
-		} else if (!dtP.equals("")) {
+		} else if (dtP != null) {
 			mr.agregarReserva(cliente, dtR, dtP.getNicknameP());
 		} else {
 			throw new Exception("No se seleccionó ningún servicio o promoción");

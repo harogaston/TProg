@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ManejadorReservas.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ServidorCentral&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">com.tprog.logica.manejadores</a> &gt; <span class="el_source">ManejadorReservas.java</span></div><h1>ManejadorReservas.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tprog.logica.manejadores;
+
+import com.tprog.logica.clases.Cliente;
+import com.tprog.logica.clases.Reserva;
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTReserva;
+import com.tprog.logica.dt.EstadoReserva;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+public class ManejadorReservas {
+
+	private Map&lt;Integer, Reserva&gt; reservas;
+<span class="nc" id="L21">	private static ManejadorReservas instance = null;</span>
+
+	public static ManejadorReservas getInstance() {
+<span class="nc bnc" id="L24" title="All 2 branches missed.">		if (instance == null) {</span>
+<span class="nc" id="L25">			instance = new ManejadorReservas();</span>
+		}
+<span class="nc" id="L27">		return instance;</span>
+	}
+
+<span class="nc" id="L30">	private ManejadorReservas() {</span>
+<span class="nc" id="L31">		reservas = new HashMap();</span>
+<span class="nc" id="L32">	}</span>
+
+	public Set&lt;DTMinReserva&gt; listarReservas() {
+<span class="nc" id="L35">		Set&lt;DTMinReserva&gt; set = new HashSet();</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">		if (!reservas.isEmpty()) {</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">			for (Reserva r : reservas.values()) {</span>
+<span class="nc" id="L38">				DTMinReserva dtMin = r.crearDTMinReserva();</span>
+<span class="nc" id="L39">				set.add(dtMin);</span>
+<span class="nc" id="L40">			}</span>
+		}
+<span class="nc" id="L42">		return set;</span>
+	}
+
+	public DTReserva infoReserva(int idReserva) {
+<span class="nc" id="L46">		Reserva r = reservas.get(idReserva);</span>
+<span class="nc" id="L47">		return r.crearDTReserva();</span>
+	}
+
+	public boolean cambiarEstadoReserva(int idReserva, EstadoReserva nuevoEstado) {
+<span class="nc" id="L51">		Reserva r = reservas.get(idReserva);</span>
+
+<span class="nc" id="L53">		return r.cambiarEstadoReserva(nuevoEstado);</span>
+	}
+
+	public void eliminarReserva(int idReserva) {
+<span class="nc" id="L57">		Reserva r = reservas.get(idReserva);</span>
+<span class="nc" id="L58">		r.eliminar();</span>
+		// sacar del map
+<span class="nc" id="L60">		this.reservas.remove(r);</span>
+
+<span class="nc" id="L62">	}</span>
+
+	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
+<span class="nc" id="L65">		Reserva nuevaReserva = new Reserva(dtR, nicknameP);</span>
+<span class="nc" id="L66">		reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);</span>
+<span class="nc" id="L67">		cliente.agregarReserva(nuevaReserva);</span>
+<span class="nc" id="L68">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Reserva.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ServidorCentral&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">com.tprog.logica.clases</a> &gt; <span class="el_source">Reserva.java</span></div><h1>Reserva.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tprog.logica.clases;
+
+import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.dt.DTMinReserva;
+import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTReserva;
+import com.tprog.logica.dt.EstadoReserva;
+import com.tprog.logica.manejadores.ManejadorProductos;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+public class Reserva {
+
+	private int idReserva;
+	private static int contador;
+	private Date fCreacion;
+	private EstadoReserva estado;
+	private float precioTotal;
+	private Set&lt;LineaReserva&gt; lineasReserva;
+
+<span class="nc" id="L29">	public Reserva(DTReserva dtR, String nicknameP) throws Exception{</span>
+<span class="nc" id="L30">		this.idReserva = Reserva.contador;</span>
+<span class="nc" id="L31">		Reserva.contador++;</span>
+<span class="nc" id="L32">		this.fCreacion = dtR.getFCreacion();</span>
+<span class="nc" id="L33">		this.estado = dtR.getEstadoReserva();</span>
+<span class="nc" id="L34">		this.lineasReserva = new HashSet();</span>
+<span class="nc" id="L35">		this.precioTotal = dtR.getPrecioTotal();</span>
+		
+		// Creo y agrego las lineasReserva
+<span class="nc" id="L38">		ManejadorProductos mp = ManejadorProductos.getInstance();</span>
+		LineaReserva linea; // debe declararse fuera de los if
+<span class="nc bnc" id="L40" title="All 2 branches missed.">		for (DTLineaReserva dtLinea : dtR.getLineasReserva()){</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">			if (!dtLinea.getServicio().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L42">				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());</span>
+<span class="nc" id="L43">				Servicio s = mp.getServicio(dtMinS);</span>
+<span class="nc" id="L44">				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());</span>
+<span class="nc" id="L45">			}</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">			else if (!dtLinea.getPromocion().equals(&quot;&quot;)) {</span>
+<span class="nc" id="L47">				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());</span>
+<span class="nc" id="L48">				Promocion p = mp.getPromocion(dtMinP);</span>
+<span class="nc" id="L49">				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());</span>
+<span class="nc" id="L50">			}</span>
+			else {
+<span class="nc" id="L52">				throw new Exception(&quot;DTLineaReserva sin Servicio o Promocion especificado&quot;);</span>
+			}
+<span class="nc" id="L54">			lineasReserva.add(linea);</span>
+<span class="nc" id="L55">		}</span>
+<span class="nc" id="L56">	}</span>
+
+	public int getIdReserva() {
+<span class="nc" id="L59">		return idReserva;</span>
+	}
+
+	public Date getFCreacion() {
+<span class="nc" id="L63">		return fCreacion;</span>
+	}
+
+	public EstadoReserva getEstadoReserva() {
+<span class="nc" id="L67">		return estado;</span>
+	}
+
+	public float getPrecioTotal() {
+<span class="nc" id="L71">		return precioTotal;</span>
+	}
+
+	public void agregarLineaReserva(LineaReserva linea) {
+<span class="nc" id="L75">		lineasReserva.add(linea);</span>
+<span class="nc" id="L76">		float p = linea.getPrecio();</span>
+<span class="nc" id="L77">		p = p + this.getPrecioTotal();</span>
+<span class="nc" id="L78">		setPrecioTotal(p);</span>
+<span class="nc" id="L79">	}</span>
+
+	public void setEstadoReserva(EstadoReserva est) {
+<span class="nc" id="L82">		this.estado = est;</span>
+<span class="nc" id="L83">	}</span>
+
+	public void setPrecioTotal(float p) {
+<span class="nc" id="L86">		this.precioTotal = p;</span>
+<span class="nc" id="L87">	}</span>
+
+	public DTReserva crearDTReserva() {
+<span class="nc" id="L90">		Set&lt;DTLineaReserva&gt; dtsLR = new HashSet();</span>
+
+<span class="nc" id="L92">		Iterator&lt;LineaReserva&gt; it = lineasReserva.iterator();</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">		while (it.hasNext()) {</span>
+<span class="nc" id="L94">			LineaReserva l = it.next();</span>
+<span class="nc" id="L95">			DTLineaReserva temp = l.crearDTLineaReserva();</span>
+<span class="nc" id="L96">			dtsLR.add(temp);</span>
+<span class="nc" id="L97">		}</span>
+<span class="nc" id="L98">		DTReserva dt = new DTReserva(this.idReserva, this.fCreacion, this.estado,</span>
+				this.precioTotal, dtsLR);
+<span class="nc" id="L100">		return dt;</span>
+	}
+
+	public DTMinReserva crearDTMinReserva() {
+<span class="nc" id="L104">		DTMinReserva dt = new DTMinReserva(this.idReserva, this.fCreacion);</span>
+<span class="nc" id="L105">		return dt;</span>
+	}
+
+	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">		if ((&quot;Registrada&quot;.equals(this.getEstadoReserva().toString()))</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">				&amp;&amp; (!&quot;Facturada&quot;.equals(nuevoEstado.toString()))) {</span>
+<span class="nc" id="L111">			setEstadoReserva(nuevoEstado);</span>
+<span class="nc" id="L112">			return true;</span>
+		} else {
+<span class="nc" id="L114">			return false;</span>
+		}
+	}
+
+	public void eliminar() {
+<span class="nc" id="L119">		this.lineasReserva.clear();</span>
+
+<span class="nc" id="L121">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

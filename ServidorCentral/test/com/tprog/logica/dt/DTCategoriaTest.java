@@ -3,12 +3,12 @@
  */
 package com.tprog.logica.dt;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-public class DTCategoriaTest{
+public class DTCategoriaTest {
 
 	public DTCategoriaTest() {
 	}
@@ -20,7 +20,23 @@ public class DTCategoriaTest{
 		String expResult = "testID";
 		String result = instance.getIdCategoria();
 		assertEquals(expResult, result);
-		fail("fallo en DTCategoria::getIdCategoria.");
+		DTCategoria instance2 = new DTCategoria("", null);
+		String expResult2 = "";
+		result = instance2.getIdCategoria();
+		assertEquals(expResult2, result);
+	}
+
+	@Test
+	public void testGetIdCategoriaVacio() {
+		System.out.println("getIdCategoriaVacio");
+		try {
+			DTCategoria instance = new DTCategoria("", null);
+			String result = instance.getIdCategoria();
+			String expResult2 = "";
+			assertEquals(expResult2, result);
+		} catch (Exception e) {
+			//System.out.println(e.getMessage());
+		}
 	}
 
 	@Test
@@ -37,7 +53,6 @@ public class DTCategoriaTest{
 		Set<DTCategoria> expResult = subCategorias;
 		Set<DTCategoria> result = instance.getSubCategorias();
 		assertEquals(expResult, result);
-		fail("fallo en DTCategoria::getSubCategorias.");
 	}
 
 }

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Servicio.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ServidorCentral&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">com.tprog.logica.clases</a> &gt; <span class="el_source">Servicio.java</span></div><h1>Servicio.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.tprog.logica.clases;
+
+import java.util.Set;
+import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.dt.DTMinServicio;
+import java.util.HashSet;
+
+/**
+ *
+ * @author gaston
+ */
+public class Servicio {
+
+	private String idServicio;
+	private String descripcion;
+	private float precio;
+	private Set&lt;String&gt; imagenes;
+
+	private Ciudad origen;
+	private Ciudad destino;
+	private Proveedor proveedor;
+	private Set&lt;Simple&gt; categorias;
+
+<span class="nc" id="L29">	public Servicio(String idServicio, String descripcion, float precio, Set&lt;String&gt; imagenes, Ciudad origen, Ciudad destino, Proveedor proveedor) {</span>
+<span class="nc" id="L30">		this.idServicio = idServicio;</span>
+<span class="nc" id="L31">		this.descripcion = descripcion;</span>
+<span class="nc" id="L32">		this.precio = precio;</span>
+<span class="nc" id="L33">		this.imagenes = imagenes;</span>
+<span class="nc" id="L34">		this.origen = origen;</span>
+<span class="nc" id="L35">		this.destino = destino;</span>
+<span class="nc" id="L36">		this.proveedor = proveedor;</span>
+<span class="nc" id="L37">		this.categorias = new HashSet(); //Se crea vacío</span>
+<span class="nc" id="L38">	}</span>
+
+	public DTServicio crearDT() {
+<span class="nc bnc" id="L41" title="All 2 branches missed.">		if (this.destino != null) {</span>
+<span class="nc" id="L42">			return new DTServicio(idServicio, descripcion, precio, imagenes, origen.crearDT(), destino.crearDT());</span>
+		} else {
+<span class="nc" id="L44">			return new DTServicio(idServicio, descripcion, precio, imagenes, origen.crearDT(), null);</span>
+		}
+	}
+
+	public DTMinServicio crearDTMin() {
+<span class="nc" id="L49">		DTMinServicio nuevoDT = new DTMinServicio(this.proveedor.getNickname(), this.idServicio);</span>
+<span class="nc" id="L50">		return nuevoDT;</span>
+	}
+
+	public Set&lt;String&gt; listarImagenes() {
+<span class="nc" id="L54">		return this.imagenes;</span>
+	}
+
+	public void agregarImagen(String imagen) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">		if (imagenes.size() &lt; 3) {</span>
+<span class="nc" id="L59">			imagenes.add(imagen);</span>
+		}
+<span class="nc" id="L61">	}</span>
+
+	public void quitarImagen(String imagen) {
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if (!imagenes.isEmpty()) {</span>
+<span class="nc" id="L65">			imagenes.remove(imagen);</span>
+		}
+<span class="nc" id="L67">	}</span>
+
+	public Set&lt;String&gt; listarCategorias() {
+<span class="nc" id="L70">		Set&lt;String&gt; nuevoSet = new HashSet();</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">		for (Simple c : categorias) {</span>
+<span class="nc" id="L72">			nuevoSet.add(c.getIdCategoria());</span>
+<span class="nc" id="L73">		}</span>
+<span class="nc" id="L74">		return nuevoSet;</span>
+	}
+
+	public boolean agregarCategoria(Categoria nueva_categoria) {
+<span class="nc" id="L78">            Simple cs = (Simple) nueva_categoria;</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">            if (categorias.isEmpty() || !categorias.contains(cs)) {</span>
+<span class="nc" id="L80">                categorias.add(cs);</span>
+<span class="nc" id="L81">                cs.agregarServicio(this);</span>
+<span class="nc" id="L82">                return true;</span>
+            } else {
+<span class="nc" id="L84">                return false;</span>
+            }
+	}
+
+	public boolean quitarCategoria(Categoria categoria_a_quitar) {
+<span class="nc" id="L89">		Simple cs = (Simple) categoria_a_quitar;</span>
+<span class="nc bnc" id="L90" title="All 4 branches missed.">		if (!categorias.isEmpty() &amp;&amp; categorias.contains(cs)) {</span>
+<span class="nc" id="L91">			categorias.remove(cs);</span>
+<span class="nc" id="L92">                        cs.quitarServicio(this);</span>
+<span class="nc" id="L93">			return true;</span>
+		} else {
+<span class="nc" id="L95">			return false;</span>
+		}
+	}
+
+	public String getIdServicio() {
+<span class="nc" id="L100">		return idServicio;</span>
+	}
+
+	public void setIdServicio(String idServicio) {
+<span class="nc" id="L104">		this.idServicio = idServicio;</span>
+<span class="nc" id="L105">	}</span>
+
+	public String getDescripcion() {
+<span class="nc" id="L108">		return descripcion;</span>
+	}
+
+	public void setDescripcion(String descripcion) {
+<span class="nc" id="L112">		this.descripcion = descripcion;</span>
+<span class="nc" id="L113">	}</span>
+
+	public float getPrecio() {
+<span class="nc" id="L116">		return precio;</span>
+	}
+
+	public void setPrecio(float precio) {
+<span class="nc" id="L120">		this.precio = precio;</span>
+<span class="nc" id="L121">	}</span>
+
+	public Set&lt;String&gt; getImagenes() {
+<span class="nc" id="L124">		return imagenes;</span>
+	}
+
+	public void setImagenes(Set&lt;String&gt; imagenes) {
+<span class="nc" id="L128">		this.imagenes = imagenes;</span>
+<span class="nc" id="L129">	}</span>
+
+	public Ciudad getOrigen() {
+<span class="nc" id="L132">		return origen;</span>
+	}
+
+	public void setOrigen(Ciudad origen) {
+<span class="nc" id="L136">		this.origen = origen;</span>
+<span class="nc" id="L137">	}</span>
+
+	public Ciudad getDestino() {
+<span class="nc" id="L140">		return destino;</span>
+	}
+
+	public void setDestino(Ciudad destino) {
+<span class="nc" id="L144">		this.destino = destino;</span>
+<span class="nc" id="L145">	}</span>
+
+	public Proveedor getProveedor() {
+<span class="nc" id="L148">		return proveedor;</span>
+	}
+
+	public void setProveedor(Proveedor proveedor) {
+<span class="nc" id="L152">		this.proveedor = proveedor;</span>
+<span class="nc" id="L153">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

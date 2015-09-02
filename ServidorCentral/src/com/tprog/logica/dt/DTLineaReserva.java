@@ -20,8 +20,16 @@ public class DTLineaReserva {
 		this.cantidad = cantidad;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.servicio = servicio;
-		this.promocion = promocion;
+		if (servicio == null) {
+			this.servicio = "";
+		} else {
+			this.servicio = servicio;
+		}
+		if (promocion == null) {
+			this.promocion = "";
+		} else {
+			this.promocion = promocion;
+		}
 		this.precio = precio;
 	}
 

@@ -5,6 +5,9 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import java.awt.event.MouseListener;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
+
 /**
  *
  * @author marccio
@@ -16,6 +19,10 @@ public class DatosUsuario extends javax.swing.JInternalFrame {
      */
     public DatosUsuario() {
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -26,6 +33,8 @@ public class DatosUsuario extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
+        setPreferredSize(new java.awt.Dimension(690, 435));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

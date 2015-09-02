@@ -8,8 +8,10 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -24,6 +26,10 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
      */
     public AltaCategoria() {
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
     
     void cargarDatos() {

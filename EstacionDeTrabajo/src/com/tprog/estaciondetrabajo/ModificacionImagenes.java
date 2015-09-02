@@ -6,11 +6,13 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -28,6 +30,10 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         initComponents();
         actualizarImagenes();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     public void actualizarImagenes() {

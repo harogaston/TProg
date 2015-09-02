@@ -8,9 +8,11 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -26,6 +28,10 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         this.padre = padre;
         setTitle("Realizar Reserva");
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**

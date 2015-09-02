@@ -6,12 +6,14 @@
 package com.tprog.estaciondetrabajo;
 
 import java.awt.Component;
+import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -25,6 +27,10 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
     public AltaUsuarioPrueba() {
         setTitle("Alta de Usuario");
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -84,7 +90,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         grupo_botones.add(botonCliente);
         grupo_botones.add(botonProveedor);
 
-        setPreferredSize(new java.awt.Dimension(700, 500));
+        setPreferredSize(new java.awt.Dimension(690, 435));
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(650, 450));
 
@@ -125,9 +131,9 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(206, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +147,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(231, 231, 231)
                                         .addComponent(jButton1)))
-                                .addContainerGap(226, Short.MAX_VALUE))))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

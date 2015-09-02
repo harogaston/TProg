@@ -9,7 +9,9 @@ import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -27,6 +29,10 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         this.servicio = servicio;
         this.ctrlProductos = ctrlProductos;
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**

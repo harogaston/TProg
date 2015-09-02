@@ -8,7 +8,9 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.apache.commons.validator.routines.EmailValidator;
 
 /**
@@ -24,6 +26,10 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		setTitle("Alta de Usuario");
 		fabrica = Fabrica.getInstance();
 		initComponents();
+                BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+                for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+                    basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+                }                
 	}
 
 	/**
@@ -42,6 +48,14 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         buttonSalir = new javax.swing.JButton();
         jTextFieldNickname = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
+
+        setEnabled(false);
+        setPreferredSize(new java.awt.Dimension(690, 435));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
 
         jLabel1.setText("Ingrese los datos del nuevo Usuario y haga click en \"Siguiente\" para continuar");
 
@@ -69,46 +83,42 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addContainerGap(466, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonSalir)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonSiguiente))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldNickname)
-                                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addComponent(jLabel2))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(jLabel3))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(449, 449, 449)
+                .addComponent(buttonSalir)
+                .addGap(6, 6, 6)
+                .addComponent(buttonSiguiente))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addGap(52, 52, 52)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jTextFieldNickname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonSiguiente)
-                    .addComponent(buttonSalir))
-                .addGap(37, 37, 37))
+                .addGap(141, 141, 141)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonSalir)
+                    .addComponent(buttonSiguiente)))
         );
 
         pack();
@@ -147,6 +157,11 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
     }//GEN-LAST:event_buttonSiguienteActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        jTextFieldEmail.setText("");
+        jTextFieldNickname.setText("");
+    }//GEN-LAST:event_formComponentHidden
 
 	Fabrica fabrica;
     // Variables declaration - do not modify//GEN-BEGIN:variables

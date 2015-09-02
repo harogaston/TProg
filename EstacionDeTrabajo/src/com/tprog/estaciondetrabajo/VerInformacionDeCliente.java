@@ -12,9 +12,11 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -27,6 +29,10 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeCliente() {
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
     
     void cargarDatos() {

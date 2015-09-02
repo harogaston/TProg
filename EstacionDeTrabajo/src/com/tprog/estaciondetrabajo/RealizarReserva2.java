@@ -9,6 +9,8 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -28,6 +30,10 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         setTitle("Realizar Reserva");
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -58,6 +64,8 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(690, 435));
 
         jLabel1.setText("Ingrese los datos de la Reserva");
 

@@ -13,10 +13,12 @@ import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -33,6 +35,10 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
         this.padre = padre;
         setTitle("Alta de Servicio");
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
     
     void cargarDatos() {
@@ -68,6 +74,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(690, 435));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

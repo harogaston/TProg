@@ -8,6 +8,7 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTUsuario;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
@@ -18,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -42,9 +44,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		this.padre = padre;
 		this.nickname = nickname;
 		this.email = email;
-
 		initComponents();
 		this.ictrlU = ictrlU;
+                BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+                for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+                    basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+                }                
 	}
 
 	/**
@@ -91,6 +96,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         grupoBotones.add(radioButtonCliente);
         grupoBotones.add(radioButtonProveedor);
+
+        setPreferredSize(new java.awt.Dimension(690, 435));
 
         jLabel1.setText("Complete los datos del nuevo Usuario y haga click  en  \"Confirmar\".");
 
@@ -196,7 +203,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(174, 174, 174)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -6,6 +6,8 @@
 package com.tprog.estaciondetrabajo;
 
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -19,6 +21,10 @@ public class AltaDeServicio1 extends javax.swing.JInternalFrame {
     public AltaDeServicio1() {
         setTitle("Alta de Servicio");
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -33,6 +39,8 @@ public class AltaDeServicio1 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         buttonVerProveedores = new javax.swing.JButton();
         buttonSalir = new javax.swing.JButton();
+
+        setPreferredSize(new java.awt.Dimension(690, 435));
 
         jLabel1.setText("Haga click en \"Ver Proveedores\" para ver los proveedores con Servicios disponibles.");
 

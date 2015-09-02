@@ -7,8 +7,10 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -27,6 +29,10 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         this.arbolCiudades = arbolCiudades;
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**

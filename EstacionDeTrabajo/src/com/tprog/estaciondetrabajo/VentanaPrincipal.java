@@ -27,6 +27,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //inicializo hash
         internalFrames = new HashMap<>();
         //inicializo internal frames
+        actualizarServicio = new ActualizarServicio();
         actualizarEstadoReserva = new ActualizarEstadoReserva();
         altaCategoria = new AltaCategoria();
         verInformacionDeCliente = new VerInformacionDeCliente();
@@ -39,6 +40,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         altaDeServicio1 = new AltaDeServicio1();
         realizarReserva1 = new RealizarReserva1();
         //las agrego al content pane
+        getContentPane().add(actualizarServicio, BorderLayout.CENTER);
         getContentPane().add(actualizarEstadoReserva, BorderLayout.CENTER);
         getContentPane().add(altaCategoria, BorderLayout.CENTER);
         getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
@@ -51,6 +53,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(altaDeServicio1, BorderLayout.CENTER);
         getContentPane().add(realizarReserva1, BorderLayout.CENTER);
         //las agrego al hash
+        internalFrames.put("actualizarServicio", actualizarServicio);
         internalFrames.put("actualizarEstadoReserva", actualizarEstadoReserva);
         internalFrames.put("altaCategoria", altaCategoria);
         internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
@@ -142,6 +145,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuRegistros.add(menuItemAltaPromocion);
 
         menuItemActualizarServicio.setText("Actualizar Servicio");
+        menuItemActualizarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemActualizarServicioActionPerformed(evt);
+            }
+        });
         menuRegistros.add(menuItemActualizarServicio);
 
         menuItemRealizarReserva.setText("Realizar Reserva");
@@ -270,6 +278,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemActualizarEstadoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoReservaActionPerformed
         showInternalFrame("actualizarEstadoReserva");
     }//GEN-LAST:event_menuItemActualizarEstadoReservaActionPerformed
+
+    private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
+        showInternalFrame("actualizarServicio");
+    }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
      private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         showInternalFrame("altaDeServicio1");
     } 
@@ -323,6 +335,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     HashMap<String, JInternalFrame> internalFrames;
     //Variables nuestras
+    private ActualizarServicio actualizarServicio;
     private ActualizarEstadoReserva actualizarEstadoReserva;
     private AltaCategoria altaCategoria;
     private VerInformacionDeCliente verInformacionDeCliente;

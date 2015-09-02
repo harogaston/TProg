@@ -53,7 +53,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBoxMeses = new javax.swing.JComboBox();
+        comboBoxMeses = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -173,10 +173,10 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Imágen");
 
-        jComboBoxMeses.setModel(new javax.swing.DefaultComboBoxModel(meses));
-        jComboBoxMeses.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxMeses.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        comboBoxMeses.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxMesesActionPerformed(evt);
+                comboBoxMesesActionPerformed(evt);
             }
         });
 
@@ -299,7 +299,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel8)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jComboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(comboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel10)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -343,7 +343,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jComboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel10))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,9 +449,9 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton4ActionPerformed
     
-    private void jComboBoxMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesesActionPerformed
+    private void comboBoxMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMesesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxMesesActionPerformed
+    }//GEN-LAST:event_comboBoxMesesActionPerformed
     private String ruta;
     private ImageIcon imageUsuario;
     private JLabel mostrarImageU;
@@ -480,13 +480,13 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonCliente;
     private javax.swing.JRadioButton botonProveedor;
+    private javax.swing.JComboBox comboBoxMeses;
     private javax.swing.ButtonGroup grupo_botones;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox jComboBoxMeses;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

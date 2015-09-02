@@ -131,6 +131,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String nickname = textPaneNickname.getText();
         String email = textPaneEmail.getText();
+        String error = "";
         ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
         if (!(nickname.equals((""))) && (!(email.equals(""))) && (ictrlU.verificarNickname(nickname)) && (ictrlU.verificarEmail(email))) {
             AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ictrlU);
@@ -140,8 +141,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             au2.setVisible(true);
             getParent().add(au2);
         }
-        else
-            JOptionPane.showMessageDialog(this, "Verifique sus datos por favor", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);            
+        else{
+            if (nickname.equals((""))) error = "Por favor ingrese un nickname.";
+            else if(email.equals("")) error = "Por favor ingrese un email.";
+            else if (!ictrlU.verificarNickname(nickname)) error = "Ya existe un usuario con el mismo nickname.";
+            else if (!ictrlU.verificarEmail(email)) error = "Ya existe un usuario con el mismo email.";
+            JOptionPane.showMessageDialog(this, "Error! "+error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE); 
+        }                
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
     Fabrica fabrica;

@@ -357,40 +357,60 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         String apellido = textPaneApellido.getText();
         String imagen = null;
         String diaString = textPaneDia.getText();
-        int dia = parseInt(diaString);
-        //String mes = comboBoxMeses.getSelectedItem().toString();
-        int mes = comboBoxMeses.getSelectedIndex() + 1;
         String anioString = textPaneAnio.getText();
-        int anio = parseInt(anioString);
+        int anio = 0;
+        int dia = 0;
         boolean okNombre = (nombre.matches("([a-z]|[A-Z]|)+"))&&(nombre.length() >= 1);
-        boolean okApellido = (nombre.matches("([a-z]|[A-Z]|)+"))&&(apellido.length() >= 1);
+        boolean okApellido = (apellido.matches("([a-z]|[A-Z]|)+"))&&(apellido.length() >= 1);
         boolean okDia = (diaString.matches("([0-9]|)+"))&&(diaString.length() >= 1);
         boolean okAnio = (anioString.matches("([0-9]|)+"))&&(anioString.length() >= 1);
         boolean proveedor = radioButtonProveedor.isSelected();
+        if (okDia) dia = parseInt(diaString);
+        okDia = ((okDia)&&(dia>=1)&&(dia<=31));
+        if (okAnio) anio = parseInt(anioString);
+        okAnio = ((okAnio)&&(anio>=1800));
+        int mes = comboBoxMeses.getSelectedIndex() + 1;
         boolean ok = (okNombre && okApellido && okDia && okAnio);
         Date fechaNacimiento = new Date();
-        fechaNacimiento.setDate(dia);
-        fechaNacimiento.setMonth(mes);
-        fechaNacimiento.setYear(anio);
+        boolean okNombreEmpresa = false;
+        boolean okLinkEmpresa = false;
+        boolean okP = false;
+        boolean todoOk = ok;
+        String nombreEmpresa = "";
+        String linkEmpresa = "";
+        if ((okDia)&&(okAnio)){
+            fechaNacimiento.setDate(dia);
+            fechaNacimiento.setMonth(mes);
+            fechaNacimiento.setYear(anio);
+        }
         if (ok){
             DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, imagen, fechaNacimiento);
-            //ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
             ictrlU.ingresarDatosUsuario(dtU, proveedor);
             if (proveedor){
-                System.out.println("proveee");
-                String nombreEmpresa = textPaneNombreEmpresa.getText();
-                String linkEmpresa = textPaneLinkEmpresa.getText();
-                boolean okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+"))&&(nombreEmpresa.length() >= 1);
-                boolean okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+"))&&(linkEmpresa.length() >= 1);
-                boolean okP = (okNombreEmpresa && okLinkEmpresa);
-                if (okP) ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa); 
+                nombreEmpresa = textPaneNombreEmpresa.getText();
+                linkEmpresa = textPaneLinkEmpresa.getText();
+                okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+"))&&(nombreEmpresa.length() >= 1);
+                okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+"))&&(linkEmpresa.length() >= 1);
+                okP = (okNombreEmpresa && okLinkEmpresa);
+                if (okP){
+                    todoOk = true;
+                    ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
+                } 
+                else todoOk =false;
             }
+        }
+        if (todoOk){
             ictrlU.altaUsuario();
             JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
         else {
-            JOptionPane.showMessageDialog(this, "Verifique sus datos", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+            String error = null;
+            if (!okNombre) error = "verifique su nombre.";
+            else if (!okApellido) error = "verifique su apellido.";
+            else if (((!okDia))||(!okAnio)) error = "verifique su fecha.";
+            else if ((proveedor)&&(!okP)) error = "verifique los datos de su Empresa.";
+            JOptionPane.showMessageDialog(this, "Error! Por favor "+ error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 

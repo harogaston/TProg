@@ -54,6 +54,35 @@ public class Reserva {
 			lineasReserva.add(linea);
 		}
 	}
+        
+        public Reserva(Date fCreacion,EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception{
+		this.idReserva = Reserva.contador;
+		Reserva.contador++;
+		this.fCreacion = fCreacion;
+		this.estado = estado;
+		this.lineasReserva = new HashSet();
+		this.precioTotal = precioTotal;
+		
+		// Creo y agrego las lineasReserva
+		ManejadorProductos mp = ManejadorProductos.getInstance();
+		LineaReserva linea; // debe declararse fuera de los if
+		for (DTLineaReserva dtLinea : lineas){
+			if (!dtLinea.getServicio().equals("")) {
+				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
+				Servicio s = mp.getServicio(dtMinS);
+				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
+			}
+			else if (!dtLinea.getPromocion().equals("")) {
+				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
+				Promocion p = mp.getPromocion(dtMinP);
+				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
+			}
+			else {
+				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
+			}
+			lineasReserva.add(linea);
+		}
+	}
 
 	public int getIdReserva() {
 		return idReserva;
@@ -106,13 +135,15 @@ public class Reserva {
 	}
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {
-		if (("Registrada".equals(this.getEstadoReserva().toString()))
-				&& (!"Facturada".equals(nuevoEstado.toString()))) {
-			setEstadoReserva(nuevoEstado);
-			return true;
-		} else {
-			return false;
-		}
+            if (nuevoEstado != null){
+		if (("Registrada".equals(this.getEstadoReserva().toString())) && (!"Facturada".equals(nuevoEstado.toString()))) {
+                    setEstadoReserva(nuevoEstado);
+                    return true;
+                }
+            }  
+                   
+            return false;
+                
 	}
 
 	public void eliminar() {

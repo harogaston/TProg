@@ -140,6 +140,7 @@ public class CtrlUniversal implements ICtrlUniversal {
         p.agregarCiudad(new Ciudad("Pekín"));
         p.agregarCiudad(new Ciudad("Cantón"));
         mp.agregarPais(p);          
+        /*
     //Alta Servicios
         Set<String> imgs = new HashSet();
         imgs.add(CtrlUniversal.class.getResource("imagenes/IMG7.jpg").getPath());
@@ -150,6 +151,6 @@ public class CtrlUniversal implements ICtrlUniversal {
         cats.add("Iberia");
         cats.add("Standard");
         mp.altaServicio(dtS, "remus", cats);
-        
+                */
     }
 }

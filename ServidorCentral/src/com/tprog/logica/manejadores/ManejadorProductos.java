@@ -81,7 +81,7 @@ public class ManejadorProductos {
             DTServicio result = null;
             if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) {
                 if (!servicios.get(dtS.getNicknameP()).isEmpty()
-                        && !servicios.get(dtS.getIdServicio()).containsKey(dtS.getIdServicio())) {
+                        && !servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
                     Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
                     result = s.crearDT();
                 }
@@ -315,6 +315,9 @@ public class ManejadorProductos {
                 s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,ciudadDestino,prov);
             }else{
                 s = new Servicio(dtS.getIdServicio(),dtS.getDescripcion(),dtS.getPrecio(),dtS.getImagenes(),ciudadOrigen,null,prov);
+            }
+            if (!this.servicios.containsKey(nicknameP)) {
+                servicios.put(nicknameP, new HashMap<String, Servicio>());
             }
             this.servicios.get(nicknameP).put(dtS.getIdServicio(),s);
             prov.addServicio(s);

@@ -11,15 +11,17 @@ import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.event.MouseListener;
 import java.io.File;
 import static java.lang.Integer.parseInt;
-import static java.lang.Integer.parseInt;
-import static java.lang.Integer.parseInt;
+import java.util.Enumeration;
 import java.util.Set;
+import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 /**
  *
@@ -42,7 +44,30 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
+        cargarCiudades();
+    }
+    
+    private void cargarCiudades() {
+        setCiudades = ctrlProductos.listarCiudades();
+        Enumeration e = setCiudades.breadthFirstEnumeration();
+        /*
+        El árbol tiene la siguiente estructura de tres niveles:
+        Root que engloba a todos los subárboles
+        Nivel de países
+        Nivel de ciudades
+        Teniendo una ciudad, se puede hacer getParent() y obtener a su 
+        país correspondiente
+        */
+        while (e.hasMoreElements()) {
+            TreeNode nodo = (TreeNode) e.nextElement();
+            if (nodo.getChildCount() == 0) { //es hoja, o sea ciudad
+                listaCiudades.add(nodo.toString());
+//                System.out.println(nodo.toString());
+            }
+        }
+        listaCiudadesOrigenInterfaz.updateUI();
+        listaCiudadesDestinoInterfaz.updateUI();
     }
 
     /**
@@ -56,8 +81,8 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        listaCiudadesOrigen = new javax.swing.JComboBox();
-        listaCiudadesDestino = new javax.swing.JComboBox();
+        listaCiudadesOrigenInterfaz = new javax.swing.JComboBox();
+        listaCiudadesDestinoInterfaz = new javax.swing.JComboBox();
         buttonConfirmar = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
         buttonSalir = new javax.swing.JButton();
@@ -85,13 +110,23 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         jLabel2.setText("Ciudad de Origen");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 204, 147, -1));
 
-        listaCiudadesOrigen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(listaCiudadesOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 166, -1));
+        listaCiudadesOrigenInterfaz.setModel(new javax.swing.DefaultComboBoxModel(listaCiudades));
+        listaCiudadesOrigenInterfaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaCiudadesOrigenInterfazActionPerformed(evt);
+            }
+        });
+        getContentPane().add(listaCiudadesOrigenInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 166, -1));
 
-        listaCiudadesDestino.setVisible(false);
-        listaCiudadesDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        listaCiudadesDestino.setFocusable(false);
-        getContentPane().add(listaCiudadesDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 168, -1));
+        listaCiudadesDestinoInterfaz.setVisible(false);
+        listaCiudadesDestinoInterfaz.setModel(new javax.swing.DefaultComboBoxModel(listaCiudades));
+        listaCiudadesDestinoInterfaz.setFocusable(false);
+        listaCiudadesDestinoInterfaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaCiudadesDestinoInterfazActionPerformed(evt);
+            }
+        });
+        getContentPane().add(listaCiudadesDestinoInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 168, -1));
 
         buttonConfirmar.setText("Confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -199,32 +234,55 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 			imagenes.add(ruta3);
 		}
         boolean okImagenes = true;
-        String ciudadOrigen = null;
-        ciudadOrigen = (String) listaCiudadesOrigen.getSelectedItem();
-        String paisOrigen = null; // falta
-        DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
-        ctrlProductos.seleccionarOrigen(origen);
-        if (checkBoxCiudadDestino.isSelected()){
-            String ciudadDestino = null;
-            ciudadDestino = (String) listaCiudadesDestino.getSelectedItem();
-            String paisDestino = null; // falta
-            DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
-            ctrlProductos.seleccionarDestino(destino);
-        }
-        if ((okDescripcion)&&(okPrecio)&&(okImagenes))
-            ctrlProductos.altaServicio(descripcion, precio, imagenes);
-        else {
-            String error = "";
-            if (!okDescripcion) error = "Por favor ingrese una descripción.";
-            else if(!okPrecio) error = "Por favor verifique el precio.";
-            JOptionPane.showMessageDialog(this, "Error! "+error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+        if (ciudadOrigen != null) {
+            //busco pais origen en el arbol
+            String paisOrigen = null;
+            Enumeration e = setCiudades.breadthFirstEnumeration();
+            while (e.hasMoreElements()) {
+                TreeNode nodo = (TreeNode) e.nextElement();
+                if (nodo.toString().equals(ciudadOrigen)){ //si encuentro al nodo actual
+                //obtengo a su padre para asociarlo a pais
+                    paisOrigen = nodo.getParent().toString();
+                }
+            }            
+            if (paisOrigen != null) {
+                DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
+                ctrlProductos.seleccionarOrigen(origen);
+                if (checkBoxCiudadDestino.isSelected()){
+                    if (ciudadDestino != null) {
+                        //busco pais destino en el arbol
+                        String paisDestino = null; // falta
+                        e = setCiudades.breadthFirstEnumeration();
+                        while (e.hasMoreElements()) {
+                            TreeNode nodo = (TreeNode) e.nextElement();
+                            if (nodo.toString().equals(ciudadDestino)){ //si encuentro al nodo actual
+                                //obtengo a su padre para asociarlo a pais
+                                paisDestino = nodo.getParent().toString();
+                            }
+                        }                         
+                        DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
+                        ctrlProductos.seleccionarDestino(destino);
+                    } else JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad correcta de destino, o ninguna", "Error", JOptionPane.INFORMATION_MESSAGE);
+                }
+                if ((okDescripcion)&&(okPrecio)&&(okImagenes))
+                    ctrlProductos.altaServicio(descripcion, precio, imagenes);
+                else {
+                    String error = "";
+                    if (!okDescripcion) error = "Por favor ingrese una descripción.";
+                    else if(!okPrecio) error = "Por favor verifique el precio.";
+                    JOptionPane.showMessageDialog(this, "Error! "+error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } //es imposible que el paisOrigen sea null, por eso no tiro ningun mensaje
+            JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad de origen", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void checkBoxCiudadDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxCiudadDestinoActionPerformed
         // TODO add your handling code here:
-        if (checkBoxCiudadDestino.isSelected()) listaCiudadesDestino.setVisible(true);
-        else listaCiudadesDestino.setVisible(false);
+        if (checkBoxCiudadDestino.isSelected()) listaCiudadesDestinoInterfaz.setVisible(true);
+        else listaCiudadesDestinoInterfaz.setVisible(false);
     }//GEN-LAST:event_checkBoxCiudadDestinoActionPerformed
 
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
@@ -301,7 +359,18 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                          }
                     }
     }//GEN-LAST:event_buttonImagen3ActionPerformed
+
+    private void listaCiudadesOrigenInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaCiudadesOrigenInterfazActionPerformed
+        ciudadOrigen = (String) listaCiudadesOrigenInterfaz.getSelectedItem();
+    }//GEN-LAST:event_listaCiudadesOrigenInterfazActionPerformed
+
+    private void listaCiudadesDestinoInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaCiudadesDestinoInterfazActionPerformed
+        ciudadDestino = (String) listaCiudadesOrigenInterfaz.getSelectedItem();
+    }//GEN-LAST:event_listaCiudadesDestinoInterfazActionPerformed
     
+    String ciudadOrigen = null;
+    String ciudadDestino = null;
+    DefaultMutableTreeNode setCiudades;
     String ruta1;
     String ruta2;
     String ruta3;
@@ -323,8 +392,9 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel labelImagen1;
     private javax.swing.JLabel labelImagen2;
     private javax.swing.JLabel labelImagen3;
-    private javax.swing.JComboBox listaCiudadesDestino;
-    private javax.swing.JComboBox listaCiudadesOrigen;
+    private javax.swing.JComboBox listaCiudadesDestinoInterfaz;
+    private Vector<String> listaCiudades = new Vector<>();
+    private javax.swing.JComboBox listaCiudadesOrigenInterfaz;
     private javax.swing.JTextPane textPaneDescripcion;
     private javax.swing.JTextPane textPanePrecio;
     // End of variables declaration//GEN-END:variables

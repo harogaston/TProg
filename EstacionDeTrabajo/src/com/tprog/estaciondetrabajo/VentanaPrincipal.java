@@ -297,6 +297,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 //        try {
             ctrl.cargarDatos();
             JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+            cargarDatos.setEnabled(false);
 //        } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
 //        }

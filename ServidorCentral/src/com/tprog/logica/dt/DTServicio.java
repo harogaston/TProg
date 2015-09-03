@@ -52,12 +52,20 @@ public class DTServicio {
 
 	@Override
 	public String toString() {
-		return "ID de servicio: " + idServicio
-				+ "\n" + "Descripcion: " + descripcion
-				+ "\n" + "Precio: " + Float.toString(precio)
-				+ "\n" + "Origen: " + origen.toString()
-				+ "\n" + "Destino: " + destino.toString()
-				+ "\n";
+            if (destino == null) {
+                return "ID de servicio: " + idServicio
+                        + "\n" + "Descripcion: " + descripcion
+                        + "\n" + "Precio: " + Float.toString(precio)
+                        + "\n" + "Origen: " + origen.toString()
+                        + "\n";
+            } else {
+                return "ID de servicio: " + idServicio
+                        + "\n" + "Descripcion: " + descripcion
+                        + "\n" + "Precio: " + Float.toString(precio)
+                        + "\n" + "Origen: " + origen.toString()
+                        + "\n" + "Destino: " + destino.toString()
+                        + "\n";                
+            }
 	}
 
 }

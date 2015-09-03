@@ -87,15 +87,14 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public void altaUsuario() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		if (esProveedor) {
-                    DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
-                    mu.altaProveedor(nuevoDT);
-		}
-		else{
-                    DTCliente nuevoDT = new DTCliente(dtU);
-                    mu.altaCliente(nuevoDT);
-		}
+            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+            if (esProveedor) {
+                DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
+                mu.altaProveedor(nuevoDT);
+            }else{
+                DTCliente nuevoDT = new DTCliente(dtU);
+                mu.altaCliente(nuevoDT);
+            }
 	}
 
 	@Override

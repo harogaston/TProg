@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package com.tprog.logica.clases;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
         
 /**
@@ -30,5 +31,10 @@ public class Pais {
     
     public void setIdPais(String id){
         this.idPais = id;
+    }
+    
+    public void agregarCiudad(Ciudad c){
+        this.ciudades.put(c.getIdCiudad(), c);
+        c.setPais(this);
     }
 }

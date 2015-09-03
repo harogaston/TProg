@@ -20,8 +20,8 @@ public class DTCliente extends DTUsuario {
 	}
 
 	public DTCliente(DTUsuario dtU) {
-		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
-		this.reservas = new HashSet<>();
+            super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
+            this.reservas = new HashSet<>();
 	}
         
         public Set<DTMinReserva> getReservas(){

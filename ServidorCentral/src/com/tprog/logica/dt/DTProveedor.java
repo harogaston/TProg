@@ -14,9 +14,9 @@ public class DTProveedor extends DTUsuario {
 
 	public DTProveedor(String nickname, String nombre, String apellido, String email,
 			String imagen, Date fechaN, String empresa, String webEmpresa) {
-		super(nickname, nombre, apellido, email, imagen, fechaN);
-		this.empresa = empresa;
-		this.webEmpresa = webEmpresa;
+            super(nickname, nombre, apellido, email, imagen, fechaN);
+            this.empresa = empresa;
+            this.webEmpresa = webEmpresa;
 	}
 
 	public DTProveedor(DTUsuario dtU, String empresa, String webEmpresa) {

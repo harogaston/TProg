@@ -35,12 +35,13 @@ public class ManejadorProductos {
 	private Map<String, Map<String, Servicio>> servicios;
 	private Map<String, Map<String, Promocion>> promociones;
 
-	protected ManejadorProductos() {
-		categorias = new HashMap();
-		servicios = new HashMap();
-		promociones = new HashMap();
-		ubicaciones = new HashMap();
-		root = new Simple("Categorias");
+	private ManejadorProductos() {
+            categorias = new HashMap();
+            servicios = new HashMap();
+            promociones = new HashMap();
+            ubicaciones = new HashMap();
+            root = new Simple("Categorias");
+            categorias.put("root.getIdCategoria()", root);
 	}
 
 	public static ManejadorProductos getInstance() {
@@ -51,17 +52,17 @@ public class ManejadorProductos {
 	}
 
 	public Set<DTMinPromocion> listarPromociones() {
-		Set<DTMinPromocion> result = new HashSet();
-		if (!promociones.isEmpty()) {
-			for (Map<String, Promocion> mapaPromocion : promociones.values()) {
-				if (!mapaPromocion.isEmpty()) {
-					for (Promocion p : mapaPromocion.values()) {
-						result.add(p.crearDTMin());
-					}
-				}
-			}
-		}
-		return result;
+            Set<DTMinPromocion> result = new HashSet();
+            if (!promociones.isEmpty()) {
+                for (Map<String, Promocion> mapaPromocion : promociones.values()) {
+                    if (!mapaPromocion.isEmpty()) {
+                        for (Promocion p : mapaPromocion.values()) {
+                            result.add(p.crearDTMin());
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
@@ -216,12 +217,12 @@ public class ManejadorProductos {
 	}
 
 	public boolean esCategoriaPadre(String idCategoria) {
-		boolean result = false;
-		if (!categorias.isEmpty() && categorias.containsKey(idCategoria)) {
-			Categoria padre = categorias.get(idCategoria);
-			result = padre.esCategoriaPadre();
-		}
-		return result;
+            boolean result = false;
+            if (!categorias.isEmpty() && categorias.containsKey(idCategoria)) {
+                Categoria padre = categorias.get(idCategoria);
+                result = padre.esCategoriaPadre();
+            }
+            return result;
 	}
 
 	public boolean esCategoriaSimpleAgregar(DTMinServicio dtS, String cat) {
@@ -370,5 +371,9 @@ public class ManejadorProductos {
                 }else return null;        
             }else return null;   
 	}
+        
+        public void agregarPais(Pais p){
+            this.ubicaciones.put(p.getIdPais(), p);
+        }
         
 }

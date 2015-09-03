@@ -10,9 +10,6 @@ import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JInternalFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -37,7 +34,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         verInformacionDeServicio = new VerInformacionDeServicio();
         cancelarReserva = new CancelarReserva();
         altaDeUsuario1 = new AltaDeUsuario1();
-        altaDeServicio1 = new AltaDeServicio1();
+        altaDeServicio = new AltaDeServicio2();
         realizarReserva1 = new RealizarReserva1();
         //las agrego al content pane
         getContentPane().add(actualizarServicio, BorderLayout.CENTER);
@@ -50,7 +47,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
         getContentPane().add(cancelarReserva, BorderLayout.CENTER);
         getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
-        getContentPane().add(altaDeServicio1, BorderLayout.CENTER);
+        getContentPane().add(altaDeServicio, BorderLayout.CENTER);
         getContentPane().add(realizarReserva1, BorderLayout.CENTER);
         //las agrego al hash
         internalFrames.put("actualizarServicio", actualizarServicio);
@@ -63,7 +60,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
         internalFrames.put("cancelarReserva", cancelarReserva);
         internalFrames.put("altaDeUsuario1", altaDeUsuario1);
-        internalFrames.put("altaDeServicio1", altaDeServicio1);
+        internalFrames.put("altaDeServicio", altaDeServicio);
         internalFrames.put("realizarReserva1", realizarReserva1);
         //esconder todas
         for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
@@ -283,7 +280,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         showInternalFrame("actualizarServicio");
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
      private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        showInternalFrame("altaDeServicio1");
+        showInternalFrame("altaDeServicio");
     } 
     /**
      * @param args the command line arguments
@@ -321,7 +318,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VerInformacionDeServicio verInformacionDeServicio;
     private CancelarReserva cancelarReserva;
     private AltaDeUsuario1 altaDeUsuario1;
-    private AltaDeServicio1 altaDeServicio1;
+    private AltaDeServicio2 altaDeServicio;
     private RealizarReserva1 realizarReserva1;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -152,21 +152,29 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_casillaPadreActionPerformed
 
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
-        if (!nombreCategoria.getText().equals("")) { //nombre no vacío
+        String categoriaNueva = nombreCategoria.getText();
+        if (!categoriaNueva.equals("")) { //nombre no vacío
             if (casillaPadre.isSelected()) {
-                
-            } else {
-                String idCategoria =  ((DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent()).toString();
-                if (! ctrlProductos.seleccionarCategoriaPadre(idCategoria))
+                String categoriaPadre =  ((DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent()).toString();
+                if (! ctrlProductos.seleccionarCategoriaPadre(categoriaPadre))
                     JOptionPane.showMessageDialog(this, "Esa categoria tiene servicios asociados; escoja otra", "Categoria padre erronea", JOptionPane.INFORMATION_MESSAGE);
-                else
-                    if (!ctrlProductos.idCategoriaDisponible(idCategoria))
+                else {
+                    if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))
                         JOptionPane.showMessageDialog(this, "El nombre escogido esta en uso; escoja otro", "Nombre invalido", JOptionPane.INFORMATION_MESSAGE);
                     else {
                         ctrlProductos.altaCategoria();
                         JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
                         cargarDatos();
                     }
+                }
+            } else {
+                if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))
+                    JOptionPane.showMessageDialog(this, "El nombre escogido esta en uso; escoja otro", "Nombre invalido", JOptionPane.INFORMATION_MESSAGE);
+                else {
+                    ctrlProductos.altaCategoria();
+                    JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                    cargarDatos();
+                }
             }
         } else JOptionPane.showMessageDialog(this, "Por favor ingrese un nombre para la categoria", "Campo vacio", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonConfirmarActionPerformed

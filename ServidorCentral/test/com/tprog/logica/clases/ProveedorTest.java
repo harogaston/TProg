@@ -7,114 +7,104 @@ import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class ProveedorTest {
+
+	Date fechaN;
+	Proveedor instance;
 	
 	public ProveedorTest() {
 	}
-	
+
 	@Before
 	public void setUp() {
+		fechaN = new Date();
+		instance = new Proveedor("nick", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
 	}
 
 	@Test
 	public void testCrearDTMin() {
 		System.out.println("crearDTMin");
-		Proveedor instance = null;
-		DTMinProveedor expResult = null;
+		DTMinProveedor expResult = new DTMinProveedor("nick", "email", "empresa");
 		DTMinProveedor result = instance.crearDTMin();
 		assertEquals(expResult, result);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testCrearDT() {
 		System.out.println("crearDT");
-		Proveedor instance = null;
-		DTProveedor expResult = null;
+		DTProveedor expResult = new DTProveedor("nick", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
 		DTProveedor result = instance.crearDT();
 		assertEquals(expResult, result);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testListarServicios() {
 		System.out.println("listarServicios");
-		Proveedor instance = null;
-		Set<DTMinServicio> expResult = null;
+		Set<DTMinServicio> expResult = new HashSet<>();
 		Set<DTMinServicio> result = instance.listarServicios();
 		assertEquals(expResult, result);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testListarPromociones() {
 		System.out.println("listarPromociones");
-		Proveedor instance = null;
-		Set<DTMinPromocion> expResult = null;
+		Set<DTMinPromocion> expResult = new HashSet<>();
 		Set<DTMinPromocion> result = instance.listarPromociones();
 		assertEquals(expResult, result);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testAddServicio() {
 		System.out.println("addServicio");
-		Servicio s = null;
-		Proveedor instance = null;
+		Servicio s = new Servicio("id", "desc", 123.5F, null, null, null, instance);
 		instance.addServicio(s);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testAddPromocion() {
 		System.out.println("addPromocion");
 		Promocion p = null;
-		Proveedor instance = null;
 		instance.addPromocion(p);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testSetEmpresa() {
 		System.out.println("setEmpresa");
-		String empresa = "";
-		Proveedor instance = null;
+		String empresa = "nuevaEmpresa";
 		instance.setEmpresa(empresa);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testSetWebEmpresa() {
 		System.out.println("setWebEmpresa");
-		String webEmpresa = "";
-		Proveedor instance = null;
+		String webEmpresa = "nuevaWeb";
 		instance.setWebEmpresa(webEmpresa);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testGetEmpresa() {
 		System.out.println("getEmpresa");
-		Proveedor instance = null;
-		String expResult = "";
+		String expResult = "empresa";
 		String result = instance.getEmpresa();
 		assertEquals(expResult, result);
-		fail("The test case is a prototype.");
 	}
 
 	@Test
 	public void testGetWebEmpresa() {
 		System.out.println("getWebEmpresa");
-		Proveedor instance = null;
-		String expResult = "";
+		String expResult = "webEmpresa";
 		String result = instance.getWebEmpresa();
 		assertEquals(expResult, result);
-		fail("The test case is a prototype.");
 	}
-	
+
 }

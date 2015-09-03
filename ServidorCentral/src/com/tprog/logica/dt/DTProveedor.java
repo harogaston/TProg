@@ -40,4 +40,17 @@ public class DTProveedor extends DTUsuario {
 		output = output.concat("Web Empresa: " + webEmpresa + "\n");
 		return output;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		DTProveedor dt = (DTProveedor) o;
+		return this.apellido == dt.apellido && 
+			this.email == dt.email && 
+			this.empresa == dt.empresa &&
+			this.fechaNacimiento.equals(dt.fechaNacimiento) &&
+			this.imagen == dt.imagen &&
+			this.nickname == dt.nickname &&
+			this.nombre == dt.nombre &&
+			this.webEmpresa == dt.webEmpresa;
+	}
 }

@@ -20,7 +20,7 @@ import java.util.Set;
 public class Reserva {
 
 	private int idReserva;
-	private static int contador;
+	private static int contador = 1;
 	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
@@ -55,7 +55,7 @@ public class Reserva {
 		}
 	}
         
-        public Reserva(Date fCreacion,EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception{
+        public Reserva(Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception{
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
 		this.fCreacion = fCreacion;

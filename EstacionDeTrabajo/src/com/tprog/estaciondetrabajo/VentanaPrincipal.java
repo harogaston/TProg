@@ -19,7 +19,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		//inicializo hash
 		internalFrames = new HashMap<>();
 		//inicializo internal frames
-                altaDeServicio = new AltaDeServicio2();
+		altaDeServicio = new AltaDeServicio2();
 		actualizarServicio = new ActualizarServicio();
 		actualizarEstadoReserva = new ActualizarEstadoReserva();
 		altaCategoria = new AltaCategoria();
@@ -32,7 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		altaDeUsuario1 = new AltaDeUsuario1();
 		realizarReserva1 = new RealizarReserva1();
 		//las agrego al content pane
-                getContentPane().add(altaDeServicio, BorderLayout.CENTER);
+		getContentPane().add(altaDeServicio, BorderLayout.CENTER);
 		getContentPane().add(actualizarServicio, BorderLayout.CENTER);
 		getContentPane().add(actualizarEstadoReserva, BorderLayout.CENTER);
 		getContentPane().add(altaCategoria, BorderLayout.CENTER);
@@ -45,7 +45,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
 		getContentPane().add(realizarReserva1, BorderLayout.CENTER);
 		//las agrego al hash
-                internalFrames.put("altaDeServicio", altaDeServicio);
+		internalFrames.put("altaDeServicio", altaDeServicio);
 		internalFrames.put("actualizarServicio", actualizarServicio);
 		internalFrames.put("actualizarEstadoReserva", actualizarEstadoReserva);
 		internalFrames.put("altaCategoria", altaCategoria);
@@ -61,10 +61,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
 			internalFrame.getValue().setVisible(false);
 		}
-		
+
 		//inicializacion autogenerada
 		initComponents();
-		//this.setSize(640, 525);
 	}
 
 	/**
@@ -110,6 +109,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 formComponentResized(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));
         menu.setMinimumSize(new java.awt.Dimension(240, 20));
@@ -292,11 +292,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
-        Fabrica f = Fabrica.getInstance();
-        ICtrlUniversal ctrl = f.getICtrlUniversal();
+		Fabrica f = Fabrica.getInstance();
+		ICtrlUniversal ctrl = f.getICtrlUniversal();
 //        try {
-            ctrl.cargarDatos();
-            JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+		ctrl.cargarDatos();
+		JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
 //        } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
 //        }
@@ -334,7 +334,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 	HashMap<String, JInternalFrame> internalFrames;
 	//Variables nuestras
-        private AltaDeServicio2 altaDeServicio;
+	private AltaDeServicio2 altaDeServicio;
 	private ActualizarServicio actualizarServicio;
 	private ActualizarEstadoReserva actualizarEstadoReserva;
 	private AltaCategoria altaCategoria;

@@ -141,15 +141,6 @@ public class CtrlUniversal implements ICtrlUniversal {
         p.agregarCiudad(new Ciudad("Cantón"));
         mp.agregarPais(p);          
     //Alta Servicios
-        Set<String> imgs = new HashSet();
-        imgs.add(CtrlUniversal.class.getResource("imagenes/IMG7.jpg").getPath());
-        DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad" , 
-                1100, imgs , new DTUbicacion("Montevideo", "Uruguay"), 
-                new DTUbicacion("Valecia", "España"));
-        Set<String> cats = new HashSet(){};
-        cats.add("Iberia");
-        cats.add("Standard");
-        mp.altaServicio(dtS, "remus", cats);
         
     }
 }

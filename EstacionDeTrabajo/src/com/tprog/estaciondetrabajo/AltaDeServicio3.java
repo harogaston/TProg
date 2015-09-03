@@ -8,7 +8,9 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -30,6 +32,10 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -48,6 +54,8 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         buttonSalir = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
+
+        setPreferredSize(new java.awt.Dimension(690, 435));
 
         jLabel1.setText("Ingrese el nombre del nuevo Servicio y haga click en \"Aceptar\".");
 

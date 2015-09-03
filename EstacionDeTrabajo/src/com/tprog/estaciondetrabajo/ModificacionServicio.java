@@ -9,7 +9,9 @@ import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -27,6 +29,10 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         this.servicio = servicio;
         this.ctrlProductos = ctrlProductos;
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -172,7 +178,12 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonModificarCategoriasActionPerformed
 
     private void botonModificarImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarImagenesActionPerformed
-        // TODO add your handling code here:
+        ModificacionImagenes m = new ModificacionImagenes(this, ctrlProductos);
+        getContentPane().add(m, BorderLayout.CENTER);
+        m.setBounds(10, 10, 100, 100);
+        this.setVisible(false);
+        m.setVisible(true);
+        getParent().add(m);         
     }//GEN-LAST:event_botonModificarImagenesActionPerformed
 
     

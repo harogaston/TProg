@@ -11,8 +11,10 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -33,6 +35,10 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         initComponents();
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
     
     void cargarDatos() {
@@ -106,6 +112,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
             }
         });
 
+        arbolCategorias.setModel(null);
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 arbolCategoriasValueChanged(evt);

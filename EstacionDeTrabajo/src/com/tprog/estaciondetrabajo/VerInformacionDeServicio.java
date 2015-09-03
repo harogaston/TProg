@@ -11,8 +11,9 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
+import java.awt.event.MouseListener;
 import java.util.Set;
-import java.util.Vector;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -27,6 +28,10 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeServicio() {
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }
     }
     
     void cargarDatos() {
@@ -56,6 +61,8 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(690, 435));
+        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

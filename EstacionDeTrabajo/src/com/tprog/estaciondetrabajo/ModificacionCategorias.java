@@ -6,11 +6,13 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
@@ -40,6 +42,11 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
             DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) en.nextElement();
             listaSistema.add(nodo.toString());
         }
+        //disable dragging
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**

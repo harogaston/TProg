@@ -9,8 +9,10 @@ import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -32,6 +34,10 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         for (DTMinServicio dt : servicios) {
             listaServicios.add(dt.getIdServicio());
         }
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**

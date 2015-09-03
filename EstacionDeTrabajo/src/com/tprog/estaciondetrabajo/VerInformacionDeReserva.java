@@ -9,8 +9,10 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlReservas;
+import java.awt.event.MouseListener;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -23,6 +25,10 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
      */
     public VerInformacionDeReserva() {
         initComponents();
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
     
     void cargarDatos() {

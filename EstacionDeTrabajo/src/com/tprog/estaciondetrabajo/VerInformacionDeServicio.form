@@ -6,6 +6,10 @@
       <Border info="null"/>
     </Property>
     <Property name="toolTipText" type="java.lang.String" value=""/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[690, 435]"/>
+    </Property>
+    <Property name="visible" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

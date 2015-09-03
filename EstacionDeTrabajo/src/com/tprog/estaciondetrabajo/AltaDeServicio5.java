@@ -8,6 +8,7 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.event.MouseListener;
 import java.io.File;
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.parseInt;
@@ -18,6 +19,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
@@ -37,6 +39,10 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         setTitle("Alta de Servicio");
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
+        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+        }        
     }
 
     /**
@@ -70,6 +76,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         labelImagen2 = new javax.swing.JLabel();
         labelImagen3 = new javax.swing.JLabel();
 
+        setPreferredSize(new java.awt.Dimension(690, 435));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese los datos del servicio y haga click en \"Confirmar\".");

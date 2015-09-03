@@ -15,6 +15,7 @@ import java.util.Set;
 
 public interface ICtrlReservas {
 	public void seleccionarCliente(String nickname);
+        public void seleccionarProveedor(String nicknameP);
 	public Set<DTMinPromocion> listarPromociones();
 	public Set<DTMinServicio> listarServicios();
 	public void seleccionarPromocion(DTMinPromocion dtP);

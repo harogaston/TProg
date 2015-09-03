@@ -456,7 +456,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 			} else if (!okLinkEmpresa) {
 				error = "El link de empresa ingresado no es correcto.";
 			}
-			JOptionPane.showMessageDialog(this, "Error! Por favor " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 

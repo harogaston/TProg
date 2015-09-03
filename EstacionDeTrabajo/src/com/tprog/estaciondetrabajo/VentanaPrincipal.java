@@ -26,7 +26,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		verInformacionDeServicio = new VerInformacionDeServicio();
 		cancelarReserva = new CancelarReserva();
 		altaDeUsuario1 = new AltaDeUsuario1();
-		altaDeServicio1 = new AltaDeServicio1();
 		realizarReserva1 = new RealizarReserva1();
 		//las agrego al content pane
 		getContentPane().add(actualizarServicio, BorderLayout.CENTER);
@@ -39,7 +38,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
 		getContentPane().add(cancelarReserva, BorderLayout.CENTER);
 		getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
-		getContentPane().add(altaDeServicio1, BorderLayout.CENTER);
 		getContentPane().add(realizarReserva1, BorderLayout.CENTER);
 		//las agrego al hash
 		internalFrames.put("actualizarServicio", actualizarServicio);
@@ -52,7 +50,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
 		internalFrames.put("cancelarReserva", cancelarReserva);
 		internalFrames.put("altaDeUsuario1", altaDeUsuario1);
-		internalFrames.put("altaDeServicio1", altaDeServicio1);
 		internalFrames.put("realizarReserva1", realizarReserva1);
 		//esconder todas
 		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
@@ -291,7 +288,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 	//Operaciones auxiliares
 	public void showInternalFrame(String id) {
-        //muestra el internal frame identificado por id
+		//muestra el internal frame identificado por id
 		//solo funciona si el internal frame fue agregado al hash
 		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
 			if (!internalFrame.getKey().equals(id)) {
@@ -314,7 +311,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	private VerInformacionDeServicio verInformacionDeServicio;
 	private CancelarReserva cancelarReserva;
 	private AltaDeUsuario1 altaDeUsuario1;
-	private AltaDeServicio1 altaDeServicio1;
 	private RealizarReserva1 realizarReserva1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

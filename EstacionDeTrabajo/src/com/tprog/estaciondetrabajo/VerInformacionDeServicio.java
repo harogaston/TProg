@@ -53,7 +53,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         arbolCategorias = new javax.swing.JTree();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBorder(null);
         setToolTipText("");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);

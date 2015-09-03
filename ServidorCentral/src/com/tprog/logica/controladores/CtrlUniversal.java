@@ -140,7 +140,5 @@ public class CtrlUniversal implements ICtrlUniversal {
         p.agregarCiudad(new Ciudad("Pekín"));
         p.agregarCiudad(new Ciudad("Cantón"));
         mp.agregarPais(p);          
-    //Alta Servicios
-        
     }
 }

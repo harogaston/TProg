@@ -109,7 +109,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 formComponentResized(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));
         menu.setMinimumSize(new java.awt.Dimension(240, 20));
@@ -293,10 +292,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
 		Fabrica f = Fabrica.getInstance();
-		ICtrlUniversal ctrl = f.getICtrlUniversal();
+                ICtrlUniversal ctrl = f.getICtrlUniversal();
 //        try {
-		ctrl.cargarDatos();
-		JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+                ctrl.cargarDatos();
+                JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+                cargarDatos.setEnabled(false);
 //        } catch (Exception e) {
 //            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
 //        }

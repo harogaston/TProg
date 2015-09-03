@@ -6,10 +6,16 @@ import com.tprog.logica.interfaces.ICtrlUniversal;
 import com.tprog.logica.manejadores.*;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTProveedor;
+import com.tprog.logica.dt.DTUbicacion;
+import com.tprog.logica.dt.DTServicio;
 import java.util.HashSet;
 import java.util.Date;
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Ciudad;
+import com.tprog.logica.clases.Proveedor;
+import java.util.Set;
+
+
 /**
  *
  * @author sofia
@@ -134,5 +140,16 @@ public class CtrlUniversal implements ICtrlUniversal {
         p.agregarCiudad(new Ciudad("Pekín"));
         p.agregarCiudad(new Ciudad("Cantón"));
         mp.agregarPais(p);          
+    //Alta Servicios
+        Set<String> imgs = new HashSet();
+        imgs.add(CtrlUniversal.class.getResource("imagenes/IMG7.jpg").getPath());
+        DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad" , 
+                1100, imgs , new DTUbicacion("Montevideo", "Uruguay"), 
+                new DTUbicacion("Valecia", "España"));
+        Set<String> cats = new HashSet(){};
+        cats.add("Iberia");
+        cats.add("Standard");
+        mp.altaServicio(dtS, "remus", cats);
+        
     }
 }

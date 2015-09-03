@@ -160,6 +160,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 				imagenUsuario.setIcon(imageIcon);
 			} catch (Exception e) {
 				System.out.println("La imagen no pudo ser cargada");
+                                imagenUsuario.setIcon(null);
 			}
 			//cargo la lista de servicios del proveedor
 			servicios = ctrlUsuarios.listarServiciosProveedor();

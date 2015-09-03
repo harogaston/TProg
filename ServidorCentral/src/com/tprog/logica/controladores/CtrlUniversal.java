@@ -153,7 +153,11 @@ public class CtrlUniversal implements ICtrlUniversal {
             p = new Pais("China");
             p.agregarCiudad(new Ciudad("Pekín"));
             p.agregarCiudad(new Ciudad("Cantón"));
-            mp.agregarPais(p);          
+            mp.agregarPais(p); 
+            
+            
+            
+            
         //Alta Servicios
         //S1    
             Set<String> imgs = new HashSet();
@@ -298,6 +302,7 @@ public class CtrlUniversal implements ICtrlUniversal {
             cats.add("Auto");
             cats.add("Chevrolet");
             mp.altaServicio(dtS, "mHooch", cats); 
+            /*
         //Alta de Promociones
         //P1 4 5
             Set<String> servs = new HashSet();
@@ -400,6 +405,7 @@ public class CtrlUniversal implements ICtrlUniversal {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
+            */
         } catch (IOException ex) {
             Logger.getLogger(CtrlUniversal.class.getName()).log(Level.SEVERE, null, ex);
         }

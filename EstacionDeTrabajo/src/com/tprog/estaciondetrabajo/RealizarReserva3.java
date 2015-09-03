@@ -8,6 +8,8 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import com.tprog.logica.interfaces.ICtrlReservas;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Set;
@@ -19,13 +21,19 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class RealizarReserva3 extends javax.swing.JInternalFrame {
+    private final ICtrlUsuarios ctrlUsuarios;
+    private final ICtrlReservas ctrlReservas;
 
     /**
      * Creates new form ReservasCliente
      * @param padre
+     * @param <error>
+     * @param ctrlReservas
      */
-    public RealizarReserva3(RealizarReserva2 padre) {
+    public RealizarReserva3(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas) {
         this.padre = padre;
+        this.ctrlUsuarios = ctrlUsuarios;
+        this.ctrlReservas = ctrlReservas;
         initComponents();
         setTitle("Realizar Reserva");
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
@@ -102,6 +110,11 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         getContentPane().add(buttonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         buttonAgregar.setText("Agregar");
+        buttonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAgregarActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         pack();
@@ -144,6 +157,17 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonVolverActionPerformed
+
+    private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
+        // TODO add your handling code here:
+        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+        ctrlUsuarios.seleccionarServicio(servicio);
+        DTServicio dtS = ctrlUsuarios.infoServicio();
+        //DTMinServicio dtmS = new DTMinServicio(ctrlReservas.)
+        
+        //ctrlReservas.seleccionarServicio(dtS);
+        
+    }//GEN-LAST:event_buttonAgregarActionPerformed
 
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;

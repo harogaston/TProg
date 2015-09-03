@@ -19,17 +19,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private final RealizarReserva1 padre;
     private final ICtrlUsuarios ctrlUsuarios;
+    private final ICtrlReservas ctrlReservas;
 
     /**
      * Creates new form RealizarReserva2
      * @param padre
+     * @param ctrlUsuarios
      * @param ctrlReservas
      */
-    public RealizarReserva2(RealizarReserva1 padre, ICtrlUsuarios ctrlUsuarios) {
+    public RealizarReserva2(RealizarReserva1 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas) {
         initComponents();
         setTitle("Realizar Reserva");
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
+        this.ctrlReservas = ctrlReservas;
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
@@ -116,6 +119,11 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         jLabel5.setText("Servicios y Promociones de la Reserva");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Fecha:");
 
@@ -219,7 +227,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(212, 212, 212)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonSalir)
@@ -236,7 +244,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void buttonAgregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarReservaActionPerformed
         // TODO add your handling code here:
-        RealizarReserva3 rr3 = new RealizarReserva3(this);
+        RealizarReserva3 rr3 = new RealizarReserva3(this, ctrlUsuarios, ctrlReservas);
         getContentPane().add(rr3, BorderLayout.CENTER);
                 rr3.setBounds(10, 10, 100, 100);
                 this.setVisible(false);
@@ -268,6 +276,10 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                 rr4.setVisible(true);
                 getParent().add(rr4); 
     }//GEN-LAST:event_buttonAgregarPromocionActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

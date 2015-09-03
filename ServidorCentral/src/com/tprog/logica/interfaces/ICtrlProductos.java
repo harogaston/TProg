@@ -13,6 +13,7 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.dt.DTMinProveedor;
+import java.util.Vector;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 

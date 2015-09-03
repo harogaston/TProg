@@ -18,12 +18,12 @@ public class DTServicio {
 
 	public DTServicio(String idServicio, String descripcion, float precio,
 			Set<String> imagenes, DTUbicacion origen, DTUbicacion destino) {
-		this.idServicio = idServicio;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.imagenes = imagenes;
-		this.origen = origen;
-		this.destino = destino;
+            this.idServicio = idServicio;
+            this.descripcion = descripcion;
+            this.precio = precio;
+            this.imagenes = imagenes;
+            this.origen = origen;
+            this.destino = destino;
 	}
 
 	public String getIdServicio() {

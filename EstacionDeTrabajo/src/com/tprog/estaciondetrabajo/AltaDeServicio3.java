@@ -55,7 +55,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         buttonSalir = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese el nombre del nuevo Servicio y haga click en \"Aceptar\".");
@@ -110,7 +110,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 DTMinServicio dtmServicio = new DTMinServicio(proveedor, nombreServicio);
                 ctrlProductos.seleccionarServicio(dtmServicio);
                 AltaDeServicio4 as4 = new AltaDeServicio4(this, ctrlProductos);
-                getContentPane().add(as4, BorderLayout.CENTER);
+//                getContentPane().add(as4, BorderLayout.CENTER);
                 as4.setBounds(10, 10, 100, 100);
                 this.setVisible(false);
                 as4.setVisible(true);

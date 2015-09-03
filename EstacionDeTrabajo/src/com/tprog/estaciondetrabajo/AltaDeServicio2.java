@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -52,6 +53,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
         for (DTMinProveedor dt : setProveedores) {
             listaProveedores.add(dt.getNickname());
         }
+        listaProveedoresInterfaz.updateUI();
     }
 
     /**
@@ -74,7 +76,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setToolTipText("");
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -230,10 +232,10 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
       
         String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
         //String proveedor = "Jorgito_de_prueba";
-        if (!proveedor.isEmpty()) {
+        if (proveedor != null) {
             ctrlProductos.seleccionarProveedor(proveedor);
             AltaDeServicio3 as3 = new AltaDeServicio3(this, ctrlProductos, proveedor);
-            getContentPane().add(as3, BorderLayout.CENTER);
+//            getContentPane().add(as3, BorderLayout.CENTER);
             as3.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             as3.setVisible(true);

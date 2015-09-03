@@ -79,6 +79,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -156,7 +157,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
             boolean okCategoria = ctrlProductos.agregarCategoria(categoria);
             if (okCategoria){
                 AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
-                getContentPane().add(as5, BorderLayout.CENTER);
+//                getContentPane().add(as5, BorderLayout.CENTER);
                 as5.setBounds(10, 10, 100, 100);
                 this.setVisible(false);
                 as5.setVisible(true);

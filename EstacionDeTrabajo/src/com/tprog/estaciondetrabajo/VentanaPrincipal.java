@@ -271,6 +271,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
 		showInternalFrame("actualizarServicio");
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
+
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
 		showInternalFrame("altaDeServicio1");
 	}

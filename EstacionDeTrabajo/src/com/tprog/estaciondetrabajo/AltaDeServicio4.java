@@ -112,6 +112,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
             }
         });
 
+        arbolCategorias.setModel(null);
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
                 arbolCategoriasValueChanged(evt);

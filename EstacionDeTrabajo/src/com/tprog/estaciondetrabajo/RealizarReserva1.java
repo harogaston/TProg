@@ -217,15 +217,15 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
 
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
-        //if (!cliente.isEmpty()) {
-        //    ctrlReservas.seleccionarCliente(cliente);
-            RealizarReserva2 rr2 = new RealizarReserva2(this, ctrlUsuarios);
+        if (!cliente.isEmpty()) {
+           ctrlReservas.seleccionarCliente(cliente);
+            RealizarReserva2 rr2 = new RealizarReserva2(this, ctrlUsuarios, ctrlReservas);
             getContentPane().add(rr2, BorderLayout.CENTER);
             rr2.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             rr2.setVisible(true);
             getParent().add(rr2);
-        //}
+        }
     }//GEN-LAST:event_buttonSiguienteActionPerformed
     ICtrlReservas ctrlReservas;
     Set<DTMinReserva> reservas;

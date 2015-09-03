@@ -16,6 +16,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		//inicializo hash
 		internalFrames = new HashMap<>();
 		//inicializo internal frames
+                altaDeServicio = new AltaDeServicio2();
 		actualizarServicio = new ActualizarServicio();
 		actualizarEstadoReserva = new ActualizarEstadoReserva();
 		altaCategoria = new AltaCategoria();
@@ -28,6 +29,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		altaDeUsuario1 = new AltaDeUsuario1();
 		realizarReserva1 = new RealizarReserva1();
 		//las agrego al content pane
+                getContentPane().add(altaDeServicio, BorderLayout.CENTER);
 		getContentPane().add(actualizarServicio, BorderLayout.CENTER);
 		getContentPane().add(actualizarEstadoReserva, BorderLayout.CENTER);
 		getContentPane().add(altaCategoria, BorderLayout.CENTER);
@@ -40,6 +42,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
 		getContentPane().add(realizarReserva1, BorderLayout.CENTER);
 		//las agrego al hash
+                internalFrames.put("altaDeServicio", altaDeServicio);
 		internalFrames.put("actualizarServicio", actualizarServicio);
 		internalFrames.put("actualizarEstadoReserva", actualizarEstadoReserva);
 		internalFrames.put("altaCategoria", altaCategoria);
@@ -277,7 +280,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
-		showInternalFrame("altaDeServicio1");
+		showInternalFrame("altaDeServicio");
 	}
 
 	/**
@@ -308,6 +311,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 	HashMap<String, JInternalFrame> internalFrames;
 	//Variables nuestras
+        private AltaDeServicio2 altaDeServicio;
 	private ActualizarServicio actualizarServicio;
 	private ActualizarEstadoReserva actualizarEstadoReserva;
 	private AltaCategoria altaCategoria;

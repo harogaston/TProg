@@ -155,17 +155,22 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         String categoriaNueva = nombreCategoria.getText();
         if (!categoriaNueva.equals("")) { //nombre no vacío
             if (casillaPadre.isSelected()) {
-                String categoriaPadre =  ((DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent()).toString();
-                if (! ctrlProductos.seleccionarCategoriaPadre(categoriaPadre))
-                    JOptionPane.showMessageDialog(this, "Esa categoria tiene servicios asociados; escoja otra", "Categoria padre erronea", JOptionPane.INFORMATION_MESSAGE);
-                else {
-                    if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))
-                        JOptionPane.showMessageDialog(this, "El nombre escogido esta en uso; escoja otro", "Nombre invalido", JOptionPane.INFORMATION_MESSAGE);
+                DefaultMutableTreeNode categoriaPadreNodo =  (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
+                if (categoriaPadreNodo != null) {
+                    String categoriaPadre = categoriaPadreNodo.toString();
+                    if (! ctrlProductos.seleccionarCategoriaPadre(categoriaPadre))
+                        JOptionPane.showMessageDialog(this, "Esa categoria tiene servicios asociados; escoja otra", "Categoria padre erronea", JOptionPane.INFORMATION_MESSAGE);
                     else {
-                        ctrlProductos.altaCategoria();
-                        JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                        cargarDatos();
+                        if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))
+                            JOptionPane.showMessageDialog(this, "El nombre escogido esta en uso; escoja otro", "Nombre invalido", JOptionPane.INFORMATION_MESSAGE);
+                        else {
+                            ctrlProductos.altaCategoria();
+                            JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                            cargarDatos();
+                        }
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Seleccione una categoria", "Categoria no seleccionada", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
                 if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))

@@ -76,7 +76,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         labelImagen2 = new javax.swing.JLabel();
         labelImagen3 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese los datos del servicio y haga click en \"Confirmar\".");
@@ -182,37 +182,43 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
-     String descripcion = textPaneDescripcion.getText();
-     String precioString = textPanePrecio.getText();
-     boolean okDescripcion = !(descripcion.isEmpty());
-     boolean okPrecio = (precioString.matches("([0-9]|)+"))&&(precioString.length() >= 1);
-     int precio = 0;
-     if (okPrecio)  precio = parseInt(precioString);
-     Set<String> imagenes = null;
-     imagenes.add(ruta1);
-     imagenes.add(ruta2);
-     imagenes.add(ruta2);
-     boolean okImagenes = true;
-     String ciudadOrigen = null;
-     ciudadOrigen = (String) listaCiudadesOrigen.getSelectedItem();
-     String paisOrigen = null; // falta
-     DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
-     ctrlProductos.seleccionarOrigen(origen);
-     if (checkBoxCiudadDestino.isSelected()){
-         String ciudadDestino = null;
-         ciudadDestino = (String) listaCiudadesDestino.getSelectedItem();
-         String paisDestino = null; // falta
-         DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
-         ctrlProductos.seleccionarDestino(destino);
-     }
-     if ((okDescripcion)&&(okPrecio)&&(okImagenes))
-        ctrlProductos.altaServicio(descripcion, precio, imagenes);
-     else {
-         String error = "";
-         if (!okDescripcion) error = "Por favor ingrese una descripción.";
-         else if(!okPrecio) error = "Por favor verifique el precio.";
-         JOptionPane.showMessageDialog(this, "Error! "+error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
-     }
+        String descripcion = textPaneDescripcion.getText();
+        String precioString = textPanePrecio.getText();
+        boolean okDescripcion = !(descripcion.isEmpty());
+        boolean okPrecio = (precioString.matches("([0-9]|)+"))&&(precioString.length() >= 1);
+        int precio = 0;
+        if (okPrecio)  precio = parseInt(precioString);
+        Set<String> imagenes = null;
+		if (ruta1 != null) {
+			imagenes.add(ruta1);
+		}
+		if (ruta2 != null) {
+			imagenes.add(ruta2);
+		}
+		if (ruta3 != null) {
+			imagenes.add(ruta3);
+		}
+        boolean okImagenes = true;
+        String ciudadOrigen = null;
+        ciudadOrigen = (String) listaCiudadesOrigen.getSelectedItem();
+        String paisOrigen = null; // falta
+        DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
+        ctrlProductos.seleccionarOrigen(origen);
+        if (checkBoxCiudadDestino.isSelected()){
+            String ciudadDestino = null;
+            ciudadDestino = (String) listaCiudadesDestino.getSelectedItem();
+            String paisDestino = null; // falta
+            DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
+            ctrlProductos.seleccionarDestino(destino);
+        }
+        if ((okDescripcion)&&(okPrecio)&&(okImagenes))
+            ctrlProductos.altaServicio(descripcion, precio, imagenes);
+        else {
+            String error = "";
+            if (!okDescripcion) error = "Por favor ingrese una descripción.";
+            else if(!okPrecio) error = "Por favor verifique el precio.";
+            JOptionPane.showMessageDialog(this, "Error! "+error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void checkBoxCiudadDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxCiudadDestinoActionPerformed

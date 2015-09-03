@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -52,6 +53,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
         for (DTMinProveedor dt : setProveedores) {
             listaProveedores.add(dt.getNickname());
         }
+        listaProveedoresInterfaz.updateUI();
     }
 
     /**
@@ -74,7 +76,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setToolTipText("");
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -83,6 +85,9 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
                 formComponentHidden(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabInfo.setPreferredSize(new java.awt.Dimension(640, 480));
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +153,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
                     .addGroup(tabInfoLayout.createSequentialGroup()
                         .addGap(202, 202, 202)
                         .addComponent(buttonSeleccionarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         tabInfoLayout.setVerticalGroup(
             tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,12 +169,12 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
                 .addComponent(buttonSeleccionarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonSalir)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         label.getAccessibleContext().setAccessibleDescription("");
 
-        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
+        getContentPane().add(tabInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 459));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -227,10 +232,10 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
       
         String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
         //String proveedor = "Jorgito_de_prueba";
-        if (!proveedor.isEmpty()) {
+        if (proveedor != null) {
             ctrlProductos.seleccionarProveedor(proveedor);
             AltaDeServicio3 as3 = new AltaDeServicio3(this, ctrlProductos, proveedor);
-            getContentPane().add(as3, BorderLayout.CENTER);
+//            getContentPane().add(as3, BorderLayout.CENTER);
             as3.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             as3.setVisible(true);

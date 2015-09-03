@@ -55,8 +55,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
 			internalFrame.getValue().setVisible(false);
 		}
+		
 		//inicializacion autogenerada
 		initComponents();
+		//this.setSize(640, 525);
 	}
 
 	/**
@@ -93,13 +95,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(645, 525));
+        setPreferredSize(new java.awt.Dimension(645, 525));
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });
+
+        menu.setMaximumSize(new java.awt.Dimension(480, 20));
+        menu.setMinimumSize(new java.awt.Dimension(240, 20));
+        menu.setPreferredSize(new java.awt.Dimension(240, 20));
 
         menuRegistros.setText("Registros");
 
@@ -247,9 +254,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-		int width = this.getWidth();
-		int height = (int) (width / 1.33);
-		this.setSize(width, height);
+//		int width = this.getWidth();
+//		int height = (int) (width / 1.33);
+//		this.setSize(width, height);
     }//GEN-LAST:event_formComponentResized
 
     private void menuItemAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaCategoriaActionPerformed

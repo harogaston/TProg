@@ -189,9 +189,15 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         int precio = 0;
         if (okPrecio)  precio = parseInt(precioString);
         Set<String> imagenes = null;
-        imagenes.add(ruta1);
-        imagenes.add(ruta2);
-        imagenes.add(ruta2);
+		if (ruta1 != null) {
+			imagenes.add(ruta1);
+		}
+		if (ruta2 != null) {
+			imagenes.add(ruta2);
+		}
+		if (ruta3 != null) {
+			imagenes.add(ruta3);
+		}
         boolean okImagenes = true;
         String ciudadOrigen = null;
         ciudadOrigen = (String) listaCiudadesOrigen.getSelectedItem();

@@ -5,10 +5,13 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.interfaces.Fabrica;
+import com.tprog.logica.interfaces.ICtrlUniversal;
 import java.awt.BorderLayout;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -84,6 +87,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemActualizarServicio = new javax.swing.JMenuItem();
         menuItemRealizarReserva = new javax.swing.JMenuItem();
         menuItemActualizarEstadoReserva = new javax.swing.JMenuItem();
+        cargarDatos = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         menuItemVerInfoCliente = new javax.swing.JMenuItem();
         menuItemVerInfoProveedor = new javax.swing.JMenuItem();
@@ -163,6 +167,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         menuRegistros.add(menuItemActualizarEstadoReserva);
+
+        cargarDatos.setText("Cargar datos");
+        cargarDatos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarDatosActionPerformed(evt);
+            }
+        });
+        menuRegistros.add(cargarDatos);
 
         menu.add(menuRegistros);
 
@@ -279,6 +291,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		showInternalFrame("actualizarServicio");
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
+    private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
+        Fabrica f = Fabrica.getInstance();
+        ICtrlUniversal ctrl = f.getICtrlUniversal();
+        try {
+            ctrl.cargarDatos();
+            JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_cargarDatosActionPerformed
+
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
 		showInternalFrame("altaDeServicio");
 	}
@@ -325,6 +348,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	private RealizarReserva1 realizarReserva1;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cargarDatos;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menu;

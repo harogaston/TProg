@@ -6,10 +6,17 @@
 
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.Vector;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -19,23 +26,65 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private final RealizarReserva1 padre;
     private final ICtrlUsuarios ctrlUsuarios;
+    private final ICtrlReservas ctrlReservas;
+    private Vector<String> listaLineasReserva = new Vector<>();
 
     /**
      * Creates new form RealizarReserva2
      * @param padre
+     * @param ctrlUsuarios
      * @param ctrlReservas
      */
-    public RealizarReserva2(RealizarReserva1 padre, ICtrlUsuarios ctrlUsuarios) {
+    public RealizarReserva2(RealizarReserva1 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas) {
         initComponents();
         setTitle("Realizar Reserva");
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
+        this.ctrlReservas = ctrlReservas;
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
         }        
     }
-
+    
+    void cargarDatos() {
+        //pedir controlador
+        DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
+        String precio = Float.toString(dtR.getPrecioTotal());
+        textPanePrecio.setText(precio);
+        //falta fecha
+        
+        //listaClientes
+//        int contador = 0;
+       Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
+       Iterator it = lineasReserva.iterator();
+       int i = 1;
+       while (it.hasNext()) {
+           hashLineasReserva.put(i, (DTLineaReserva) it.next());
+           i++;
+       }
+       Iterator it2 = hashLineasReserva.entrySet().iterator();
+       while (it2.hasNext()) {
+           Map.Entry pair = (Map.Entry)it.next();
+           listaLineasReserva.add(Integer.toString((Integer) pair.getKey()));
+       }
+       /*
+       
+       if (lineasReserva != null) {
+            for (DTLineaReserva dt : lineasReserva) {
+                listaLineasReserva.add(Integer.toString(contador));
+                //textAreaServicios.setText((dt.toString()));
+                contador++;
+            }
+        }
+       */
+        /*for (int i = 1; i <= lineasReserva.size(); i++){
+            for (DTLineaReserva linea : lineasReserva){
+                textAreaServicios.setText((linea.toString()));
+            }
+         */   
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,14 +104,14 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        textPanelPrecio = new javax.swing.JTextPane();
+        textPanePrecio = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        listaServiciosInterfaz = new javax.swing.JComboBox(listaLineasReserva);
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textPaneFecha = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textAreaServicios = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(690, 435));
@@ -110,22 +159,25 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Precio total:");
 
-        textPanelPrecio.setEditable(false);
-        jScrollPane1.setViewportView(textPanelPrecio);
+        textPanePrecio.setEditable(false);
+        jScrollPane1.setViewportView(textPanePrecio);
 
         jLabel5.setText("Servicios y Promociones de la Reserva");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaServiciosInterfazActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Fecha:");
 
         textPaneFecha.setEditable(false);
         jScrollPane2.setViewportView(textPaneFecha);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Cantidad:\nPrecio:\nFecha de Inicio:\nFecha de Fin:");
-        jScrollPane3.setViewportView(jTextArea1);
+        textAreaServicios.setColumns(20);
+        textAreaServicios.setRows(5);
+        jScrollPane3.setViewportView(textAreaServicios);
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setText("Datos actuales de la Reserva");
@@ -175,12 +227,12 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,7 +262,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel6))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGap(18, 18, 18)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(42, 42, 42))))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,7 +271,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(212, 212, 212)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(buttonSalir)
@@ -236,7 +288,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void buttonAgregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarReservaActionPerformed
         // TODO add your handling code here:
-        RealizarReserva3 rr3 = new RealizarReserva3(this);
+        RealizarReserva3 rr3 = new RealizarReserva3(this, ctrlUsuarios, ctrlReservas);
         getContentPane().add(rr3, BorderLayout.CENTER);
                 rr3.setBounds(10, 10, 100, 100);
                 this.setVisible(false);
@@ -269,14 +321,28 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                 getParent().add(rr4); 
     }//GEN-LAST:event_buttonAgregarPromocionActionPerformed
 
+    private void listaServiciosInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazActionPerformed
+        // TODO add your handling code here:
+        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+        if (servicio != null){
+            int indice = Integer.parseInt(servicio);
+            DTLineaReserva dt = (DTLineaReserva) hashLineasReserva.get(indice);
+            textAreaServicios.setText(dt.toString());
 
+        }
+    }//GEN-LAST:event_listaServiciosInterfazActionPerformed
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {                                    
+        //pido de nuevo los datos en caso de que hayan cambiado
+        cargarDatos();
+    }        
+
+    Map<Integer, DTLineaReserva> hashLineasReserva = new HashMap<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregarPromocion;
     private javax.swing.JButton buttonAgregarReserva;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
     private javax.swing.JButton buttonSalir;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -287,8 +353,10 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JComboBox listaServiciosInterfaz;
+    private javax.swing.JTextArea textAreaServicios;
     private javax.swing.JTextPane textPaneFecha;
-    private javax.swing.JTextPane textPanelPrecio;
+    private javax.swing.JTextPane textPanePrecio;
     // End of variables declaration//GEN-END:variables
+    
 }

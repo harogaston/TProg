@@ -22,6 +22,7 @@ import java.util.Set;
 public class CtrlReservas implements ICtrlReservas {
 
 	private String nickname;
+        private String nicknameP;
 	private DTMinPromocion dtP;
 	private DTMinServicio dtS;
 	private DTReserva dtR;
@@ -43,6 +44,10 @@ public class CtrlReservas implements ICtrlReservas {
 	@Override
 	public void seleccionarCliente(String nickname) {
 		this.nickname = nickname;
+	}
+        
+        public void seleccionarProveedor(String nicknameP) {
+		this.nicknameP = nicknameP;
 	}
 
 	@Override

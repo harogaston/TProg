@@ -22,7 +22,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author gaston
  */
 public interface ICtrlProductos {
-
+        public  DTMinServicio infoMinServicio();
 	public Set<DTMinPromocion> listarPromociones();
 	public void seleccionarPromocion(DTMinPromocion dtP);
 	public DTPromocion infoPromocion();

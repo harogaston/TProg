@@ -59,12 +59,19 @@ public class DTLineaReserva {
 
 	@Override
 	public String toString() {
+            if (promocion.equals("")) {
 		return "Cantidad: " + Integer.toString(cantidad)
 				+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
 				+ "\n" + "Fecha de fin=" + fechaFin.toString()
-				+ "\n" + "Servicio=" + servicio
-				+ "\n" + "Promocion=" + promocion
+                                + "\n" + "Servicio=" + servicio
 				+ "\n" + "Precio=" + Float.toString(precio) + "\n";
+            } else {
+		return "Cantidad: " + Integer.toString(cantidad)
+				+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
+				+ "\n" + "Fecha de fin=" + fechaFin.toString()
+				+ "\n" + "Promocion=" + promocion
+				+ "\n" + "Precio=" + Float.toString(precio) + "\n";                
+            }
 	}
 
 }

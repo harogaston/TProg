@@ -21,35 +21,24 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-/**
- *
- * @author User
- */
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
 	private final AltaDeUsuario1 padre;
 	private String ruta;
 	private final ICtrlUsuarios ictrlU;
 
-	/**
-	 * Creates new form AltaDeUsuario2
-	 *
-	 * @param padre
-	 */
 	public AltaDeUsuario2(AltaDeUsuario1 padre, String nickname, String email, ICtrlUsuarios ictrlU) {
 
 		setTitle("Alta de Usuario");
-        //ctrlU = new CtrlUsuarios();
-		//fabrica = Fabrica.getInstance();
 		this.padre = padre;
 		this.nickname = nickname;
 		this.email = email;
 		initComponents();
 		this.ictrlU = ictrlU;
-                BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-                for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-                    basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-                }                
+		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+		}
 	}
 
 	/**
@@ -76,8 +65,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textPaneDia = new javax.swing.JTextPane();
         comboBoxMeses = new javax.swing.JComboBox();
         jScrollPane4 = new javax.swing.JScrollPane();
         textPaneAnio = new javax.swing.JTextPane();
@@ -93,13 +80,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         buttonAtras = new javax.swing.JButton();
         buttonConfirmar = new javax.swing.JButton();
         buttonSalir = new javax.swing.JButton();
+        jComboBoxDia = new javax.swing.JComboBox();
 
         grupoBotones.add(radioButtonCliente);
         grupoBotones.add(radioButtonProveedor);
 
         setPreferredSize(new java.awt.Dimension(690, 435));
 
-        jLabel1.setText("Complete los datos del nuevo Usuario y haga click  en  \"Confirmar\".");
+        jLabel1.setText("Complete los datos del nuevo Usuario");
 
         jLabel2.setText("Nombre");
 
@@ -128,9 +116,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Año");
 
-        jScrollPane3.setViewportView(textPaneDia);
-
         comboBoxMeses.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        comboBoxMeses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxMesesActionPerformed(evt);
+            }
+        });
 
         jScrollPane4.setViewportView(textPaneAnio);
 
@@ -189,6 +180,13 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        jComboBoxDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDiaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -197,23 +195,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(125, 125, 125)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(174, 174, 174)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radioButtonCliente)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(radioButtonProveedor))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -235,9 +216,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(comboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -256,8 +237,25 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(buttonAtras)
                                         .addGap(26, 26, 26)
-                                        .addComponent(buttonConfirmar)))))
-                        .addGap(0, 16, Short.MAX_VALUE))
+                                        .addComponent(buttonConfirmar))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(174, 174, 174)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(radioButtonCliente)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(radioButtonProveedor)))))))
+                        .addGap(0, 59, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonSalir)))
@@ -266,9 +264,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -277,17 +278,15 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel6))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)
-                        .addComponent(comboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9)
+                                    .addComponent(comboBoxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,7 +315,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(labelImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 13, Short.MAX_VALUE))
+                        .addGap(0, 12, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(96, 96, 96)
                         .addComponent(scrollPaneLinkEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,15 +332,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
-		// TODO add your handling code here:
+		// File Chooser
 		JFileChooser fc = new JFileChooser();
-		String rutname = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"Imágenes JPG & PNG ", "jpg", "png");
 		fc.setFileFilter(filter);
-		int seleccion = fc.showDialog(this, "Adjuntar");
+		int seleccion = fc.showDialog(this, "Seleccione una imágen");
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			// Para guardar la imagen.*******************************************
+			// Para guardar la imagen
 			File file = fc.getSelectedFile();
 			ruta = file.getPath();
 			try {
@@ -351,12 +349,21 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 				labelImagen.setIcon(imageIcon);
 				labelImagen.setHorizontalAlignment(JLabel.CENTER);
 				labelImagen.setVerticalAlignment(JLabel.CENTER);
-                                rutaImagen = ruta;
+				rutaImagen = ruta;
 			} catch (IOException e) {
-				e.printStackTrace();
+				e.getMessage();
+				rutaImagen = null;
 			}
 		}
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
+
+	private boolean isWhiteSpace(String s) {
+		return s.matches("^\\s*$");
+	}
+	
+	private boolean hasWhiteSpace(String s) {
+		return s.matches("\\s");
+	}
 
     private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonClienteActionPerformed
 		// TODO add your handling code here:
@@ -379,71 +386,75 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_radioButtonProveedorActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-		// TODO add your handling code here:
 		String nombre = textPaneNombre.getText();
 		String apellido = textPaneApellido.getText();
-		String diaString = textPaneDia.getText();
-		String anioString = textPaneAnio.getText();
-		int anio = 0;
-		int dia = 0;
-		boolean okNombre = (nombre.matches("([a-z]|[A-Z]|)+")) && (nombre.length() >= 1);
-		boolean okApellido = (apellido.matches("([a-z]|[A-Z]|)+")) && (apellido.length() >= 1);
-		boolean okDia = (diaString.matches("([0-9]|)+")) && (diaString.length() >= 1);
-		boolean okAnio = (anioString.matches("([0-9]|)+")) && (anioString.length() >= 1);
-		boolean proveedor = radioButtonProveedor.isSelected();
-		if (okDia) {
-			dia = parseInt(diaString);
-		}
-		okDia = ((okDia) && (dia >= 1) && (dia <= 31));
-		if (okAnio) {
-			anio = parseInt(anioString);
-		}
-		okAnio = ((okAnio) && (anio >= 1800));
+		int dia = (Integer) jComboBoxDia.getSelectedItem();
 		int mes = comboBoxMeses.getSelectedIndex() + 1;
-		boolean ok = (okNombre && okApellido && okDia && okAnio);
-		Date fechaNacimiento = new Date();
+		String anioString = textPaneAnio.getText();
+		boolean proveedor = radioButtonProveedor.isSelected();
+
+		// Verificar nombre y apellido
+		boolean okNombre = !isWhiteSpace(nombre);
+		boolean okApellido = !isWhiteSpace(apellido);
+
+		// Verificacion del año
+		int anio = parseInt(anioString);
+		boolean okAnio = (anio >= 1900) && (anio <= 2015);
+
+		// Verificacion de empresa y webEmpresa
+		String nombreEmpresa = "Empresa por defecto";
+		String linkEmpresa = "empresa.com";
 		boolean okNombreEmpresa = false;
 		boolean okLinkEmpresa = false;
-		boolean okP = false;
-		boolean todoOk = ok;
-		String nombreEmpresa = "";
-		String linkEmpresa = "";
-		if ((okDia) && (okAnio)) {
-			fechaNacimiento.setDate(dia);
-			fechaNacimiento.setMonth(mes);
-			fechaNacimiento.setYear(anio);
+		if (proveedor) {
+			nombreEmpresa = textPaneNombreEmpresa.getText();
+			linkEmpresa = textPaneLinkEmpresa.getText();
+			okNombreEmpresa = !isWhiteSpace(nombreEmpresa);
+			okLinkEmpresa = !isWhiteSpace(linkEmpresa) && !hasWhiteSpace(linkEmpresa);
 		}
-		if (ok) {
+
+		// Mando los datos al controlador
+		if (okNombre && okApellido && okAnio) {
+			Date fechaNacimiento = new Date(anio, mes, dia);
 			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
-			if (proveedor) {
-				nombreEmpresa = textPaneNombreEmpresa.getText();
-				linkEmpresa = textPaneLinkEmpresa.getText();
-//				okNombreEmpresa = (nombreEmpresa.matches("([a-z]|[A-Z]|)+")) && (nombreEmpresa.length() >= 1);
-				okLinkEmpresa = (linkEmpresa.matches("([a-z]|[A-Z]|)+")) && (linkEmpresa.length() >= 1);
-//				okP = (okNombreEmpresa && okLinkEmpresa);
-				if (okLinkEmpresa) {
-					todoOk = true;
-					ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
-				} else {
-					todoOk = false;
-				}
+			if (proveedor && okNombreEmpresa && okLinkEmpresa) {
+				ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
 			}
 		}
-		if (todoOk) {
-			ictrlU.altaUsuario();
+
+		// Creo Usuario
+		boolean okCliente = okNombre && okApellido && okAnio;
+		boolean okProveedor = okCliente && okNombreEmpresa && okLinkEmpresa;
+		boolean creado = false;
+		if (proveedor) {
+			if (okProveedor) {
+				ictrlU.altaUsuario();
+				creado = true;
+			}
+		} else {
+			if (okCliente) {
+				ictrlU.altaUsuario();
+				creado = true;
+			}
+		}
+
+		// Salir con éxito o reportar errores
+		if (creado) {
 			JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		} else {
-			String error = null;
+			String error = "";
 			if (!okNombre) {
-				error = "verifique su nombre.";
+				error = "El nombre ingresado no es correcto.";
 			} else if (!okApellido) {
-				error = "verifique su apellido.";
-			} else if (((!okDia)) || (!okAnio)) {
-				error = "verifique su fecha.";
-			} else if ((proveedor) && (!okP)) {
-				error = "verifique los datos de su Empresa.";
+				error = "El apellido ingresado no es correcto.";
+			} else if (!okAnio) {
+				error = "El año ingresado no es correcto.\nDebe ingresar una fecha entre 1900 y 2015.";
+			} else if (!okNombreEmpresa) {
+				error = "El nombre de empresa ingresado no es correcto.";
+			} else if (!okLinkEmpresa) {
+				error = "El link de empresa ingresado no es correcto.";
 			}
 			JOptionPane.showMessageDialog(this, "Error! Por favor " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -459,13 +470,22 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
+    private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDiaActionPerformed
+
+    private void comboBoxMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMesesActionPerformed
+		// TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxMesesActionPerformed
+
 	String nickname;
 	String email;
-        String rutaImagen = "";
-    //Fabrica fabrica;
+	String rutaImagen = "";
+	//Fabrica fabrica;
 	//CtrlUsuarios ctrlU ;
 	private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
 		"Octubre", "Noviembre", "Diciembre"};
+	private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
@@ -473,6 +493,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonSeleccionar;
     private javax.swing.JComboBox comboBoxMeses;
     private javax.swing.ButtonGroup grupoBotones;
+    private javax.swing.JComboBox jComboBoxDia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -484,7 +505,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JLabel labelImagen;
     private javax.swing.JLabel labelLinkEmpresa;
@@ -495,7 +515,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane scrollPaneNombreEmpresa;
     private javax.swing.JTextPane textPaneAnio;
     private javax.swing.JTextPane textPaneApellido;
-    private javax.swing.JTextPane textPaneDia;
     private javax.swing.JTextPane textPaneLinkEmpresa;
     private javax.swing.JTextPane textPaneNombre;
     private javax.swing.JTextPane textPaneNombreEmpresa;

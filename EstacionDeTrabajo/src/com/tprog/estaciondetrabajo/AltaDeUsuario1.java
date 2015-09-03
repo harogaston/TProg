@@ -26,10 +26,10 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		setTitle("Alta de Usuario");
 		fabrica = Fabrica.getInstance();
 		initComponents();
-                BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-                for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-                    basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-                }                
+		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
+		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
+			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
+		}
 	}
 
 	/**
@@ -133,11 +133,18 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		// TODO add your handling code here:
 		String nickname = jTextFieldNickname.getText();
 		String email = jTextFieldEmail.getText();
-		String error = "";
-		ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
+
+		//Verificacion de email
 		EmailValidator emailValidator = EmailValidator.getInstance(true);
-		boolean b = emailValidator.isValid(email);
-		if (!(nickname.equals((""))) && b && (ictrlU.verificarNickname(nickname)) && (ictrlU.verificarEmail(email))) {
+		boolean okEmail = emailValidator.isValid(email);
+
+		//Verificacion de nickname
+		boolean okEnblanco = !nickname.matches("^\\s*$");
+		boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
+		boolean okNickname = okEnblanco && okSinEspacios;
+
+		ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
+		if (okNickname && okEmail && (ictrlU.verificarNickname(nickname)) && (ictrlU.verificarEmail(email))) {
 			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ictrlU);
 			getContentPane().add(au2, BorderLayout.CENTER);
 			au2.setBounds(10, 10, 100, 100);
@@ -145,9 +152,10 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			au2.setVisible(true);
 			getParent().add(au2);
 		} else {
-			if (nickname.equals((""))) {
-				error = "Por favor ingrese un nickname.";
-			} else if (!b) {
+			String error = "";
+			if (!okNickname) {
+				error = "Por favor ingrese un nickname válido.";
+			} else if (!okEmail) {
 				error = "Por favor ingrese un email válido.";
 			} else if (!ictrlU.verificarNickname(nickname)) {
 				error = "Ya existe un usuario con el mismo nickname.";
@@ -159,8 +167,8 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        jTextFieldEmail.setText("");
-        jTextFieldNickname.setText("");
+		jTextFieldEmail.setText("");
+		jTextFieldNickname.setText("");
     }//GEN-LAST:event_formComponentHidden
 
 	Fabrica fabrica;

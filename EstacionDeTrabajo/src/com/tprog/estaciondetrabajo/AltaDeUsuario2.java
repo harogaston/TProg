@@ -120,7 +120,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         getContentPane().add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
 
         jLabel6.setText("Fecha de Nacimiento");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         jLabel7.setText("Día");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
@@ -129,7 +129,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         jLabel9.setText("Año");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, -1, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
 
         comboBoxMeses.setModel(new javax.swing.DefaultComboBoxModel(meses));
         comboBoxMeses.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         jScrollPane4.setViewportView(textPaneAnio);
 
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, 40, -1));
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 50, -1));
 
         jLabel10.setText("Tipo de Usuario");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
@@ -227,7 +227,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// File Chooser
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				"Imágenes JPG & PNG ", "jpg", "png");
+			"Imágenes JPG & PNG ", "jpg", "png");
 		fc.setFileFilter(filter);
 		int seleccion = fc.showDialog(this, "Seleccione una imágen");
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -252,7 +252,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private boolean isWhiteSpace(String s) {
 		return s.matches("^\\s*$");
 	}
-	
+
 	private boolean hasWhiteSpace(String s) {
 		return s.matches("\\s");
 	}
@@ -290,8 +290,16 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		boolean okApellido = !isWhiteSpace(apellido);
 
 		// Verificacion del año
-		int anio = parseInt(anioString);
-		boolean okAnio = (anio >= 1900) && (anio <= 2015);
+		boolean okAnio;
+		int anio;
+		if (!isWhiteSpace(anioString)) {
+			anio = parseInt(anioString);
+			okAnio = (anio >= 1900) && (anio <= 2015);
+		}
+		else{
+			anio = 1900;
+			okAnio = false;
+		}
 
 		// Verificacion de empresa y webEmpresa
 		String nombreEmpresa = "Empresa por defecto";

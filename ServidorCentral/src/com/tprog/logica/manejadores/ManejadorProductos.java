@@ -41,7 +41,7 @@ public class ManejadorProductos {
             promociones = new HashMap();
             ubicaciones = new HashMap();
             root = new Simple("Categorias");
-            categorias.put("root.getIdCategoria()", root);
+            categorias.put(root.getIdCategoria(), root);
 	}
 
 	public static ManejadorProductos getInstance() {
@@ -269,18 +269,19 @@ public class ManejadorProductos {
 				Compuesta padreC = (Compuesta) padre;
 				padreC.add(c);
 			} else {
-				categorias.remove(idPadre);
-				Compuesta nuevoPadre = new Compuesta(idPadre);
-				nuevoPadre.add(c);
-				categorias.put(idPadre, nuevoPadre);
-				if (idPadre.equals("Categorias")) {
-					root = nuevoPadre;
-				} else {
-					Compuesta abuelo = padre.getPadre();
-					abuelo.add(nuevoPadre);
-				}
-			}
-		}
+                            categorias.remove(idPadre);
+                            Compuesta nuevoPadre = new Compuesta(idPadre);
+                            nuevoPadre.add(c);
+                            categorias.put(idPadre, nuevoPadre);
+                            if (idPadre.equals("Categorias")) {
+                                root = nuevoPadre;
+                            } else {
+                                Compuesta abuelo = padre.getPadre();
+                                abuelo.add(nuevoPadre);
+                                abuelo.remove(padre);
+                            }
+                        }
+                }
 	}
 
 	public boolean idServicioDisponible(String idServicio, String nicknameP) {

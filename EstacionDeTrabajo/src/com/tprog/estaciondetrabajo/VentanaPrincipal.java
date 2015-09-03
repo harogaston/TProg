@@ -294,12 +294,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
         Fabrica f = Fabrica.getInstance();
         ICtrlUniversal ctrl = f.getICtrlUniversal();
-        try {
+//        try {
             ctrl.cargarDatos();
             JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
-        }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+//        }
     }//GEN-LAST:event_cargarDatosActionPerformed
 
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {

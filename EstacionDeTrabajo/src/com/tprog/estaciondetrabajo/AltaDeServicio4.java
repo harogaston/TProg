@@ -88,15 +88,21 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
             }
         });
 
+        tabInfo.setPreferredSize(new java.awt.Dimension(640, 480));
+        tabInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
+        tabInfo.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(542, 338, -1, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setText("Seleccione la Categoría \"hoja\" a la que pertenece el nuevo Servicio.");
+        tabInfo.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 486, 68));
+        label.getAccessibleContext().setAccessibleDescription("");
 
         buttonSeleccionar.setText("Seleccionar");
         buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +110,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 buttonSeleccionarActionPerformed(evt);
             }
         });
+        tabInfo.add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 276, -1, -1));
 
         buttonAtras.setText("Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +118,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
+        tabInfo.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 276, -1, -1));
 
         arbolCategorias.setModel(null);
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
@@ -120,47 +128,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCategorias);
 
-        javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
-        tabInfo.setLayout(tabInfoLayout);
-        tabInfoLayout.setHorizontalGroup(
-            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
-                .addGap(0, 200, Short.MAX_VALUE)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
-                        .addComponent(botonSalir)
-                        .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabInfoLayout.createSequentialGroup()
-                        .addComponent(buttonAtras)
-                        .addGap(96, 96, 96)
-                        .addComponent(buttonSeleccionar)
-                        .addGap(264, 264, 264))))
-            .addGroup(tabInfoLayout.createSequentialGroup()
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        tabInfoLayout.setVerticalGroup(
-            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabInfoLayout.createSequentialGroup()
-                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonSeleccionar)
-                    .addComponent(buttonAtras))
-                .addGap(35, 35, 35)
-                .addComponent(botonSalir)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-
-        label.getAccessibleContext().setAccessibleDescription("");
+        tabInfo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 72, 260, 186));
 
         getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
 

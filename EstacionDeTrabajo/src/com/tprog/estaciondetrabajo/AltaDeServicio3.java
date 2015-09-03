@@ -56,8 +56,10 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         buttonAtras = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(690, 435));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese el nombre del nuevo Servicio y haga click en \"Aceptar\".");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 27, 396, -1));
 
         buttonAceptar.setText("Aceptar");
         buttonAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,10 +67,14 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 buttonAceptarActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 231, 81, -1));
 
         jScrollPane1.setViewportView(textPaneNombreServicio);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 161, 199, -1));
+
         jLabel2.setText("Nombre del Servicio");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 128, -1, -1));
 
         buttonSalir.setText("Salir");
         buttonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +82,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 buttonSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 342, -1, -1));
 
         buttonAtras.setText("Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -83,50 +90,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(buttonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(184, 184, 184)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(buttonAtras)
-                .addGap(35, 35, 35)
-                .addComponent(buttonSalir)
-                .addGap(39, 39, 39))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addComponent(buttonAceptar)
-                .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonSalir)
-                    .addComponent(buttonAtras))
-                .addGap(39, 39, 39))
-        );
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 342, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

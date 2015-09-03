@@ -76,7 +76,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         labelImagen2 = new javax.swing.JLabel();
         labelImagen3 = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese los datos del servicio y haga click en \"Confirmar\".");

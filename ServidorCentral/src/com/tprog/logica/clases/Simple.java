@@ -75,7 +75,7 @@ public class Simple implements Categoria{
     
     @Override
     public boolean esCategoriaPadre(){
-        return this.servicios.isEmpty();
+        return servicios.isEmpty();
     }
     
     @Override

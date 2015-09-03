@@ -23,8 +23,12 @@ public class Ciudad {
         return this.idCiudad;
     }
     
-    public void setIdCiudad(String id){
+    /*public void setIdCiudad(String id){
         this.idCiudad = id;
+    }*/
+    
+    public void setPais(Pais pais){
+        this.pais = pais;
     }
     
     public DTUbicacion crearDT(){

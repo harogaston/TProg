@@ -19,23 +19,23 @@ public class Cliente extends Usuario {
 	Map<Integer, Reserva> reservas;
 
 	public Cliente(String nickname, String nombre, String apellido, String email, String imagen, Date fechaN) {
-		super(nickname, nombre, apellido, email, imagen, fechaN);
-		this.reservas = new HashMap();
+            super(nickname, nombre, apellido, email, imagen, fechaN);
+            this.reservas = new HashMap();
 	}
 
 	public Cliente(DTCliente dtC) {
-		super(dtC.getNickname(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
-		this.reservas = new HashMap();
+            super(dtC.getNickname(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
+            this.reservas = new HashMap();
 	}
 
 	public DTCliente crearDT() {
-		Set<DTMinReserva> nuevoSetReservas = new HashSet();
-		for (Reserva r : reservas.values()) {
-			nuevoSetReservas.add(r.crearDTMinReserva());
-		}
-		DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
-				this.imagen, this.fechaNacimiento, nuevoSetReservas);
-		return dt;
+            Set<DTMinReserva> nuevoSetReservas = new HashSet();
+            for (Reserva r : reservas.values()) {
+                    nuevoSetReservas.add(r.crearDTMinReserva());
+            }
+            DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
+                            this.imagen, this.fechaNacimiento, nuevoSetReservas);
+            return dt;
 	}
 
 	public DTMinCliente crearDTMin() {

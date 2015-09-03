@@ -35,4 +35,10 @@ public class DTMinProveedor {
 				+ "\n" + "Email: " + email + "\n"
 				+ "\n" + "Empresa: " + empresa + "\n";
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		DTMinProveedor dt = (DTMinProveedor) o;
+		return ((this.email == dt.getEmail()) && (this.nickname == dt.getNickname()) && (this.empresa == dt.getEmpresa()));
+	}
 }

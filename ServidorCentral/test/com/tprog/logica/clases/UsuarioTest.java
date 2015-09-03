@@ -4,19 +4,21 @@
 package com.tprog.logica.clases;
 
 import java.util.Date;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class UsuarioTest {
+
 	Date fechaN;
 	Usuario instance;
+
 	public UsuarioTest() {
 	}
-	
+
 	@Before
 	public void setUp() {
-		fechaN = new Date(1987,7,23);
+		fechaN = new Date(1987, 7, 23);
 		instance = new Usuario("harogaston", "Gastón", "Haro", "harogason@gmail.com", "perico", fechaN);
 	}
 
@@ -121,5 +123,5 @@ public class UsuarioTest {
 		Date result = instance.getFechaNacimiento();
 		assertEquals(fechaN, result);
 	}
-	
+
 }

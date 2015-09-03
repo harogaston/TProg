@@ -41,7 +41,7 @@ public class Proveedor extends Usuario {
 	}
 
 	public DTMinProveedor crearDTMin() {
-		DTMinProveedor nuevoDT = new DTMinProveedor(this.nickname, this.email, this.webEmpresa);
+		DTMinProveedor nuevoDT = new DTMinProveedor(this.nickname, this.email, this.empresa);
 		return nuevoDT;
 	}
 

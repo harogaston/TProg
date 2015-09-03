@@ -29,4 +29,9 @@ public class DTMinCliente {
 				+ "\n" + "Email: " + email + "\n";
 	}
 
+	@Override
+	public boolean equals(Object o){
+		DTMinCliente dt = (DTMinCliente) o;
+		return (this.email == dt.email) && (this.nickname == dt.nickname);
+	}
 }

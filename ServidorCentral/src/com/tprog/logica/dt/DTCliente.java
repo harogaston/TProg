@@ -39,4 +39,10 @@ public class DTCliente extends DTUsuario {
         }
         return output;
     }
+	
+	@Override
+	public boolean equals(Object o){
+		DTCliente dt = (DTCliente) o;
+		return this.reservas.equals(dt.reservas);
+	}
 }

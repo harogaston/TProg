@@ -9,10 +9,13 @@ import com.tprog.logica.dt.DTUsuario;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
 import java.awt.event.MouseListener;
+import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -33,12 +36,13 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		this.padre = padre;
 		this.nickname = nickname;
 		this.email = email;
-		initComponents();
+
 		this.ictrlU = ictrlU;
 		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
 		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
 			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
 		}
+		initComponents();
 	}
 
 	/**
@@ -85,6 +89,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         grupoBotones.add(radioButtonCliente);
         grupoBotones.add(radioButtonProveedor);
 
+        setBorder(null);
         setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -137,7 +142,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                 comboBoxMesesActionPerformed(evt);
             }
         });
-        getContentPane().add(comboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        getContentPane().add(comboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 110, -1));
 
         jScrollPane4.setViewportView(textPaneAnio);
 
@@ -218,7 +223,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                 jComboBoxDiaActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+        getContentPane().add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 50, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

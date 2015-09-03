@@ -6,10 +6,16 @@ import com.tprog.logica.interfaces.ICtrlUniversal;
 import com.tprog.logica.manejadores.*;
 import com.tprog.logica.dt.DTCliente;
 import com.tprog.logica.dt.DTProveedor;
+import com.tprog.logica.dt.DTUbicacion;
+import com.tprog.logica.dt.DTServicio;
 import java.util.HashSet;
 import java.util.Date;
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Ciudad;
+import com.tprog.logica.clases.Proveedor;
+import java.util.Set;
+
+
 /**
  *
  * @author sofia

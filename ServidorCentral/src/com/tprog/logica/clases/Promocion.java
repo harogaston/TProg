@@ -41,18 +41,20 @@ public class Promocion {
 	
 	public DTPromocion crearDT(){
 		Set<DTMinServicio> nuevoSet = new HashSet();
-		for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
-			Servicio serv = it.next();
-			DTMinServicio temp = serv.crearDTMin();
-			nuevoSet.add(temp);
-		}
+                if (servicios != null){
+                        for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
+                                Servicio serv = it.next();
+                                DTMinServicio temp = serv.crearDTMin();
+                                nuevoSet.add(temp);
+                        }
+                }
 		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);
 		return nuevoDT;
 	}
 	
 	public void addServicio(Servicio s){
 		servicios.put(s.getIdServicio(), s);
-		this.total += s.getPrecio() * this.descuento;
+		this.total += (s.getPrecio() * ((100 - this.descuento)/100)) ;
 	}
 	
 	public void setIdPromocion(String idPromocion){
@@ -82,4 +84,8 @@ public class Promocion {
 	public String getNicknameProveedor(){
 		return this.proveedor.getNickname();
 	}
+        
+        public Proveedor getProveedor(){
+                return this.proveedor;
+        }
 }

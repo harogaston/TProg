@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tprog.estaciondetrabajo;
 
 import java.awt.BorderLayout;
@@ -11,71 +10,63 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JInternalFrame;
 
-/**
- *
- * @author marccio.silva
- */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    /**
 
-     * Creates new form VentanaPrincipal
-     */
-    public VentanaPrincipal() {
-        //inicializo hash
-        internalFrames = new HashMap<>();
-        //inicializo internal frames
-        actualizarServicio = new ActualizarServicio();
-        actualizarEstadoReserva = new ActualizarEstadoReserva();
-        altaCategoria = new AltaCategoria();
-        verInformacionDeCliente = new VerInformacionDeCliente();
-        verInformacionDePromocion = new VerInformacionDePromocion();
-        verInformacionDeProveedor = new VerInformacionDeProveedor();
-        verInformacionDeReserva = new VerInformacionDeReserva();
-        verInformacionDeServicio = new VerInformacionDeServicio();
-        cancelarReserva = new CancelarReserva();
-        altaDeUsuario1 = new AltaDeUsuario1();
-        altaDeServicio = new AltaDeServicio2();
-        realizarReserva1 = new RealizarReserva1();
-        //las agrego al content pane
-        getContentPane().add(actualizarServicio, BorderLayout.CENTER);
-        getContentPane().add(actualizarEstadoReserva, BorderLayout.CENTER);
-        getContentPane().add(altaCategoria, BorderLayout.CENTER);
-        getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
-        getContentPane().add(verInformacionDePromocion, BorderLayout.CENTER);
-        getContentPane().add(verInformacionDeProveedor, BorderLayout.CENTER);
-        getContentPane().add(verInformacionDeReserva, BorderLayout.CENTER);
-        getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
-        getContentPane().add(cancelarReserva, BorderLayout.CENTER);
-        getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
-        getContentPane().add(altaDeServicio, BorderLayout.CENTER);
-        getContentPane().add(realizarReserva1, BorderLayout.CENTER);
-        //las agrego al hash
-        internalFrames.put("actualizarServicio", actualizarServicio);
-        internalFrames.put("actualizarEstadoReserva", actualizarEstadoReserva);
-        internalFrames.put("altaCategoria", altaCategoria);
-        internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
-        internalFrames.put("verInformacionDePromocion", verInformacionDePromocion);
-        internalFrames.put("verInformacionDeProveedor", verInformacionDeProveedor);
-        internalFrames.put("verInformacionDeReserva", verInformacionDeReserva);
-        internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
-        internalFrames.put("cancelarReserva", cancelarReserva);
-        internalFrames.put("altaDeUsuario1", altaDeUsuario1);
-        internalFrames.put("altaDeServicio", altaDeServicio);
-        internalFrames.put("realizarReserva1", realizarReserva1);
-        //esconder todas
-        for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-            internalFrame.getValue().setVisible(false);
-        }
-        //inicializacion autogenerada
-        initComponents();
-    }
+	public VentanaPrincipal() {
+		//inicializo hash
+		internalFrames = new HashMap<>();
+		//inicializo internal frames
+		actualizarServicio = new ActualizarServicio();
+		actualizarEstadoReserva = new ActualizarEstadoReserva();
+		altaCategoria = new AltaCategoria();
+		verInformacionDeCliente = new VerInformacionDeCliente();
+		verInformacionDePromocion = new VerInformacionDePromocion();
+		verInformacionDeProveedor = new VerInformacionDeProveedor();
+		verInformacionDeReserva = new VerInformacionDeReserva();
+		verInformacionDeServicio = new VerInformacionDeServicio();
+		cancelarReserva = new CancelarReserva();
+		altaDeUsuario1 = new AltaDeUsuario1();
+		realizarReserva1 = new RealizarReserva1();
+		//las agrego al content pane
+		getContentPane().add(actualizarServicio, BorderLayout.CENTER);
+		getContentPane().add(actualizarEstadoReserva, BorderLayout.CENTER);
+		getContentPane().add(altaCategoria, BorderLayout.CENTER);
+		getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
+		getContentPane().add(verInformacionDePromocion, BorderLayout.CENTER);
+		getContentPane().add(verInformacionDeProveedor, BorderLayout.CENTER);
+		getContentPane().add(verInformacionDeReserva, BorderLayout.CENTER);
+		getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
+		getContentPane().add(cancelarReserva, BorderLayout.CENTER);
+		getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
+		getContentPane().add(realizarReserva1, BorderLayout.CENTER);
+		//las agrego al hash
+		internalFrames.put("actualizarServicio", actualizarServicio);
+		internalFrames.put("actualizarEstadoReserva", actualizarEstadoReserva);
+		internalFrames.put("altaCategoria", altaCategoria);
+		internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
+		internalFrames.put("verInformacionDePromocion", verInformacionDePromocion);
+		internalFrames.put("verInformacionDeProveedor", verInformacionDeProveedor);
+		internalFrames.put("verInformacionDeReserva", verInformacionDeReserva);
+		internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
+		internalFrames.put("cancelarReserva", cancelarReserva);
+		internalFrames.put("altaDeUsuario1", altaDeUsuario1);
+		internalFrames.put("realizarReserva1", realizarReserva1);
+		//esconder todas
+		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+			internalFrame.getValue().setVisible(false);
+		}
+		
+		//inicializacion autogenerada
+		initComponents();
+		//this.setSize(640, 525);
+	}
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always
+	 * regenerated by the Form Editor.
+	 */
+	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -104,13 +95,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(645, 525));
+        setPreferredSize(new java.awt.Dimension(645, 525));
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 formComponentResized(evt);
             }
         });
+
+        menu.setMaximumSize(new java.awt.Dimension(480, 20));
+        menu.setMinimumSize(new java.awt.Dimension(240, 20));
+        menu.setPreferredSize(new java.awt.Dimension(240, 20));
 
         menuRegistros.setText("Registros");
 
@@ -229,98 +225,101 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaUsuarioActionPerformed
-        showInternalFrame("altaDeUsuario1");
+		showInternalFrame("altaDeUsuario1");
     }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
-   
+
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
-        showInternalFrame("verInformacionDeCliente");
+		showInternalFrame("verInformacionDeCliente");
     }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
 
     private void menuItemVerInfoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoProveedorActionPerformed
-        showInternalFrame("verInformacionDeProveedor");
+		showInternalFrame("verInformacionDeProveedor");
     }//GEN-LAST:event_menuItemVerInfoProveedorActionPerformed
 
     private void menuItemVerInfoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoServicioActionPerformed
-        showInternalFrame("verInformacionDeServicio");
+		showInternalFrame("verInformacionDeServicio");
     }//GEN-LAST:event_menuItemVerInfoServicioActionPerformed
 
     private void menuItemVerInfoPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoPromocionActionPerformed
-    //verInformacionDePromocion
-        showInternalFrame("verInformacionDePromocion");
+		//verInformacionDePromocion
+		showInternalFrame("verInformacionDePromocion");
     }//GEN-LAST:event_menuItemVerInfoPromocionActionPerformed
 
     private void menuItemVerInfoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoReservaActionPerformed
-        showInternalFrame("verInformacionDeReserva");
+		showInternalFrame("verInformacionDeReserva");
     }//GEN-LAST:event_menuItemVerInfoReservaActionPerformed
 
     private void menuItemCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelarReservaActionPerformed
-        showInternalFrame("cancelarReserva");
+		showInternalFrame("cancelarReserva");
     }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        int width = this.getWidth();
-        int height = (int) (width/1.33);
-        this.setSize(width, height);
+//		int width = this.getWidth();
+//		int height = (int) (width / 1.33);
+//		this.setSize(width, height);
     }//GEN-LAST:event_formComponentResized
-	
+
     private void menuItemAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaCategoriaActionPerformed
-        showInternalFrame("altaCategoria");
+		showInternalFrame("altaCategoria");
     }//GEN-LAST:event_menuItemAltaCategoriaActionPerformed
 
     private void menuItemRealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRealizarReservaActionPerformed
-        // TODO add your handling code here:
-        showInternalFrame("realizarReserva1");
+		// TODO add your handling code here:
+		showInternalFrame("realizarReserva1");
     }//GEN-LAST:event_menuItemRealizarReservaActionPerformed
 
     private void menuItemActualizarEstadoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoReservaActionPerformed
-        showInternalFrame("actualizarEstadoReserva");
+		showInternalFrame("actualizarEstadoReserva");
     }//GEN-LAST:event_menuItemActualizarEstadoReservaActionPerformed
 
     private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
-        showInternalFrame("actualizarServicio");
+		showInternalFrame("actualizarServicio");
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
-     private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        showInternalFrame("altaDeServicio");
-    } 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VentanaPrincipal().setVisible(true);
-            }
-        });
-    }
-    
-    //Operaciones auxiliares
-    public void showInternalFrame(String id) {
-        //muestra el internal frame identificado por id
-        //solo funciona si el internal frame fue agregado al hash
-        for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-            if (!internalFrame.getKey().equals(id)) {
-                internalFrame.getValue().setVisible(false);
-            } else internalFrame.getValue().setVisible(true);
-        }
-    }
-    
-    HashMap<String, JInternalFrame> internalFrames;
-    //Variables nuestras
-    private ActualizarServicio actualizarServicio;
-    private ActualizarEstadoReserva actualizarEstadoReserva;
-    private AltaCategoria altaCategoria;
-    private VerInformacionDeCliente verInformacionDeCliente;
-    private VerInformacionDePromocion verInformacionDePromocion;
-    private VerInformacionDeProveedor verInformacionDeProveedor;
-    private VerInformacionDeReserva verInformacionDeReserva;
-    private VerInformacionDeServicio verInformacionDeServicio;
-    private CancelarReserva cancelarReserva;
-    private AltaDeUsuario1 altaDeUsuario1;
-    private AltaDeServicio2 altaDeServicio;
-    private RealizarReserva1 realizarReserva1;
-    
+
+	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
+		showInternalFrame("altaDeServicio1");
+	}
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				new VentanaPrincipal().setVisible(true);
+			}
+		});
+	}
+
+	//Operaciones auxiliares
+	public void showInternalFrame(String id) {
+		//muestra el internal frame identificado por id
+		//solo funciona si el internal frame fue agregado al hash
+		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
+			if (!internalFrame.getKey().equals(id)) {
+				internalFrame.getValue().setVisible(false);
+			} else {
+				internalFrame.getValue().setVisible(true);
+			}
+		}
+	}
+
+	HashMap<String, JInternalFrame> internalFrames;
+	//Variables nuestras
+	private ActualizarServicio actualizarServicio;
+	private ActualizarEstadoReserva actualizarEstadoReserva;
+	private AltaCategoria altaCategoria;
+	private VerInformacionDeCliente verInformacionDeCliente;
+	private VerInformacionDePromocion verInformacionDePromocion;
+	private VerInformacionDeProveedor verInformacionDeProveedor;
+	private VerInformacionDeReserva verInformacionDeReserva;
+	private VerInformacionDeServicio verInformacionDeServicio;
+	private CancelarReserva cancelarReserva;
+	private AltaDeUsuario1 altaDeUsuario1;
+	private RealizarReserva1 realizarReserva1;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

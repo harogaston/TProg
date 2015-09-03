@@ -76,8 +76,15 @@ public class LineaReserva {
 	}
 
 	public DTLineaReserva crearDTLineaReserva() {
-		DTLineaReserva dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), this.promocion.getIdPromocion(), this.Precio);
-		return dt;
+            DTLineaReserva dt;
+            if ((this.servicio == null) && (this.promocion != null) ){
+                dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, "", this.promocion.getIdPromocion(), this.Precio);
+            }else if((this.promocion == null) && (this.servicio != null)){
+                dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(),"" , this.Precio);
+            }else {
+                dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, "","" , this.Precio);
+            }
+            return dt;
 	}
 
 }

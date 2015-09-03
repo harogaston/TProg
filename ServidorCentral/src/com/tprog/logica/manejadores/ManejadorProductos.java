@@ -272,7 +272,7 @@ public class ManejadorProductos {
 				Compuesta nuevoPadre = new Compuesta(idPadre);
 				nuevoPadre.add(c);
 				categorias.put(idPadre, nuevoPadre);
-				if (idPadre.equals("")) {
+				if (idPadre.equals("Categorias")) {
 					root = nuevoPadre;
 				} else {
 					Compuesta abuelo = padre.getPadre();

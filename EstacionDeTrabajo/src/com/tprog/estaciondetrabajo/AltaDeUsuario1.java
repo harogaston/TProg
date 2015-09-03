@@ -48,7 +48,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jTextFieldNickname = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
 
-        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setBorder(null);
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {

@@ -61,7 +61,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         botonConfirmar = new javax.swing.JButton();
 
         setBorder(null);
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -79,7 +79,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 290, -1, -1));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
 
         jLabel1.setText("<html>Nombre de la nueva categoria</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
@@ -90,14 +90,14 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
                 casillaPadreActionPerformed(evt);
             }
         });
-        getContentPane().add(casillaPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+        getContentPane().add(casillaPadre, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 180, 20, 20));
 
         nombreCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreCategoriaActionPerformed(evt);
             }
         });
-        getContentPane().add(nombreCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 110, -1));
+        getContentPane().add(nombreCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 220, 20));
 
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -106,10 +106,10 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCategorias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 200, 300));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 230, 300));
 
         jLabel2.setText("<html>Tiene una categoría padre</html>");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
         botonConfirmar.setText("Confirmar creacion");
         botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
                 botonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, -1, -1));
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

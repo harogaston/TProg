@@ -61,7 +61,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
         botonEliminar = new javax.swing.JButton();
 
         setBorder(null);
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -88,7 +88,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
                 listaReservasInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 418, -1));
+        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 350, -1));
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -96,10 +96,10 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 400, -1, -1));
 
         jLabel1.setText("<html>Seleccione alguna reserva del sistema para eliminarla</html>");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
 
         botonEliminar.setText("Eliminar");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
                 botonEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, -1, -1));
+        getContentPane().add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

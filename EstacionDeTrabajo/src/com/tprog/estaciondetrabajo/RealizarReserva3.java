@@ -5,6 +5,7 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.estaciondetrabajo.RealizarReserva2;
 import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinServicio;

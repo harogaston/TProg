@@ -256,6 +256,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Fecha:"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jLabel6.setVisible(false);"/>
+      </AuxValues>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
@@ -282,6 +285,7 @@
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane4">
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jScrollPane4.setVisible(false);"/>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
 
@@ -292,6 +296,9 @@
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textAreaFecha.setVisible(false);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

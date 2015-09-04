@@ -297,7 +297,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// Verificacion del año
 		boolean okAnio;
 		int anio;
-		if (!isWhiteSpace(anioString)) {
+		if ((!isWhiteSpace(anioString))&&(anioString.matches("([0-9]|)+"))) {
 			anio = parseInt(anioString);
 			okAnio = (anio >= 1900) && (anio <= 2015);
 		}

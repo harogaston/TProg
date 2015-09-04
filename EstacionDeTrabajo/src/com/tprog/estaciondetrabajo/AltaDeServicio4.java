@@ -68,7 +68,6 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabInfo = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
         label = new javax.swing.JLabel();
         buttonSeleccionar = new javax.swing.JButton();
@@ -87,9 +86,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 formComponentHidden(evt);
             }
         });
-
-        tabInfo.setPreferredSize(new java.awt.Dimension(640, 480));
-        tabInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -97,20 +94,20 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        tabInfo.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(542, 338, -1, -1));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setText("Seleccione la Categoría \"hoja\" a la que pertenece el nuevo Servicio.");
-        tabInfo.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 486, 68));
+        getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 486, 68));
         label.getAccessibleContext().setAccessibleDescription("");
 
-        buttonSeleccionar.setText("Seleccionar");
+        buttonSeleccionar.setText("Siguiente >");
         buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSeleccionarActionPerformed(evt);
             }
         });
-        tabInfo.add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 276, -1, -1));
+        getContentPane().add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
 
         buttonAtras.setText("Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +115,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        tabInfo.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 276, -1, -1));
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, -1, -1));
 
         arbolCategorias.setModel(null);
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
@@ -128,9 +125,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCategorias);
 
-        tabInfo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 72, 260, 186));
-
-        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 260, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -190,6 +185,5 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonSeleccionar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label;
-    private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

@@ -116,8 +116,6 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 			String categoria = nodo.getUserObject().toString();
 			listaServicios = ctrlProductos.listarServiciosCategoria(categoria);
 			ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
-			getContentPane().add(s, BorderLayout.CENTER);
-			s.setBounds(10, 10, 100, 100);
 			this.setVisible(false);
 			s.setVisible(true);
 			getParent().add(s);

@@ -172,6 +172,7 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //pido de nuevo los datos en caso de que hayan cambiado
+        System.out.println("rrserva1");
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
 

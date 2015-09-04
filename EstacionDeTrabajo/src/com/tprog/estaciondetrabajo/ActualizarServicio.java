@@ -62,7 +62,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(true);
+        setVisible(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -163,9 +163,10 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
         }
         */
         String cliente = (String) listaServiciosInterfaz.getSelectedItem();
+        System.out.println("servicio: " + cliente);
         if (cliente != null) {
             ModificacionServicio m = new ModificacionServicio(this, ctrlProductos.infoServicio(), ctrlProductos);
-            getContentPane().add(m, BorderLayout.CENTER);
+//            getContentPane().add(m, BorderLayout.CENTER);
             m.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             m.setVisible(true);

@@ -58,7 +58,8 @@ public class CtrlReservas implements ICtrlReservas {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		return mp.listarPromociones();
 	}
-
+        
+        
 	@Override
 	public Set<DTMinServicio> listarServicios() {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
@@ -74,13 +75,14 @@ public class CtrlReservas implements ICtrlReservas {
 	public void seleccionarServicio(DTMinServicio dtS) {
 		this.dtS = dtS;
 	}
-
+        public void seleccionarDTReserva(DTReserva dtR){
+            this.dtR = dtR;
+        }
 	@Override
 	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		ManejadorReservas mr = ManejadorReservas.getInstance();
 		if (dtS == null) {
-                        System.out.println("helado");
 			float precio = mp.getPrecioPromocion(dtP);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, "", dtP.getNicknameP(), precio);
 			lineasReserva.add(dtLR);
@@ -89,10 +91,6 @@ public class CtrlReservas implements ICtrlReservas {
 			float precio = mp.getPrecioServicio(dtS);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), "", precio);
 			this.lineasReserva.add(dtLR);
-                        int a = lineasReserva.size();
-                        String as = Integer.toString(a);
-                        System.out.println("ahoraaa??");
-                        System.out.println(as);
 			this.precioTotal += precio;
 		}
 	}
@@ -100,7 +98,7 @@ public class CtrlReservas implements ICtrlReservas {
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarServiciosProveedor(nickname);
+		return mu.listarServiciosProveedor(nicknameP);
 	}
 
 	@Override

@@ -56,7 +56,6 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     void cargarDatos() {
         //pedir controlador
         DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
-        if (dtR == null) System.out.println("lolololmao");
         String precio = Float.toString(dtR.getPrecioTotal());
         textPanePrecio.setText(precio);
         Date fechaActual = null;
@@ -67,10 +66,12 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         //falta fecha
         
        Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
+       /*
        int a = lineasReserva.size();
        String as = Integer.toString(a);
         System.out.println("despues");
         System.out.println(as);
+        */
        Iterator it = lineasReserva.iterator();
        int i = 1;
        while (it.hasNext()) {
@@ -83,17 +84,17 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
            listaLineasReserva.add(Integer.toString((Integer) pair.getKey()));
        }
        DTReserva asd = ctrlReservas.mostrarReservaTemporal();
-       textAreaFecha.setText(asd.getFCreacion().toString());
        
-       Set<DTLineaReserva> asdsd = asd.getLineasReserva();
-       System.out.println(asdsd.size());
+       //imprimir mejor
+       textAreaFecha.setText(asd.getFCreacion().toString());
+
        if (!ctrlReservas.mostrarReservaTemporal().getLineasReserva().isEmpty()){
-           System.out.println("select");
            proveedorSeleccionado = true;
        }
        else{
            proveedorSeleccionado = false;
-           System.out.println("la peor");
+            //int idR = ctrlReservas.mostrarReservaTemporal().getIdReserva();
+            //ctrlReservas.seleccionarReserva(idR);
        }   
        
        /*
@@ -358,7 +359,8 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         try {
             // TODO add your handling code here:
             //falta acoomodar y excepciones
-        
+            DTReserva dtrr = ctrlReservas.mostrarReservaTemporal();
+            ctrlReservas.seleccionarDTReserva(dtrr);
             ctrlReservas.altaReserva();
             JOptionPane.showMessageDialog(this, "Reserva creada con éxito", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
@@ -391,9 +393,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
-        
                 cargarDatos();
-                System.out.println("reserva2");
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden

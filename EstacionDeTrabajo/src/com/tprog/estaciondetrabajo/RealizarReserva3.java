@@ -296,16 +296,9 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             int anioF = Integer.parseInt(anioFString);
             Date fI = new Date(anioI, mesI, diaI);  
             Date fF = new Date(anioF, mesF, diaF);
-            ctrlReservas.ingresarLineaReserva(cant, fI, fF);
-            
+            ctrlReservas.ingresarLineaReserva(cant, fI, fF);            
             DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
-            if (dtR == null) System.out.println("verga");
-            else System.out.println("no tan verga");
             Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
-            int a = lineasReserva.size();
-            String as = Integer.toString(a);
-            System.out.println("antes");
-            System.out.println(as);
             this.setVisible(false);
             this.padre.setVisible(true);
             //ctrlReservas.seleccionarServicio(servicio);

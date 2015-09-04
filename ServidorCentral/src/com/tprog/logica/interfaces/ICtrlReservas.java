@@ -16,6 +16,7 @@ import java.util.Set;
 public interface ICtrlReservas {
 	public void seleccionarCliente(String nickname);
         public void seleccionarProveedor(String nicknameP);
+        public void seleccionarDTReserva(DTReserva dtr);
 	public Set<DTMinPromocion> listarPromociones();
 	public Set<DTMinServicio> listarServicios();
 	public void seleccionarPromocion(DTMinPromocion dtP);
@@ -30,4 +31,5 @@ public interface ICtrlReservas {
 	public DTReserva infoReserva();
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 	public void eliminarReserva();
+
 }

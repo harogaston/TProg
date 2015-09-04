@@ -182,6 +182,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setVisible(false);
         jLabel6.setText("Fecha:");
 
         textAreaServicios.setColumns(20);
@@ -191,6 +192,9 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setText("Datos actuales de la Reserva");
 
+        jScrollPane4.setVisible(false);
+
+        textAreaFecha.setVisible(false);
         textAreaFecha.setColumns(20);
         textAreaFecha.setRows(5);
         jScrollPane4.setViewportView(textAreaFecha);
@@ -241,7 +245,6 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel5)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(26, 26, 26))))
                     .addGroup(layout.createSequentialGroup()
@@ -341,7 +344,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
             this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(RealizarReserva2.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "Piraste viejo, proba de nuevo", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Hubo problemas en la creación de la reserva.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
         }
         
     }//GEN-LAST:event_buttonConfirmarActionPerformed

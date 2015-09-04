@@ -22,7 +22,6 @@ public class DTReserva {
 		this.fCreacion = fCreacion;
 		this.estado = estado;
 		this.precioTotal = precioTotal;
-		lineasReserva = new HashSet();
 		this.lineasReserva = lineasReserva;
 	}
 

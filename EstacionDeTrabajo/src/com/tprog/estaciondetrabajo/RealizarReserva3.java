@@ -8,6 +8,7 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
@@ -52,10 +53,11 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
         } 
         
-        Set<DTMinServicio> setServicios = ctrlReservas.listarServicios();
+        Set<DTMinServicio> setServicios = this.ctrlReservas.listarServicios();
         Set<DTMinServicio> setServiciosP = null;
         if (proveedorSeleccionado){
-            setServiciosP = ctrlReservas.listarServiciosProveedor();
+            
+            setServiciosP = this.ctrlReservas.listarServiciosProveedor();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
             if (setServiciosP != null) {
@@ -269,6 +271,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
+            
+            
             //DTServicio dtS = ctrlUsuarios.infoServicio();
             //detalleServicio.setVisible(true);
             //detalleServicio.setText(dtS.toString());         
@@ -293,6 +297,15 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             Date fI = new Date(anioI, mesI, diaI);  
             Date fF = new Date(anioF, mesF, diaF);
             ctrlReservas.ingresarLineaReserva(cant, fI, fF);
+            
+            DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
+            if (dtR == null) System.out.println("verga");
+            else System.out.println("no tan verga");
+            Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
+            int a = lineasReserva.size();
+            String as = Integer.toString(a);
+            System.out.println("antes");
+            System.out.println(as);
             this.setVisible(false);
             this.padre.setVisible(true);
             //ctrlReservas.seleccionarServicio(servicio);

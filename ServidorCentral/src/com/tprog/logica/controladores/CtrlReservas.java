@@ -80,15 +80,19 @@ public class CtrlReservas implements ICtrlReservas {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		ManejadorReservas mr = ManejadorReservas.getInstance();
 		if (dtS == null) {
+                        System.out.println("helado");
 			float precio = mp.getPrecioPromocion(dtP);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, "", dtP.getNicknameP(), precio);
 			lineasReserva.add(dtLR);
 			this.precioTotal += precio;
 		} else {
-                        System.out.println("OOOO");
 			float precio = mp.getPrecioServicio(dtS);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), "", precio);
-			lineasReserva.add(dtLR);
+			this.lineasReserva.add(dtLR);
+                        int a = lineasReserva.size();
+                        String as = Integer.toString(a);
+                        System.out.println("ahoraaa??");
+                        System.out.println(as);
 			this.precioTotal += precio;
 		}
 	}
@@ -109,7 +113,8 @@ public class CtrlReservas implements ICtrlReservas {
 	public DTReserva mostrarReservaTemporal() {
 		Date fecha = new Date();
 		EstadoReserva estado = EstadoReserva.Registrada;
-		return (dtR = new DTReserva(-1, fecha, estado, precioTotal, lineasReserva));
+                DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+		return dtR;
 	}
 
 	@Override

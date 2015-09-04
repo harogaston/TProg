@@ -10,7 +10,6 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -39,7 +38,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 		Fabrica f = Fabrica.getInstance();
 		ctrlUsuarios = f.getICtrlUsuarios();
 		Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-        //construyo un vector con la informacion a mostrar, porque
+		//construyo un vector con la informacion a mostrar, porque
 		//el comboBox solo funciona con Vector o List
 		for (DTMinProveedor dt : setProveedores) {
 			listaProveedores.add(dt.getNickname());
@@ -150,20 +149,22 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 			ctrlUsuarios.seleccionarProveedor(proveedor);
 			//muestro Text Area para la información del proveedor
 			detalleUsuario.setVisible(true);
-			DTProveedor dt = ctrlUsuarios.infoProveedor();
-			detalleUsuario.setText(dt.toString());
 			try {
+				DTProveedor dt = ctrlUsuarios.infoProveedor();
+				detalleUsuario.setText(dt.toString());
+
 				File f = new File(dt.getImagen());
 				Image img = ImageIO.read(f);
 				Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(dimg);
 				imagenUsuario.setIcon(imageIcon);
+				//cargo la lista de servicios del proveedor
+				servicios = ctrlUsuarios.listarServiciosProveedor();
 			} catch (Exception e) {
 				System.out.println("La imagen no pudo ser cargada");
-                                imagenUsuario.setIcon(null);
+				imagenUsuario.setIcon(null);
 			}
-			//cargo la lista de servicios del proveedor
-			servicios = ctrlUsuarios.listarServiciosProveedor();
+
 		}
     }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
 

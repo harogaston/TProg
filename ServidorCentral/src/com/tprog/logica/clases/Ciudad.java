@@ -6,33 +6,26 @@
 package com.tprog.logica.clases;
 
 import com.tprog.logica.dt.DTUbicacion;
-        
-/**
- *
- * @author gaston
- */
+
 public class Ciudad {
-    private String idCiudad;
-    private Pais pais;
-    
-    public Ciudad(String id){
-        this.idCiudad = id;
-    }
-    
-    public String getIdCiudad(){
-        return this.idCiudad;
-    }
-    
-    /*public void setIdCiudad(String id){
-        this.idCiudad = id;
-    }*/
-    
-    public void setPais(Pais pais){
-        this.pais = pais;
-    }
-    
-    public DTUbicacion crearDT(){
-        DTUbicacion nuevoDT = new DTUbicacion(this.idCiudad, this.pais.getIdPais());
-        return nuevoDT;
-    }
+
+	private String idCiudad;
+	private Pais pais;
+
+	public Ciudad(String id) {
+		this.idCiudad = id;
+	}
+
+	public String getIdCiudad() {
+		return this.idCiudad;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public DTUbicacion crearDT() {
+		DTUbicacion nuevoDT = new DTUbicacion(this.idCiudad, this.pais.getIdPais());
+		return nuevoDT;
+	}
 }

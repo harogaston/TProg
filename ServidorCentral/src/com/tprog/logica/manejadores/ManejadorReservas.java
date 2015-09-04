@@ -28,18 +28,18 @@ public class ManejadorReservas {
 	}
 
 	private ManejadorReservas() {
-            reservas = new HashMap();
+		reservas = new HashMap();
 	}
 
 	public Set<DTMinReserva> listarReservas() {
-            Set<DTMinReserva> set = new HashSet();
-            if (!reservas.isEmpty()) {
-                for (Reserva r : reservas.values()) {
-                    DTMinReserva dtMin = r.crearDTMinReserva();
-                    set.add(dtMin);
-                }
-            }
-            return set;
+		Set<DTMinReserva> set = new HashSet();
+		if (!reservas.isEmpty()) {
+			for (Reserva r : reservas.values()) {
+				DTMinReserva dtMin = r.crearDTMinReserva();
+				set.add(dtMin);
+			}
+		}
+		return set;
 	}
 
 	public DTReserva infoReserva(int idReserva) {
@@ -55,9 +55,9 @@ public class ManejadorReservas {
 
 	public void eliminarReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-		r.eliminar();
+//		r.eliminar();
 		// sacar del map
-		reservas.remove(r);
+                reservas.remove(idReserva);
 	}
 
 	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
@@ -66,5 +66,6 @@ public class ManejadorReservas {
                 reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
                 cliente.agregarReserva(nuevaReserva);
             } else System.out.println("El DTReserva que se paso hacia agregarReserva era nulo");
+            
 	}
 }

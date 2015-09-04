@@ -14,9 +14,9 @@ public class DTProveedor extends DTUsuario {
 
 	public DTProveedor(String nickname, String nombre, String apellido, String email,
 			String imagen, Date fechaN, String empresa, String webEmpresa) {
-            super(nickname, nombre, apellido, email, imagen, fechaN);
-            this.empresa = empresa;
-            this.webEmpresa = webEmpresa;
+		super(nickname, nombre, apellido, email, imagen, fechaN);
+		this.empresa = empresa;
+		this.webEmpresa = webEmpresa;
 	}
 
 	public DTProveedor(DTUsuario dtU, String empresa, String webEmpresa) {
@@ -40,17 +40,17 @@ public class DTProveedor extends DTUsuario {
 		output = output.concat("Web Empresa: " + webEmpresa + "\n");
 		return output;
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		DTProveedor dt = (DTProveedor) o;
-		return this.apellido == dt.apellido && 
-			this.email == dt.email && 
-			this.empresa == dt.empresa &&
-			this.fechaNacimiento.equals(dt.fechaNacimiento) &&
-			this.imagen == dt.imagen &&
-			this.nickname == dt.nickname &&
-			this.nombre == dt.nombre &&
-			this.webEmpresa == dt.webEmpresa;
+		return this.apellido.equals(dt.apellido)
+				&& this.email.equals(dt.email)
+				&& this.empresa.equals(dt.empresa)
+				&& this.fechaNacimiento.equals(dt.fechaNacimiento)
+				&& this.imagen.equals(dt.imagen)
+				&& this.nickname.equals(dt.nickname)
+				&& this.nombre.equals(dt.nombre)
+				&& this.webEmpresa.equals(dt.webEmpresa);
 	}
 }

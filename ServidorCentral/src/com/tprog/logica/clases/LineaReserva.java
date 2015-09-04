@@ -5,12 +5,8 @@
  */
 package com.tprog.logica.clases;
 
-/**
- *
- * @author MarG
- */
-import java.util.Date;
 import com.tprog.logica.dt.DTLineaReserva;
+import java.util.Date;
 
 public class LineaReserva {
 
@@ -76,15 +72,13 @@ public class LineaReserva {
 	}
 
 	public DTLineaReserva crearDTLineaReserva() {
-            DTLineaReserva dt;
-            if ((this.servicio == null) && (this.promocion != null) ){
-                dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, "", this.promocion.getIdPromocion(), this.Precio);
-            }else if((this.promocion == null) && (this.servicio != null)){
-                dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(),"" , this.Precio);
-            }else {
-                dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, "","" , this.Precio);
-            }
-            return dt;
+		DTLineaReserva dt;
+		if (this.servicio == null) {
+			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.Precio);
+		} else {
+			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), null, this.Precio);
+		}
+		return dt;
 	}
 
 }

@@ -14,9 +14,10 @@ import java.util.Date;
 import java.util.Set;
 
 public interface ICtrlReservas {
+
 	public void seleccionarCliente(String nickname);
-        public void seleccionarProveedor(String nicknameP);
-        public void seleccionarDTReserva(DTReserva dtr);
+	public void seleccionarProveedor(String nicknameP);
+	public void seleccionarDTReserva(DTReserva dtr);
 	public Set<DTMinPromocion> listarPromociones();
 	public Set<DTMinServicio> listarServicios();
 	public void seleccionarPromocion(DTMinPromocion dtP);
@@ -25,11 +26,10 @@ public interface ICtrlReservas {
 	public Set<DTMinServicio> listarServiciosProveedor();
 	public Set<DTMinPromocion> listarPromocionesProveedor();
 	public DTReserva mostrarReservaTemporal();
-	public void altaReserva()throws Exception;
+	public void altaReserva() throws Exception;
 	public Set<DTMinReserva> listarReservas();
 	public void seleccionarReserva(int idReserva);
 	public DTReserva infoReserva();
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 	public void eliminarReserva();
-
 }

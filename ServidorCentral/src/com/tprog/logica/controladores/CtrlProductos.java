@@ -146,13 +146,14 @@ public class CtrlProductos implements ICtrlProductos{
     @Override
     public boolean agregarCategoria(String idCategoria){
         ManejadorProductos mp = ManejadorProductos.getInstance();
-        return mp.agregarCategoria(idCategoria);
+        return mp.esCategoriaSimpleAgregar(dtS, idCategoria);
+//        return mp.agregarCategoria(idCategoria);
     }
     
     @Override
     public boolean quitarCategoria (String idCategoria){
         ManejadorProductos mp = ManejadorProductos.getInstance();
-        return mp.quitarCategoria(idCategoria);
+        return mp.esCategoriaSimpleQuitar(dtS, idCategoria);
     }
     
     @Override

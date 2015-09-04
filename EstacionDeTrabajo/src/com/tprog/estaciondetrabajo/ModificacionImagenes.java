@@ -6,10 +6,12 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.Image;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -39,12 +41,22 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
     public void actualizarImagenes() {
         modelComboBox.clear();
         Set<String> imagenes = ctrlProductos.listarImagenes();
-        for (String s : imagenes) {
+        for (String ruta : imagenes) {
             try {
-                ImageIcon imagen = new ImageIcon(ModificacionImagenes.class.getResource(s));
-                imagen.setDescription(s);
-                modelComboBox.add(imagen);
+                
+                //obtengo archivo desde ruta
+                File f = new File(ruta);
+                //creo imagen
+                Image img = ImageIO.read(f);
+                //redimensiono para que entre en la JLabel
+                Image dimg = img.getScaledInstance(comboboxImagenes.getWidth() / 8, comboboxImagenes.getHeight() / 2, Image.SCALE_SMOOTH);
+                //armo el ImageIcon
+                ImageIcon imageIcon = new ImageIcon(dimg);
+                //lo asocio a la JLabel
+                modelComboBox.add(imageIcon);
+                
                 cantidadImagenes++;
+                
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 break;
@@ -84,7 +96,11 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, -1, -1));
 
-        comboboxImagenes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxImagenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxImagenesActionPerformed(evt);
+            }
+        });
         getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 280, 30));
 
         botonQuitar.setText("Quitar");
@@ -120,6 +136,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
 
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
         ImageIcon imagen = (ImageIcon) comboboxImagenes.getSelectedItem();
+        comboboxImagenes.removeItem(imagen);
         if (imagen != null) {
             ctrlProductos.quitarImagen(imagen.getDescription());
             cantidadImagenes--;
@@ -138,8 +155,12 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_botonAgregarActionPerformed
 
+    private void comboboxImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxImagenesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboboxImagenesActionPerformed
+
     
-    Vector<Object> modelComboBox = new Vector<>();
+    Vector<ImageIcon> modelComboBox = new Vector<>();
     ICtrlProductos ctrlProductos;
     ModificacionServicio padre;
     int cantidadImagenes = 0;

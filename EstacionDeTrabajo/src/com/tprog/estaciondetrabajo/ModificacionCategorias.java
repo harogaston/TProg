@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -32,7 +33,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         initComponents();
         //construyo lista para la interfaz usando el set
-        Set<String> categoriasServicio = ctrlProductos.listarCategoriasServicio();
+        categoriasServicio = ctrlProductos.listarCategoriasServicio();
         for (String s : categoriasServicio) {
             listaServicio.add(s);
         }
@@ -67,7 +68,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         listaSistemaInterfaz = new javax.swing.JList(listaSistema);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonConfirmar = new javax.swing.JButton();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
@@ -112,8 +113,13 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         jLabel2.setText("Categorias del sistema");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
 
-        jButton1.setText("Confirmar cambios");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+        botonConfirmar.setText("Confirmar cambios");
+        botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConfirmarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,13 +168,55 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonAgregarActionPerformed
 
+    private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
+        try {
+            //primero recorro el set de categorias original, y a aquellas
+            //categorias que no esten en mi lista nueva, les aplico quitar
+            for (String s : categoriasServicio) {
+                Iterator it = listaServicio.iterator();
+                boolean found = false;
+                //mientras no encuentre la categoria sigo buscandola
+                while (it.hasNext() && !found) {
+                    if (it.next().toString().equals(s))
+                        //si la encuentro no la quito
+                        found = true;
+                }
+                //si no la encontré, la saco
+                if (!found) {
+                    ctrlProductos.quitarCategoria(s);
+                }
+            }
+            
+            //ahora recorro la lista nueva, y cada elemento que no esté en mi
+            //set de categorías original, lo agrego a las categorias del servicio
+            
+            Iterator it = listaServicio.iterator();
+            while (it.hasNext()) {
+                //si la categoria actual no esta dentro de las originales
+                //del servicio, la agrego
+                String categoria = it.next().toString();
+                System.out.println("Linea 198: " + categoria);
+                if (!categoriasServicio.contains(categoria))
+                    ctrlProductos.agregarCategoria(categoria);
+            }
+            JOptionPane.showMessageDialog(this, "Categorías modificadas con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            padre.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage().toString(), "Error", JOptionPane.ERROR_MESSAGE);            
+        }
+        
+        
+    }//GEN-LAST:event_botonConfirmarActionPerformed
+
+    Set<String> categoriasServicio;
     ICtrlProductos ctrlProductos;
     ModificacionServicio padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregar;
+    private javax.swing.JButton botonConfirmar;
     private javax.swing.JButton botonQuitar;
     private javax.swing.JButton botonSalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

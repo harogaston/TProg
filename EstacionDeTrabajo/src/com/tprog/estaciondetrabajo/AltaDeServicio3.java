@@ -100,6 +100,12 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
+        padre.dispose();
+    }
+    
     private void buttonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAceptarActionPerformed
         // TODO add your handling code here:
         String nombreServicio = textPaneNombreServicio.getText();

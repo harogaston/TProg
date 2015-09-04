@@ -61,6 +61,7 @@ public class ManejadorReservas {
 	}
 
 	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
+            if (dtR == null) System.out.println("la palida");
             Reserva nuevaReserva = new Reserva(dtR, nicknameP);
             reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
             cliente.agregarReserva(nuevaReserva);

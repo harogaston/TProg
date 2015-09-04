@@ -7,11 +7,15 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import java.awt.Image;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -20,7 +24,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
-import org.apache.commons.validator.routines.FloatValidator;
 
 public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
@@ -232,7 +235,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 			okPrecio = false;
 		}
 		
-		Set<String> imagenes = null;
+		Set<String> imagenes = new HashSet<>();
 		if (ruta1 != null) {
 			imagenes.add(ruta1);
 		}
@@ -288,6 +291,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 				}
 			} //es imposible que el paisOrigen sea null, por eso no tiro ningun mensaje
 			JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad de origen", "Error", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -307,12 +311,33 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
+        padre.dispose();
+    }
+
+    
+    
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
 		// TODO add your handling code here:
 		this.setVisible(false);
 		this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
+    private void mostrarImagen(String ruta, JLabel label) throws IOException {
+        //obtengo archivo desde ruta
+        File f = new File(ruta);
+        //creo imagen
+        Image img = ImageIO.read(f);
+        //redimensiono para que entre en la JLabel
+        Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        //armo el ImageIcon
+        ImageIcon imageIcon = new ImageIcon(dimg);
+        //lo asocio a la JLabel
+        label.setIcon(imageIcon);        
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -324,9 +349,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 			File file = fc.getSelectedFile();
 			ruta1 = file.getPath();
 			try {
-				labelImagen1.setIcon(new ImageIcon(ruta1));
-				labelImagen1.setHorizontalAlignment(JLabel.CENTER);
-				labelImagen1.setVerticalAlignment(JLabel.CENTER);
+                            mostrarImagen(ruta1, labelImagen1);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -346,9 +369,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 			File file = fc.getSelectedFile();
 			ruta2 = file.getPath();
 			try {
-				labelImagen2.setIcon(new ImageIcon(ruta2));
-				labelImagen2.setHorizontalAlignment(JLabel.CENTER);
-				labelImagen2.setVerticalAlignment(JLabel.CENTER);
+                            mostrarImagen(ruta2, labelImagen2);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -368,9 +389,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 			File file = fc.getSelectedFile();
 			ruta3 = file.getPath();
 			try {
-				labelImagen3.setIcon(new ImageIcon(ruta3));
-				labelImagen3.setHorizontalAlignment(JLabel.CENTER);
-				labelImagen3.setVerticalAlignment(JLabel.CENTER);
+                            mostrarImagen(ruta3, labelImagen3);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -382,7 +401,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaCiudadesOrigenInterfazActionPerformed
 
     private void listaCiudadesDestinoInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaCiudadesDestinoInterfazActionPerformed
-		ciudadDestino = (String) listaCiudadesOrigenInterfaz.getSelectedItem();
+		ciudadDestino = (String) listaCiudadesDestinoInterfaz.getSelectedItem();
     }//GEN-LAST:event_listaCiudadesDestinoInterfazActionPerformed
 
 	String ciudadOrigen = null;

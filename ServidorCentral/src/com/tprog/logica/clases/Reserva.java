@@ -11,6 +11,7 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.EstadoReserva;
+import static com.tprog.logica.dt.EstadoReserva.Registrada;
 import com.tprog.logica.manejadores.ManejadorProductos;
 import java.util.Date;
 import java.util.HashSet;
@@ -29,8 +30,12 @@ public class Reserva {
 	public Reserva(DTReserva dtR, String nicknameP) throws Exception{
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
-		this.fCreacion = dtR.getFCreacion();
+                //Date f = new Date();
+               // f = dtR.getFCreacion();
+		//this.fCreacion = new Date();
+                this.fCreacion = dtR.getFCreacion();
 		this.estado = dtR.getEstadoReserva();
+                //this.estado = Registrada;
 		this.lineasReserva = new HashSet();
 		this.precioTotal = dtR.getPrecioTotal();
 		
@@ -58,6 +63,8 @@ public class Reserva {
         public Reserva(Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception{
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
+               // Date f = new Date();
+               // f = fCreacion;
 		this.fCreacion = fCreacion;
 		this.estado = estado;
 		this.lineasReserva = new HashSet();

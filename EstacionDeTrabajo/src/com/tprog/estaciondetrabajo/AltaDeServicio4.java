@@ -170,6 +170,14 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
+        padre.dispose();
+    }
+
+    
+    
     private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSiguienteActionPerformed

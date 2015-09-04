@@ -58,7 +58,8 @@ public class CtrlReservas implements ICtrlReservas {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		return mp.listarPromociones();
 	}
-
+        
+        
 	@Override
 	public Set<DTMinServicio> listarServicios() {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
@@ -74,7 +75,9 @@ public class CtrlReservas implements ICtrlReservas {
 	public void seleccionarServicio(DTMinServicio dtS) {
 		this.dtS = dtS;
 	}
-
+        public void seleccionarDTReserva(DTReserva dtR){
+            this.dtR = dtR;
+        }
 	@Override
 	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
@@ -87,7 +90,7 @@ public class CtrlReservas implements ICtrlReservas {
 		} else {
 			float precio = mp.getPrecioServicio(dtS);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), "", precio);
-			lineasReserva.add(dtLR);
+			this.lineasReserva.add(dtLR);
 			this.precioTotal += precio;
 		}
 	}
@@ -95,7 +98,7 @@ public class CtrlReservas implements ICtrlReservas {
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarServiciosProveedor(nickname);
+		return mu.listarServiciosProveedor(nicknameP);
 	}
 
 	@Override
@@ -108,7 +111,8 @@ public class CtrlReservas implements ICtrlReservas {
 	public DTReserva mostrarReservaTemporal() {
 		Date fecha = new Date();
 		EstadoReserva estado = EstadoReserva.Registrada;
-		return (dtR = new DTReserva(-1, fecha, estado, precioTotal, lineasReserva));
+                DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+		return dtR;
 	}
 
 	@Override

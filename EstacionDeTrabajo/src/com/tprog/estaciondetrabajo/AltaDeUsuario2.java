@@ -370,6 +370,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+
+    
+    
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
 		this.setVisible(false);
 		padre.setVisible(true);

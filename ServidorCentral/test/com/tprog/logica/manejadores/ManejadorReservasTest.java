@@ -59,7 +59,7 @@ public class ManejadorReservasTest {
 		set.add(l1);
 		//set.add(l2);
 		//set.add(l3);
-                r1 = new Reserva(fecha,EstadoReserva.Registrada,500,set,"jorge");
+               // r1 = new Reserva(fecha,EstadoReserva.Registrada,500,set,"jorge");
                 dtr1 = new DTReserva(-1,fecha,EstadoReserva.Registrada,500,set);
                // Reserva r2 = new Reserva(fecha,EstadoReserva.Registrada,300,set,"pepito");
                // DTReserva dtr2 = new DTReserva(r2.getIdReserva(),fecha,EstadoReserva.Registrada,300,set);

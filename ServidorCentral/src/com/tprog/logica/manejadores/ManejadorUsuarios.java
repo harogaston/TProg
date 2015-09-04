@@ -21,7 +21,6 @@ import java.util.Set;
 public class ManejadorUsuarios {
 
 	private static ManejadorUsuarios instace = null;
-
 	private Map<String, Proveedor> proveedores;
 	private Map<String, Cliente> clientes;
 
@@ -119,13 +118,13 @@ public class ManejadorUsuarios {
 	}
 
 	public void altaCliente(DTCliente dtC) {
-		Cliente nuevoCliente = new Cliente(dtC);
-		clientes.put(dtC.getNickname(), nuevoCliente);
+            Cliente nuevoCliente = new Cliente(dtC);
+            clientes.put(dtC.getNickname(), nuevoCliente);
 	}
 
 	public void altaProveedor(DTProveedor dtP) {
-		Proveedor nuevoProveedor = new Proveedor(dtP);
-		proveedores.put(dtP.getNickname(), nuevoProveedor);
+            Proveedor nuevoProveedor = new Proveedor(dtP);
+            proveedores.put(dtP.getNickname(), nuevoProveedor);
 	}
 
 	public Cliente getCliente(String nickname) {

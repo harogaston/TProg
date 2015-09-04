@@ -44,20 +44,30 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 	
 	@Override
-	public Set<DTMinCliente> listarClientes() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarClientes();
+	public Set<DTMinCliente> listarClientes() throws Exception{
+            try{
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+                return mu.listarClientes();
+            } 
+            catch(Exception e){
+                throw e;
+            }
 	}
 
 	@Override
 	public void seleccionarCliente(String nickname) {
-		this.nicknameU = nickname;
+            this.nicknameU = nickname;
 	}
 
 	@Override
-	public DTCliente infoCliente() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.infoCliente(this.nicknameU);
+	public DTCliente infoCliente() throws Exception {
+            try { 
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+                return mu.infoCliente(this.nicknameU);
+            }
+            catch(Exception e){
+                throw e;
+            }
 	}
 
 	@Override
@@ -121,15 +131,19 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 
 	@Override
-	public DTProveedor infoProveedor() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+	public DTProveedor infoProveedor() throws Exception {
+            try {
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		return mu.infoProveedor(this.nicknameP);
+            } catch(Exception e){
+                throw e;
+            }    
 	}
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarServiciosProveedor(this.nicknameP);
+            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+            return mu.listarServiciosProveedor(this.nicknameP);
 	}
 
 	@Override

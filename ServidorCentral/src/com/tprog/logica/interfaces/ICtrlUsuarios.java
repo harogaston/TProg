@@ -17,9 +17,9 @@ import java.util.Set;
 
 public interface ICtrlUsuarios {
 
-	public Set<DTMinCliente> listarClientes();
+	public Set<DTMinCliente> listarClientes() throws Exception;
 	public void seleccionarCliente(String nickname);
-	public DTCliente infoCliente();
+	public DTCliente infoCliente() throws Exception ;
 	public void seleccionarReserva(int idReserva);
 	public DTReserva infoReserva();
 	public boolean verificarNickname(String nickname);
@@ -29,7 +29,7 @@ public interface ICtrlUsuarios {
 	public void altaUsuario();
 	public Set<DTMinProveedor> listarProveedores();
 	public void seleccionarProveedor(String nickname);
-	public DTProveedor infoProveedor();
+	public DTProveedor infoProveedor() throws Exception;
 	public Set<DTMinServicio> listarServiciosProveedor();
 	public void seleccionarServicio(String idServicio);
 	public DTServicio infoServicio();

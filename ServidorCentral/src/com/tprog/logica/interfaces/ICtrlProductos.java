@@ -27,9 +27,9 @@ public interface ICtrlProductos {
 	public Set<DTMinServicio> listarServicios();
 	public void cambiarPrecio(float nuevoPrecio);
 	public void cambiarDescripcion(String nuevaDescripcion);
-	public Set<String> listarImagenes();
-	public void agregarImagen(String idImagen);
-	public void quitarImagen(String idImagen);
+    public Set<String> listarImagenes();
+	public void agregarImagen(String idImagen) throws Exception;
+	public void quitarImagen(String idImagen) throws Exception;
 	public DefaultMutableTreeNode listarCiudades();
 	public void cambiarOrigen(DTUbicacion origen);
 	public void cambiarDestino(DTUbicacion destino);

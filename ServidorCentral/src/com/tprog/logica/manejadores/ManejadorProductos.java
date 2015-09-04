@@ -147,11 +147,36 @@ public class ManejadorProductos {
 		return result;
 	}
 
-	public void agregarImagen(DTMinServicio dtS, String img) {
+	public void agregarImagen(DTMinServicio dtS, String img) throws Exception {
+            if (!servicios.isEmpty()){
+                if (servicios.containsKey(dtS.getNicknameP()) 
+                        && !servicios.get(dtS.getNicknameP()).isEmpty() 
+                        && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                            Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                            s.agregarImagen(img);
+                } else {
+                    throw new Exception ("El Servicio seleccionado no es válido.");
+                }
+                    
+            }else{
+                throw new Exception("No existen Servicios registrados en el Sistema.");
+            }    
 	}
 
-	public void quitarImagen(DTMinServicio dtS, String img) {
-	}
+	public void quitarImagen(DTMinServicio dtS, String img)  throws Exception{
+            if (!servicios.isEmpty()){
+                if (servicios.containsKey(dtS.getNicknameP()) 
+                        && !servicios.get(dtS.getNicknameP()).isEmpty() 
+                        && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())){
+                            Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
+                            s.quitarImagen(img);
+                } else {
+                    throw new Exception ("El Servicio seleccionado no es válido.");
+                }        
+            }else{
+                throw new Exception("No existen Servicios registrados en el Sistema.");
+            }
+        }
 
 	public DefaultMutableTreeNode listarCiudades() {
 		DefaultMutableTreeNode result = new DefaultMutableTreeNode();

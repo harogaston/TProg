@@ -5,10 +5,10 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.event.MouseListener;
-import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -32,7 +32,14 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }      
+        actualizarInterfaz();
+    }
+    
+    private void actualizarInterfaz() {
+        DTServicio dt = ctrlProductos.infoServicio();
+        labelOrigen.setText("<html>" + dt.getOrigen().getCiudad() + ", " + dt.getOrigen().getPais() + "</html>");
+        labelDestino.setText("<html>" + dt.getDestino().getCiudad() + ", " + dt.getDestino().getPais() + "</html>");
     }
 
     /**
@@ -53,6 +60,10 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         botonConfirmar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        labelOrigen = new javax.swing.JLabel();
+        labelDestino = new javax.swing.JLabel();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
@@ -79,7 +90,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCiudadesOrigenInterfaz);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 200, 210));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 200, 150));
 
         arbolCiudadesDestinoInterfaz.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -88,7 +99,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(arbolCiudadesDestinoInterfaz);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 200, 210));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 200, 150));
 
         jLabel1.setText("Seleccione un nuevo origen");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
@@ -106,6 +117,18 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, -1, -1));
+
+        jLabel4.setText("Origen actual:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+
+        jLabel5.setText("Destino actual:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
+
+        labelOrigen.setText("jLabel6");
+        getContentPane().add(labelOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 150, 60));
+
+        labelDestino.setText("jLabel7");
+        getContentPane().add(labelDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, 60));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -168,7 +191,11 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelDestino;
+    private javax.swing.JLabel labelOrigen;
     // End of variables declaration//GEN-END:variables
 }

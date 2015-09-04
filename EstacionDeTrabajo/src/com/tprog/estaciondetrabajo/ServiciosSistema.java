@@ -130,14 +130,22 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleServicio.setText("");
-        detalleServicio.setVisible(false);
+//        detalleServicio.setText("");
+//        detalleServicio.setVisible(false);
         this.dispose();
-        servicios = null;
-        ctrlProductos = null;
-        padre.setVisible(true);
+//        servicios = null;
+//        ctrlProductos = null;
+//        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+
+    
+    
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     VerInformacionDeServicio padre;

@@ -9,6 +9,7 @@ import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
@@ -28,7 +29,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
     private final ICtrlUsuarios ctrlUsuarios;
     private final ICtrlReservas ctrlReservas;
     private boolean proveedorSeleccionado;
-    private Vector<String> listaServicios = new Vector<>();
+    //private Vector<String> listaServicios = new Vector<>();
 
     /**
      * Creates new form ReservasCliente
@@ -42,6 +43,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlReservas = ctrlReservas;
+        f = Fabrica.getInstance();
+        this.ctrlProductos = f.getICtrlProductos();
         initComponents();
         setTitle("Realizar Reserva");
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
@@ -50,11 +53,11 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         } 
         
         Set<DTMinServicio> setServicios = ctrlReservas.listarServicios();
-        Set<DTMinServicio> setServiciosP = ctrlReservas.listarServiciosProveedor();
-        //ctrlReservas.
+        Set<DTMinServicio> setServiciosP = null;
+        if (proveedorSeleccionado){
+            setServiciosP = ctrlReservas.listarServiciosProveedor();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        if (proveedorSeleccionado){
             if (setServiciosP != null) {
                 for (DTMinServicio dt : setServicios) {
                     listaServicios.add(dt.getIdServicio());
@@ -230,15 +233,20 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
             //buscar servicio
-            ctrlReservas.seleccionarServicio(servicio);
             DTMinServicio dt = null;
+            servicios = ctrlReservas.listarServicios();
             Iterator it = servicios.iterator();
             boolean found = false;
             while (it.hasNext() && !found) {
+                //System.out.println("323");
                 DTMinServicio tmp = (DTMinServicio) it.next();
-                if (tmp.getIdServicio().equals(servicio))
+                if (tmp.getIdServicio().equals(servicio)){
                     dt = tmp; //es imposible que dt sea null al final del loop
+                    //System.out.println("aaaasd");
+                }
+                    
             }
+            //ctrlReservas.seleccionarServicio(dt);
             ctrlProductos.seleccionarServicio(dt);
             DTServicio dtServicio = ctrlProductos.infoServicio();
             //imagenes
@@ -261,13 +269,16 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
-            DTServicio dtS = ctrlUsuarios.infoServicio();
-            detalleServicio.setVisible(true);
-            detalleServicio.setText(dtS.toString());         
-             DTMinServicio dtmS = ctrlProductos.infoMinServicio();
+            //DTServicio dtS = ctrlUsuarios.infoServicio();
+            //detalleServicio.setVisible(true);
+            //detalleServicio.setText(dtS.toString());         
+             
+            DTMinServicio dtmS = ctrlProductos.infoMinServicio();
             String proveedor = dtmS.getNicknameP();
             ctrlReservas.seleccionarProveedor(proveedor);
             ctrlReservas.seleccionarServicio(dtmS);
+            // qe wea ermano
+            ctrlProductos.seleccionarServicio(dtmS);
             //leer cantidad y fechas
             String cantString = (String) textPaneCantidad.getText();
             int cant = Integer.parseInt(cantString);
@@ -279,7 +290,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             String anioFString = textPaneAnio2.getText();
             int anioI = Integer.parseInt(anioIString);
             int anioF = Integer.parseInt(anioFString);
-                Date fI = new Date(anioI, mesI, diaI);  
+            Date fI = new Date(anioI, mesI, diaI);  
             Date fF = new Date(anioF, mesF, diaF);
             ctrlReservas.ingresarLineaReserva(cant, fI, fF);
             this.setVisible(false);
@@ -292,7 +303,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             //ctrlReservas.seleccionarServicio(dtS);
         }
     }//GEN-LAST:event_buttonAgregarActionPerformed
-
+    Fabrica f;
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     RealizarReserva2 padre;

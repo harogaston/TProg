@@ -18,6 +18,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -329,7 +331,12 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-        // TODO add your handling code here:
+        
+            // TODO add your handling code here:
+            //falta acoomodar y excepciones
+        
+            //ctrlReservas.altaReserva();
+       
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonAgregarPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarPromocionActionPerformed

@@ -24,10 +24,11 @@ public class Promocion {
 	private Map<String, Servicio> servicios;
 
 	public Promocion(String idPromocion, float descuento, Proveedor proveedor) {
-		this.idPromocion = idPromocion;
-		this.descuento = descuento;
-		this.proveedor = proveedor;
-		servicios = new HashMap();
+            this.idPromocion = idPromocion;
+            this.descuento = descuento;
+            this.proveedor = proveedor;
+            servicios = new HashMap();
+            this.total = 0;
 	}
 
 	public DTMinPromocion crearDTMin() {
@@ -36,21 +37,21 @@ public class Promocion {
 	}
 
 	public DTPromocion crearDT() {
-		Set<DTMinServicio> nuevoSet = new HashSet();
-		if (servicios != null) {
-			for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
-				Servicio serv = it.next();
-				DTMinServicio temp = serv.crearDTMin();
-				nuevoSet.add(temp);
-			}
-		}
-		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);
-		return nuevoDT;
+            Set<DTMinServicio> nuevoSet = new HashSet();
+            if (servicios != null) {
+                for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
+                    Servicio serv = it.next();
+                    DTMinServicio temp = serv.crearDTMin();
+                    nuevoSet.add(temp);
+                }
+            }
+            DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);
+            return nuevoDT;
 	}
 
 	public void addServicio(Servicio s) {
-		servicios.put(s.getIdServicio(), s);
-		this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
+            servicios.put(s.getIdServicio(), s);
+            this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
 	}
 
 	public void setIdPromocion(String idPromocion) {

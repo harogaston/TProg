@@ -309,112 +309,120 @@ public class CtrlUniversal implements ICtrlUniversal {
 			cats.add("Auto");
 			cats.add("Chevrolet");
 			mp.altaServicio(dtS, "mHooch", cats);
-			/*
-			 //Alta de Promociones
-			 //P1 4 5
-			 Set<String> servs = new HashSet();
-			 servs.add("Euro-Car-1");
-			 servs.add("Euro-Car-1");
-			 mp.altaPromocion("Euro-Cars-E-S", 30, "moody", servs);
-			 //P2 4 6
-			 servs = new HashSet();
-			 servs.add("Euro-Car-1");
-			 servs.add("Euro-Car-3");
-			 mp.altaPromocion("Euro-Cars-E-F", 30, "moody", servs);
-			 //P3 5 6
-			 servs = new HashSet();
-			 servs.add("Euro-Car-2");
-			 servs.add("Euro-Car-3");
-			 mp.altaPromocion("Euro-Cars-ES-F", 30, "moody", servs);
-			 //P4 1 2
-			 servs = new HashSet();
-			 servs.add("Euro-Vuelo-S");
-			 servs.add("Euro-Vuelo-LC");
-			 mp.altaPromocion("Euro-Vuelos-S-LC", 40, "remus", servs);
-			 //P5 1 3
-			 servs = new HashSet();
-			 servs.add("Euro-Vuelo-S");
-			 servs.add("Euro-Vuelo-FC");
-			 mp.altaPromocion("Euro-Vuelos-S-FC", 40, "remus", servs); 
-			 //P6 2 3
-			 servs = new HashSet();
-			 servs.add("Euro-Vuelo-LC");
-			 servs.add("Euro-Vuelo-FC");
-			 mp.altaPromocion("Euro-Vuelos-LC-FC", 40, "remus", servs);
-			 //P7 7 8
-			 servs = new HashSet();
-			 servs.add("Casa para p4 BsAS");
-			 servs.add("Floripa G. House");
-			 mp.altaPromocion("Sudamerica-Casas", 50, "mHooch", servs); 
-			 //P8 11 12
-			 servs = new HashSet();
-			 servs.add("Luxury south beach corner apartment");
-			 servs.add("Coche-Miami");
-			 mp.altaPromocion("Miami-Viaje", 30, "mHooch", servs);    
-			 */
-			//Alta Reservas
-			ManejadorReservas mr = ManejadorReservas.getInstance();
-			try {
-				//R1 S1
-				Set<DTLineaReserva> lineas = new HashSet();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 1, 1),
-						new Date(2015, 1, 1), "Euro-Vuelo-S", null, 1100));
-				DTReserva dtR = new DTReserva(0, new Date(2015, 1, 1),
-						EstadoReserva.Facturada, 1100, lineas);
-				mr.agregarReserva(mu.getCliente("oWood"), dtR, "remus");
-				//R2    S1 S2
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 1, 1),
-						new Date(2015, 1, 1), "Euro-Vuelo-S", null, 1100));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 1, 1),
-						new Date(2015, 1, 1), "Euro-Vuelo-LC", null, 850));
-				dtR = new DTReserva(0, new Date(2015, 1, 1),
-						EstadoReserva.Cancelada, 3050, lineas);
-				mr.agregarReserva(mu.getCliente("eWatson"), dtR, "remus");
+        //Alta de Promociones
+        //P1 4 5
+            Set<String> servs = new HashSet();
+            servs.add("Euro-Car-1");
+            servs.add("Euro-Car-1");
+            mp.altaPromocion("Euro-Cars-E-S", 30, "moody", servs);
+        //P2 4 6
+            servs = new HashSet();
+            servs.add("Euro-Car-1");
+            servs.add("Euro-Car-3");
+            mp.altaPromocion("Euro-Cars-E-F", 30, "moody", servs);
+        //P3 5 6
+            servs = new HashSet();
+            servs.add("Euro-Car-2");
+            servs.add("Euro-Car-3");
+            mp.altaPromocion("Euro-Cars-ES-F", 30, "moody", servs);
+        //P4 1 2
+            servs = new HashSet();
+            servs.add("Euro-Vuelo-S");
+            servs.add("Euro-Vuelo-LC");
+            mp.altaPromocion("Euro-Vuelos-S-LC", 40, "remus", servs);
+        //P5 1 3
+            servs = new HashSet();
+            servs.add("Euro-Vuelo-S");
+            servs.add("Euro-Vuelo-FC");
+            mp.altaPromocion("Euro-Vuelos-S-FC", 40, "remus", servs); 
+        //P6 2 3
+            servs = new HashSet();
+            servs.add("Euro-Vuelo-LC");
+            servs.add("Euro-Vuelo-FC");
+            mp.altaPromocion("Euro-Vuelos-LC-FC", 40, "remus", servs);
+        //P7 7 8
+            servs = new HashSet();
+            servs.add("Casa para p4 BsAs");
+            servs.add("Floripa G. House");
+            mp.altaPromocion("Sudamerica-Casas", 50, "mHooch", servs); 
+        //P8 11 12
+            servs = new HashSet();
+            servs.add("Luxury south beach corner apartament");
+            servs.add("Coche-Miami");
+            mp.altaPromocion("Miami-Viaje", 30, "mHooch", servs);    
+        
+        //Alta Reservas
+            ManejadorReservas mr = ManejadorReservas.getInstance();
+            try {
+            //R1 S1
+                Set<DTLineaReserva> lineas = new HashSet();
+                lineas.add(new DTLineaReserva(1, new Date(2015, 1, 1), 
+                    new Date(2015,1,1), "Euro-Vuelo-S", null, 1100));
+                DTReserva dtR = new DTReserva(0, new Date(2015, 1, 1),
+                        EstadoReserva.Facturada, 1100 , lineas);
+                mr.agregarReserva(mu.getCliente("oWood"), dtR, "remus");
+            //R2    S1 S2
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(2, new Date(2015, 1, 1), 
+                    new Date(2015,1,1), "Euro-Vuelo-S", null, 1100));
+                lineas.add(new DTLineaReserva(1, new Date(2015, 1, 1), 
+                    new Date(2015, 1, 1), "Euro-Vuelo-LC", null, 850));
+                dtR = new DTReserva(0, new Date(2015, 1, 1),
+                        EstadoReserva.Cancelada, 3050 , lineas);
+                mr.agregarReserva(mu.getCliente("eWatson"), dtR, "remus");
+
             //R3    P7
-//                lineas = new HashSet();
-//                lineas.add(new DTLineaReserva(1, new Date(2015, 3, 5), 
-//                    new Date(2015, 4, 2), null, "Sudamerica-Casas", 135));
-//                dtR = new DTReserva(0, new Date(2015, 3, 5),
-//                        EstadoReserva.Pagada, 135 , lineas);
-//                mr.agregarReserva(mu.getCliente("BruceS"), dtR, "mHooch"); 
-				//R4    S5 S6
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8),
-						new Date(2015, 5, 12), "Euro-Car-2", null, 300));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8),
-						new Date(2015, 5, 12), "Euro-Car-3", null, 300));
-				dtR = new DTReserva(0, new Date(2015, 5, 8),
-						EstadoReserva.Pagada, 600, lineas);
-				mr.agregarReserva(mu.getCliente("JeffW"), dtR, "moody");
-				//R5    S9
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7),
-						new Date(2015, 8, 10), "Air-France-FC", null, 100));
-				dtR = new DTReserva(0, new Date(2015, 8, 7),
-						EstadoReserva.Registrada, 200, lineas);
-				mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(1, new Date(2015, 3, 5), 
+                    new Date(2015, 4, 2), null, "Sudamerica-Casas", 135));
+                dtR = new DTReserva(0, new Date(2015, 3, 5),
+                        EstadoReserva.Pagada, 135 , lineas);
+                mr.agregarReserva(mu.getCliente("BruceS"), dtR, "mHooch"); 
+            //R4    S5 S6
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8),
+                                new Date(2015, 5, 12), "Euro-Car-2", null, 300));
+                lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8),
+                                new Date(2015, 5, 12), "Euro-Car-3", null, 300));
+                dtR = new DTReserva(0, new Date(2015, 5, 8),
+                                EstadoReserva.Pagada, 600, lineas);
+                mr.agregarReserva(mu.getCliente("JeffW"), dtR, "moody");
+                //R5    S9
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7),
+                                new Date(2015, 8, 10), "Air-France-FC", null, 100));
+                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                                EstadoReserva.Registrada, 200, lineas);
+                mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
+            //R5    S9
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7), 
+                    new Date(2015, 8, 10), "Air-France-FC", null, 100));
+                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                        EstadoReserva.Registrada, 200, lineas);
+                mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook"); 
+
             //R6    P8 S7
-//                lineas = new HashSet();
-//                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 7), 
-//                    new Date(2015, 8, 14), null, "Miami-Viaje", 462));
-//                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 14), 
-//                    new Date(2015, 8, 21), "Casa para p4 BsAs", null, 80));
-//                dtR = new DTReserva(0, new Date(2015, 8, 7),
-//                        EstadoReserva.Registrada, 542 , lineas);
-//                mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
-				//R7    S2
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7),
-						new Date(2015, 8, 7), "Euro-Vuelo-LC", null, 850));
-				dtR = new DTReserva(0, new Date(2015, 8, 7),
-						EstadoReserva.Registrada, 1700, lineas);
-				mr.agregarReserva(mu.getCliente("BruceS"), dtR, "remus");
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-		} catch (IOException ex) {
-			Logger.getLogger(CtrlUniversal.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 7), 
+                    new Date(2015, 8, 14), null, "Miami-Viaje", 462));
+                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 14), 
+                    new Date(2015, 8, 21), "Casa para p4 BsAs", null, 80));
+                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                        EstadoReserva.Registrada, 542 , lineas);
+                mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
+            //R7    S2
+                lineas = new HashSet();
+                lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7), 
+                    new Date(2015, 8, 7), "Euro-Vuelo-LC", null, 850));
+                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                        EstadoReserva.Registrada, 1700, lineas);
+                mr.agregarReserva(mu.getCliente("BruceS"), dtR, "remus");    
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(CtrlUniversal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

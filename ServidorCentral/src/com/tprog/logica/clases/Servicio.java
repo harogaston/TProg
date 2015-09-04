@@ -61,7 +61,7 @@ public class Servicio {
 	}
 
 	public void quitarImagen(String imagen) {
-		if (!imagenes.isEmpty()) {
+		if (!imagenes.isEmpty() && imagenes.contains(imagen)) {
 			imagenes.remove(imagen);
 		}
 	}

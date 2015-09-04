@@ -57,7 +57,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         botonSalir = new javax.swing.JButton();
         listaProveedoresInterfaz = new javax.swing.JComboBox(listaProveedores);
         label = new javax.swing.JLabel();
-        imagenUsuario = new javax.swing.JLabel();
+        imagenUsuarioHolder = new javax.swing.JLabel();
         panelUsuario = new javax.swing.JScrollPane();
         detalleUsuario = new javax.swing.JTextArea();
         botonServicios = new javax.swing.JButton();
@@ -105,9 +105,9 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 440, 30));
         label.getAccessibleContext().setAccessibleDescription("");
 
-        imagenUsuario.setMaximumSize(new java.awt.Dimension(50, 50));
-        imagenUsuario.setPreferredSize(new java.awt.Dimension(50, 50));
-        getContentPane().add(imagenUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 130));
+        imagenUsuarioHolder.setMaximumSize(new java.awt.Dimension(50, 50));
+        imagenUsuarioHolder.setPreferredSize(new java.awt.Dimension(50, 50));
+        getContentPane().add(imagenUsuarioHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 130));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -136,7 +136,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
 		listaProveedores.clear();
 		servicios = null;
-		imagenUsuario.setIcon(null);
+		imagenUsuarioHolder.setIcon(null);
 		listaProveedoresInterfaz.setSelectedItem(null);
 		detalleUsuario.setText("");
 		detalleUsuario.setVisible(false);
@@ -152,19 +152,23 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 			try {
 				DTProveedor dt = ctrlUsuarios.infoProveedor();
 				detalleUsuario.setText(dt.toString());
-
-				File f = new File(dt.getImagen());
-				Image img = ImageIO.read(f);
-				Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
-				ImageIcon imageIcon = new ImageIcon(dimg);
-				imagenUsuario.setIcon(imageIcon);
+				String imagen = dt.getImagen();
+				if (imagen != null) {
+					File f = new File(dt.getImagen());
+					Image img = ImageIO.read(f);
+					Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon imageIcon = new ImageIcon(dimg);
+					imagenUsuarioHolder.setIcon(imageIcon);
+				}
+				else{
+					imagenUsuarioHolder.setIcon(null);
+				}
 				//cargo la lista de servicios del proveedor
 				servicios = ctrlUsuarios.listarServiciosProveedor();
 			} catch (Exception e) {
 				System.out.println("La imagen no pudo ser cargada");
-				imagenUsuario.setIcon(null);
+				imagenUsuarioHolder.setIcon(null);
 			}
-
 		}
     }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
 
@@ -196,7 +200,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;
     private javax.swing.JTextArea detalleUsuario;
-    private javax.swing.JLabel imagenUsuario;
+    private javax.swing.JLabel imagenUsuarioHolder;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaProveedoresInterfaz;
     private Vector<String> listaProveedores = new Vector<>();

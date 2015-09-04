@@ -17,6 +17,7 @@ import com.tprog.logica.manejadores.ManejadorProductos;
 import com.tprog.logica.manejadores.ManejadorReservas;
 import com.tprog.logica.manejadores.ManejadorUsuarios;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class CtrlReservas implements ICtrlReservas {
@@ -32,11 +33,13 @@ public class CtrlReservas implements ICtrlReservas {
 
 	public CtrlReservas() {
 		this.nickname = "";
+                this.nicknameP = "";
 		this.dtP = null;
 		this.dtS = null;
 		this.dtR = null;
 		this.idReserva = -1;
 		this.precioTotal = 0;
+                this.lineasReserva = new HashSet();
 
 	}
 	//ManejadorUsuarios mu = ManejadorUsuarios.getInstance();

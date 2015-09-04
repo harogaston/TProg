@@ -90,7 +90,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, -1, -1));
 
-        jLabel1.setText("<html>Seleccione algun servicio de la promocion para ver su información</html>");
+        jLabel1.setText("<html>Seleccione alguna promoción para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
 
         buttonVolver.setText("Volver");

@@ -12,12 +12,16 @@ import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -44,14 +48,20 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
 		ctrlUsuarios = f.getICtrlUsuarios();
 		ctrlReservas = f.getICtrlReservas();
 		//listaClientes
-		Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
+                try{
+                    Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
+                    if (setClientes != null) {
+                            for (DTMinCliente dt : setClientes) {
+                                    listaClientes.add(dt.getNickname());
+                            }
+                    }                    
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+                    this.dispose();
+                }
         //construyo un vector con la informacion a mostrar, porque
 		//el comboBox solo funciona con Vector o List
-		if (setClientes != null) {
-			for (DTMinCliente dt : setClientes) {
-				listaClientes.add(dt.getNickname());
-			}
-		}
+
 	}
 
 	/**
@@ -199,8 +209,13 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
 			try {
 				DTCliente dt = ctrlUsuarios.infoCliente();
 				detalleUsuario.setText(dt.toString());
-
-				imagenUsuario.setIcon(new ImageIcon(RealizarReserva1.class.getResource(dt.getImagen())));
+                                //cargar imagen
+                                File f = new File(dt.getImagen());
+				Image img = ImageIO.read(f);
+				Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
+				ImageIcon imageIcon = new ImageIcon(dimg);
+				imagenUsuario.setIcon(imageIcon);
+                                //obtener reservas
 				reservas = dt.getReservas();
 				//cargo la lista de reservas del usuario acá, y cuando se pidan las reservas se muestran
 			} catch (Exception ex) {

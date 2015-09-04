@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.estaciondetrabajo.RealizarReserva2;
@@ -28,19 +28,17 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class RealizarReserva3 extends javax.swing.JInternalFrame {
-    private final ICtrlUsuarios ctrlUsuarios;
-    private final ICtrlReservas ctrlReservas;
-    private boolean proveedorSeleccionado;
     //private Vector<String> listaServicios = new Vector<>();
-
+    
     /**
      * Creates new form ReservasCliente
      * @param padre
      * @param <error>
      * @param ctrlReservas
      */
-    public RealizarReserva3(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas, 
-                                    boolean proveedorSeleccionado) {
+    public RealizarReserva3(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas,
+            boolean proveedorSeleccionado) {
+        //asignación de atributos
         this.proveedorSeleccionado = proveedorSeleccionado;
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
@@ -49,25 +47,27 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         this.ctrlProductos = f.getICtrlProductos();
         initComponents();
         setTitle("Realizar Reserva");
+        //non-draggable
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        } 
-        
+        }
+        //obtengo los servicios a mostrar
+        //si nunca elegí alguno, se muestran todos
+        //si no, se muestran sólo los de ese proveedor
         Set<DTMinServicio> setServicios = this.ctrlReservas.listarServicios();
         Set<DTMinServicio> setServiciosP = null;
         if (proveedorSeleccionado){
-            
+            //muestro solo los servicios del proveedor seleccionado
             setServiciosP = this.ctrlReservas.listarServiciosProveedor();
-        //construyo un vector con la informacion a mostrar, porque
-        //el comboBox solo funciona con Vector o List
+            //construyo un vector con la informacion a mostrar, porque
+            //el comboBox solo funciona con Vector o List
             if (setServiciosP != null) {
-                for (DTMinServicio dt : setServicios) {
+                for (DTMinServicio dt : setServiciosP) {
                     listaServicios.add(dt.getIdServicio());
                 }
             }
-        }
-        else{
+        } else {
             if (setServicios != null) {
                 for (DTMinServicio dt : setServicios) {
                     listaServicios.add(dt.getIdServicio());
@@ -75,7 +75,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,10 +97,6 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         textPaneCantidad = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textPaneAnio1 = new javax.swing.JTextPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        textPaneAnio2 = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -111,6 +107,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         comboBoxDias2 = new javax.swing.JComboBox();
         comboBoxMeses2 = new javax.swing.JComboBox();
+        textFieldAnio1 = new javax.swing.JTextField();
+        textFieldAnio2 = new javax.swing.JTextField();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
@@ -183,14 +181,6 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 122, -1));
 
-        jScrollPane2.setViewportView(textPaneAnio1);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 70, -1));
-
-        jScrollPane3.setViewportView(textPaneAnio2);
-
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 70, -1));
-
         jLabel5.setText("Día");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
 
@@ -220,18 +210,20 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
 
         comboBoxMeses2.setModel(new javax.swing.DefaultComboBoxModel(meses));
         getContentPane().add(comboBoxMeses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 100, -1));
+        getContentPane().add(textFieldAnio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 80, -1));
+        getContentPane().add(textFieldAnio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
-
+    
     private void listaServiciosInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaServiciosInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaServiciosInterfazItemStateChanged
-
+    
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
@@ -247,27 +239,33 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                     dt = tmp; //es imposible que dt sea null al final del loop
                     //System.out.println("aaaasd");
                 }
-                    
+                
             }
             //ctrlReservas.seleccionarServicio(dt);
             ctrlProductos.seleccionarServicio(dt);
             DTServicio dtServicio = ctrlProductos.infoServicio();
             //imagenes
             detalleServicio.setVisible(true);
-            detalleServicio.setText(dt.toString()); 
+            detalleServicio.setText(dt.toString());
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+    
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonVolverActionPerformed
-
+    
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
         // TODO add your handling code here:
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
@@ -276,8 +274,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             
             //DTServicio dtS = ctrlUsuarios.infoServicio();
             //detalleServicio.setVisible(true);
-            //detalleServicio.setText(dtS.toString());         
-             
+            //detalleServicio.setText(dtS.toString());
+            
             DTMinServicio dtmS = ctrlProductos.infoMinServicio();
             String proveedor = dtmS.getNicknameP();
             ctrlReservas.seleccionarProveedor(proveedor);
@@ -291,13 +289,13 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             int diaF = (Integer) comboBoxDias2.getSelectedItem();
             int mesI = comboBoxMeses1.getSelectedIndex()+1;
             int mesF = comboBoxMeses2.getSelectedIndex()+1;
-            String anioIString = textPaneAnio1.getText();
-            String anioFString = textPaneAnio2.getText();
+            String anioIString = textFieldAnio1.getText();
+            String anioFString = textFieldAnio2.getText();
             int anioI = Integer.parseInt(anioIString);
             int anioF = Integer.parseInt(anioFString);
-            Date fI = new Date(anioI, mesI, diaI);  
+            Date fI = new Date(anioI, mesI, diaI);
             Date fF = new Date(anioF, mesF, diaF);
-            ctrlReservas.ingresarLineaReserva(cant, fI, fF);            
+            ctrlReservas.ingresarLineaReserva(cant, fI, fF);
             DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
             Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
             this.setVisible(false);
@@ -306,16 +304,26 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             // DTServicio dtS = ctrlUsuarios.infoServicio();
             //String proveedor = dtS.get
             //DTMinServicio dtmS = new DTMinServicio(ctrlReservas.)
-        
+            
             //ctrlReservas.seleccionarServicio(dtS);
         }
     }//GEN-LAST:event_buttonAgregarActionPerformed
+    
+    
+    
+    
+    //booleano que determina si lo que se agrega es el primer servicio o producto
+    //es para saber cuando seleccionar proveedor o no
+    
+    private ICtrlUsuarios ctrlUsuarios;
+    private ICtrlReservas ctrlReservas;
+    private ICtrlProductos ctrlProductos;
+    private boolean proveedorSeleccionado;    
     Fabrica f;
-    ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     RealizarReserva2 padre;
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
-		"Octubre", "Noviembre", "Diciembre"};
+        "Octubre", "Noviembre", "Diciembre"};
     private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};                     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
@@ -337,13 +345,11 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JComboBox listaServiciosInterfaz;
     private Vector<String> listaServicios = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
-    private javax.swing.JTextPane textPaneAnio1;
-    private javax.swing.JTextPane textPaneAnio2;
+    private javax.swing.JTextField textFieldAnio1;
+    private javax.swing.JTextField textFieldAnio2;
     private javax.swing.JTextPane textPaneCantidad;
     // End of variables declaration//GEN-END:variables
 }

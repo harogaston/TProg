@@ -161,6 +161,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 				ImageIcon imageIcon = new ImageIcon(dimg);
 				imagenUsuario.setIcon(imageIcon);
 			} catch (Exception e) {
+                                imagenUsuario.setIcon(null);
 				System.out.println("La imagen no pudo ser cargada");
 			}
 			

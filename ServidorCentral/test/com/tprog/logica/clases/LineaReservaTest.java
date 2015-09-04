@@ -12,6 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ *
+ * @author MarG
+ */
 public class LineaReservaTest {
     
     Servicio servicio;
@@ -35,7 +39,9 @@ public class LineaReservaTest {
         fecha = new Date();
         
         promocion = null;
+        
         servicio = new Servicio("ser","bueno",50,null,null,null,null);
+        promocion = new Promocion("promo",50,null);
         instance = new LineaReserva(2,fecha,fecha,servicio,promocion,50);
         
     }
@@ -107,7 +113,7 @@ public class LineaReservaTest {
     public void testGetPromocion() {
         System.out.println("getPromocion");
         
-        Promocion expResult = null;
+        Promocion expResult = this.promocion;
         Promocion result = instance.getPromocion();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -203,8 +209,14 @@ public class LineaReservaTest {
         
         DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser","",50);
         DTLineaReserva result = instance.crearDTLineaReserva();
+        instance.setServicio(null);
+        Promocion promo = new Promocion("promo",50,null);
+        instance.setPromocion(promo);
         
-        assertEquals(expResult.toString(), result.toString());
+        DTLineaReserva exp = new DTLineaReserva(4,fecha,fecha,"","promo",50);
+        DTLineaReserva res = instance.crearDTLineaReserva();
+        
+        
         // TODO review the generated test code and remove the default call to fail.
         
     }

@@ -108,15 +108,23 @@ public class CtrlProductos implements ICtrlProductos{
     }
     
     @Override
-    public void agregarImagen(String idImagen){
-        ManejadorProductos mp = ManejadorProductos.getInstance();
-        mp.agregarImagen(dtS, idImagen);
+    public void agregarImagen(String idImagen) throws Exception{
+        try{
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            mp.agregarImagen(dtS, idImagen);
+        }catch(Exception e){
+            throw e;
+        }    
     }
     
     @Override
-    public void quitarImagen(String idImagen){
-        ManejadorProductos mp = ManejadorProductos.getInstance();
-        mp.quitarImagen(dtS, idImagen);
+    public void quitarImagen(String idImagen) throws Exception{
+        try {
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            mp.quitarImagen(dtS, idImagen);
+        } catch (Exception e){
+            throw e;
+        }   
     }
     
     @Override

@@ -12,6 +12,7 @@ import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,6 +53,8 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
         String precio = Float.toString(dtR.getPrecioTotal());
         textPanePrecio.setText(precio);
+        Date fechaActual; //setear fecha actual
+        textPaneFecha.setText(title);
         //falta fecha
         
         //listaClientes

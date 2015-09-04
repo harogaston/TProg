@@ -67,13 +67,24 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textPaneCantidad = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        textPaneAnio1 = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
+        textPaneAnio2 = new javax.swing.JTextPane();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        comboBoxMeses1 = new javax.swing.JComboBox();
+        comboBoxDias1 = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        comboBoxDias2 = new javax.swing.JComboBox();
+        comboBoxMeses2 = new javax.swing.JComboBox();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
         setVisible(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -90,6 +101,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 300, -1));
 
         detalleServicio.setEditable(false);
         detalleServicio.setColumns(20);
@@ -98,14 +110,18 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         detalleServicio.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleServicio);
 
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 269, 128));
+
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
 
         jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         buttonVolver.setText("Volver");
         buttonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +129,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                 buttonVolverActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         buttonAgregar.setText("Agregar");
         buttonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,83 +137,58 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                 buttonAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         jLabel2.setText("Cantidad");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
 
         jLabel3.setText("Fecha de Inicio");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
         jLabel4.setText("Fecha de Fin");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
 
         jScrollPane1.setViewportView(textPaneCantidad);
 
-        jScrollPane2.setViewportView(jTextPane2);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 122, -1));
 
-        jScrollPane3.setViewportView(jTextPane3);
+        jScrollPane2.setViewportView(textPaneAnio1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3)))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(buttonVolver)
-                .addGap(32, 32, 32)
-                .addComponent(buttonAgregar)
-                .addGap(159, 159, 159)
-                .addComponent(botonSalir))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(listaServiciosInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(17, 17, 17)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonVolver)
-                    .addComponent(buttonAgregar)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(botonSalir))))
-        );
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 70, -1));
+
+        jScrollPane3.setViewportView(textPaneAnio2);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 70, -1));
+
+        jLabel5.setText("Día");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
+
+        jLabel6.setText("Mes");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
+
+        jLabel7.setText("Año");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
+        comboBoxMeses1.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        getContentPane().add(comboBoxMeses1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 100, -1));
+
+        comboBoxDias1.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        getContentPane().add(comboBoxDias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 62, -1));
+
+        jLabel8.setText("Día");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, -1, -1));
+
+        jLabel9.setText("Mes");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, -1));
+
+        jLabel10.setText("Año");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
+
+        comboBoxDias2.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        getContentPane().add(comboBoxDias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 50, -1));
+
+        comboBoxMeses2.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        getContentPane().add(comboBoxMeses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -245,47 +237,69 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         if (servicio != null) {
             DTServicio dtS = ctrlUsuarios.infoServicio();
             detalleServicio.setVisible(true);
-            detalleServicio.setText(dtS.toString()); 
-            ctrlProductos.seleccionarServicio(null);
+            detalleServicio.setText(dtS.toString());         
+             DTMinServicio dtmS = ctrlProductos.infoMinServicio();
+            String proveedor = dtmS.getNicknameP();
+            ctrlReservas.seleccionarProveedor(proveedor);
+            ctrlReservas.seleccionarServicio(dtmS);
+            //leer cantidad y fechas
+            String cantString = (String) textPaneCantidad.getText();
+            int cant = Integer.parseInt(cantString);
+            int diaI = (Integer) comboBoxDias1.getSelectedItem();
+            int diaF = (Integer) comboBoxDias2.getSelectedItem();
+            int mesI = comboBoxMeses1.getSelectedIndex()+1;
+            int mesF = comboBoxMeses2.getSelectedIndex()+1;
+            String anioIString = textPaneAnio1.getText();
+            String anioFString = textPaneAnio2.getText();
+            int anioI = Integer.parseInt(anioIString);
+            int anioF = Integer.parseInt(anioFString);
+                Date fI = new Date(anioI, mesI, diaI);  
+            Date fF = new Date(anioF, mesF, diaF);
+            ctrlReservas.ingresarLineaReserva(cant, fI, fF);
+            this.setVisible(false);
+            this.padre.setVisible(true);
+            //ctrlReservas.seleccionarServicio(servicio);
+            // DTServicio dtS = ctrlUsuarios.infoServicio();
+            //String proveedor = dtS.get
+            //DTMinServicio dtmS = new DTMinServicio(ctrlReservas.)
         
-        DTMinServicio dtmS = ctrlProductos.infoMinServicio();
-        String proveedor = dtmS.getNicknameP();
-        ctrlReservas.seleccionarProveedor(proveedor);
-        ctrlReservas.seleccionarServicio(dtmS);
-        //leer cantidad y fechas
-        Date fI = new Date();  
-        ctrlReservas.ingresarLineaReserva(1, fI, fI);
-        this.setVisible(false);
-        this.padre.setVisible(true);
-        //ctrlReservas.seleccionarServicio(servicio);
-       // DTServicio dtS = ctrlUsuarios.infoServicio();
-        //String proveedor = dtS.get
-        //DTMinServicio dtmS = new DTMinServicio(ctrlReservas.)
-        
-        //ctrlReservas.seleccionarServicio(dtS);
+            //ctrlReservas.seleccionarServicio(dtS);
         }
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     RealizarReserva2 padre;
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
+		"Octubre", "Noviembre", "Diciembre"};
+    private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};                     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonVolver;
+    private javax.swing.JComboBox comboBoxDias1;
+    private javax.swing.JComboBox comboBoxDias2;
+    private javax.swing.JComboBox comboBoxMeses1;
+    private javax.swing.JComboBox comboBoxMeses2;
     private javax.swing.JTextArea detalleServicio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
     private javax.swing.JComboBox listaServiciosInterfaz;
     private Vector<String> listaServicios = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
+    private javax.swing.JTextPane textPaneAnio1;
+    private javax.swing.JTextPane textPaneAnio2;
     private javax.swing.JTextPane textPaneCantidad;
     // End of variables declaration//GEN-END:variables
 }

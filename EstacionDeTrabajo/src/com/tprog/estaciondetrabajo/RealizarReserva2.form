@@ -262,6 +262,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="textPaneFecha">
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="textPaneFecha.setEditable(false);"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

@@ -7,6 +7,7 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
@@ -20,6 +21,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -54,6 +56,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     void cargarDatos() {
         //pedir controlador
         DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
+        if (dtR == null) System.out.println("lolololmao");
         String precio = Float.toString(dtR.getPrecioTotal());
         textPanePrecio.setText(precio);
         Date fechaActual = null;
@@ -75,9 +78,17 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
            Map.Entry pair = (Map.Entry)it.next();
            listaLineasReserva.add(Integer.toString((Integer) pair.getKey()));
        }
-       if (!ctrlReservas.mostrarReservaTemporal().getLineasReserva().isEmpty())
+       DTReserva asd = ctrlReservas.mostrarReservaTemporal();
+       Set<DTLineaReserva> asdsd = asd.getLineasReserva();
+       System.out.println(asdsd.size());
+       if (!ctrlReservas.mostrarReservaTemporal().getLineasReserva().isEmpty()){
+           System.out.println("select");
            proveedorSeleccionado = true;
-       else proveedorSeleccionado = false;   
+       }
+       else{
+           proveedorSeleccionado = false;
+           System.out.println("la peor");
+       }   
        
        /*
        
@@ -196,6 +207,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha:");
 
+        textPaneFecha.setEditable(false);
         jScrollPane2.setViewportView(textPaneFecha);
 
         textAreaServicios.setColumns(20);
@@ -332,10 +344,16 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         
+        try {
             // TODO add your handling code here:
             //falta acoomodar y excepciones
         
-            //ctrlReservas.altaReserva();
+            ctrlReservas.altaReserva();
+            JOptionPane.showMessageDialog(this, "Reserva creada con éxito", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(RealizarReserva2.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Piraste viejo, proba de nuevo", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+        }
        
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
@@ -362,8 +380,9 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
-        System.out.println("reserva2");
+        
                 cargarDatos();
+                System.out.println("reserva2");
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden

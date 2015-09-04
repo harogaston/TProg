@@ -85,6 +85,7 @@ public class CtrlReservas implements ICtrlReservas {
 			lineasReserva.add(dtLR);
 			this.precioTotal += precio;
 		} else {
+                        System.out.println("OOOO");
 			float precio = mp.getPrecioServicio(dtS);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), "", precio);
 			lineasReserva.add(dtLR);

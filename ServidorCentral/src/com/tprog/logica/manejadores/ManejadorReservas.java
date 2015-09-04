@@ -57,13 +57,14 @@ public class ManejadorReservas {
 		Reserva r = reservas.get(idReserva);
 		r.eliminar();
 		// sacar del map
-		this.reservas.remove(r);
+		reservas.remove(r);
 	}
 
 	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
-            if (dtR == null) System.out.println("la palida");
-            Reserva nuevaReserva = new Reserva(dtR, nicknameP);
-            reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
-            cliente.agregarReserva(nuevaReserva);
+            if (dtR != null) {
+                Reserva nuevaReserva = new Reserva(dtR, nicknameP);
+                reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
+                cliente.agregarReserva(nuevaReserva);
+            } else System.out.println("El DTReserva que se paso hacia agregarReserva era nulo");
 	}
 }

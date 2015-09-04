@@ -143,7 +143,9 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public DTReserva infoReserva() {
-		return this.dtR;
+            ManejadorReservas mr = ManejadorReservas.getInstance();
+            dtR = mr.infoReserva(idReserva);
+            return dtR;
 	}
 
 	@Override

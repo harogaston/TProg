@@ -148,6 +148,8 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
             ctrlProductos.cambiarOrigen(dtOrigen);
             ctrlProductos.cambiarDestino(dtDestino);
             JOptionPane.showMessageDialog(this, "Cambio realizado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+            padre.setVisible(true);
         } else
             JOptionPane.showMessageDialog(this, "Por favor seleccione ciudades validas", "Seleccion invalida", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonConfirmarActionPerformed

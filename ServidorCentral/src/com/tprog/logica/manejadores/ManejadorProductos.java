@@ -81,7 +81,7 @@ public class ManejadorProductos {
             DTServicio result = null;
             if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) {
                 if (!servicios.get(dtS.getNicknameP()).isEmpty()
-                        && !servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
+                        && servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())) {
                     Servicio s = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
                     result = s.crearDT();
                 }

@@ -114,14 +114,20 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleUsuario.setText("");
-        detalleUsuario.setVisible(false);
+//        detalleUsuario.setText("");
+//        detalleUsuario.setVisible(false);
         this.dispose();
-        reservas = null;
-        ctrlUsuarios = null;
-        padre.setVisible(true);
+//        reservas = null;
+//        ctrlUsuarios = null;
+//        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+    
     ICtrlUsuarios ctrlUsuarios;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;

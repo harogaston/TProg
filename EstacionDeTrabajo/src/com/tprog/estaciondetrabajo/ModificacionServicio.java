@@ -33,6 +33,8 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
         }        
+        descripcionInterfaz.setText(servicio.getDescripcion());
+        precioInterfaz.setText(Float.toString(servicio.getPrecio()));        
     }
 
     /**
@@ -129,19 +131,19 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        /*
-        detalleServicio.setText("");
-        detalleServicio.setVisible(false);
-        */
         this.dispose();
-        /*
-        servicios = null;
-        ctrlUsuarios = null;
-        */
-        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+
+    
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        servicio = ctrlProductos.infoServicio();
         descripcionInterfaz.setText(servicio.getDescripcion());
         precioInterfaz.setText(Float.toString(servicio.getPrecio()));
     }//GEN-LAST:event_formComponentShown
@@ -149,6 +151,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
     private void actualizarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPrecioActionPerformed
         try {
             ctrlProductos.cambiarPrecio(Float.parseFloat(precioInterfaz.getText()));
+            JOptionPane.showMessageDialog(this, "El precio fue modificado", "Exito", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Por favor ingrese un precio valido", "Precio invalido", JOptionPane.INFORMATION_MESSAGE);
             System.out.println(e.getMessage()); //debugging
@@ -157,11 +160,12 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
 
     private void actualizarDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarDescripcionActionPerformed
         ctrlProductos.cambiarDescripcion(descripcionInterfaz.getText());
+        JOptionPane.showMessageDialog(this, "Descripción modificada con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_actualizarDescripcionActionPerformed
 
     private void botonModificarUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarUbicacionActionPerformed
         ModificacionUbicacion m = new ModificacionUbicacion(this, ctrlProductos.listarCiudades(), ctrlProductos);
-        getContentPane().add(m, BorderLayout.CENTER);
+//        getContentPane().add(m, BorderLayout.CENTER);
         m.setBounds(10, 10, 100, 100);
         this.setVisible(false);
         m.setVisible(true);
@@ -170,7 +174,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
 
     private void botonModificarCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarCategoriasActionPerformed
         ModificacionCategorias m = new ModificacionCategorias(this, ctrlProductos);
-        getContentPane().add(m, BorderLayout.CENTER);
+//        getContentPane().add(m, BorderLayout.CENTER);
         m.setBounds(10, 10, 100, 100);
         this.setVisible(false);
         m.setVisible(true);
@@ -179,7 +183,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
 
     private void botonModificarImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarImagenesActionPerformed
         ModificacionImagenes m = new ModificacionImagenes(this, ctrlProductos);
-        getContentPane().add(m, BorderLayout.CENTER);
+//        getContentPane().add(m, BorderLayout.CENTER);
         m.setBounds(10, 10, 100, 100);
         this.setVisible(false);
         m.setVisible(true);

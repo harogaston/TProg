@@ -114,19 +114,28 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
             ctrlUsuarios.seleccionarServicio(servicio);
             DTServicio dt = ctrlUsuarios.infoServicio();
             detalleServicio.setVisible(true);
+            if (dt == null) System.out.println("Fuck you");
             detalleServicio.setText(dt.toString()); 
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        detalleServicio.setText("");
-        detalleServicio.setVisible(false);
+//        detalleServicio.setText("");
+//        detalleServicio.setVisible(false);
         this.dispose();
-        servicios = null;
-        ctrlUsuarios = null;
-        padre.setVisible(true);
+//        servicios = null;
+//        ctrlUsuarios = null;
+//        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+
+    
+    
     ICtrlUsuarios ctrlUsuarios;
     Set<DTMinServicio> servicios;
     VerInformacionDeProveedor padre;

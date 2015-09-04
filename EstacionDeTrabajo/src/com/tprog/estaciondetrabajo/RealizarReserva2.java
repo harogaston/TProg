@@ -12,11 +12,14 @@ import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -28,6 +31,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private final ICtrlUsuarios ctrlUsuarios;
     private final ICtrlReservas ctrlReservas;
     private Vector<String> listaLineasReserva = new Vector<>();
+    private boolean proveedorSeleccionado = false;
 
     /**
      * Creates new form RealizarReserva2
@@ -52,10 +56,13 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
         String precio = Float.toString(dtR.getPrecioTotal());
         textPanePrecio.setText(precio);
+        Date fechaActual = null;
+        //setear fecha actual
+            //fechaActual.toLocalDate();
+            //String fechaSalida = fechaActual.toString();
+
         //falta fecha
         
-        //listaClientes
-//        int contador = 0;
        Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
        Iterator it = lineasReserva.iterator();
        int i = 1;
@@ -68,6 +75,10 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
            Map.Entry pair = (Map.Entry)it.next();
            listaLineasReserva.add(Integer.toString((Integer) pair.getKey()));
        }
+       if (!ctrlReservas.mostrarReservaTemporal().getLineasReserva().isEmpty())
+           proveedorSeleccionado = true;
+       else proveedorSeleccionado = false;   
+       
        /*
        
        if (lineasReserva != null) {
@@ -115,6 +126,14 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(690, 435));
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
 
         jLabel1.setText("Ingrese los datos de la Reserva");
 
@@ -164,6 +183,11 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Servicios y Promociones de la Reserva");
 
+        listaServiciosInterfaz.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaServiciosInterfazActionPerformed(evt);
@@ -172,7 +196,6 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Fecha:");
 
-        textPaneFecha.setEditable(false);
         jScrollPane2.setViewportView(textPaneFecha);
 
         textAreaServicios.setColumns(20);
@@ -288,7 +311,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void buttonAgregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarReservaActionPerformed
         // TODO add your handling code here:
-        RealizarReserva3 rr3 = new RealizarReserva3(this, ctrlUsuarios, ctrlReservas);
+        RealizarReserva3 rr3 = new RealizarReserva3(this, ctrlUsuarios, ctrlReservas, proveedorSeleccionado);
         getContentPane().add(rr3, BorderLayout.CENTER);
                 rr3.setBounds(10, 10, 100, 100);
                 this.setVisible(false);
@@ -308,7 +331,12 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-        // TODO add your handling code here:
+        
+            // TODO add your handling code here:
+            //falta acoomodar y excepciones
+        
+            //ctrlReservas.altaReserva();
+       
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonAgregarPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarPromocionActionPerformed
@@ -320,7 +348,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
                 rr4.setVisible(true);
                 getParent().add(rr4); 
     }//GEN-LAST:event_buttonAgregarPromocionActionPerformed
-
+ 
     private void listaServiciosInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazActionPerformed
         // TODO add your handling code here:
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
@@ -331,10 +359,17 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
         }
     }//GEN-LAST:event_listaServiciosInterfazActionPerformed
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {                                    
-        //pido de nuevo los datos en caso de que hayan cambiado
-        cargarDatos();
-    }        
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        System.out.println("reserva2");
+                cargarDatos();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formComponentHidden
+            
 
     Map<Integer, DTLineaReserva> hashLineasReserva = new HashMap<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables

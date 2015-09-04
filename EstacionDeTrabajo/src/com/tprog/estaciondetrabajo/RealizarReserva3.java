@@ -6,6 +6,7 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
@@ -26,6 +27,8 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class RealizarReserva3 extends javax.swing.JInternalFrame {
     private final ICtrlUsuarios ctrlUsuarios;
     private final ICtrlReservas ctrlReservas;
+    private boolean proveedorSeleccionado;
+    private Vector<String> listaServicios = new Vector<>();
 
     /**
      * Creates new form ReservasCliente
@@ -33,7 +36,9 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
      * @param <error>
      * @param ctrlReservas
      */
-    public RealizarReserva3(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas) {
+    public RealizarReserva3(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas, 
+                                    boolean proveedorSeleccionado) {
+        this.proveedorSeleccionado = proveedorSeleccionado;
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlReservas = ctrlReservas;
@@ -42,7 +47,27 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        } 
+        
+        Set<DTMinServicio> setServicios = ctrlReservas.listarServicios();
+        Set<DTMinServicio> setServiciosP = ctrlReservas.listarServiciosProveedor();
+        //ctrlReservas.
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+        if (proveedorSeleccionado){
+            if (setServiciosP != null) {
+                for (DTMinServicio dt : setServicios) {
+                    listaServicios.add(dt.getIdServicio());
+                }
+            }
+        }
+        else{
+            if (setServicios != null) {
+                for (DTMinServicio dt : setServicios) {
+                    listaServicios.add(dt.getIdServicio());
+                }
+            }
+        }
     }
 
     /**
@@ -205,6 +230,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
             //buscar servicio
+            ctrlReservas.seleccionarServicio(servicio);
             DTMinServicio dt = null;
             Iterator it = servicios.iterator();
             boolean found = false;

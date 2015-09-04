@@ -30,8 +30,8 @@ public class DTMinCliente {
 	}
 
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		DTMinCliente dt = (DTMinCliente) o;
-		return (this.email == dt.email) && (this.nickname == dt.nickname);
+		return (this.email.equals(dt.email)) && (this.nickname.equals(dt.nickname));
 	}
 }

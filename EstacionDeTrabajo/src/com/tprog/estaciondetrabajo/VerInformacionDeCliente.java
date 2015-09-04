@@ -10,12 +10,13 @@ import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
-import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -37,16 +38,22 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 		//pedir controlador
 		Fabrica f = Fabrica.getInstance();
 		ctrlUsuarios = f.getICtrlUsuarios();
-		
+
 		//listaClientes
-		Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
-        //construyo un vector con la informacion a mostrar, porque
-		//el comboBox solo funciona con Vector o List
-		if (!setClientes.isEmpty()) {
-			for (DTMinCliente dt : setClientes) {
-				listaClientes.add(dt.getNickname());
+		Set<DTMinCliente> setClientes;
+		try {
+			setClientes = ctrlUsuarios.listarClientes();
+			//construyo un vector con la informacion a mostrar, porque
+			//el comboBox solo funciona con Vector o List
+			if (!setClientes.isEmpty()) {
+				for (DTMinCliente dt : setClientes) {
+					listaClientes.add(dt.getNickname());
+				}
 			}
+		} catch (Exception ex) {
+			Logger.getLogger(VerInformacionDeCliente.class.getName()).log(Level.SEVERE, null, ex);
 		}
+
 	}
 
 	/**
@@ -152,21 +159,23 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 			ctrlUsuarios.seleccionarCliente(cliente);
 			//muestro Text Area para la información del cliente
 			detalleUsuario.setVisible(true);
-			DTCliente dt = ctrlUsuarios.infoCliente();
-			detalleUsuario.setText(dt.toString());
+			DTCliente dt;
 			try {
+				dt = ctrlUsuarios.infoCliente();
+				detalleUsuario.setText(dt.toString());
 				File f = new File(dt.getImagen());
 				Image img = ImageIO.read(f);
 				Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(dimg);
 				imagenUsuario.setIcon(imageIcon);
-			} catch (Exception e) {
-                                imagenUsuario.setIcon(null);
+				//cargo la lista de reservas del usuario
+				reservas = dt.getReservas();
+			} catch (Exception ex) {
+				Logger.getLogger(VerInformacionDeCliente.class.getName()).log(Level.SEVERE, null, ex);
+				imagenUsuario.setIcon(null);
 				System.out.println("La imagen no pudo ser cargada");
 			}
-			
-			//cargo la lista de reservas del usuario
-			reservas = dt.getReservas();
+
 		}
     }//GEN-LAST:event_listaClientesInterfazInterfazActionPerformed
 

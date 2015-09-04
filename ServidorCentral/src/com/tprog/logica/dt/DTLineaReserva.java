@@ -20,16 +20,8 @@ public class DTLineaReserva {
 		this.cantidad = cantidad;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		if (servicio == null) {
-			this.servicio = "";
-		} else {
-			this.servicio = servicio;
-		}
-		if (promocion == null) {
-			this.promocion = "";
-		} else {
-			this.promocion = promocion;
-		}
+		this.servicio = servicio;
+		this.promocion = promocion;
 		this.precio = precio;
 	}
 
@@ -59,19 +51,18 @@ public class DTLineaReserva {
 
 	@Override
 	public String toString() {
-            if (promocion.equals("")) {
-		return "Cantidad: " + Integer.toString(cantidad)
-				+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
-				+ "\n" + "Fecha de fin=" + fechaFin.toString()
-                                + "\n" + "Servicio=" + servicio
-				+ "\n" + "Precio=" + Float.toString(precio) + "\n";
-            } else {
-		return "Cantidad: " + Integer.toString(cantidad)
-				+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
-				+ "\n" + "Fecha de fin=" + fechaFin.toString()
-				+ "\n" + "Promocion=" + promocion
-				+ "\n" + "Precio=" + Float.toString(precio) + "\n";                
-            }
+		if (promocion == null) {
+			return "Cantidad: " + Integer.toString(cantidad)
+					+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
+					+ "\n" + "Fecha de fin=" + fechaFin.toString()
+					+ "\n" + "Servicio=" + servicio
+					+ "\n" + "Precio=" + Float.toString(precio) + "\n";
+		} else {
+			return "Cantidad: " + Integer.toString(cantidad)
+					+ "\n" + "Fecha de inicio=" + fechaInicio.toString()
+					+ "\n" + "Fecha de fin=" + fechaFin.toString()
+					+ "\n" + "Promocion=" + promocion
+					+ "\n" + "Precio=" + Float.toString(precio) + "\n";
+		}
 	}
-
 }

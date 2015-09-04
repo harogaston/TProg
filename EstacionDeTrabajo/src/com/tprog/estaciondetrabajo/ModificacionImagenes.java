@@ -11,6 +11,8 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -138,7 +140,11 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         ImageIcon imagen = (ImageIcon) comboboxImagenes.getSelectedItem();
         comboboxImagenes.removeItem(imagen);
         if (imagen != null) {
-            ctrlProductos.quitarImagen(imagen.getDescription());
+			try {
+				ctrlProductos.quitarImagen(imagen.getDescription());
+			} catch (Exception ex) {
+				Logger.getLogger(ModificacionImagenes.class.getName()).log(Level.SEVERE, null, ex);
+			}
             cantidadImagenes--;
             actualizarImagenes();
         }
@@ -150,7 +156,11 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
             chooser.showOpenDialog(null);
             File imagen = chooser.getSelectedFile();
             String nombreImagen = imagen.getAbsolutePath();
-            ctrlProductos.agregarImagen(nombreImagen);
+			try {
+				ctrlProductos.agregarImagen(nombreImagen);
+			} catch (Exception ex) {
+				Logger.getLogger(ModificacionImagenes.class.getName()).log(Level.SEVERE, null, ex);
+			}
             actualizarImagenes();
         }
     }//GEN-LAST:event_botonAgregarActionPerformed

@@ -20,28 +20,28 @@ public class DTCliente extends DTUsuario {
 	}
 
 	public DTCliente(DTUsuario dtU) {
-            super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
-            this.reservas = new HashSet<>();
+		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
+		this.reservas = new HashSet<>();
 	}
-        
-        public Set<DTMinReserva> getReservas(){
-            return reservas;
-        }
 
-    @Override
-    public String toString() {
-        String output = super.toString();
-        int i = 1;
-        for (DTMinReserva dt : reservas) {
-            output = output.concat("Reserva " + Integer.toString(i) + "\n");
-            output = output.concat(dt.toString());
-            i++;
-        }
-        return output;
-    }
-	
+	public Set<DTMinReserva> getReservas() {
+		return reservas;
+	}
+
 	@Override
-	public boolean equals(Object o){
+	public String toString() {
+		String output = super.toString();
+		int i = 1;
+		for (DTMinReserva dt : reservas) {
+			output = output.concat("Reserva " + Integer.toString(i) + "\n");
+			output = output.concat(dt.toString());
+			i++;
+		}
+		return output;
+	}
+
+	@Override
+	public boolean equals(Object o) {
 		DTCliente dt = (DTCliente) o;
 		return this.reservas.equals(dt.reservas);
 	}

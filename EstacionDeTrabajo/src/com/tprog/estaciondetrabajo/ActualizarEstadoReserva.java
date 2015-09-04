@@ -9,6 +9,7 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlReservas;
+import java.util.Locale;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -165,7 +166,7 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 			if (okEstado) {
 				JOptionPane.showMessageDialog(this, "El estado de la reserva fue cambiado exitosamente", "Estado cambiado", JOptionPane.INFORMATION_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(this, "La reserva esta registrada, su estado no puede ser cambiado; por favor escoja otra reserva", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "La reserva esta " + ctrlReservas.infoReserva().getEstadoReserva().toString().toLowerCase() + ", su estado no puede ser cambiado; por favor escoja otra reserva", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else if (reservaSeleccionada != null) {
 			JOptionPane.showMessageDialog(this, "Escoja un estado nuevo", "Estado no seleccionado", JOptionPane.INFORMATION_MESSAGE);

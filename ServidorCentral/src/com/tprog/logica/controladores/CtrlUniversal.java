@@ -302,7 +302,7 @@ public class CtrlUniversal implements ICtrlUniversal {
             cats.add("Auto");
             cats.add("Chevrolet");
             mp.altaServicio(dtS, "mHooch", cats); 
-            /*
+        /*
         //Alta de Promociones
         //P1 4 5
             Set<String> servs = new HashSet();
@@ -344,6 +344,7 @@ public class CtrlUniversal implements ICtrlUniversal {
             servs.add("Luxury south beach corner apartment");
             servs.add("Coche-Miami");
             mp.altaPromocion("Miami-Viaje", 30, "mHooch", servs);    
+        */
         //Alta Reservas
             ManejadorReservas mr = ManejadorReservas.getInstance();
             try {
@@ -364,12 +365,12 @@ public class CtrlUniversal implements ICtrlUniversal {
                         EstadoReserva.Cancelada, 3050 , lineas);
                 mr.agregarReserva(mu.getCliente("eWatson"), dtR, "remus");
             //R3    P7
-                lineas = new HashSet();
-                lineas.add(new DTLineaReserva(1, new Date(2015, 3, 5), 
-                    new Date(2015, 4, 2), null, "Sudamerica-Casas", 135));
-                dtR = new DTReserva(0, new Date(2015, 3, 5),
-                        EstadoReserva.Pagada, 135 , lineas);
-                mr.agregarReserva(mu.getCliente("BruceS"), dtR, "mHooch"); 
+//                lineas = new HashSet();
+//                lineas.add(new DTLineaReserva(1, new Date(2015, 3, 5), 
+//                    new Date(2015, 4, 2), null, "Sudamerica-Casas", 135));
+//                dtR = new DTReserva(0, new Date(2015, 3, 5),
+//                        EstadoReserva.Pagada, 135 , lineas);
+//                mr.agregarReserva(mu.getCliente("BruceS"), dtR, "mHooch"); 
             //R4    S5 S6
                 lineas = new HashSet();
                 lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8), 
@@ -378,7 +379,7 @@ public class CtrlUniversal implements ICtrlUniversal {
                     new Date(2015, 5, 12), "Euro-Car-3", null, 300));
                 dtR = new DTReserva(0, new Date(2015, 5, 8),
                         EstadoReserva.Pagada, 600 , lineas);
-                mr.agregarReserva(mu.getCliente("Jeff"), dtR, "moody");
+                mr.agregarReserva(mu.getCliente("JeffW"), dtR, "moody");
             //R5    S9
                 lineas = new HashSet();
                 lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7), 
@@ -387,14 +388,14 @@ public class CtrlUniversal implements ICtrlUniversal {
                         EstadoReserva.Registrada, 200, lineas);
                 mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook"); 
             //R6    P8 S7
-                lineas = new HashSet();
-                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 7), 
-                    new Date(2015, 8, 14), null, "Miami-Viaje", 462));
-                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 14), 
-                    new Date(2015, 8, 21), "Casa para p4 BsAs", null, 80));
-                dtR = new DTReserva(0, new Date(2015, 8, 7),
-                        EstadoReserva.Registrada, 542 , lineas);
-                mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
+//                lineas = new HashSet();
+//                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 7), 
+//                    new Date(2015, 8, 14), null, "Miami-Viaje", 462));
+//                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 14), 
+//                    new Date(2015, 8, 21), "Casa para p4 BsAs", null, 80));
+//                dtR = new DTReserva(0, new Date(2015, 8, 7),
+//                        EstadoReserva.Registrada, 542 , lineas);
+//                mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
             //R7    S2
                 lineas = new HashSet();
                 lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7), 
@@ -405,7 +406,6 @@ public class CtrlUniversal implements ICtrlUniversal {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            */
         } catch (IOException ex) {
             Logger.getLogger(CtrlUniversal.class.getName()).log(Level.SEVERE, null, ex);
         }

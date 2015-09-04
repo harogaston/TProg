@@ -5,15 +5,11 @@
  */
 package com.tprog.logica.clases;
 
-import java.util.Set;
-import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTServicio;
 import java.util.HashSet;
+import java.util.Set;
 
-/**
- *
- * @author gaston
- */
 public class Servicio {
 
 	private String idServicio;
@@ -61,7 +57,7 @@ public class Servicio {
 	}
 
 	public void quitarImagen(String imagen) {
-		if (!imagenes.isEmpty()) {
+		if (!imagenes.isEmpty() && imagenes.contains(imagen)) {
 			imagenes.remove(imagen);
 		}
 	}
@@ -75,21 +71,21 @@ public class Servicio {
 	}
 
 	public boolean agregarCategoria(Categoria nueva_categoria) {
-            Simple cs = (Simple) nueva_categoria;
-            if (categorias.isEmpty() || !categorias.contains(cs)) {
-                categorias.add(cs);
-                cs.agregarServicio(this);
-                return true;
-            } else {
-                return false;
-            }
+		Simple cs = (Simple) nueva_categoria;
+		if (categorias.isEmpty() || !categorias.contains(cs)) {
+			categorias.add(cs);
+			cs.agregarServicio(this);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public boolean quitarCategoria(Categoria categoria_a_quitar) {
 		Simple cs = (Simple) categoria_a_quitar;
 		if (!categorias.isEmpty() && categorias.contains(cs)) {
 			categorias.remove(cs);
-                        cs.quitarServicio(this);
+			cs.quitarServicio(this);
 			return true;
 		} else {
 			return false;

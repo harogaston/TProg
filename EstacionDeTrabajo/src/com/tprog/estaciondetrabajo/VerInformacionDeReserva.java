@@ -25,6 +25,7 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
 		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
 			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
 		}
+                cargarDatos();
 	}
 
 	void cargarDatos() {
@@ -118,14 +119,14 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaReservasInterfazItemStateChanged
 
     private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
-		String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
-		if (reservaSeleccionada != null) {
-			int reserva = Integer.parseInt(reservaSeleccionada);
-			ctrlReservas.seleccionarReserva(reserva);
-			DTReserva dt = ctrlReservas.infoReserva();
-			detalleReserva.setVisible(true);
-			detalleReserva.setText(dt.toString()); //imprimir lineas de reserva
-		}
+        String reservaSeleccionada = (String) listaReservasInterfaz.getModel().getSelectedItem();
+        if (reservaSeleccionada != null) {
+            int reserva = Integer.parseInt(reservaSeleccionada);
+            ctrlReservas.seleccionarReserva(reserva);
+            DTReserva dt = ctrlReservas.infoReserva();
+            detalleReserva.setVisible(true);
+            detalleReserva.setText(dt.toString()); //imprimir lineas de reserva
+        }
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed

@@ -139,6 +139,12 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
+    
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);

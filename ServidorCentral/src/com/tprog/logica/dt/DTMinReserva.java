@@ -30,9 +30,9 @@ public class DTMinReserva {
 		return "ID de reserva: " + Integer.toString(idReserva)
 				+ "\n" + "Fecha de creacion: " + fechaCreacion.toString() + "\n";
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
+	public boolean equals(Object o) {
 		DTMinReserva dt = (DTMinReserva) o;
 		return (this.idReserva == dt.idReserva) && this.fechaCreacion.equals(dt.fechaCreacion);
 	}

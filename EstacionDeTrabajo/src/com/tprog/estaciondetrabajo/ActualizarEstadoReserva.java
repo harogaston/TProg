@@ -9,7 +9,6 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlReservas;
-import java.util.Locale;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -26,9 +25,8 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 	void cargarDatos() {
 		Fabrica f = Fabrica.getInstance();
 		ctrlReservas = f.getICtrlReservas();
-		//listaClientes
 		Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
-        //construyo un vector con la informacion a mostrar, porque
+		//construyo un vector con la informacion a mostrar, porque
 		//el comboBox solo funciona con Vector o List
 		if (setReservas != null) {
 			for (DTMinReserva dt : setReservas) {
@@ -52,6 +50,8 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         botonCambiarEstado = new javax.swing.JButton();
         listaEstados = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
+        jLabelEstadoReservaSeleccionada = new javax.swing.JLabel();
+        jLabelMensajeNoModificarEstado = new javax.swing.JLabel();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(640, 480));
@@ -104,10 +104,20 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 
         listaEstados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Registrada", "Cancelada", "Pagada", "Facturada" }));
         listaEstados.setSelectedItem(null);
-        getContentPane().add(listaEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 190, -1));
+        listaEstados.setEnabled(false);
+        getContentPane().add(listaEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 190, -1));
 
         jLabel2.setText("<html>Escoja el nuevo estado</html>");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, -1, -1));
+        jLabel2.setEnabled(false);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
+
+        jLabelEstadoReservaSeleccionada.setVisible(false);
+        jLabelEstadoReservaSeleccionada.setText("La reserva se encuentra en estado: ");
+        getContentPane().add(jLabelEstadoReservaSeleccionada, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 440, -1));
+
+        jLabelMensajeNoModificarEstado.setText("Su estado no puede ser modificado.");
+        jLabelMensajeNoModificarEstado.setVisible(false);
+        getContentPane().add(jLabelMensajeNoModificarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -125,6 +135,26 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 		if (reservaSeleccionada != null) {
 			int reserva = Integer.parseInt(reservaSeleccionada);
 			ctrlReservas.seleccionarReserva(reserva);
+			estadoReservaSeleccionada = ctrlReservas.getEstadoReserva();
+			jLabelEstadoReservaSeleccionada.setText("La reserva se encuentra en estado: " + estadoReservaSeleccionada.toString());
+			jLabelEstadoReservaSeleccionada.setVisible(true);
+
+			switch (estadoReservaSeleccionada) {
+				case Registrada:
+				case Pagada:
+					jLabel2.setEnabled(true);
+					listaEstados.setEnabled(true);
+					jLabelMensajeNoModificarEstado.setVisible(false);
+					break;
+				case Cancelada:
+				case Facturada:
+					jLabel2.setEnabled(false);
+					listaEstados.setEnabled(false);
+					jLabelMensajeNoModificarEstado.setVisible(true);
+					break;
+				default:
+					throw new IllegalArgumentException();
+			}
 		}
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
 
@@ -143,34 +173,59 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formComponentHidden
 
     private void botonCambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCambiarEstadoActionPerformed
+		// Leo la reserva y el estado seleccionados
 		String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
-		String estadoNuevo = (String) listaEstados.getSelectedItem();
-		if (reservaSeleccionada != null && estadoNuevo != null) {
-			boolean okEstado = false;
-			switch (estadoNuevo) {
+		String estadoNuevoStr = (String) listaEstados.getSelectedItem();
+
+		// Si se han seleccionado ambos
+		if (reservaSeleccionada != null && estadoNuevoStr != null) {
+			//Casteo el nuevo estado a algo de tipo EstadoReserva
+			EstadoReserva estadoNuevo;
+			switch (estadoNuevoStr) {
 				case "Facturada": {
-					okEstado = ctrlReservas.cambiarEstadoReserva(EstadoReserva.Facturada);
+					estadoNuevo = EstadoReserva.Facturada;
 					break;
 				}
 				case "Pagada": {
-					okEstado = ctrlReservas.cambiarEstadoReserva(EstadoReserva.Pagada);
+					estadoNuevo = EstadoReserva.Pagada;
 					break;
 				}
 				case "Cancelada": {
-					okEstado = ctrlReservas.cambiarEstadoReserva(EstadoReserva.Cancelada);
+					estadoNuevo = EstadoReserva.Cancelada;
+					break;
+				}
+				case "Registrada": {
+					estadoNuevo = EstadoReserva.Registrada;
 					break;
 				}
 				default:
-					break;
+					throw new IllegalArgumentException();
 			}
-			if (okEstado) {
-				JOptionPane.showMessageDialog(this, "El estado de la reserva fue cambiado exitosamente", "Estado cambiado", JOptionPane.INFORMATION_MESSAGE);
-			} else {
-				JOptionPane.showMessageDialog(this, "La reserva esta " + ctrlReservas.infoReserva().getEstadoReserva().toString().toLowerCase() + ", su estado no puede ser cambiado; por favor escoja otra reserva", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
+
+			// Ejecuto acción de acuerdo al estado seleccionado
+			switch (estadoReservaSeleccionada) {
+				case Registrada:
+					if (estadoNuevo == EstadoReserva.Cancelada || estadoNuevo == EstadoReserva.Pagada) {
+						ctrlReservas.cambiarEstadoReserva(estadoNuevo);
+						JOptionPane.showMessageDialog(this, "Estado cambiado con éxito", "Operación realizada", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(this, "La reserva esta " + estadoReservaSeleccionada.toString().toLowerCase() + ", su estado solo puede cambiarse a Cancelada o Pagada", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
+					}
+					break;
+				case Pagada:
+					if (estadoNuevo == EstadoReserva.Facturada) {
+						ctrlReservas.cambiarEstadoReserva(estadoNuevo);
+						JOptionPane.showMessageDialog(this, "Estado cambiado con éxito", "Operación realizada", JOptionPane.INFORMATION_MESSAGE);
+					} else {
+						JOptionPane.showMessageDialog(this, "La reserva esta " + estadoReservaSeleccionada.toString().toLowerCase() + ", su estado solo puede cambiarse a Facturada", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
+					}
+					break;
+				default:
+					throw new IllegalArgumentException();
 			}
 		} else if (reservaSeleccionada != null) {
 			JOptionPane.showMessageDialog(this, "Escoja un estado nuevo", "Estado no seleccionado", JOptionPane.INFORMATION_MESSAGE);
-		} else if (estadoNuevo != null) {
+		} else if (estadoNuevoStr != null) {
 			JOptionPane.showMessageDialog(this, "Escoja una reserva", "Reserva no seleccionada", JOptionPane.INFORMATION_MESSAGE);
 		} else {
 			JOptionPane.showMessageDialog(this, "Escoja una reserva y un estado nuevo", "Estado y reserva no seleccionados", JOptionPane.INFORMATION_MESSAGE);
@@ -180,11 +235,14 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 
 	ICtrlReservas ctrlReservas;
 	Set<DTMinReserva> reservas;
+	EstadoReserva estadoReservaSeleccionada;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonCambiarEstado;
     private javax.swing.JButton botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelEstadoReservaSeleccionada;
+    private javax.swing.JLabel jLabelMensajeNoModificarEstado;
     private javax.swing.JComboBox listaEstados;
     private javax.swing.JComboBox listaReservasInterfaz;
     private Vector<String> listaReservas = new Vector<>();

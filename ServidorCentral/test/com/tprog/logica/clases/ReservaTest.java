@@ -118,7 +118,7 @@ public class ReservaTest {
         EstadoReserva expResult = EstadoReserva.Registrada;
         EstadoReserva result = null;
         
-            result = instance.getEstadoReserva();
+            result = instance.getEstado();
         
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -195,7 +195,7 @@ public class ReservaTest {
     public void testCrearDTReserva() {
         System.out.println("crearDTReserva");
         DTReserva result = instance.crearDTReserva();
-        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstadoReserva(), instance.getPrecioTotal(),set);
+        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstado(), instance.getPrecioTotal(),set);
                 
         assertEquals(esperado.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.

@@ -82,7 +82,6 @@ public class Reserva {
 //			lineasReserva.add(linea);
 //		}
 //	}
-
 	public int getIdReserva() {
 		return idReserva;
 	}
@@ -91,7 +90,7 @@ public class Reserva {
 		return fCreacion;
 	}
 
-	public EstadoReserva getEstadoReserva() {
+	public EstadoReserva getEstado() {
 		return estado;
 	}
 
@@ -99,10 +98,10 @@ public class Reserva {
 		return precioTotal;
 	}
 
-	public Cliente getCliente(){
+	public Cliente getCliente() {
 		return cliente;
 	}
-	
+
 	public void agregarLineaReserva(LineaReserva linea) {
 		lineasReserva.add(linea);
 		precioTotal += linea.getPrecio();
@@ -137,15 +136,25 @@ public class Reserva {
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {
 		if (nuevoEstado != null) {
-			if (("Registrada".equals(this.getEstadoReserva().toString())) && (!"Facturada".equals(nuevoEstado.toString()))) {
-				setEstadoReserva(nuevoEstado);
-				return true;
+			switch (this.estado) {
+				case Registrada: {
+					if (nuevoEstado == EstadoReserva.Cancelada || nuevoEstado == EstadoReserva.Pagada) {
+						setEstadoReserva(nuevoEstado);
+						return true;
+					}
+					return false;
+				}
+				case Pagada: {
+					if (nuevoEstado == EstadoReserva.Facturada) {
+						setEstadoReserva(nuevoEstado);
+						return true;
+					}
+					return false;
+				}
 			}
 		}
-
 		return false;
-
-	}
+}
 
 	public void eliminar() {
 		this.lineasReserva.clear();

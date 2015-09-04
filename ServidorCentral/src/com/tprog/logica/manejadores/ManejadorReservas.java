@@ -54,7 +54,7 @@ public class ManejadorReservas {
 
 	public boolean eliminarReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-		EstadoReserva estado = r.getEstadoReserva();
+		EstadoReserva estado = r.getEstado();
 		if (estado == EstadoReserva.Registrada || estado == EstadoReserva.Cancelada) {
 			r.getCliente().quitarReserva(idReserva);
 			reservas.remove(idReserva);
@@ -72,5 +72,10 @@ public class ManejadorReservas {
 			System.out.println("El DTReserva que se paso hacia agregarReserva era nulo");
 		}
 
+	}
+
+	public EstadoReserva getEstadoReserva(int idReserva) {
+		Reserva r = reservas.get(idReserva);
+		return r.getEstado();
 	}
 }

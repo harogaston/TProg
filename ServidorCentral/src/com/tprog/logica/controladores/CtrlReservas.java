@@ -159,4 +159,10 @@ public class CtrlReservas implements ICtrlReservas {
 		ManejadorReservas mr = ManejadorReservas.getInstance();
 		return mr.eliminarReserva(idReserva);
 	}
+	
+	@Override
+	public EstadoReserva getEstadoReserva(){
+		ManejadorReservas mr = ManejadorReservas.getInstance();
+		return mr.getEstadoReserva(this.idReserva);
+	}
 }

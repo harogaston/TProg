@@ -32,4 +32,5 @@ public interface ICtrlReservas {
 	public DTReserva infoReserva();
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 	public boolean eliminarReserva();
+	public EstadoReserva getEstadoReserva();
 }

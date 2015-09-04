@@ -28,18 +28,18 @@ public class ManejadorReservas {
 	}
 
 	private ManejadorReservas() {
-            reservas = new HashMap();
+		reservas = new HashMap();
 	}
 
 	public Set<DTMinReserva> listarReservas() {
-            Set<DTMinReserva> set = new HashSet();
-            if (!reservas.isEmpty()) {
-                for (Reserva r : reservas.values()) {
-                    DTMinReserva dtMin = r.crearDTMinReserva();
-                    set.add(dtMin);
-                }
-            }
-            return set;
+		Set<DTMinReserva> set = new HashSet();
+		if (!reservas.isEmpty()) {
+			for (Reserva r : reservas.values()) {
+				DTMinReserva dtMin = r.crearDTMinReserva();
+				set.add(dtMin);
+			}
+		}
+		return set;
 	}
 
 	public DTReserva infoReserva(int idReserva) {
@@ -55,15 +55,12 @@ public class ManejadorReservas {
 
 	public void eliminarReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-		r.eliminar();
-		// sacar del map
-		this.reservas.remove(r);
+		this.reservas.remove(idReserva);
 	}
 
 	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
-            if (dtR == null) System.out.println("la palida");
-            Reserva nuevaReserva = new Reserva(dtR, nicknameP);
-            reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
-            cliente.agregarReserva(nuevaReserva);
+		Reserva nuevaReserva = new Reserva(dtR, nicknameP);
+		reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
+		cliente.agregarReserva(nuevaReserva);
 	}
 }

@@ -5,24 +5,18 @@
  */
 package com.tprog.logica.interfaces;
 
-import java.util.Set;
-
 import com.tprog.logica.dt.DTMinPromocion;
-import com.tprog.logica.dt.DTPromocion;
+import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTPromocion;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
-import com.tprog.logica.dt.DTMinProveedor;
-import java.util.Vector;
+import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-
-/**
- *
- * @author gaston
- */
 public interface ICtrlProductos {
-        public  DTMinServicio infoMinServicio();
+
+	public DTMinServicio infoMinServicio();
 	public Set<DTMinPromocion> listarPromociones();
 	public void seleccionarPromocion(DTMinPromocion dtP);
 	public DTPromocion infoPromocion();
@@ -33,7 +27,7 @@ public interface ICtrlProductos {
 	public Set<DTMinServicio> listarServicios();
 	public void cambiarPrecio(float nuevoPrecio);
 	public void cambiarDescripcion(String nuevaDescripcion);
-        public Set<String> listarImagenes();
+	public Set<String> listarImagenes();
 	public void agregarImagen(String idImagen);
 	public void quitarImagen(String idImagen);
 	public DefaultMutableTreeNode listarCiudades();

@@ -34,7 +34,7 @@ public class Cliente extends Usuario {
 			nuevoSetReservas.add(r.crearDTMinReserva());
 		}
 		DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
-			this.imagen, this.fechaNacimiento, nuevoSetReservas);
+				this.imagen, this.fechaNacimiento, nuevoSetReservas);
 		return dt;
 	}
 
@@ -49,6 +49,6 @@ public class Cliente extends Usuario {
 	@Override
 	public boolean equals(Object o) {
 		Cliente c = (Cliente) o;
-		return this.reservas == c.reservas;
+		return this.reservas.equals(c.reservas);
 	}
 }

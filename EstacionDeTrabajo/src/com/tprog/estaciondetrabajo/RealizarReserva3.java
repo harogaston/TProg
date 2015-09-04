@@ -5,10 +5,17 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTLineaReserva;
+import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
+import com.tprog.logica.interfaces.ICtrlReservas;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
+import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -19,19 +26,51 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class RealizarReserva3 extends javax.swing.JInternalFrame {
+    private final ICtrlUsuarios ctrlUsuarios;
+    private final ICtrlReservas ctrlReservas;
+    private boolean proveedorSeleccionado;
+    //private Vector<String> listaServicios = new Vector<>();
 
     /**
      * Creates new form ReservasCliente
      * @param padre
+     * @param <error>
+     * @param ctrlReservas
      */
-    public RealizarReserva3(RealizarReserva2 padre) {
+    public RealizarReserva3(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas, 
+                                    boolean proveedorSeleccionado) {
+        this.proveedorSeleccionado = proveedorSeleccionado;
         this.padre = padre;
+        this.ctrlUsuarios = ctrlUsuarios;
+        this.ctrlReservas = ctrlReservas;
+        f = Fabrica.getInstance();
+        this.ctrlProductos = f.getICtrlProductos();
         initComponents();
         setTitle("Realizar Reserva");
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        } 
+        
+        Set<DTMinServicio> setServicios = ctrlReservas.listarServicios();
+        Set<DTMinServicio> setServiciosP = null;
+        if (proveedorSeleccionado){
+            setServiciosP = ctrlReservas.listarServiciosProveedor();
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+            if (setServiciosP != null) {
+                for (DTMinServicio dt : setServicios) {
+                    listaServicios.add(dt.getIdServicio());
+                }
+            }
+        }
+        else{
+            if (setServicios != null) {
+                for (DTMinServicio dt : setServicios) {
+                    listaServicios.add(dt.getIdServicio());
+                }
+            }
+        }
     }
 
     /**
@@ -50,6 +89,25 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         buttonVolver = new javax.swing.JButton();
         buttonAgregar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textPaneCantidad = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textPaneAnio1 = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textPaneAnio2 = new javax.swing.JTextPane();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        comboBoxMeses1 = new javax.swing.JComboBox();
+        comboBoxDias1 = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        comboBoxDias2 = new javax.swing.JComboBox();
+        comboBoxMeses2 = new javax.swing.JComboBox();
 
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(690, 435));
@@ -71,7 +129,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 300, -1));
 
         detalleServicio.setEditable(false);
         detalleServicio.setColumns(20);
@@ -80,7 +138,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         detalleServicio.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleServicio);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 128));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 269, 128));
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +149,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
 
         jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         buttonVolver.setText("Volver");
         buttonVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +160,63 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         getContentPane().add(buttonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         buttonAgregar.setText("Agregar");
+        buttonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAgregarActionPerformed(evt);
+            }
+        });
         getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+
+        jLabel2.setText("Cantidad");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
+
+        jLabel3.setText("Fecha de Inicio");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
+
+        jLabel4.setText("Fecha de Fin");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
+
+        jScrollPane1.setViewportView(textPaneCantidad);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 122, -1));
+
+        jScrollPane2.setViewportView(textPaneAnio1);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 260, 70, -1));
+
+        jScrollPane3.setViewportView(textPaneAnio2);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 260, 70, -1));
+
+        jLabel5.setText("Día");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
+
+        jLabel6.setText("Mes");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
+
+        jLabel7.setText("Año");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
+        comboBoxMeses1.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        getContentPane().add(comboBoxMeses1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 100, -1));
+
+        comboBoxDias1.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        getContentPane().add(comboBoxDias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 62, -1));
+
+        jLabel8.setText("Día");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, -1, -1));
+
+        jLabel9.setText("Mes");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 230, -1, -1));
+
+        jLabel10.setText("Año");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
+
+        comboBoxDias2.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        getContentPane().add(comboBoxDias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 50, -1));
+
+        comboBoxMeses2.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        getContentPane().add(comboBoxMeses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 100, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -120,13 +234,19 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         if (servicio != null) {
             //buscar servicio
             DTMinServicio dt = null;
+            servicios = ctrlReservas.listarServicios();
             Iterator it = servicios.iterator();
             boolean found = false;
             while (it.hasNext() && !found) {
+                //System.out.println("323");
                 DTMinServicio tmp = (DTMinServicio) it.next();
-                if (tmp.getIdServicio().equals(servicio))
+                if (tmp.getIdServicio().equals(servicio)){
                     dt = tmp; //es imposible que dt sea null al final del loop
+                    //System.out.println("aaaasd");
+                }
+                    
             }
+            //ctrlReservas.seleccionarServicio(dt);
             ctrlProductos.seleccionarServicio(dt);
             DTServicio dtServicio = ctrlProductos.infoServicio();
             //imagenes
@@ -145,17 +265,78 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonVolverActionPerformed
 
+    private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
+        // TODO add your handling code here:
+        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+        if (servicio != null) {
+            //DTServicio dtS = ctrlUsuarios.infoServicio();
+            //detalleServicio.setVisible(true);
+            //detalleServicio.setText(dtS.toString());         
+             
+            DTMinServicio dtmS = ctrlProductos.infoMinServicio();
+            String proveedor = dtmS.getNicknameP();
+            ctrlReservas.seleccionarProveedor(proveedor);
+            ctrlReservas.seleccionarServicio(dtmS);
+            // qe wea ermano
+            ctrlProductos.seleccionarServicio(dtmS);
+            //leer cantidad y fechas
+            String cantString = (String) textPaneCantidad.getText();
+            int cant = Integer.parseInt(cantString);
+            int diaI = (Integer) comboBoxDias1.getSelectedItem();
+            int diaF = (Integer) comboBoxDias2.getSelectedItem();
+            int mesI = comboBoxMeses1.getSelectedIndex()+1;
+            int mesF = comboBoxMeses2.getSelectedIndex()+1;
+            String anioIString = textPaneAnio1.getText();
+            String anioFString = textPaneAnio2.getText();
+            int anioI = Integer.parseInt(anioIString);
+            int anioF = Integer.parseInt(anioFString);
+            Date fI = new Date(anioI, mesI, diaI);  
+            Date fF = new Date(anioF, mesF, diaF);
+            ctrlReservas.ingresarLineaReserva(cant, fI, fF);
+            this.setVisible(false);
+            this.padre.setVisible(true);
+            //ctrlReservas.seleccionarServicio(servicio);
+            // DTServicio dtS = ctrlUsuarios.infoServicio();
+            //String proveedor = dtS.get
+            //DTMinServicio dtmS = new DTMinServicio(ctrlReservas.)
+        
+            //ctrlReservas.seleccionarServicio(dtS);
+        }
+    }//GEN-LAST:event_buttonAgregarActionPerformed
+    Fabrica f;
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     RealizarReserva2 padre;
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
+		"Octubre", "Noviembre", "Diciembre"};
+    private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};                     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonVolver;
+    private javax.swing.JComboBox comboBoxDias1;
+    private javax.swing.JComboBox comboBoxDias2;
+    private javax.swing.JComboBox comboBoxMeses1;
+    private javax.swing.JComboBox comboBoxMeses2;
     private javax.swing.JTextArea detalleServicio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JComboBox listaServiciosInterfaz;
     private Vector<String> listaServicios = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
+    private javax.swing.JTextPane textPaneAnio1;
+    private javax.swing.JTextPane textPaneAnio2;
+    private javax.swing.JTextPane textPaneCantidad;
     // End of variables declaration//GEN-END:variables
 }

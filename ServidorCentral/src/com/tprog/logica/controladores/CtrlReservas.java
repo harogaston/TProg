@@ -17,11 +17,13 @@ import com.tprog.logica.manejadores.ManejadorProductos;
 import com.tprog.logica.manejadores.ManejadorReservas;
 import com.tprog.logica.manejadores.ManejadorUsuarios;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 public class CtrlReservas implements ICtrlReservas {
 
 	private String nickname;
+        private String nicknameP;
 	private DTMinPromocion dtP;
 	private DTMinServicio dtS;
 	private DTReserva dtR;
@@ -31,11 +33,13 @@ public class CtrlReservas implements ICtrlReservas {
 
 	public CtrlReservas() {
 		this.nickname = "";
+                this.nicknameP = "";
 		this.dtP = null;
 		this.dtS = null;
 		this.dtR = null;
 		this.idReserva = -1;
 		this.precioTotal = 0;
+                this.lineasReserva = new HashSet();
 
 	}
 	//ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
@@ -43,6 +47,10 @@ public class CtrlReservas implements ICtrlReservas {
 	@Override
 	public void seleccionarCliente(String nickname) {
 		this.nickname = nickname;
+	}
+        
+        public void seleccionarProveedor(String nicknameP) {
+		this.nicknameP = nicknameP;
 	}
 
 	@Override

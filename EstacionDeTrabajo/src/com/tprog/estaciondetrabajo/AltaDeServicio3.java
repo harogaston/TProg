@@ -58,16 +58,16 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Ingrese el nombre del nuevo Servicio y haga click en \"Aceptar\".");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 27, 396, -1));
+        jLabel1.setText("Ingrese el nombre del nuevo Servicio y haga click en \"Siguiente\".");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, 20));
 
-        buttonAceptar.setText("Aceptar");
+        buttonAceptar.setText("Siguiente >");
         buttonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAceptarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(232, 231, 81, -1));
+        getContentPane().add(buttonAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 390, 120, -1));
 
         jScrollPane1.setViewportView(textPaneNombreServicio);
 
@@ -82,7 +82,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 buttonSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 342, -1, -1));
+        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 390, -1, -1));
 
         buttonAtras.setText("Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +90,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(521, 342, -1, -1));
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

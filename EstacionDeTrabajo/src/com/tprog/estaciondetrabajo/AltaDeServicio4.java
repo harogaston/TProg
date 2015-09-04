@@ -16,10 +16,6 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-/**
- *
- * @author marccio.silva
- */
 public class AltaDeServicio4 extends javax.swing.JInternalFrame {
 
 	private AltaDeServicio3 padre;
@@ -68,13 +64,13 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabInfo = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
         label = new javax.swing.JLabel();
         buttonSeleccionar = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         arbolCategorias = new javax.swing.JTree();
+        jButtonSiguiente = new javax.swing.JButton();
 
         setBorder(null);
         setToolTipText("");
@@ -87,9 +83,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 formComponentHidden(evt);
             }
         });
-
-        tabInfo.setPreferredSize(new java.awt.Dimension(640, 480));
-        tabInfo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -97,28 +91,28 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 botonSalirActionPerformed(evt);
             }
         });
-        tabInfo.add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(542, 338, -1, -1));
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 410, -1, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setText("Seleccione la Categoría \"hoja\" a la que pertenece el nuevo Servicio.");
-        tabInfo.add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 486, 68));
+        getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 486, 68));
         label.getAccessibleContext().setAccessibleDescription("");
 
-        buttonSeleccionar.setText("Seleccionar");
+        buttonSeleccionar.setText("Siguiente >");
         buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSeleccionarActionPerformed(evt);
             }
         });
-        tabInfo.add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(291, 276, -1, -1));
+        getContentPane().add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
 
-        buttonAtras.setText("Atras");
+        buttonAtras.setText("< Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        tabInfo.add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 276, -1, -1));
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 410, -1, -1));
 
         arbolCategorias.setModel(null);
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
@@ -128,9 +122,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCategorias);
 
-        tabInfo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(185, 72, 260, 186));
-
-        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 260, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -144,41 +136,43 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
 		reservas = null;
     }//GEN-LAST:event_formComponentHidden
 
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-		this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
-    private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
-		DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
-		String categoria = null;
-		if (nodo != null) {
-			categoria = nodo.toString();
-		}
-		boolean okCategoria = ctrlProductos.agregarCategoria(categoria);
-		if (okCategoria) {
-			AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
-//                getContentPane().add(as5, BorderLayout.CENTER);
-			as5.setBounds(10, 10, 100, 100);
-			this.setVisible(false);
-			as5.setVisible(true);
-			getParent().add(as5);
-		} else {
-			JOptionPane.showMessageDialog(this, "Error! Por favor ingrese una Categoría", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
-		}
-    }//GEN-LAST:event_buttonSeleccionarActionPerformed
+    private void arbolCategoriasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCategoriasValueChanged
+        DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
+        if (nodo != null) {
+            System.out.println("Seleccionaste " + nodo.toString());
+        }
+    }//GEN-LAST:event_arbolCategoriasValueChanged
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
-		// TODO add your handling code here:
-		this.setVisible(false);
-		this.padre.setVisible(true);
+        // TODO add your handling code here:
+        this.setVisible(false);
+        this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
-    private void arbolCategoriasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCategoriasValueChanged
-		DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
-		if (nodo != null) {
-			System.out.println("Seleccionaste " + nodo.toString());
-		}
-    }//GEN-LAST:event_arbolCategoriasValueChanged
+    private void buttonSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarActionPerformed
+        DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
+        String categoria = null;
+        if (nodo != null) {
+            categoria = nodo.toString();
+        }
+        boolean okCategoria = ctrlProductos.seleccionarCategoriaSimple(categoria);
+        if (okCategoria) {
+            AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
+            this.setVisible(false);
+            as5.setVisible(true);
+            getParent().add(as5);
+        } else {
+            JOptionPane.showMessageDialog(this, "Error! Por favor seleccione una categoría hoja", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonSeleccionarActionPerformed
+
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void jButtonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSiguienteActionPerformed
 
 	Set<DTMinServicio> listaServicios;
 	Set<DTMinReserva> reservas;
@@ -188,8 +182,8 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonSeleccionar;
+    private javax.swing.JButton jButtonSiguiente;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label;
-    private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

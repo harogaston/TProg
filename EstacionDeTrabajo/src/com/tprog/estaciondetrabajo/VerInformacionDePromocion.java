@@ -57,7 +57,6 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabInfo = new javax.swing.JPanel();
         botonSalir = new javax.swing.JButton();
         listaPromocionesInterfaz = new javax.swing.JComboBox(listaPromociones);
         label = new javax.swing.JLabel();
@@ -67,6 +66,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
 
         setBorder(null);
         setToolTipText("");
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -75,6 +75,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
                 formComponentHidden(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         botonSalir.setText("Salir");
         botonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +83,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
                 botonSalirActionPerformed(evt);
             }
         });
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
 
         listaPromocionesInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -98,9 +100,12 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
                 listaPromocionesInterfazInterfazActionPerformed(evt);
             }
         });
+        getContentPane().add(listaPromocionesInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 270, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setText("<html>Seleccione una promocion del Sistema, y haga click en 'Ver Servicios' para ver sus servicios asociados</html>");
+        label.setText("Seleccione una promocion del Sistema, y haga click en 'Ver Servicios'");
+        getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 500, 20));
+        label.getAccessibleContext().setAccessibleDescription("");
 
         botonServicios.setText("Ver servicios");
         botonServicios.addActionListener(new java.awt.event.ActionListener() {
@@ -108,51 +113,13 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
                 botonServiciosActionPerformed(evt);
             }
         });
+        getContentPane().add(botonServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 130, -1));
 
         detallePromocion.setColumns(20);
         detallePromocion.setRows(5);
         jScrollPane1.setViewportView(detallePromocion);
 
-        javax.swing.GroupLayout tabInfoLayout = new javax.swing.GroupLayout(tabInfo);
-        tabInfo.setLayout(tabInfoLayout);
-        tabInfoLayout.setHorizontalGroup(
-            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabInfoLayout.createSequentialGroup()
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(botonServicios)
-                        .addGap(35, 35, 35)
-                        .addComponent(botonSalir))
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(listaPromocionesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(tabInfoLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(134, Short.MAX_VALUE))
-        );
-        tabInfoLayout.setVerticalGroup(
-            tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabInfoLayout.createSequentialGroup()
-                .addComponent(label, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(listaPromocionesInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(tabInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonSalir)
-                    .addComponent(botonServicios))
-                .addContainerGap(118, Short.MAX_VALUE))
-        );
-
-        label.getAccessibleContext().setAccessibleDescription("");
-
-        getContentPane().add(tabInfo, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 0, 0));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -228,6 +195,5 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaPromocionesInterfaz;
     private Vector<String> listaPromociones = new Vector<>();
-    private javax.swing.JPanel tabInfo;
     // End of variables declaration//GEN-END:variables
 }

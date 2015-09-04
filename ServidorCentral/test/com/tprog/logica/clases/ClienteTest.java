@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,7 +42,7 @@ public class ClienteTest {
 		System.out.println("crearDTMin");
 		DTMinCliente expResult = new DTMinCliente("nick", "email");
 		DTMinCliente result = instance.crearDTMin();
-		assertTrue(expResult.equals(result));
+		assertEquals(expResult, result);
 	}
 
 	@Test

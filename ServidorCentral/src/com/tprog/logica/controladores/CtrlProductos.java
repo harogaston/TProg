@@ -66,6 +66,11 @@ public class CtrlProductos implements ICtrlProductos{
         return mp.infoServicio(dtS);
     }
     
+    public DTMinServicio infoMinServicio(){
+        
+        return dtS;
+    }
+    
     @Override
     public DefaultMutableTreeNode listarCategorias(){
         ManejadorProductos mp = ManejadorProductos.getInstance();

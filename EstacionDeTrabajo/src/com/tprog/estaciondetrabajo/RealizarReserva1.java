@@ -172,6 +172,7 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //pido de nuevo los datos en caso de que hayan cambiado
+        System.out.println("rrserva1");
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
 
@@ -217,15 +218,15 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
 
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
-        //if (!cliente.isEmpty()) {
-        //    ctrlReservas.seleccionarCliente(cliente);
-            RealizarReserva2 rr2 = new RealizarReserva2(this, ctrlUsuarios);
+        if (!cliente.isEmpty()) {
+           ctrlReservas.seleccionarCliente(cliente);
+            RealizarReserva2 rr2 = new RealizarReserva2(this, ctrlUsuarios, ctrlReservas);
             getContentPane().add(rr2, BorderLayout.CENTER);
             rr2.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             rr2.setVisible(true);
             getParent().add(rr2);
-        //}
+        }
     }//GEN-LAST:event_buttonSiguienteActionPerformed
     ICtrlReservas ctrlReservas;
     Set<DTMinReserva> reservas;

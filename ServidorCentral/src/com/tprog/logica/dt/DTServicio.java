@@ -18,12 +18,12 @@ public class DTServicio {
 
 	public DTServicio(String idServicio, String descripcion, float precio,
 			Set<String> imagenes, DTUbicacion origen, DTUbicacion destino) {
-		this.idServicio = idServicio;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.imagenes = imagenes;
-		this.origen = origen;
-		this.destino = destino;
+            this.idServicio = idServicio;
+            this.descripcion = descripcion;
+            this.precio = precio;
+            this.imagenes = imagenes;
+            this.origen = origen;
+            this.destino = destino;
 	}
 
 	public String getIdServicio() {
@@ -52,12 +52,20 @@ public class DTServicio {
 
 	@Override
 	public String toString() {
-		return "ID de servicio: " + idServicio
-				+ "\n" + "Descripcion: " + descripcion
-				+ "\n" + "Precio: " + Float.toString(precio)
-				+ "\n" + "Origen: " + origen.toString()
-				+ "\n" + "Destino: " + destino.toString()
-				+ "\n";
+            if (destino == null) {
+                return "ID de servicio: " + idServicio
+                        + "\n" + "Descripcion: " + descripcion
+                        + "\n" + "Precio: " + Float.toString(precio)
+                        + "\n" + "Origen: " + origen.toString()
+                        + "\n";
+            } else {
+                return "ID de servicio: " + idServicio
+                        + "\n" + "Descripcion: " + descripcion
+                        + "\n" + "Precio: " + Float.toString(precio)
+                        + "\n" + "Origen: " + origen.toString()
+                        + "\n" + "Destino: " + destino.toString()
+                        + "\n";                
+            }
 	}
 
 }

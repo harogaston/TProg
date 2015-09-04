@@ -9,6 +9,9 @@ import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -45,6 +48,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jTextFieldNickname = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
 
+        setBorder(null);
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
@@ -121,8 +125,6 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		
         if (okNickname && okEmail && emailUnico && nicknameUnico) {
             AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ictrlU);
-            getContentPane().add(au2, BorderLayout.CENTER);
-            au2.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             au2.setVisible(true);
             getParent().add(au2);

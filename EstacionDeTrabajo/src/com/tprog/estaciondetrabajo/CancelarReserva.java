@@ -146,8 +146,13 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
         if (reservaSeleccionada != null) {
-            ctrlReservas.eliminarReserva();
-            JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);            
+            boolean eliminada = ctrlReservas.eliminarReserva();
+			if (eliminada) {
+				JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);            
+			}
+			else{
+				JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE); 
+			}
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
 

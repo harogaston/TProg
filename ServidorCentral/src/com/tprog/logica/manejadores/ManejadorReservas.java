@@ -49,23 +49,28 @@ public class ManejadorReservas {
 
 	public boolean cambiarEstadoReserva(int idReserva, EstadoReserva nuevoEstado) {
 		Reserva r = reservas.get(idReserva);
-
 		return r.cambiarEstadoReserva(nuevoEstado);
 	}
 
-	public void eliminarReserva(int idReserva) {
+	public boolean eliminarReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-//		r.eliminar();
-		// sacar del map
-                reservas.remove(idReserva);
+		EstadoReserva estado = r.getEstadoReserva();
+		if (estado == EstadoReserva.Registrada || estado == EstadoReserva.Cancelada) {
+			r.getCliente().quitarReserva(idReserva);
+			reservas.remove(idReserva);
+			return true;
+		}
+		return false;
 	}
 
 	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
-            if (dtR != null) {
-                Reserva nuevaReserva = new Reserva(dtR, nicknameP);
-                reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
-                cliente.agregarReserva(nuevaReserva);
-            } else System.out.println("El DTReserva que se paso hacia agregarReserva era nulo");
-            
+		if (dtR != null) {
+			Reserva nuevaReserva = new Reserva(cliente, dtR, nicknameP);
+			reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
+			cliente.agregarReserva(nuevaReserva);
+		} else {
+			System.out.println("El DTReserva que se paso hacia agregarReserva era nulo");
+		}
+
 	}
 }

@@ -155,8 +155,8 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void eliminarReserva() {
+	public boolean eliminarReserva() {
 		ManejadorReservas mr = ManejadorReservas.getInstance();
-		mr.eliminarReserva(idReserva);
+		return mr.eliminarReserva(idReserva);
 	}
 }

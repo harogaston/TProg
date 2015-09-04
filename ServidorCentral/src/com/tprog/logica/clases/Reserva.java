@@ -20,15 +20,17 @@ import java.util.Set;
 public class Reserva {
 
 	private int idReserva;
+	private Cliente cliente;
 	private static int contador = 1;
 	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
 	private Set<LineaReserva> lineasReserva;
 
-	public Reserva(DTReserva dtR, String nicknameP) throws Exception {
+	public Reserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
+		this.cliente = cliente;
 		this.fCreacion = dtR.getFCreacion();
 		this.estado = dtR.getEstadoReserva();
 		this.lineasReserva = new HashSet();
@@ -53,32 +55,33 @@ public class Reserva {
 		}
 	}
 
-	public Reserva(Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception {
-		this.idReserva = Reserva.contador;
-		Reserva.contador++;
-		this.fCreacion = fCreacion;
-		this.estado = estado;
-		this.lineasReserva = new HashSet();
-		this.precioTotal = precioTotal;
-
-		// Creo y agrego las lineasReserva
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		LineaReserva linea; // debe declararse fuera de los if
-		for (DTLineaReserva dtLinea : lineas) {
-			if (!dtLinea.getServicio().equals("")) {
-				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
-				Servicio s = mp.getServicio(dtMinS);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
-			} else if (!dtLinea.getPromocion().equals("")) {
-				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
-				Promocion p = mp.getPromocion(dtMinP);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
-			} else {
-				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
-			}
-			lineasReserva.add(linea);
-		}
-	}
+	// Como no se usa, de momento lo comento para que no joda
+//	public Reserva(Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception {
+//		this.idReserva = Reserva.contador;
+//		Reserva.contador++;
+//		this.fCreacion = fCreacion;
+//		this.estado = estado;
+//		this.lineasReserva = new HashSet();
+//		this.precioTotal = precioTotal;
+//
+//		// Creo y agrego las lineasReserva
+//		ManejadorProductos mp = ManejadorProductos.getInstance();
+//		LineaReserva linea; // debe declararse fuera de los if
+//		for (DTLineaReserva dtLinea : lineas) {
+//			if (!dtLinea.getServicio().equals("")) {
+//				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
+//				Servicio s = mp.getServicio(dtMinS);
+//				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
+//			} else if (!dtLinea.getPromocion().equals("")) {
+//				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
+//				Promocion p = mp.getPromocion(dtMinP);
+//				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
+//			} else {
+//				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
+//			}
+//			lineasReserva.add(linea);
+//		}
+//	}
 
 	public int getIdReserva() {
 		return idReserva;
@@ -96,6 +99,10 @@ public class Reserva {
 		return precioTotal;
 	}
 
+	public Cliente getCliente(){
+		return cliente;
+	}
+	
 	public void agregarLineaReserva(LineaReserva linea) {
 		lineasReserva.add(linea);
 		precioTotal += linea.getPrecio();

@@ -27,10 +27,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private final ICtrlUsuarios ictrlU;
 
 	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String email, ICtrlUsuarios ictrlU) {
+
 		setTitle("Alta de Usuario");
 		this.anterior = anterior;
 		this.nickname = nickname;
 		this.email = email;
+
 		this.ictrlU = ictrlU;
 		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
 		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
@@ -225,14 +227,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
-    private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonClienteActionPerformed
+	private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {
 		jTextFieldEmpresa.setVisible(false);
 		jTextFieldLinkEmpresa.setVisible(false);
 		labelNombreEmpresa.setVisible(false);
 		labelLinkEmpresa.setVisible(false);
 		jTextFieldEmpresa.setVisible(false);
 		jTextFieldLinkEmpresa.setVisible(false);
-    }//GEN-LAST:event_radioButtonClienteActionPerformed
+	}
 
     private void radioButtonProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonProveedorActionPerformed
 		jTextFieldEmpresa.setVisible(true);
@@ -313,18 +315,17 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
-		anterior.dispose();
-		this.dispose();
+		exit();
     }//GEN-LAST:event_buttonSalirActionPerformed
 
-    private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
-		exit();
-    }//GEN-LAST:event_buttonAtrasActionPerformed
+	private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {
+		this.setVisible(false);
+		anterior.setVisible(true);
+	}
 
 	String nickname = null;
 	String email = null;
 	String rutaImagen = null;
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;

@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
@@ -16,7 +16,7 @@ import java.util.Vector;
  * @author marccio
  */
 public class ReservasCliente extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      * @param reservas
@@ -33,7 +33,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
             listaReservas.add(Integer.toString(dt.getIdReserva()));
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,15 +93,15 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaReservasInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaReservasInterfazInterfazComponentAdded
-
+    
     private void listaReservasInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaReservasInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaReservasInterfazItemStateChanged
-
+    
     private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
         if (reservaSeleccionada != null) {
@@ -112,7 +112,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
             detalleUsuario.setText(dt.toString()); //imprimir lineas de reserva
         }
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
 //        detalleUsuario.setText("");
 //        detalleUsuario.setVisible(false);
@@ -121,7 +121,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
 //        ctrlUsuarios = null;
 //        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     @Override
     public void dispose() {
         super.dispose();

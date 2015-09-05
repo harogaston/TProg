@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
@@ -19,7 +18,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class ServiciosProveedor extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      * @param idCliente
@@ -31,15 +30,17 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
         //construyo lista para la interfaz usando el set
-        for (DTMinServicio dt : servicios) {
-            listaServicios.add(dt.getIdServicio());
+        if (servicios != null) {
+            for (DTMinServicio dt : servicios) {
+                listaServicios.add(dt.getIdServicio());
+            }
         }
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,15 +100,15 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
-
+    
     private void listaServiciosInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaServiciosInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaServiciosInterfazItemStateChanged
-
+    
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
@@ -115,10 +116,10 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
             DTServicio dt = ctrlUsuarios.infoServicio();
             detalleServicio.setVisible(true);
             if (dt == null) System.out.println("Fuck you");
-            detalleServicio.setText(dt.toString()); 
+            detalleServicio.setText(dt.toString());
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
 //        detalleServicio.setText("");
 //        detalleServicio.setVisible(false);
@@ -127,13 +128,13 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
 //        ctrlUsuarios = null;
 //        padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     @Override
     public void dispose() {
         super.dispose();
         padre.dispose();
     }
-
+    
     
     
     ICtrlUsuarios ctrlUsuarios;

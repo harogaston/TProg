@@ -1,11 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
-import java.awt.Component;
 import java.awt.event.MouseListener;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -20,7 +19,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author User
  */
 public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form AltaUsuario
      */
@@ -30,9 +29,9 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -410,17 +409,17 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-      JOptionPane.showMessageDialog(this, "Dale padelante, guachín", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);  
+        JOptionPane.showMessageDialog(this, "Dale padelante, guachín", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);  
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void botonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonClienteActionPerformed
         // TODO add your handling code here:
         //prov = false;
@@ -431,7 +430,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         jTextPane5.setVisible(false);
         jTextPane6.setVisible(false);
     }//GEN-LAST:event_botonClienteActionPerformed
-
+    
     private void botonProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonProveedorActionPerformed
         // TODO add your handling code here:
         jScrollPane5.setVisible(true);
@@ -448,7 +447,7 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(this, "Todo piola viejita", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
@@ -465,23 +464,23 @@ public class AltaUsuarioPrueba extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         JFileChooser fc = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter(
-  	            "Imágenes JPG & PNG ", "jpg", "png");
-  	            fc.setFileFilter(filter);
-       
-  	            int seleccion = fc.showDialog(this, "Adjuntar");
-  	            if (seleccion == JFileChooser.APPROVE_OPTION) {
-  	                // Para guardar la imagen.*******************************************
-  	                File file = fc.getSelectedFile();
-  	                ruta= file.getPath();
-                        //jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource(ruta)));
-                       // imageUsuario = new ImageIcon(getClass().getResource(ruta));
-                        //jTextPane9.setText(ruta);
-                    }
-                    //jLabel15.setIc
-                    //jLabel15.setIcon(imageUsuario);
+                "Imágenes JPG & PNG ", "jpg", "png");
+        fc.setFileFilter(filter);
+        
+        int seleccion = fc.showDialog(this, "Adjuntar");
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            // Para guardar la imagen.*******************************************
+            File file = fc.getSelectedFile();
+            ruta= file.getPath();
+            //jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource(ruta)));
+            // imageUsuario = new ImageIcon(getClass().getResource(ruta));
+            //jTextPane9.setText(ruta);
+        }
+        //jLabel15.setIc
+        //jLabel15.setIcon(imageUsuario);
         
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    
     //private boolean prov = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonCliente;

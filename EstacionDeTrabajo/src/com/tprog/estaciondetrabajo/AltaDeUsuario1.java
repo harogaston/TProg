@@ -5,7 +5,6 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
@@ -14,9 +13,9 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 
-	public AltaDeUsuario1() {
+	public AltaDeUsuario1(ICtrlUsuarios ctrlUsuarios) {
 		setTitle("Alta de Usuario");
-		fabrica = Fabrica.getInstance();
+		this.ctrlUsuarios = ctrlUsuarios;
 		initComponents();
 		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
 		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
@@ -92,18 +91,17 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
 		boolean okNickname = okEnblanco && okSinEspacios;
 
-		ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
 		boolean nicknameUnico = false;
 		if (okNickname) {
-			nicknameUnico = ictrlU.verificarNickname(nickname);
+			nicknameUnico = ctrlUsuarios.verificarNickname(nickname);
 		}
 		boolean emailUnico = false;
 		if (okEmail) {
-			emailUnico = ictrlU.verificarEmail(email);
+			emailUnico = ctrlUsuarios.verificarEmail(email);
 		}
 
 		if (okNickname && okEmail && emailUnico && nicknameUnico) {
-			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ictrlU);
+			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ctrlUsuarios);
 			this.setVisible(false);
 			getParent().add(au2);
 			au2.setVisible(true);
@@ -122,7 +120,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
-	Fabrica fabrica;
+	ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSiguiente;
@@ -132,5 +130,4 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNickname;
     // End of variables declaration//GEN-END:variables
-
 }

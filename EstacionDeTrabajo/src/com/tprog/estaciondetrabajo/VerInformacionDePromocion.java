@@ -1,15 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTPromocion;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
@@ -23,21 +22,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio.silva
  */
 public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form VerInformacionDeCliente
      */
-    public VerInformacionDePromocion() {
+    public VerInformacionDePromocion(ICtrlProductos ctrlProductos) {
+        this.ctrlProductos = ctrlProductos;
         initComponents();
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
     
     void cargarDatos() {
-        Fabrica f = Fabrica.getInstance();
-        ctrlProductos = f.getICtrlProductos();        
         setPromociones = ctrlProductos.listarPromociones();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
@@ -47,7 +45,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,18 +121,18 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //pido de nuevo los datos en caso de que hayan cambiado
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-
+    
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         listaPromociones.clear();
         servicios = null;
         listaPromocionesInterfaz.setSelectedItem(null);
     }//GEN-LAST:event_formComponentHidden
-
+    
     DTMinPromocion buscarDTMinPromocion(String id) {
         DTMinPromocion dt = null;
         Iterator it = setPromociones.iterator();
@@ -158,19 +156,19 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
             detallePromocion.setText(dt.toString());
         }
     }//GEN-LAST:event_listaPromocionesInterfazInterfazActionPerformed
-
+    
     private void listaPromocionesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaPromocionesInterfazInterfazComponentAdded
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void listaPromocionesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaPromocionesInterfazItemStateChanged
-
+    
     private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
         String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
         if (promocion != null) {

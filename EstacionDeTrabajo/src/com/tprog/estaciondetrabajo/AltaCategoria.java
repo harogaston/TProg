@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.event.MouseListener;
 import java.util.Set;
@@ -20,28 +19,27 @@ import javax.swing.tree.DefaultTreeModel;
  * @author marccio
  */
 public class AltaCategoria extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      */
-    public AltaCategoria() {
+    public AltaCategoria(ICtrlProductos ctrlProductos) {
+        this.ctrlProductos = ctrlProductos;
         initComponents();
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
     
     void cargarDatos() {
-        Fabrica f = Fabrica.getInstance();
-        ctrlProductos = f.getICtrlProductos();
         DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
         arbolCategorias.removeAll();
         arbolCategorias.setModel(new DefaultTreeModel(raiz));
         if (!casillaPadre.isSelected()) arbolCategorias.setEnabled(false);
         arbolCategorias.updateUI();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -121,36 +119,36 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-
+    
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         nombreCategoria.setText("");
         casillaPadre.setSelected(false);
     }//GEN-LAST:event_formComponentHidden
-
+    
     private void nombreCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreCategoriaActionPerformed
-
+    
     private void arbolCategoriasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCategoriasValueChanged
         DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
         if (nodo != null) {
             System.out.println("Seleccionaste " + nodo.toString());
         }
     }//GEN-LAST:event_arbolCategoriasValueChanged
-
+    
     private void casillaPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casillaPadreActionPerformed
         if (!casillaPadre.isSelected()) arbolCategorias.setEnabled(false);
         else arbolCategorias.setEnabled(true);
     }//GEN-LAST:event_casillaPadreActionPerformed
-
+    
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         String categoriaNueva = nombreCategoria.getText();
         if (!categoriaNueva.equals("")) { //nombre no vacío
@@ -183,7 +181,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
             }
         } else JOptionPane.showMessageDialog(this, "Por favor ingrese un nombre para la categoria", "Campo vacio", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonConfirmarActionPerformed
-
+    
     ICtrlProductos ctrlProductos;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;

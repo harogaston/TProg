@@ -33,6 +33,7 @@ public class ClienteTest {
 	public void testCrearDT() {
 		System.out.println("crearDT");
 		DTCliente expResult = new DTCliente("nick", "nombre", "ap", "email", "imagen", fecha, new HashSet<>());
+                instance = new Cliente(expResult);
 		DTCliente result = instance.crearDT();
 		assertEquals(expResult, result);
 	}

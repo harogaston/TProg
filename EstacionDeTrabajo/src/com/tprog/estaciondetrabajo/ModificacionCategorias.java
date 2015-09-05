@@ -128,21 +128,24 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
 
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
         //quitar
-
-        List selected = listaServicioInterfaz.getSelectedValuesList();
-        Iterator it1 = selected.iterator();
-        while (it1.hasNext()) {
-            String actual = (String) it1.next();
-            Iterator it2 = listaServicio.iterator();
-            while (it2.hasNext()) {
-                if (it2.next().equals(actual)) {
-                    it2.remove();
+        if (listaServicio.size() > 1) {
+            List selected = listaServicioInterfaz.getSelectedValuesList();
+            Iterator it1 = selected.iterator();
+            while (it1.hasNext()) {
+                String actual = (String) it1.next();
+                Iterator it2 = listaServicio.iterator();
+                while (it2.hasNext()) {
+                    if (it2.next().equals(actual)) {
+                        it2.remove();
+                    }
                 }
+                //listaSistema.add(actual); no es necesario porque ya estan las cosas
             }
-            //listaSistema.add(actual); no es necesario porque ya estan las cosas
+            listaServicio.sort(null);
+            listaServicioInterfaz.updateUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "No puede quitarle todas las categorias al servicio", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        listaServicio.sort(null);
-        listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonQuitarActionPerformed
 
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,7 +166,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         }
         listaServicio.sort(null);
         listaServicioInterfaz.updateUI();
-    }//GEN-LAST:event_botonAgregarActionPerformed
+    }
 
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         try {

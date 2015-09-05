@@ -5,23 +5,22 @@ package com.tprog.logica.clases;
 
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTServicio;
-import com.tprog.logica.dt.DTUbicacion;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author MarG
  */
 public class ServicioTest {
-    
+
     Servicio instance;
     String idServicio;
     String descripcion;
@@ -31,34 +30,33 @@ public class ServicioTest {
     Ciudad destino;
     Set<Simple> categorias;
     Proveedor proveedor;
-    
+
     public ServicioTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         imagenes = new HashSet();
-        instance = new Servicio("idServicio", "descripcion", 50, imagenes,null,null,null);
+        instance = new Servicio("idServicio", "descripcion", 50, imagenes, null, null, null);
         Date fecha = new Date();
         origen = new Ciudad("Montevideo");
         Pais pais = new Pais("Uruguay");
         origen.setPais(pais);
         instance.setOrigen(origen);
-        proveedor = new Proveedor("nick","nom","ap","email",
-			"imagen",fecha,"empresa","webEmpresa");
+        proveedor = new Proveedor("nick", "nom", "ap", "email",
+                "imagen", fecha, "empresa", "webEmpresa");
         instance.setProveedor(proveedor);
-        
-        
+
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -69,20 +67,20 @@ public class ServicioTest {
     @Test
     public void testCrearDT() {
         System.out.println("crearDT");
-        
-        DTServicio expResult = new DTServicio("idServicio","descripcion", 50,null,origen.crearDT(),null);
+
+        DTServicio expResult = new DTServicio("idServicio", "descripcion", 50, null, origen.crearDT(), null);
         DTServicio result = instance.crearDT();
         boolean prim = (expResult.toString().equals(result.toString()));
         destino = new Ciudad("Colonia");
         Pais pais = new Pais("Brasil");
         destino.setPais(pais);
         instance.setDestino(destino);
-        DTServicio expResult2 = new DTServicio("idServicio","descripcion", 50,null,origen.crearDT(),destino.crearDT());
+        DTServicio expResult2 = new DTServicio("idServicio", "descripcion", 50, null, origen.crearDT(), destino.crearDT());
         DTServicio result2 = instance.crearDT();
         boolean prim2 = (expResult2.toString().equals(result2.toString()));
-        assertEquals(prim,prim2);
+        assertEquals(prim, prim2);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -91,12 +89,12 @@ public class ServicioTest {
     @Test
     public void testCrearDTMin() {
         System.out.println("crearDTMin");
-        
-        DTMinServicio expResult = new DTMinServicio("nick","idServicio");
+
+        DTMinServicio expResult = new DTMinServicio("nick", "idServicio");
         DTMinServicio result = instance.crearDTMin();
         assertEquals(expResult.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -109,7 +107,7 @@ public class ServicioTest {
         Set<String> result = instance.listarImagenes();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -121,7 +119,7 @@ public class ServicioTest {
         String imagen = "imageeeen";
         instance.agregarImagen(imagen);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -134,7 +132,7 @@ public class ServicioTest {
         instance.agregarImagen(imagen);
         instance.quitarImagen(imagen);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -143,7 +141,7 @@ public class ServicioTest {
     @Test
     public void testListarCategorias() {
         System.out.println("listarCategorias");
-        
+
         Set<String> expResult = new HashSet();
         expResult.add("idCategoria");
         Categoria c = new Simple("idCategoria");
@@ -151,7 +149,7 @@ public class ServicioTest {
         Set<String> result = instance.listarCategorias();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -165,7 +163,7 @@ public class ServicioTest {
         boolean result = instance.agregarCategoria(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -175,14 +173,14 @@ public class ServicioTest {
     public void testQuitarCategoria() {
         System.out.println("quitarCategoria");
         Categoria c = new Simple("idCategoria");
-        boolean entro = instance.agregarCategoria(c); 
+        boolean entro = instance.agregarCategoria(c);
         Categoria categoria_a_quitar = c;
-        
+
         boolean expResult = true;
         boolean result = instance.quitarCategoria(categoria_a_quitar);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -191,12 +189,12 @@ public class ServicioTest {
     @Test
     public void testGetIdServicio() {
         System.out.println("getIdServicio");
-        
+
         String expResult = "idServicio";
         String result = instance.getIdServicio();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -208,7 +206,7 @@ public class ServicioTest {
         String idServicio = "";
         instance.setIdServicio(idServicio);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -221,7 +219,7 @@ public class ServicioTest {
         String result = instance.getDescripcion();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -233,7 +231,7 @@ public class ServicioTest {
         String descripcion = "";
         instance.setDescripcion(descripcion);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -246,7 +244,7 @@ public class ServicioTest {
         float result = instance.getPrecio();
         assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -258,7 +256,7 @@ public class ServicioTest {
         float precio = 20;
         instance.setPrecio(precio);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -271,7 +269,7 @@ public class ServicioTest {
         Set<String> result = instance.getImagenes();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -283,7 +281,7 @@ public class ServicioTest {
         Set<String> imagenes = null;
         instance.setImagenes(imagenes);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -296,7 +294,7 @@ public class ServicioTest {
         Ciudad result = instance.getOrigen();
         assertEquals(expResult.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -308,7 +306,7 @@ public class ServicioTest {
         Ciudad origen = null;
         instance.setOrigen(origen);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -321,7 +319,7 @@ public class ServicioTest {
         Ciudad result = instance.getDestino();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -333,7 +331,7 @@ public class ServicioTest {
         Ciudad destino = null;
         instance.setDestino(destino);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -346,7 +344,7 @@ public class ServicioTest {
         Proveedor result = instance.getProveedor();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -356,10 +354,10 @@ public class ServicioTest {
     public void testSetProveedor() {
         System.out.println("setProveedor");
         Proveedor proveedor = null;
-        
+
         instance.setProveedor(proveedor);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
-    
+
 }

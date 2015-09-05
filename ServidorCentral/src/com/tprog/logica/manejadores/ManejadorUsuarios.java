@@ -20,118 +20,118 @@ import java.util.Set;
 
 public class ManejadorUsuarios {
 
-	private static ManejadorUsuarios instace = null;
-	private Map<String, Proveedor> proveedores;
-	private Map<String, Cliente> clientes;
+    private static ManejadorUsuarios instace = null;
+    private Map<String, Proveedor> proveedores;
+    private Map<String, Cliente> clientes;
 
-	private ManejadorUsuarios() {
-		proveedores = new HashMap();
-		clientes = new HashMap();
-	}
+    private ManejadorUsuarios() {
+        proveedores = new HashMap();
+        clientes = new HashMap();
+    }
 
-	public static ManejadorUsuarios getInstance() {
-		if (instace == null) {
-			instace = new ManejadorUsuarios();
-		}
-		return instace;
-	}
+    public static ManejadorUsuarios getInstance() {
+        if (instace == null) {
+            instace = new ManejadorUsuarios();
+        }
+        return instace;
+    }
 
-	public Set<DTMinProveedor> listarProveedores() {
-		Set<DTMinProveedor> lista = new HashSet();
-		if (!proveedores.isEmpty()) {
-			for (Proveedor p : proveedores.values()) {
-				DTMinProveedor dtMin = p.crearDTMin();
-				lista.add(dtMin);
-			}
-		}
-		return lista;
-	}
+    public Set<DTMinProveedor> listarProveedores() {
+        Set<DTMinProveedor> lista = new HashSet();
+        if (!proveedores.isEmpty()) {
+            for (Proveedor p : proveedores.values()) {
+                DTMinProveedor dtMin = p.crearDTMin();
+                lista.add(dtMin);
+            }
+        }
+        return lista;
+    }
 
-	public Set<DTMinServicio> listarServiciosProveedor(String nickname) {
-		Proveedor p = proveedores.get(nickname);
-		return p.listarServicios();
-	}
+    public Set<DTMinServicio> listarServiciosProveedor(String nickname) {
+        Proveedor p = proveedores.get(nickname);
+        return p.listarServicios();
+    }
 
-	public Set<DTMinPromocion> listarPromocionesProveedor(String nickname) {
-		Proveedor p = proveedores.get(nickname);
-		return p.listarPromociones();
-	}
+    public Set<DTMinPromocion> listarPromocionesProveedor(String nickname) {
+        Proveedor p = proveedores.get(nickname);
+        return p.listarPromociones();
+    }
 
-	public Set<DTMinCliente> listarClientes() throws Exception {
-		Set<DTMinCliente> nuevoSet = new HashSet();
-		if (!clientes.isEmpty()) {
-			for (Cliente c : clientes.values()) {
-				nuevoSet.add(c.crearDTMin());
-			}
-			return nuevoSet;
-		} else {
-			throw new Exception("No existen Clientes registrados en el Sistema");
-		}
-	}
+    public Set<DTMinCliente> listarClientes() throws Exception {
+        Set<DTMinCliente> nuevoSet = new HashSet();
+        if (!clientes.isEmpty()) {
+            for (Cliente c : clientes.values()) {
+                nuevoSet.add(c.crearDTMin());
+            }
+            return nuevoSet;
+        } else {
+            throw new Exception("No existen Clientes registrados en el Sistema");
+        }
+    }
 
-	public DTCliente infoCliente(String nickname) throws Exception {
-		if (!clientes.isEmpty()) {
-			if (clientes.containsKey(nickname)) {
-				Cliente c = clientes.get(nickname);
-				return c.crearDT();
-			} else {
-				throw new Exception("No ha seleccionado un Cliente válido.");
-			}
-		} else {
-			throw new Exception("No existen Clientes registrados en el Sistema");
-		}
-	}
+    public DTCliente infoCliente(String nickname) throws Exception {
+        if (!clientes.isEmpty()) {
+            if (clientes.containsKey(nickname)) {
+                Cliente c = clientes.get(nickname);
+                return c.crearDT();
+            } else {
+                throw new Exception("No ha seleccionado un Cliente válido.");
+            }
+        } else {
+            throw new Exception("No existen Clientes registrados en el Sistema");
+        }
+    }
 
-	public DTProveedor infoProveedor(String nicknameP) throws Exception {
-		if (!proveedores.isEmpty()) {
-			if (proveedores.containsKey(nicknameP)) {
-				Proveedor p = proveedores.get(nicknameP);
-				return p.crearDT();
-			} else {
-				throw new Exception("No ha seleccionado un Proveedor válido.");
-			}
-		} else {
-			throw new Exception("No existen Proveedores registrados en el Sistema");
-		}
-	}
+    public DTProveedor infoProveedor(String nicknameP) throws Exception {
+        if (!proveedores.isEmpty()) {
+            if (proveedores.containsKey(nicknameP)) {
+                Proveedor p = proveedores.get(nicknameP);
+                return p.crearDT();
+            } else {
+                throw new Exception("No ha seleccionado un Proveedor válido.");
+            }
+        } else {
+            throw new Exception("No existen Proveedores registrados en el Sistema");
+        }
+    }
 
-	public boolean verificarNickname(String nicknameU) {
-		return !proveedores.containsKey(nicknameU) && !clientes.containsKey(nicknameU);
-	}
+    public boolean verificarNickname(String nicknameU) {
+        return !proveedores.containsKey(nicknameU) && !clientes.containsKey(nicknameU);
+    }
 
-	public boolean verificarEmail(String email) {
-		if (!proveedores.isEmpty()) {
-			for (Proveedor p : proveedores.values()) {
-				if (email.equals(p.getEmail())) {
-					return false;
-				}
-			}
-		}
-		if (!clientes.isEmpty()) {
-			for (Cliente c : clientes.values()) {
-				if (email.equals(c.getEmail())) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+    public boolean verificarEmail(String email) {
+        if (!proveedores.isEmpty()) {
+            for (Proveedor p : proveedores.values()) {
+                if (email.equals(p.getEmail())) {
+                    return false;
+                }
+            }
+        }
+        if (!clientes.isEmpty()) {
+            for (Cliente c : clientes.values()) {
+                if (email.equals(c.getEmail())) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
-	public void altaCliente(DTCliente dtC) {
-            Cliente nuevoCliente = new Cliente(dtC);
-            clientes.put(dtC.getNickname(), nuevoCliente);
-	}
+    public void altaCliente(DTCliente dtC) {
+        Cliente nuevoCliente = new Cliente(dtC);
+        clientes.put(dtC.getNickname(), nuevoCliente);
+    }
 
-	public void altaProveedor(DTProveedor dtP) {
-            Proveedor nuevoProveedor = new Proveedor(dtP);
-            proveedores.put(dtP.getNickname(), nuevoProveedor);
-	}
+    public void altaProveedor(DTProveedor dtP) {
+        Proveedor nuevoProveedor = new Proveedor(dtP);
+        proveedores.put(dtP.getNickname(), nuevoProveedor);
+    }
 
-	public Cliente getCliente(String nickname) {
-		return clientes.get(nickname);
-	}
+    public Cliente getCliente(String nickname) {
+        return clientes.get(nickname);
+    }
 
-	public Proveedor getProveedor(String nickname) {
-		return proveedores.get(nickname);
-	}
+    public Proveedor getProveedor(String nickname) {
+        return proveedores.get(nickname);
+    }
 }

@@ -9,57 +9,57 @@ import java.util.Set;
 
 public class DTServicio {
 
-	private final String idServicio;
-	private final String descripcion;
-	private final float precio;
-	private final Set<String> imagenes;
-	private final DTUbicacion origen;
-	private final DTUbicacion destino;
+    private final String idServicio;
+    private final String descripcion;
+    private final float precio;
+    private final Set<String> imagenes;
+    private final DTUbicacion origen;
+    private final DTUbicacion destino;
 
-	public DTServicio(String idServicio, String descripcion, float precio,
-			Set<String> imagenes, DTUbicacion origen, DTUbicacion destino) {
-		this.idServicio = idServicio;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.imagenes = imagenes;
-		this.origen = origen;
-		this.destino = destino;
-	}
+    public DTServicio(String idServicio, String descripcion, float precio,
+            Set<String> imagenes, DTUbicacion origen, DTUbicacion destino) {
+        this.idServicio = idServicio;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.imagenes = imagenes;
+        this.origen = origen;
+        this.destino = destino;
+    }
 
-	public String getIdServicio() {
-		return this.idServicio;
-	}
+    public String getIdServicio() {
+        return this.idServicio;
+    }
 
-	public String getDescripcion() {
-		return this.descripcion;
-	}
+    public String getDescripcion() {
+        return this.descripcion;
+    }
 
-	public float getPrecio() {
-		return this.precio;
-	}
+    public float getPrecio() {
+        return this.precio;
+    }
 
-	public Set<String> getImagenes() {
-		return this.imagenes;
-	}
+    public Set<String> getImagenes() {
+        return this.imagenes;
+    }
 
-	public DTUbicacion getOrigen() {
-		return this.origen;
-	}
+    public DTUbicacion getOrigen() {
+        return this.origen;
+    }
 
-	public DTUbicacion getDestino() {
-		return this.destino;
-	}
+    public DTUbicacion getDestino() {
+        return this.destino;
+    }
 
-	@Override
-	public String toString() {
-		String salida = "ID de servicio: " + idServicio
-				+ "\n" + "Descripcion: " + descripcion
-				+ "\n" + "Precio: " + Float.toString(precio)
-				+ "\n" + "Origen: " + origen.toString()
-				+ "\n";
-		if (destino != null) {
-			salida = salida.concat("Destino: " + destino.toString() + "\n");
-		}
-		return salida;
-	}
+    @Override
+    public String toString() {
+        String salida = "ID de servicio: " + idServicio
+                + "\n" + "Descripcion: " + descripcion
+                + "\n" + "Precio: " + Float.toString(precio)
+                + "\n" + "Origen: " + origen.toString()
+                + "\n";
+        if (destino != null) {
+            salida = salida.concat("Destino: " + destino.toString() + "\n");
+        }
+        return salida;
+    }
 }

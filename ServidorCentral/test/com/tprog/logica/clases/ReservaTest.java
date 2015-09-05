@@ -3,7 +3,6 @@
  */
 package com.tprog.logica.clases;
 
-import com.tprog.logica.clases.LineaReserva;
 import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
@@ -13,17 +12,17 @@ import java.util.HashSet;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author MarG
  */
 public class ReservaTest {
-    
+
     Reserva instance;
     Date fecha;
     Set<LineaReserva> lineasReserva;
@@ -33,52 +32,45 @@ public class ReservaTest {
     String nicknameProv;
     float precioTotal;
     EstadoReserva estado;
-    
-    
-    
-    
-    
-    
+
     public ReservaTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
-            
-                
+
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() throws Exception {
-            fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, 10);
-		DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", 20);
-		DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, 30);
-                DTLineaReserva l4 = new DTLineaReserva(3, fecha, fecha, null, null, 30);
-                
-		set = new HashSet();
-		set.add(l1);
-		set.add(l2);
-		set.add(l3);
-                //set.add(l4); 
-                
-                
-		precioTotal = l1.getPrecio() + l2.getPrecio() * 2 + l3.getPrecio() * 3;
-                this.nicknameProv = "Pedro";
-                estado = EstadoReserva.Registrada;
-                DTReserva dtR = new DTReserva(-1,fecha,estado,precioTotal,set);
-                instance = new Reserva(null,dtR,nicknameProv);
+        fecha = new Date();
+        DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, 10);
+        DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", 20);
+        DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, 30);
+        DTLineaReserva l4 = new DTLineaReserva(3, fecha, fecha, null, null, 30);
+
+        set = new HashSet();
+        set.add(l1);
+        set.add(l2);
+        set.add(l3);
+                //set.add(l4);
+
+        precioTotal = l1.getPrecio() + l2.getPrecio() * 2 + l3.getPrecio() * 3;
+        this.nicknameProv = "Pedro";
+        estado = EstadoReserva.Registrada;
+        DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, set);
+        instance = new Reserva(null, dtR, nicknameProv);
 		//instance = new Reserva(fecha,estado,precioTotal,set,nicknameProv);
-                
+
     }
-    
+
     @After
     public void tearDown() {
-            
+
     }
 
     /**
@@ -87,11 +79,10 @@ public class ReservaTest {
     @Test
     public void testGetIdReserva() {
         System.out.println("getIdReserva");
-        
+
         int result = instance.getIdReserva();
-        
+
         // TODO review the generated test code and remove the default call to fail.
-        
     }
 
     /**
@@ -100,12 +91,12 @@ public class ReservaTest {
     @Test
     public void testGetFCreacion() {
         System.out.println("getFCreacion");
-        
+
         Date expResult = fecha;
         Date result = instance.getFCreacion();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -114,15 +105,15 @@ public class ReservaTest {
     @Test
     public void testGetEstadoReserva() {
         System.out.println("getEstadoReserva");
-        
+
         EstadoReserva expResult = EstadoReserva.Registrada;
         EstadoReserva result = null;
-        
-            result = instance.getEstado();
-        
+
+        result = instance.getEstado();
+
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -133,12 +124,12 @@ public class ReservaTest {
         System.out.println("getPrecioTotal");
         float expResult = this.precioTotal;
         float result = 0;
-        if (instance != null){
-             result = instance.getPrecioTotal();
+        if (instance != null) {
+            result = instance.getPrecioTotal();
         }
-        assertEquals(expResult,result, 0.0);
+        assertEquals(expResult, result, 0.0);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -147,17 +138,14 @@ public class ReservaTest {
     @Test
     public void testAgregarLineaReserva() {
         System.out.println("agregarLineaReserva");
-            
-            LineaReserva lin1 = new LineaReserva(5,fecha,fecha,servicio,null,20);
-            LineaReserva lin2 = new LineaReserva(6,fecha,fecha,null,promocion,20);
-            
-            instance.agregarLineaReserva(lin1);
-            instance.agregarLineaReserva(lin2);
-            
-            
-          
+
+        LineaReserva lin1 = new LineaReserva(5, fecha, fecha, servicio, null, 20);
+        LineaReserva lin2 = new LineaReserva(6, fecha, fecha, null, promocion, 20);
+
+        instance.agregarLineaReserva(lin1);
+        instance.agregarLineaReserva(lin2);
+
         // TODO review the generated test code and remove the default call to fail.
-        
     }
 
     /**
@@ -166,11 +154,10 @@ public class ReservaTest {
     @Test
     public void testSetEstadoReserva() {
         System.out.println("setEstadoReserva");
-        
+
         instance.setEstadoReserva(EstadoReserva.Cancelada);
-        
+
         // TODO review the generated test code and remove the default call to fail.
-        
     }
 
     /**
@@ -179,13 +166,13 @@ public class ReservaTest {
     @Test
     public void testSetPrecioTotal() {
         System.out.println("setPrecioTotal");
-       
+
         float p = 20;
-        
+
         instance.setPrecioTotal(p);
         float result = instance.getPrecioTotal();
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(p, result,0);
+        assertEquals(p, result, 0);
     }
 
     /**
@@ -194,13 +181,13 @@ public class ReservaTest {
     @Test
     public void testCrearDTReserva() throws Exception {
         System.out.println("crearDTReserva");
-        
+
         DTReserva result = instance.crearDTReserva();
-        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstado(), instance.getPrecioTotal(),set);
-                
+        DTReserva esperado = new DTReserva(instance.getIdReserva(), fecha, instance.getEstado(), instance.getPrecioTotal(), set);
+
         assertEquals(esperado.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -209,14 +196,14 @@ public class ReservaTest {
     @Test
     public void testCrearDTMinReserva() {
         System.out.println("crearDTMinReserva");
-        
-        DTMinReserva expected = new DTMinReserva(instance.getIdReserva(),this.fecha);
-        
+
+        DTMinReserva expected = new DTMinReserva(instance.getIdReserva(), this.fecha);
+
         DTMinReserva result = instance.crearDTMinReserva();
-        
-        assertEquals(expected.toString(),result.toString());
+
+        assertEquals(expected.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -226,13 +213,13 @@ public class ReservaTest {
     public void testCambiarEstadoReserva() {
         System.out.println("cambiarEstadoReserva");
         EstadoReserva nuevoEstado = EstadoReserva.Facturada;
-        
-       instance.cambiarEstadoReserva(nuevoEstado);
-       nuevoEstado = EstadoReserva.Cancelada;
-       instance.cambiarEstadoReserva(nuevoEstado);
-       instance.cambiarEstadoReserva(nuevoEstado); 
+
+        instance.cambiarEstadoReserva(nuevoEstado);
+        nuevoEstado = EstadoReserva.Cancelada;
+        instance.cambiarEstadoReserva(nuevoEstado);
+        instance.cambiarEstadoReserva(nuevoEstado);
         // TODO review the generated test code and remove the default call to fail.
-        
+
     }
 
     /**
@@ -241,13 +228,12 @@ public class ReservaTest {
     @Test
     public void testEliminar() {
         System.out.println("eliminar");
-        
-        if (instance != null){
-             instance.eliminar();
+
+        if (instance != null) {
+            instance.eliminar();
         }
-           
+
         // TODO review the generated test code and remove the default call to fail.
-        
     }
-    
+
 }

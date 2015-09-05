@@ -16,43 +16,43 @@ import java.util.Set;
 
 public class Cliente extends Usuario {
 
-	Map<Integer, Reserva> reservas;
+    Map<Integer, Reserva> reservas;
 
-	public Cliente(String nickname, String nombre, String apellido, String email, String imagen, Date fechaN) {
-		super(nickname, nombre, apellido, email, imagen, fechaN);
-		this.reservas = new HashMap();
-	}
+    public Cliente(String nickname, String nombre, String apellido, String email, String imagen, Date fechaN) {
+        super(nickname, nombre, apellido, email, imagen, fechaN);
+        this.reservas = new HashMap();
+    }
 
-	public Cliente(DTCliente dtC) {
-		super(dtC.getNickname(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
-		this.reservas = new HashMap();
-	}
+    public Cliente(DTCliente dtC) {
+        super(dtC.getNickname(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
+        this.reservas = new HashMap();
+    }
 
-	public DTCliente crearDT() {
-		Set<DTMinReserva> nuevoSetReservas = new HashSet<>();
-		for (Reserva r : reservas.values()) {
-			nuevoSetReservas.add(r.crearDTMinReserva());
-		}
-		DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
-				this.imagen, this.fechaNacimiento, nuevoSetReservas);
-		return dt;
-	}
+    public DTCliente crearDT() {
+        Set<DTMinReserva> nuevoSetReservas = new HashSet<>();
+        for (Reserva r : reservas.values()) {
+            nuevoSetReservas.add(r.crearDTMinReserva());
+        }
+        DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
+                this.imagen, this.fechaNacimiento, nuevoSetReservas);
+        return dt;
+    }
 
-	public DTMinCliente crearDTMin() {
-		return new DTMinCliente(this.nickname, this.email);
-	}
+    public DTMinCliente crearDTMin() {
+        return new DTMinCliente(this.nickname, this.email);
+    }
 
-	public void agregarReserva(Reserva reserva) {
-		reservas.put(reserva.getIdReserva(), reserva);
-	}
-	
-	public void quitarReserva(int idReserva){
-		reservas.remove(idReserva);
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		Cliente c = (Cliente) o;
-		return this.reservas.equals(c.reservas);
-	}
+    public void agregarReserva(Reserva reserva) {
+        reservas.put(reserva.getIdReserva(), reserva);
+    }
+
+    public void quitarReserva(int idReserva) {
+        reservas.remove(idReserva);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Cliente c = (Cliente) o;
+        return this.reservas.equals(c.reservas);
+    }
 }

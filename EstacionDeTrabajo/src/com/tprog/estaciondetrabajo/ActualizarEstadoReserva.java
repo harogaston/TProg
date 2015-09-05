@@ -138,6 +138,7 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 			estadoReservaSeleccionada = ctrlReservas.getEstadoReserva();
 			jLabelEstadoReservaSeleccionada.setText("La reserva se encuentra en estado: " + estadoReservaSeleccionada.toString());
 			jLabelEstadoReservaSeleccionada.setVisible(true);
+			listaEstados.setSelectedItem(null);
 
 			switch (estadoReservaSeleccionada) {
 				case Registrada:
@@ -170,6 +171,8 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 		listaReservas.clear();
 		reservas = null;
 		listaReservasInterfaz.setSelectedItem(null);
+		jLabelEstadoReservaSeleccionada.setVisible(false);
+		jLabelMensajeNoModificarEstado.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void botonCambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCambiarEstadoActionPerformed

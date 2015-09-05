@@ -34,37 +34,37 @@ public class CtrlUniversal implements ICtrlUniversal {
             String directorioImagenes = dir.getCanonicalPath();
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
             DTCliente dtC = new DTCliente("oWood", "Oliver", "Wood", "quidditch28@gmail.com",
-                    directorioImagenes + "/imagenes/clientes/oWood.jpg", new Date(1988, 12, 28), new HashSet());
+                    directorioImagenes + "/imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet());
             mu.altaCliente(dtC);
             dtC = new DTCliente("eWatson", "Emma", "Watson", "e.watson@gmail.com",
-                    directorioImagenes + "/imagenes/clientes/eWatson.jpg", new Date(1990, 4, 15), new HashSet());
+                    directorioImagenes + "/imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet());
             mu.altaCliente(dtC);
             dtC = new DTCliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com",
-                    null, new Date(1978, 12, 3), new HashSet());
+                    null, new Date(1978, 12 - 1, 3), new HashSet());
             mu.altaCliente(dtC);
             dtC = new DTCliente("JeffW", "Jeff", "Williams", "jeff.williams@gmail.com",
-                    null, new Date(1984, 11, 27), new HashSet());
+                    null, new Date(1984, 11 - 1, 27), new HashSet());
             mu.altaCliente(dtC);
             //AltaProveedores
             DTProveedor dtP = new DTProveedor("tCook", "Tim", "Cook", "air.f@gmail.com",
                     directorioImagenes + "/imagenes/proveedores/tCook.jpg",
-                    new Date(1960, 11, 1), "AirFrance", "http://www.airfrance.com/");
+                    new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
             mu.altaProveedor(dtP);
             dtP = new DTProveedor("moody", "Alastor", "Moody", "eu.car@eucar.com",
                     directorioImagenes + "/imagenes/proveedores/moody.jpg",
-                    new Date(1965, 9, 2), "EuropCar", "http://www.europcar.com.uy/");
+                    new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
             mu.altaProveedor(dtP);
             dtP = new DTProveedor("remus", "Remus", "Lupin", "iberia@gmail.com",
                     directorioImagenes + "/imagenes/proveedores/remus.jpg",
-                    new Date(1970, 5, 4), "Iberia", "http://www.iberia.com/uy/");
+                    new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
             mu.altaProveedor(dtP);
             dtP = new DTProveedor("adippet", "Armando", "Dippet", "tam@outlook.com",
                     directorioImagenes + "/imagenes/proveedores/adippet.jpg",
-                    new Date(1967, 2, 12), "Tam", "http://www.tam.com.br/");
+                    new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
             mu.altaProveedor(dtP);
             dtP = new DTProveedor("mHooch", "Madam", "Hooch", "segHogar@gmail.com",
                     directorioImagenes + "/imagenes/proveedores/mHooch.jpg",
-                    new Date(1963, 8, 5), "Segundo Hogar", "http://www.segundohogar.com/");
+                    new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
             mu.altaProveedor(dtP);
             //Alta Categorias
             ManejadorProductos mp = ManejadorProductos.getInstance();
@@ -153,7 +153,7 @@ public class CtrlUniversal implements ICtrlUniversal {
             p.agregarCiudad(new Ciudad("Cantón"));
             mp.agregarPais(p);
 
-        //Alta Servicios
+            //Alta Servicios
             //S1
             Set<String> imgs = new HashSet();
             imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
@@ -309,7 +309,7 @@ public class CtrlUniversal implements ICtrlUniversal {
             cats.add("Auto");
             cats.add("Chevrolet");
             mp.altaServicio(dtS, "mHooch", cats);
-        //Alta de Promociones
+            //Alta de Promociones
             //P1 4 5
             Set<String> servs = new HashSet();
             servs.add("Euro-Car-1");
@@ -356,59 +356,59 @@ public class CtrlUniversal implements ICtrlUniversal {
             try {
                 //R1 S1
                 Set<DTLineaReserva> lineas = new HashSet();
-                lineas.add(new DTLineaReserva(1, new Date(2015, 1, 1),
-                        new Date(2015, 1, 1), "Euro-Vuelo-S", null, 1100));
-                DTReserva dtR = new DTReserva(0, new Date(2015, 1, 1),
+                lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
+                        new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, 1100));
+                DTReserva dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
                         EstadoReserva.Facturada, 1100, lineas);
                 mr.agregarReserva(mu.getCliente("oWood"), dtR, "remus");
                 //R2    S1 S2
                 lineas = new HashSet();
-                lineas.add(new DTLineaReserva(2, new Date(2015, 1, 1),
-                        new Date(2015, 1, 1), "Euro-Vuelo-S", null, 1100));
-                lineas.add(new DTLineaReserva(1, new Date(2015, 1, 1),
-                        new Date(2015, 1, 1), "Euro-Vuelo-LC", null, 850));
-                dtR = new DTReserva(0, new Date(2015, 1, 1),
+                lineas.add(new DTLineaReserva(2, new Date(2015, 1 - 1, 1),
+                        new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, 1100));
+                lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
+                        new Date(2015, 1 - 1, 1), "Euro-Vuelo-LC", null, 850));
+                dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
                         EstadoReserva.Cancelada, 3050, lineas);
                 mr.agregarReserva(mu.getCliente("eWatson"), dtR, "remus");
 
                 //R3    P7
                 lineas = new HashSet();
-                lineas.add(new DTLineaReserva(1, new Date(2015, 3, 5),
-                        new Date(2015, 4, 2), null, "Sudamerica-Casas", 135));
-                dtR = new DTReserva(0, new Date(2015, 3, 5),
+                lineas.add(new DTLineaReserva(1, new Date(2015, 3 - 1, 5),
+                        new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", 135));
+                dtR = new DTReserva(0, new Date(2015, 3 - 1, 5),
                         EstadoReserva.Pagada, 135, lineas);
                 mr.agregarReserva(mu.getCliente("BruceS"), dtR, "mHooch");
                 //R4    S5 S6
                 lineas = new HashSet();
-                lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8),
-                        new Date(2015, 5, 12), "Euro-Car-2", null, 300));
-                lineas.add(new DTLineaReserva(1, new Date(2015, 5, 8),
-                        new Date(2015, 5, 12), "Euro-Car-3", null, 300));
-                dtR = new DTReserva(0, new Date(2015, 5, 8),
+                lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
+                        new Date(2015, 5 - 1, 12), "Euro-Car-2", null, 300));
+                lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
+                        new Date(2015, 5 - 1, 12), "Euro-Car-3", null, 300));
+                dtR = new DTReserva(0, new Date(2015, 5 - 1, 8),
                         EstadoReserva.Pagada, 600, lineas);
                 mr.agregarReserva(mu.getCliente("JeffW"), dtR, "moody");
                 //R5    S9
                 lineas = new HashSet();
-                lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7),
-                        new Date(2015, 8, 10), "Air-France-FC", null, 100));
-                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
+                        new Date(2015, 8 - 1, 10), "Air-France-FC", null, 100));
+                dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
                         EstadoReserva.Registrada, 200, lineas);
                 mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
 
                 //R6    P8 S7
                 lineas = new HashSet();
-                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 7),
-                        new Date(2015, 8, 14), null, "Miami-Viaje", 462));
-                lineas.add(new DTLineaReserva(1, new Date(2015, 8, 14),
-                        new Date(2015, 8, 21), "Casa para p4 BsAs", null, 80));
-                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),
+                        new Date(2015, 8 - 1, 14), null, "Miami-Viaje", 462));
+                lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 14),
+                        new Date(2015, 8 - 1, 21), "Casa para p4 BsAs", null, 80));
+                dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
                         EstadoReserva.Registrada, 542, lineas);
                 mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
                 //R7    S2
                 lineas = new HashSet();
-                lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7),
-                        new Date(2015, 8, 7), "Euro-Vuelo-LC", null, 850));
-                dtR = new DTReserva(0, new Date(2015, 8, 7),
+                lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
+                        new Date(2015, 8 - 1, 7), "Euro-Vuelo-LC", null, 850));
+                dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
                         EstadoReserva.Registrada, 1700, lineas);
                 mr.agregarReserva(mu.getCliente("BruceS"), dtR, "remus");
             } catch (Exception e) {

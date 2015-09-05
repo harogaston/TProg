@@ -48,8 +48,8 @@ public class DTReserva {
     public String toString() {
         String output = "ID de reserva: " + Integer.toString(idReserva)
                 + "\n" + "Fecha de creacion: "
-                + Integer.toString(fCreacion.getDay()) + "-"
-                + Integer.toString(fCreacion.getMonth()) + "-"
+                + Integer.toString(fCreacion.getDate()) + "-"
+                + Integer.toString(fCreacion.getMonth() + 1) + "-"
                 + Integer.toString(fCreacion.getYear()) + "\n"
                 + "\n" + "Estado: " + estado.toString()
                 + "\n" + "Precio total: " + Float.toString(precioTotal)

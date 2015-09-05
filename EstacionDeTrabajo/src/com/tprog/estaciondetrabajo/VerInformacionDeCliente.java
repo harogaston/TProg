@@ -1,8 +1,8 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTCliente;
@@ -22,7 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form VerInformacionDeCliente
      */
@@ -34,7 +34,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
         }
     }
-    
+
     void cargarDatos() {
         //listaClientes
         Set<DTMinCliente> setClientes;
@@ -52,9 +52,9 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Error", JOptionPane.WARNING_MESSAGE);
             this.dispose();
         }
-        
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -136,12 +136,12 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         //pido de nuevo los datos en caso de que hayan cambiado
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-    
+
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         listaClientes.clear();
         reservas = null;
@@ -150,7 +150,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         detalleUsuario.setText("");
         detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
-    
+
     private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed
         //seleccionarCliente
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
@@ -168,11 +168,10 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
                     Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon imageIcon = new ImageIcon(dimg);
                     imagenUsuarioHolder.setIcon(imageIcon);
-                }
-                else{
+                } else {
                     imagenUsuarioHolder.setIcon(null);
                 }
-                
+
                 //cargo la lista de reservas del usuario
                 reservas = dt.getReservas();
             } catch (Exception ex) {
@@ -180,22 +179,22 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
                 imagenUsuarioHolder.setIcon(null);
                 System.out.println("La imagen no pudo ser cargada");
             }
-            
+
         }
     }//GEN-LAST:event_listaClientesInterfazInterfazActionPerformed
-    
+
     private void listaClientesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazComponentAdded
-        
+
     }//GEN-LAST:event_listaClientesInterfazInterfazComponentAdded
-    
+
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-    
+
     private void listaClientesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaClientesInterfazItemStateChanged
-        
+
     }//GEN-LAST:event_listaClientesInterfazItemStateChanged
-    
+
     private void botonReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservasActionPerformed
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
         if (cliente != null) {
@@ -205,7 +204,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             getParent().add(r);
         }
     }//GEN-LAST:event_botonReservasActionPerformed
-    
+
     Set<DTMinReserva> reservas;
     ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables

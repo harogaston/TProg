@@ -349,7 +349,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
     private void buttonAgregarPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarPromocionActionPerformed
         // TODO add your handling code here:
-        RealizarReserva4 rr4 = new RealizarReserva4(this);
+        RealizarReserva4 rr4 = new RealizarReserva4(this, ctrlUsuarios, ctrlReservas, proveedorSeleccionado);
         getContentPane().add(rr4, BorderLayout.CENTER);
         rr4.setBounds(10, 10, 100, 100);
         this.setVisible(false);

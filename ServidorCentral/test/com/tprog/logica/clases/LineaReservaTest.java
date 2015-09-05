@@ -207,13 +207,13 @@ public class LineaReservaTest {
     public void testCrearDTLineaReserva() {
         System.out.println("crearDTLineaReserva");
         
-        DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser","",50);
+        DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser",null,50);
         DTLineaReserva result = instance.crearDTLineaReserva();
         instance.setServicio(null);
         Promocion promo = new Promocion("promo",50,null);
         instance.setPromocion(promo);
         
-        DTLineaReserva exp = new DTLineaReserva(4,fecha,fecha,"","promo",50);
+        DTLineaReserva exp = new DTLineaReserva(4,fecha,fecha,null,"promo",50);
         DTLineaReserva res = instance.crearDTLineaReserva();
         
         

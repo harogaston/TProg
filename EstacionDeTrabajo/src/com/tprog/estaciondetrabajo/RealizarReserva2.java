@@ -190,7 +190,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonAgregarPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarPromocionActionPerformed
-		RealizarReserva4 rr4 = new RealizarReserva4(this);
+		RealizarReserva4 rr4 = new RealizarReserva4(this, ctrlUsuarios, ctrlReservas, proveedorSeleccionado);
 		this.setVisible(false);
 		getParent().add(rr4);
 		rr4.setLocation(this.getLocation());

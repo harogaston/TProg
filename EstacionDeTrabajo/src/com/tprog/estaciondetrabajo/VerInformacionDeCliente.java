@@ -136,7 +136,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 		imagenUsuarioHolder.setIcon(null);
 		listaClientesInterfaz.setSelectedItem(null);
 		detalleUsuario.setText("");
-		detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed

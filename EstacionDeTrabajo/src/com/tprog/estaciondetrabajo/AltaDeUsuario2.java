@@ -50,7 +50,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	}
 
 	private void exit() {
+		// dispose a AltaDeUsuario1
 		anterior.dispose();
+		// dispose de esta ventana
 		this.dispose();
 	}
 

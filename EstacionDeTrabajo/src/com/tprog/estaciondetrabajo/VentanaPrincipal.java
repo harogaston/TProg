@@ -1,21 +1,22 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUniversal;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     public VentanaPrincipal() {
         //inicializacion autogenerada
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,6 +28,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        desktop = new javax.swing.JPanel();
         menu = new javax.swing.JMenuBar();
         menuRegistros = new javax.swing.JMenu();
         menuItemAltaUsuario = new javax.swing.JMenuItem();
@@ -59,6 +61,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 formComponentResized(evt);
             }
         });
+
+        desktop.setBorder(null);
+        getContentPane().add(desktop, java.awt.BorderLayout.CENTER);
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));
         menu.setMinimumSize(new java.awt.Dimension(240, 20));
@@ -192,109 +197,139 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    private void liberarVentanaPrincipal() {
+        desktop.removeAll();
+        desktop.updateUI();
+    }
+
     private void menuItemAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaUsuarioActionPerformed
+        liberarVentanaPrincipal();
         AltaDeUsuario1 altaDeUsuario = new AltaDeUsuario1(fabrica.getICtrlUsuarios());
         altaDeUsuario.setBounds(10, 10, 100, 100);
         altaDeUsuario.setVisible(true);
-        this.add(altaDeUsuario);
+        desktop.add(altaDeUsuario);
+//        this.add(altaDeUsuario);
     }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
-    
+
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
+        liberarVentanaPrincipal();
         VerInformacionDeCliente verInfoCliente = new VerInformacionDeCliente(fabrica.getICtrlUsuarios());
         verInfoCliente.setBounds(10, 10, 100, 100);
         verInfoCliente.setVisible(true);
-        this.add(verInfoCliente);          
+//        this.add(verInfoCliente);
+        desktop.add(verInfoCliente);
     }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
-    
+
     private void menuItemVerInfoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoProveedorActionPerformed
+        liberarVentanaPrincipal();
         VerInformacionDeProveedor verInfoProveedor = new VerInformacionDeProveedor(fabrica.getICtrlUsuarios());
         verInfoProveedor.setBounds(10, 10, 100, 100);
         verInfoProveedor.setVisible(true);
-        this.add(verInfoProveedor);        
+        desktop.add(verInfoProveedor);
+//        this.add(verInfoProveedor);
     }//GEN-LAST:event_menuItemVerInfoProveedorActionPerformed
-    
+
     private void menuItemVerInfoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoServicioActionPerformed
+        liberarVentanaPrincipal();
         VerInformacionDeServicio verInfoServicio = new VerInformacionDeServicio(fabrica.getICtrlProductos());
         verInfoServicio.setBounds(10, 10, 100, 100);
         verInfoServicio.setVisible(true);
-        this.add(verInfoServicio); 
+        desktop.add(verInfoServicio);
+//        this.add(verInfoServicio);
     }//GEN-LAST:event_menuItemVerInfoServicioActionPerformed
-    
+
     private void menuItemVerInfoPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoPromocionActionPerformed
+        liberarVentanaPrincipal();
         VerInformacionDePromocion verInfoPromocion = new VerInformacionDePromocion(fabrica.getICtrlProductos());
         verInfoPromocion.setBounds(10, 10, 100, 100);
         verInfoPromocion.setVisible(true);
-        this.add(verInfoPromocion);  
+        desktop.add(verInfoPromocion);
+//        this.add(verInfoPromocion);
     }//GEN-LAST:event_menuItemVerInfoPromocionActionPerformed
-    
+
     private void menuItemVerInfoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoReservaActionPerformed
+        liberarVentanaPrincipal();
         VerInformacionDeReserva verInfoReserva = new VerInformacionDeReserva(fabrica.getICtrlReservas());
         verInfoReserva.setBounds(10, 10, 100, 100);
         verInfoReserva.setVisible(true);
-        this.add(verInfoReserva);          
+        desktop.add(verInfoReserva);
+//        this.add(verInfoReserva);
     }//GEN-LAST:event_menuItemVerInfoReservaActionPerformed
-    
+
     private void menuItemCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelarReservaActionPerformed
+        liberarVentanaPrincipal();
         CancelarReserva cancelarReserva = new CancelarReserva(fabrica.getICtrlReservas());
         cancelarReserva.setBounds(10, 10, 100, 100);
         cancelarReserva.setVisible(true);
-        this.add(cancelarReserva); 
+        desktop.add(cancelarReserva);
+//        this.add(cancelarReserva);
     }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
-    
+
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
 //		int width = this.getWidth();
 //		int height = (int) (width / 1.33);
 //		this.setSize(width, height);
     }//GEN-LAST:event_formComponentResized
-    
+
     private void menuItemAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaCategoriaActionPerformed
+        liberarVentanaPrincipal();
         AltaCategoria altaCategoria = new AltaCategoria(fabrica.getICtrlProductos());
         altaCategoria.setBounds(10, 10, 100, 100);
         altaCategoria.setVisible(true);
-        this.add(altaCategoria);         
+        desktop.add(altaCategoria);
+//        this.add(altaCategoria);
     }//GEN-LAST:event_menuItemAltaCategoriaActionPerformed
-    
+
     private void menuItemRealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRealizarReservaActionPerformed
+        liberarVentanaPrincipal();
         RealizarReserva1 realizarReserva = new RealizarReserva1(fabrica.getICtrlUsuarios(), fabrica.getICtrlReservas());
         realizarReserva.setBounds(10, 10, 100, 100);
         realizarReserva.setVisible(true);
-        this.add(realizarReserva);
+        desktop.add(realizarReserva);
+//        this.add(realizarReserva);
     }//GEN-LAST:event_menuItemRealizarReservaActionPerformed
-    
+
     private void menuItemActualizarEstadoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoReservaActionPerformed
+        liberarVentanaPrincipal();
         ActualizarEstadoReserva actualizarEstadoReserva = new ActualizarEstadoReserva(fabrica.getICtrlReservas());
         actualizarEstadoReserva.setBounds(10, 10, 100, 100);
         actualizarEstadoReserva.setVisible(true);
-        this.add(actualizarEstadoReserva);        
+        desktop.add(actualizarEstadoReserva);
+//        this.add(actualizarEstadoReserva);
     }//GEN-LAST:event_menuItemActualizarEstadoReservaActionPerformed
-    
+
     private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
+        liberarVentanaPrincipal();
         ActualizarServicio actualizarServicio = new ActualizarServicio(fabrica.getICtrlProductos());
         actualizarServicio.setBounds(10, 10, 100, 100);
         actualizarServicio.setVisible(true);
-        this.add(actualizarServicio);
+        desktop.add(actualizarServicio);
+//        this.add(actualizarServicio);
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
-    
+
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
+        liberarVentanaPrincipal();
         Fabrica f = Fabrica.getInstance();
         ICtrlUniversal ctrl = f.getICtrlUniversal();
         ctrl.cargarDatos();
-        JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(desktop, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
         cargarDatos.setEnabled(false);
     }//GEN-LAST:event_cargarDatosActionPerformed
 
-    private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
-        
-    }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
-    
     private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
+        liberarVentanaPrincipal();
         AltaDeServicio2 altaDeServicio = new AltaDeServicio2(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
         altaDeServicio.setBounds(10, 10, 100, 100);
         altaDeServicio.setVisible(true);
-        this.add(altaDeServicio);
+        desktop.add(altaDeServicio);
+//        this.add(altaDeServicio);
     }
-    
+
+    private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
+
+    }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -307,10 +342,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
     }
-    
+
+    JInternalFrame frameActivo = null;
     Fabrica fabrica = Fabrica.getInstance();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cargarDatos;
+    private javax.swing.JPanel desktop;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menu;

@@ -53,6 +53,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jLabel3.setText("email");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
+
         buttonSiguiente.setText("Siguiente >");
         buttonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,6 +61,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 120, -1));
+
 
         buttonSalir.setText("Salir");
         buttonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -70,6 +72,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
         getContentPane().add(jTextFieldNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 110, 440, -1));
         getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 170, 440, -1));
+
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,9 +121,10 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			}
 			JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
-    }//GEN-LAST:event_buttonSiguienteActionPerformed
+    }                                               
 
 	ICtrlUsuarios ctrlUsuarios;
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSiguiente;

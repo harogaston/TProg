@@ -1,9 +1,8 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
-
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTLineaReserva;
@@ -27,9 +26,10 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author ignacio.prandi
  */
 public class RealizarReserva2 extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form RealizarReserva2
+     *
      * @param padre
      * @param ctrlUsuarios
      * @param ctrlReservas
@@ -46,7 +46,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         }
         cargarDatos();
     }
-    
+
     void cargarDatos() {
         //limpio estructuras
         hashLineasReserva.clear();
@@ -55,7 +55,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
         String precio = Float.toString(dtR.getPrecioTotal());
         textPanePrecio.setText(precio);
-        
+
         Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
         Iterator it = lineasReserva.iterator();
         int i = 1;
@@ -65,23 +65,23 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         }
         Iterator it2 = hashLineasReserva.entrySet().iterator();
         while (it2.hasNext()) {
-            Map.Entry pair = (Map.Entry)it2.next();
+            Map.Entry pair = (Map.Entry) it2.next();
             listaLineasReserva.add(Integer.toString((Integer) pair.getKey()));
         }
         DTReserva reservaTemporal = ctrlReservas.mostrarReservaTemporal();
-        
+
         //imprimir mejor
         textAreaFecha.setText(reservaTemporal.getFCreacion().toString());
-        
+
         //si ya elegí algún producto, pongo proveedorSeleccionado en true
         //para limitar los servicios y productos que se ofrecen después
-        if (!ctrlReservas.mostrarReservaTemporal().getLineasReserva().isEmpty()){
+        if (!ctrlReservas.mostrarReservaTemporal().getLineasReserva().isEmpty()) {
             proveedorSeleccionado = true;
-        }
-        else{
+        } else {
             proveedorSeleccionado = false;
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -302,7 +302,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void buttonAgregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarReservaActionPerformed
         // TODO add your handling code here:
         RealizarReserva3 rr3 = new RealizarReserva3(this, ctrlUsuarios, ctrlReservas, proveedorSeleccionado);
@@ -310,28 +310,28 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         rr3.setBounds(10, 10, 100, 100);
         this.setVisible(false);
         rr3.setVisible(true);
-        getParent().add(rr3); 
+        getParent().add(rr3);
     }//GEN-LAST:event_buttonAgregarReservaActionPerformed
-    
+
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
-    
+
     @Override
     public void dispose() {
         super.dispose();
         padre.dispose();
     }
-    
+
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
-    
+
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-        
+
         try {
             // TODO add your handling code here:
             //falta acoomodar y excepciones
@@ -344,9 +344,9 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
             Logger.getLogger(RealizarReserva2.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Hubo problemas en la creación de la reserva.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_buttonConfirmarActionPerformed
-    
+
     private void buttonAgregarPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarPromocionActionPerformed
         // TODO add your handling code here:
         RealizarReserva4 rr4 = new RealizarReserva4(this);
@@ -354,30 +354,30 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         rr4.setBounds(10, 10, 100, 100);
         this.setVisible(false);
         rr4.setVisible(true);
-        getParent().add(rr4); 
+        getParent().add(rr4);
     }//GEN-LAST:event_buttonAgregarPromocionActionPerformed
-    
+
     private void listaServiciosInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazActionPerformed
         // TODO add your handling code here:
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
-        if (servicio != null){
+        if (servicio != null) {
             int indice = Integer.parseInt(servicio);
             DTLineaReserva dt = (DTLineaReserva) hashLineasReserva.get(indice);
             textAreaServicios.setText(dt.toString());
-            
+
         }
     }//GEN-LAST:event_listaServiciosInterfazActionPerformed
-    
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
         cargarDatos();
         listaServiciosInterfaz.updateUI();
     }//GEN-LAST:event_formComponentShown
-    
+
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         // TODO add your handling code here:
     }//GEN-LAST:event_formComponentHidden
-    
+
     private final RealizarReserva1 padre;
     private final ICtrlUsuarios ctrlUsuarios;
     private final ICtrlReservas ctrlReservas;
@@ -405,5 +405,5 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea textAreaServicios;
     private javax.swing.JTextPane textPanePrecio;
     // End of variables declaration//GEN-END:variables
-    
+
 }

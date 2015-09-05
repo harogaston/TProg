@@ -29,8 +29,8 @@ public class DTMinReserva {
     public String toString() {
         return "ID de reserva: " + Integer.toString(idReserva)
                 + "\n" + "Fecha de inicio: "
-                + Integer.toString(fechaCreacion.getDay()) + "-"
-                + Integer.toString(fechaCreacion.getMonth()) + "-"
+                + Integer.toString(fechaCreacion.getDate()) + "-"
+                + Integer.toString(fechaCreacion.getMonth() + 1) + "-"
                 + Integer.toString(fechaCreacion.getYear()) + "\n";
     }
 

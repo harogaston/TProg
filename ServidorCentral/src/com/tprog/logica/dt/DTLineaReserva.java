@@ -54,11 +54,11 @@ public class DTLineaReserva {
         if (promocion == null) {
             return "Cantidad: " + Integer.toString(cantidad)
                     + "\n" + "Fecha de inicio: "
-                    + Integer.toString(fechaInicio.getDay()) + "-"
+                    + Integer.toString(fechaInicio.getDate()) + "-"
                     + Integer.toString(fechaInicio.getMonth()) + "-"
                     + Integer.toString(fechaInicio.getYear())
                     + "\n" + "Fecha de fin: "
-                    + Integer.toString(fechaFin.getDay()) + "-"
+                    + Integer.toString(fechaFin.getDate()) + "-"
                     + Integer.toString(fechaFin.getMonth()) + "-"
                     + Integer.toString(fechaFin.getYear())
                     + "\n" + "Servicio: " + servicio
@@ -66,12 +66,12 @@ public class DTLineaReserva {
         } else {
             return "Cantidad: " + Integer.toString(cantidad)
                     + "\n" + "Fecha de inicio: "
-                    + Integer.toString(fechaInicio.getDay()) + "-"
+                    + Integer.toString(fechaInicio.getDate()) + "-"
                     + Integer.toString(fechaInicio.getMonth()) + "-"
                     + Integer.toString(fechaInicio.getYear())
                     + "\n" + "Fecha de fin: "
-                    + Integer.toString(fechaFin.getDay()) + "-"
-                    + Integer.toString(fechaFin.getMonth()) + "-"
+                    + Integer.toString(fechaFin.getDate()) + "-"
+                    + Integer.toString(fechaFin.getMonth() + 1) + "-"
                     + Integer.toString(fechaFin.getYear())
                     + "\n" + "Promocion: " + promocion
                     + "\n" + "Precio: " + Float.toString(precio) + "\n";

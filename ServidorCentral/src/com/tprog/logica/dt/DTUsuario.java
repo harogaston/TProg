@@ -57,8 +57,8 @@ public class DTUsuario {
                 + "\n" + "Apellido: " + apellido
                 + "\n" + "Email: " + email
                 + "\n" + "Fecha de nacimiento: "
-                + Integer.toString(fechaNacimiento.getDay()) + "-"
-                + Integer.toString(fechaNacimiento.getMonth()) + "-"
+                + Integer.toString(fechaNacimiento.getDate()) + "-"
+                + Integer.toString(fechaNacimiento.getMonth() + 1) + "-"
                 + Integer.toString(fechaNacimiento.getYear()) + "\n";
 
     }

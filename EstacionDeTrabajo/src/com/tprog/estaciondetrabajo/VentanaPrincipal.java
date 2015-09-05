@@ -61,8 +61,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 formComponentResized(evt);
             }
         });
-
-        desktop.setBorder(null);
         getContentPane().add(desktop, java.awt.BorderLayout.CENTER);
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));

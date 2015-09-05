@@ -117,8 +117,8 @@ public class ManejadorUsuariosTest {
     public void testListarServiciosProveedor() {
         System.out.println("listarServiciosProveedor");
         Set<DTMinServicio> expResult = new HashSet();
-        DTMinServicio dtmin = new DTMinServicio("nick","idServicio");
-        expResult.add(dtmin);
+        //DTMinServicio dtmin = new DTMinServicio("nick","idServicio");
+        //expResult.add(dtmin);
         Set<DTMinServicio> result = instance.listarServiciosProveedor("nick");
         assertEquals(expResult.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.
@@ -187,7 +187,7 @@ public class ManejadorUsuariosTest {
     public void testVerificarNickname() {
         System.out.println("verificarNickname");
         boolean expResult = false;
-        boolean result = instance.verificarNickname("nick");
+        boolean result = instance.verificarNickname("nicko");
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         
@@ -200,8 +200,12 @@ public class ManejadorUsuariosTest {
     public void testVerificarEmail() {
         System.out.println("verificarEmail");
         boolean expResult = false;
-        boolean result = instance.verificarEmail("email");
+        boolean result = instance.verificarEmail("emailo");
+        boolean result2 = instance.verificarEmail("email2");
+        boolean result3 = instance.verificarEmail("email");
         assertEquals(expResult, result);
+        assertEquals(true,result2);
+        assertEquals(true,result3);
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -214,7 +218,7 @@ public class ManejadorUsuariosTest {
         System.out.println("altaCliente");
         
         // TODO review the generated test code and remove the default call to fail.
-        assertTrue(instance.getClientes().containsKey(dtC));
+        assertTrue(instance.getClientes().containsKey("nickname"));
     }
 
     /**
@@ -226,7 +230,7 @@ public class ManejadorUsuariosTest {
         
         //ya di de alta dtP
         
-        assertTrue(instance.getProveedores().containsKey(dtP));
+        assertTrue(instance.getProveedores().containsKey("nick"));
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -239,7 +243,7 @@ public class ManejadorUsuariosTest {
         System.out.println("getCliente");
         Cliente expResult = cliente;
         Cliente result = instance.getCliente("nickname");
-        assertEquals(expResult, result);
+        assertEquals(expResult.getNickname(), result.getNickname());
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -253,7 +257,7 @@ public class ManejadorUsuariosTest {
         
         Proveedor expResult = proveedor;
         Proveedor result = instance.getProveedor("nick");
-        assertEquals(expResult, result);
+        assertEquals(expResult.getNickname(), result.getNickname());
         // TODO review the generated test code and remove the default call to fail.
         
     }

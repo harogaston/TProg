@@ -5,27 +5,33 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTPromocion;
+import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlReservas;
+import com.tprog.logica.interfaces.ICtrlUsuarios;
+import java.awt.event.MouseListener;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-public class RealizarReserva4 extends javax.swing.JInternalFrame {
+public class RealizarReservaOld extends javax.swing.JInternalFrame {
 
-	public RealizarReserva4(RealizarReserva2 padre, ICtrlReservas ctrlReservas, boolean proveedorSeleccionado) {
-		
+	public RealizarReservaOld(RealizarReserva2 padre, ICtrlUsuarios ctrlUsuarios, ICtrlReservas ctrlReservas,
+			boolean proveedorSeleccionado) {
 		//asignación de atributos
 		this.padre = padre;
 		this.ctrlReservas = ctrlReservas;
 		f = Fabrica.getInstance();
 		this.ctrlProductos = f.getICtrlProductos();
 		initComponents();
-
+		
 		//obtengo los servicios a mostrar
 		//si nunca elegí alguno, se muestran todos
 		//si no, se muestran sólo los de ese proveedor
@@ -35,15 +41,15 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 			if (proveedorSeleccionado) {
 				//muestro solo los servicios del proveedor seleccionado
 				setPromocionesP = this.ctrlReservas.listarPromocionesProveedor();
-				//construyo un vector con la informacion a mostrar, porque
-				//el comboBox solo funciona con Vector o List
 				if (!setPromocionesP.isEmpty()) {
+                    //construyo un vector con la informacion a mostrar, porque
+					//el comboBox solo funciona con Vector o List
 					for (DTMinPromocion dt : setPromocionesP) {
 						listaPromociones.add(dt.getIdPromocion());
 					}
 				} else {
 					JOptionPane.showMessageDialog(this, "No hay promociones en el sistema para el proveedor actual", "Error", JOptionPane.ERROR_MESSAGE);
-					this.dispose();
+				this.dispose();
 				}
 			} else {
 				for (DTMinPromocion dt : setPromociones) {
@@ -52,15 +58,9 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 			}
 		} else {
 			JOptionPane.showMessageDialog(this, "No hay promociones en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
-			this.dispose();
+		this.dispose();
 		}
 		listaPromociones.sort(null);
-	}
-
-	@Override
-	public void dispose() {
-		padre.dispose();
-		super.dispose();
 	}
 
 	/**
@@ -75,25 +75,27 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         listaPromocionesInterfaz = new javax.swing.JComboBox(listaPromociones);
         panelUsuario = new javax.swing.JScrollPane();
         detallePromocion = new javax.swing.JTextArea();
+        botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        buttonAtras = new javax.swing.JButton();
+        buttonVolver = new javax.swing.JButton();
         buttonAgregar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textPaneCantidad = new javax.swing.JTextPane();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        comboBoxMeses1 = new javax.swing.JComboBox();
+        comboBoxDias1 = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        comboBoxDias1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
-        comboBoxDias2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
-        comboBoxAnios1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
-        comboBoxAnios2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
-        comboBoxMeses1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
-        comboBoxMeses2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
-        jTextFieldCantidad = new javax.swing.JTextField();
+        comboBoxDias2 = new javax.swing.JComboBox();
+        comboBoxMeses2 = new javax.swing.JComboBox();
+        textFieldAnio1 = new javax.swing.JTextField();
+        textFieldAnio2 = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -103,6 +105,16 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        listaPromocionesInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                listaPromocionesInterfazInterfazComponentAdded(evt);
+            }
+        });
+        listaPromocionesInterfaz.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                listaPromocionesInterfazItemStateChanged(evt);
+            }
+        });
         listaPromocionesInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaPromocionesInterfazInterfazActionPerformed(evt);
@@ -119,16 +131,24 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
         getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 240, 128));
 
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
+
         jLabel1.setText("<html>Seleccione alguna promoción del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
-        buttonAtras.setText("< Atras");
-        buttonAtras.addActionListener(new java.awt.event.ActionListener() {
+        buttonVolver.setText("Volver");
+        buttonVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAtrasActionPerformed(evt);
+                buttonVolverActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, -1, -1));
+        getContentPane().add(buttonVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, -1, -1));
 
         buttonAgregar.setText("Agregar");
         buttonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,25 +156,35 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
                 buttonAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 360, -1, -1));
+        getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         jLabel2.setText("Cantidad");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, -1, -1));
 
         jLabel3.setText("Fecha de Inicio");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, -1, -1));
 
         jLabel4.setText("Fecha de Fin");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 150, -1, -1));
+
+        jScrollPane1.setViewportView(textPaneCantidad);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 122, -1));
 
         jLabel5.setText("Día");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, -1, -1));
 
         jLabel6.setText("Mes");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 230, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, -1, -1));
 
         jLabel7.setText("Año");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 270, -1, -1));
+
+        comboBoxMeses1.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        getContentPane().add(comboBoxMeses1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 100, -1));
+
+        comboBoxDias1.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        getContentPane().add(comboBoxDias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 62, -1));
 
         jLabel8.setText("Día");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 190, -1, -1));
@@ -164,16 +194,25 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
         jLabel10.setText("Año");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
-        getContentPane().add(comboBoxDias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 60, -1));
-        getContentPane().add(comboBoxDias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 60, -1));
-        getContentPane().add(comboBoxAnios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
-        getContentPane().add(comboBoxAnios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
-        getContentPane().add(comboBoxMeses1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
-        getContentPane().add(comboBoxMeses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, -1, -1));
-        getContentPane().add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 70, -1));
+
+        comboBoxDias2.setModel(new javax.swing.DefaultComboBoxModel(dias));
+        getContentPane().add(comboBoxDias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 180, 50, -1));
+
+        comboBoxMeses2.setModel(new javax.swing.DefaultComboBoxModel(meses));
+        getContentPane().add(comboBoxMeses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 220, 100, -1));
+        getContentPane().add(textFieldAnio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 270, 80, -1));
+        getContentPane().add(textFieldAnio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 80, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listaPromocionesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazComponentAdded
+
+    }//GEN-LAST:event_listaPromocionesInterfazInterfazComponentAdded
+
+    private void listaPromocionesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazItemStateChanged
+		// TODO add your handling code here:
+    }//GEN-LAST:event_listaPromocionesInterfazItemStateChanged
 
     private void listaPromocionesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazActionPerformed
 		String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
@@ -189,18 +228,23 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 					dt = tmp;
 				}
 			}
-
+			
 			// Lo mando al Ctrl y muestro su DT
 			ctrlProductos.seleccionarPromocion(dt);
 			detallePromocion.setVisible(true);
-			detallePromocion.setText(ctrlProductos.infoPromocion().toString());
+			detallePromocion.setText(dt.toString());
 		}
     }//GEN-LAST:event_listaPromocionesInterfazInterfazActionPerformed
 
-    private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+		this.dispose();
+		padre.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
+    private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
 		this.setVisible(false);
 		this.padre.setVisible(true);
-    }//GEN-LAST:event_buttonAtrasActionPerformed
+    }//GEN-LAST:event_buttonVolverActionPerformed
 
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
 		String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
@@ -212,50 +256,53 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 			ctrlProductos.seleccionarPromocion(dtmP);
 
 			//validar cantidad
-			int cant = -1;
-			String cantString = jTextFieldCantidad.getText();
-			boolean okCant;
-			try {
+			boolean okCant = false;
+			int cant = 0;
+			String cantString = textPaneCantidad.getText();
+			okCant = ((!cantString.isEmpty()) && (cantString.matches("([0-9]|)+")));
+			if (okCant) {
 				cant = Integer.parseInt(cantString);
-				okCant = cant > 0;
-			} catch (NumberFormatException e) {
-				okCant = false;
 			}
-
-			//fechas
+			//validar fechas
 			int diaI = (Integer) comboBoxDias1.getSelectedItem();
 			int diaF = (Integer) comboBoxDias2.getSelectedItem();
 			int mesI = comboBoxMeses1.getSelectedIndex() + 1;
 			int mesF = comboBoxMeses2.getSelectedIndex() + 1;
-			int anioI = (Integer) comboBoxAnios1.getSelectedItem();
-			int anioF = (Integer) comboBoxAnios2.getSelectedItem();
-
-			Date fechaInicio = new Date(anioI, mesI, diaI);
-			Date fechaFinal = new Date(anioF, mesF, diaF);
-			Date fechaActual = new Date();
-
-			// Verifico las fechas
-			boolean fechasCoherentes = (fechaInicio.before(fechaFinal)) && (fechaInicio.after(fechaActual));
-
-			// Si todo esta ok
-			if (okCant && fechasCoherentes) {
-				// Envío la información al controlador
-				ctrlReservas.ingresarLineaReserva(cant, fechaInicio, fechaFinal);
-
-				JOptionPane.showMessageDialog(this, "La promoción fue agregada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+			String anioIString = textFieldAnio1.getText();
+			String anioFString = textFieldAnio2.getText();
+			int anioI = 0;
+			int anioF = 0;
+			int anio;
+			boolean okAnioI = (((!anioIString.isEmpty())) && (anioIString.matches("([0-9]|)+")));
+			if (okAnioI) {
+				anioI = Integer.parseInt(anioIString);
+			}
+			okAnioI = ((okAnioI) && (anioI >= 2015));
+			boolean okAnioF = (((!anioIString.isEmpty())) && (anioFString.matches("([0-9]|)+")));
+			if (okAnioF) {
+				anioF = Integer.parseInt(anioFString);
+			}
+			okAnioF = ((okAnioF) && (okAnioI) && (anioF >= anioI));
+			//creo fechas
+			if ((okCant) && (okAnioI) && (okAnioF)) {//todo ok
+				Date fI = new Date(anioI, mesI, diaI);
+				Date fF = new Date(anioF, mesF, diaF);
+				ctrlReservas.ingresarLineaReserva(cant, fI, fF);
+				DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
+				Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
 				this.setVisible(false);
 				this.padre.setVisible(true);
 			} else { //hay algun dato erroneo
 				String error = "";
 				if (!okCant) {
-					error = "Por favor ingrese una cantidad válida.";
-				} else if (!fechasCoherentes) {
-					error = "La fecha de inicio debe ser posterior a la fecha actual.\n La fecha de fin debe ser postarior a la fecha de inicio.";
+					error = "Por favor ingrese una cantidad de reservas coherente.";
+				} else if ((!okAnioI) || (!okAnioF)) {
+					error = "La fecha ingresada no es correcta";
 				}
 				JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(this, "Debe seleccionar un servicio.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Seleccione una Promoción por favor. ", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
 		}
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
@@ -264,15 +311,17 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 	Fabrica f;
 	Set<DTMinPromocion> promociones;
 	RealizarReserva2 padre;
+	private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
+		"Octubre", "Noviembre", "Diciembre"};
+	private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonAgregar;
-    private javax.swing.JButton buttonAtras;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios comboBoxAnios1;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios comboBoxAnios2;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxDias comboBoxDias1;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxDias comboBoxDias2;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses comboBoxMeses1;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses comboBoxMeses2;
+    private javax.swing.JButton buttonVolver;
+    private javax.swing.JComboBox comboBoxDias1;
+    private javax.swing.JComboBox comboBoxDias2;
+    private javax.swing.JComboBox comboBoxMeses1;
+    private javax.swing.JComboBox comboBoxMeses2;
     private javax.swing.JTextArea detallePromocion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -284,9 +333,12 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextFieldCantidad;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox listaPromocionesInterfaz;
     private Vector<String> listaPromociones = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;
+    private javax.swing.JTextField textFieldAnio1;
+    private javax.swing.JTextField textFieldAnio2;
+    private javax.swing.JTextPane textPaneCantidad;
     // End of variables declaration//GEN-END:variables
 }

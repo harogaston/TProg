@@ -69,7 +69,7 @@ public class ManejadorProductos {
             DTPromocion result = null;
             if (!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) {
                 if (!promociones.get(dtP.getNicknameP()).isEmpty()
-                        && !promociones.get(dtP.getNicknameP()).containsKey(dtP.getIdPromocion())) {
+                        && promociones.get(dtP.getNicknameP()).containsKey(dtP.getIdPromocion())) {
                     Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
                     result = p.crearDT();
                 }

@@ -65,16 +65,6 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        listaPromocionesInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                listaPromocionesInterfazInterfazComponentAdded(evt);
-            }
-        });
-        listaPromocionesInterfaz.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                listaPromocionesInterfazItemStateChanged(evt);
-            }
-        });
         listaPromocionesInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaPromocionesInterfazInterfazActionPerformed(evt);
@@ -134,19 +124,12 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
         if (promocion != null) {
             DTMinPromocion dt = buscarDTMinPromocion(promocion);
             ctrlProductos.seleccionarPromocion(dt);
+			//System.out.println(dt.getNicknameP());
             detallePromocion.setVisible(true);
             dtPromocionActual = ctrlProductos.infoPromocion();
             detallePromocion.setText(dt.toString());
         }
     }//GEN-LAST:event_listaPromocionesInterfazInterfazActionPerformed
-
-    private void listaPromocionesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazComponentAdded
-
-    }//GEN-LAST:event_listaPromocionesInterfazInterfazComponentAdded
-
-    private void listaPromocionesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaPromocionesInterfazItemStateChanged
 
     private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
         String promocion = (String) listaPromocionesInterfaz.getSelectedItem();

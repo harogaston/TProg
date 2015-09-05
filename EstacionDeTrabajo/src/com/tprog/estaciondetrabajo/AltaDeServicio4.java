@@ -141,12 +141,15 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void botonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSiguienteActionPerformed
-        AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
-        this.setVisible(false);
-        getParent().add(as5);
-        as5.setLocation(this.getLocation());
-        as5.setVisible(true);
-
+        if (!seleccionCategorias.isEmpty()) {
+            AltaDeServicio5 as5 = new AltaDeServicio5(this, ctrlProductos);
+            this.setVisible(false);
+            getParent().add(as5);
+            as5.setLocation(this.getLocation());
+            as5.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor escoja al menos una categoría antes de avanzar.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_botonSiguienteActionPerformed
 
     @Override
@@ -166,9 +169,11 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                     seleccionCategorias.add(categoriaActual);
                     seleccionCategorias.sort(null);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Por favor seleccione una categoria hoja", "Error", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Por favor seleccione una categoria hoja", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor escoja una categoría antes de intentar agregar una.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         seleccionCategoriasInterfaz.updateUI();
     }//GEN-LAST:event_botonAgregarActionPerformed

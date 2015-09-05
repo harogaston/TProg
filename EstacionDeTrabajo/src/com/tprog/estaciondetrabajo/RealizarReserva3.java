@@ -54,12 +54,18 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                     for (DTMinServicio dt : setServiciosP) {
                         listaServicios.add(dt.getIdServicio());
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "No hay servicios en el sistema para el proveedor actual", "Error", JOptionPane.ERROR_MESSAGE);
+                    this.dispose();
                 }
             } else {
                 for (DTMinServicio dt : setServicios) {
                     listaServicios.add(dt.getIdServicio());
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay servicios en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
         }
         listaServicios.sort(null);
     }
@@ -240,13 +246,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
-    @Override
-    public void dispose() {
-        super.dispose();
         padre.dispose();
-    }
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
         // TODO add your handling code here:
@@ -315,7 +316,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             } else { //hay algun dato erroneo
                 String error = "";
                 if (!okCant) {
-                    error = "El formato de la fecha ingresada no es correcto.";
+                    error = "Por favor ingrese una cantidad de reservas coherente.";
                 } else if ((!okAnioI) || (!okAnioF)) {
                     error = "La fecha ingresada no es correcta.";
                 } else if (!fechasCoherentes) {

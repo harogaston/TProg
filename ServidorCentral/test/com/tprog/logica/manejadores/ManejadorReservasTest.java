@@ -18,6 +18,8 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,7 +31,7 @@ import org.junit.Test;
 public class ManejadorReservasTest {
 
     ManejadorReservas instance;
-    Map<Integer, Reserva> reservas;
+    
     Set<DTMinReserva> minR;
     Set<DTLineaReserva> set;
     Reserva r1;
@@ -65,7 +67,6 @@ public class ManejadorReservasTest {
         // DTReserva dtr2 = new DTReserva(r2.getIdReserva(),fecha,EstadoReserva.Registrada,300,set);
         //  Reserva r3 = new Reserva(fecha,EstadoReserva.Registrada,100,set,"gg");
         //DTReserva dtr3 = new DTReserva(r3.getIdReserva(),fecha,EstadoReserva.Registrada,100,set);
-        reservas = new HashMap();
         jorge = new Cliente("alguien", "alg", "apellido", "email", "imagen", fecha);
 
         instance.agregarReserva(jorge, dtr1, "jorge");
@@ -73,11 +74,7 @@ public class ManejadorReservasTest {
         Iterator<DTMinReserva> it;
         DTMinReserva dt = lista.iterator().next();
         aux = dt.getIdReserva();
-               // instance.agregarReserva(jorge, dtr2, "pepito");
-        // instance.agregarReserva(jorge, dtr3, "gg");
-
-               // reservas.put(r2.getIdReserva(), r2);
-        // reservas.put(r3.getIdReserva(), r3);
+        dtr1 = new DTReserva(aux, fecha, EstadoReserva.Registrada, 500, set);
         minR = new HashSet();
         DTMinReserva dtmin = new DTMinReserva(aux, fecha);
         minR.add(dtmin);
@@ -155,7 +152,7 @@ public class ManejadorReservasTest {
 
         instance.eliminarReserva(aux);
         // TODO review the generated test code and remove the default call to fail.
-
+        assertFalse(instance.getReservas().containsKey(aux));
     }
 
     /**
@@ -167,14 +164,15 @@ public class ManejadorReservasTest {
 
         instance.agregarReserva(jorge, dtr1, "jorge");
         // TODO review the generated test code and remove the default call to fail.
-
+        assertTrue(instance.getReservas().containsKey(aux+1));
     }
 
     
     @Test
     public void testGetEstadoReserva(){
         System.out.println("getEstadoReserva");
-        instance.getEstadoReserva(aux);
+        EstadoReserva estado = instance.getEstadoReserva(aux);
+        assertEquals(EstadoReserva.Registrada,estado);
     }
 
 }

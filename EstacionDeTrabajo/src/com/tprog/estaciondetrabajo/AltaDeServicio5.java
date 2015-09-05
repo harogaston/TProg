@@ -22,7 +22,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
-import org.apache.commons.validator.routines.FloatValidator;
 
 public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
@@ -60,6 +59,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 //                System.out.println(nodo.toString());
 			}
 		}
+		listaCiudades.sort(null);
 		listaCiudadesOrigenInterfaz.updateUI();
 		listaCiudadesDestinoInterfaz.updateUI();
 	}
@@ -211,7 +211,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
 		String descripcion = textPaneDescripcion.getText();
 		String precioString = textPanePrecio.getText();
-		boolean okDescripcion = !isWhiteSpace(descripcion);
 
 		// Verifico precio
 		boolean okPrecio;
@@ -219,73 +218,92 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		try {
 			precio = Float.parseFloat(precioString);
 			okPrecio = true;
-		} catch (NullPointerException e) {
-			JOptionPane.showMessageDialog(this, "Por favor ingrese un precio", "Error", JOptionPane.INFORMATION_MESSAGE);
-			okPrecio = false;
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(this, "Precio: El valor ingresado no es correcto", "Error", JOptionPane.INFORMATION_MESSAGE);
+		} catch (Exception e) {
 			okPrecio = false;
 		}
 
-		Set<String> imagenes = new HashSet<>();
-		if (ruta1 != null) {
-			imagenes.add(ruta1);
+		// Verifico descripción
+		boolean okDescripcion = !isWhiteSpace(descripcion);
+
+		// Verifico origen
+		boolean okOrigen = (ciudadOrigen != null);
+
+		// Verifico destino
+		boolean okDestino = false;
+		boolean tieneDestino = checkBoxCiudadDestino.isSelected();
+		if (tieneDestino) {
+			okDestino = (ciudadDestino != null);
 		}
-		if (ruta2 != null) {
-			imagenes.add(ruta2);
-		}
-		if (ruta3 != null) {
-			imagenes.add(ruta3);
-		}
-		boolean okImagenes = true;
-		if (ciudadOrigen != null) {
+
+		boolean okCrear = false;
+		// Si todo ok, creo el servico
+		if (okPrecio && okDescripcion && okOrigen) {
+			// Guardo las imágenes que se hayan cargado
+			Set<String> imagenes = new HashSet<>();
+
+			if (ruta1 != null) {
+				imagenes.add(ruta1);
+			}
+			if (ruta2 != null) {
+				imagenes.add(ruta2);
+			}
+			if (ruta3 != null) {
+				imagenes.add(ruta3);
+			}
+
 			//busco pais origen en el arbol
 			String paisOrigen = null;
-			Enumeration e = setCiudades.breadthFirstEnumeration();
-			while (e.hasMoreElements()) {
-				TreeNode nodo = (TreeNode) e.nextElement();
-				if (nodo.toString().equals(ciudadOrigen)) { //si encuentro al nodo actual
+			Enumeration arbolCiudades = setCiudades.breadthFirstEnumeration();
+			while (arbolCiudades.hasMoreElements()) {
+				TreeNode nodo = (TreeNode) arbolCiudades.nextElement();
+				if (nodo.toString().equals(ciudadOrigen)) {
 					//obtengo a su padre para asociarlo a pais
 					paisOrigen = nodo.getParent().toString();
 				}
 			}
-			if (paisOrigen != null) {
-				DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
-				ctrlProductos.seleccionarOrigen(origen);
-				if (checkBoxCiudadDestino.isSelected()) {
-					if (ciudadDestino != null) {
-						//busco pais destino en el arbol
-						String paisDestino = null; // falta
-						e = setCiudades.breadthFirstEnumeration();
-						while (e.hasMoreElements()) {
-							TreeNode nodo = (TreeNode) e.nextElement();
-							if (nodo.toString().equals(ciudadDestino)) { //si encuentro al nodo actual
-								//obtengo a su padre para asociarlo a pais
-								paisDestino = nodo.getParent().toString();
-							}
+
+			// Construyo el DTUbicacion
+			DTUbicacion origen = new DTUbicacion(ciudadOrigen, paisOrigen);
+
+			// Lo paso al Crtl
+			ctrlProductos.seleccionarOrigen(origen);
+
+			// Chequeo si tiene destino
+			if (tieneDestino) {
+				if (okDestino) {
+					//busco pais destino en el arbol
+					String paisDestino = null;
+					arbolCiudades = setCiudades.breadthFirstEnumeration();
+					while (arbolCiudades.hasMoreElements()) {
+						TreeNode nodo = (TreeNode) arbolCiudades.nextElement();
+						if (nodo.toString().equals(ciudadDestino)) {
+							//obtengo a su padre para asociarlo a pais
+							paisDestino = nodo.getParent().toString();
 						}
-						DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
-						ctrlProductos.seleccionarDestino(destino);
-					} else {
-						JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad correcta de destino, o ninguna", "Error", JOptionPane.INFORMATION_MESSAGE);
 					}
-				}
-				if ((okDescripcion) && (okPrecio) && (okImagenes)) {
-					ctrlProductos.altaServicio(descripcion, precio, imagenes);
+
+					// Construyo el DTUbicacion
+					DTUbicacion destino = new DTUbicacion(ciudadDestino, paisDestino);
+
+					// Lo paso al Crtl
+					ctrlProductos.seleccionarDestino(destino);
 				} else {
-					String error = "";
-					if (!okDescripcion) {
-						error = "Por favor ingrese una descripción.";
-					} else if (!okPrecio) {
-						error = "Por favor verifique el precio.";
-					}
-					JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad destino, o desmarque la casilla", "Error", JOptionPane.ERROR_MESSAGE);
+					return;
 				}
-			} //es imposible que el paisOrigen sea null, por eso no tiro ningun mensaje
+			}
+
+			// Creo el servicio
+			ctrlProductos.altaServicio(descripcion, precio, imagenes);
 			JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
-		} else {
-			JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad de origen", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+		} else if (!okDescripcion) {
+			JOptionPane.showMessageDialog(this, "Por favor ingrese una descripción", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (!okPrecio) {
+			JOptionPane.showMessageDialog(this, "El precio ingresado no es correcto", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (!okOrigen) {
+			JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad de origen", "Error", JOptionPane.ERROR_MESSAGE);
 		}
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
@@ -302,7 +320,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		padre.dispose();
 		super.dispose();
 	}
-
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
 		this.setVisible(false);

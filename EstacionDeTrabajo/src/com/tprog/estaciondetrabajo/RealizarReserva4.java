@@ -284,8 +284,8 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             //validar fechas
             int diaI = (Integer) comboBoxDias1.getSelectedItem();
             int diaF = (Integer) comboBoxDias2.getSelectedItem();
-            int mesI = comboBoxMeses1.getSelectedIndex() + 1;
-            int mesF = comboBoxMeses2.getSelectedIndex() + 1;
+            int mesI = comboBoxMeses1.getSelectedIndex();
+            int mesF = comboBoxMeses2.getSelectedIndex();
             String anioIString = textFieldAnio1.getText();
             String anioFString = textFieldAnio2.getText();
             int anioI = 0;

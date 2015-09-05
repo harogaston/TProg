@@ -218,9 +218,6 @@
       </Constraints>
     </Component>
     <Component class="com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios" name="comboBoxAnios1">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios(2015, 2099)"/>
-      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="360" y="270" width="-1" height="-1"/>
@@ -228,9 +225,6 @@
       </Constraints>
     </Component>
     <Component class="com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios" name="comboBoxAnios2">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios(2015, 2099)"/>
-      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="530" y="270" width="-1" height="-1"/>

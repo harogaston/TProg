@@ -280,9 +280,6 @@
       </Constraints>
     </Component>
     <Component class="com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios" name="jComboBoxAnios">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios(1900, 2015)"/>
-      </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="550" y="90" width="-1" height="-1"/>

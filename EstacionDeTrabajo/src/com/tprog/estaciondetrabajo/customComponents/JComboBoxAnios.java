@@ -12,10 +12,10 @@ import javax.swing.JComboBox;
 
 public class JComboBoxAnios extends JComboBox<Integer> {
 
-	public JComboBoxAnios(int min, int max) {
+	public JComboBoxAnios() {
 		super();
 		List<Integer> lista = new ArrayList<>();
-		for (int i = min; i <= max; i++) {
+		for (int i = 1900; i < 2016; i++) {
 			lista.add(i);
 		}
 		Integer[] anios = lista.toArray(new Integer[lista.size()]);

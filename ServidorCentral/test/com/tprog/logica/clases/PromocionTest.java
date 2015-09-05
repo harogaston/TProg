@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -101,6 +102,7 @@ public class PromocionTest {
 
 		Servicio servicio3 = new Servicio("ser3", "malote", 220, null, null, null, proveedor);
 		instance.addServicio(servicio3);
+                assertTrue(instance.getServicios().containsKey("ser3"));
         // TODO review the generated test code and remove the default call to fail.
 
 	}

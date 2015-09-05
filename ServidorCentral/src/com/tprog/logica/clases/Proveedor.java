@@ -92,4 +92,11 @@ public class Proveedor extends Usuario {
 	public String getWebEmpresa() {
 		return this.webEmpresa;
 	}
+        public Map<String, Servicio> getServicios(){
+                return this.servicios;
+        }
+        
+        public Map<String, Promocion> getPromociones(){
+                return this.promociones;
+        }
 }

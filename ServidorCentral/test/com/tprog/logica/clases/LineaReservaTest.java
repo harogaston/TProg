@@ -209,13 +209,14 @@ public class LineaReservaTest {
         
         DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser",null,50);
         DTLineaReserva result = instance.crearDTLineaReserva();
+        assertEquals(expResult.toString(),result.toString());
         instance.setServicio(null);
         Promocion promo = new Promocion("promo",50,null);
         instance.setPromocion(promo);
         
         DTLineaReserva exp = new DTLineaReserva(4,fecha,fecha,null,"promo",50);
         DTLineaReserva res = instance.crearDTLineaReserva();
-        
+        assertEquals(exp.toString(),res.toString());
         
         // TODO review the generated test code and remove the default call to fail.
         

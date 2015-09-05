@@ -85,4 +85,8 @@ public class Promocion {
 	public Proveedor getProveedor() {
 		return this.proveedor;
 	}
+        
+        public Map<String, Servicio> getServicios(){
+                return this.servicios;
+        }
 }

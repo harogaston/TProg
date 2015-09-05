@@ -160,4 +160,7 @@ public class Reserva {
 		this.lineasReserva.clear();
 
 	}
+        public Set<LineaReserva> getLineasReserva(){
+            return this.lineasReserva;
+        }
 }

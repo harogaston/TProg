@@ -105,7 +105,7 @@ public class ServicioTest {
     @Test
     public void testListarImagenes() {
         System.out.println("listarImagenes");
-        Set<String> expResult = null;
+        Set<String> expResult = new HashSet();
         Set<String> result = instance.listarImagenes();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -205,8 +205,9 @@ public class ServicioTest {
     @Test
     public void testSetIdServicio() {
         System.out.println("setIdServicio");
-        String idServicio = "";
-        instance.setIdServicio(idServicio);
+        String id = "";
+        instance.setIdServicio(id);
+        assertEquals(id, instance.getIdServicio());
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -230,10 +231,10 @@ public class ServicioTest {
     @Test
     public void testSetDescripcion() {
         System.out.println("setDescripcion");
-        String descripcion = "";
-        instance.setDescripcion(descripcion);
+        String descn = "";
+        instance.setDescripcion(descn);
         // TODO review the generated test code and remove the default call to fail.
-        
+        assertEquals(descn, instance.getDescripcion());
     }
 
     /**
@@ -258,7 +259,7 @@ public class ServicioTest {
         float precio = 20;
         instance.setPrecio(precio);
         // TODO review the generated test code and remove the default call to fail.
-        
+        assertEquals(precio, instance.getPrecio(), 0.0);
     }
 
     /**
@@ -267,7 +268,7 @@ public class ServicioTest {
     @Test
     public void testGetImagenes() {
         System.out.println("getImagenes");
-        Set<String> expResult = null;
+        Set<String> expResult = new HashSet();
         Set<String> result = instance.getImagenes();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -280,10 +281,10 @@ public class ServicioTest {
     @Test
     public void testSetImagenes() {
         System.out.println("setImagenes");
-        Set<String> imagenes = null;
+        Set<String> imagenes = new HashSet();
         instance.setImagenes(imagenes);
         // TODO review the generated test code and remove the default call to fail.
-        
+        assertEquals(imagenes,instance.getImagenes());
     }
 
     /**

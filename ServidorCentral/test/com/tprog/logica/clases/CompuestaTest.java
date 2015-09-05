@@ -50,6 +50,7 @@ public class CompuestaTest {
         System.out.println("setPadre");
         Compuesta padre = new Compuesta("padre");
         instance.setPadre(padre);
+        
         // TODO review the generated test code and remove the default call to fail.
         
     }

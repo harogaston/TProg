@@ -52,7 +52,7 @@ public class SimpleTest {
         Servicio s = null;
         instance.agregarServicio(s);
         // TODO review the generated test code and remove the default call to fail.
-        
+        assertEquals(null ,instance.getServicios());
     }
 
     /**
@@ -65,7 +65,7 @@ public class SimpleTest {
         
         instance.quitarServicio(s);
         // TODO review the generated test code and remove the default call to fail.
-        
+        assertFalse(instance.getServicios().contains(s));
     }
 
     /**
@@ -171,7 +171,7 @@ public class SimpleTest {
     @Test
     public void testListarCategorias() {
         System.out.println("listarCategorias");
-        DefaultMutableTreeNode expResult = null;
+        DefaultMutableTreeNode expResult = new DefaultMutableTreeNode("idCategoria");
         DefaultMutableTreeNode result = instance.listarCategorias();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.

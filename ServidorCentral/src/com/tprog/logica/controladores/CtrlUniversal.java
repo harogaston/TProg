@@ -387,13 +387,6 @@ public class CtrlUniversal implements ICtrlUniversal {
                 dtR = new DTReserva(0, new Date(2015, 5, 8),
                                 EstadoReserva.Pagada, 600, lineas);
                 mr.agregarReserva(mu.getCliente("JeffW"), dtR, "moody");
-                //R5    S9
-                lineas = new HashSet();
-                lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7),
-                                new Date(2015, 8, 10), "Air-France-FC", null, 100));
-                dtR = new DTReserva(0, new Date(2015, 8, 7),
-                                EstadoReserva.Registrada, 200, lineas);
-                mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
             //R5    S9
                 lineas = new HashSet();
                 lineas.add(new DTLineaReserva(2, new Date(2015, 8, 7), 

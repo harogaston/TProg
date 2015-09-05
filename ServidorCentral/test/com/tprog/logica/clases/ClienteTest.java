@@ -51,7 +51,7 @@ public class ClienteTest {
 		DTReserva r = new DTReserva(123, fecha, EstadoReserva.Pagada, 180.53F, null);
 		Reserva reserva;
 		try {
-			reserva = new Reserva(r, "Pepe");
+			reserva = new Reserva(instance,r, "Pepe");
 			instance.agregarReserva(reserva);
 		} catch (Exception ex) {
 			Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);

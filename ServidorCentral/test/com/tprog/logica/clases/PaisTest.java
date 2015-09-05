@@ -91,7 +91,6 @@ public class PaisTest {
     public void testAgregarCiudad() {
         System.out.println("agregarCiudad");
         Ciudad c = new Ciudad("Atlantida");
-        
         instance.agregarCiudad(c);
         // TODO review the generated test code and remove the default call to fail.
         

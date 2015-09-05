@@ -153,7 +153,8 @@ public class ReservaTest {
             
             instance.agregarLineaReserva(lin1);
             instance.agregarLineaReserva(lin2);
-            
+            assertTrue(instance.getLineasReserva().contains(lin1));
+            assertTrue(instance.getLineasReserva().contains(lin2));
             
           
         // TODO review the generated test code and remove the default call to fail.
@@ -168,7 +169,7 @@ public class ReservaTest {
         System.out.println("setEstadoReserva");
         
         instance.setEstadoReserva(EstadoReserva.Cancelada);
-        
+        assertEquals(EstadoReserva.Cancelada,instance.getEstado());
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -228,9 +229,12 @@ public class ReservaTest {
         EstadoReserva nuevoEstado = EstadoReserva.Facturada;
         
        instance.cambiarEstadoReserva(nuevoEstado);
+       assertTrue(EstadoReserva.Registrada.equals(instance.getEstado()));
        nuevoEstado = EstadoReserva.Cancelada;
        instance.cambiarEstadoReserva(nuevoEstado);
+       assertTrue(EstadoReserva.Cancelada.equals(instance.getEstado()));
        instance.cambiarEstadoReserva(nuevoEstado); 
+       assertTrue(EstadoReserva.Cancelada.equals(instance.getEstado()));
         // TODO review the generated test code and remove the default call to fail.
         
     }
@@ -245,7 +249,7 @@ public class ReservaTest {
         if (instance != null){
              instance.eliminar();
         }
-           
+        assertEquals(null,instance);   
         // TODO review the generated test code and remove the default call to fail.
         
     }

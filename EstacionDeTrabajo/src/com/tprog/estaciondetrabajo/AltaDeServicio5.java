@@ -59,6 +59,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 //                System.out.println(nodo.toString());
             }
         }
+        listaCiudades.sort(null);
         listaCiudadesOrigenInterfaz.updateUI();
         listaCiudadesDestinoInterfaz.updateUI();
     }

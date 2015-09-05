@@ -89,7 +89,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Seleccione algun servicio del sistema para ver su informaci&#xf3;n&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt;Seleccione alguna promoci&#xf3;n del sistema para ver su informaci&#xf3;n&lt;/html&gt;"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

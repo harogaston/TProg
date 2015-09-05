@@ -32,6 +32,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         this.padre = padre;
         this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlReservas = ctrlReservas;
+        jTextFieldPrecio.setEditable(false);
         cargarDatos();
     }
 
@@ -157,6 +158,12 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         jLabel7.setText("Datos actuales");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 140, 33));
+
+        jTextFieldPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPrecioActionPerformed(evt);
+            }
+        });
         getContentPane().add(jTextFieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 80, -1));
 
         jButton1.setText("Salir");
@@ -228,6 +235,10 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         this.dispose();
         padre.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPrecioActionPerformed
 
     private final RealizarReserva1 padre;
     private final ICtrlUsuarios ctrlUsuarios;

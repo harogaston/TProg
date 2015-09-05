@@ -62,12 +62,16 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
                     for (DTMinPromocion dt : setPromocionesP) {
                         listaServicios.add(dt.getIdPromocion());
                     }
+                } else {
+                    JOptionPane.showMessageDialog(this, "No hay promociones en el sistema para el proveedor actual", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 for (DTMinPromocion dt : setPromociones) {
                     listaServicios.add(dt.getIdPromocion());
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay promociones en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
         }
         listaServicios.sort(null);
     }
@@ -145,7 +149,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
 
-        jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
+        jLabel1.setText("<html>Seleccione alguna promoción del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         buttonVolver.setText("Volver");
@@ -248,13 +252,8 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
-    @Override
-    public void dispose() {
-        super.dispose();
         padre.dispose();
-    }
+    }//GEN-LAST:event_botonSalirActionPerformed
 
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
         this.setVisible(false);
@@ -314,7 +313,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             } else { //hay algun dato erroneo
                 String error = "";
                 if (!okCant) {
-                    error = "La cantidad ingresada no es correcta.";
+                    error = "Por favor ingrese una cantidad de reservas coherente.";
                 } else if ((!okAnioI) || (!okAnioF)) {
                     error = "La fecha ingresada no es correcta";
                 }

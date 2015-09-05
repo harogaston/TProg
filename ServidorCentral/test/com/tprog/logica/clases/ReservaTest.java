@@ -249,7 +249,7 @@ public class ReservaTest {
         if (instance != null){
              instance.eliminar();
         }
-        assertEquals(null,instance);   
+        assertEquals(null,instance.getLineasReserva());   
         // TODO review the generated test code and remove the default call to fail.
         
     }

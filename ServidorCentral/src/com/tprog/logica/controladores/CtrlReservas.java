@@ -91,7 +91,7 @@ public class CtrlReservas implements ICtrlReservas {
 			float precio = mp.getPrecioServicio(dtS);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), null, precio);
 			lineasReserva.add(dtLR);
-			precioTotal += precio;
+			precioTotal += (precio*cant);
 		}
 	}
 
@@ -155,8 +155,14 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void eliminarReserva() {
+	public boolean eliminarReserva() {
 		ManejadorReservas mr = ManejadorReservas.getInstance();
-		mr.eliminarReserva(idReserva);
+		return mr.eliminarReserva(idReserva);
+	}
+	
+	@Override
+	public EstadoReserva getEstadoReserva(){
+		ManejadorReservas mr = ManejadorReservas.getInstance();
+		return mr.getEstadoReserva(this.idReserva);
 	}
 }

@@ -20,15 +20,17 @@ import java.util.Set;
 public class Reserva {
 
 	private int idReserva;
+	private Cliente cliente;
 	private static int contador = 1;
 	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
 	private Set<LineaReserva> lineasReserva;
 
-	public Reserva(DTReserva dtR, String nicknameP) throws Exception {
+	public Reserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
+		this.cliente = cliente;
 		this.fCreacion = dtR.getFCreacion();
 		this.estado = dtR.getEstadoReserva();
 		this.lineasReserva = new HashSet();
@@ -38,48 +40,48 @@ public class Reserva {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		LineaReserva linea; // debe declararse fuera de los if
 		for (DTLineaReserva dtLinea : dtR.getLineasReserva()) {
-			if (!dtLinea.getServicio().equals("")) {
-				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
-				Servicio s = mp.getServicio(dtMinS);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
-			} else if (!dtLinea.getPromocion().equals("")) {
-				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
-				Promocion p = mp.getPromocion(dtMinP);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
+			if (dtLinea.getServicio() != null) {
+                            DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
+                            Servicio s = mp.getServicio(dtMinS);
+                            linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
+			} else if (dtLinea.getPromocion() != null) {
+                            DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
+                            Promocion p = mp.getPromocion(dtMinP);
+                            linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
 			} else {
-				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
+                            throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
 			}
 			lineasReserva.add(linea);
 		}
 	}
 
-	public Reserva(Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception {
-		this.idReserva = Reserva.contador;
-		Reserva.contador++;
-		this.fCreacion = fCreacion;
-		this.estado = estado;
-		this.lineasReserva = new HashSet();
-		this.precioTotal = precioTotal;
-
-		// Creo y agrego las lineasReserva
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		LineaReserva linea; // debe declararse fuera de los if
-		for (DTLineaReserva dtLinea : lineas) {
-			if (!dtLinea.getServicio().equals("")) {
-				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
-				Servicio s = mp.getServicio(dtMinS);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
-			} else if (!dtLinea.getPromocion().equals("")) {
-				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
-				Promocion p = mp.getPromocion(dtMinP);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
-			} else {
-				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
-			}
-			lineasReserva.add(linea);
-		}
-	}
-
+	// Como no se usa, de momento lo comento para que no joda
+//	public Reserva(Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineas, String nicknameP) throws Exception {
+//		this.idReserva = Reserva.contador;
+//		Reserva.contador++;
+//		this.fCreacion = fCreacion;
+//		this.estado = estado;
+//		this.lineasReserva = new HashSet();
+//		this.precioTotal = precioTotal;
+//
+//		// Creo y agrego las lineasReserva
+//		ManejadorProductos mp = ManejadorProductos.getInstance();
+//		LineaReserva linea; // debe declararse fuera de los if
+//		for (DTLineaReserva dtLinea : lineas) {
+//			if (!dtLinea.getServicio().equals("")) {
+//				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
+//				Servicio s = mp.getServicio(dtMinS);
+//				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
+//			} else if (!dtLinea.getPromocion().equals("")) {
+//				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
+//				Promocion p = mp.getPromocion(dtMinP);
+//				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
+//			} else {
+//				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
+//			}
+//			lineasReserva.add(linea);
+//		}
+//	}
 	public int getIdReserva() {
 		return idReserva;
 	}
@@ -88,12 +90,16 @@ public class Reserva {
 		return fCreacion;
 	}
 
-	public EstadoReserva getEstadoReserva() {
+	public EstadoReserva getEstado() {
 		return estado;
 	}
 
 	public float getPrecioTotal() {
 		return precioTotal;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 	public void agregarLineaReserva(LineaReserva linea) {
@@ -130,15 +136,25 @@ public class Reserva {
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {
 		if (nuevoEstado != null) {
-			if (("Registrada".equals(this.getEstadoReserva().toString())) && (!"Facturada".equals(nuevoEstado.toString()))) {
-				setEstadoReserva(nuevoEstado);
-				return true;
+			switch (this.estado) {
+				case Registrada: {
+					if (nuevoEstado == EstadoReserva.Cancelada || nuevoEstado == EstadoReserva.Pagada) {
+						setEstadoReserva(nuevoEstado);
+						return true;
+					}
+					return false;
+				}
+				case Pagada: {
+					if (nuevoEstado == EstadoReserva.Facturada) {
+						setEstadoReserva(nuevoEstado);
+						return true;
+					}
+					return false;
+				}
 			}
 		}
-
 		return false;
-
-	}
+}
 
 	public void eliminar() {
 		this.lineasReserva.clear();

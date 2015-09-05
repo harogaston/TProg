@@ -45,7 +45,11 @@ public class Cliente extends Usuario {
 	public void agregarReserva(Reserva reserva) {
 		reservas.put(reserva.getIdReserva(), reserva);
 	}
-
+	
+	public void quitarReserva(int idReserva){
+		reservas.remove(idReserva);
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		Cliente c = (Cliente) o;

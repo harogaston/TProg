@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
-import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -20,7 +19,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
     private AltaDeServicio2 padre;
     private ICtrlProductos ctrlProductos;
     private String proveedor;
-
+    
     /**
      * Creates new form AltaDeServicio3
      * @param padre
@@ -35,9 +34,9 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -94,12 +93,12 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
-
+    
     @Override
     public void dispose() {
         super.dispose(); //To change body of generated methods, choose Tools | Templates.
@@ -110,32 +109,32 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String nombreServicio = textPaneNombreServicio.getText();
         String error = "";
-        boolean ok1 = (!nombreServicio.isEmpty());   
+        boolean ok1 = (!nombreServicio.isEmpty());
         boolean ok2 = ((ok1) && (ctrlProductos.idServicioDisponible(nombreServicio)));
-            if (ok2){
-                DTMinServicio dtmServicio = new DTMinServicio(proveedor, nombreServicio);
-                ctrlProductos.seleccionarServicio(dtmServicio);
-                AltaDeServicio4 as4 = new AltaDeServicio4(this, ctrlProductos);
+        if (ok2){
+            DTMinServicio dtmServicio = new DTMinServicio(proveedor, nombreServicio);
+            ctrlProductos.seleccionarServicio(dtmServicio);
+            AltaDeServicio4 as4 = new AltaDeServicio4(this, ctrlProductos);
 //                getContentPane().add(as4, BorderLayout.CENTER);
-                as4.setBounds(10, 10, 100, 100);
-                this.setVisible(false);
-                as4.setVisible(true);
-                getParent().add(as4); 
-            }
-            else {
-                 if (!ok1) error = "Por favor ingrese el nombre del Servicio.";
-                 else if(!ok2) error ="Ya existe un Servicio con ese nombre.";
-                JOptionPane.showMessageDialog(this, "Error! ", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE); 
-            }
+            as4.setBounds(10, 10, 100, 100);
+            this.setVisible(false);
+            as4.setVisible(true);
+            getParent().add(as4);
+        }
+        else {
+            if (!ok1) error = "Por favor ingrese el nombre del Servicio.";
+            else if(!ok2) error ="Ya existe un Servicio con ese nombre.";
+            JOptionPane.showMessageDialog(this, "Error! ", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_buttonAceptarActionPerformed
-
+    
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
-
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAceptar;
     private javax.swing.JButton buttonAtras;

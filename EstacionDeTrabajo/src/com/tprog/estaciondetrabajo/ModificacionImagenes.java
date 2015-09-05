@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlProductos;
@@ -23,7 +23,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class ModificacionImagenes extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      * @param idCliente
@@ -37,9 +37,9 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
-
+    
     public void actualizarImagenes() {
         modelComboBox.clear();
         Set<String> imagenes = ctrlProductos.listarImagenes();
@@ -123,52 +123,52 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         /*
         descripcionInterfaz.setText(servicio.getDescripcion());
         precioInterfaz.setText(Float.toString(servicio.getPrecio()));
         */        
     }//GEN-LAST:event_formComponentShown
-
+    
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
         ImageIcon imagen = (ImageIcon) comboboxImagenes.getSelectedItem();
         comboboxImagenes.removeItem(imagen);
         if (imagen != null) {
-			try {
-				ctrlProductos.quitarImagen(imagen.getDescription());
-			} catch (Exception ex) {
-				Logger.getLogger(ModificacionImagenes.class.getName()).log(Level.SEVERE, null, ex);
-			}
+            try {
+                ctrlProductos.quitarImagen(imagen.getDescription());
+            } catch (Exception ex) {
+                Logger.getLogger(ModificacionImagenes.class.getName()).log(Level.SEVERE, null, ex);
+            }
             cantidadImagenes--;
             actualizarImagenes();
         }
     }//GEN-LAST:event_botonQuitarActionPerformed
-
+    
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         if (cantidadImagenes < 3) {
             JFileChooser chooser = new JFileChooser();
             chooser.showOpenDialog(null);
             File imagen = chooser.getSelectedFile();
             String nombreImagen = imagen.getAbsolutePath();
-			try {
-				ctrlProductos.agregarImagen(nombreImagen);
-			} catch (Exception ex) {
-				Logger.getLogger(ModificacionImagenes.class.getName()).log(Level.SEVERE, null, ex);
-			}
+            try {
+                ctrlProductos.agregarImagen(nombreImagen);
+            } catch (Exception ex) {
+                Logger.getLogger(ModificacionImagenes.class.getName()).log(Level.SEVERE, null, ex);
+            }
             actualizarImagenes();
         }
     }//GEN-LAST:event_botonAgregarActionPerformed
-
+    
     private void comboboxImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxImagenesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboboxImagenesActionPerformed
-
+    
     
     Vector<ImageIcon> modelComboBox = new Vector<>();
     ICtrlProductos ctrlProductos;

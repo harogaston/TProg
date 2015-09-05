@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinServicio;
@@ -19,7 +19,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class RealizarReserva4 extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      * @param padre
@@ -31,9 +31,9 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,15 +106,15 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
-
+    
     private void listaServiciosInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaServiciosInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaServiciosInterfazItemStateChanged
-
+    
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
@@ -131,14 +131,14 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             DTServicio dtServicio = ctrlProductos.infoServicio();
             //imagenes
             detalleServicio.setVisible(true);
-            detalleServicio.setText(dt.toString()); 
+            detalleServicio.setText(dt.toString());
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     @Override
     public void dispose() {
         super.dispose();
@@ -150,7 +150,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonVolverActionPerformed
-
+    
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     RealizarReserva2 padre;

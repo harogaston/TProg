@@ -174,4 +174,9 @@ public class ManejadorReservasTest {
         
     }
     
+    @Test
+    public void testGetEstadoReserva(){
+        System.out.println("getEstadoReserva");
+        instance.getEstadoReserva(aux);
+    }
 }

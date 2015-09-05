@@ -1,8 +1,8 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlUsuarios;
@@ -12,7 +12,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form AltaDeUsuario1
      */
@@ -25,7 +25,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,11 +58,11 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 
         jLabel2.setText("nickname");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 110, 67, 15);
+        jLabel2.setBounds(30, 110, 60, 15);
 
         jLabel3.setText("email");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(60, 170, 38, 15);
+        jLabel3.setBounds(60, 170, 33, 15);
 
         buttonSiguiente.setText("Siguiente >");
         buttonSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +71,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonSiguiente);
-        buttonSiguiente.setBounds(480, 400, 120, 25);
+        buttonSiguiente.setBounds(480, 400, 120, 27);
 
         buttonSalir.setText("Salir");
         buttonSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -80,34 +80,34 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonSalir);
-        buttonSalir.setBounds(400, 400, 66, 25);
+        buttonSalir.setBounds(400, 400, 39, 27);
         getContentPane().add(jTextFieldNickname);
-        jTextFieldNickname.setBounds(122, 110, 440, 19);
+        jTextFieldNickname.setBounds(122, 110, 440, 25);
         getContentPane().add(jTextFieldEmail);
-        jTextFieldEmail.setBounds(122, 170, 440, 19);
+        jTextFieldEmail.setBounds(122, 170, 440, 25);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
-    
+
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         // TODO add your handling code here:
         String nickname = jTextFieldNickname.getText();
         String email = jTextFieldEmail.getText();
-        
+
         //Verificacion de email
         EmailValidator emailValidator = EmailValidator.getInstance(true);
         boolean okEmail = emailValidator.isValid(email);
-        
+
         //Verificacion de nickname
         boolean okEnblanco = !nickname.matches("^\\s*$");
         boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
         boolean okNickname = okEnblanco && okSinEspacios;
-        
+
         boolean nicknameUnico = false;
         if (okNickname) {
             nicknameUnico = ctrlUsuarios.verificarNickname(nickname);
@@ -116,7 +116,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         if (okEmail) {
             emailUnico = ctrlUsuarios.verificarEmail(email);
         }
-        
+
         if (okNickname && okEmail && emailUnico && nicknameUnico) {
             AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ctrlUsuarios);
             this.setVisible(false);
@@ -136,12 +136,12 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonSiguienteActionPerformed
-    
+
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         jTextFieldEmail.setText("");
         jTextFieldNickname.setText("");
     }//GEN-LAST:event_formComponentHidden
-    
+
     ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSalir;
@@ -152,5 +152,5 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNickname;
     // End of variables declaration//GEN-END:variables
-    
+
 }

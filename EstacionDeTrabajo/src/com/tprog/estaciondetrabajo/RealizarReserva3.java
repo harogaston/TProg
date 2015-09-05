@@ -89,8 +89,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         comboBoxDias1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
         comboBoxDias2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
-        comboBoxAnios1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
-        comboBoxAnios2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
+        comboBoxAnios1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios(2015, 2099);
+        comboBoxAnios2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios(2015, 2099);
         comboBoxMeses1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
         comboBoxMeses2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
         jTextFieldCantidad = new javax.swing.JTextField();

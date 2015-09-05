@@ -78,7 +78,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldEmpresa = new javax.swing.JTextField();
         jTextFieldLinkEmpresa = new javax.swing.JTextField();
-        jComboBoxAnios = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
+        jComboBoxAnios = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios(1900, 2015);
         jComboBoxMeses = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
         jComboBoxDias = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
 

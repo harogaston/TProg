@@ -58,7 +58,9 @@ public class CtrlProductos implements ICtrlProductos {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		return mp.infoPromocion(dtP);
 	}
-        public DTMinPromocion infoMinPromocion() {
+        
+	@Override
+	public DTMinPromocion infoMinPromocion() {
 		return dtP;
 	}
 	@Override

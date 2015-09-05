@@ -1,16 +1,14 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.interfaces.ICtrlProductos;
-import java.awt.event.MouseListener;
 import java.util.Set;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -19,27 +17,33 @@ import javax.swing.tree.DefaultTreeModel;
  * @author marccio
  */
 public class AltaCategoria extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form ReservasCliente
      */
     public AltaCategoria(ICtrlProductos ctrlProductos) {
         this.ctrlProductos = ctrlProductos;
         initComponents();
-        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }
+        cargarDatos();
     }
-    
-    void cargarDatos() {
+
+    private void cargarDatos() {
         DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
         arbolCategorias.removeAll();
-        arbolCategorias.setModel(new DefaultTreeModel(raiz));
-        if (!casillaPadre.isSelected()) arbolCategorias.setEnabled(false);
-        arbolCategorias.updateUI();
+        arbolCategoriasModelo = new DefaultTreeModel(raiz);
+        arbolCategorias.setModel(arbolCategoriasModelo);
+        if (!casillaPadre.isSelected()) {
+            arbolCategorias.clearSelection();
+            arbolCategorias.setEnabled(false);
+        }
+//		arbolCategorias.updateUI();
+        this.updateUI();
     }
-    
+
+    private boolean isWhiteSpace(String s) {
+        return (s.matches("^\\s*$") || s.matches("^\\s.*"));
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,35 +53,26 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         casillaPadre = new javax.swing.JCheckBox();
         nombreCategoria = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         arbolCategorias = new javax.swing.JTree();
         jLabel2 = new javax.swing.JLabel();
-        botonConfirmar = new javax.swing.JButton();
+        botonCrear = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Alta de Categoría");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                formComponentHidden(evt);
-            }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 400, -1, -1));
 
         jLabel1.setText("<html>Nombre de la nueva categoria</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
@@ -109,86 +104,85 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         jLabel2.setText("<html>Tiene una categoría padre</html>");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, -1, -1));
 
-        botonConfirmar.setText("Confirmar creacion");
-        botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        botonCrear.setText("Crear");
+        botonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonConfirmarActionPerformed(evt);
+                botonCrearActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 400, -1, -1));
+        getContentPane().add(botonCrear, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-    
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-    
-    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-        nombreCategoria.setText("");
-        casillaPadre.setSelected(false);
-    }//GEN-LAST:event_formComponentHidden
-    
+
     private void nombreCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreCategoriaActionPerformed
-    
+
     private void arbolCategoriasValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCategoriasValueChanged
         DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
         if (nodo != null) {
             System.out.println("Seleccionaste " + nodo.toString());
         }
     }//GEN-LAST:event_arbolCategoriasValueChanged
-    
+
     private void casillaPadreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casillaPadreActionPerformed
-        if (!casillaPadre.isSelected()) arbolCategorias.setEnabled(false);
-        else arbolCategorias.setEnabled(true);
+        if (!casillaPadre.isSelected()) {
+            arbolCategorias.clearSelection();
+            arbolCategorias.setEnabled(false);
+        } else {
+            arbolCategorias.setEnabled(true);
+        }
     }//GEN-LAST:event_casillaPadreActionPerformed
-    
-    private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
+
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
+
         String categoriaNueva = nombreCategoria.getText();
-        if (!categoriaNueva.equals("")) { //nombre no vacío
+        if (!isWhiteSpace(categoriaNueva)) {
             if (casillaPadre.isSelected()) {
-                DefaultMutableTreeNode categoriaPadreNodo =  (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
+                DefaultMutableTreeNode categoriaPadreNodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
                 if (categoriaPadreNodo != null) {
                     String categoriaPadre = categoriaPadreNodo.toString();
-                    if (! ctrlProductos.seleccionarCategoriaPadre(categoriaPadre))
+                    if (!ctrlProductos.seleccionarCategoriaPadre(categoriaPadre)) {
                         JOptionPane.showMessageDialog(this, "Esa categoria tiene servicios asociados; escoja otra", "Categoria padre erronea", JOptionPane.INFORMATION_MESSAGE);
-                    else {
-                        if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))
+                    } else {
+                        if (!ctrlProductos.idCategoriaDisponible(categoriaNueva)) {
                             JOptionPane.showMessageDialog(this, "El nombre escogido esta en uso; escoja otro", "Nombre invalido", JOptionPane.INFORMATION_MESSAGE);
-                        else {
+                        } else {
                             ctrlProductos.altaCategoria();
                             JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                            cargarDatos();
+                            this.dispose();
                         }
                     }
                 } else {
                     JOptionPane.showMessageDialog(this, "Seleccione una categoria", "Categoria no seleccionada", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
-                if (!ctrlProductos.idCategoriaDisponible(categoriaNueva))
+                if (!ctrlProductos.idCategoriaDisponible(categoriaNueva)) {
                     JOptionPane.showMessageDialog(this, "El nombre escogido esta en uso; escoja otro", "Nombre invalido", JOptionPane.INFORMATION_MESSAGE);
-                else {
+                } else {
+                    ctrlProductos.seleccionarCategoriaPadre(null);
                     ctrlProductos.altaCategoria();
                     JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    cargarDatos();
+                    this.dispose();
                 }
             }
-        } else JOptionPane.showMessageDialog(this, "Por favor ingrese un nombre para la categoria", "Campo vacio", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_botonConfirmarActionPerformed
-    
+        } else {
+            JOptionPane.showMessageDialog(this, "El nombre de categoría ingresado no es válido", "Campo vacio", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }                                          
+
+    DefaultTreeModel arbolCategoriasModelo;
     ICtrlProductos ctrlProductos;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolCategorias;
-    private javax.swing.JButton botonConfirmar;
-    private javax.swing.JButton botonSalir;
+    private javax.swing.JButton botonCrear;
     private javax.swing.JCheckBox casillaPadre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

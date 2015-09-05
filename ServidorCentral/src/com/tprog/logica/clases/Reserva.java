@@ -158,6 +158,10 @@ public class Reserva {
 
 	public void eliminar() {
 		this.lineasReserva.clear();
+                this.lineasReserva = null;
 
 	}
+        public Set<LineaReserva> getLineasReserva(){
+            return this.lineasReserva;
+        }
 }

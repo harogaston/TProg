@@ -15,22 +15,41 @@ import java.util.Set;
 
 public interface ICtrlReservas {
 
-	public void seleccionarCliente(String nickname);
-	public void seleccionarProveedor(String nicknameP);
-	public void seleccionarDTReserva(DTReserva dtr);
-	public Set<DTMinPromocion> listarPromociones();
-	public Set<DTMinServicio> listarServicios();
-	public void seleccionarPromocion(DTMinPromocion dtP);
-	public void seleccionarServicio(DTMinServicio dtS);
-	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal);
-	public Set<DTMinServicio> listarServiciosProveedor();
-	public Set<DTMinPromocion> listarPromocionesProveedor();
-	public DTReserva mostrarReservaTemporal();
-	public void altaReserva() throws Exception;
-	public Set<DTMinReserva> listarReservas();
-	public void seleccionarReserva(int idReserva);
-	public DTReserva infoReserva();
-	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
-	public boolean eliminarReserva();
-	public EstadoReserva getEstadoReserva();
+    public void seleccionarCliente(String nickname);
+
+    public void seleccionarProveedor(String nicknameP);
+
+    public void seleccionarDTReserva(DTReserva dtr);
+
+    public Set<DTMinPromocion> listarPromociones();
+
+    public Set<DTMinServicio> listarServicios();
+
+    public void seleccionarPromocion(DTMinPromocion dtP);
+
+    public void seleccionarServicio(DTMinServicio dtS);
+
+    public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal);
+
+    public Set<DTMinServicio> listarServiciosProveedor();
+
+    public Set<DTMinPromocion> listarPromocionesProveedor();
+
+    public DTReserva mostrarReservaTemporal();
+
+    public void altaReserva() throws Exception;
+
+    public Set<DTMinReserva> listarReservas();
+
+    public void seleccionarReserva(int idReserva);
+
+    public DTReserva infoReserva();
+
+    public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
+
+    public boolean eliminarReserva();
+
+    public EstadoReserva getEstadoReserva();
+
+    public void liberarMemoriaControlador();
 }

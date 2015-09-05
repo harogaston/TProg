@@ -37,11 +37,8 @@ public class LineaReservaTest {
     @Before
     public void setUp() {
         fecha = new Date();
-        
         promocion = null;
-        
         servicio = new Servicio("ser","bueno",50,null,null,null,null);
-        promocion = new Promocion("promo",50,null);
         instance = new LineaReserva(2,fecha,fecha,servicio,promocion,50);
         
     }
@@ -207,15 +204,16 @@ public class LineaReservaTest {
     public void testCrearDTLineaReserva() {
         System.out.println("crearDTLineaReserva");
         
-        DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser","",50);
+        DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser",null,50);
         DTLineaReserva result = instance.crearDTLineaReserva();
+        assertEquals(expResult.toString(),result.toString());
         instance.setServicio(null);
         Promocion promo = new Promocion("promo",50,null);
         instance.setPromocion(promo);
-        
-        DTLineaReserva exp = new DTLineaReserva(4,fecha,fecha,"","promo",50);
+        instance.setServicio(null);
+        DTLineaReserva exp = new DTLineaReserva(2,fecha,fecha,null,"promo",50);
         DTLineaReserva res = instance.crearDTLineaReserva();
-        
+        assertEquals(exp.toString(),res.toString());
         
         // TODO review the generated test code and remove the default call to fail.
         

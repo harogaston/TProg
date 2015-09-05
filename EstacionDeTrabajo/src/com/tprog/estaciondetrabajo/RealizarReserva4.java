@@ -1,16 +1,14 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTLineaReserva;
 import com.tprog.logica.dt.DTMinPromocion;
-import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTPromocion;
 import com.tprog.logica.dt.DTReserva;
-import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlReservas;
@@ -23,15 +21,12 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-/**
- *
- * @author marccio
- */
 public class RealizarReserva4 extends javax.swing.JInternalFrame {
     //private Vector<String> listaServicios = new Vector<>();
-    
+
     /**
      * Creates new form ReservasCliente
+     *
      * @param padre
      * @param <error>
      * @param ctrlReservas
@@ -57,25 +52,30 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         //si no, se muestran sólo los de ese proveedor
         Set<DTMinPromocion> setPromociones = this.ctrlReservas.listarPromociones();
         Set<DTMinPromocion> setPromocionesP = null;
-        if (proveedorSeleccionado){
-            //muestro solo los servicios del proveedor seleccionado
-            setPromocionesP = this.ctrlReservas.listarPromocionesProveedor();
-            //construyo un vector con la informacion a mostrar, porque
-            //el comboBox solo funciona con Vector o List
-            if (setPromocionesP != null) {
-                for (DTMinPromocion dt : setPromocionesP) {
-                    listaServicios.add(dt.getIdPromocion());
+        if (!setPromociones.isEmpty()) {
+            if (proveedorSeleccionado) {
+                //muestro solo los servicios del proveedor seleccionado
+                setPromocionesP = this.ctrlReservas.listarPromocionesProveedor();
+                if (!setPromocionesP.isEmpty()) {
+                    //construyo un vector con la informacion a mostrar, porque
+                    //el comboBox solo funciona con Vector o List
+                    for (DTMinPromocion dt : setPromocionesP) {
+                        listaServicios.add(dt.getIdPromocion());
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "No hay promociones en el sistema para el proveedor actual", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-        } else {
-            if (setPromociones != null) {
+            } else {
                 for (DTMinPromocion dt : setPromociones) {
                     listaServicios.add(dt.getIdPromocion());
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay promociones en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        listaServicios.sort(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -149,7 +149,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, -1, -1));
 
-        jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
+        jLabel1.setText("<html>Seleccione alguna promoción del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, -1, -1));
 
         buttonVolver.setText("Volver");
@@ -215,15 +215,15 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void listaPromocionesInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazComponentAdded
-        
+
     }//GEN-LAST:event_listaPromocionesInterfazInterfazComponentAdded
-    
+
     private void listaPromocionesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaPromocionesInterfazItemStateChanged
-    
+
     private void listaPromocionesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaPromocionesInterfazInterfazActionPerformed
         String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
         if (promocion != null) {
@@ -235,11 +235,11 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             while (it.hasNext() && !found) {
                 //System.out.println("323");
                 DTMinPromocion tmp = (DTMinPromocion) it.next();
-                if (tmp.getIdPromocion().equals(promocion)){
+                if (tmp.getIdPromocion().equals(promocion)) {
                     dt = tmp; //es imposible que dt sea null al final del loop
                     //System.out.println("aaaasd");
                 }
-                
+
             }
             //ctrlReservas.seleccionarServicio(dt);
             ctrlProductos.seleccionarPromocion(dt);
@@ -249,25 +249,18 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             detallePromocion.setText(dt.toString());
         }
     }//GEN-LAST:event_listaPromocionesInterfazInterfazActionPerformed
-    
+
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-    
-    @Override
-    public void dispose() {
-        super.dispose();
         padre.dispose();
-    }
-    
+    }//GEN-LAST:event_botonSalirActionPerformed
+
     private void buttonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVolverActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
         this.padre.setVisible(true);
     }//GEN-LAST:event_buttonVolverActionPerformed
-    
+
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
-        // TODO add your handling code here:
         String promocion = (String) listaPromocionesInterfaz.getSelectedItem();
         if (promocion != null) {
             //DTServicio dtS = ctrlUsuarios.infoServicio();
@@ -284,30 +277,32 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             boolean okCant = false;
             int cant = 0;
             String cantString = textPaneCantidad.getText();
-            okCant = ((!cantString.isEmpty()) && ( cantString.matches("([0-9]|)+")));
-            if (okCant){
+            okCant = ((!cantString.isEmpty()) && (cantString.matches("([0-9]|)+")));
+            if (okCant) {
                 cant = Integer.parseInt(cantString);
             }
             //validar fechas
             int diaI = (Integer) comboBoxDias1.getSelectedItem();
             int diaF = (Integer) comboBoxDias2.getSelectedItem();
-            int mesI = comboBoxMeses1.getSelectedIndex()+1;
-            int mesF = comboBoxMeses2.getSelectedIndex()+1;
+            int mesI = comboBoxMeses1.getSelectedIndex() + 1;
+            int mesF = comboBoxMeses2.getSelectedIndex() + 1;
             String anioIString = textFieldAnio1.getText();
             String anioFString = textFieldAnio2.getText();
             int anioI = 0;
             int anioF = 0;
             int anio;
-            boolean okAnioI = (((!anioIString.isEmpty()))&&(anioIString.matches("([0-9]|)+")));
-            if (okAnioI)
+            boolean okAnioI = (((!anioIString.isEmpty())) && (anioIString.matches("([0-9]|)+")));
+            if (okAnioI) {
                 anioI = Integer.parseInt(anioIString);
-            okAnioI = ((okAnioI) && ( anioI >= 2015));
-            boolean okAnioF = (((!anioIString.isEmpty()))&&(anioFString.matches("([0-9]|)+")));
-            if (okAnioF)
+            }
+            okAnioI = ((okAnioI) && (anioI >= 2015));
+            boolean okAnioF = (((!anioIString.isEmpty())) && (anioFString.matches("([0-9]|)+")));
+            if (okAnioF) {
                 anioF = Integer.parseInt(anioFString);
-            okAnioF = ((okAnioF) && (okAnioI) && ( anioF >= anioI));
+            }
+            okAnioF = ((okAnioF) && (okAnioI) && (anioF >= anioI));
             //creo fechas
-            if ((okCant) && (okAnioI)&&(okAnioF)){//todo ok
+            if ((okCant) && (okAnioI) && (okAnioF)) {//todo ok
                 Date fI = new Date(anioI, mesI, diaI);
                 Date fF = new Date(anioF, mesF, diaF);
                 ctrlReservas.ingresarLineaReserva(cant, fI, fF);
@@ -315,26 +310,22 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
                 Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
                 this.setVisible(false);
                 this.padre.setVisible(true);
-            }
-            else{ //hay algun dato erroneo
+            } else { //hay algun dato erroneo
                 String error = "";
-                if (!okCant)
-                    error = "La cantidad ingresada no es correcta.";
-                else if ((!okAnioI)|| (!okAnioF))
+                if (!okCant) {
+                    error = "Por favor ingrese una cantidad de reservas coherente.";
+                } else if ((!okAnioI) || (!okAnioF)) {
                     error = "La fecha ingresada no es correcta";
+                }
                 JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
             }
-        }
-        else
+        } else {
             JOptionPane.showMessageDialog(this, "Seleccione una Promoción por favor. ", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_buttonAgregarActionPerformed
-    
-    
-    
-    
+
     //booleano que determina si lo que se agrega es el primer servicio o producto
     //es para saber cuando seleccionar proveedor o no
-    
     private ICtrlUsuarios ctrlUsuarios;
     private ICtrlReservas ctrlReservas;
     private ICtrlProductos ctrlProductos;
@@ -344,7 +335,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
     RealizarReserva2 padre;
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
         "Octubre", "Noviembre", "Diciembre"};
-    private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};                     
+    private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonAgregar;

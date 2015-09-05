@@ -10,7 +10,6 @@ import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
@@ -19,7 +18,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 
@@ -29,10 +27,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     public VerInformacionDeCliente(ICtrlUsuarios ctrlUsuarios) {
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
-        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }
     }
 
     void cargarDatos() {
@@ -46,10 +40,11 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
                 for (DTMinCliente dt : setClientes) {
                     listaClientes.add(dt.getNickname());
                 }
+                listaClientes.sort(null);
             }
         } catch (Exception ex) {
 //            Logger.getLogger(VerInformacionDeCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
 
@@ -64,7 +59,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
         listaClientesInterfaz = new javax.swing.JComboBox(listaClientes);
         label = new javax.swing.JLabel();
         imagenUsuarioHolder = new javax.swing.JLabel();
@@ -72,7 +66,10 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         detalleUsuario = new javax.swing.JTextArea();
         botonReservas = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Ver Información de Cliente");
         setToolTipText("");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -84,14 +81,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
 
         listaClientesInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -115,7 +104,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, 420, 30));
         label.getAccessibleContext().setAccessibleDescription("");
 
-        getContentPane().add(imagenUsuarioHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 130));
+        getContentPane().add(imagenUsuarioHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 140));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -148,7 +137,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         imagenUsuarioHolder.setIcon(null);
         listaClientesInterfaz.setSelectedItem(null);
         detalleUsuario.setText("");
-        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaClientesInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaClientesInterfazInterfazActionPerformed
@@ -187,10 +175,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_listaClientesInterfazInterfazComponentAdded
 
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
     private void listaClientesInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaClientesInterfazItemStateChanged
 
     }//GEN-LAST:event_listaClientesInterfazItemStateChanged
@@ -200,8 +184,9 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         if (cliente != null) {
             ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
             this.setVisible(false);
-            r.setVisible(true);
             getParent().add(r);
+            r.setLocation(this.getLocation());
+            r.setVisible(true);
         }
     }//GEN-LAST:event_botonReservasActionPerformed
 
@@ -209,7 +194,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonReservas;
-    private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel imagenUsuarioHolder;
     private javax.swing.JLabel label;

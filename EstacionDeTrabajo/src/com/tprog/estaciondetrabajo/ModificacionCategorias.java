@@ -1,29 +1,24 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlProductos;
-import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-/**
- *
- * @author marccio
- */
 public class ModificacionCategorias extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form ReservasCliente
+     *
      * @param servicios
      * @param ctrlProductos
      * @param padre
@@ -37,19 +32,16 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         for (String s : categoriasServicio) {
             listaServicio.add(s);
         }
+        listaServicio.sort(null);
         DefaultMutableTreeNode categoriasSistema = ctrlProductos.listarCategorias();
         Enumeration en = categoriasSistema.depthFirstEnumeration();
         while (en.hasMoreElements()) {
             DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) en.nextElement();
             listaSistema.add(nodo.toString());
         }
-        //disable dragging
-        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }
+        listaSistema.sort(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,7 +51,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
+        botonAtras = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaServicioInterfaz = new javax.swing.JList(listaServicio);
         botonQuitar = new javax.swing.JButton();
@@ -70,18 +62,19 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         botonConfirmar = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setTitle("Modificar Categorías");
         setPreferredSize(new java.awt.Dimension(690, 435));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+        botonAtras.setText("< Atras");
+        botonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
+                botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 370, -1, -1));
 
         jScrollPane1.setViewportView(listaServicioInterfaz);
 
@@ -119,41 +112,46 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 botonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+
+    private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
         listaSistema.clear();
         listaServicio.clear();
         listaServicioInterfaz.updateUI();
         listaSistemaInterfaz.updateUI();
         this.dispose();
         padre.setVisible(true);
-    }//GEN-LAST:event_botonSalirActionPerformed
-    
+    }//GEN-LAST:event_botonAtrasActionPerformed
+
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
         //quitar
-        List selected = listaServicioInterfaz.getSelectedValuesList();
-        Iterator it1 = selected.iterator();
-        while (it1.hasNext()){
-            String actual = (String) it1.next();
-            Iterator it2 = listaServicio.iterator();
-            while (it2.hasNext()) {
-                if (it2.next().equals(actual)) {
-                    it2.remove();
+        if (listaServicio.size() > 1) {
+            List selected = listaServicioInterfaz.getSelectedValuesList();
+            Iterator it1 = selected.iterator();
+            while (it1.hasNext()) {
+                String actual = (String) it1.next();
+                Iterator it2 = listaServicio.iterator();
+                while (it2.hasNext()) {
+                    if (it2.next().equals(actual)) {
+                        it2.remove();
+                    }
                 }
+                //listaSistema.add(actual); no es necesario porque ya estan las cosas
             }
-            //listaSistema.add(actual); no es necesario porque ya estan las cosas
+            listaServicio.sort(null);
+            listaServicioInterfaz.updateUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "No puede quitarle todas las categorias al servicio", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonQuitarActionPerformed
-    
-    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+
+    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {
         List selected = listaSistemaInterfaz.getSelectedValuesList();
         Iterator it1 = selected.iterator();
-        while (it1.hasNext()){
+        while (it1.hasNext()) {
             String actual = (String) it1.next();
             Iterator it2 = listaServicio.iterator();
             boolean yaEstaAsignado = false;
@@ -162,12 +160,14 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                     yaEstaAsignado = true;
                 }
             }
-            if (!yaEstaAsignado)
+            if (!yaEstaAsignado) {
                 listaServicio.add(actual);
+            }
         }
+        listaServicio.sort(null);
         listaServicioInterfaz.updateUI();
-    }//GEN-LAST:event_botonAgregarActionPerformed
-    
+    }
+
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         try {
             //primero recorro el set de categorias original, y a aquellas
@@ -177,27 +177,28 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 boolean found = false;
                 //mientras no encuentre la categoria sigo buscandola
                 while (it.hasNext() && !found) {
-                    if (it.next().toString().equals(s))
-                        //si la encuentro no la quito
+                    if (it.next().toString().equals(s)) //si la encuentro no la quito
+                    {
                         found = true;
+                    }
                 }
                 //si no la encontré, la saco
                 if (!found) {
                     ctrlProductos.quitarCategoria(s);
                 }
             }
-            
+
             //ahora recorro la lista nueva, y cada elemento que no esté en mi
             //set de categorías original, lo agrego a las categorias del servicio
-            
             Iterator it = listaServicio.iterator();
             while (it.hasNext()) {
                 //si la categoria actual no esta dentro de las originales
                 //del servicio, la agrego
                 String categoria = it.next().toString();
                 System.out.println("Linea 198: " + categoria);
-                if (!categoriasServicio.contains(categoria))
+                if (!categoriasServicio.contains(categoria)) {
                     ctrlProductos.agregarCategoria(categoria);
+                }
             }
             JOptionPane.showMessageDialog(this, "Categorías modificadas con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -205,18 +206,17 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage().toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
     }//GEN-LAST:event_botonConfirmarActionPerformed
-    
+
     Set<String> categoriasServicio;
     ICtrlProductos ctrlProductos;
     ModificacionServicio padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregar;
+    private javax.swing.JButton botonAtras;
     private javax.swing.JButton botonConfirmar;
     private javax.swing.JButton botonQuitar;
-    private javax.swing.JButton botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

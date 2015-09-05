@@ -1,33 +1,27 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.interfaces.ICtrlReservas;
-import java.awt.event.MouseListener;
 import java.util.Set;
 import java.util.Vector;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form ReservasCliente
      */
     public VerInformacionDeReserva(ICtrlReservas ctrlReservas) {
         this.ctrlReservas = ctrlReservas;
         initComponents();
-        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }
         cargarDatos();
     }
-    
+
     void cargarDatos() {
         //listaClientes
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
@@ -37,9 +31,10 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
             for (DTMinReserva dt : setReservas) {
                 listaReservas.add(Integer.toString(dt.getIdReserva()));
             }
+            listaReservas.sort(null);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,10 +47,12 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         listaReservasInterfaz = new javax.swing.JComboBox(listaReservas);
         panelUsuario = new javax.swing.JScrollPane();
         detalleReserva = new javax.swing.JTextArea();
-        botonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Ver Información de Reserva");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -92,30 +89,22 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         detalleReserva.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleReserva);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 270, 190));
-
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 270, 250));
 
         jLabel1.setText("<html>Seleccione alguna reserva del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void listaReservasInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazComponentAdded
-        
+
     }//GEN-LAST:event_listaReservasInterfazInterfazComponentAdded
-    
+
     private void listaReservasInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaReservasInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaReservasInterfazItemStateChanged
-    
+
     private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getModel().getSelectedItem();
         if (reservaSeleccionada != null) {
@@ -126,15 +115,11 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
             detalleReserva.setText(dt.toString()); //imprimir lineas de reserva
         }
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
-    
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-    
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-    
+
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         listaReservas.clear();
         reservas = null;
@@ -142,12 +127,11 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         detalleReserva.setText("");
         detalleReserva.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
-    
+
     ICtrlReservas ctrlReservas;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonSalir;
     private javax.swing.JTextArea detalleReserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox listaReservasInterfaz;

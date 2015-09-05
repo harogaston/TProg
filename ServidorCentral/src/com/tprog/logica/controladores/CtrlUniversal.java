@@ -68,7 +68,7 @@ public class CtrlUniversal implements ICtrlUniversal {
 			mu.altaProveedor(dtP);
 			//Alta Categorias
 			ManejadorProductos mp = ManejadorProductos.getInstance();
-			mp.altaCategoria("Vuelos", "");
+			mp.altaCategoria("Vuelos", null);
 			mp.altaCategoria("Empresas", "Vuelos");
 			mp.altaCategoria("Iberia", "Empresas");
 			mp.altaCategoria("American Airlines", "Empresas");
@@ -78,7 +78,7 @@ public class CtrlUniversal implements ICtrlUniversal {
 			mp.altaCategoria("LowCost", "Tipo vuelo");
 			mp.altaCategoria("Standard", "Tipo vuelo");
 			mp.altaCategoria("First Class", "Tipo vuelo");
-			mp.altaCategoria("Alojamientos", "");
+			mp.altaCategoria("Alojamientos", null);
 			mp.altaCategoria("Tipo alojamiento", "Alojamientos");
 			mp.altaCategoria("Hotel", "Tipo alojamiento");
 			mp.altaCategoria("Hostal", "Tipo alojamiento");
@@ -92,7 +92,7 @@ public class CtrlUniversal implements ICtrlUniversal {
 			mp.altaCategoria("1 ambiente", "Habitaciones");
 			mp.altaCategoria("1 dormitorio", "Habitaciones");
 			mp.altaCategoria("2 dormitorios", "Habitaciones");
-			mp.altaCategoria("Automóviles", "");
+			mp.altaCategoria("Automóviles", null);
 			mp.altaCategoria("Tarifa", "Automóviles");
 			mp.altaCategoria("Mini", "Tarifa");
 			mp.altaCategoria("Económico", "Tarifa");
@@ -109,7 +109,7 @@ public class CtrlUniversal implements ICtrlUniversal {
 			mp.altaCategoria("Daihatsu", "Marca");
 			mp.altaCategoria("Fiat", "Marca");
 			mp.altaCategoria("Ford", "Marca");
-			mp.altaCategoria("Cruceros", "");
+			mp.altaCategoria("Cruceros", null);
 			mp.altaCategoria("Mediterráneo", "Cruceros");
 			mp.altaCategoria("Mar Negro", "Cruceros");
 			mp.altaCategoria("Caribe", "Cruceros");

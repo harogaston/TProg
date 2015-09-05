@@ -6,21 +6,14 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlUsuarios;
-import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 
 	public AltaDeUsuario1(ICtrlUsuarios ctrlUsuarios) {
-		setTitle("Alta de Usuario");
 		this.ctrlUsuarios = ctrlUsuarios;
 		initComponents();
-		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-		}
 	}
 
 	/**
@@ -36,11 +29,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         buttonSiguiente = new javax.swing.JButton();
-        buttonSalir = new javax.swing.JButton();
         jTextFieldNickname = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Alta de Usuario");
         setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -53,7 +48,6 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jLabel3.setText("email");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
-
         buttonSiguiente.setText("Siguiente >");
         buttonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,27 +55,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 120, -1));
-
-
-        buttonSalir.setText("Salir");
-        buttonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
         getContentPane().add(jTextFieldNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 110, 440, -1));
         getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 170, 440, -1));
-
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
-		this.dispose();
-    }//GEN-LAST:event_buttonSalirActionPerformed
-
-    private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
+	private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {
 		String nickname = jTextFieldNickname.getText();
 		String email = jTextFieldEmail.getText();
 
@@ -107,6 +87,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ctrlUsuarios);
 			this.setVisible(false);
 			getParent().add(au2);
+			au2.setLocation(this.getLocation());
 			au2.setVisible(true);
 		} else {
 			String error = "";
@@ -121,12 +102,11 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			}
 			JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
-    }                                               
+	}
 
 	ICtrlUsuarios ctrlUsuarios;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

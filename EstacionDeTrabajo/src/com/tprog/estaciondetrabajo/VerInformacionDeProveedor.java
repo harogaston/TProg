@@ -1,8 +1,8 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinProveedor;
@@ -10,16 +10,14 @@ import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form VerInformacionDeCliente
      *
@@ -27,22 +25,19 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     public VerInformacionDeProveedor(ICtrlUsuarios ctrlUsuarios) {
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
-        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }
     }
-    
+
     void cargarDatos() {
         //listaClientes
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-        //construyo un vector con la informacion a mostrar, porque
+		//construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
         for (DTMinProveedor dt : setProveedores) {
             listaProveedores.add(dt.getNickname());
         }
+        listaProveedores.sort(null);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +47,6 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
         listaProveedoresInterfaz = new javax.swing.JComboBox(listaProveedores);
         label = new javax.swing.JLabel();
         imagenUsuarioHolder = new javax.swing.JLabel();
@@ -60,8 +54,10 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
         detalleUsuario = new javax.swing.JTextArea();
         botonServicios = new javax.swing.JButton();
 
-        setBorder(null);
-        setToolTipText("");
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Ver Información de Proveedor");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -72,14 +68,6 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
 
         listaProveedoresInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -105,7 +93,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
         imagenUsuarioHolder.setMaximumSize(new java.awt.Dimension(50, 50));
         imagenUsuarioHolder.setPreferredSize(new java.awt.Dimension(50, 50));
-        getContentPane().add(imagenUsuarioHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 130));
+        getContentPane().add(imagenUsuarioHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 140));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -126,20 +114,19 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-    
+
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         listaProveedores.clear();
         servicios = null;
         imagenUsuarioHolder.setIcon(null);
         listaProveedoresInterfaz.setSelectedItem(null);
         detalleUsuario.setText("");
-        detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
-    
+
     private void listaProveedoresInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazActionPerformed
         //seleccionarProveedor
         String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
@@ -157,8 +144,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
                     Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon imageIcon = new ImageIcon(dimg);
                     imagenUsuarioHolder.setIcon(imageIcon);
-                }
-                else{
+                } else {
                     imagenUsuarioHolder.setIcon(null);
                 }
                 //cargo la lista de servicios del proveedor
@@ -169,33 +155,29 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
-    
+
     private void listaProveedoresInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazComponentAdded
-        
+
     }//GEN-LAST:event_listaProveedoresInterfazInterfazComponentAdded
-    
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-    
+
     private void listaProveedoresInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaProveedoresInterfazItemStateChanged
-    
+
     private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
         String cliente = (String) listaProveedoresInterfaz.getSelectedItem();
         if (cliente != null) {
             ServiciosProveedor s = new ServiciosProveedor(this, servicios, ctrlUsuarios);
             this.setVisible(false);
-            s.setVisible(true);
             getParent().add(s);
+            s.setLocation(this.getLocation());
+            s.setVisible(true);
         }
     }//GEN-LAST:event_botonServiciosActionPerformed
-    
+
     Set<DTMinServicio> servicios;
     ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;
     private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel imagenUsuarioHolder;

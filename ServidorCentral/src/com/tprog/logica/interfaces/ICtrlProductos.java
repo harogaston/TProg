@@ -17,7 +17,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public interface ICtrlProductos {
 
 	public DTMinServicio infoMinServicio();
-        public DTMinPromocion infoMinPromocion();
+    public DTMinPromocion infoMinPromocion();
 	public Set<DTMinPromocion> listarPromociones();
 	public void seleccionarPromocion(DTMinPromocion dtP);
 	public DTPromocion infoPromocion();

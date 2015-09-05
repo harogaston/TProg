@@ -8,7 +8,6 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTUsuario;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Date;
@@ -18,42 +17,34 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
-	private final AltaDeUsuario1 anterior;
+	private final AltaDeUsuario1 padre;
 	private String ruta;
 	private final ICtrlUsuarios ictrlU;
 
 	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String email, ICtrlUsuarios ictrlU) {
-
-		setTitle("Alta de Usuario");
-		this.anterior = anterior;
+		this.padre = anterior;
 		this.nickname = nickname;
 		this.email = email;
 
 		this.ictrlU = ictrlU;
-		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-		}
 		initComponents();
 	}
 
 	private boolean isWhiteSpace(String s) {
-		return s.matches("^\\s*$");
+		return (s.matches("^\\s*$") || s.matches("^\\s.*"));
 	}
 
 	private boolean hasWhiteSpace(String s) {
 		return s.matches("\\s");
 	}
 
-	private void exit() {
-		// dispose a AltaDeUsuario1
-		anterior.dispose();
-		// dispose de esta ventana
-		this.dispose();
+	@Override
+	public void dispose() {
+		padre.dispose();
+		super.dispose();
 	}
 
 	/**
@@ -83,7 +74,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         labelLinkEmpresa = new javax.swing.JLabel();
         buttonAtras = new javax.swing.JButton();
         buttonConfirmar = new javax.swing.JButton();
-        buttonSalir = new javax.swing.JButton();
         jTextFieldNombre = new javax.swing.JTextField();
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldEmpresa = new javax.swing.JTextField();
@@ -95,8 +85,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         grupoBotones.add(radioButtonCliente);
         grupoBotones.add(radioButtonProveedor);
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Alta de Usuario");
         setPreferredSize(new java.awt.Dimension(640, 480));
+        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Complete los datos del nuevo Usuario");
@@ -180,14 +174,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
-
-        buttonSalir.setText("Salir");
-        buttonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
         getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 140, -1));
         getContentPane().add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 140, -1));
 
@@ -300,7 +286,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// Salir con éxito o reportar errores
 		if (creado) {
 			JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
-			exit();
+			dispose();
 		} else {
 			String error = "";
 			if (!okNombre) {
@@ -316,13 +302,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
-    private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
-		exit();
-    }//GEN-LAST:event_buttonSalirActionPerformed
-
 	private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {
 		this.setVisible(false);
-		anterior.setVisible(true);
+		padre.setVisible(true);
 	}
 
 	String nickname = null;
@@ -331,7 +313,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
-    private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSeleccionar;
     private javax.swing.ButtonGroup grupoBotones;
     private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios jComboBoxAnios;

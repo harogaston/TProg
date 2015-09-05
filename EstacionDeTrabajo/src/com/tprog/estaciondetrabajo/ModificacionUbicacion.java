@@ -1,26 +1,21 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
-import java.awt.event.MouseListener;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-/**
- *
- * @author marccio
- */
 public class ModificacionUbicacion extends javax.swing.JInternalFrame {
-    
+
     /**
      * Creates new form ReservasCliente
+     *
      * @param idCliente
      * @param padre
      */
@@ -29,19 +24,19 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         this.arbolCiudades = arbolCiudades;
         initComponents();
-        BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-        for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-            basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }
         actualizarInterfaz();
     }
-    
+
     private void actualizarInterfaz() {
         DTServicio dt = ctrlProductos.infoServicio();
         labelOrigen.setText("<html>" + dt.getOrigen().getCiudad() + ", " + dt.getOrigen().getPais() + "</html>");
-        labelDestino.setText("<html>" + dt.getDestino().getCiudad() + ", " + dt.getDestino().getPais() + "</html>");
+        if (dt.getDestino() != null) {
+            labelDestino.setText("<html>" + dt.getDestino().getCiudad() + ", " + dt.getDestino().getPais() + "</html>");
+        } else {
+            labelDestino.setText("No tiene");
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +46,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
+        botonAtras = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         arbolCiudadesOrigenInterfaz = new javax.swing.JTree(arbolCiudades);
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -65,7 +60,8 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         labelOrigen = new javax.swing.JLabel();
         labelDestino = new javax.swing.JLabel();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setTitle("Modificar Ubicación");
         setPreferredSize(new java.awt.Dimension(690, 435));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -75,13 +71,13 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+        botonAtras.setText("< Atras");
+        botonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
+                botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, -1, -1));
 
         arbolCiudadesOrigenInterfaz.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -132,34 +128,34 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+
+    private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
         arbolCiudades.removeAllChildren();
         this.dispose();
         padre.setVisible(true);
-    }//GEN-LAST:event_botonSalirActionPerformed
-    
+    }//GEN-LAST:event_botonAtrasActionPerformed
+
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         /*
-        descripcionInterfaz.setText(servicio.getDescripcion());
-        precioInterfaz.setText(Float.toString(servicio.getPrecio()));
-        */        
+         descripcionInterfaz.setText(servicio.getDescripcion());
+         precioInterfaz.setText(Float.toString(servicio.getPrecio()));
+         */
     }//GEN-LAST:event_formComponentShown
-    
+
     private void arbolCiudadesOrigenInterfazValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCiudadesOrigenInterfazValueChanged
         DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCiudadesOrigenInterfaz.getLastSelectedPathComponent();
         if (nodo != null) {
             System.out.println("Seleccionaste " + nodo.toString());
         }
     }//GEN-LAST:event_arbolCiudadesOrigenInterfazValueChanged
-    
+
     private void arbolCiudadesDestinoInterfazValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCiudadesDestinoInterfazValueChanged
         DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCiudadesOrigenInterfaz.getLastSelectedPathComponent();
         if (nodo != null) {
             System.out.println("Seleccionaste " + nodo.toString());
         }
     }//GEN-LAST:event_arbolCiudadesDestinoInterfazValueChanged
-    
+
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         //construir DTUbicacion's en base a la hoja seleccionada y al padre
         //origen
@@ -173,21 +169,19 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Cambio realizado con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
             padre.setVisible(true);
-        } else
+        } else {
             JOptionPane.showMessageDialog(this, "Por favor seleccione ciudades validas", "Seleccion invalida", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_botonConfirmarActionPerformed
-    
-    
-    
-    
+
     DefaultMutableTreeNode arbolCiudades;
     ICtrlProductos ctrlProductos;
     ModificacionServicio padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolCiudadesDestinoInterfaz;
     private javax.swing.JTree arbolCiudadesOrigenInterfaz;
+    private javax.swing.JButton botonAtras;
     private javax.swing.JButton botonConfirmar;
-    private javax.swing.JButton botonSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

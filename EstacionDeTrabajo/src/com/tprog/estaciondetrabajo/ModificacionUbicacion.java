@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTServicio;
@@ -18,7 +18,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author marccio
  */
 public class ModificacionUbicacion extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      * @param idCliente
@@ -32,7 +32,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }      
+        }
         actualizarInterfaz();
     }
     
@@ -41,7 +41,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         labelOrigen.setText("<html>" + dt.getOrigen().getCiudad() + ", " + dt.getOrigen().getPais() + "</html>");
         labelDestino.setText("<html>" + dt.getDestino().getCiudad() + ", " + dt.getDestino().getPais() + "</html>");
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,34 +132,34 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         arbolCiudades.removeAllChildren();
         this.dispose();
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         /*
         descripcionInterfaz.setText(servicio.getDescripcion());
         precioInterfaz.setText(Float.toString(servicio.getPrecio()));
         */        
     }//GEN-LAST:event_formComponentShown
-
+    
     private void arbolCiudadesOrigenInterfazValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCiudadesOrigenInterfazValueChanged
         DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCiudadesOrigenInterfaz.getLastSelectedPathComponent();
         if (nodo != null) {
             System.out.println("Seleccionaste " + nodo.toString());
         }
     }//GEN-LAST:event_arbolCiudadesOrigenInterfazValueChanged
-
+    
     private void arbolCiudadesDestinoInterfazValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_arbolCiudadesDestinoInterfazValueChanged
         DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCiudadesOrigenInterfaz.getLastSelectedPathComponent();
         if (nodo != null) {
             System.out.println("Seleccionaste " + nodo.toString());
         }
     }//GEN-LAST:event_arbolCiudadesDestinoInterfazValueChanged
-
+    
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         //construir DTUbicacion's en base a la hoja seleccionada y al padre
         //origen
@@ -176,7 +176,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         } else
             JOptionPane.showMessageDialog(this, "Por favor seleccione ciudades validas", "Seleccion invalida", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_botonConfirmarActionPerformed
-
+    
     
     
     

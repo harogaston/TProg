@@ -12,8 +12,6 @@ import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;

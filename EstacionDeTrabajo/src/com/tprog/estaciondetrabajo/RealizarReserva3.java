@@ -5,9 +5,7 @@
 */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.estaciondetrabajo.RealizarReserva2;
 import com.tprog.logica.dt.DTLineaReserva;
-import com.tprog.logica.dt.DTMinCliente;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTServicio;
@@ -15,9 +13,7 @@ import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
-import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
-import static java.lang.Integer.parseInt;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -255,7 +251,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     @Override
     public void dispose() {
         super.dispose();
@@ -274,7 +270,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         if (servicio != null) {
             //DTServicio dtS = ctrlUsuarios.infoServicio();
             //detalleServicio.setVisible(true);
-            //detalleServicio.setText(dtS.toString()); 
+            //detalleServicio.setText(dtS.toString());
             DTMinServicio dtmS = ctrlProductos.infoMinServicio();
             String proveedor = dtmS.getNicknameP();
             ctrlReservas.seleccionarProveedor(proveedor);
@@ -301,16 +297,16 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             int anioF = 0;
             int anio;
             boolean okAnioI = (((!anioIString.isEmpty()))&&(anioIString.matches("([0-9]|)+")));
-            if (okAnioI) 
+            if (okAnioI)
                 anioI = Integer.parseInt(anioIString);
             okAnioI = ((okAnioI) && ( anioI >= 2015));
             boolean okAnioF = (((!anioIString.isEmpty()))&&(anioFString.matches("([0-9]|)+")));
-            if (okAnioF) 
+            if (okAnioF)
                 anioF = Integer.parseInt(anioFString);
             okAnioF = ((okAnioF) && (okAnioI) && ( anioF >= anioI));
             //creo fechas
             if ((okCant) && (okAnioI)&&(okAnioF)){//todo ok
-                 Date fI = new Date(anioI, mesI, diaI);
+                Date fI = new Date(anioI, mesI, diaI);
                 Date fF = new Date(anioF, mesF, diaF);
                 ctrlReservas.ingresarLineaReserva(cant, fI, fF);
                 DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
@@ -320,11 +316,11 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             }
             else{ //hay algun dato erroneo
                 String error = "";
-		if (!okCant)
+                if (!okCant)
                     error = "La cantidad ingresada no es correcta.";
-                    else if ((!okAnioI)|| (!okAnioF))
-			error = "La fecha ingresada no es correcta";
-		JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+                else if ((!okAnioI)|| (!okAnioF))
+                    error = "La fecha ingresada no es correcta";
+                JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
             }
         }
         else
@@ -340,7 +336,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
     private ICtrlUsuarios ctrlUsuarios;
     private ICtrlReservas ctrlReservas;
     private ICtrlProductos ctrlProductos;
-    private boolean proveedorSeleccionado;    
+    private boolean proveedorSeleccionado;
     Fabrica f;
     Set<DTMinServicio> servicios;
     RealizarReserva2 padre;

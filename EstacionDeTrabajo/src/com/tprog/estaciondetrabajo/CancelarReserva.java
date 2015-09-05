@@ -1,13 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import java.awt.event.MouseListener;
 import java.util.Set;
@@ -20,21 +19,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class CancelarReserva extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      */
-    public CancelarReserva() {
+    public CancelarReserva(ICtrlReservas ctrlReservas) {
+        this.ctrlReservas = ctrlReservas;
         initComponents();
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
     
     void cargarDatos() {
-        Fabrica f = Fabrica.getInstance();
-        ctrlReservas = f.getICtrlReservas();
         //listaClientes
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
         //construyo un vector con la informacion a mostrar, porque
@@ -45,7 +43,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,15 +109,15 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaReservasInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaReservasInterfazInterfazComponentAdded
-
+    
     private void listaReservasInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaReservasInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaReservasInterfazItemStateChanged
-
+    
     private void listaReservasInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaReservasInterfazInterfazActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
         if (reservaSeleccionada != null) {
@@ -128,34 +126,34 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
             DTReserva dt = ctrlReservas.infoReserva();
         }
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-
+    
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         listaReservas.clear();
         reservas = null;
         listaReservasInterfaz.setSelectedItem(null);
     }//GEN-LAST:event_formComponentHidden
-
+    
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
         if (reservaSeleccionada != null) {
             boolean eliminada = ctrlReservas.eliminarReserva();
-			if (eliminada) {
-				JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);            
-			}
-			else{
-				JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE); 
-			}
+            if (eliminada) {
+                JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }//GEN-LAST:event_botonEliminarActionPerformed
-
+    
     ICtrlReservas ctrlReservas;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;

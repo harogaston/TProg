@@ -1,14 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinServicio;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
-import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Set;
@@ -20,21 +18,20 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author marccio
  */
 public class ActualizarServicio extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      */
-    public ActualizarServicio() {
+    public ActualizarServicio(ICtrlProductos ctrlProductos) {
+        this.ctrlProductos = ctrlProductos;
         initComponents();
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
     
     void cargarDatos() {
-        Fabrica f = Fabrica.getInstance();
-        ctrlProductos = f.getICtrlProductos();
         //listaClientes
         servicios = ctrlProductos.listarServicios();
         //construyo un vector con la informacion a mostrar, porque
@@ -45,7 +42,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
             }
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,15 +108,15 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
-
+        
     }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
-
+    
     private void listaServiciosInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaServiciosInterfazItemStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_listaServiciosInterfazItemStateChanged
-
+    
     DTMinServicio buscarDTMinServicio(String id) {
         DTMinServicio dt = null;
         Iterator it = servicios.iterator();
@@ -139,41 +136,33 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
             ctrlProductos.seleccionarServicio(dt);
         }
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
     }//GEN-LAST:event_formComponentShown
-
+    
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         listaServicios.clear();
         servicios = null;
         listaServiciosInterfaz.setSelectedItem(null);
     }//GEN-LAST:event_formComponentHidden
-
+    
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
-        /*
-        String reservaSeleccionada = (String) listaServiciosInterfaz.getSelectedItem();
-        if (reservaSeleccionada != null) {
-            ctrlProductos.eliminarReserva();
-            JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);            
-        }
-        */
         String cliente = (String) listaServiciosInterfaz.getSelectedItem();
         System.out.println("servicio: " + cliente);
         if (cliente != null) {
             ModificacionServicio m = new ModificacionServicio(this, ctrlProductos.infoServicio(), ctrlProductos);
-//            getContentPane().add(m, BorderLayout.CENTER);
             m.setBounds(10, 10, 100, 100);
             this.setVisible(false);
             m.setVisible(true);
             getParent().add(m);
         }        
     }//GEN-LAST:event_botonModificarActionPerformed
-
+    
     ICtrlProductos ctrlProductos;
     Set<DTMinServicio> servicios;
     VerInformacionDeCliente padre;

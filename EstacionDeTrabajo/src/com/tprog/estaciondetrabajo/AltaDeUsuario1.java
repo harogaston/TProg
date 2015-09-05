@@ -1,36 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
-import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import org.apache.commons.validator.routines.EmailValidator;
 
 public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form AltaDeUsuario1
      */
-    public AltaDeUsuario1() {
+    public AltaDeUsuario1(ICtrlUsuarios ctrlUsuarios) {
         setTitle("Alta de Usuario");
-        fabrica = Fabrica.getInstance();
+        this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -93,38 +88,37 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_buttonSalirActionPerformed
-
+    
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         // TODO add your handling code here:
         String nickname = jTextFieldNickname.getText();
         String email = jTextFieldEmail.getText();
-
+        
         //Verificacion de email
         EmailValidator emailValidator = EmailValidator.getInstance(true);
         boolean okEmail = emailValidator.isValid(email);
-
+        
         //Verificacion de nickname
         boolean okEnblanco = !nickname.matches("^\\s*$");
         boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
         boolean okNickname = okEnblanco && okSinEspacios;
-
-		ICtrlUsuarios ictrlU = fabrica.getICtrlUsuarios();
-		boolean nicknameUnico = false;
+        
+        boolean nicknameUnico = false;
         if (okNickname) {
-            nicknameUnico = ictrlU.verificarNickname(nickname);
+            nicknameUnico = ctrlUsuarios.verificarNickname(nickname);
         }
-		boolean emailUnico = false;
+        boolean emailUnico = false;
         if (okEmail) {
-            emailUnico = ictrlU.verificarEmail(email);
+            emailUnico = ctrlUsuarios.verificarEmail(email);
         }
-		
+        
         if (okNickname && okEmail && emailUnico && nicknameUnico) {
-            AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ictrlU);
+            AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ctrlUsuarios);
             this.setVisible(false);
             au2.setVisible(true);
             getParent().add(au2);
@@ -142,13 +136,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonSiguienteActionPerformed
-
+    
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         jTextFieldEmail.setText("");
         jTextFieldNickname.setText("");
     }//GEN-LAST:event_formComponentHidden
-
-    Fabrica fabrica;
+    
+    ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSiguiente;
@@ -158,5 +152,5 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNickname;
     // End of variables declaration//GEN-END:variables
-
+    
 }

@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.ICtrlProductos;
@@ -21,7 +21,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
  * @author marccio
  */
 public class ModificacionCategorias extends javax.swing.JInternalFrame {
-
+    
     /**
      * Creates new form ReservasCliente
      * @param servicios
@@ -47,9 +47,9 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
         for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
             basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-        }        
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -123,7 +123,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         listaSistema.clear();
         listaServicio.clear();
@@ -132,7 +132,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         this.dispose();
         padre.setVisible(true);
     }//GEN-LAST:event_botonSalirActionPerformed
-
+    
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
         //quitar
         List selected = listaServicioInterfaz.getSelectedValuesList();
@@ -149,7 +149,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         }
         listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonQuitarActionPerformed
-
+    
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
         List selected = listaSistemaInterfaz.getSelectedValuesList();
         Iterator it1 = selected.iterator();
@@ -167,7 +167,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         }
         listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonAgregarActionPerformed
-
+    
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
         try {
             //primero recorro el set de categorias original, y a aquellas
@@ -203,12 +203,12 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
             this.dispose();
             padre.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage().toString(), "Error", JOptionPane.ERROR_MESSAGE);            
+            JOptionPane.showMessageDialog(this, e.getMessage().toString(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         
     }//GEN-LAST:event_botonConfirmarActionPerformed
-
+    
     Set<String> categoriasServicio;
     ICtrlProductos ctrlProductos;
     ModificacionServicio padre;

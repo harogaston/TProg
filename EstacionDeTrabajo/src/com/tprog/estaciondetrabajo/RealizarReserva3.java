@@ -225,8 +225,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
 			//fechas
 			int diaI = (Integer) comboBoxDias1.getSelectedItem();
 			int diaF = (Integer) comboBoxDias2.getSelectedItem();
-			int mesI = comboBoxMeses1.getSelectedIndex() + 1;
-			int mesF = comboBoxMeses2.getSelectedIndex() + 1;
+			int mesI = comboBoxMeses1.getSelectedIndex();
+			int mesF = comboBoxMeses2.getSelectedIndex();
 			int anioI = (Integer) comboBoxAnios1.getSelectedItem();
 			int anioF = (Integer) comboBoxAnios2.getSelectedItem();
 

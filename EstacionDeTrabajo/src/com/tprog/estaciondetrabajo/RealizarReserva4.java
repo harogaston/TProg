@@ -225,15 +225,15 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 			//fechas
 			int diaI = (Integer) comboBoxDias1.getSelectedItem();
 			int diaF = (Integer) comboBoxDias2.getSelectedItem();
-			int mesI = comboBoxMeses1.getSelectedIndex() + 1;
-			int mesF = comboBoxMeses2.getSelectedIndex() + 1;
+			int mesI = comboBoxMeses1.getSelectedIndex();
+			int mesF = comboBoxMeses2.getSelectedIndex();
 			int anioI = (Integer) comboBoxAnios1.getSelectedItem();
 			int anioF = (Integer) comboBoxAnios2.getSelectedItem();
 
 			Date fechaInicio = new Date(anioI, mesI, diaI);
 			Date fechaFinal = new Date(anioF, mesF, diaF);
 			Date fechaActual = new Date();
-
+			
 			// Verifico las fechas
 			boolean fechasCoherentes = (fechaInicio.before(fechaFinal)) && (fechaInicio.after(fechaActual));
 

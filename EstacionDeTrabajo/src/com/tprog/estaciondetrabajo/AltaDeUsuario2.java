@@ -237,7 +237,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		String nombre = jTextFieldNombre.getText();
 		String apellido = jTextFieldApellido.getText();
 		int dia = (Integer) jComboBoxDias.getSelectedItem();
-		int mes = jComboBoxMeses.getSelectedIndex() + 1;
+		int mes = jComboBoxMeses.getSelectedIndex();
 		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
 

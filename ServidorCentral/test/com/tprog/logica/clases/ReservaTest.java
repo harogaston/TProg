@@ -55,10 +55,10 @@ public class ReservaTest {
     @Before
     public void setUp() throws Exception {
             fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", "", 10);
-		DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, "", "idPromocion2", 20);
-		DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", "", 30);
-                DTLineaReserva l4 = new DTLineaReserva(3, fecha, fecha, "", "", 30);
+		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, 10);
+		DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", 20);
+		DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, 30);
+                DTLineaReserva l4 = new DTLineaReserva(3, fecha, fecha, null, null, 30);
                 
 		set = new HashSet();
 		set.add(l1);
@@ -71,8 +71,8 @@ public class ReservaTest {
                 this.nicknameProv = "Pedro";
                 estado = EstadoReserva.Registrada;
                 DTReserva dtR = new DTReserva(-1,fecha,estado,precioTotal,set);
-                Reserva res = new Reserva(dtR,nicknameProv);
-		instance = new Reserva(fecha,estado,precioTotal,set,nicknameProv);
+                instance = new Reserva(null,dtR,nicknameProv);
+		//instance = new Reserva(fecha,estado,precioTotal,set,nicknameProv);
                 
     }
     
@@ -118,7 +118,7 @@ public class ReservaTest {
         EstadoReserva expResult = EstadoReserva.Registrada;
         EstadoReserva result = null;
         
-            result = instance.getEstadoReserva();
+            result = instance.getEstado();
         
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -192,10 +192,11 @@ public class ReservaTest {
      * Test of crearDTReserva method, of class Reserva.
      */
     @Test
-    public void testCrearDTReserva() {
+    public void testCrearDTReserva() throws Exception {
         System.out.println("crearDTReserva");
+        
         DTReserva result = instance.crearDTReserva();
-        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstadoReserva(), instance.getPrecioTotal(),set);
+        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstado(), instance.getPrecioTotal(),set);
                 
         assertEquals(esperado.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.

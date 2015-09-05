@@ -8,11 +8,9 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.util.Set;
 import java.util.Vector;
@@ -21,33 +19,22 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
-/**
- *
- * @author marccio.silva
- */
 public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 
 	/**
 	 * Creates new form VerInformacionDeCliente
 	 */
-	public AltaDeServicio2() {
-		setTitle("Alta de Servicio");
+	public AltaDeServicio2(ICtrlUsuarios ctrlUsuarios, ICtrlProductos ctrlProductos) {
+		this.ctrlProductos = ctrlProductos;
+		this.ctrlUsuarios = ctrlUsuarios;
 		initComponents();
-		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-		}
 	}
 
 	void cargarDatos() {
 		//listaClientes
-		Fabrica f = Fabrica.getInstance();
-		ctrlUsuarios = f.getICtrlUsuarios();
-		ctrlProductos = f.getICtrlProductos();
 		Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-        //construyo un vector con la informacion a mostrar, porque
+		//construyo un vector con la informacion a mostrar, porque
 		//el comboBox solo funciona con Vector o List
 		for (DTMinProveedor dt : setProveedores) {
 			listaProveedores.add(dt.getNickname());
@@ -64,16 +51,17 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
         listaProveedoresInterfaz = new javax.swing.JComboBox(listaProveedores);
         label = new javax.swing.JLabel();
-        imagenUsuario = new javax.swing.JLabel();
+        imagenUsuarioHolder = new javax.swing.JLabel();
         panelUsuario = new javax.swing.JScrollPane();
         detalleUsuario = new javax.swing.JTextArea();
         buttonSeleccionarProveedor = new javax.swing.JButton();
 
-        setBorder(null);
-        setToolTipText("");
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Alta de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -84,14 +72,6 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 400, -1, -1));
 
         listaProveedoresInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -108,14 +88,14 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
                 listaProveedoresInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaProveedoresInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 290, -1));
+        getContentPane().add(listaProveedoresInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 290, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setText("Seleccione el proveedor que va a dar de alta el Servicio.");
-        getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
         label.getAccessibleContext().setAccessibleDescription("");
 
-        getContentPane().add(imagenUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(imagenUsuarioHolder, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 140, 140));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -124,7 +104,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
         detalleUsuario.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleUsuario);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 230, 200));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 180, 230, 190));
 
         buttonSeleccionarProveedor.setText("Siguiente >");
         buttonSeleccionarProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -144,14 +124,13 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
 		listaProveedores.clear();
 		servicios = null;
-		imagenUsuario.setIcon(null);
+		imagenUsuarioHolder.setIcon(null);
 		listaProveedoresInterfaz.setSelectedItem(null);
 		detalleUsuario.setText("");
-		detalleUsuario.setVisible(false);
     }//GEN-LAST:event_formComponentHidden
 
     private void listaProveedoresInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazActionPerformed
-		//seleccionarCliente
+		//seleccionarProveedor
 		String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
 		if (proveedor != null) {
 			ctrlUsuarios.seleccionarProveedor(proveedor);
@@ -160,19 +139,21 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 			try {
 				DTProveedor dt = ctrlUsuarios.infoProveedor();
 				detalleUsuario.setText(dt.toString());
-
-				File f = new File(dt.getImagen());
-				Image img = ImageIO.read(f);
-				Image dimg = img.getScaledInstance(imagenUsuario.getWidth(), imagenUsuario.getHeight(), Image.SCALE_SMOOTH);
-				ImageIcon imageIcon = new ImageIcon(dimg);
-				imagenUsuario.setIcon(imageIcon);
+				String imagen = dt.getImagen();
+				if (imagen != null) {
+					File f = new File(dt.getImagen());
+					Image img = ImageIO.read(f);
+					Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon imageIcon = new ImageIcon(dimg);
+					imagenUsuarioHolder.setIcon(imageIcon);
+				} else {
+					imagenUsuarioHolder.setIcon(null);
+				}
 			} catch (Exception ex) {
 				Logger.getLogger(AltaDeServicio2.class.getName()).log(Level.SEVERE, null, ex);
 				System.out.println("La imagen no pudo ser cargada");
+				imagenUsuarioHolder.setIcon(null);
 			}
-
-            //cargo la lista de servicios del usuario acá, y cuando se pidan los servicios se muestran
-			//servicios = ctrlUsuarios.listarServiciosProveedor();
 		}
     }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
 
@@ -180,26 +161,20 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_listaProveedoresInterfazInterfazComponentAdded
 
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-		this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
     private void listaProveedoresInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazItemStateChanged
-		// TODO add your handling code here:
+
     }//GEN-LAST:event_listaProveedoresInterfazItemStateChanged
 
     private void buttonSeleccionarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSeleccionarProveedorActionPerformed
 
 		String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
-		//String proveedor = "Jorgito_de_prueba";
 		if (proveedor != null) {
 			ctrlProductos.seleccionarProveedor(proveedor);
 			AltaDeServicio3 as3 = new AltaDeServicio3(this, ctrlProductos, proveedor);
-//            getContentPane().add(as3, BorderLayout.CENTER);
-			as3.setBounds(10, 10, 100, 100);
 			this.setVisible(false);
-			as3.setVisible(true);
 			getParent().add(as3);
+			as3.setLocation(this.getLocation());
+			as3.setVisible(true);
 		} else {
 			JOptionPane.showMessageDialog(this, "Seleccione un proveedor.", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
 		}
@@ -209,10 +184,9 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 	ICtrlProductos ctrlProductos;
 	ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonSeleccionarProveedor;
     private javax.swing.JTextArea detalleUsuario;
-    private javax.swing.JLabel imagenUsuario;
+    private javax.swing.JLabel imagenUsuarioHolder;
     private javax.swing.JLabel label;
     private javax.swing.JComboBox listaProveedoresInterfaz;
     private Vector<String> listaProveedores = new Vector<>();

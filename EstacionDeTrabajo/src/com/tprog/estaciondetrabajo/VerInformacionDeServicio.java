@@ -7,12 +7,8 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
-import java.awt.BorderLayout;
-import java.awt.event.MouseListener;
 import java.util.Set;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -21,17 +17,13 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 	/**
 	 * Creates new form VerInformacionDeCliente
 	 */
-	public VerInformacionDeServicio() {
+	public VerInformacionDeServicio(ICtrlProductos ctrlProductos) {
+		this.ctrlProductos = ctrlProductos;
 		initComponents();
-		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-		}
+		cargarDatos();
 	}
 
 	void cargarDatos() {
-		Fabrica f = Fabrica.getInstance();
-		ctrlProductos = f.getICtrlProductos();
 		DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
 		arbolCategorias.removeAll();
 		arbolCategorias.setModel(new DefaultTreeModel(raiz));
@@ -47,14 +39,15 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonSalir = new javax.swing.JButton();
         label = new javax.swing.JLabel();
         botonServicios = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         arbolCategorias = new javax.swing.JTree();
 
-        setBorder(null);
-        setToolTipText("");
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Ver Información de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -66,14 +59,6 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        botonSalir.setText("Salir");
-        botonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, -1, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setText("<html><div style=\"text-align: center;\">Seleccione una categoría del Sistema, y haga click en 'Ver Servicios'</html>");
@@ -105,10 +90,6 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 		reservas = null;
     }//GEN-LAST:event_formComponentHidden
 
-    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
-		this.dispose();
-    }//GEN-LAST:event_botonSalirActionPerformed
-
     private void botonServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonServiciosActionPerformed
 		DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) arbolCategorias.getLastSelectedPathComponent();
 		if (nodo != null) {
@@ -117,8 +98,9 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 			listaServicios = ctrlProductos.listarServiciosCategoria(categoria);
 			ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
 			this.setVisible(false);
-			s.setVisible(true);
 			getParent().add(s);
+			s.setLocation(this.getLocation());
+			s.setVisible(true);
 		}
     }//GEN-LAST:event_botonServiciosActionPerformed
 
@@ -127,7 +109,6 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 	ICtrlProductos ctrlProductos;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolCategorias;
-    private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonServicios;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label;

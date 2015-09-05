@@ -17,6 +17,10 @@ import static org.junit.Assert.*;
  */
 public class PaisTest {
     
+    Pais instance;
+    String idPais;
+    Map<String, Ciudad> ciudades;
+    
     public PaisTest() {
     }
     
@@ -30,6 +34,10 @@ public class PaisTest {
     
     @Before
     public void setUp() {
+        instance = new Pais("QGuay");
+        Ciudad nueva = new Ciudad("Montevideo");
+        instance.agregarCiudad(nueva);
+        
     }
     
     @After
@@ -42,12 +50,11 @@ public class PaisTest {
     @Test
     public void testGetIdPais() {
         System.out.println("getIdPais");
-        Pais instance = null;
-        String expResult = "";
+        
+        String expResult = "QGuay";
         String result = instance.getIdPais();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -56,12 +63,12 @@ public class PaisTest {
     @Test
     public void testGetCiudades() {
         System.out.println("getCiudades");
-        Pais instance = null;
-        Map<String, Ciudad> expResult = null;
+        
+        Map<String, Ciudad> expResult = ciudades;
         Map<String, Ciudad> result = instance.getCiudades();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -70,11 +77,11 @@ public class PaisTest {
     @Test
     public void testSetIdPais() {
         System.out.println("setIdPais");
-        String id = "";
-        Pais instance = null;
+        String id = "gg";
+        
         instance.setIdPais(id);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -83,11 +90,11 @@ public class PaisTest {
     @Test
     public void testAgregarCiudad() {
         System.out.println("agregarCiudad");
-        Ciudad c = null;
-        Pais instance = null;
+        Ciudad c = new Ciudad("Atlantida");
+        
         instance.agregarCiudad(c);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

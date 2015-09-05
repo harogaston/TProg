@@ -70,11 +70,11 @@ public class Proveedor extends Usuario {
 	}
 
 	public void addServicio(Servicio s) {
-		servicios.put(s.getIdServicio(), s);
+            servicios.put(s.getIdServicio(), s);
 	}
 
 	public void addPromocion(Promocion p) {
-		promociones.put(p.getIdPromocion(), p);
+            promociones.put(p.getIdPromocion(), p);
 	}
 
 	public void setEmpresa(String empresa) {

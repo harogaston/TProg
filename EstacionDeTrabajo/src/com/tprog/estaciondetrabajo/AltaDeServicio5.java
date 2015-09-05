@@ -8,7 +8,6 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.Image;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -21,9 +20,9 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
+import org.apache.commons.validator.routines.FloatValidator;
 
 public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 
@@ -38,13 +37,8 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 	 */
 	public AltaDeServicio5(AltaDeServicio4 padre, ICtrlProductos ctrlProductos) {
 		initComponents();
-		setTitle("Alta de Servicio");
 		this.padre = padre;
 		this.ctrlProductos = ctrlProductos;
-		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-		}
 		cargarCiudades();
 	}
 
@@ -56,7 +50,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		 Root que engloba a todos los subárboles
 		 Nivel de países
 		 Nivel de ciudades
-		 Teniendo una ciudad, se puede hacer getParent() y obtener a su 
+		 Teniendo una ciudad, se puede hacer getParent() y obtener a su
 		 país correspondiente
 		 */
 		while (e.hasMoreElements()) {
@@ -68,6 +62,10 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		}
 		listaCiudadesOrigenInterfaz.updateUI();
 		listaCiudadesDestinoInterfaz.updateUI();
+	}
+
+	private boolean isWhiteSpace(String s) {
+		return (s.matches("^\\s*$") || s.matches("^\\s.*"));
 	}
 
 	/**
@@ -85,7 +83,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         listaCiudadesDestinoInterfaz = new javax.swing.JComboBox();
         buttonConfirmar = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
-        buttonSalir = new javax.swing.JButton();
         checkBoxCiudadDestino = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -101,6 +98,10 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         labelImagen2 = new javax.swing.JLabel();
         labelImagen3 = new javax.swing.JLabel();
 
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Alta de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -108,7 +109,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 11, 480, -1));
 
         jLabel2.setText("Ciudad de Origen");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 204, 147, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 147, -1));
 
         listaCiudadesOrigenInterfaz.setModel(new javax.swing.DefaultComboBoxModel(listaCiudades));
         listaCiudadesOrigenInterfaz.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +117,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 listaCiudadesOrigenInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaCiudadesOrigenInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 166, -1));
+        getContentPane().add(listaCiudadesOrigenInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 166, -1));
 
         listaCiudadesDestinoInterfaz.setVisible(false);
         listaCiudadesDestinoInterfaz.setModel(new javax.swing.DefaultComboBoxModel(listaCiudades));
@@ -126,7 +127,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 listaCiudadesDestinoInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaCiudadesDestinoInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 168, -1));
+        getContentPane().add(listaCiudadesDestinoInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 168, -1));
 
         buttonConfirmar.setText("Confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,21 +137,13 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         });
         getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
 
-        buttonAtras.setText("Atras");
+        buttonAtras.setText("< Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
-
-        buttonSalir.setText("Salir");
-        buttonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, -1, -1));
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
 
         checkBoxCiudadDestino.setSelected(false);
         checkBoxCiudadDestino.setText("Ciudad de Destino");
@@ -159,7 +152,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 checkBoxCiudadDestinoActionPerformed(evt);
             }
         });
-        getContentPane().add(checkBoxCiudadDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        getContentPane().add(checkBoxCiudadDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         jLabel3.setText("Descripción");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 43, -1, -1));
@@ -169,11 +162,11 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 75, 169, -1));
 
         jLabel4.setText("Precio");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 104, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jScrollPane2.setViewportView(textPanePrecio);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(73, 164, 168, -1));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 168, -1));
 
         jLabel5.setText("Imágenes");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 43, -1, -1));
@@ -184,7 +177,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
         buttonImagen2.setText("Imágen 2");
         buttonImagen2.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +185,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonImagen2ActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        getContentPane().add(buttonImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
 
         buttonImagen3.setText("Imágen 3");
         buttonImagen3.addActionListener(new java.awt.event.ActionListener() {
@@ -200,27 +193,26 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonImagen3ActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, -1, -1));
+        getContentPane().add(buttonImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
 
         labelImagen1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, 120, 80));
+        getContentPane().add(labelImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 90, 90));
 
         labelImagen2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 180, 120, 80));
+        getContentPane().add(labelImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 90, 90));
 
         labelImagen3.setAutoscrolls(true);
         labelImagen3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 120, 80));
+        getContentPane().add(labelImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 90, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-		// TODO add your handling code here:
 		String descripcion = textPaneDescripcion.getText();
 		String precioString = textPanePrecio.getText();
-		boolean okDescripcion = !(descripcion.isEmpty());
-		
+		boolean okDescripcion = !isWhiteSpace(descripcion);
+
 		// Verifico precio
 		boolean okPrecio;
 		float precio = 0.0F;
@@ -234,7 +226,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 			JOptionPane.showMessageDialog(this, "Precio: El valor ingresado no es correcto", "Error", JOptionPane.INFORMATION_MESSAGE);
 			okPrecio = false;
 		}
-		
+
 		Set<String> imagenes = new HashSet<>();
 		if (ruta1 != null) {
 			imagenes.add(ruta1);
@@ -291,14 +283,13 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 				}
 			} //es imposible que el paisOrigen sea null, por eso no tiro ningun mensaje
 			JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                        this.dispose();
+			this.dispose();
 		} else {
 			JOptionPane.showMessageDialog(this, "Por favor seleccione una ciudad de origen", "Error", JOptionPane.INFORMATION_MESSAGE);
 		}
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void checkBoxCiudadDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxCiudadDestinoActionPerformed
-		// TODO add your handling code here:
 		if (checkBoxCiudadDestino.isSelected()) {
 			listaCiudadesDestinoInterfaz.setVisible(true);
 		} else {
@@ -306,38 +297,31 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_checkBoxCiudadDestinoActionPerformed
 
-    private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
-		// TODO add your handling code here:
-		this.dispose();
-    }//GEN-LAST:event_buttonSalirActionPerformed
+	@Override
+	public void dispose() {
+		padre.dispose();
+		super.dispose();
+	}
 
-    @Override
-    public void dispose() {
-        super.dispose(); //To change body of generated methods, choose Tools | Templates.
-        padre.dispose();
-    }
 
-    
-    
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
-		// TODO add your handling code here:
 		this.setVisible(false);
 		this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
-    private void mostrarImagen(String ruta, JLabel label) throws IOException {
-        //obtengo archivo desde ruta
-        File f = new File(ruta);
-        //creo imagen
-        Image img = ImageIO.read(f);
-        //redimensiono para que entre en la JLabel
-        Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-        //armo el ImageIcon
-        ImageIcon imageIcon = new ImageIcon(dimg);
-        //lo asocio a la JLabel
-        label.setIcon(imageIcon);        
-    }
-    
+	private void mostrarImagen(String ruta, JLabel label) throws IOException {
+		//obtengo archivo desde ruta
+		File f = new File(ruta);
+		//creo imagen
+		Image img = ImageIO.read(f);
+		//redimensiono para que entre en la JLabel
+		Image dimg = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+		//armo el ImageIcon
+		ImageIcon imageIcon = new ImageIcon(dimg);
+		//lo asocio a la JLabel
+		label.setIcon(imageIcon);
+	}
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -345,11 +329,11 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 		fc.setFileFilter(filter);
 		int seleccion = fc.showDialog(this, "Adjuntar");
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			// Para guardar la imagen.*******************************************
+			// Para guardar la imagen
 			File file = fc.getSelectedFile();
 			ruta1 = file.getPath();
 			try {
-                            mostrarImagen(ruta1, labelImagen1);
+				mostrarImagen(ruta1, labelImagen1);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -357,19 +341,17 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonImagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImagen2ActionPerformed
-		// TODO add your handling code here:
 		JFileChooser fc = new JFileChooser();
-		String rutname = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"Imágenes JPG & PNG ", "jpg", "png");
 		fc.setFileFilter(filter);
 		int seleccion = fc.showDialog(this, "Adjuntar");
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			// Para guardar la imagen.*******************************************
+			// Para guardar la imagen
 			File file = fc.getSelectedFile();
 			ruta2 = file.getPath();
 			try {
-                            mostrarImagen(ruta2, labelImagen2);
+				mostrarImagen(ruta2, labelImagen2);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -377,19 +359,17 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonImagen2ActionPerformed
 
     private void buttonImagen3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonImagen3ActionPerformed
-		// TODO add your handling code here:
 		JFileChooser fc = new JFileChooser();
-		String rutname = "";
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"Imágenes JPG & PNG ", "jpg", "png");
 		fc.setFileFilter(filter);
 		int seleccion = fc.showDialog(this, "Adjuntar");
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
-			// Para guardar la imagen.*******************************************
+			// Para guardar la imagen
 			File file = fc.getSelectedFile();
 			ruta3 = file.getPath();
 			try {
-                            mostrarImagen(ruta3, labelImagen3);
+				mostrarImagen(ruta3, labelImagen3);
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
@@ -415,7 +395,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonConfirmar;
     private javax.swing.JButton buttonImagen2;
     private javax.swing.JButton buttonImagen3;
-    private javax.swing.JButton buttonSalir;
     private javax.swing.JCheckBox checkBoxCiudadDestino;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

@@ -8,21 +8,15 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTUsuario;
 import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
-import java.awt.event.MouseListener;
-import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
-import static java.lang.Integer.parseInt;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
@@ -30,19 +24,27 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private String ruta;
 	private final ICtrlUsuarios ictrlU;
 
-	public AltaDeUsuario2(AltaDeUsuario1 padre, String nickname, String email, ICtrlUsuarios ictrlU) {
-
-		setTitle("Alta de Usuario");
-		this.padre = padre;
+	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String email, ICtrlUsuarios ictrlU) {
+		this.padre = anterior;
 		this.nickname = nickname;
 		this.email = email;
 
 		this.ictrlU = ictrlU;
-		BasicInternalFrameUI basicInternalFrameUI = ((javax.swing.plaf.basic.BasicInternalFrameUI) this.getUI());
-		for (MouseListener listener : basicInternalFrameUI.getNorthPane().getMouseListeners()) {
-			basicInternalFrameUI.getNorthPane().removeMouseListener(listener);
-		}
 		initComponents();
+	}
+
+	private boolean isWhiteSpace(String s) {
+		return (s.matches("^\\s*$") || s.matches("^\\s.*"));
+	}
+
+	private boolean hasWhiteSpace(String s) {
+		return s.matches("\\s");
+	}
+
+	@Override
+	public void dispose() {
+		padre.dispose();
+		super.dispose();
 	}
 
 	/**
@@ -56,12 +58,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         grupoBotones = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textPaneNombre = new javax.swing.JTextPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        textPaneApellido = new javax.swing.JTextPane();
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelApellido = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         labelImagen = new javax.swing.JLabel();
         buttonSeleccionar = new javax.swing.JButton();
@@ -69,52 +67,46 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        comboBoxMeses = new javax.swing.JComboBox();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        textPaneAnio = new javax.swing.JTextPane();
         jLabel10 = new javax.swing.JLabel();
         radioButtonCliente = new javax.swing.JRadioButton();
         radioButtonProveedor = new javax.swing.JRadioButton();
         labelNombreEmpresa = new javax.swing.JLabel();
-        scrollPaneNombreEmpresa = new javax.swing.JScrollPane();
-        textPaneNombreEmpresa = new javax.swing.JTextPane();
         labelLinkEmpresa = new javax.swing.JLabel();
-        scrollPaneLinkEmpresa = new javax.swing.JScrollPane();
-        textPaneLinkEmpresa = new javax.swing.JTextPane();
         buttonAtras = new javax.swing.JButton();
         buttonConfirmar = new javax.swing.JButton();
-        buttonSalir = new javax.swing.JButton();
-        jComboBoxDia = new javax.swing.JComboBox();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jTextFieldApellido = new javax.swing.JTextField();
+        jTextFieldEmpresa = new javax.swing.JTextField();
+        jTextFieldLinkEmpresa = new javax.swing.JTextField();
+        jComboBoxAnios = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
+        jComboBoxMeses = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
+        jComboBoxDias = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
 
         grupoBotones.add(radioButtonCliente);
         grupoBotones.add(radioButtonProveedor);
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setClosable(true);
+        setIconifiable(true);
+        setTitle("Alta de Usuario");
         setPreferredSize(new java.awt.Dimension(640, 480));
+        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Complete los datos del nuevo Usuario");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
-        jLabel2.setText("Nombre");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 57, -1));
+        jLabelNombre.setText("Nombre");
+        getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 57, -1));
 
-        jLabel3.setText("Apellido");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        jScrollPane1.setViewportView(textPaneNombre);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 143, -1));
-
-        jScrollPane2.setViewportView(textPaneApellido);
-
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 143, -1));
+        jLabelApellido.setText("Apellido");
+        getContentPane().add(jLabelApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel4.setText("Imágen");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         labelImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 120));
+        getContentPane().add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 140));
 
         buttonSeleccionar.setText("Seleccionar...");
         buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +114,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
                 buttonSeleccionarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, -1, -1));
+        getContentPane().add(buttonSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, -1, -1));
 
         jLabel6.setText("Fecha de Nacimiento");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
@@ -135,18 +127,6 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Año");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
-
-        comboBoxMeses.setModel(new javax.swing.DefaultComboBoxModel(meses));
-        comboBoxMeses.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxMesesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(comboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, 110, -1));
-
-        jScrollPane4.setViewportView(textPaneAnio);
-
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 50, -1));
 
         jLabel10.setText("Tipo de Usuario");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
@@ -175,23 +155,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         labelNombreEmpresa.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         getContentPane().add(labelNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, -1, -1));
 
-        scrollPaneNombreEmpresa.setVisible(false);
-
-        textPaneNombreEmpresa.setVisible(false);
-        scrollPaneNombreEmpresa.setViewportView(textPaneNombreEmpresa);
-
-        getContentPane().add(scrollPaneNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 310, -1));
-
         labelLinkEmpresa.setVisible(false);
         labelLinkEmpresa.setText("Link de la Empresa");
         getContentPane().add(labelLinkEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, -1, -1));
-
-        scrollPaneLinkEmpresa.setVisible(false);
-
-        textPaneLinkEmpresa.setVisible(false);
-        scrollPaneLinkEmpresa.setViewportView(textPaneLinkEmpresa);
-
-        getContentPane().add(scrollPaneLinkEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 310, -1));
 
         buttonAtras.setText("< Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -208,22 +174,17 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+        getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 140, -1));
+        getContentPane().add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 140, -1));
 
-        buttonSalir.setText("Salir");
-        buttonSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(buttonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 400, -1, -1));
+        jTextFieldEmpresa.setVisible(false);
+        getContentPane().add(jTextFieldEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 310, -1));
 
-        jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel(dias));
-        jComboBoxDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxDiaActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 50, -1));
+        jTextFieldLinkEmpresa.setVisible(false);
+        getContentPane().add(jTextFieldLinkEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 310, -1));
+        getContentPane().add(jComboBoxAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, -1, -1));
+        getContentPane().add(jComboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        getContentPane().add(jComboBoxDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -232,7 +193,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// File Chooser
 		JFileChooser fc = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-			"Imágenes JPG & PNG ", "jpg", "png");
+				"Imágenes JPG & PNG ", "jpg", "png");
 		fc.setFileFilter(filter);
 		int seleccion = fc.showDialog(this, "Seleccione una imágen");
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
@@ -254,57 +215,35 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
-	private boolean isWhiteSpace(String s) {
-		return s.matches("^\\s*$");
-	}
-
-	private boolean hasWhiteSpace(String s) {
-		return s.matches("\\s");
-	}
-
-    private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonClienteActionPerformed
-		// TODO add your handling code here:
-		scrollPaneNombreEmpresa.setVisible(false);
-		scrollPaneLinkEmpresa.setVisible(false);
+	private void radioButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {
+		jTextFieldEmpresa.setVisible(false);
+		jTextFieldLinkEmpresa.setVisible(false);
 		labelNombreEmpresa.setVisible(false);
 		labelLinkEmpresa.setVisible(false);
-		textPaneNombreEmpresa.setVisible(false);
-		textPaneLinkEmpresa.setVisible(false);
-    }//GEN-LAST:event_radioButtonClienteActionPerformed
+		jTextFieldEmpresa.setVisible(false);
+		jTextFieldLinkEmpresa.setVisible(false);
+	}
 
     private void radioButtonProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioButtonProveedorActionPerformed
-		// TODO add your handling code here:
-		scrollPaneNombreEmpresa.setVisible(true);
-		scrollPaneLinkEmpresa.setVisible(true);
+		jTextFieldEmpresa.setVisible(true);
+		jTextFieldLinkEmpresa.setVisible(true);
 		labelNombreEmpresa.setVisible(true);
 		labelLinkEmpresa.setVisible(true);
-		textPaneNombreEmpresa.setVisible(true);
-		textPaneLinkEmpresa.setVisible(true);
+		jTextFieldEmpresa.setVisible(true);
+		jTextFieldLinkEmpresa.setVisible(true);
     }//GEN-LAST:event_radioButtonProveedorActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-		String nombre = textPaneNombre.getText();
-		String apellido = textPaneApellido.getText();
-		int dia = (Integer) jComboBoxDia.getSelectedItem();
-		int mes = comboBoxMeses.getSelectedIndex() + 1;
-		String anioString = textPaneAnio.getText();
+		String nombre = jTextFieldNombre.getText();
+		String apellido = jTextFieldApellido.getText();
+		int dia = (Integer) jComboBoxDias.getSelectedItem();
+		int mes = jComboBoxMeses.getSelectedIndex() + 1;
+		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
 
 		// Verificar nombre y apellido
 		boolean okNombre = !isWhiteSpace(nombre);
 		boolean okApellido = !isWhiteSpace(apellido);
-
-		// Verificacion del año
-		boolean okAnio;
-		int anio;
-		if (!isWhiteSpace(anioString)) {
-			anio = parseInt(anioString);
-			okAnio = (anio >= 1900) && (anio <= 2015);
-		}
-		else{
-			anio = 1900;
-			okAnio = false;
-		}
 
 		// Verificacion de empresa y webEmpresa
 		String nombreEmpresa = "Empresa por defecto";
@@ -312,14 +251,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		boolean okNombreEmpresa = false;
 		boolean okLinkEmpresa = false;
 		if (proveedor) {
-			nombreEmpresa = textPaneNombreEmpresa.getText();
-			linkEmpresa = textPaneLinkEmpresa.getText();
+			nombreEmpresa = jTextFieldEmpresa.getText();
+			linkEmpresa = jTextFieldLinkEmpresa.getText();
 			okNombreEmpresa = !isWhiteSpace(nombreEmpresa);
 			okLinkEmpresa = !isWhiteSpace(linkEmpresa) && !hasWhiteSpace(linkEmpresa);
 		}
 
 		// Mando los datos al controlador
-		if (okNombre && okApellido && okAnio) {
+		if (okNombre && okApellido) {
 			Date fechaNacimiento = new Date(anio, mes, dia);
 			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
@@ -329,7 +268,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 
 		// Creo Usuario
-		boolean okCliente = okNombre && okApellido && okAnio;
+		boolean okCliente = okNombre && okApellido;
 		boolean okProveedor = okCliente && okNombreEmpresa && okLinkEmpresa;
 		boolean creado = false;
 		if (proveedor) {
@@ -347,15 +286,13 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// Salir con éxito o reportar errores
 		if (creado) {
 			JOptionPane.showMessageDialog(this, "Usuario creado con éxito", "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
-			this.dispose();
+			dispose();
 		} else {
 			String error = "";
 			if (!okNombre) {
 				error = "El nombre ingresado no es correcto.";
 			} else if (!okApellido) {
 				error = "El apellido ingresado no es correcto.";
-			} else if (!okAnio) {
-				error = "El año ingresado no es correcto.\nDebe ingresar una fecha entre 1900 y 2015.";
 			} else if (!okNombreEmpresa) {
 				error = "El nombre de empresa ingresado no es correcto.";
 			} else if (!okLinkEmpresa) {
@@ -365,71 +302,39 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
-    private void buttonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalirActionPerformed
-		// TODO add your handling code here:
-		this.dispose();
-    }//GEN-LAST:event_buttonSalirActionPerformed
-
-    @Override
-    public void dispose() {
-        super.dispose();
-        padre.dispose();
-    }
-
-    
-    
-    private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
+	private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {
 		this.setVisible(false);
 		padre.setVisible(true);
-    }//GEN-LAST:event_buttonAtrasActionPerformed
+	}
 
-    private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxDiaActionPerformed
-
-    private void comboBoxMesesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxMesesActionPerformed
-		// TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxMesesActionPerformed
-
-	String nickname;
-	String email;
-	String rutaImagen = "";
-	//Fabrica fabrica;
-	//CtrlUsuarios ctrlU ;
-	private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Setiembre",
-		"Octubre", "Noviembre", "Diciembre"};
-	private Integer[] dias = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31};
+	String nickname = null;
+	String email = null;
+	String rutaImagen = null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
-    private javax.swing.JButton buttonSalir;
     private javax.swing.JButton buttonSeleccionar;
-    private javax.swing.JComboBox comboBoxMeses;
     private javax.swing.ButtonGroup grupoBotones;
-    private javax.swing.JComboBox jComboBoxDia;
+    private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios jComboBoxAnios;
+    private com.tprog.estaciondetrabajo.customComponents.JComboBoxDias jComboBoxDias;
+    private com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses jComboBoxMeses;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel jLabelApellido;
+    private javax.swing.JLabel jLabelNombre;
+    private javax.swing.JTextField jTextFieldApellido;
+    private javax.swing.JTextField jTextFieldEmpresa;
+    private javax.swing.JTextField jTextFieldLinkEmpresa;
+    private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JLabel labelImagen;
     private javax.swing.JLabel labelLinkEmpresa;
     private javax.swing.JLabel labelNombreEmpresa;
     private javax.swing.JRadioButton radioButtonCliente;
     private javax.swing.JRadioButton radioButtonProveedor;
-    private javax.swing.JScrollPane scrollPaneLinkEmpresa;
-    private javax.swing.JScrollPane scrollPaneNombreEmpresa;
-    private javax.swing.JTextPane textPaneAnio;
-    private javax.swing.JTextPane textPaneApellido;
-    private javax.swing.JTextPane textPaneLinkEmpresa;
-    private javax.swing.JTextPane textPaneNombre;
-    private javax.swing.JTextPane textPaneNombreEmpresa;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,61 +7,16 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlUniversal;
-import java.awt.BorderLayout;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.Dimension;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
 	public VentanaPrincipal() {
-		//inicializo hash
-		internalFrames = new HashMap<>();
-		//inicializo internal frames
-		altaDeServicio = new AltaDeServicio2();
-		actualizarServicio = new ActualizarServicio();
-		actualizarEstadoReserva = new ActualizarEstadoReserva();
-		altaCategoria = new AltaCategoria();
-		verInformacionDeCliente = new VerInformacionDeCliente();
-		verInformacionDePromocion = new VerInformacionDePromocion();
-		verInformacionDeProveedor = new VerInformacionDeProveedor();
-		verInformacionDeReserva = new VerInformacionDeReserva();
-		verInformacionDeServicio = new VerInformacionDeServicio();
-		cancelarReserva = new CancelarReserva();
-		altaDeUsuario1 = new AltaDeUsuario1();
-		realizarReserva1 = new RealizarReserva1();
-		//las agrego al content pane
-		getContentPane().add(altaDeServicio, BorderLayout.CENTER);
-		getContentPane().add(actualizarServicio, BorderLayout.CENTER);
-		getContentPane().add(actualizarEstadoReserva, BorderLayout.CENTER);
-		getContentPane().add(altaCategoria, BorderLayout.CENTER);
-		getContentPane().add(verInformacionDeCliente, BorderLayout.CENTER);
-		getContentPane().add(verInformacionDePromocion, BorderLayout.CENTER);
-		getContentPane().add(verInformacionDeProveedor, BorderLayout.CENTER);
-		getContentPane().add(verInformacionDeReserva, BorderLayout.CENTER);
-		getContentPane().add(verInformacionDeServicio, BorderLayout.CENTER);
-		getContentPane().add(cancelarReserva, BorderLayout.CENTER);
-		getContentPane().add(altaDeUsuario1, BorderLayout.CENTER);
-		getContentPane().add(realizarReserva1, BorderLayout.CENTER);
-		//las agrego al hash
-		internalFrames.put("altaDeServicio", altaDeServicio);
-		internalFrames.put("actualizarServicio", actualizarServicio);
-		internalFrames.put("actualizarEstadoReserva", actualizarEstadoReserva);
-		internalFrames.put("altaCategoria", altaCategoria);
-		internalFrames.put("verInformacionDeCliente", verInformacionDeCliente);
-		internalFrames.put("verInformacionDePromocion", verInformacionDePromocion);
-		internalFrames.put("verInformacionDeProveedor", verInformacionDeProveedor);
-		internalFrames.put("verInformacionDeReserva", verInformacionDeReserva);
-		internalFrames.put("verInformacionDeServicio", verInformacionDeServicio);
-		internalFrames.put("cancelarReserva", cancelarReserva);
-		internalFrames.put("altaDeUsuario1", altaDeUsuario1);
-		internalFrames.put("realizarReserva1", realizarReserva1);
-		//esconder todas
-		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-			internalFrame.getValue().setVisible(false);
-		}
-
 		//inicializacion autogenerada
 		initComponents();
 	}
@@ -77,6 +32,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
+        desktop = new javax.swing.JDesktopPane();
         menu = new javax.swing.JMenuBar();
         menuRegistros = new javax.swing.JMenu();
         menuItemAltaUsuario = new javax.swing.JMenuItem();
@@ -101,14 +57,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(645, 525));
-        setPreferredSize(new java.awt.Dimension(645, 525));
+        setTitle("Help4Traveling Administrador");
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setName("Venatana Principal"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
-        });
+        getContentPane().add(desktop, java.awt.BorderLayout.CENTER);
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));
         menu.setMinimumSize(new java.awt.Dimension(240, 20));
@@ -141,6 +95,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuRegistros.add(menuItemAltaServicio);
 
         menuItemAltaPromocion.setText("Alta de Promoción");
+        menuItemAltaPromocion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAltaPromocionActionPerformed(evt);
+            }
+        });
         menuRegistros.add(menuItemAltaPromocion);
 
         menuItemActualizarServicio.setText("Actualizar Servicio");
@@ -238,73 +197,101 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	public void closeAllInternalFrames() {
+
+		JInternalFrame fram[] = this.desktop.getAllFrames();
+		for (int i = 0; i < fram.length; i++) {
+			fram[i].dispose();
+		}
+	}
+
+	private void center(JInternalFrame v) {
+		// Limpio jDesktop
+		//closeAllInternalFrames();
+
+		// La ubico y le doy foco
+		desktop.add(v);
+		Dimension desktopSize = desktop.getSize();
+		Dimension jInternalFrameSize = v.getSize();
+		v.setLocation((desktopSize.width - jInternalFrameSize.width) / 2, (desktopSize.height - jInternalFrameSize.height) / 2);
+		try {
+			v.setSelected(true);
+		} catch (PropertyVetoException ex) {
+			Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		v.setVisible(true);
+	}
+
     private void menuItemAltaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaUsuarioActionPerformed
-		showInternalFrame("altaDeUsuario1");
+		AltaDeUsuario1 altaDeUsuario = new AltaDeUsuario1(fabrica.getICtrlUsuarios());
+		center(altaDeUsuario);
     }//GEN-LAST:event_menuItemAltaUsuarioActionPerformed
 
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
-		showInternalFrame("verInformacionDeCliente");
+		VerInformacionDeCliente verInfoCliente = new VerInformacionDeCliente(fabrica.getICtrlUsuarios());
+		center(verInfoCliente);
     }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
 
     private void menuItemVerInfoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoProveedorActionPerformed
-		showInternalFrame("verInformacionDeProveedor");
+		VerInformacionDeProveedor verInfoProveedor = new VerInformacionDeProveedor(fabrica.getICtrlUsuarios());
+		center(verInfoProveedor);
     }//GEN-LAST:event_menuItemVerInfoProveedorActionPerformed
 
     private void menuItemVerInfoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoServicioActionPerformed
-		showInternalFrame("verInformacionDeServicio");
+		VerInformacionDeServicio verInfoServicio = new VerInformacionDeServicio(fabrica.getICtrlProductos());
+		center(verInfoServicio);
     }//GEN-LAST:event_menuItemVerInfoServicioActionPerformed
 
     private void menuItemVerInfoPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoPromocionActionPerformed
-		//verInformacionDePromocion
-		showInternalFrame("verInformacionDePromocion");
+		VerInformacionDePromocion verInfoPromocion = new VerInformacionDePromocion(fabrica.getICtrlProductos());
+		center(verInfoPromocion);
     }//GEN-LAST:event_menuItemVerInfoPromocionActionPerformed
 
     private void menuItemVerInfoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoReservaActionPerformed
-		showInternalFrame("verInformacionDeReserva");
+		VerInformacionDeReserva verInfoReserva = new VerInformacionDeReserva(fabrica.getICtrlReservas());
+		center(verInfoReserva);
     }//GEN-LAST:event_menuItemVerInfoReservaActionPerformed
 
     private void menuItemCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelarReservaActionPerformed
-		showInternalFrame("cancelarReserva");
+		CancelarReserva cancelarReserva = new CancelarReserva(fabrica.getICtrlReservas());
+		center(cancelarReserva);
     }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
 
-    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-//		int width = this.getWidth();
-//		int height = (int) (width / 1.33);
-//		this.setSize(width, height);
-    }//GEN-LAST:event_formComponentResized
-
     private void menuItemAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaCategoriaActionPerformed
-		showInternalFrame("altaCategoria");
+		AltaCategoria altaCategoria = new AltaCategoria(fabrica.getICtrlProductos());
+		center(altaCategoria);
     }//GEN-LAST:event_menuItemAltaCategoriaActionPerformed
 
     private void menuItemRealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRealizarReservaActionPerformed
-		// TODO add your handling code here:
-		showInternalFrame("realizarReserva1");
+		RealizarReserva1 realizarReserva = new RealizarReserva1(fabrica.getICtrlUsuarios(), fabrica.getICtrlReservas());
+		center(realizarReserva);
     }//GEN-LAST:event_menuItemRealizarReservaActionPerformed
 
     private void menuItemActualizarEstadoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoReservaActionPerformed
-		showInternalFrame("actualizarEstadoReserva");
+		ActualizarEstadoReserva actualizarEstadoReserva = new ActualizarEstadoReserva(fabrica.getICtrlReservas());
+		center(actualizarEstadoReserva);
     }//GEN-LAST:event_menuItemActualizarEstadoReservaActionPerformed
 
     private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
-		showInternalFrame("actualizarServicio");
+		ActualizarServicio actualizarServicio = new ActualizarServicio(fabrica.getICtrlProductos());
+		center(actualizarServicio);
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
-		Fabrica f = Fabrica.getInstance();
-                ICtrlUniversal ctrl = f.getICtrlUniversal();
-//        try {
-                ctrl.cargarDatos();
-                JOptionPane.showMessageDialog(this, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
-                cargarDatos.setEnabled(false);
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this, "La carga de datos falló", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
-//        }
+		ICtrlUniversal ctrl = fabrica.getICtrlUniversal();
+		ctrl.cargarDatos();
+		JOptionPane.showMessageDialog(desktop, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+		cargarDatos.setEnabled(false);
     }//GEN-LAST:event_cargarDatosActionPerformed
 
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
-		showInternalFrame("altaDeServicio");
+		AltaDeServicio2 altaDeServicio = new AltaDeServicio2(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+		center(altaDeServicio);
 	}
+
+    private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
+
+    }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
 	/**
 	 * @param args the command line arguments
@@ -319,36 +306,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		});
 	}
 
-	//Operaciones auxiliares
-	public void showInternalFrame(String id) {
-		//muestra el internal frame identificado por id
-		//solo funciona si el internal frame fue agregado al hash
-		for (Map.Entry<String, JInternalFrame> internalFrame : internalFrames.entrySet()) {
-			if (!internalFrame.getKey().equals(id)) {
-				internalFrame.getValue().setVisible(false);
-			} else {
-				internalFrame.getValue().setVisible(true);
-			}
-		}
-	}
-
-	HashMap<String, JInternalFrame> internalFrames;
-	//Variables nuestras
-	private AltaDeServicio2 altaDeServicio;
-	private ActualizarServicio actualizarServicio;
-	private ActualizarEstadoReserva actualizarEstadoReserva;
-	private AltaCategoria altaCategoria;
-	private VerInformacionDeCliente verInformacionDeCliente;
-	private VerInformacionDePromocion verInformacionDePromocion;
-	private VerInformacionDeProveedor verInformacionDeProveedor;
-	private VerInformacionDeReserva verInformacionDeReserva;
-	private VerInformacionDeServicio verInformacionDeServicio;
-	private CancelarReserva cancelarReserva;
-	private AltaDeUsuario1 altaDeUsuario1;
-	private RealizarReserva1 realizarReserva1;
-
+	Fabrica fabrica = Fabrica.getInstance();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cargarDatos;
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menu;

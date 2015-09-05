@@ -66,15 +66,15 @@ public class ManejadorProductos {
 	}
 
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
-		DTPromocion result = null;
-		if (!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) {
-			if (!promociones.get(dtP.getNicknameP()).isEmpty()
-					&& !promociones.get(dtP.getIdPromocion()).containsKey(dtP.getIdPromocion())) {
-				Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
-				result = p.crearDT();
-			}
-		}
-		return result;
+            DTPromocion result = null;
+            if (!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) {
+                if (!promociones.get(dtP.getNicknameP()).isEmpty()
+                        && !promociones.get(dtP.getNicknameP()).containsKey(dtP.getIdPromocion())) {
+                    Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
+                    result = p.crearDT();
+                }
+            }
+            return result;
 	}
 
 	public DTServicio infoServicio(DTMinServicio dtS) {
@@ -283,7 +283,7 @@ public class ManejadorProductos {
 	public void altaCategoria(String idCategoria, String idPadre) {
 		Categoria c = new Simple(idCategoria);
 		categorias.put(idCategoria, c);
-		if (idPadre.equals("")) {
+		if (idPadre == null) {
 			idPadre = "Categorias";
 		}
 		if (!categorias.isEmpty() && categorias.containsKey(idPadre)) {
@@ -357,17 +357,20 @@ public class ManejadorProductos {
 	}
 
 	public void altaPromocion(String idPromocion, float descuento, String nicknameProv, Set<String> servicios) {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		Proveedor proveedor = mu.getProveedor(nicknameProv);
-		Promocion promo = new Promocion(idPromocion, descuento, proveedor);
-		this.promociones.get(nicknameProv).put(idPromocion, promo);
-		Iterator<String> it = servicios.iterator();
-		while (it.hasNext()) {
-			String l = (String) it.next();
-			Servicio temp = this.servicios.get(nicknameProv).get(l);
-			promo.addServicio(temp);
-			proveedor.addPromocion(promo);
-		}
+            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+            Proveedor proveedor = mu.getProveedor(nicknameProv);
+            Promocion promo = new Promocion(idPromocion, descuento, proveedor);
+            if(!promociones.containsKey(nicknameProv)){
+                promociones.put(nicknameProv, new HashMap());
+            }
+            this.promociones.get(nicknameProv).put(idPromocion, promo);
+            Iterator<String> it = servicios.iterator();
+            proveedor.addPromocion(promo);
+            while (it.hasNext()) {
+                String l = (String) it.next();
+                Servicio temp = this.servicios.get(nicknameProv).get(l);
+                promo.addServicio(temp);
+            }
 	}
 
 	public float getPrecioPromocion(DTMinPromocion dtP) {

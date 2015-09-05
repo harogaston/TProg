@@ -40,6 +40,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
                 for (DTMinCliente dt : setClientes) {
                     listaClientes.add(dt.getNickname());
                 }
+                listaClientes.sort(null);
             }
         } catch (Exception ex) {
 //            Logger.getLogger(VerInformacionDeCliente.class.getName()).log(Level.SEVERE, null, ex);

@@ -59,6 +59,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 //                System.out.println(nodo.toString());
 			}
 		}
+		listaCiudades.sort(null);
 		listaCiudadesOrigenInterfaz.updateUI();
 		listaCiudadesDestinoInterfaz.updateUI();
 	}
@@ -291,12 +292,12 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
 					return;
 				}
 			}
-			
+
 			// Creo el servicio
 			ctrlProductos.altaServicio(descripcion, precio, imagenes);
 			JOptionPane.showMessageDialog(this, "Servicio creado con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
-			
+
 		} else if (!okDescripcion) {
 			JOptionPane.showMessageDialog(this, "Por favor ingrese una descripción", "Error", JOptionPane.ERROR_MESSAGE);
 		} else if (!okPrecio) {

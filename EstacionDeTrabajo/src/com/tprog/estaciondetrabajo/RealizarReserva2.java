@@ -86,6 +86,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         textAreaServicios = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldPrecio = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("Realizar Reserva");
@@ -158,6 +159,14 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 140, 33));
         getContentPane().add(jTextFieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 80, -1));
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 400, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -203,15 +212,27 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
             int indice = Integer.parseInt(servicio);
             DTLineaReserva dt = (DTLineaReserva) hashLineasReserva.get(indice);
             textAreaServicios.setText(dt.toString());
-
+            System.out.println(dt.toString());
         }
     }//GEN-LAST:event_listaServiciosInterfazActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         cargarDatos();
-//		listaServiciosInterfaz.updateUI();
+        listaLineasReserva.sort(null);
+        listaServiciosInterfaz.updateUI();
+        textAreaServicios.setText("");
         this.updateUI();
     }//GEN-LAST:event_formComponentShown
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        padre.dispose();
+    }
 
     private final RealizarReserva1 padre;
     private final ICtrlUsuarios ctrlUsuarios;
@@ -224,6 +245,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonAgregarReserva;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;

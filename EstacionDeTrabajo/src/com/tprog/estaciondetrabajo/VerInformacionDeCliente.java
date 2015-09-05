@@ -43,7 +43,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             }
         } catch (Exception ex) {
 //            Logger.getLogger(VerInformacionDeCliente.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
 

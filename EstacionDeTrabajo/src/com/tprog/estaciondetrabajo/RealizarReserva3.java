@@ -44,23 +44,24 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         //si no, se muestran sólo los de ese proveedor
         Set<DTMinServicio> setServicios = this.ctrlReservas.listarServicios();
         Set<DTMinServicio> setServiciosP = null;
-        if (proveedorSeleccionado) {
-            //muestro solo los servicios del proveedor seleccionado
-            setServiciosP = this.ctrlReservas.listarServiciosProveedor();
-            //construyo un vector con la informacion a mostrar, porque
-            //el comboBox solo funciona con Vector o List
-            if (setServiciosP != null) {
-                for (DTMinServicio dt : setServiciosP) {
-                    listaServicios.add(dt.getIdServicio());
+        if (!setServicios.isEmpty()) {
+            if (proveedorSeleccionado) {
+                //muestro solo los servicios del proveedor seleccionado
+                setServiciosP = this.ctrlReservas.listarServiciosProveedor();
+                //construyo un vector con la informacion a mostrar, porque
+                //el comboBox solo funciona con Vector o List
+                if (!setServiciosP.isEmpty()) {
+                    for (DTMinServicio dt : setServiciosP) {
+                        listaServicios.add(dt.getIdServicio());
+                    }
                 }
-            }
-        } else {
-            if (setServicios != null) {
+            } else {
                 for (DTMinServicio dt : setServicios) {
                     listaServicios.add(dt.getIdServicio());
                 }
             }
         }
+        listaServicios.sort(null);
     }
 
     /**
@@ -307,6 +308,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                 ctrlReservas.ingresarLineaReserva(cant, fI, fF);
                 DTReserva dtR = ctrlReservas.mostrarReservaTemporal();
                 Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
+                JOptionPane.showMessageDialog(this, "El servicio fue agregado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 this.setVisible(false);
                 this.padre.setVisible(true);
             } else { //hay algun dato erroneo

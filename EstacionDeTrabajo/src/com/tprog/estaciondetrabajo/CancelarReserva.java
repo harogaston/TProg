@@ -36,6 +36,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
                 listaReservas.add(Integer.toString(dt.getIdReserva()));
             }
         }
+        listaReservas.sort(null);
         this.updateUI();
     }
 

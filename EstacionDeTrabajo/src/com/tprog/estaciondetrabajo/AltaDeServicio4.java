@@ -165,6 +165,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 //si la categoria seleccionada es simple, la agrego
                 if (ctrlProductos.seleccionarCategoriaSimple(categoriaActual)) {
                     seleccionCategorias.add(categoriaActual);
+                    seleccionCategorias.sort(null);
                 } else {
                     JOptionPane.showMessageDialog(this, "Por favor seleccione una categoria hoja", "Error", JOptionPane.INFORMATION_MESSAGE);
                 }

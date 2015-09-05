@@ -10,6 +10,7 @@ import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,14 +29,18 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
     void cargarDatos() {
         //listaClientes
         servicios = ctrlProductos.listarServicios();
-		//construyo un vector con la informacion a mostrar, porque
+        //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        if (servicios != null) {
+        if (!servicios.isEmpty()) {
             for (DTMinServicio dt : servicios) {
                 listaServicios.add(dt.getIdServicio());
             }
+            listaServicios.sort(null);
+            this.updateUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay servicios en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
-        this.updateUI();
     }
 
     /**
@@ -146,6 +151,8 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
             getParent().add(m);
             m.setLocation(this.getLocation());
             m.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "No se seleccionó ningún servicio", "Información", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_botonModificarActionPerformed
 

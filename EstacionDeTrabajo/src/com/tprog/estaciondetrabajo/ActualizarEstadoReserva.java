@@ -8,10 +8,8 @@ package com.tprog.estaciondetrabajo;
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.interfaces.ICtrlReservas;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import javax.swing.DefaultComboBoxModel;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
@@ -28,18 +26,19 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     private void cargarDatos() {
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
-		//construyo un vector con la informacion a mostrar, porque
+        //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        if (setReservas != null) {
+        if (!setReservas.isEmpty()) {
             for (DTMinReserva dt : setReservas) {
                 listaReservas.add(Integer.toString(dt.getIdReserva()));
             }
-            String[] listaReservasArray = listaReservas.toArray(new String[listaReservas.size()]);
-            DefaultComboBoxModel<String> temp = new DefaultComboBoxModel<String>(listaReservasArray);
-            listaReservasInterfaz.setModel(temp);
+            listaReservas.sort(null);
             listaReservasInterfaz.setSelectedItem(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "No existen reservas en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         }
-        this.updateUI();
+//        this.updateUI();
     }
 
     /**
@@ -51,7 +50,7 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        listaReservasInterfaz = new javax.swing.JComboBox<String>();
+        listaReservasInterfaz = new javax.swing.JComboBox<String>(listaReservas);
         jLabel1 = new javax.swing.JLabel();
         botonCambiarEstado = new javax.swing.JButton();
         listaEstados = new javax.swing.JComboBox();
@@ -93,7 +92,7 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         });
         getContentPane().add(botonCambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
 
-        listaEstados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Registrada", "Cancelada", "Pagada", "Facturada" }));
+        listaEstados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cancelada", "Facturada", "Pagada", "Registrada" }));
         listaEstados.setSelectedItem(null);
         listaEstados.setEnabled(false);
         getContentPane().add(listaEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 190, -1));
@@ -226,6 +225,6 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelMensajeNoModificarEstado;
     private javax.swing.JComboBox listaEstados;
     private javax.swing.JComboBox listaReservasInterfaz;
-    private List<String> listaReservas = new ArrayList<>();
+    private Vector<String> listaReservas = new Vector<>();
     // End of variables declaration//GEN-END:variables
 }

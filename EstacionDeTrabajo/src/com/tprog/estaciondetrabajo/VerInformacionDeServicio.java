@@ -11,6 +11,7 @@ import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeSelectionModel;
 
 public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
 
@@ -20,6 +21,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
     public VerInformacionDeServicio(ICtrlProductos ctrlProductos) {
         this.ctrlProductos = ctrlProductos;
         initComponents();
+        arbolCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         cargarDatos();
     }
 

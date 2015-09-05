@@ -104,7 +104,7 @@ public class CtrlReservas implements ICtrlReservas {
     @Override
     public Set<DTMinPromocion> listarPromocionesProveedor() {
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        return mu.listarPromocionesProveedor(nickname);
+        return mu.listarPromocionesProveedor(nicknameP);
     }
 
     @Override
@@ -165,4 +165,17 @@ public class CtrlReservas implements ICtrlReservas {
         ManejadorReservas mr = ManejadorReservas.getInstance();
         return mr.getEstadoReserva(this.idReserva);
     }
+
+    @Override
+    public void liberarMemoriaControlador() {
+        this.nickname = null;
+        this.nicknameP = null;
+        this.dtP = null;
+        this.dtS = null;
+        this.dtR = null;
+        this.idReserva = -1;
+        this.precioTotal = 0;
+        this.lineasReserva = new HashSet();
+    }
+
 }

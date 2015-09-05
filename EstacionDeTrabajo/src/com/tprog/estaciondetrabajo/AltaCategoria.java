@@ -30,7 +30,8 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
     private void cargarDatos() {
         DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
         arbolCategorias.removeAll();
-        arbolCategorias.setModel(new DefaultTreeModel(raiz));
+        arbolCategoriasModelo = new DefaultTreeModel(raiz);
+        arbolCategorias.setModel(arbolCategoriasModelo);
         if (!casillaPadre.isSelected()) {
             arbolCategorias.clearSelection();
             arbolCategorias.setEnabled(false);
@@ -153,7 +154,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
                         } else {
                             ctrlProductos.altaCategoria();
                             JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                            cargarDatos();
+                            this.dispose();
                         }
                     }
                 } else {
@@ -166,7 +167,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
                     ctrlProductos.seleccionarCategoriaPadre(null);
                     ctrlProductos.altaCategoria();
                     JOptionPane.showMessageDialog(this, "La categoria fue creada con exito", "Exito", JOptionPane.INFORMATION_MESSAGE);
-                    cargarDatos();
+                    this.dispose();
                 }
             }
         } else {
@@ -174,6 +175,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_botonCrearActionPerformed
 
+    DefaultTreeModel arbolCategoriasModelo;
     ICtrlProductos ctrlProductos;
     Set<DTMinReserva> reservas;
     VerInformacionDeCliente padre;

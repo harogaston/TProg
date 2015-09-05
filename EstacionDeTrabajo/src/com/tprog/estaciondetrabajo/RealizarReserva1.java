@@ -32,7 +32,7 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
         try {
             cargarDatos();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "No hay clientes en el sistema", "Alerta", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             this.dispose();
         }
     }
@@ -41,11 +41,12 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
         //listaClientes
         try {
             Set<DTMinCliente> setClientes = ctrlUsuarios.listarClientes();
-            if (setClientes != null) {
+            if (!setClientes.isEmpty()) {
                 listaClientes.removeAllElements();
                 for (DTMinCliente dt : setClientes) {
                     listaClientes.add(dt.getNickname());
                 }
+                listaClientes.sort(null);
             }
             this.updateUI();
         } catch (Exception e) {
@@ -68,6 +69,7 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
         panelUsuario = new javax.swing.JScrollPane();
         detalleUsuario = new javax.swing.JTextArea();
         buttonSiguiente = new javax.swing.JButton();
+        botonSalir = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -105,7 +107,15 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
                 buttonSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
+        getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+
+        botonSalir.setText("Salir");
+        botonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,6 +155,7 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
         if (cliente != null) {
+            ctrlReservas.liberarMemoriaControlador();
             ctrlReservas.seleccionarCliente(cliente);
             RealizarReserva2 rr2 = new RealizarReserva2(this, ctrlUsuarios, ctrlReservas);
             this.setVisible(false);
@@ -156,10 +167,15 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
+    private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonSalirActionPerformed
+
     ICtrlReservas ctrlReservas;
     Set<DTMinReserva> reservas;
     ICtrlUsuarios ctrlUsuarios;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonSalir;
     private javax.swing.JButton buttonSiguiente;
     private javax.swing.JTextArea detalleUsuario;
     private javax.swing.JLabel imagenUsuarioHolder;

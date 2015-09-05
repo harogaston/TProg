@@ -50,4 +50,6 @@ public interface ICtrlReservas {
     public boolean eliminarReserva();
 
     public EstadoReserva getEstadoReserva();
+
+    public void liberarMemoriaControlador();
 }

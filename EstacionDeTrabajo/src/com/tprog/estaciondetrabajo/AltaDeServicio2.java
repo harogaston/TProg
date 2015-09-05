@@ -34,12 +34,13 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
     void cargarDatos() {
         //listaClientes
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-		//construyo un vector con la informacion a mostrar, porque
+        //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
         for (DTMinProveedor dt : setProveedores) {
             listaProveedores.add(dt.getNickname());
         }
 //		listaProveedoresInterfaz.updateUI();
+        listaProveedores.sort(null);
         this.updateUI();
     }
 

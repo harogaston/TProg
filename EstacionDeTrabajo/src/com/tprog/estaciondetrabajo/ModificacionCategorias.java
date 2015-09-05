@@ -32,12 +32,14 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         for (String s : categoriasServicio) {
             listaServicio.add(s);
         }
+        listaServicio.sort(null);
         DefaultMutableTreeNode categoriasSistema = ctrlProductos.listarCategorias();
         Enumeration en = categoriasSistema.depthFirstEnumeration();
         while (en.hasMoreElements()) {
             DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) en.nextElement();
             listaSistema.add(nodo.toString());
         }
+        listaSistema.sort(null);
     }
 
     /**
@@ -138,6 +140,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
             }
             //listaSistema.add(actual); no es necesario porque ya estan las cosas
         }
+        listaServicio.sort(null);
         listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonQuitarActionPerformed
 
@@ -157,6 +160,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 listaServicio.add(actual);
             }
         }
+        listaServicio.sort(null);
         listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonAgregarActionPerformed
 

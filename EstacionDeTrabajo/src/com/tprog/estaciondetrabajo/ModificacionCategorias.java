@@ -128,6 +128,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
 
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
         //quitar
+
         List selected = listaServicioInterfaz.getSelectedValuesList();
         Iterator it1 = selected.iterator();
         while (it1.hasNext()) {
@@ -144,7 +145,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         listaServicioInterfaz.updateUI();
     }//GEN-LAST:event_botonQuitarActionPerformed
 
-    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+    private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {
         List selected = listaSistemaInterfaz.getSelectedValuesList();
         Iterator it1 = selected.iterator();
         while (it1.hasNext()) {

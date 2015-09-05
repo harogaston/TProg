@@ -9,18 +9,18 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public interface Categoria {
 
-    public Set<DTMinServicio> listarServicios();
+	public Set<DTMinServicio> listarServicios();
 
-    public boolean esCategoriaSimple();
+	public boolean esCategoriaSimple();
 
-    public String getIdCategoria();
+	public String getIdCategoria();
 
-    public Compuesta getPadre();
+	public Compuesta getPadre();
 
-    public boolean esCategoriaPadre();
+	public boolean esCategoriaPadre();
 
-    public void setPadre(Compuesta padre);
+	public void setPadre(Compuesta padre);
 
-    public DefaultMutableTreeNode listarCategorias();
+	public DefaultMutableTreeNode listarCategorias();
 
 }

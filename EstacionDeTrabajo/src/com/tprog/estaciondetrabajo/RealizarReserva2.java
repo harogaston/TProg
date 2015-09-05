@@ -216,23 +216,18 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_listaServiciosInterfazActionPerformed
 
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {
         cargarDatos();
         listaLineasReserva.sort(null);
         listaServiciosInterfaz.updateUI();
         textAreaServicios.setText("");
         this.updateUI();
-    }//GEN-LAST:event_formComponentShown
+    }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    @Override
-    public void dispose() {
-        super.dispose();
         padre.dispose();
-    }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private final RealizarReserva1 padre;
     private final ICtrlUsuarios ctrlUsuarios;

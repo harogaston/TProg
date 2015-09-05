@@ -9,23 +9,23 @@ import com.tprog.logica.dt.DTUbicacion;
 
 public class Ciudad {
 
-    private String idCiudad;
-    private Pais pais;
+	private String idCiudad;
+	private Pais pais;
 
-    public Ciudad(String id) {
-        this.idCiudad = id;
-    }
+	public Ciudad(String id) {
+		this.idCiudad = id;
+	}
 
-    public String getIdCiudad() {
-        return this.idCiudad;
-    }
+	public String getIdCiudad() {
+		return this.idCiudad;
+	}
 
-    public void setPais(Pais pais) {
-        this.pais = pais;
-    }
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
 
-    public DTUbicacion crearDT() {
-        DTUbicacion nuevoDT = new DTUbicacion(this.idCiudad, this.pais.getIdPais());
-        return nuevoDT;
-    }
+	public DTUbicacion crearDT() {
+		DTUbicacion nuevoDT = new DTUbicacion(this.idCiudad, this.pais.getIdPais());
+		return nuevoDT;
+	}
 }

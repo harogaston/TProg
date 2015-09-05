@@ -7,26 +7,26 @@ package com.tprog.logica.dt;
 
 public class DTMinServicio {
 
-    private final String nicknameP;
-    private final String idServicio;
+	private final String nicknameP;
+	private final String idServicio;
 
-    public DTMinServicio(String nicknameP, String idServicio) {
-        this.nicknameP = nicknameP;
-        this.idServicio = idServicio;
-    }
+	public DTMinServicio(String nicknameP, String idServicio) {
+		this.nicknameP = nicknameP;
+		this.idServicio = idServicio;
+	}
 
-    public String getNicknameP() {
-        return this.nicknameP;
-    }
+	public String getNicknameP() {
+		return this.nicknameP;
+	}
 
-    public String getIdServicio() {
-        return this.idServicio;
-    }
+	public String getIdServicio() {
+		return this.idServicio;
+	}
 
-    @Override
-    public String toString() {
-        return "Nickname del proveedor: " + nicknameP
-                + "\n" + "ID de servicio: " + idServicio + "\n";
-    }
+	@Override
+	public String toString() {
+		return "Nickname del proveedor: " + nicknameP
+				+ "\n" + "ID de servicio: " + idServicio + "\n";
+	}
 
 }

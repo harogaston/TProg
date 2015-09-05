@@ -38,9 +38,8 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
         arbolCategorias.removeAll();
         arbolCategorias.setModel(new DefaultTreeModel(raiz));
-//		arbolCategorias.updateUI();
+        arbolCategorias.updateUI();
         seleccionCategorias.clear();
-        this.updateUI();
     }
 
     /**

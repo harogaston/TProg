@@ -269,6 +269,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             ctrlProductos.seleccionarServicio(dtmS);
             //leer cantidad y fechas
             //validar cantidad
+
             boolean okCant = false;
             int cant = 0;
             String cantString = textPaneCantidad.getText();
@@ -328,7 +329,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
     //booleano que determina si lo que se agrega es el primer servicio o producto
-    //es para saber cuando seleccionar proveedor o no
+//es para saber cuando seleccionar proveedor o no
     private ICtrlUsuarios ctrlUsuarios;
     private ICtrlReservas ctrlReservas;
     private ICtrlProductos ctrlProductos;

@@ -143,6 +143,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formComponentHidden
 
     private void botonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarActionPerformed
+
         String cliente = (String) listaServiciosInterfaz.getSelectedItem();
         System.out.println("servicio: " + cliente);
         if (cliente != null) {

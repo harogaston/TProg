@@ -283,7 +283,7 @@ public class ManejadorProductos {
 	public void altaCategoria(String idCategoria, String idPadre) {
 		Categoria c = new Simple(idCategoria);
 		categorias.put(idCategoria, c);
-		if (idPadre.equals("")) {
+		if (idPadre == null) {
 			idPadre = "Categorias";
 		}
 		if (!categorias.isEmpty() && categorias.containsKey(idPadre)) {

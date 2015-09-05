@@ -78,4 +78,7 @@ public class ManejadorReservas {
 		Reserva r = reservas.get(idReserva);
 		return r.getEstado();
 	}
+        public Map<Integer,Reserva> getReservas(){
+                return reservas;
+        }
 }

@@ -134,4 +134,12 @@ public class ManejadorUsuarios {
 	public Proveedor getProveedor(String nickname) {
 		return proveedores.get(nickname);
 	}
+        
+        public Map<String,Proveedor> getProveedores(){
+                return proveedores;
+        }
+        
+        public Map<String,Cliente> getClientes(){
+                return clientes;
+        }
 }

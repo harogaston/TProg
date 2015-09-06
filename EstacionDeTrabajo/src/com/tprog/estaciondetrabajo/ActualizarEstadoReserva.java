@@ -26,6 +26,8 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     private void cargarDatos() {
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
+		listaReservas.clear();
+		listaReservasInterfaz.setSelectedItem(null);
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
         if (!setReservas.isEmpty()) {
@@ -35,10 +37,27 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
             listaReservas.sort(null);
             listaReservasInterfaz.setSelectedItem(null);
         } else {
-            JOptionPane.showMessageDialog(this, "No existen reservas en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "No existen reservas en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         }
 //        this.updateUI();
+    }
+	
+	private void cargarDatos2() {
+        Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
+        //construyo un vector con la informacion a mostrar, porque
+        //el comboBox solo funciona con Vector o List
+        if (!setReservas.isEmpty()) {
+            for (DTMinReserva dt : setReservas) {
+                listaReservas.add(Integer.toString(dt.getIdReserva()));
+            }
+            listaReservas.sort(null);
+            listaReservasInterfaz.setSelectedItem(null);
+        }
+		else {
+			JOptionPane.showMessageDialog(this, "No existen reservas en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
+		}
     }
 
     /**
@@ -142,7 +161,7 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-        cargarDatos();
+        cargarDatos2();
     }//GEN-LAST:event_formComponentShown
 
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
@@ -211,7 +230,8 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Escoja una reserva y un estado nuevo", "Estado y reserva no seleccionados", JOptionPane.INFORMATION_MESSAGE);
         }
-
+		listaReservasInterfaz.setSelectedItem(null);
+		listaEstados.setSelectedItem(null);
     }//GEN-LAST:event_botonCambiarEstadoActionPerformed
 
     ICtrlReservas ctrlReservas;

@@ -160,10 +160,23 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
         String descuentoString = textPaneDescuento.getText();
-        float descuento = Float.parseFloat(descuentoString);
-        ctrlProductos.altaPromocion(descuento);
-        JOptionPane.showMessageDialog(this, "Promoción creada con éxito", "Ala Promoción", JOptionPane.INFORMATION_MESSAGE);
-        this.dispose();
+        boolean okDescuento = false;
+        float descuento = 0;
+        if (!descuentoString.isEmpty() && (descuentoString.matches("([0-9]|)+"))){
+            descuento = Float.parseFloat(descuentoString);
+            okDescuento = ((descuento > 0)&&(descuento < 100));
+        }  
+        if (((!servicios.isEmpty()))&&(okDescuento)){
+            ctrlProductos.altaPromocion(descuento);
+            JOptionPane.showMessageDialog(this, "Promoción creada con éxito", "Alta Promoción", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+        else
+            if (servicios.isEmpty())
+                JOptionPane.showMessageDialog(this, "Debe ingresar al menos un Servicio.", "Alta Promoción", JOptionPane.ERROR_MESSAGE);
+            else if (!okDescuento)
+                JOptionPane.showMessageDialog(this, "El descuento ingresado no es válido.", "Alta Promoción", JOptionPane.ERROR_MESSAGE);
+        
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
 	ICtrlProductos ctrlProductos;

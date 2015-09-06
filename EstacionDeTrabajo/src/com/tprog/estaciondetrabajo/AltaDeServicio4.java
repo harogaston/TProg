@@ -7,18 +7,16 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 
 public class AltaDeServicio4 extends javax.swing.JInternalFrame {
-
-    private AltaDeServicio3 padre;
 
     /**
      * Creates new form VerInformacionDeCliente
@@ -31,10 +29,10 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
         arbolCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        seleccionCategoriasInterfaz.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     void cargarDatos() {
-        Fabrica f = Fabrica.getInstance();
         DefaultMutableTreeNode raiz = ctrlProductos.listarCategorias();
         arbolCategorias.removeAll();
         arbolCategorias.setModel(new DefaultTreeModel(raiz));
@@ -59,6 +57,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         botonAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         seleccionCategoriasInterfaz = new javax.swing.JList(seleccionCategorias);
+        botonQuitar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -82,6 +81,11 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         label.getAccessibleContext().setAccessibleDescription("");
 
         botonSiguiente.setText("Siguiente >");
+        botonSiguiente.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                botonSiguienteComponentShown(evt);
+            }
+        });
         botonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonSiguienteActionPerformed(evt);
@@ -113,11 +117,19 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 botonAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 110, 70));
+        getContentPane().add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 110, 50));
 
         jScrollPane2.setViewportView(seleccionCategoriasInterfaz);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 170, 280));
+
+        botonQuitar.setText("<html><div align=\"center\">Quitar<br>Categoría</html>");
+        botonQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonQuitarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 110, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,8 +181,11 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                     seleccionCategorias.add(categoriaActual);
                     seleccionCategorias.sort(null);
                 } else {
+                    ctrlProductos.quitarCategoriaListada(categoriaActual);
                     JOptionPane.showMessageDialog(this, "Por favor seleccione una categoria hoja", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Esa categoría ya fue agregada", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Por favor escoja una categoría antes de intentar agregar una.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -178,6 +193,23 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         seleccionCategoriasInterfaz.updateUI();
     }//GEN-LAST:event_botonAgregarActionPerformed
 
+    private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
+        if (seleccionCategorias.size() > 0) {
+            String categoria = (String) seleccionCategoriasInterfaz.getSelectedValue();
+            if (categoria != null) {
+                seleccionCategorias.remove(seleccionCategoriasInterfaz.getSelectedIndex());
+                ctrlProductos.quitarCategoriaListada(categoria);
+                seleccionCategorias.sort(null);
+                seleccionCategoriasInterfaz.updateUI();
+            }
+        }
+    }//GEN-LAST:event_botonQuitarActionPerformed
+
+    private void botonSiguienteComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_botonSiguienteComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonSiguienteComponentShown
+
+    private AltaDeServicio3 padre;
     Vector<String> seleccionCategorias = new Vector<>();
     Set<DTMinServicio> listaServicios;
     Set<DTMinReserva> reservas;
@@ -185,6 +217,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolCategorias;
     private javax.swing.JButton botonAgregar;
+    private javax.swing.JButton botonQuitar;
     private javax.swing.JButton botonSiguiente;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JScrollPane jScrollPane1;

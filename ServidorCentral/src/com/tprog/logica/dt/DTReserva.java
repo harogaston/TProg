@@ -53,14 +53,14 @@ public class DTReserva {
                 + Integer.toString(fCreacion.getYear()) + "\n"
                 + "\n" + "Estado: " + estado.toString()
                 + "\n" + "Precio total: " + Float.toString(precioTotal)
-                + "\n";
+                + "\n" + "\n";
         if (!lineasReserva.isEmpty()) {
-            output = output.concat("Lineas de reserva: " + "\n");
+            output = output.concat("Lineas de reserva: " + "\n" + "\n");
             int i = 1;
             for (DTLineaReserva dt : lineasReserva) {
                 if (dt != null) {
-                    output = output.concat("Linea " + Integer.toString(i) + "\n");
-                    output = output.concat(dt.toString());
+                    output = output.concat("Linea " + Integer.toString(i) + "\n" + "\n");
+                    output = output.concat(dt.toString() + "\n");
                     i++;
                 }
             }

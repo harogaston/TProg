@@ -178,4 +178,39 @@ public class CtrlReservas implements ICtrlReservas {
         this.lineasReserva = new HashSet();
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getNicknameP() {
+        return nicknameP;
+    }
+
+    public DTMinPromocion getDtP() {
+        return dtP;
+    }
+
+    public DTMinServicio getDtS() {
+        return dtS;
+    }
+
+    public DTReserva getDtR() {
+        return dtR;
+    }
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public Set<DTLineaReserva> getLineasReserva() {
+        return lineasReserva;
+    }
+    
+    
+    
+
 }

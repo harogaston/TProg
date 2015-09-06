@@ -7,6 +7,7 @@ package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTReserva;
+import com.tprog.logica.dt.EstadoReserva;
 import com.tprog.logica.interfaces.ICtrlReservas;
 import java.util.Set;
 import java.util.Vector;
@@ -135,12 +136,18 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String reservaSeleccionada = (String) listaReservasInterfaz.getSelectedItem();
         if (reservaSeleccionada != null) {
+            DTReserva dt = ctrlReservas.infoReserva();
+            EstadoReserva estado = dt.getEstadoReserva();
             boolean eliminada = ctrlReservas.eliminarReserva();
             if (eliminada) {
                 JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
                 cargarDatos();
             } else {
-                JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
+                if(estado.equals(EstadoReserva.Pagada)){
+                    JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada.\nLa misma ya se encuentra pagada.", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada.\nLa misma ya se encuentra facturada.", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
+                }    
             }
         }
     }//GEN-LAST:event_botonEliminarActionPerformed

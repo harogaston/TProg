@@ -22,7 +22,8 @@ public class Servicio {
 	private Proveedor proveedor;
 	private Set<Simple> categorias;
 
-	public Servicio(String idServicio, String descripcion, float precio, Set<String> imagenes, Ciudad origen, Ciudad destino, Proveedor proveedor) {
+	public Servicio(String idServicio, String descripcion, float precio, Set<String> imagenes, 
+                    Ciudad origen, Ciudad destino, Proveedor proveedor) {
 		this.idServicio = idServicio;
 		this.descripcion = descripcion;
 		this.precio = precio;

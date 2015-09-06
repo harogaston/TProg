@@ -29,11 +29,11 @@ public class ManejadorProductos {
 
 	private static ManejadorProductos instace = null;
 
-	private Map<String, Categoria> categorias;
-	private Categoria root;
-	private Map<String, Pais> ubicaciones;
-	private Map<String, Map<String, Servicio>> servicios;
-	private Map<String, Map<String, Promocion>> promociones;
+	protected Map<String, Categoria> categorias;
+	protected Categoria root;
+	protected Map<String, Pais> ubicaciones;
+	protected Map<String, Map<String, Servicio>> servicios;
+	protected Map<String, Map<String, Promocion>> promociones;
 
 	private ManejadorProductos() {
 		categorias = new HashMap();
@@ -183,19 +183,19 @@ public class ManejadorProductos {
         }
 
 	public DefaultMutableTreeNode listarCiudades() {
-		DefaultMutableTreeNode result = new DefaultMutableTreeNode();
-		if (!ubicaciones.isEmpty()) {
-			for (Pais p : ubicaciones.values()) {
-				DefaultMutableTreeNode pais = new DefaultMutableTreeNode(p.getIdPais());
-				result.add(pais);
-				if (!p.getCiudades().isEmpty()) {
-					for (Ciudad c : p.getCiudades().values()) {
-						pais.add(new DefaultMutableTreeNode(c.getIdCiudad(), false));
-					}
-				}
-			}
-		}
-		return result;
+            DefaultMutableTreeNode result = new DefaultMutableTreeNode();
+            if (!ubicaciones.isEmpty()) {
+                for (Pais p : ubicaciones.values()) {
+                    DefaultMutableTreeNode pais = new DefaultMutableTreeNode(p.getIdPais());
+                    result.add(pais);
+                    if (!p.getCiudades().isEmpty()) {
+                        for (Ciudad c : p.getCiudades().values()) {
+                            pais.add(new DefaultMutableTreeNode(c.getIdCiudad(), false));
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
 //	public boolean agregarCategoria(String idCategoria) {

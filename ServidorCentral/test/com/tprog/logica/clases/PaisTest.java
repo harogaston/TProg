@@ -3,6 +3,7 @@
  */
 package com.tprog.logica.clases;
 
+import java.util.HashMap;
 import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,24 +25,9 @@ public class PaisTest {
     public PaisTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
         instance = new Pais("QGuay");
-        Ciudad nueva = new Ciudad("Montevideo");
-        instance.agregarCiudad(nueva);
-        
-    }
-    
-    @After
-    public void tearDown() {
     }
 
     /**
@@ -54,7 +40,6 @@ public class PaisTest {
         String expResult = "QGuay";
         String result = instance.getIdPais();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     /**
@@ -63,12 +48,8 @@ public class PaisTest {
     @Test
     public void testGetCiudades() {
         System.out.println("getCiudades");
-        
-        Map<String, Ciudad> expResult = ciudades;
-        Map<String, Ciudad> result = instance.getCiudades();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        Map<String, Ciudad> cities = instance.getCiudades();
+        assertTrue(cities.isEmpty());
     }
 
     /**
@@ -76,11 +57,11 @@ public class PaisTest {
      */
     @Test
     public void testSetIdPais() {
-        System.out.println("setIdPais");
-        String id = "gg";
+        System.out.println("TEST: setIdPais");
+        String id = "Uruguay";
         
         instance.setIdPais(id);
-        // TODO review the generated test code and remove the default call to fail.
+        assertEquals(id, instance.getIdPais());
         
     }
 
@@ -90,9 +71,12 @@ public class PaisTest {
     @Test
     public void testAgregarCiudad() {
         System.out.println("agregarCiudad");
-        Ciudad c = new Ciudad("Atlantida");
-        instance.agregarCiudad(c);
-        // TODO review the generated test code and remove the default call to fail.
+        instance.agregarCiudad(new Ciudad("Montevideo"));
+        assertTrue(!instance.getCiudades().isEmpty());
+        assertTrue(instance.getCiudades().containsKey("Montevideo"));
+        String pais = instance.getIdPais();
+        String paisCiudad = instance.getCiudades().get("Montevideo").getPais().getIdPais();
+        assertEquals(pais, paisCiudad);
         
     }
     

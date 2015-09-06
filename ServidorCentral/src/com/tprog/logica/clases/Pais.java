@@ -14,8 +14,8 @@ public class Pais {
 	private Map<String, Ciudad> ciudades;
 
 	public Pais(String id) {
-		this.idPais = id;
-		this.ciudades = new HashMap();
+            this.idPais = id;
+            this.ciudades = new HashMap();
 	}
 
 	public String getIdPais() {

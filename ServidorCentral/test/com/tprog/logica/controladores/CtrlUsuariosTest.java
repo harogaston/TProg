@@ -81,7 +81,18 @@ public class CtrlUsuariosTest {
             expResult.add(new DTMinCliente("jorge1", "jorge1@gmail.com"));
             expResult.add(new DTMinCliente("jorge3", "jorge3@gmail.com"));
             Set<DTMinCliente> result = ctrlUsuarios.listarClientes();
-            assertTrue(result.equals(expResult));
+            boolean foundAll = true;
+            for (DTMinCliente dtResult : result) {
+                boolean found = false;
+                for (DTMinCliente dtExpResult : expResult) {
+                    if (dtExpResult.getNickname().equals(dtResult.getNickname())
+                            && dtExpResult.getEmail().equals(dtResult.getEmail())) {
+                        found = true;
+                    }
+                }
+                foundAll = foundAll && found;
+            }
+            assertTrue(result.size() == expResult.size() && foundAll);
         } catch (Exception e) {
             throw e;
         }
@@ -225,7 +236,18 @@ public class CtrlUsuariosTest {
         Set<DTMinProveedor> expResult = new HashSet<>();
         expResult.add(new DTMinProveedor("jorge2", "jorge2@gmail.com", null));
         Set<DTMinProveedor> result = ctrlUsuarios.listarProveedores();
-        assertEquals(expResult.toString(), result.toString());
+        boolean foundAll = true;
+        for (DTMinProveedor dtResult : result) {
+            boolean found = false;
+            for (DTMinProveedor dtExpResult : expResult) {
+                if (dtExpResult.getNickname().equals(dtResult.getNickname())
+                        && dtExpResult.getEmail().equals(dtResult.getEmail())) {
+                    found = true;
+                }
+            }
+            foundAll = foundAll && found;
+        }
+        assertTrue(result.size() == expResult.size() && foundAll);
     }
 
     /**

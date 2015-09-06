@@ -67,7 +67,7 @@ public class DTLineaReserva {
             return "Cantidad: " + Integer.toString(cantidad)
                     + "\n" + "Fecha de inicio: "
                     + Integer.toString(fechaInicio.getDate()) + "-"
-                    + Integer.toString(fechaInicio.getMonth() +1 ) + "-"
+                    + Integer.toString(fechaInicio.getMonth() + 1) + "-"
                     + Integer.toString(fechaInicio.getYear())
                     + "\n" + "Fecha de fin: "
                     + Integer.toString(fechaFin.getDate()) + "-"

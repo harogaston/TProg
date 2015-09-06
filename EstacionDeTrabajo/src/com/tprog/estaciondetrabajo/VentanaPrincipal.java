@@ -5,8 +5,8 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.estaciondetrabajo.carga.CtrlCarga;
+import com.tprog.logica.interfaces.Fabrica;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;

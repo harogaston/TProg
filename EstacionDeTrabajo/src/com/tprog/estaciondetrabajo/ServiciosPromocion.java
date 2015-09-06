@@ -166,6 +166,8 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
             }
             if (imagenes.size() > 0) {
                 comboboxImagenes.setEnabled(true);
+            } else {
+                comboboxImagenes.setEnabled(false);
             }
             comboboxImagenes.updateUI();
         }

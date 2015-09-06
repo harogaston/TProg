@@ -160,8 +160,7 @@ public class ManejadorProductos {
                             s.agregarImagen(img);
                 } else {
                     throw new Exception ("El Servicio seleccionado no es válido.");
-                }
-                    
+                }  
             }else{
                 throw new Exception("No existen Servicios registrados en el Sistema.");
             }    
@@ -356,11 +355,17 @@ public class ManejadorProductos {
 	}
 
 	public boolean idPromocionDisponible(String idPromocion, String nicknameProv) {
-		Promocion pro = this.promociones.get(nicknameProv).get(idPromocion);
-		return (pro == null);
+            boolean result = true;
+            if (!promociones.isEmpty() && promociones.containsKey(nicknameProv)
+                    && !promociones.get(nicknameProv).isEmpty()
+                    && promociones.get(nicknameProv).containsKey(idPromocion)) {
+                result = false;
+            }
+            return result;
 	}
 
-	public void altaPromocion(String idPromocion, float descuento, String nicknameProv, Set<String> servicios) {
+	public void altaPromocion(String idPromocion, float descuento, String nicknameProv,
+                Set<String> servicios) {
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
             Proveedor proveedor = mu.getProveedor(nicknameProv);
             Promocion promo = new Promocion(idPromocion, descuento, proveedor);
@@ -402,16 +407,14 @@ public class ManejadorProductos {
 	}
 
 	public Promocion getPromocion(DTMinPromocion dtMinP) {
-		if (dtMinP != null) {
-			Map<String, Promocion> aux = promociones.get(dtMinP.getNicknameP());
-			if (aux != null) {
-				return aux.get(dtMinP.getIdPromocion());
-			} else {
-				return null;
-			}
-		} else {
-			return null;
-		}
+            if (dtMinP != null && !promociones.isEmpty() && 
+                    promociones.containsKey(dtMinP.getNicknameP()) &&
+                    !promociones.get(dtMinP.getNicknameP()).isEmpty() &&
+                    promociones.get(dtMinP.getNicknameP()).containsKey(dtMinP.getIdPromocion())) {
+                    return promociones.get(dtMinP.getNicknameP()).get(dtMinP.getIdPromocion());
+            } else {
+                return null;
+            } 
 	}
 
 	public void agregarPais(Pais p) {

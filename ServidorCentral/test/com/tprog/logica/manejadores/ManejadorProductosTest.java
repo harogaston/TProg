@@ -6,9 +6,12 @@ package com.tprog.logica.manejadores;
 import com.tprog.logica.clases.Categoria;
 import com.tprog.logica.clases.Ciudad;
 import com.tprog.logica.clases.Pais;
+import com.tprog.logica.clases.Promocion;
 import com.tprog.logica.clases.Servicio;
 import com.tprog.logica.clases.Simple;
+import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTPromocion;
 import com.tprog.logica.dt.DTProveedor;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
@@ -181,6 +184,34 @@ public class ManejadorProductosTest{
     }
     
     /**
+     * Test of esCategoriaSimple method, of class ManejadorProductos.
+     */
+    @Test
+    public void esCategoriaSimpleTrue(){
+       System.out.println("esCategoriaSimpleTrue");
+        assertTrue(instance.esCategoriaSimple("SubCat"));
+        
+    }
+    
+    /**
+     * Test of esCategoriaSimple method, of class ManejadorProductos.
+     */
+    @Test
+    public void esCategoriaSimpleFalse1(){
+       System.out.println("esCategoriaSimpleFalse1");
+        assertFalse(instance.esCategoriaSimple("Categorias")); 
+    }
+    
+    /**
+     * Test of esCategoriaSimple method, of class ManejadorProductos.
+     */
+    @Test
+    public void esCategoriaSimpleFalse2(){
+       System.out.println("esCategoriaSimpleFalse2");
+        assertFalse(instance.esCategoriaSimple("CategoriaFalsa")); 
+    }
+    
+    /**
      * Test of idServicioDisponible method, of class ManejadorProductos.
      */
     @Test
@@ -336,7 +367,7 @@ public class ManejadorProductosTest{
     }
     
     /**
-     * Test of quitarImagen method, of class ManejadorProductos.
+     * Test of agregarImagen method, of class ManejadorProductos.
      */
     @Test
     public void testAgregarImagenFail() throws Exception {
@@ -346,6 +377,21 @@ public class ManejadorProductosTest{
             instance.agregarImagen(dtMinS, "Beatle");
         } catch (Exception e){
             assertEquals(e.getMessage(), "El Servicio seleccionado no es válido.");
+        }    
+    }
+    
+    /**
+     * Test of agregarImagen method, of class ManejadorProductos.
+     */
+    @Test
+    public void testAgregarImagenFail2() throws Exception {
+        System.out.println("agregarImagenFail2");
+        try {
+            instance.servicios = new HashMap();
+            DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Red Beatle");
+            instance.agregarImagen(dtMinS, "Beatle");
+        } catch (Exception e){
+            assertEquals(e.getMessage(), "No existen Servicios registrados en el Sistema.");
         }    
     }
     
@@ -361,6 +407,35 @@ public class ManejadorProductosTest{
         instance.quitarImagen(dtMinS, "Beatle");
         Set<String> result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getImagenes();
         assertTrue(result.isEmpty());
+    }
+    
+    /**
+     * Test of quitarImagen method, of class ManejadorProductos.
+     */
+    @Test
+    public void testQuitarImagenFail() throws Exception {
+        System.out.println("quitarImagenFail");
+        try {
+            DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Red Beatle");
+            instance.quitarImagen(dtMinS, "Beatle");
+        } catch (Exception e){
+            assertEquals(e.getMessage(), "El Servicio seleccionado no es válido.");
+        }    
+    }
+    
+    /**
+     * Test of quitarImagen method, of class ManejadorProductos.
+     */
+    @Test
+    public void testquitarImagenFail2() throws Exception {
+        System.out.println("quitarImagenFail2");
+        try {
+            instance.servicios = new HashMap();
+            DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Red Beatle");
+            instance.quitarImagen(dtMinS, "Beatle");
+        } catch (Exception e){
+            assertEquals(e.getMessage(), "No existen Servicios registrados en el Sistema.");
+        }    
     }
     
     /**
@@ -411,11 +486,25 @@ public class ManejadorProductosTest{
      * Test of esCategoriaSimpleAgregar method, of class ManejadorProductos.
      */
     @Test
-    public void testEsCategoriaSimpleAgregarFails() {
+    //Caso que intenta agregar una Categoria Compuesta.
+    public void testEsCategoriaSimpleAgregarFail() {
         System.out.println("esCategoriaSimpleAgregarFails");
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
         int expResult = instance.listarCategoriasServicio(dtMinS).size();
         assertFalse(instance.esCategoriaSimpleAgregar(dtMinS, "Categorias"));
+        assertEquals(expResult, instance.listarCategoriasServicio(dtMinS).size()); 
+    }
+    
+    /**
+     * Test of esCategoriaSimpleAgregar method, of class ManejadorProductos.
+     */
+    @Test
+    //Caso que intenta agregar una Categoria inválida.
+    public void testEsCategoriaSimpleAgregarFail2() {
+        System.out.println("esCategoriaSimpleAgregarFails");
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        int expResult = instance.listarCategoriasServicio(dtMinS).size();
+        assertFalse(instance.esCategoriaSimpleAgregar(dtMinS, "CategoriaFalsa"));
         assertEquals(expResult, instance.listarCategoriasServicio(dtMinS).size()); 
     }
     
@@ -429,6 +518,17 @@ public class ManejadorProductosTest{
         instance.altaCategoria("NuevaCategoria", null);
         assertTrue(instance.esCategoriaSimpleAgregar(dtMinS, "NuevaCategoria"));
         assertEquals(2, instance.listarCategoriasServicio(dtMinS).size()); 
+    }
+    /**
+     * Test of esCategoriaSimpleAgregar method, of class ManejadorProductos.
+     */
+    //Caso de agregar una Categoria que ya está en el Set
+    @Test
+    public void testEsCategoriaSimpleAgregarFails3() {
+        System.out.println("esCategoriaSimpleAgregar");
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        assertFalse(instance.esCategoriaSimpleAgregar(dtMinS, "SubCat"));
+        assertEquals(1, instance.listarCategoriasServicio(dtMinS).size()); 
     }
     
     /**
@@ -482,79 +582,109 @@ public class ManejadorProductosTest{
     }
     
     /**
-     * Test of infoPromocion method, of class ManejadorProductos.
+     * Test of idPromocionDisponible method, of class ManejadorProductos.
      */
-    /*@Test
-    public void testInfoPromocion() {
-        System.out.println("infoProtomocion");
-        
-        DTMinPromocion dtP = DTMinPromocion("Mister", "Chicago Flight");
-        
-        ManejadorProductos instance = null;
-        DTPromocion expResult = null;
-        DTPromocion result = instance.infoPromocion(dtP);
-        assertEquals(expResult, result);
-    }*/
-
+    @Test
+    public void testIdPromocionDisponible() {
+        System.out.println("idPromocionDisponible");
+        String idPromocion = "Oportunidad";
+        assertTrue(instance.idPromocionDisponible(idPromocion, "Juan Perez"));
+    }
+    
     /**
      * Test of idPromocionDisponible method, of class ManejadorProductos.
      */
-    /*@Test
-    public void testIdPromocionDisponible() {
-        System.out.println("idPromocionDisponible");
-        String idPromocion = "";
-        String nicknameProv = "";
-        ManejadorProductos instance = null;
-        boolean expResult = false;
-        boolean result = instance.idPromocionDisponible(idPromocion, nicknameProv);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
+    @Test
+    public void testIdPromocionDisponible2() {
+        System.out.println("idPromocionDisponible2");
+        String idPromocion = "Blue Opportunity";
+        float descuento = 20;
+        String nicknameProv = "Harry Dresden";
+        Set<String> servicios = new HashSet();
+        servicios.add("Blue Beatle");
+        instance.altaPromocion(idPromocion, descuento, nicknameProv, servicios);
+        assertFalse(instance.idPromocionDisponible("Blue Opportunity", "Harry Dresden"));
+        assertTrue(instance.idPromocionDisponible("Blue Opportunity", "Harry Potter"));
+        assertTrue(instance.idPromocionDisponible("Black Opportunity", "Harry Dresden"));
+    }
+    
+    
     /**
      * Test of altaPromocion method, of class ManejadorProductos.
      */
-    /*@Test
+    @Test
     public void testAltaPromocion() {
         System.out.println("altaPromocion");
-        String idPromocion = "";
-        float descuento = 0.0F;
-        String nicknameProv = "";
-        Set<String> servicios = null;
-        ManejadorProductos instance = null;
+        String idPromocion = "Blue Opportunity";
+        float descuento = 20;
+        String nicknameProv = "Harry Dresden";
+        Set<String> servicios = new HashSet();
+        servicios.add("Blue Beatle");
         instance.altaPromocion(idPromocion, descuento, nicknameProv, servicios);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
+        
+        assertFalse(instance.promociones.isEmpty());
+        assertTrue(instance.promociones.containsKey("Harry Dresden"));
+        assertTrue(instance.promociones.get("Harry Dresden").containsKey("Blue Opportunity"));
+        Promocion p = instance.getPromocion(new DTMinPromocion("Harry Dresden", "Blue Opportunity"));
+        assertEquals("Blue Opportunity", p.getIdPromocion());
+        assertEquals("Harry Dresden", p.getNicknameProveedor());
+        assertEquals(20, p.getDescuento(), 0); 
+        assertEquals(40, p.getTotal(), 0);
+        assertFalse(instance.idPromocionDisponible("Blue Opportunity", "Harry Dresden"));
+    }
+    
+    /**
+     * Test of infoPromocion method, of class ManejadorProductos.
+     */
+    @Test
+    public void testInfoPromocionNull() {
+        System.out.println("infoPromocion");
+        assertEquals(null, instance.infoPromocion(null));
+    }
+    
+    /**
+     * Test of infoPromocion method, of class ManejadorProductos.
+     */
+    @Test
+    public void testInfoPromocion() {
+        System.out.println("infoPromocion");
+        String idPromocion = "Blue Opportunity";
+        float descuento = 20;
+        String nicknameProv = "Harry Dresden";
+        Set<String> servicios = new HashSet();
+        servicios.add("Blue Beatle");
+        instance.altaPromocion(idPromocion, descuento, nicknameProv, servicios);
+        DTMinPromocion dtP = new DTMinPromocion(nicknameProv, idPromocion);
+        DTMinServicio dtS = new DTMinServicio(nicknameProv, "Blue Beatle");
+        Set<DTMinServicio> serv = new HashSet();
+        serv.add(dtS);
+        DTPromocion expResult = new DTPromocion(idPromocion, 20, 40, serv);
+        DTPromocion result = instance.infoPromocion(dtP);
+        assertEquals(expResult.toString(), result.toString());
+    }
+    
+    /**
+     * Test of getPromocion method, of class ManejadorPorductos.
+     */
+    @Test
+    public void testGetPromocion(){
+        System.out.println("getPromocion");
+        assertEquals(null, instance.getPromocion(null));
+    }
 
     /**
      * Test of getPrecioPromocion method, of class ManejadorProductos.
      */
-    /*@Test
+    @Test
     public void testGetPrecioPromocion() {
-        System.out.println("getPrecioPromocion");
-        DTMinPromocion dtP = null;
-        ManejadorProductos instance = null;
-        float expResult = 0.0F;
-        float result = instance.getPrecioPromocion(dtP);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of getPromocion method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testGetPromocion() {
-        System.out.println("getPromocion");
-        DTMinPromocion dtMinP = null;
-        ManejadorProductos instance = null;
-        Promocion expResult = null;
-        Promocion result = instance.getPromocion(dtMinP);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
+        String idPromocion = "Blue Opportunity";
+        float descuento = 20;
+        String nicknameProv = "Harry Dresden";
+        Set<String> servicios = new HashSet();
+        servicios.add("Blue Beatle");
+        instance.altaPromocion(idPromocion, descuento, nicknameProv, servicios);
+        float expResult = 40;
+        float result = instance.getPrecioPromocion(new DTMinPromocion("Harry Dresden", "Blue Opportunity"));
+        assertEquals(expResult, result, 0);
+    }
 }

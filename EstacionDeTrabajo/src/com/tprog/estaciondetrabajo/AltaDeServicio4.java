@@ -38,6 +38,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         arbolCategorias.setModel(new DefaultTreeModel(raiz));
         arbolCategorias.updateUI();
         seleccionCategorias.clear();
+        seleccionCategoriasInterfaz.updateUI();
     }
 
     /**
@@ -179,6 +180,9 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
                 //si la categoria seleccionada es simple, la agrego
                 if (ctrlProductos.seleccionarCategoriaSimple(categoriaActual)) {
                     seleccionCategorias.add(categoriaActual);
+                    if (seleccionCategorias.size() > 0) {
+                        botonQuitar.setEnabled(true);
+                    }
                     seleccionCategorias.sort(null);
                 } else {
                     ctrlProductos.quitarCategoriaListada(categoriaActual);
@@ -194,14 +198,18 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonAgregarActionPerformed
 
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
-        if (seleccionCategorias.size() > 0) {
-            String categoria = (String) seleccionCategoriasInterfaz.getSelectedValue();
-            if (categoria != null) {
-                seleccionCategorias.remove(seleccionCategoriasInterfaz.getSelectedIndex());
-                ctrlProductos.quitarCategoriaListada(categoria);
-                seleccionCategorias.sort(null);
-                seleccionCategoriasInterfaz.updateUI();
+        String categoria = (String) seleccionCategoriasInterfaz.getSelectedValue();
+        if (categoria != null) {
+            seleccionCategorias.remove(seleccionCategoriasInterfaz.getSelectedIndex());
+            ctrlProductos.quitarCategoriaListada(categoria);
+            seleccionCategorias.sort(null);
+            if (seleccionCategorias.size() == 0) {
+                botonQuitar.setEnabled(false);
             }
+            seleccionCategoriasInterfaz.clearSelection();
+            seleccionCategoriasInterfaz.updateUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tiene que seleccionar una categoría para intentar quitarla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonQuitarActionPerformed
 

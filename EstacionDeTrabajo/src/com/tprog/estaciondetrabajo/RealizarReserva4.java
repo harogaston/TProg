@@ -9,16 +9,19 @@ import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.interfaces.Fabrica;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.interfaces.ICtrlReservas;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
 	public RealizarReserva4(RealizarReserva2 padre, ICtrlReservas ctrlReservas, boolean proveedorSeleccionado) {
-		
+
 		//asignación de atributos
 		this.padre = padre;
 		this.ctrlReservas = ctrlReservas;
@@ -63,6 +66,15 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 		super.dispose();
 	}
 
+	private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
+		List<Integer> lista = new ArrayList<>();
+		for (int i = min; i <= max; i++) {
+			lista.add(i);
+		}
+		Integer[] anios = lista.toArray(new Integer[lista.size()]);
+		return new DefaultComboBoxModel<Integer>(anios);
+	}
+
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,11 +101,11 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         jLabel10 = new javax.swing.JLabel();
         comboBoxDias1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
         comboBoxDias2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
-        comboBoxAnios1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
-        comboBoxAnios2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
         comboBoxMeses1 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
         comboBoxMeses2 = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
         jTextFieldCantidad = new javax.swing.JTextField();
+        comboBoxAnios1 = new javax.swing.JComboBox();
+        comboBoxAnios2 = new javax.swing.JComboBox();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -166,11 +178,15 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
         getContentPane().add(comboBoxDias1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 60, -1));
         getContentPane().add(comboBoxDias2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 60, -1));
-        getContentPane().add(comboBoxAnios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, -1, -1));
-        getContentPane().add(comboBoxAnios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
         getContentPane().add(comboBoxMeses1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 230, -1, -1));
         getContentPane().add(comboBoxMeses2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, -1, -1));
         getContentPane().add(jTextFieldCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 70, -1));
+
+        comboBoxAnios1.setModel(modeloAnios1);
+        getContentPane().add(comboBoxAnios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 60, -1));
+
+        comboBoxAnios2.setModel(modeloAnios2);
+        getContentPane().add(comboBoxAnios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, 60, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -232,10 +248,9 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 
 			Date fechaInicio = new Date(anioI, mesI, diaI);
 			Date fechaFinal = new Date(anioF, mesF, diaF);
-			Date fechaActual = new Date();
-			
+
 			// Verifico las fechas
-			boolean fechasCoherentes = (fechaInicio.before(fechaFinal)) && (fechaInicio.after(fechaActual));
+			boolean fechasCoherentes = fechaInicio.before(fechaFinal);
 
 			// Si todo esta ok
 			if (okCant && fechasCoherentes) {
@@ -255,7 +270,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
 				JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
 			}
 		} else {
-			JOptionPane.showMessageDialog(this, "Debe seleccionar un servicio.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Debe seleccionar una promoción.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
 		}
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
@@ -267,8 +282,10 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonAtras;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios comboBoxAnios1;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios comboBoxAnios2;
+    private javax.swing.JComboBox comboBoxAnios1;
+    private DefaultComboBoxModel<Integer> modeloAnios1 = modelRange(2015, 2099);
+    private javax.swing.JComboBox comboBoxAnios2;
+    private DefaultComboBoxModel<Integer> modeloAnios2 = modelRange(2015, 2099);
     private com.tprog.estaciondetrabajo.customComponents.JComboBoxDias comboBoxDias1;
     private com.tprog.estaciondetrabajo.customComponents.JComboBoxDias comboBoxDias2;
     private com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses comboBoxMeses1;

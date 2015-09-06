@@ -27,22 +27,27 @@ public class AltaDePromocion extends javax.swing.JInternalFrame {
      */
     public AltaDePromocion(ICtrlUsuarios ctrlUsuarios, ICtrlProductos ctrlProductos) {
         this.ctrlProductos = ctrlProductos;
-        this.ctrlUsuarios = ctrlUsuarios;
-        setTitle("Alta de Promoción");
+        this.ctrlUsuarios = ctrlUsuarios;  
         initComponents();
+        setTitle("Alta de Promoción");
     }
 
     void cargarDatos() {
         //listaClientes
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-        //construyo un vector con la informacion a mostrar, porque
-        //el comboBox solo funciona con Vector o List
-        for (DTMinProveedor dt : setProveedores) {
-            listaProveedores.add(dt.getNickname());
-        }
+        if (!setProveedores.isEmpty()) {
+            //construyo un vector con la informacion a mostrar, porque
+            //el comboBox solo funciona con Vector o List
+            for (DTMinProveedor dt : setProveedores) {
+                listaProveedores.add(dt.getNickname());
+            }
 //		listaProveedoresInterfaz.updateUI();
-        listaProveedores.sort(null);
-        this.updateUI();
+            listaProveedores.sort(null);
+            this.updateUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay proveedores en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        }
     }
 
     /**

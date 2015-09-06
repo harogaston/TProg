@@ -12,6 +12,7 @@ import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
 
@@ -25,13 +26,16 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
 
     void cargarDatos() {
         setPromociones = ctrlProductos.listarPromociones();
-		//construyo un vector con la informacion a mostrar, porque
+        //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        if (setPromociones != null) {
+        if (!setPromociones.isEmpty()) {
             for (DTMinPromocion promocion : setPromociones) {
                 listaPromociones.add(promocion.getIdPromocion());
             }
             listaPromociones.sort(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay promociones en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
         }
     }
 
@@ -124,7 +128,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
         if (promocion != null) {
             DTMinPromocion dt = buscarDTMinPromocion(promocion);
             ctrlProductos.seleccionarPromocion(dt);
-			//System.out.println(dt.getNicknameP());
+            //System.out.println(dt.getNicknameP());
             detallePromocion.setVisible(true);
             dtPromocionActual = ctrlProductos.infoPromocion();
             detallePromocion.setText(dt.toString());

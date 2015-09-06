@@ -34,12 +34,15 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
         //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        if (setReservas != null) {
+        if (!setReservas.isEmpty()) {
             for (DTMinReserva dt : setReservas) {
                 listaReservas.add(Integer.toString(dt.getIdReserva()));
             }
+            listaReservas.sort(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay reservas en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
         }
-        listaReservas.sort(null);
     }
 
     /**

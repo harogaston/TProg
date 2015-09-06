@@ -139,7 +139,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_casillaPadreActionPerformed
 
-    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
 
         String categoriaNueva = nombreCategoria.getText();
         if (!isWhiteSpace(categoriaNueva)) {
@@ -174,7 +174,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "El nombre de categoría ingresado no es válido", "Campo vacio", JOptionPane.INFORMATION_MESSAGE);
         }
-    }                                          
+    }
 
     DefaultTreeModel arbolCategoriasModelo;
     ICtrlProductos ctrlProductos;

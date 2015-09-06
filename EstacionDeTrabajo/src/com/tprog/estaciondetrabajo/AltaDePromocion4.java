@@ -33,6 +33,7 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlProductos = ctrlProductos;
         initComponents();
+        setTitle("Alta de Promoción");
         //construyo lista para la interfaz usando el set
         for (DTMinServicio dt : servicios) {
             listaServicios.add(dt.getIdServicio());

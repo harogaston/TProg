@@ -290,7 +290,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
-
+        AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+        center(altaDePromocion);
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
     /**

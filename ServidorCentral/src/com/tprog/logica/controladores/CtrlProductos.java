@@ -93,6 +93,7 @@ public class CtrlProductos implements ICtrlProductos {
 
 	@Override
 	public Set<DTMinServicio> listarServicios() {
+        
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		return mp.listarServicios();
 	}

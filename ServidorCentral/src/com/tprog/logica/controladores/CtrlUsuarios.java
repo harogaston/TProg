@@ -80,7 +80,6 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		ManejadorReservas mu = ManejadorReservas.getInstance();
 		return mu.infoReserva(this.idReserva);
 	}
-
 	@Override
 	public boolean verificarNickname(String nickname) {
 		this.nicknameU = nickname;

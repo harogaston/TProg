@@ -62,22 +62,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setName("Venatana Principal"); // NOI18N
         setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
-<<<<<<< HEAD
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
-        });
-||||||| merged common ancestors
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
-        });
-
-        desktop.setBorder(null);
-=======
->>>>>>> master
         getContentPane().add(desktop, java.awt.BorderLayout.CENTER);
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));
@@ -306,7 +290,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
-
+        AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+        center(altaDePromocion);
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
     /**

@@ -44,22 +44,28 @@ public class ManejadorReservas {
 
 	public DTReserva infoReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-		return r.crearDTReserva();
+        if (r != null){
+            return r.crearDTReserva();
+        }else return null;
 	}
 
 	public boolean cambiarEstadoReserva(int idReserva, EstadoReserva nuevoEstado) {
 		Reserva r = reservas.get(idReserva);
-		return r.cambiarEstadoReserva(nuevoEstado);
+        if (r != null){
+            return r.cambiarEstadoReserva(nuevoEstado);
+        }return false;
 	}
 
 	public boolean eliminarReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-		EstadoReserva estado = r.getEstado();
-		if (estado == EstadoReserva.Registrada || estado == EstadoReserva.Cancelada) {
-                    r.getCliente().quitarReserva(idReserva);
-                    reservas.remove(idReserva);
-                    return true;
-		}
+        if (r != null){
+            EstadoReserva estado = r.getEstado();
+            if (estado == EstadoReserva.Registrada || estado == EstadoReserva.Cancelada) {
+                        r.getCliente().quitarReserva(idReserva);
+                        reservas.remove(idReserva);
+                        return true;
+            }
+        }
 		return false;
 	}
 
@@ -76,7 +82,9 @@ public class ManejadorReservas {
 
 	public EstadoReserva getEstadoReserva(int idReserva) {
 		Reserva r = reservas.get(idReserva);
-		return r.getEstado();
+        if (r != null){
+            return r.getEstado();
+        }else return null;
 	}
         public Map<Integer,Reserva> getReservas(){
                 return reservas;

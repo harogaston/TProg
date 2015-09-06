@@ -55,7 +55,6 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         botonAtras = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         comboboxImagenes = new javax.swing.JComboBox(modelComboBox);
-        labelImagen = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -81,7 +80,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 418, -1));
 
         detalleServicio.setEditable(false);
         detalleServicio.setColumns(20);
@@ -102,17 +101,10 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
 
         jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
-
-        comboboxImagenes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboboxImagenesActionPerformed(evt);
-            }
-        });
-        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 150, 30));
-        getContentPane().add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 160, 160));
+        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 200, 230));
 
         jLabel2.setText("<html> Imágenes del servicio </html>");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 150, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,7 +120,6 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
-            labelImagen.setIcon(null);
             //buscar servicio
             DTMinServicio dt = null;
             Iterator it = servicios.iterator();
@@ -154,7 +145,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
                     //creo imagen
                     Image img = ImageIO.read(f);
                     //redimensiono para que entre en la JLabel
-                    int width = labelImagen.getWidth();
+                    int width = comboboxImagenes.getWidth();
                     int height = img.getHeight(null) * width / img.getWidth(null);
                     Image dimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
                     //armo el ImageIcon
@@ -181,13 +172,6 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         padre.setVisible(true);
     }//GEN-LAST:event_botonAtrasActionPerformed
 
-    private void comboboxImagenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxImagenesActionPerformed
-        ImageIcon img = (ImageIcon) comboboxImagenes.getSelectedItem();
-        if (img != null) {
-            labelImagen.setIcon(img);
-        }
-    }//GEN-LAST:event_comboboxImagenesActionPerformed
-
     @Override
     public void dispose() {
         padre.dispose();
@@ -204,7 +188,6 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
     private javax.swing.JTextArea detalleServicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel labelImagen;
     private javax.swing.JComboBox listaServiciosInterfaz;
     private Vector<String> listaServicios = new Vector<>();
     private javax.swing.JScrollPane panelUsuario;

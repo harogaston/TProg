@@ -6,7 +6,7 @@
 package com.tprog.estaciondetrabajo;
 
 import com.tprog.logica.interfaces.Fabrica;
-import com.tprog.logica.interfaces.ICtrlUniversal;
+import com.tprog.estaciondetrabajo.carga.CtrlCarga;
 import java.awt.Dimension;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
@@ -278,7 +278,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
-        ICtrlUniversal ctrl = fabrica.getICtrlUniversal();
+        CtrlCarga ctrl = new CtrlCarga();
         ctrl.cargarDatos();
         JOptionPane.showMessageDialog(desktop, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
         cargarDatos.setEnabled(false);

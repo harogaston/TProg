@@ -24,9 +24,12 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
     public CancelarReserva(ICtrlReservas ctrlReservas) {
         this.ctrlReservas = ctrlReservas;
         initComponents();
+        cargarDatos();
     }
 
     void cargarDatos() {
+        listaReservas.clear();
+        listaReservasInterfaz.setSelectedItem(null);
         //listaClientes
         Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
         //construyo un vector con la informacion a mostrar, porque
@@ -37,7 +40,6 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
             }
         }
         listaReservas.sort(null);
-        this.updateUI();
     }
 
     /**
@@ -133,6 +135,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
             boolean eliminada = ctrlReservas.eliminarReserva();
             if (eliminada) {
                 JOptionPane.showMessageDialog(this, "La reserva fue eliminada exitosamente", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
+                cargarDatos();
             } else {
                 JOptionPane.showMessageDialog(this, "La reserva no pudo ser eliminada", "Cancelación de Reserva", JOptionPane.INFORMATION_MESSAGE);
             }

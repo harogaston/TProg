@@ -2,6 +2,7 @@
  */
 package com.tprog.logica.controladores;
 
+import com.tprog.estaciondetrabajo.carga.CtrlCarga;
 import com.tprog.logica.clases.Cliente;
 import com.tprog.logica.clases.Promocion;
 import com.tprog.logica.clases.Proveedor;
@@ -33,7 +34,7 @@ import org.junit.Test;
 public class CtrlReservasTest {
 
     CtrlReservas instance;
-    CtrlUniversal ctrlUniversal;
+    CtrlCarga ctrlUniversal;
     String nickname;
     String nicknameP;
     DTMinPromocion dtP;
@@ -59,7 +60,7 @@ public class CtrlReservasTest {
 
     @Before
     public void setUp() {
-        ctrlUniversal = new CtrlUniversal();
+        ctrlUniversal = new CtrlCarga();
         ctrlUniversal.cargarDatos();
 
         instance = new CtrlReservas();

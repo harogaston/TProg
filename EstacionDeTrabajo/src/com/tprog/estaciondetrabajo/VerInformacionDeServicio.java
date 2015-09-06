@@ -99,11 +99,15 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
             //no se si asi o cast directamente a String
             String categoria = nodo.getUserObject().toString();
             listaServicios = ctrlProductos.listarServiciosCategoria(categoria);
-            ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
-            this.setVisible(false);
-            getParent().add(s);
-            s.setLocation(this.getLocation());
-            s.setVisible(true);
+            if (!listaServicios.isEmpty()) {
+                ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
+                this.setVisible(false);
+                getParent().add(s);
+                s.setLocation(this.getLocation());
+                s.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Ésta categoría no tiene servicios asociados.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una categoría para ver sus servicios asociados.", "Error", JOptionPane.ERROR_MESSAGE);
         }

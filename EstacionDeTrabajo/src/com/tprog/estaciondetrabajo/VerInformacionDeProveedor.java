@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
 
@@ -30,12 +31,17 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
     void cargarDatos() {
         //listaClientes
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-		//construyo un vector con la informacion a mostrar, porque
+        //construyo un vector con la informacion a mostrar, porque
         //el comboBox solo funciona con Vector o List
-        for (DTMinProveedor dt : setProveedores) {
-            listaProveedores.add(dt.getNickname());
+        if (!setProveedores.isEmpty()) {
+            for (DTMinProveedor dt : setProveedores) {
+                listaProveedores.add(dt.getNickname());
+            }
+            listaProveedores.sort(null);
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay proveedores en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
         }
-        listaProveedores.sort(null);
     }
 
     /**

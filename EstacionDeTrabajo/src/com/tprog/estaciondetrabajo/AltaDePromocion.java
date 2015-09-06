@@ -27,9 +27,9 @@ public class AltaDePromocion extends javax.swing.JInternalFrame {
      */
     public AltaDePromocion(ICtrlUsuarios ctrlUsuarios, ICtrlProductos ctrlProductos) {
         this.ctrlProductos = ctrlProductos;
-        this.ctrlUsuarios = ctrlUsuarios;
-        setTitle("Alta de Promoción");
+        this.ctrlUsuarios = ctrlUsuarios;  
         initComponents();
+        setTitle("Alta de Promoción");
     }
 
     void cargarDatos() {

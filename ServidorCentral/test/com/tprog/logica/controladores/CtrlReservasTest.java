@@ -675,14 +675,20 @@ public class CtrlReservasTest {
                     new Date(2015, 8 - 1, 21), "Casa para p4 BsAs", null, 80));
             dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
                     EstadoReserva.Registrada, 542, lineas);
+            instance.seleccionarServicio(new DTMinServicio("remus","Euro-Vuelo-LC"));
+            instance.ingresarLineaReserva(2, fecha, fecha);
             mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
+            instance.seleccionarServicio(null);
             //R7    S2
             lineas = new HashSet();
             lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
                     new Date(2015, 8 - 1, 7), "Euro-Vuelo-LC", null, 850));
             dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
                     EstadoReserva.Registrada, 1700, lineas);
+            instance.seleccionarPromocion(new DTMinPromocion("moody","Euro-Cars-E-S"));
+            instance.ingresarLineaReserva(2, fecha, fecha);
             mr.agregarReserva(mu.getCliente("BruceS"), dtR, "remus");
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -741,6 +747,9 @@ public class CtrlReservasTest {
     @Test
     public void testAltaReserva() throws Exception {
         instance.seleccionarServicio(new DTMinServicio("remus", "Euro-Vuelo-LC"));
+        instance.altaReserva();
+        instance.seleccionarServicio(null);
+        instance.seleccionarPromocion(new DTMinPromocion("remus","Euro-Vuelos-LC-FC"));
         instance.altaReserva();
     }
 

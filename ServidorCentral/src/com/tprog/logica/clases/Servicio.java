@@ -148,4 +148,17 @@ public class Servicio {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
+        
+        @Override
+        public String toString(){
+            String output = "IdServicio: " + idServicio + "\n"
+                + "Proveedor: " + proveedor.getNickname() + "\n"
+                + "Descripción: " + descripcion + "\n" 
+                + "Precio: " + Float.toString(precio) + "\n"
+                + "Origen: " + origen.toString() + "\n";
+                if (destino != null){
+                    output = output.concat("Destino: " + destino.toString() + "\n");
+                }
+            return output;        
+        }
 }

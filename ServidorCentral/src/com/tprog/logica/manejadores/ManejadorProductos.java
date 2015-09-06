@@ -312,13 +312,13 @@ public class ManejadorProductos {
 	}
 
 	public boolean idServicioDisponible(String idServicio, String nicknameP) {
-		boolean result = true;
-		if (!servicios.isEmpty() && servicios.containsKey(nicknameP)
-				&& !servicios.get(nicknameP).isEmpty()
-				&& servicios.get(nicknameP).containsKey(idServicio)) {
-			result = false;
-		}
-		return result;
+            boolean result = true;
+            if (!servicios.isEmpty() && servicios.containsKey(nicknameP)
+                    && !servicios.get(nicknameP).isEmpty()
+                    && servicios.get(nicknameP).containsKey(idServicio)) {
+                result = false;
+            }
+            return result;
 	}
 
 	public boolean esCategoriaSimple(String cat) {

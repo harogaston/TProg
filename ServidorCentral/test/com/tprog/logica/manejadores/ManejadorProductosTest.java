@@ -8,8 +8,10 @@ import com.tprog.logica.clases.Ciudad;
 import com.tprog.logica.clases.Pais;
 import com.tprog.logica.clases.Proveedor;
 import com.tprog.logica.clases.Simple;
+import com.tprog.logica.dt.DTMinPromocion;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.junit.After;
 import org.junit.Before;
@@ -182,15 +184,47 @@ public class ManejadorProductosTest{
     }
     
     /**
+     * Test of idServicioDisponible method, of class ManejadorProductos.
+     */
+    @Test
+    public void testIdServicioDisponibleFails() {
+        System.out.println("idServicioDisponible");
+        String idServicio = "testServicio";
+        String nicknameP = "So";
+        boolean expResult = true;
+        boolean result = instance.idServicioDisponible(idServicio, nicknameP);
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of listarServicios method, of class ManejadorProductos.
+     */
+    @Test
+    public void testListarServicios() {
+        System.out.println("listarServicios");
+        assertTrue(instance.listarServicios().isEmpty());
+    }
+    
+    /**
      * Test of listarPromociones method, of class ManejadorProductos.
      */
-    /*@Test
+    @Test
     public void testListarPromociones() {
         System.out.println("listarPromociones");
+        assertTrue(instance.listarPromociones().isEmpty());
+    }
+    
+    /**
+     * Test of altaServicio method, of class ManejadorProductos.
+     */
+    /*@Test
+    public void testAltaServicio() {
+        System.out.println("altaServicio");
+        DTServicio dtS = null;
+        String nicknameP = "";
+        Set<String> listaCategorias = null;
         ManejadorProductos instance = null;
-        Set<DTMinPromocion> expResult = null;
-        Set<DTMinPromocion> result = instance.listarPromociones();
-        assertEquals(expResult, result);
+        instance.altaServicio(dtS, nicknameP, listaCategorias);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }*/
@@ -235,20 +269,6 @@ public class ManejadorProductosTest{
         ManejadorProductos instance = null;
         Set<DTMinServicio> expResult = null;
         Set<DTMinServicio> result = instance.listarServiciosCategoria(cat);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of listarServicios method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testListarServicios() {
-        System.out.println("listarServicios");
-        ManejadorProductos instance = null;
-        Set<DTMinServicio> expResult = null;
-        Set<DTMinServicio> result = instance.listarServicios();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -401,22 +421,6 @@ public class ManejadorProductosTest{
     }*/
 
     /**
-     * Test of idServicioDisponible method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testIdServicioDisponible() {
-        System.out.println("idServicioDisponible");
-        String idServicio = "";
-        String nicknameP = "";
-        ManejadorProductos instance = null;
-        boolean expResult = false;
-        boolean result = instance.idServicioDisponible(idServicio, nicknameP);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
      * Test of esCategoriaSimple method, of class ManejadorProductos.
      */
     /*@Test
@@ -427,21 +431,6 @@ public class ManejadorProductosTest{
         boolean expResult = false;
         boolean result = instance.esCategoriaSimple(cat);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of altaServicio method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testAltaServicio() {
-        System.out.println("altaServicio");
-        DTServicio dtS = null;
-        String nicknameP = "";
-        Set<String> listaCategorias = null;
-        ManejadorProductos instance = null;
-        instance.altaServicio(dtS, nicknameP, listaCategorias);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }*/

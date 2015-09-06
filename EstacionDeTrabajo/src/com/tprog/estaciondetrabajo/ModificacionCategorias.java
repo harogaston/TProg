@@ -41,6 +41,9 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
             seleccionCategorias.add(s);
         }
         seleccionCategorias.sort(null);
+        if (seleccionCategorias.size() == 0) {
+            botonQuitar.setEnabled(false);
+        }
     }
 
     /**
@@ -166,6 +169,9 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 //si la categoria seleccionada es simple, la agrego
                 if (nodo.isLeaf()) {
                     seleccionCategorias.add(categoriaActual);
+                    if (seleccionCategorias.size() > 0) {
+                        botonQuitar.setEnabled(true);
+                    }
                     seleccionCategorias.sort(null);
                 } else {
                     JOptionPane.showMessageDialog(this, "Por favor seleccione una categoria hoja", "Error", JOptionPane.ERROR_MESSAGE);
@@ -180,54 +186,60 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonAgregarActionPerformed
 
     private void botonQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonQuitarActionPerformed
-        if (seleccionCategorias.size() > 1) {
-            String categoria = (String) seleccionCategoriasInterfaz.getSelectedValue();
-            if (categoria != null) {
-                seleccionCategorias.remove(seleccionCategoriasInterfaz.getSelectedIndex());
-                seleccionCategorias.sort(null);
-                seleccionCategoriasInterfaz.updateUI();
+        String categoria = (String) seleccionCategoriasInterfaz.getSelectedValue();
+        if (categoria != null) {
+            seleccionCategorias.remove(seleccionCategoriasInterfaz.getSelectedIndex());
+            seleccionCategorias.sort(null);
+            if (seleccionCategorias.size() == 0) {
+                botonQuitar.setEnabled(false);
             }
+            seleccionCategoriasInterfaz.clearSelection();
+            seleccionCategoriasInterfaz.updateUI();
         } else {
-            JOptionPane.showMessageDialog(this, "El servicio debe conservar al menos una categoría", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Tiene que seleccionar una categoría para intentar quitarla.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonQuitarActionPerformed
 
     private void botonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConfirmarActionPerformed
-        try {
-            //primero recorro el set de categorias original, y a aquellas
-            //categorias que no esten en mi lista nueva, les aplico quitar
-            for (String s : categoriasServicio) {
-                Iterator it = seleccionCategorias.iterator();
-                boolean found = false;
-                //mientras no encuentre la categoria sigo buscandola
-                while (it.hasNext() && !found) {
-                    if (it.next().toString().equals(s)) //si la encuentro no la quito
-                    {
-                        found = true;
+        if (!seleccionCategorias.isEmpty()) {
+            try {
+                //primero recorro el set de categorias original, y a aquellas
+                //categorias que no esten en mi lista nueva, les aplico quitar
+                for (String s : categoriasServicio) {
+                    Iterator it = seleccionCategorias.iterator();
+                    boolean found = false;
+                    //mientras no encuentre la categoria sigo buscandola
+                    while (it.hasNext() && !found) {
+                        if (it.next().toString().equals(s)) //si la encuentro no la quito
+                        {
+                            found = true;
+                        }
+                    }
+                    //si no la encontré, la saco
+                    if (!found) {
+                        ctrlProductos.quitarCategoria(s);
                     }
                 }
-                //si no la encontré, la saco
-                if (!found) {
-                    ctrlProductos.quitarCategoria(s);
-                }
-            }
 
-            //ahora recorro la lista nueva, y cada elemento que no esté en mi
-            //set de categorías original, lo agrego a las categorias del servicio
-            Iterator it = seleccionCategorias.iterator();
-            while (it.hasNext()) {
-                //si la categoria actual no esta dentro de las originales
-                //del servicio, la agrego
-                String categoria = it.next().toString();
-                if (!categoriasServicio.contains(categoria)) {
-                    ctrlProductos.agregarCategoria(categoria);
+                //ahora recorro la lista nueva, y cada elemento que no esté en mi
+                //set de categorías original, lo agrego a las categorias del servicio
+                Iterator it = seleccionCategorias.iterator();
+                while (it.hasNext()) {
+                    //si la categoria actual no esta dentro de las originales
+                    //del servicio, la agrego
+                    String categoria = it.next().toString();
+                    if (!categoriasServicio.contains(categoria)) {
+                        ctrlProductos.agregarCategoria(categoria);
+                    }
                 }
+                JOptionPane.showMessageDialog(this, "Categorías modificadas con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+                padre.setVisible(true);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage().toString(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(this, "Categorías modificadas con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
-            padre.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage().toString(), "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor escoja al menos una categoría antes de avanzar.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonConfirmarActionPerformed
 

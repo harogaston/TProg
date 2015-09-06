@@ -68,7 +68,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 418, -1));
 
         detalleServicio.setEditable(false);
         detalleServicio.setColumns(20);
@@ -77,7 +77,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         detalleServicio.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleServicio);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 128));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 269, 210));
 
         botonAtras.setText("< Atras");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         jLabel1.setText("<html>Seleccione un servicio para ver su información</html>");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

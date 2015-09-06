@@ -55,11 +55,11 @@ public class DTLineaReserva {
             return "Cantidad: " + Integer.toString(cantidad)
                     + "\n" + "Fecha de inicio: "
                     + Integer.toString(fechaInicio.getDate()) + "-"
-                    + Integer.toString(fechaInicio.getMonth()) + "-"
+                    + Integer.toString(fechaInicio.getMonth() + 1) + "-"
                     + Integer.toString(fechaInicio.getYear())
                     + "\n" + "Fecha de fin: "
                     + Integer.toString(fechaFin.getDate()) + "-"
-                    + Integer.toString(fechaFin.getMonth()) + "-"
+                    + Integer.toString(fechaFin.getMonth() + 1) + "-"
                     + Integer.toString(fechaFin.getYear())
                     + "\n" + "Servicio: " + servicio
                     + "\n" + "Precio: " + Float.toString(precio) + "\n";
@@ -67,7 +67,7 @@ public class DTLineaReserva {
             return "Cantidad: " + Integer.toString(cantidad)
                     + "\n" + "Fecha de inicio: "
                     + Integer.toString(fechaInicio.getDate()) + "-"
-                    + Integer.toString(fechaInicio.getMonth()) + "-"
+                    + Integer.toString(fechaInicio.getMonth() +1 ) + "-"
                     + Integer.toString(fechaInicio.getYear())
                     + "\n" + "Fecha de fin: "
                     + Integer.toString(fechaFin.getDate()) + "-"

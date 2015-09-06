@@ -20,11 +20,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public class CtrlProductos implements ICtrlProductos {
 
-	private DTMinPromocion dtP;
-	private DTMinServicio dtS;
-	private String categoriaPadre;
+	protected DTMinPromocion dtP;
+	protected DTMinServicio dtS;
+	protected String categoriaPadre;
 	private String idCategoria;
-	private String nicknameP;
+	protected String nicknameP;
 	private Set<String> listaServicios;
 	private Set<String> listaCategorias;
 	private DTUbicacion origen;

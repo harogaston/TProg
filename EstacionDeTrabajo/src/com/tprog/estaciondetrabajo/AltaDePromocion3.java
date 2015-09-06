@@ -36,7 +36,8 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
         this.proveedor = proveedor;
 		this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlProductos = ctrlProductos;
-        this.servicios = new HashSet<DTMinServicio>();
+        this.servicios = servicios;
+        this.serviciosProm = new HashSet<DTMinServicio>();
         //this.servicios = ctrlProductos.listarServiciosProveedor();
 		initComponents();
         setTitle("Alta de Promoción");
@@ -182,7 +183,7 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
             //leer cantidad y fechas
             //validar cantidad
             ctrlProductos.agregarServicio(dtmS);
-            servicios.add(dtmS);
+            serviciosProm.add(dtmS);
             JOptionPane.showMessageDialog(this, "Servicio agregado correctamente.", "Alta de Promoción", JOptionPane.INFORMATION_MESSAGE);
         }
         else{
@@ -192,7 +193,7 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
 
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
         // TODO add your handling code here:
-        AltaDePromocion4 ap4 = new AltaDePromocion4(this, servicios, ctrlUsuarios, ctrlProductos, proveedor);
+        AltaDePromocion4 ap4 = new AltaDePromocion4(this, serviciosProm, ctrlUsuarios, ctrlProductos, proveedor);
         this.setVisible(false);
         getParent().add(ap4);
         ap4.setLocation(this.getLocation());
@@ -202,6 +203,7 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
 	ICtrlUsuarios ctrlUsuarios;
     ICtrlProductos ctrlProductos;
 	Set<DTMinServicio> servicios;
+    Set<DTMinServicio> serviciosProm;
 	AltaDePromocion2 padre;
     String proveedor;
     // Variables declaration - do not modify//GEN-BEGIN:variables

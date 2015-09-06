@@ -51,7 +51,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Ver Información de Servicio");
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -79,7 +79,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         detalleServicio.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleServicio);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 128));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 230));
 
         botonAtras.setText("< Atras");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -87,10 +87,10 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -125,10 +125,16 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
-		this.dispose();
+		super.dispose();
 		padre.setVisible(true);
     }//GEN-LAST:event_botonAtrasActionPerformed
 
+	@Override
+	public void dispose(){
+		padre.dispose();
+		super.dispose();
+	}
+	
 	ICtrlProductos ctrlProductos;
 	Set<DTMinServicio> servicios;
 	VerInformacionDeServicio padre;

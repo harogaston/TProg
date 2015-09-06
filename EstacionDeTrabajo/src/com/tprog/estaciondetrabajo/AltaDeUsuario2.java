@@ -10,8 +10,11 @@ import com.tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -39,6 +42,15 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
 	private boolean hasWhiteSpace(String s) {
 		return s.matches("\\s");
+	}
+	
+	private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
+		List<Integer> lista = new ArrayList<>();
+		for (int i = min; i <= max; i++) {
+			lista.add(i);
+		}
+		Integer[] anios = lista.toArray(new Integer[lista.size()]);
+		return new DefaultComboBoxModel<Integer>(anios);
 	}
 
 	@Override
@@ -78,9 +90,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         jTextFieldApellido = new javax.swing.JTextField();
         jTextFieldEmpresa = new javax.swing.JTextField();
         jTextFieldLinkEmpresa = new javax.swing.JTextField();
-        jComboBoxAnios = new com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios();
         jComboBoxMeses = new com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses();
         jComboBoxDias = new com.tprog.estaciondetrabajo.customComponents.JComboBoxDias();
+        jComboBoxAnios = new javax.swing.JComboBox();
 
         grupoBotones.add(radioButtonCliente);
         grupoBotones.add(radioButtonProveedor);
@@ -182,9 +194,11 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         jTextFieldLinkEmpresa.setVisible(false);
         getContentPane().add(jTextFieldLinkEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 310, -1));
-        getContentPane().add(jComboBoxAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, -1, -1));
         getContentPane().add(jComboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
         getContentPane().add(jComboBoxDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+
+        jComboBoxAnios.setModel(modeloAnios);
+        getContentPane().add(jComboBoxAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 60, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -237,7 +251,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		String nombre = jTextFieldNombre.getText();
 		String apellido = jTextFieldApellido.getText();
 		int dia = (Integer) jComboBoxDias.getSelectedItem();
-		int mes = jComboBoxMeses.getSelectedIndex() + 1;
+		int mes = jComboBoxMeses.getSelectedIndex();
 		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
 
@@ -307,6 +321,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		padre.setVisible(true);
 	}
 
+	//DefaultComboBoxModel<Integer> modeloAnios = modelRange(1900, 2015);
 	String nickname = null;
 	String email = null;
 	String rutaImagen = null;
@@ -315,7 +330,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonConfirmar;
     private javax.swing.JButton buttonSeleccionar;
     private javax.swing.ButtonGroup grupoBotones;
-    private com.tprog.estaciondetrabajo.customComponents.JComboBoxAnios jComboBoxAnios;
+    private javax.swing.JComboBox jComboBoxAnios;
+    DefaultComboBoxModel<Integer> modeloAnios = modelRange(1900, 2015);
     private com.tprog.estaciondetrabajo.customComponents.JComboBoxDias jComboBoxDias;
     private com.tprog.estaciondetrabajo.customComponents.JComboBoxMeses jComboBoxMeses;
     private javax.swing.JLabel jLabel1;

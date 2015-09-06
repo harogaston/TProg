@@ -108,54 +108,54 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public void altaUsuario() {
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        if (esProveedor) {
+            DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
+            mu.altaProveedor(nuevoDT);
+
+        } else {
+            DTCliente nuevoDT = new DTCliente(dtU);
+            mu.altaCliente(nuevoDT);
+        }
+    }
+
+    @Override
+    public Set<DTMinProveedor> listarProveedores() {
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        return mu.listarProveedores();
+    }
+
+    @Override
+    public void seleccionarProveedor(String nickname) {
+        this.nicknameP = nickname;
+    }
+
+    @Override
+    public DTProveedor infoProveedor() throws Exception {
+        try {
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-            if (esProveedor) {
-                DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
-                mu.altaProveedor(nuevoDT);
+            return mu.infoProveedor(this.nicknameP);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
-            } else {
-                    DTCliente nuevoDT = new DTCliente(dtU);
-                    mu.altaCliente(nuevoDT);
-            }
-	}
+    @Override
+    public Set<DTMinServicio> listarServiciosProveedor() {
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        return mu.listarServiciosProveedor(this.nicknameP);
+    }
 
-	@Override
-	public Set<DTMinProveedor> listarProveedores() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarProveedores();
-	}
+    @Override
+    public void seleccionarServicio(String idServicio) {
+        this.idServicio = idServicio;
+    }
 
-	@Override
-	public void seleccionarProveedor(String nickname) {
-		this.nicknameP = nickname;
-	}
-
-	@Override
-	public DTProveedor infoProveedor() throws Exception {
-            try {
-                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.infoProveedor(this.nicknameP);
-            } catch(Exception e){
-                throw e;
-            }    
-	}
-
-	@Override
-	public Set<DTMinServicio> listarServiciosProveedor() {
-            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-            return mu.listarServiciosProveedor(this.nicknameP);
-	}
-
-	@Override
-	public void seleccionarServicio(String idServicio) {
-		this.idServicio = idServicio;
-	}
-
-	@Override
-	public DTServicio infoServicio() {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
-		return mp.infoServicio(nuevoDT);
-	}
+    @Override
+    public DTServicio infoServicio() {
+        ManejadorProductos mp = ManejadorProductos.getInstance();
+        DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
+        return mp.infoServicio(nuevoDT);
+    }
 
 }

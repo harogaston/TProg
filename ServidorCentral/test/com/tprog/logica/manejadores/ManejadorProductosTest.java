@@ -6,6 +6,7 @@ package com.tprog.logica.manejadores;
 import com.tprog.logica.clases.Categoria;
 import com.tprog.logica.clases.Ciudad;
 import com.tprog.logica.clases.Pais;
+import com.tprog.logica.clases.Servicio;
 import com.tprog.logica.clases.Simple;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.dt.DTProveedor;
@@ -35,6 +36,20 @@ public class ManejadorProductosTest{
     @Before
     public void setUp() {
         instance = ManejadorProductos.getInstance();
+        Pais p = new Pais("USA");
+        Ciudad c = new Ciudad("Chicago");
+        p.agregarCiudad(c);
+        instance.agregarPais(p);
+        instance.altaCategoria("SubCat", null);
+        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
+			new HashSet(), new DTUbicacion("Chicago", "USA"), null);
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
+			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
+        mu.altaProveedor(dtP);
+        Set<String> listaCategorias = new HashSet();
+        listaCategorias.add("SubCat");
+        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
     }
     
     @After
@@ -63,10 +78,7 @@ public class ManejadorProductosTest{
     @Test
     public void testAgregarPais() {
         System.out.println("agregarPais");
-        Pais p = new Pais("USA");
-        Ciudad chicago = new Ciudad("Chicago");
-        p.agregarCiudad(chicago);
-        instance.agregarPais(p);
+        //Se agregó Pais "USA" en el SetUp
         assertTrue(!instance.ubicaciones.isEmpty());
         assertEquals(1, instance.ubicaciones.size());
         assertTrue(instance.ubicaciones.containsKey("USA"));
@@ -76,30 +88,15 @@ public class ManejadorProductosTest{
      * Test of listarCiudades method, of class ManejadorProductos.
      */
     @Test
-    public void testListarCiudadesVacio() {
-        System.out.println("listarCiudadesVacio");
-        DefaultMutableTreeNode result = instance.listarCiudades();
-        assertTrue(result.isRoot());
-        assertEquals(0, instance.ubicaciones.size());
-        assertEquals(0, result.getChildCount());
-    }
-    
-    /**
-     * Test of listarCiudades method, of class ManejadorProductos.
-     */
-    @Test
     public void testListarCiudades() {
         System.out.println("listarCiudades");
-        Pais p = new Pais("Uruguay");
-        Ciudad chuy = new Ciudad("Chuy");
-        p.agregarCiudad(chuy);
-        instance.agregarPais(p);
+        //Se agregó Chicago como ciudad de USA en el SetUp
         DefaultMutableTreeNode result = instance.listarCiudades();
         assertTrue(result.isRoot());
         assertEquals(1, result.getChildCount());
-        assertEquals("Uruguay", result.getFirstChild().toString());
+        assertEquals("USA", result.getFirstChild().toString());
         assertEquals(1, result.getFirstChild().getChildCount());
-        assertEquals("Chuy", result.getFirstLeaf().toString());
+        assertEquals("Chicago", result.getFirstLeaf().toString());
     }
     
     /**
@@ -143,7 +140,8 @@ public class ManejadorProductosTest{
         System.out.println("listarCategorias");
         DefaultMutableTreeNode result = instance.listarCategorias();
         assertTrue(result.isRoot());
-        assertTrue(result.isLeaf());
+        assertFalse(result.isLeaf());
+        assertEquals(1, result.getChildCount());
         assertEquals("Categorias", result.getRoot().toString());
     }
     
@@ -152,10 +150,10 @@ public class ManejadorProductosTest{
      */
     @Test
     public void testAltaCategoriaToRoot() {
-        System.out.println("altaCategoria");
+        System.out.println("altaCategoriaToRoot");
         String idCategoria = "NewCategoria";
         instance.altaCategoria(idCategoria, null);
-        assertEquals(2, instance.categorias.size());
+        assertEquals(3, instance.categorias.size());
         assertTrue(instance.categorias.containsKey("NewCategoria"));
         Categoria newC = instance.categorias.get("NewCategoria");
         Categoria root = instance.categorias.get("Categorias");
@@ -169,15 +167,13 @@ public class ManejadorProductosTest{
      * Test of altaCategoria method, of class ManejadorProductos.
      */
     @Test
-    public void testAltaCategoria() {
+    public void testAltaCategoria2() {
         System.out.println("altaCategoria");
-        String idCategoria = "NewCategoria";
-        instance.altaCategoria(idCategoria, null);
-        instance.altaCategoria("BabyCategoria", "NewCategoria");
+        instance.altaCategoria("BabyCategoria", "SubCat");
         assertEquals(3, instance.categorias.size());
         assertTrue(instance.categorias.containsKey("BabyCategoria"));
         Categoria baby = instance.categorias.get("BabyCategoria");
-        Categoria newC = instance.categorias.get("NewCategoria");
+        Categoria newC = instance.categorias.get("SubCat");
         assertTrue(newC.esCategoriaPadre()); 
         assertFalse(newC.esCategoriaSimple());
         assertTrue(baby.esCategoriaSimple());
@@ -188,8 +184,8 @@ public class ManejadorProductosTest{
      * Test of idServicioDisponible method, of class ManejadorProductos.
      */
     @Test
-    public void testIdServicioDisponibleFails() {
-        System.out.println("idServicioDisponible");
+    public void testIdServicioDisponibleSinProveedor() {
+        System.out.println("idServicioSinProveedor");
         String idServicio = "testServicio";
         String nicknameP = "So";
         boolean expResult = true;
@@ -203,7 +199,9 @@ public class ManejadorProductosTest{
     @Test
     public void testListarServicios() {
         System.out.println("listarServicios");
-        assertTrue(instance.listarServicios().isEmpty());
+        Set<DTMinServicio> result = instance.listarServicios();
+        assertFalse(result.isEmpty());
+        assertEquals(1, result.size());
     }
     
     /**
@@ -220,33 +218,11 @@ public class ManejadorProductosTest{
      */
     @Test
     public void testAltaServicio() {
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
         System.out.println("altaServicio");
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
-        assertTrue(instance.servicios.containsKey(dtP.getNickname()));
-        assertTrue(instance.servicios.get(dtP.getNickname()).containsKey("Blue Beatle"));
+        //Se creó un Servicio en el SetUp        
+        assertTrue(instance.servicios.containsKey("Harry Dresden"));
+        assertTrue(instance.servicios.get("Harry Dresden").containsKey("Blue Beatle"));
         assertFalse(instance.idServicioDisponible("Blue Beatle", "Harry Dresden"));
-    }
-    
-    /**
-     * Test of listarServiciosCategoria method, of class ManejadorProductos.
-     */
-    @Test
-    public void testListarServiciosCategoriaEmpty() {
-        System.out.println("listarServiciosCategoriaEmpty");
-        assertTrue(instance.listarServiciosCategoria("Categorias").isEmpty());
     }
     
     /**
@@ -255,19 +231,7 @@ public class ManejadorProductosTest{
     @Test
     public void testListarServiciosCategoria() {
         System.out.println("listarServiciosCategoria");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
+        //El Servicio creado en SetUp pertenece a Categorias
         Set<DTMinServicio> result = instance.listarServiciosCategoria("Categorias");
         assertFalse(result.isEmpty());
         assertEquals(1,result.size());
@@ -276,6 +240,17 @@ public class ManejadorProductosTest{
             assertEquals(dtMin.toString(), s.toString());
         }
     }
+    /**
+     * Test of listarServiciosCategoria method, of class ManejadorProductos.
+     */
+    @Test
+    public void testListarServiciosCategoriaVacio() {
+        System.out.println("listarServiciosCategoria");
+        //El Servicio creado en SetUp pertenece a Categorias
+        instance.altaCategoria("Vacia", null);
+        Set<DTMinServicio> result = instance.listarServiciosCategoria("Vacía");
+        assertTrue(result.isEmpty());        
+    }
     
     /**
      * Test of infoServicio method, of class ManejadorProductos.
@@ -283,24 +258,27 @@ public class ManejadorProductosTest{
     @Test
     public void testInfoServicio() {
         System.out.println("infoServicio");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se compara con el Servicio dado de Alta en SetUp
         DTServicio expResult = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
+			new HashSet(), new DTUbicacion("Chicago", "USA"), null);
         DTServicio result = instance.infoServicio(new DTMinServicio("Harry Dresden", "Blue Beatle"));
         assertEquals(expResult.toString(), result.toString());
+    }
+    
+    @Test
+    public void testInfoServicioFail1() {
+        System.out.println("infoServicioFail1");
+        //Se compara con el Servicio dado de Alta en SetUp
+        DTServicio result = instance.infoServicio(new DTMinServicio("Harry Dresden", "Red Beatle"));
+        assertEquals(null, result);
+    }
+    
+    @Test
+    public void testInfoServicioFail2() {
+        System.out.println("infoServicioFail2");
+        //Se compara con el Servicio dado de Alta en SetUp
+        DTServicio result = instance.infoServicio(new DTMinServicio("Charlie Dresden", "Blue Beatle"));
+        assertEquals(null, result);
     }
     
     /**
@@ -309,20 +287,7 @@ public class ManejadorProductosTest{
     @Test
     public void testCambiarDescripcion() {
         System.out.println("cambiarDescripcion");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se modifica el Servicio creado en SetUp
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
         String descripcion = "Nueva Descripción";
         instance.cambiarDescripcion(dtMinS, descripcion);
@@ -336,20 +301,7 @@ public class ManejadorProductosTest{
     @Test
     public void testCambiarPrecio() {
         System.out.println("cambiarPrecio");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se modifica el Servicio creado en SetUp
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
         Float precio = 55.5F;
         instance.cambiarPrecio(dtMinS, precio);
@@ -363,20 +315,7 @@ public class ManejadorProductosTest{
     @Test
     public void testListarImagenesEmpty() {
         System.out.println("listarImagenesEmpty");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se analiza el Servicio creado en SetUp con un set de imagenes vacío.
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
         assertTrue(instance.listarImagenes(dtMinS).isEmpty());
     }
@@ -387,20 +326,7 @@ public class ManejadorProductosTest{
     @Test
     public void testAgregarImagen() throws Exception {
         System.out.println("agregarImagen");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se modifica el Servicio creado en SetUp
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
         instance.agregarImagen(dtMinS, "Beatle");
         Set<String> result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getImagenes();
@@ -413,50 +339,9 @@ public class ManejadorProductosTest{
      * Test of quitarImagen method, of class ManejadorProductos.
      */
     @Test
-    public void testQuitarImagen() throws Exception {
-        System.out.println("quitarImagen");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
-        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
-        instance.agregarImagen(dtMinS, "Beatle");
-        instance.quitarImagen(dtMinS, "Beatle");
-        Set<String> result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getImagenes();
-        assertTrue(result.isEmpty());
-    }
-    
-    /**
-     * Test of quitarImagen method, of class ManejadorProductos.
-     */
-    @Test
     public void testAgregarImagenFail() throws Exception {
         System.out.println("agregarImagenFail");
         try {
-            Pais p = new Pais("TheStates");
-            Ciudad c = new Ciudad("Chicago");
-            p.agregarCiudad(c);
-            instance.agregarPais(p);
-            DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-                            new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-            DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-                            "Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-            mu.altaProveedor(dtP);
-            Set<String> listaCategorias = new HashSet();
-            listaCategorias.add("Categorias");
-            instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-
             DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Red Beatle");
             instance.agregarImagen(dtMinS, "Beatle");
         } catch (Exception e){
@@ -465,57 +350,46 @@ public class ManejadorProductosTest{
     }
     
     /**
+     * Test of quitarImagen method, of class ManejadorProductos.
+     */
+    @Test
+    public void testQuitarImagen() throws Exception {
+        System.out.println("quitarImagen");
+        //Se modifica el Servicio creado en SetUp
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        instance.agregarImagen(dtMinS, "Beatle");
+        instance.quitarImagen(dtMinS, "Beatle");
+        Set<String> result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getImagenes();
+        assertTrue(result.isEmpty());
+    }
+    
+    /**
      * Test of cambiarOrigen method, of class ManejadorProductos.
      */
     @Test
     public void testCambiarOrigen() {
         System.out.println("cambiarOrigen");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se modifica el Servicio creado en SetUp
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
-        p = new Pais("The NeverNever");
-        c = new Ciudad("FairyLand");
+        Pais p = new Pais("The NeverNever");
+        Ciudad c = new Ciudad("FairyLand");
         p.agregarCiudad(c);
         instance.agregarPais(p);
+        
         instance.cambiarOrigen(dtMinS, new DTUbicacion("FairyLand", "The NeverNever"));
         Ciudad result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getOrigen();
         assertEquals(c, result);
     }
     /**
-     * Test of cambiarOrigen method, of class ManejadorProductos.
+     * Test of cambiarDestino method, of class ManejadorProductos.
      */
     @Test
     public void testCambiarDestino() {
         System.out.println("cambiarDestino");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
+        //Se modifica el Servicio creado en SetUp con Destino = null
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
-        
-        instance.cambiarDestino(dtMinS, new DTUbicacion("Chicago", "TheStates"));
+        Ciudad c = instance.ubicaciones.get("USA").getCiudades().get("Chicago");
+        instance.cambiarDestino(dtMinS, new DTUbicacion("Chicago", "USA"));
         Ciudad result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getDestino();
         assertEquals(c, result);
     }
@@ -526,25 +400,85 @@ public class ManejadorProductosTest{
     @Test
     public void testListarCategoriasServicio() {
         System.out.println("listarCategoriasServicio");
-        Pais p = new Pais("TheStates");
-        Ciudad c = new Ciudad("Chicago");
-        p.agregarCiudad(c);
-        instance.agregarPais(p);
-        DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
-			new HashSet(), new DTUbicacion("Chicago", "TheStates"), null);
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
-			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
-        mu.altaProveedor(dtP);
-        Set<String> listaCategorias = new HashSet();
-        listaCategorias.add("Categorias");
-        instance.altaServicio(dtS, dtP.getNickname(), listaCategorias);
-        
         DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
         Set<String> result = instance.listarCategoriasServicio(dtMinS);
         assertFalse(result.isEmpty());
         assertEquals(1, result.size());
-        assertTrue(result.contains("Categorias"));
+        assertTrue(result.contains("SubCat"));
+    }
+    
+    /**
+     * Test of esCategoriaSimpleAgregar method, of class ManejadorProductos.
+     */
+    @Test
+    public void testEsCategoriaSimpleAgregarFails() {
+        System.out.println("esCategoriaSimpleAgregarFails");
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        int expResult = instance.listarCategoriasServicio(dtMinS).size();
+        assertFalse(instance.esCategoriaSimpleAgregar(dtMinS, "Categorias"));
+        assertEquals(expResult, instance.listarCategoriasServicio(dtMinS).size()); 
+    }
+    
+    /**
+     * Test of esCategoriaSimpleAgregar method, of class ManejadorProductos.
+     */
+    @Test
+    public void testEsCategoriaSimpleAgregar() {
+        System.out.println("esCategoriaSimpleAgregar");
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        instance.altaCategoria("NuevaCategoria", null);
+        assertTrue(instance.esCategoriaSimpleAgregar(dtMinS, "NuevaCategoria"));
+        assertEquals(2, instance.listarCategoriasServicio(dtMinS).size()); 
+    }
+    
+    /**
+     * Test of esCategoriaSimpleQuitar method, of class ManejadorProductos.
+     */
+    @Test
+    public void testEsCategoriaSimpleQuitar() {
+        System.out.println("esCategoriaSimpleQuitar");
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        instance.altaCategoria("NuevaCategoria", null);
+        assertTrue(instance.esCategoriaSimpleAgregar(dtMinS, "NuevaCategoria"));
+        assertTrue(instance.esCategoriaSimpleQuitar(dtMinS, "NuevaCategoria"));
+        assertEquals(1, instance.listarCategoriasServicio(dtMinS).size());
+        assertFalse(instance.listarCategoriasServicio(dtMinS).contains("NuevaCategoria"));
+    }
+    
+    /**
+     * Test of getPrecioServicio method, of class ManejadorProductos.
+     */
+    @Test
+    public void testGetPrecioServicio() {
+        System.out.println("getPrecioServicio");
+        DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
+        float result = instance.getPrecioServicio(dtMinS); 
+        float expResult = 50;
+        assertEquals(expResult, result, 0.1F);
+    }
+
+    /**
+     * Test of getServicio method, of class ManejadorProductos.
+     */
+    @Test
+    public void testGetServicioNull() {
+        System.out.println("getServicioNull");
+        Servicio result = instance.getServicio(null);
+        assertEquals(null, result);
+    }
+    
+    /**
+     * Test of getServicio method, of class ManejadorProductos.
+     */
+    @Test
+    public void testGetServicio() {
+        System.out.println("getServicio");
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        Servicio s = new Servicio("Blue Beatle", "Just an old blue beatle", 50,
+                new HashSet(), instance.ubicaciones.get("USA").getCiudades().get("Chicago"), 
+                null, mu.getProveedor("Harry Dresden"));
+        Servicio result = instance.getServicio(new DTMinServicio("Harry Dresden", "Blue Beatle"));
+        assertEquals(s.toString(), result.toString());
     }
     
     /**
@@ -552,7 +486,7 @@ public class ManejadorProductosTest{
      */
     /*@Test
     public void testInfoPromocion() {
-        System.out.println("infoPromocion");
+        System.out.println("infoProtomocion");
         
         DTMinPromocion dtP = DTMinPromocion("Mister", "Chicago Flight");
         
@@ -560,53 +494,6 @@ public class ManejadorProductosTest{
         DTPromocion expResult = null;
         DTPromocion result = instance.infoPromocion(dtP);
         assertEquals(expResult, result);
-    }*/
-
-    /**
-     * Test of esCategoriaSimpleAgregar method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testEsCategoriaSimpleAgregar() {
-        System.out.println("esCategoriaSimpleAgregar");
-        DTMinServicio dtS = null;
-        String cat = "";
-        ManejadorProductos instance = null;
-        boolean expResult = false;
-        boolean result = instance.esCategoriaSimpleAgregar(dtS, cat);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of esCategoriaSimpleQuitar method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testEsCategoriaSimpleQuitar() {
-        System.out.println("esCategoriaSimpleQuitar");
-        DTMinServicio dtS = null;
-        String cat = "";
-        ManejadorProductos instance = null;
-        boolean expResult = false;
-        boolean result = instance.esCategoriaSimpleQuitar(dtS, cat);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of esCategoriaSimple method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testEsCategoriaSimple() {
-        System.out.println("esCategoriaSimple");
-        String cat = "";
-        ManejadorProductos instance = null;
-        boolean expResult = false;
-        boolean result = instance.esCategoriaSimple(cat);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }*/
 
     /**
@@ -652,36 +539,6 @@ public class ManejadorProductosTest{
         float expResult = 0.0F;
         float result = instance.getPrecioPromocion(dtP);
         assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of getPrecioServicio method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testGetPrecioServicio() {
-        System.out.println("getPrecioServicio");
-        DTMinServicio dtS = null;
-        ManejadorProductos instance = null;
-        float expResult = 0.0F;
-        float result = instance.getPrecioServicio(dtS);
-        assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }*/
-
-    /**
-     * Test of getServicio method, of class ManejadorProductos.
-     */
-    /*@Test
-    public void testGetServicio() {
-        System.out.println("getServicio");
-        DTMinServicio dtMinS = null;
-        ManejadorProductos instance = null;
-        Servicio expResult = null;
-        Servicio result = instance.getServicio(dtMinS);
-        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }*/

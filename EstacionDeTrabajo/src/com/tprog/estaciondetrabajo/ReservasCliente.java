@@ -54,6 +54,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("Reservas Cliente");
         setPreferredSize(new java.awt.Dimension(640, 480));
+        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaReservasInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -71,7 +72,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
                 listaReservasInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
+        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 418, -1));
 
         detalleUsuario.setEditable(false);
         detalleUsuario.setColumns(20);
@@ -80,7 +81,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         detalleUsuario.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleUsuario);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 269, 128));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 269, 210));
 
         botonAtras.setText("< Atras");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +93,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
 
         jLabel1.setText("<html>Seleccione alguna reserva del cliente para ver su información</html>");
         jLabel1.setAlignmentX(0.5F);
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

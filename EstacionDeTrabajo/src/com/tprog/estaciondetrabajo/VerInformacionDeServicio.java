@@ -9,6 +9,7 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
@@ -103,6 +104,8 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
             getParent().add(s);
             s.setLocation(this.getLocation());
             s.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una categoría para ver sus servicios asociados.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonServiciosActionPerformed
 

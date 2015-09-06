@@ -1,7 +1,7 @@
 /*
  * Header Test
  */
-package com.tprog.logica.controladores;
+package com.tprog.estaciondetrabajo.carga;
 
 import com.tprog.logica.clases.Ciudad;
 import com.tprog.logica.clases.Pais;
@@ -12,7 +12,6 @@ import com.tprog.logica.dt.DTReserva;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.dt.EstadoReserva;
-import com.tprog.logica.interfaces.ICtrlUniversal;
 import com.tprog.logica.manejadores.ManejadorProductos;
 import com.tprog.logica.manejadores.ManejadorReservas;
 import com.tprog.logica.manejadores.ManejadorUsuarios;
@@ -24,9 +23,8 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CtrlUniversal implements ICtrlUniversal {
+public class CtrlCarga{
 
-    @Override
     public void cargarDatos() {
         //Alta de Clientes
         File dir = new File(".");
@@ -415,7 +413,7 @@ public class CtrlUniversal implements ICtrlUniversal {
                 System.out.println(e.getMessage());
             }
         } catch (IOException ex) {
-            Logger.getLogger(CtrlUniversal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CtrlCarga.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

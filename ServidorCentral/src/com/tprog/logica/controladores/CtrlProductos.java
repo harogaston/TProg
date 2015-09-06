@@ -222,13 +222,20 @@ public class CtrlProductos implements ICtrlProductos {
 
 	@Override
 	public boolean seleccionarCategoriaSimple(String idCategoria) {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		boolean esValida = mp.esCategoriaSimple(idCategoria);
-		if (esValida) {
-			this.listaCategorias.add(idCategoria);
-		}
-		return esValida;
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            boolean esValida = mp.esCategoriaSimple(idCategoria);
+            if (esValida) {
+                    this.listaCategorias.add(idCategoria);
+            }
+            return esValida;
 	}
+        
+        @Override
+        public void quitarCategoriaListada(String idCategoria){
+            if (!listaCategorias.isEmpty() && listaCategorias.contains(idCategoria)){
+                listaCategorias.remove(idCategoria);
+            }
+        }
 
 	@Override
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes) {

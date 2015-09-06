@@ -166,7 +166,7 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         float descuento = 0;
         if (!descuentoString.isEmpty() && (descuentoString.matches("([0-9]|)+"))) {
             descuento = Float.parseFloat(descuentoString);
-            okDescuento = ((descuento > 0) && (descuento < 100));
+            okDescuento = ((descuento >= 0) && (descuento < 100));
         }
         if (((!servicios.isEmpty())) && (okDescuento)) {
             ctrlProductos.altaPromocion(descuento);

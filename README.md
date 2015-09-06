@@ -3,7 +3,7 @@
 
 Entrega: 7 Setiembre 2015
 
-Sofía Honty - 4.426.082-6 - sofisho@gmail.com
+Sofía Honty - 4.426.082-6 - sofia.honty@fing.edu.uy
 
 Marccio Silva - 4.547.599-3 - marccio.silva@fing.edu.uy
 

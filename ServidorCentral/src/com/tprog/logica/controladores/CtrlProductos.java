@@ -265,6 +265,14 @@ public class CtrlProductos implements ICtrlProductos {
 		return mp.idPromocionDisponible(idPromocion, this.nicknameP);
 	}
 
+    public DTUbicacion getOrigen() {
+        return origen;
+    }
+
+    public DTUbicacion getDestino() {
+        return destino;
+    }
+
 	@Override
 	public void altaPromocion(float descuento) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();

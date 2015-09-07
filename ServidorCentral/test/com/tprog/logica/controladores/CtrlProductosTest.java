@@ -4,8 +4,18 @@
 package com.tprog.logica.controladores;
 
 import com.tprog.logica.dt.DTMinPromocion;
+import com.tprog.logica.dt.DTMinProveedor;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTPromocion;
+import com.tprog.logica.dt.DTProveedor;
+import com.tprog.logica.dt.DTServicio;
+import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.manejadores.ManejadorProductos;
+import com.tprog.logica.manejadores.ManejadorUsuarios;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.tree.DefaultMutableTreeNode;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,38 +56,37 @@ public class CtrlProductosTest {
     /**
      * Test of listarPromociones method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarPromociones() {
         System.out.println("listarPromociones");
+        Set<DTMinPromocion> expResult = new HashSet();
+        Set<DTMinPromocion> result = instance.listarPromociones();
+        assertEquals(expResult, result);
        
-    }*/
+    }
     
     /**
      * Test of infoPromocion method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testInfoPromocion() {
         System.out.println("infoPromocion");
-        CtrlProductos instance = new CtrlProductos();
         DTPromocion expResult = null;
         DTPromocion result = instance.infoPromocion();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of infoMinPromocion method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testInfoMinPromocion() {
         System.out.println("infoMinPromocion");
-        CtrlProductos instance = new CtrlProductos();
         DTMinPromocion expResult = null;
         DTMinPromocion result = instance.infoMinPromocion();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -95,29 +104,25 @@ public class CtrlProductosTest {
     /**
      * Test of infoServicio method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testInfoServicio() {
         System.out.println("infoServicio");
-        CtrlProductos instance = new CtrlProductos();
         DTServicio expResult = null;
         DTServicio result = instance.infoServicio();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of infoMinServicio method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testInfoMinServicio() {
         System.out.println("infoMinServicio");
-        CtrlProductos instance = new CtrlProductos();
         DTMinServicio expResult = null;
         DTMinServicio result = instance.infoMinServicio();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -137,30 +142,27 @@ public class CtrlProductosTest {
     /**
      * Test of listarServiciosCategoria method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarServiciosCategoria() {
         System.out.println("listarServiciosCategoria");
         String idCategoria = "";
         CtrlProductos instance = new CtrlProductos();
-        Set<DTMinServicio> expResult = null;
+        Set<DTMinServicio> expResult = new HashSet();
         Set<DTMinServicio> result = instance.listarServiciosCategoria(idCategoria);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of listarServicios method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarServicios() {
         System.out.println("listarServicios");
-        CtrlProductos instance = new CtrlProductos();
-        Set<DTMinServicio> expResult = null;
+        Set<DTMinServicio> expResult = new HashSet();
         Set<DTMinServicio> result = instance.listarServicios();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -185,22 +187,19 @@ public class CtrlProductosTest {
         String descripcion = "";
         CtrlProductos instance = new CtrlProductos();
         instance.cambiarDescripcion(descripcion);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of listarImagenes method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarImagenes() {
         System.out.println("listarImagenes");
-        CtrlProductos instance = new CtrlProductos();
-        Set<String> expResult = null;
+        Set<String> expResult = new HashSet();
         Set<String> result = instance.listarImagenes();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -232,15 +231,14 @@ public class CtrlProductosTest {
     /**
      * Test of listarCiudades method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarCiudades() {
         System.out.println("listarCiudades");
         CtrlProductos instance = new CtrlProductos();
-        DefaultMutableTreeNode expResult = null;
+        DefaultMutableTreeNode expResult = new DefaultMutableTreeNode();
         DefaultMutableTreeNode result = instance.listarCiudades();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(expResult.toString(), result.toString());
+        
     }
 
     /**
@@ -272,15 +270,13 @@ public class CtrlProductosTest {
     /**
      * Test of listarCategoriasServicio method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarCategoriasServicio() {
         System.out.println("listarCategoriasServicio");
-        CtrlProductos instance = new CtrlProductos();
-        Set<String> expResult = null;
+        Set<String> expResult = new HashSet();
         Set<String> result = instance.listarCategoriasServicio();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -301,16 +297,14 @@ public class CtrlProductosTest {
     /**
      * Test of quitarCategoria method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testQuitarCategoria() {
         System.out.println("quitarCategoria");
         String idCategoria = "";
-        CtrlProductos instance = new CtrlProductos();
         boolean expResult = false;
         boolean result = instance.quitarCategoria(idCategoria);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -326,16 +320,14 @@ public class CtrlProductosTest {
     /**
      * Test of idCategoriaDisponible method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testIdCategoriaDisponible() {
         System.out.println("idCategoriaDisponible");
         String idCategoria = "";
-        CtrlProductos instance = new CtrlProductos();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.idCategoriaDisponible(idCategoria);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -353,84 +345,74 @@ public class CtrlProductosTest {
     /**
      * Test of listarProveedores method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarProveedores() {
         System.out.println("listarProveedores");
-        CtrlProductos instance = new CtrlProductos();
-        Set<DTMinProveedor> expResult = null;
+        Set<DTMinProveedor> expResult = new HashSet();
         Set<DTMinProveedor> result = instance.listarProveedores();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of seleccionarProveedor method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testSeleccionarProveedor() {
         System.out.println("seleccionarProveedor");
         String nick = "";
-        CtrlProductos instance = new CtrlProductos();
         instance.seleccionarProveedor(nick);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(nick,instance.nicknameP);
     }
 
     /**
      * Test of idServicioDisponible method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testIdServicioDisponible() {
         System.out.println("idServicioDisponible");
         String idServicio = "";
-        CtrlProductos instance = new CtrlProductos();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.idServicioDisponible(idServicio);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
      * Test of seleccionarOrigen method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testSeleccionarOrigen() {
         System.out.println("seleccionarOrigen");
-        DTUbicacion dtU = null;
-        CtrlProductos instance = new CtrlProductos();
+        DTUbicacion dtU = new DTUbicacion("Madrid", "España");
         instance.seleccionarOrigen(dtU);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(dtU,instance.getOrigen());
     }
 
     /**
      * Test of seleccionarDestino method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testSeleccionarDestino() {
         System.out.println("seleccionarDestino");
-        DTUbicacion dtU = null;
-        CtrlProductos instance = new CtrlProductos();
+        DTUbicacion dtU = new DTUbicacion("Madrid", "España");
         instance.seleccionarDestino(dtU);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(dtU,instance.getDestino());
+        
     }
 
     /**
      * Test of seleccionarCategoriaSimple method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testSeleccionarCategoriaSimple() {
         System.out.println("seleccionarCategoriaSimple");
-        String idCategoria = "";
-        CtrlProductos instance = new CtrlProductos();
+        String idCategoria = "asdf";
         boolean expResult = false;
         boolean result = instance.seleccionarCategoriaSimple(idCategoria);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -464,15 +446,19 @@ public class CtrlProductosTest {
     /**
      * Test of listarServiciosProveedor method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testListarServiciosProveedor() {
         System.out.println("listarServiciosProveedor");
-        CtrlProductos instance = new CtrlProductos();
-        Set<DTMinServicio> expResult = null;
+        Set<DTMinServicio> expResult = new HashSet();
+        DTProveedor dtP = new DTProveedor("remus", "Remus", "Lupin", "iberia@gmail.com",
+                     "/imagenes/proveedores/remus.jpg",
+                    new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
+        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+        mu.altaProveedor(dtP);
+        instance.seleccionarProveedor("remus");
         Set<DTMinServicio> result = instance.listarServiciosProveedor();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -491,16 +477,14 @@ public class CtrlProductosTest {
     /**
      * Test of idPromocionDisponible method, of class CtrlProductos.
      */
-    /*@Test
+    @Test
     public void testIdPromocionDisponible() {
         System.out.println("idPromocionDisponible");
         String idPromocion = "";
-        CtrlProductos instance = new CtrlProductos();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.idPromocionDisponible(idPromocion);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**

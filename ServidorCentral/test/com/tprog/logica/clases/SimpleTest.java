@@ -51,8 +51,7 @@ public class SimpleTest {
         System.out.println("agregarServicio");
         Servicio s = null;
         instance.agregarServicio(s);
-        // TODO review the generated test code and remove the default call to fail.
-        assertEquals(null ,instance.getServicios());
+        assertTrue(instance.getServicios().contains(null));
     }
 
     /**
@@ -148,9 +147,7 @@ public class SimpleTest {
         boolean expResult = true;
         boolean result = instance.esCategoriaSimple();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
-    }
+     }
 
     /**
      * Test of esCategoriaPadre method, of class Simple.
@@ -161,8 +158,6 @@ public class SimpleTest {
         boolean expResult = true;
         boolean result = instance.esCategoriaPadre();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
     }
 
     /**
@@ -171,10 +166,8 @@ public class SimpleTest {
     @Test
     public void testListarCategorias() {
         System.out.println("listarCategorias");
-        DefaultMutableTreeNode expResult = new DefaultMutableTreeNode("idCategoria");
-        DefaultMutableTreeNode result = instance.listarCategorias();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        assertTrue(instance.listarCategorias().isLeaf());
+        assertFalse(instance.listarCategorias().getAllowsChildren());
         
     }
     

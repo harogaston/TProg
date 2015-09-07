@@ -92,7 +92,9 @@ public class CtrlUsuariosTest {
                 }
                 foundAll = foundAll && found;
             }
-            assertTrue(result.size() == expResult.size() && foundAll);
+            assertEquals(2, result.size());
+            assertTrue(foundAll);
+            assertEquals(result.size(), expResult.size());
         } catch (Exception e) {
             throw e;
         }

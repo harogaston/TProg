@@ -68,7 +68,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Alta de Servicio");
+        setTitle("Actualizar Servicio - Categorías");
         setToolTipText("");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
@@ -97,7 +97,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 botonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, -1));
 
         buttonAtras.setText("< Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCategorias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 190, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 190, 280));
 
         botonAgregar.setText("<html><div align=\"center\">Agregar<br>Categoría</html>");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,11 +123,11 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 botonAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 110, 50));
+        getContentPane().add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 110, 50));
 
         jScrollPane2.setViewportView(seleccionCategoriasInterfaz);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 170, 280));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 170, 280));
 
         botonQuitar.setText("<html><div align=\"center\">Quitar<br>Categoría</html>");
         botonQuitar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +135,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 botonQuitarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 110, 50));
+        getContentPane().add(botonQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 110, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

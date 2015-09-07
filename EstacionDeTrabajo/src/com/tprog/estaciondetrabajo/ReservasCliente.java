@@ -52,7 +52,7 @@ public class ReservasCliente extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("Reservas Cliente");
+        setTitle("Ver Información de Cliente - Reservas");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

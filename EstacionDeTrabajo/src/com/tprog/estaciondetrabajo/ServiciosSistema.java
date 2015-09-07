@@ -145,9 +145,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
                     //creo imagen
                     Image img = ImageIO.read(f);
                     //redimensiono para que entre en la JLabel
-                    int width = comboboxImagenes.getWidth();
-                    int height = img.getHeight(null) * width / img.getWidth(null);
-                    Image dimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                    Image dimg = img.getScaledInstance(comboboxImagenes.getWidth(), comboboxImagenes.getWidth(), Image.SCALE_SMOOTH);
                     //armo el ImageIcon
                     ImageIcon imageIcon = new ImageIcon(dimg);
                     imageIcon.setDescription(ruta);

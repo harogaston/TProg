@@ -55,7 +55,7 @@ public class ServiciosProveedor extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("Servicios Proveedor");
+        setTitle("Ver Información de Proveedor - Servicios");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

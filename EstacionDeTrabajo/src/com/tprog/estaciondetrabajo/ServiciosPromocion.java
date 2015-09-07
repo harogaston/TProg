@@ -57,8 +57,9 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Servicios Promoción");
+        setTitle("Ver Información de Promoción - Servicios");
         setPreferredSize(new java.awt.Dimension(640, 480));
+        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {

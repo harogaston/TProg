@@ -21,6 +21,7 @@ import com.tprog.logica.dt.DTUbicacion;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -29,11 +30,11 @@ public class ManejadorProductos {
 
 	private static ManejadorProductos instace = null;
 
-	private Map<String, Categoria> categorias;
-	private Categoria root;
-	private Map<String, Pais> ubicaciones;
-	private Map<String, Map<String, Servicio>> servicios;
-	private Map<String, Map<String, Promocion>> promociones;
+	protected Map<String, Categoria> categorias;
+	protected Categoria root;
+	protected Map<String, Pais> ubicaciones;
+	protected Map<String, Map<String, Servicio>> servicios;
+	protected Map<String, Map<String, Promocion>> promociones;
 
 	private ManejadorProductos() {
 		categorias = new HashMap();
@@ -45,24 +46,24 @@ public class ManejadorProductos {
 	}
 
 	public static ManejadorProductos getInstance() {
-		if (instace == null) {
-			instace = new ManejadorProductos();
-		}
-		return instace;
+            if (instace == null) {
+                instace = new ManejadorProductos();
+            }
+            return instace;
 	}
 
 	public Set<DTMinPromocion> listarPromociones() {
-		Set<DTMinPromocion> result = new HashSet();
-		if (!promociones.isEmpty()) {
-			for (Map<String, Promocion> mapaPromocion : promociones.values()) {
-				if (!mapaPromocion.isEmpty()) {
-					for (Promocion p : mapaPromocion.values()) {
-						result.add(p.crearDTMin());
-					}
-				}
-			}
-		}
-		return result;
+            Set<DTMinPromocion> result = new HashSet();
+            if (!promociones.isEmpty()) {
+                for (Map<String, Promocion> mapaPromocion : promociones.values()) {
+                    if (!mapaPromocion.isEmpty()) {
+                        for (Promocion p : mapaPromocion.values()) {
+                                result.add(p.crearDTMin());
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
@@ -156,8 +157,7 @@ public class ManejadorProductos {
                             s.agregarImagen(img);
                 } else {
                     throw new Exception ("El Servicio seleccionado no es válido.");
-                }
-                    
+                }  
             }else{
                 throw new Exception("No existen Servicios registrados en el Sistema.");
             }    
@@ -179,33 +179,21 @@ public class ManejadorProductos {
         }
 
 	public DefaultMutableTreeNode listarCiudades() {
-		DefaultMutableTreeNode result = new DefaultMutableTreeNode();
-		if (!ubicaciones.isEmpty()) {
-			for (Pais p : ubicaciones.values()) {
-				DefaultMutableTreeNode pais = new DefaultMutableTreeNode(p.getIdPais());
-				result.add(pais);
-				if (!p.getCiudades().isEmpty()) {
-					for (Ciudad c : p.getCiudades().values()) {
-						pais.add(new DefaultMutableTreeNode(c.getIdCiudad(), false));
-					}
-				}
-			}
-		}
-		return result;
+            DefaultMutableTreeNode result = new DefaultMutableTreeNode();
+            if (!ubicaciones.isEmpty()) {
+                for (Pais p : ubicaciones.values()) {
+                    DefaultMutableTreeNode pais = new DefaultMutableTreeNode(p.getIdPais());
+                    result.add(pais);
+                    if (!p.getCiudades().isEmpty()) {
+                        for (Ciudad c : p.getCiudades().values()) {
+                            pais.add(new DefaultMutableTreeNode(c.getIdCiudad(), false));
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
-//	public boolean agregarCategoria(String idCategoria) {
-//           /* boolean result = false;
-//            if (!categorias.isEmpty() && categorias.containsKey(idCategoria)){
-//                Categoria cat = categorias.get(idCategoria);
-//                
-//            }*/
-//            return true;
-//	}
-//
-//	public boolean quitarCategoria(String idCategoria) {
-//		return true;
-//	}
 	public void cambiarOrigen(DTMinServicio dtS, DTUbicacion dtU) {
 		if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
 				&& !servicios.get(dtS.getNicknameP()).isEmpty()
@@ -308,13 +296,13 @@ public class ManejadorProductos {
 	}
 
 	public boolean idServicioDisponible(String idServicio, String nicknameP) {
-		boolean result = true;
-		if (!servicios.isEmpty() && servicios.containsKey(nicknameP)
-				&& !servicios.get(nicknameP).isEmpty()
-				&& servicios.get(nicknameP).containsKey(idServicio)) {
-			result = false;
-		}
-		return result;
+            boolean result = true;
+            if (!servicios.isEmpty() && servicios.containsKey(nicknameP)
+                    && !servicios.get(nicknameP).isEmpty()
+                    && servicios.get(nicknameP).containsKey(idServicio)) {
+                result = false;
+            }
+            return result;
 	}
 
 	public boolean esCategoriaSimple(String cat) {
@@ -352,11 +340,17 @@ public class ManejadorProductos {
 	}
 
 	public boolean idPromocionDisponible(String idPromocion, String nicknameProv) {
-		Promocion pro = this.promociones.get(nicknameProv).get(idPromocion);
-		return (pro == null);
+            boolean result = true;
+            if (!promociones.isEmpty() && promociones.containsKey(nicknameProv)
+                    && !promociones.get(nicknameProv).isEmpty()
+                    && promociones.get(nicknameProv).containsKey(idPromocion)) {
+                result = false;
+            }
+            return result;
 	}
 
-	public void altaPromocion(String idPromocion, float descuento, String nicknameProv, Set<String> servicios) {
+	public void altaPromocion(String idPromocion, float descuento, String nicknameProv,
+                List<String> servicios) {
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
             Proveedor proveedor = mu.getProveedor(nicknameProv);
             Promocion promo = new Promocion(idPromocion, descuento, proveedor);
@@ -398,16 +392,14 @@ public class ManejadorProductos {
 	}
 
 	public Promocion getPromocion(DTMinPromocion dtMinP) {
-		if (dtMinP != null) {
-			Map<String, Promocion> aux = promociones.get(dtMinP.getNicknameP());
-			if (aux != null) {
-				return aux.get(dtMinP.getIdPromocion());
-			} else {
-				return null;
-			}
-		} else {
-			return null;
-		}
+            if (dtMinP != null && !promociones.isEmpty() && 
+                    promociones.containsKey(dtMinP.getNicknameP()) &&
+                    !promociones.get(dtMinP.getNicknameP()).isEmpty() &&
+                    promociones.get(dtMinP.getNicknameP()).containsKey(dtMinP.getIdPromocion())) {
+                    return promociones.get(dtMinP.getNicknameP()).get(dtMinP.getIdPromocion());
+            } else {
+                return null;
+            } 
 	}
 
 	public void agregarPais(Pais p) {

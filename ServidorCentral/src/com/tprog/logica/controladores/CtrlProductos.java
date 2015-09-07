@@ -14,18 +14,20 @@ import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.manejadores.ManejadorProductos;
 import com.tprog.logica.manejadores.ManejadorUsuarios;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class CtrlProductos implements ICtrlProductos {
 
-	private DTMinPromocion dtP;
-	private DTMinServicio dtS;
-	private String categoriaPadre;
+	protected DTMinPromocion dtP;
+	protected DTMinServicio dtS;
+	protected String categoriaPadre;
 	private String idCategoria;
-	private String nicknameP;
-	private Set<String> listaServicios;
+	protected String nicknameP;
+	private List<String> listaServicios;
 	private Set<String> listaCategorias;
 	private DTUbicacion origen;
 	private DTUbicacion destino;
@@ -36,7 +38,7 @@ public class CtrlProductos implements ICtrlProductos {
 		this.categoriaPadre = null;
 		this.idCategoria = null;
 		this.nicknameP = null;
-		this.listaServicios = new HashSet();
+		this.listaServicios = new ArrayList();
 		this.listaCategorias = new HashSet();
 		this.origen = null;
 		this.destino = null;
@@ -93,6 +95,7 @@ public class CtrlProductos implements ICtrlProductos {
 
 	@Override
 	public Set<DTMinServicio> listarServicios() {
+        
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		return mp.listarServicios();
 	}
@@ -221,13 +224,20 @@ public class CtrlProductos implements ICtrlProductos {
 
 	@Override
 	public boolean seleccionarCategoriaSimple(String idCategoria) {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		boolean esValida = mp.esCategoriaSimple(idCategoria);
-		if (esValida) {
-			this.listaCategorias.add(idCategoria);
-		}
-		return esValida;
+            ManejadorProductos mp = ManejadorProductos.getInstance();
+            boolean esValida = mp.esCategoriaSimple(idCategoria);
+            if (esValida) {
+                    this.listaCategorias.add(idCategoria);
+            }
+            return esValida;
 	}
+        
+        @Override
+        public void quitarCategoriaListada(String idCategoria){
+            if (!listaCategorias.isEmpty() && listaCategorias.contains(idCategoria)){
+                listaCategorias.remove(idCategoria);
+            }
+        }
 
 	@Override
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes) {

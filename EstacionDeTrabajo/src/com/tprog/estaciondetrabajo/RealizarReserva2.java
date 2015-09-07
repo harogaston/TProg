@@ -31,6 +31,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 		this.ctrlReservas = ctrlReservas;
 		jTextFieldPrecio.setEditable(false);
 		cargarDatos();
+		getRootPane().setDefaultButton(buttonConfirmar);
 	}
 
 	void cargarDatos() {
@@ -79,7 +80,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonAgregarReserva = new javax.swing.JButton();
+        buttonAgregarServicio = new javax.swing.JButton();
         buttonAgregarPromocion = new javax.swing.JButton();
         buttonAtras = new javax.swing.JButton();
         buttonConfirmar = new javax.swing.JButton();
@@ -105,13 +106,13 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        buttonAgregarReserva.setText("Agregar Servicio");
-        buttonAgregarReserva.addActionListener(new java.awt.event.ActionListener() {
+        buttonAgregarServicio.setText("Agregar Servicio");
+        buttonAgregarServicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAgregarReservaActionPerformed(evt);
+                buttonAgregarServicioActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAgregarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 170, -1));
+        getContentPane().add(buttonAgregarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 170, -1));
 
         buttonAgregarPromocion.setText("Agregar Promocion");
         buttonAgregarPromocion.addActionListener(new java.awt.event.ActionListener() {
@@ -178,13 +179,13 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAgregarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarReservaActionPerformed
+    private void buttonAgregarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarServicioActionPerformed
 		RealizarReserva3 rr3 = new RealizarReserva3(this, ctrlReservas, proveedorSeleccionado);
 		this.setVisible(false);
 		getParent().add(rr3);
 		rr3.setLocation(this.getLocation());
-		rr3.setVisible(true);
-    }//GEN-LAST:event_buttonAgregarReservaActionPerformed
+		rr3.setVisible(true);	
+    }//GEN-LAST:event_buttonAgregarServicioActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
 		super.dispose();
@@ -237,7 +238,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 	Map<Integer, DTLineaReserva> hashLineasReserva = new HashMap<>();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregarPromocion;
-    private javax.swing.JButton buttonAgregarReserva;
+    private javax.swing.JButton buttonAgregarServicio;
     private javax.swing.JButton buttonAtras;
     private javax.swing.JButton buttonConfirmar;
     private javax.swing.JLabel jLabel1;

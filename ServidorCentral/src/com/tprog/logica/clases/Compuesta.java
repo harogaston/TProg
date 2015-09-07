@@ -41,9 +41,9 @@ public class Compuesta implements Categoria {
 	public Set<DTMinServicio> listarServicios() {
 		Set<DTMinServicio> result = new HashSet();
 		if (!subCategorias.isEmpty()) {
-			subCategorias.stream().forEach((cat) -> {
-				result.addAll(cat.listarServicios());
-			});
+                    for (Categoria cat : this.subCategorias) {
+                        result.addAll(cat.listarServicios());
+                    }
 		}
 		return result;
 	}

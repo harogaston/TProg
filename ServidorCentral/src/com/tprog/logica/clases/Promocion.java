@@ -7,6 +7,7 @@ package com.tprog.logica.clases;
 
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMiniItem;
 import com.tprog.logica.dt.DTPromocion;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,17 +19,17 @@ public class Promocion {
 
 	private String idPromocion;
 	private float descuento;
-	private float total;
+	//private float total;
 
 	private Proveedor proveedor;
-	private Map<String, Servicio> servicios;
+	private Map<String, ItemPromocion> servicios;
 
 	public Promocion(String idPromocion, float descuento, Proveedor proveedor) {
             this.idPromocion = idPromocion;
             this.descuento = descuento;
             this.proveedor = proveedor;
             servicios = new HashMap();
-            this.total = 0;
+            //this.total = 0;
 	}
 
 	public DTMinPromocion crearDTMin() {
@@ -37,21 +38,24 @@ public class Promocion {
 	}
 
 	public DTPromocion crearDT() {
-            Set<DTMinServicio> nuevoSet = new HashSet();
+            Set<DTMiniItem> nuevoSet = new HashSet();
             if (servicios != null) {
-                for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
-                    Servicio serv = it.next();
-                    DTMinServicio temp = serv.crearDTMin();
-                    nuevoSet.add(temp);
+                for (ItemPromocion it : servicios.values()) {
+                    DTMinServicio dtS = new DTMinServicio(this.getNicknameProveedor(),it.getServicio().getIdServicio());
+                    nuevoSet.add(new DTMiniItem(dtS, it.getCantidad()));
                 }
             }
-            DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);
+            DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);
             return nuevoDT;
 	}
 
 	public void addServicio(Servicio s) {
-            servicios.put(s.getIdServicio(), s);
-            this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
+            if (servicios.containsKey(s.getIdServicio())){
+                servicios.get(s.getIdServicio()).addServicio();
+            } else {
+                servicios.put(s.getIdServicio(), new ItemPromocion(s));
+            }    
+            //this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
 	}
 
 	public void setIdPromocion(String idPromocion) {
@@ -75,7 +79,13 @@ public class Promocion {
 	}
 
 	public float getTotal() {
-		return this.total;
+            float result = 0;
+            for(ItemPromocion it : servicios.values()){
+                float precioUnit = it.getServicio().getPrecio();
+                float precioPromocional = (precioUnit * (100-this.descuento))/100;
+                result += precioPromocional*it.getCantidad();
+            }
+            return result;
 	}
 
 	public String getNicknameProveedor() {
@@ -86,7 +96,7 @@ public class Promocion {
 		return this.proveedor;
 	}
         
-        public Map<String, Servicio> getServicios(){
-                return this.servicios;
+        public Map<String, ItemPromocion> getServicios(){
+            return this.servicios;
         }
 }

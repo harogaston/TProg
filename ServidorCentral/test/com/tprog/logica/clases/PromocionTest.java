@@ -5,6 +5,7 @@ package com.tprog.logica.clases;
 
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMiniItem;
 import com.tprog.logica.dt.DTPromocion;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,8 +23,8 @@ import org.junit.Test;
 public class PromocionTest {
 
 	Promocion instance;
-	Map<String, Servicio> servicios;
-	Set<DTMinServicio> set;
+	Map<String, ItemPromocion> servicios;
+	Set<DTMiniItem> set;
 	Proveedor proveedor;
 	Date fecha;
 	float total;
@@ -41,23 +42,26 @@ public class PromocionTest {
 
 	@Before
 	public void setUp() {
-		fecha = new Date();
-		proveedor = new Proveedor("pepito", "pedro", "elescamoso", "lalala@fing.edu.uy",
-			"/image.gg", fecha, "montecudine", "www.montecudine.com");
-		Promocion prooo;
-		set = new HashSet();
-		Servicio servicio1 = new Servicio("ser1", "bueno", 50, null, null, null, proveedor);
-		DTMinServicio ser1 = new DTMinServicio("pepito", "ser1");
-		Servicio servicio2 = new Servicio("ser2", "malo", 400, null, null, null, proveedor);
-		DTMinServicio ser2 = new DTMinServicio("pepito", "ser2");
+            fecha = new Date();
+            proveedor = new Proveedor("pepito", "pedro", "elescamoso", "lalala@fing.edu.uy",
+                    "/image.gg", fecha, "montecudine", "www.montecudine.com");
+            Promocion prooo;
 
-		servicios = new HashMap();
-		prooo = new Promocion("Promo", 50, proveedor);
-		prooo.addServicio(servicio1);
-		set.add(ser1);
-		prooo.addServicio(servicio2);
-		set.add(ser2);
-		instance = prooo;
+            Servicio servicio1 = new Servicio("ser1", "bueno", 50, new HashSet(), null, null, proveedor);
+            
+            Servicio servicio2 = new Servicio("ser2", "malo", 400, null, null, null, proveedor);
+            
+            set = new HashSet();
+            DTMiniItem ser1 = new DTMiniItem(new DTMinServicio("pepito", "ser1"), 1);
+            DTMiniItem ser2 = new DTMiniItem(new DTMinServicio("pepito", "ser2"), 1);
+            set.add(ser1);
+            set.add(ser2);
+            
+            servicios = new HashMap();
+            prooo = new Promocion("Promo", 20, proveedor);
+            prooo.addServicio(servicio1);
+            prooo.addServicio(servicio2);
+            instance = prooo;
 	}
 
 	@After
@@ -85,11 +89,10 @@ public class PromocionTest {
 	public void testCrearDT() {
 		System.out.println("crearDT");
 
-		DTPromocion expResult = new DTPromocion("Promo", 20, total, set);
+		DTPromocion expResult = new DTPromocion("Promo", 20, 360, set);
 		DTPromocion result = instance.crearDT();
 
-		assertEquals(result.toString(), result.toString()); ///
-		// TODO review the generated test code and remove the default call to fail.
+		assertEquals(expResult.toString(), result.toString()); 
 
 	}
 
@@ -103,7 +106,7 @@ public class PromocionTest {
 		Servicio servicio3 = new Servicio("ser3", "malote", 220, null, null, null, proveedor);
 		instance.addServicio(servicio3);
                 assertTrue(instance.getServicios().containsKey("ser3"));
-        // TODO review the generated test code and remove the default call to fail.
+                assertEquals(1, instance.getServicios().get("ser3").getCantidad());
 
 	}
 
@@ -168,11 +171,9 @@ public class PromocionTest {
 	public void testGetDescuento() {
 		System.out.println("getDescuento");
 
-		float expResult = 50;
+		float expResult = 20;
 		float result = instance.getDescuento();
 		assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-
 	}
 
 	/**
@@ -182,11 +183,9 @@ public class PromocionTest {
 	public void testGetTotal() {
 		System.out.println("getTotal");
 
-		float expResult = 225;
+		float expResult = 360;
 		float result = instance.getTotal();
 		assertEquals(expResult, result, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-
 	}
 
 	/**
@@ -199,8 +198,6 @@ public class PromocionTest {
 		String expResult = "pepito";
 		String result = instance.getNicknameProveedor();
 		assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-
 	}
 
 }

@@ -95,8 +95,7 @@ public class ManejadorReservasTest {
         ManejadorReservas expResult = instance;
         ManejadorReservas result = ManejadorReservas.getInstance();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -109,8 +108,6 @@ public class ManejadorReservasTest {
         Set<DTMinReserva> expResult = minR;
         Set<DTMinReserva> result = instance.listarReservas();
         assertEquals(expResult.toString(), result.toString());
-        // TODO review the generated test code and remove the default call to fail.
-
     }
 
     /**
@@ -123,8 +120,6 @@ public class ManejadorReservasTest {
         DTReserva expResult = dtr1;
         DTReserva result = instance.infoReserva(aux);
         assertEquals(expResult.toString(), result.toString());
-        // TODO review the generated test code and remove the default call to fail.
-
     }
 
     /**
@@ -139,8 +134,6 @@ public class ManejadorReservasTest {
         boolean expResult = true;
         boolean result = instance.cambiarEstadoReserva(aux, nuevoEstado);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-
     }
 
     /**

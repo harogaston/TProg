@@ -27,6 +27,7 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     public VerInformacionDeCliente(ICtrlUsuarios ctrlUsuarios) {
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
+		getRootPane().setDefaultButton(botonReservas);
     }
 
     void cargarDatos() {
@@ -70,7 +71,6 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Ver Información de Cliente");
-        setToolTipText("");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -182,11 +182,15 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
     private void botonReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonReservasActionPerformed
         String cliente = (String) listaClientesInterfaz.getSelectedItem();
         if (cliente != null) {
-            ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
-            this.setVisible(false);
-            getParent().add(r);
-            r.setLocation(this.getLocation());
-            r.setVisible(true);
+            if (!reservas.isEmpty()) {
+                ReservasCliente r = new ReservasCliente(this, reservas, ctrlUsuarios);
+                this.setVisible(false);
+                getParent().add(r);
+                r.setLocation(this.getLocation());
+                r.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Éste cliente no tiene reservas asignadas.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }//GEN-LAST:event_botonReservasActionPerformed
 

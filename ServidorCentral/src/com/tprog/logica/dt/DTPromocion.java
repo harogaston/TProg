@@ -5,6 +5,7 @@
  */
 package com.tprog.logica.dt;
 
+import com.tprog.logica.clases.ItemPromocion;
 import java.util.Set;
 
 public class DTPromocion {
@@ -12,9 +13,9 @@ public class DTPromocion {
 	private String idPromocion;
 	private float descuento;
 	private float total;
-	private Set<DTMinServicio> servicios;
+	private Set<DTMiniItem> servicios;
 
-	public DTPromocion(String idPromocion, float descuento, float total, Set<DTMinServicio> servicios) {
+	public DTPromocion(String idPromocion, float descuento, float total, Set<DTMiniItem> servicios) {
 		this.idPromocion = idPromocion;
 		this.descuento = descuento;
 		this.total = total;
@@ -30,10 +31,10 @@ public class DTPromocion {
 	}
 
 	public float getTotal() {
-		return this.total;
+            return this.total;
 	}
 
-	public Set<DTMinServicio> getServicios() {
+	public Set<DTMiniItem> getServicios() {
 		return this.servicios;
 	}
 
@@ -41,12 +42,13 @@ public class DTPromocion {
 	public String toString() {
 		String output = "ID de promocion: " + idPromocion
 				+ "\n" + "Descuento: " + Float.toString(descuento)
-				+ "\n" + "Total: " + Float.toString(total)
+				+ "\n" + "Total: " + Float.toString(this.total)
 				+ "\n" + "Servicios: " + "\n";
 		int i = 1;
-		for (DTMinServicio dt : servicios) {
-			output = output.concat("Servicio " + Integer.toString(i) + ": ");
-			output = output.concat(dt.toString());
+		for (DTMiniItem dt : servicios) {
+			output = output.concat("Servicio" + Integer.toString(i) + ": ");
+			output = output.concat(dt.getDTMinServicio().getIdServicio()) + " cantidad: " +
+                                Integer.toString(dt.getCantidad()) + "\n";
 			i++;
 		}
 		return output;

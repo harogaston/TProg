@@ -29,19 +29,25 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
+		getRootPane().setDefaultButton(buttonSeleccionarProveedor);
     }
 
     void cargarDatos() {
         //listaClientes
         Set<DTMinProveedor> setProveedores = ctrlUsuarios.listarProveedores();
-        //construyo un vector con la informacion a mostrar, porque
-        //el comboBox solo funciona con Vector o List
-        for (DTMinProveedor dt : setProveedores) {
-            listaProveedores.add(dt.getNickname());
-        }
+        if (!setProveedores.isEmpty()) {
+            //construyo un vector con la informacion a mostrar, porque
+            //el comboBox solo funciona con Vector o List
+            for (DTMinProveedor dt : setProveedores) {
+                listaProveedores.add(dt.getNickname());
+            }
 //		listaProveedoresInterfaz.updateUI();
-        listaProveedores.sort(null);
-        this.updateUI();
+            listaProveedores.sort(null);
+            this.updateUI();
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay proveedores en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        }
     }
 
     /**

@@ -9,6 +9,7 @@ import com.tprog.logica.dt.DTMinReserva;
 import com.tprog.logica.dt.DTMinServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
@@ -23,6 +24,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         initComponents();
         arbolCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         cargarDatos();
+		getRootPane().setDefaultButton(botonServicios);
     }
 
     void cargarDatos() {
@@ -51,7 +53,6 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Ver Información de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -78,7 +79,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(640, 480));
         jScrollPane1.setViewportView(arbolCategorias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 260, 320));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -98,11 +99,17 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
             //no se si asi o cast directamente a String
             String categoria = nodo.getUserObject().toString();
             listaServicios = ctrlProductos.listarServiciosCategoria(categoria);
-            ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
-            this.setVisible(false);
-            getParent().add(s);
-            s.setLocation(this.getLocation());
-            s.setVisible(true);
+            if (!listaServicios.isEmpty()) {
+                ServiciosSistema s = new ServiciosSistema(this, listaServicios, ctrlProductos);
+                this.setVisible(false);
+                getParent().add(s);
+                s.setLocation(this.getLocation());
+                s.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Ésta categoría no tiene servicios asociados.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una categoría para ver sus servicios asociados.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonServiciosActionPerformed
 

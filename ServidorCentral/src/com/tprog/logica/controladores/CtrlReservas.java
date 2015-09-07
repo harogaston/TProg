@@ -84,14 +84,14 @@ public class CtrlReservas implements ICtrlReservas {
         ManejadorProductos mp = ManejadorProductos.getInstance();
         if (dtS == null) {
             float precio = mp.getPrecioPromocion(dtP);
-            DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, null, dtP.getNicknameP(), precio);
+            DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, null, dtP.getIdPromocion(), precio);
             lineasReserva.add(dtLR);
-            precioTotal += precio;
+            precioTotal += precio * cant;
         } else {
             float precio = mp.getPrecioServicio(dtS);
             DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), null, precio);
             lineasReserva.add(dtLR);
-            precioTotal += (precio * cant);
+            precioTotal += precio * cant;
         }
     }
 
@@ -176,6 +176,38 @@ public class CtrlReservas implements ICtrlReservas {
         this.idReserva = -1;
         this.precioTotal = 0;
         this.lineasReserva = new HashSet();
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getNicknameP() {
+        return nicknameP;
+    }
+
+    public DTMinPromocion getDtP() {
+        return dtP;
+    }
+
+    public DTMinServicio getDtS() {
+        return dtS;
+    }
+
+    public DTReserva getDtR() {
+        return dtR;
+    }
+
+    public int getIdReserva() {
+        return idReserva;
+    }
+
+    public float getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public Set<DTLineaReserva> getLineasReserva() {
+        return lineasReserva;
     }
 
 }

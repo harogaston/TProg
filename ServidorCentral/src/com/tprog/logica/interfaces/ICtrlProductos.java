@@ -28,7 +28,7 @@ public interface ICtrlProductos {
 	public Set<DTMinServicio> listarServicios();
 	public void cambiarPrecio(float nuevoPrecio);
 	public void cambiarDescripcion(String nuevaDescripcion);
-    public Set<String> listarImagenes();
+        public Set<String> listarImagenes();
 	public void agregarImagen(String idImagen) throws Exception;
 	public void quitarImagen(String idImagen) throws Exception;
 	public DefaultMutableTreeNode listarCiudades();
@@ -46,6 +46,7 @@ public interface ICtrlProductos {
 	public void seleccionarOrigen(DTUbicacion origen);
 	public void seleccionarDestino(DTUbicacion destino);
 	public boolean seleccionarCategoriaSimple(String idCategoria);
+        public void quitarCategoriaListada(String idCategoria);
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes);
 	public Set<DTMinServicio> listarServiciosProveedor();
 	public void agregarServicio(DTMinServicio dtS);

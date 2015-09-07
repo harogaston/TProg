@@ -8,7 +8,6 @@ package com.tprog.logica.interfaces;
 import com.tprog.logica.controladores.CtrlProductos;
 import com.tprog.logica.controladores.CtrlUsuarios;
 import com.tprog.logica.controladores.CtrlReservas;
-import com.tprog.logica.controladores.CtrlUniversal;
 
 public class Fabrica {
 	private static Fabrica instace = null;
@@ -35,9 +34,4 @@ public class Fabrica {
 		ICtrlReservas ctrl = new CtrlReservas();
 		return ctrl;		
 	}
-        
-        public ICtrlUniversal getICtrlUniversal(){
-            ICtrlUniversal ctrl = new CtrlUniversal();
-            return ctrl;
-        }
 }

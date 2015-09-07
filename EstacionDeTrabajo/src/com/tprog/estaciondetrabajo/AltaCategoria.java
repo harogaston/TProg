@@ -25,6 +25,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         initComponents();
         cargarDatos();
+		getRootPane().setDefaultButton(botonCrear);
     }
 
     private void cargarDatos() {
@@ -66,7 +67,6 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Alta de Categoría");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -139,7 +139,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_casillaPadreActionPerformed
 
-    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
+    private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {
 
         String categoriaNueva = nombreCategoria.getText();
         if (!isWhiteSpace(categoriaNueva)) {
@@ -174,7 +174,7 @@ public class AltaCategoria extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "El nombre de categoría ingresado no es válido", "Campo vacio", JOptionPane.INFORMATION_MESSAGE);
         }
-    }                                          
+    }
 
     DefaultTreeModel arbolCategoriasModelo;
     ICtrlProductos ctrlProductos;

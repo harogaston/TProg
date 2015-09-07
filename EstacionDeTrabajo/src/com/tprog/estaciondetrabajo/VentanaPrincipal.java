@@ -5,8 +5,8 @@
  */
 package com.tprog.estaciondetrabajo;
 
+import com.tprog.estaciondetrabajo.carga.CtrlCarga;
 import com.tprog.logica.interfaces.Fabrica;
-import com.tprog.logica.interfaces.ICtrlUniversal;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -302,10 +302,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
-		ICtrlUniversal ctrl = fabrica.getICtrlUniversal();
-		ctrl.cargarDatos();
-		JOptionPane.showMessageDialog(desktop, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
-		cargarDatos.setEnabled(false);
+        CtrlCarga ctrl = new CtrlCarga();
+        ctrl.cargarDatos();
+        JOptionPane.showMessageDialog(desktop, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+        cargarDatos.setEnabled(false);
     }//GEN-LAST:event_cargarDatosActionPerformed
 
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,7 +314,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	}
 
     private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
-
+        AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+        center(altaDePromocion);
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
 	/**

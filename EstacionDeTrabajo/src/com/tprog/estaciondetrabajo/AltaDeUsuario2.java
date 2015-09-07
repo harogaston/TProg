@@ -31,9 +31,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		this.padre = anterior;
 		this.nickname = nickname;
 		this.email = email;
-
 		this.ictrlU = ictrlU;
 		initComponents();
+		getRootPane().setDefaultButton(buttonConfirmar);
 	}
 
 	private boolean isWhiteSpace(String s) {
@@ -43,7 +43,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private boolean hasWhiteSpace(String s) {
 		return s.matches("\\s");
 	}
-	
+
 	private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
 		List<Integer> lista = new ArrayList<>();
 		for (int i = min; i <= max; i++) {
@@ -51,6 +51,34 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 		Integer[] anios = lista.toArray(new Integer[lista.size()]);
 		return new DefaultComboBoxModel<Integer>(anios);
+	}
+
+	private boolean fechaValida(int dia, int mes, int anio) {
+		switch (mes) {
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				return dia < 32;
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				return dia < 31;
+			case 2: {
+				if (((anio % 4 == 0) && (anio % 100 != 0)) || (anio % 400 == 0)) {
+					//es año bisiesto
+					return dia < 30;
+				} else {
+					return dia < 29;
+				}
+			}
+			default:
+				return false;
+		}
 	}
 
 	@Override
@@ -102,25 +130,29 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Alta de Usuario");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Complete los datos del nuevo Usuario");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabelNombre.setText("Nombre");
+        jLabelNombre.setFocusable(false);
         getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 57, -1));
 
         jLabelApellido.setText("Apellido");
+        jLabelApellido.setFocusable(false);
         getContentPane().add(jLabelApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel4.setText("Imágen");
+        jLabel4.setFocusable(false);
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         labelImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelImagen.setFocusable(false);
         getContentPane().add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 140));
 
         buttonSeleccionar.setText("Seleccionar...");
+        buttonSeleccionar.setNextFocusableComponent(buttonConfirmar);
         buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSeleccionarActionPerformed(evt);
@@ -132,18 +164,23 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         jLabel7.setText("Día");
+        jLabel7.setFocusable(false);
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
 
         jLabel8.setText("Mes");
+        jLabel8.setFocusable(false);
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         jLabel9.setText("Año");
+        jLabel9.setFocusable(false);
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
 
         jLabel10.setText("Tipo de Usuario");
+        jLabel10.setFocusable(false);
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
 
         radioButtonCliente.setText("Cliente");
+        radioButtonCliente.setNextFocusableComponent(buttonSeleccionar);
         radioButtonCliente.setSelected(true);
         radioButtonCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,6 +190,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         getContentPane().add(radioButtonCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
 
         radioButtonProveedor.setText("Proveedor");
+        radioButtonProveedor.setFocusable(false);
+        radioButtonProveedor.setNextFocusableComponent(buttonSeleccionar);
         radioButtonCliente.setSelected(false);
         radioButtonProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +225,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+
+        jTextFieldNombre.setFocusCycleRoot(true);
+        jTextFieldNombre.setNextFocusableComponent(jTextFieldApellido);
         getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 140, -1));
+
+        jTextFieldApellido.setNextFocusableComponent(jComboBoxDias);
         getContentPane().add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 140, -1));
 
         jTextFieldEmpresa.setVisible(false);
@@ -194,10 +238,15 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         jTextFieldLinkEmpresa.setVisible(false);
         getContentPane().add(jTextFieldLinkEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 310, -1));
+
+        jComboBoxMeses.setNextFocusableComponent(jComboBoxAnios);
         getContentPane().add(jComboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+
+        jComboBoxDias.setNextFocusableComponent(jComboBoxMeses);
         getContentPane().add(jComboBoxDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
         jComboBoxAnios.setModel(modeloAnios);
+        jComboBoxAnios.setNextFocusableComponent(radioButtonCliente);
         getContentPane().add(jComboBoxAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 60, -1));
 
         pack();
@@ -254,11 +303,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		int mes = jComboBoxMeses.getSelectedIndex();
 		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
-
-		// Verificar nombre y apellido
+		
+		// Verificación de nombre y apellido
 		boolean okNombre = !isWhiteSpace(nombre);
 		boolean okApellido = !isWhiteSpace(apellido);
 
+		// Verificación de la fecha de nacimiento
+		boolean okFecha = fechaValida(dia, mes + 1, anio);
+		
 		// Verificacion de empresa y webEmpresa
 		String nombreEmpresa = "Empresa por defecto";
 		String linkEmpresa = "empresa.com";
@@ -272,7 +324,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 
 		// Mando los datos al controlador
-		if (okNombre && okApellido) {
+		if (okNombre && okApellido && okFecha) {
 			Date fechaNacimiento = new Date(anio, mes, dia);
 			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
@@ -282,7 +334,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 
 		// Creo Usuario
-		boolean okCliente = okNombre && okApellido;
+		boolean okCliente = okNombre && okApellido && okFecha;
 		boolean okProveedor = okCliente && okNombreEmpresa && okLinkEmpresa;
 		boolean creado = false;
 		if (proveedor) {
@@ -307,7 +359,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 				error = "El nombre ingresado no es correcto.";
 			} else if (!okApellido) {
 				error = "El apellido ingresado no es correcto.";
-			} else if (!okNombreEmpresa) {
+			} else if (!okFecha) {
+				error = "La fecha ingresada no es correcta.";
+			}else if (!okNombreEmpresa) {
 				error = "El nombre de empresa ingresado no es correcto.";
 			} else if (!okLinkEmpresa) {
 				error = "El link de empresa ingresado no es correcto.";

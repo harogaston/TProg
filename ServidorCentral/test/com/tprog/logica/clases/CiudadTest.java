@@ -34,11 +34,8 @@ public class CiudadTest {
     
     @Before
     public void setUp() {
-        
-        idCiudad = "Madrid";
         instance = new Ciudad("Madrid");
-        Pais p = new Pais("España");
-        instance.setPais(p);
+        instance.setPais(new Pais("España"));
     }
     
     @After
@@ -55,8 +52,6 @@ public class CiudadTest {
         String expResult = "Madrid";
         String result = instance.getIdCiudad();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
     }
 
     /**
@@ -66,10 +61,8 @@ public class CiudadTest {
     public void testSetPais() {
         System.out.println("setPais");
         Pais nuevo= new Pais("Mexico");
-        
         instance.setPais(nuevo);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        assertTrue(instance.getPais()==nuevo);
     }
 
     /**
@@ -79,11 +72,10 @@ public class CiudadTest {
     public void testCrearDT() {
         System.out.println("crearDT");
         
-        DTUbicacion expResult = null;
+        DTUbicacion expResult = new DTUbicacion("Madrid", "España");
         DTUbicacion result = instance.crearDT();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        
+        assertEquals(expResult.getCiudad(), result.getCiudad());
+        assertEquals(expResult.getPais(), result.getPais());
     }
     
 }

@@ -17,8 +17,12 @@ public class Ciudad {
 	}
 
 	public String getIdCiudad() {
-		return this.idCiudad;
+            return this.idCiudad;
 	}
+        
+        public Pais getPais(){
+            return this.pais;
+        }
 
 	public void setPais(Pais pais) {
 		this.pais = pais;

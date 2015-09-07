@@ -5,7 +5,7 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMiniItem;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.Image;
@@ -25,14 +25,14 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
      * @param ctrlProductos
      * @param padre
      */
-    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMinServicio> servicios, ICtrlProductos ctrlProductos) {
+    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMiniItem> servicios, ICtrlProductos ctrlProductos) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlProductos = ctrlProductos;
         initComponents();
         //construyo lista para la interfaz usando el set
-        for (DTMinServicio dt : servicios) {
-            listaServicios.add(dt.getIdServicio());
+        for (DTMiniItem dt : servicios) {
+            listaServicios.add(dt.getDTMinServicio().getIdServicio());
         }
         comboboxImagenes.setEnabled(false);
     }
@@ -117,16 +117,17 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
             //buscar servicio
-            DTMinServicio dt = null;
+            DTMiniItem dt = null;
             Iterator it = servicios.iterator();
             boolean found = false;
             while (it.hasNext() && !found) {
-                DTMinServicio tmp = (DTMinServicio) it.next();
-                if (tmp.getIdServicio().equals(servicio)) {
+                DTMiniItem tmp = (DTMiniItem) it.next();
+                if (tmp.getDTMinServicio().getIdServicio().equals(servicio)) {
                     dt = tmp; //es imposible que dt sea null al final del loop
+                    found = true;
                 }
             }
-            ctrlProductos.seleccionarServicio(dt);
+            ctrlProductos.seleccionarServicio(dt.getDTMinServicio());
             DTServicio dtServicio = ctrlProductos.infoServicio();
             //imagenes
             detalleServicio.setVisible(true);
@@ -170,7 +171,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
     Vector<ImageIcon> modelComboBox = new Vector<>();
     ICtrlProductos ctrlProductos;
-    Set<DTMinServicio> servicios;
+    Set<DTMiniItem> servicios;
     VerInformacionDePromocion padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

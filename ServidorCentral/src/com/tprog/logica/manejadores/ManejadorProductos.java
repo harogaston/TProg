@@ -106,13 +106,9 @@ public class ManejadorProductos {
 
 	public Set<DTMinServicio> listarServicios() {
 		Set<DTMinServicio> result = new HashSet();
-        System.out.println("primero");
 		if (!this.servicios.isEmpty()) {
-            System.out.println("segundo");
 			for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
-                System.out.println("tercero");
 				if (!mapaServicio.isEmpty()) {
-                    System.out.println("cuarto");
 					for (Servicio s : mapaServicio.values()) {
 						result.add(s.crearDTMin());
 					}

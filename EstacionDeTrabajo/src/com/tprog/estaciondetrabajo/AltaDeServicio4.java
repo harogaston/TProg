@@ -30,6 +30,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         arbolCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         seleccionCategoriasInterfaz.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		getRootPane().setDefaultButton(botonSiguiente);
     }
 
     void cargarDatos() {
@@ -63,7 +64,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Alta de Servicio");
+        setTitle("Alta de Servicio - Categorías");
         setToolTipText("");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {

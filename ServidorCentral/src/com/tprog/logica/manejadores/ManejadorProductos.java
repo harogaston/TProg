@@ -21,6 +21,7 @@ import com.tprog.logica.dt.DTUbicacion;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -45,24 +46,24 @@ public class ManejadorProductos {
 	}
 
 	public static ManejadorProductos getInstance() {
-		if (instace == null) {
-			instace = new ManejadorProductos();
-		}
-		return instace;
+            if (instace == null) {
+                instace = new ManejadorProductos();
+            }
+            return instace;
 	}
 
 	public Set<DTMinPromocion> listarPromociones() {
-		Set<DTMinPromocion> result = new HashSet();
-		if (!promociones.isEmpty()) {
-			for (Map<String, Promocion> mapaPromocion : promociones.values()) {
-				if (!mapaPromocion.isEmpty()) {
-					for (Promocion p : mapaPromocion.values()) {
-						result.add(p.crearDTMin());
-					}
-				}
-			}
-		}
-		return result;
+            Set<DTMinPromocion> result = new HashSet();
+            if (!promociones.isEmpty()) {
+                for (Map<String, Promocion> mapaPromocion : promociones.values()) {
+                    if (!mapaPromocion.isEmpty()) {
+                        for (Promocion p : mapaPromocion.values()) {
+                                result.add(p.crearDTMin());
+                        }
+                    }
+                }
+            }
+            return result;
 	}
 
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
@@ -106,13 +107,9 @@ public class ManejadorProductos {
 
 	public Set<DTMinServicio> listarServicios() {
 		Set<DTMinServicio> result = new HashSet();
-        System.out.println("primero");
 		if (!this.servicios.isEmpty()) {
-            System.out.println("segundo");
 			for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
-                System.out.println("tercero");
 				if (!mapaServicio.isEmpty()) {
-                    System.out.println("cuarto");
 					for (Servicio s : mapaServicio.values()) {
 						result.add(s.crearDTMin());
 					}
@@ -197,18 +194,6 @@ public class ManejadorProductos {
             return result;
 	}
 
-//	public boolean agregarCategoria(String idCategoria) {
-//           /* boolean result = false;
-//            if (!categorias.isEmpty() && categorias.containsKey(idCategoria)){
-//                Categoria cat = categorias.get(idCategoria);
-//                
-//            }*/
-//            return true;
-//	}
-//
-//	public boolean quitarCategoria(String idCategoria) {
-//		return true;
-//	}
 	public void cambiarOrigen(DTMinServicio dtS, DTUbicacion dtU) {
 		if (!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())
 				&& !servicios.get(dtS.getNicknameP()).isEmpty()
@@ -365,7 +350,7 @@ public class ManejadorProductos {
 	}
 
 	public void altaPromocion(String idPromocion, float descuento, String nicknameProv,
-                Set<String> servicios) {
+                List<String> servicios) {
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
             Proveedor proveedor = mu.getProveedor(nicknameProv);
             Promocion promo = new Promocion(idPromocion, descuento, proveedor);

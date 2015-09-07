@@ -37,6 +37,7 @@ public class VerInformacionDePromocion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay promociones en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
             this.dispose();
         }
+		getRootPane().setDefaultButton(botonServicios);
     }
 
     /**

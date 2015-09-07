@@ -5,7 +5,7 @@
  */
 package com.tprog.estaciondetrabajo;
 
-import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMiniItem;
 import com.tprog.logica.dt.DTServicio;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import java.awt.Image;
@@ -25,16 +25,17 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
      * @param ctrlProductos
      * @param padre
      */
-    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMinServicio> servicios, ICtrlProductos ctrlProductos) {
+    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMiniItem> servicios, ICtrlProductos ctrlProductos) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlProductos = ctrlProductos;
         initComponents();
         //construyo lista para la interfaz usando el set
-        for (DTMinServicio dt : servicios) {
-            listaServicios.add(dt.getIdServicio());
+        for (DTMiniItem dt : servicios) {
+            listaServicios.add(dt.getDTMinServicio().getIdServicio());
         }
         comboboxImagenes.setEnabled(false);
+		getRootPane().setDefaultButton(botonAtras);
     }
 
     /**
@@ -57,9 +58,8 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Servicios Promoción");
+        setTitle("Ver Información de Promoción - Servicios");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -77,7 +77,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 418, -1));
 
         detalleServicio.setEditable(false);
         detalleServicio.setColumns(20);
@@ -97,8 +97,8 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 400, -1, -1));
-        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 190, 230));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
+        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 190, 130));
 
         jLabel2.setText("<html> Imágenes del servicio </html>");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
@@ -118,16 +118,17 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
             //buscar servicio
-            DTMinServicio dt = null;
+            DTMiniItem dt = null;
             Iterator it = servicios.iterator();
             boolean found = false;
             while (it.hasNext() && !found) {
-                DTMinServicio tmp = (DTMinServicio) it.next();
-                if (tmp.getIdServicio().equals(servicio)) {
+                DTMiniItem tmp = (DTMiniItem) it.next();
+                if (tmp.getDTMinServicio().getIdServicio().equals(servicio)) {
                     dt = tmp; //es imposible que dt sea null al final del loop
+                    found = true;
                 }
             }
-            ctrlProductos.seleccionarServicio(dt);
+            ctrlProductos.seleccionarServicio(dt.getDTMinServicio());
             DTServicio dtServicio = ctrlProductos.infoServicio();
             //imagenes
             detalleServicio.setVisible(true);
@@ -171,7 +172,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
     Vector<ImageIcon> modelComboBox = new Vector<>();
     ICtrlProductos ctrlProductos;
-    Set<DTMinServicio> servicios;
+    Set<DTMiniItem> servicios;
     VerInformacionDePromocion padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

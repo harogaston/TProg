@@ -39,6 +39,7 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
         cargarCiudades();
+		getRootPane().setDefaultButton(buttonConfirmar);
     }
 
     private void cargarCiudades() {

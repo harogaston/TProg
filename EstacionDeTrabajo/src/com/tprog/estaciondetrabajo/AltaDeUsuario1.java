@@ -14,6 +14,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 	public AltaDeUsuario1(ICtrlUsuarios ctrlUsuarios) {
 		this.ctrlUsuarios = ctrlUsuarios;
 		initComponents();
+		getRootPane().setDefaultButton(buttonSiguiente);
 	}
 
 	/**
@@ -40,7 +41,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese los datos del nuevo Usuario y haga click en \"Siguiente\" para continuar");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 473, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 560, -1));
 
         jLabel2.setText("nickname");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));

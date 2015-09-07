@@ -33,11 +33,11 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlProductos = ctrlProductos;
         initComponents();
-        setTitle("Alta de Promoción");
         //construyo lista para la interfaz usando el set
         for (DTMinServicio dt : servicios) {
             listaServicios.add(dt.getIdServicio());
         }
+		getRootPane().setDefaultButton(buttonConfirmar);
     }
 
     /**
@@ -61,9 +61,8 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         buttonConfirmar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("Servicios Promoción");
+        setTitle("Alta de Promoción - Confirmación");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -81,7 +80,7 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 418, -1));
 
         detalleServicio.setEditable(false);
         detalleServicio.setColumns(20);
@@ -90,7 +89,7 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         detalleServicio.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleServicio);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 269, 128));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 269, 128));
 
         botonAtras.setText("< Atras");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -98,13 +97,13 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
 
         jLabel1.setText("Confirme el alta de la Promoción.");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, -1, -1));
 
         jLabel2.setText("Se muestran los Servicios actuales de la Promoción.");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         jLabel3.setText("Descuento :");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));

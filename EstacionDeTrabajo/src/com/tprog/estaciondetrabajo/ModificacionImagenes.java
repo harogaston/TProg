@@ -30,6 +30,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         initComponents();
         actualizarImagenes();
+		getRootPane().setDefaultButton(botonAtras);
     }
 
     public void actualizarImagenes() {
@@ -43,7 +44,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
                 //creo imagen
                 Image img = ImageIO.read(f);
                 //redimensiono para que entre en la JLabel
-                int width = 64;
+                int width = 120;
                 int height = img.getHeight(null) * width / img.getWidth(null);
                 Image dimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
                 //armo el ImageIcon
@@ -77,9 +78,8 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         botonAgregar = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("Modificar Imágenes");
-        setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(true);
+        setTitle("Actualizar Servicio - Imágenes");
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -93,14 +93,14 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
 
         comboboxImagenes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboboxImagenesActionPerformed(evt);
             }
         });
-        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 280, 30));
+        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 160, 120));
 
         botonQuitar.setText("Quitar");
         botonQuitar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
                 botonQuitarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, -1, -1));
+        getContentPane().add(botonQuitar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, -1, -1));
 
         botonAgregar.setText("Agregar");
         botonAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -116,7 +116,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
                 botonAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 200, -1, -1));
+        getContentPane().add(botonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

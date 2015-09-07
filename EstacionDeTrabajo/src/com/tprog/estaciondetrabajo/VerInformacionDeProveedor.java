@@ -42,6 +42,7 @@ public class VerInformacionDeProveedor extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay proveedores en el sistema.", "Error", JOptionPane.ERROR_MESSAGE);
             this.dispose();
         }
+		getRootPane().setDefaultButton(botonServicios);
     }
 
     /**

@@ -9,6 +9,6 @@ Marccio Silva - 4.547.599-3 - marccio.silva@fing.edu.uy
 
 Gastón Haro - 4.012.543-6 - gaston.haro@fing.edu.uy
 
-Martín Rucci - 4.737.496-1 - 
+Martín Rucci - 4.737.496-1 - martin.rucci@fing.edu.uy
 
-Ignacio Prandi - 4.473.654-2 - 
+Ignacio Prandi - 4.473.654-2 - Ignacio.prandi@fing.edu.uy

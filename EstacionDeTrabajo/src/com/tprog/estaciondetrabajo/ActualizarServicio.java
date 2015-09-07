@@ -24,6 +24,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
     public ActualizarServicio(ICtrlProductos ctrlProductos) {
         this.ctrlProductos = ctrlProductos;
         initComponents();
+		getRootPane().setDefaultButton(botonModificar);
     }
 
     void cargarDatos() {
@@ -60,8 +61,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Actualizar Servicio");
-        setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(false);
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -87,7 +87,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
                 listaServiciosInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 418, -1));
+        getContentPane().add(listaServiciosInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 418, -1));
 
         jLabel1.setText("<html>Seleccione algun servicio del sistema para modificar sus datos</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
@@ -98,7 +98,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
                 botonModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
+        getContentPane().add(botonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 200, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

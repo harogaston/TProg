@@ -50,9 +50,8 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Modificar Servicio");
-        setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(true);
+        setTitle("Actualizar Servicio - Datos Básicos");
+        setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -76,7 +75,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
                 botonModificarCategoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+        getContentPane().add(botonModificarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
 
         botonModificarImagenes.setText("Modificar imagenes");
         botonModificarImagenes.setAlignmentX(0.5F);
@@ -85,7 +84,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
                 botonModificarImagenesActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificarImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, 180, -1));
+        getContentPane().add(botonModificarImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 180, -1));
         getContentPane().add(descripcionInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 320, -1));
         getContentPane().add(precioInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 120, -1));
 
@@ -96,7 +95,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
                 botonModificarUbicacionActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificarUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
+        getContentPane().add(botonModificarUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
 
         actualizarDescripcion.setText("Guardar");
         actualizarDescripcion.addActionListener(new java.awt.event.ActionListener() {

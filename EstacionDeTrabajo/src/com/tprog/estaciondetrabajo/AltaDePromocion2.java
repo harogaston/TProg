@@ -33,8 +33,7 @@ public class AltaDePromocion2 extends javax.swing.JInternalFrame {
         this.ctrlUsuarios = ctrlUsuarios;
         this.servicios = servicios;
         initComponents();
-        setTitle("Alta de Promoción");
-        
+		getRootPane().setDefaultButton(buttonSiguiente);
     }
 
     /**
@@ -56,7 +55,7 @@ public class AltaDePromocion2 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Alta de Servicio");
+        setTitle("Alta de Promoción - Nombre");
         setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

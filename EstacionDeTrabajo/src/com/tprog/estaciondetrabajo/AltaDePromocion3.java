@@ -67,9 +67,8 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
         buttonSiguiente = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("Servicios Proveedor");
+        setTitle("Alta de Promoción - Servicios");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -117,13 +116,13 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
         });
         getContentPane().add(buttonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 300, -1, -1));
 
-        buttonSiguiente.setText("Siguiente");
+        buttonSiguiente.setText("Siguiente >");
         buttonSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSiguienteActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, -1, -1));
+        getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

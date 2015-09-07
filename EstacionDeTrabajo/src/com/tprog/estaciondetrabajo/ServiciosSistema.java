@@ -38,6 +38,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
             }
         }
         comboboxImagenes.setEnabled(false);
+		getRootPane().setDefaultButton(botonAtras);
     }
 
     /**
@@ -62,7 +63,6 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Ver Información de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -89,7 +89,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
         detalleServicio.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleServicio);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 269, 230));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 260, 220));
 
         botonAtras.setText("< Atras");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -97,14 +97,14 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 410, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         jLabel1.setText("<html>Seleccione algun servicio del sistema para ver su información</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
-        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, 200, 230));
+        getContentPane().add(comboboxImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 160, 130));
 
         jLabel2.setText("<html> Imágenes del servicio </html>");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 140, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 160, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -145,9 +145,7 @@ public class ServiciosSistema extends javax.swing.JInternalFrame {
                     //creo imagen
                     Image img = ImageIO.read(f);
                     //redimensiono para que entre en la JLabel
-                    int width = comboboxImagenes.getWidth();
-                    int height = img.getHeight(null) * width / img.getWidth(null);
-                    Image dimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                    Image dimg = img.getScaledInstance(comboboxImagenes.getWidth(), comboboxImagenes.getWidth(), Image.SCALE_SMOOTH);
                     //armo el ImageIcon
                     ImageIcon imageIcon = new ImageIcon(dimg);
                     imageIcon.setDescription(ruta);

@@ -58,6 +58,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             this.dispose();
         }
         listaServicios.sort(null);
+		getRootPane().setDefaultButton(buttonAgregar);
     }
 
     private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
@@ -69,6 +70,34 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         return new DefaultComboBoxModel<Integer>(anios);
     }
 
+		private boolean fechaValida(int dia, int mes, int anio) {
+		switch (mes) {
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				return dia < 32;
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				return dia < 31;
+			case 2: {
+				if (((anio % 4 == 0) && (anio % 100 != 0)) || (anio % 400 == 0)) {
+					//es año bisiesto
+					return dia < 30;
+				} else {
+					return dia < 29;
+				}
+			}
+			default:
+				return false;
+		}
+	}
+	
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,9 +133,8 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Realizar Reserva");
+        setTitle("Realizar Reserva - Agregar Servicio");
         setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {
@@ -244,10 +272,13 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             Date fechaFinal = new Date(anioF, mesF, diaF);
 
             // Verifico las fechas
+			boolean okFechaInicio = fechaValida(diaI, mesI + 1, anioI);
+			boolean okFechaFinal = fechaValida(diaF, mesF + 1, anioF);
             boolean fechasCoherentes = fechaInicio.before(fechaFinal);
+			boolean okFechas = okFechaInicio && okFechaFinal && fechasCoherentes;
 
             // Si todo esta ok
-            if (okCant && fechasCoherentes) {
+            if (okCant && okFechas) {
                 // Envío la información al controlador
                 ctrlReservas.ingresarLineaReserva(cant, fechaInicio, fechaFinal);
 
@@ -259,8 +290,12 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
                 if (!okCant) {
                     error = "Por favor ingrese una cantidad válida.";
                 } else if (!fechasCoherentes) {
-                    error = "La fecha de inicio debe ser posterior a la fecha actual.\n La fecha de fin debe ser postarior a la fecha de inicio.";
-                }
+                    error = "La fecha de inicio debe ser anterior a la fecha de finalización.";
+                } else if (!okFechaInicio) {
+					error = "La fecha de inicio ingresada no es correcta.";
+				} else if (!okFechaFinal) {
+					error = "La fecha de finalización ingresada no es correcta.";
+				}
                 JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {

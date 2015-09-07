@@ -24,6 +24,7 @@ public class EstacionDeTrabajo {
 //        }
         //</editor-fold>
         VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
-        ventanaPrincipal.setVisible(true);
+        ventanaPrincipal.setLocationRelativeTo(null);
+		ventanaPrincipal.setVisible(true);
     }
 }

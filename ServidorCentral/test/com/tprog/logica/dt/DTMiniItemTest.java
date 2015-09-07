@@ -33,8 +33,9 @@ public class DTMiniItemTest {
     @Test
     public void testGetIdServicio() {
         System.out.println("getIdServicio");
-        DTMiniItem dtMin = new DTMiniItem("Servicio", 15);
-        assertEquals("Servicio", dtMin.getIdServicio());
+        DTMiniItem dtMin = new DTMiniItem(new DTMinServicio("Fulano", "Ser"), 15);
+        assertEquals("Ser", dtMin.getDTMinServicio().getIdServicio());
+        assertEquals("Fulano", dtMin.getDTMinServicio().getNicknameP());
     }
 
     /**
@@ -43,7 +44,7 @@ public class DTMiniItemTest {
     @Test
     public void testGetCantidad() {
         System.out.println("getCantidad");
-        DTMiniItem dtMin = new DTMiniItem("Servicio", 15);
+        DTMiniItem dtMin = new DTMiniItem(new DTMinServicio("Fulano", "Ser"), 15);
         assertEquals(15, dtMin.getCantidad());
     }
     

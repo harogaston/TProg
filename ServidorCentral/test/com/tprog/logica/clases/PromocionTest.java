@@ -52,8 +52,8 @@ public class PromocionTest {
             Servicio servicio2 = new Servicio("ser2", "malo", 400, null, null, null, proveedor);
             
             set = new HashSet();
-            DTMiniItem ser1 = new DTMiniItem("ser1", 1);
-            DTMiniItem ser2 = new DTMiniItem("ser2", 1);
+            DTMiniItem ser1 = new DTMiniItem(new DTMinServicio("pepito", "ser1"), 1);
+            DTMiniItem ser2 = new DTMiniItem(new DTMinServicio("pepito", "ser2"), 1);
             set.add(ser1);
             set.add(ser2);
             

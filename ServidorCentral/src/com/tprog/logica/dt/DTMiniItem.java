@@ -8,16 +8,16 @@ package com.tprog.logica.dt;
  * @author sofia
  */
 public class DTMiniItem {
-    private String idServicio;
+    private DTMinServicio servicio;
     private int cantidad;
     
-    public DTMiniItem(String idServicio, int cantidad){
-        this.idServicio = idServicio;
+    public DTMiniItem(DTMinServicio servicio, int cantidad){
+        this.servicio = servicio;
         this.cantidad = cantidad;
     }
     
-    public String getIdServicio(){
-        return idServicio;
+    public DTMinServicio getDTMinServicio(){
+        return servicio;
     }
     
     public int getCantidad(){

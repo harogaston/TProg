@@ -41,7 +41,8 @@ public class Promocion {
             Set<DTMiniItem> nuevoSet = new HashSet();
             if (servicios != null) {
                 for (ItemPromocion it : servicios.values()) {
-                    nuevoSet.add(new DTMiniItem(it.getServicio().getIdServicio(), it.getCantidad()));
+                    DTMinServicio dtS = new DTMinServicio(this.getNicknameProveedor(),it.getServicio().getIdServicio());
+                    nuevoSet.add(new DTMiniItem(dtS, it.getCantidad()));
                 }
             }
             DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);

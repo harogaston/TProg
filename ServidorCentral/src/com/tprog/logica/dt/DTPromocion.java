@@ -46,8 +46,8 @@ public class DTPromocion {
 				+ "\n" + "Servicios: " + "\n";
 		int i = 1;
 		for (DTMiniItem dt : servicios) {
-			output = output.concat("Servicio " + Integer.toString(i) + ": ");
-			output = output.concat(dt.getIdServicio()) + " cantidad: " +
+			output = output.concat("Servicio" + Integer.toString(i) + ": ");
+			output = output.concat(dt.getDTMinServicio().getIdServicio()) + " cantidad: " +
                                 Integer.toString(dt.getCantidad()) + "\n";
 			i++;
 		}

@@ -58,7 +58,7 @@ public class ManejadorUsuariosTest {
         dtP = new DTProveedor("nick", "nom", "ap", "email", "imagen", fecha,"empresa", "webEmpresa");
         instance.altaProveedor(dtP);
         cliente = new Cliente("nickname","nombre", "apellido","email2","imagen",  fecha);
-        dtC = new DTCliente("nickname","nombre", "apellido","email2","imagen",  fecha, null);
+        dtC = new DTCliente("nickname","nombre", "apellido","email2","imagen",  fecha, new HashSet());
         instance.altaCliente(dtC);
         dtmin = new DTMinCliente("nickname","email2");
         /*Ciudad origen = new Ciudad("Montevideo");
@@ -186,10 +186,8 @@ public class ManejadorUsuariosTest {
     @Test
     public void testVerificarNickname() {
         System.out.println("verificarNickname");
-        boolean expResult = false;
-        boolean result = instance.verificarNickname("nicko");
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+        assertTrue(instance.verificarNickname("nicko"));
+        assertFalse(instance.verificarNickname("nick"));
         
     }
 
@@ -199,14 +197,9 @@ public class ManejadorUsuariosTest {
     @Test
     public void testVerificarEmail() {
         System.out.println("verificarEmail");
-        boolean expResult = false;
-        boolean result = instance.verificarEmail("emailo");
-        boolean result2 = instance.verificarEmail("email2");
-        boolean result3 = instance.verificarEmail("email");
-        assertEquals(expResult, result);
-        assertEquals(true,result2);
-        assertEquals(true,result3);
-        // TODO review the generated test code and remove the default call to fail.
+        assertTrue(instance.verificarEmail("emailo"));
+        assertFalse(instance.verificarEmail("email2"));
+        assertFalse(instance.verificarEmail("email"));
         
     }
 

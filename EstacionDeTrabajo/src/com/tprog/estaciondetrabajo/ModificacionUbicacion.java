@@ -61,8 +61,8 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         labelDestino = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        setTitle("Modificar Ubicación");
-        setPreferredSize(new java.awt.Dimension(690, 435));
+        setTitle("Actualizar Servicio - Ciudades");
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -77,7 +77,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         arbolCiudadesOrigenInterfaz.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -86,7 +86,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(arbolCiudadesOrigenInterfaz);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 200, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 200, 150));
 
         arbolCiudadesDestinoInterfaz.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -95,16 +95,16 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(arbolCiudadesDestinoInterfaz);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 50, 200, 150));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 200, 150));
 
         jLabel1.setText("Seleccione un nuevo origen");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 20, -1, -1));
 
         jLabel2.setText("Seleccione un nuevo destino");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jLabel3.setText("<html>Las ciudades seleccionadas son las ubicaciones actuales del servicio</html>");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
 
         botonConfirmar.setText("Confirmar cambios");
         botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,19 +112,19 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
                 botonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, -1, -1));
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
 
         jLabel4.setText("Origen actual:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
 
         jLabel5.setText("Destino actual:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, -1, -1));
 
         labelOrigen.setText("jLabel6");
-        getContentPane().add(labelOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 150, 60));
+        getContentPane().add(labelOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 150, 40));
 
         labelDestino.setText("jLabel7");
-        getContentPane().add(labelDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, 150, 60));
+        getContentPane().add(labelDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 240, 150, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

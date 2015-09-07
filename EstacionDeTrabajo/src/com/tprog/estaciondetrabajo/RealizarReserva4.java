@@ -132,7 +132,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Realizar Reserva");
+        setTitle("Realizar Reserva - Agregar Promoción");
         setPreferredSize(new java.awt.Dimension(690, 435));
         setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

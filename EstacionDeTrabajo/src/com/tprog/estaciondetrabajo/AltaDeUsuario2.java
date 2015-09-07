@@ -43,7 +43,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private boolean hasWhiteSpace(String s) {
 		return s.matches("\\s");
 	}
-	
+
 	private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
 		List<Integer> lista = new ArrayList<>();
 		for (int i = min; i <= max; i++) {
@@ -51,6 +51,34 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 		Integer[] anios = lista.toArray(new Integer[lista.size()]);
 		return new DefaultComboBoxModel<Integer>(anios);
+	}
+
+	private boolean fechaValida(int dia, int mes, int anio) {
+		switch (mes) {
+			case 1:
+			case 3:
+			case 5:
+			case 7:
+			case 8:
+			case 10:
+			case 12:
+				return dia < 32;
+			case 4:
+			case 6:
+			case 9:
+			case 11:
+				return dia < 31;
+			case 2: {
+				if (((anio % 4 == 0) && (anio % 100 != 0)) || (anio % 400 == 0)) {
+					//es año bisiesto
+					return dia < 30;
+				} else {
+					return dia < 29;
+				}
+			}
+			default:
+				return false;
+		}
 	}
 
 	@Override
@@ -254,11 +282,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		int mes = jComboBoxMeses.getSelectedIndex();
 		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
-
-		// Verificar nombre y apellido
+		
+		// Verificación de nombre y apellido
 		boolean okNombre = !isWhiteSpace(nombre);
 		boolean okApellido = !isWhiteSpace(apellido);
 
+		// Verificación de la fecha de nacimiento
+		boolean okFecha = fechaValida(dia, mes + 1, anio);
+		
 		// Verificacion de empresa y webEmpresa
 		String nombreEmpresa = "Empresa por defecto";
 		String linkEmpresa = "empresa.com";
@@ -272,7 +303,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 
 		// Mando los datos al controlador
-		if (okNombre && okApellido) {
+		if (okNombre && okApellido && okFecha) {
 			Date fechaNacimiento = new Date(anio, mes, dia);
 			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
@@ -282,7 +313,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		}
 
 		// Creo Usuario
-		boolean okCliente = okNombre && okApellido;
+		boolean okCliente = okNombre && okApellido && okFecha;
 		boolean okProveedor = okCliente && okNombreEmpresa && okLinkEmpresa;
 		boolean creado = false;
 		if (proveedor) {
@@ -307,7 +338,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 				error = "El nombre ingresado no es correcto.";
 			} else if (!okApellido) {
 				error = "El apellido ingresado no es correcto.";
-			} else if (!okNombreEmpresa) {
+			} else if (!okFecha) {
+				error = "La fecha ingresada no es correcta.";
+			}else if (!okNombreEmpresa) {
 				error = "El nombre de empresa ingresado no es correcto.";
 			} else if (!okLinkEmpresa) {
 				error = "El link de empresa ingresado no es correcto.";

@@ -23,8 +23,10 @@ import com.tprog.logica.manejadores.ManejadorReservas;
 import com.tprog.logica.manejadores.ManejadorUsuarios;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -350,42 +352,42 @@ public class CtrlReservasTest {
             mp.altaServicio(dtS, "mHooch", cats);
             //Alta de Promociones
             //P1 4 5
-            Set<String> servs = new HashSet();
+            List<String> servs = new ArrayList();
             servs.add("Euro-Car-1");
             servs.add("Euro-Car-1");
             mp.altaPromocion("Euro-Cars-E-S", 30, "moody", servs);
             //P2 4 6
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Euro-Car-1");
             servs.add("Euro-Car-3");
             mp.altaPromocion("Euro-Cars-E-F", 30, "moody", servs);
             //P3 5 6
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Euro-Car-2");
             servs.add("Euro-Car-3");
             mp.altaPromocion("Euro-Cars-ES-F", 30, "moody", servs);
             //P4 1 2
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Euro-Vuelo-S");
             servs.add("Euro-Vuelo-LC");
             mp.altaPromocion("Euro-Vuelos-S-LC", 40, "remus", servs);
             //P5 1 3
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Euro-Vuelo-S");
             servs.add("Euro-Vuelo-FC");
             mp.altaPromocion("Euro-Vuelos-S-FC", 40, "remus", servs);
             //P6 2 3
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Euro-Vuelo-LC");
             servs.add("Euro-Vuelo-FC");
             mp.altaPromocion("Euro-Vuelos-LC-FC", 40, "remus", servs);
             //P7 7 8
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Casa para p4 BsAs");
             servs.add("Floripa G. House");
             mp.altaPromocion("Sudamerica-Casas", 50, "mHooch", servs);
             //P8 11 12
-            servs = new HashSet();
+            servs = new ArrayList();
             servs.add("Luxury south beach corner apartament");
             servs.add("Coche-Miami");
             mp.altaPromocion("Miami-Viaje", 30, "mHooch", servs);
@@ -478,9 +480,6 @@ public class CtrlReservasTest {
 
     }
 
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of seleccionarCliente method, of class CtrlReservas.

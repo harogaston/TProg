@@ -7,6 +7,7 @@ package com.tprog.logica.clases;
 
 import com.tprog.logica.dt.DTMinPromocion;
 import com.tprog.logica.dt.DTMinServicio;
+import com.tprog.logica.dt.DTMiniItem;
 import com.tprog.logica.dt.DTPromocion;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,7 +19,7 @@ public class Promocion {
 
 	private String idPromocion;
 	private float descuento;
-	private float total;
+	//private float total;
 
 	private Proveedor proveedor;
 	private Map<String, ItemPromocion> servicios;
@@ -28,7 +29,7 @@ public class Promocion {
             this.descuento = descuento;
             this.proveedor = proveedor;
             servicios = new HashMap();
-            this.total = 0;
+            //this.total = 0;
 	}
 
 	public DTMinPromocion crearDTMin() {
@@ -37,15 +38,13 @@ public class Promocion {
 	}
 
 	public DTPromocion crearDT() {
-            Set<DTMinServicio> nuevoSet = new HashSet();
+            Set<DTMiniItem> nuevoSet = new HashSet();
             if (servicios != null) {
-                for (Iterator<ItemPromocion> it = servicios.values().iterator(); it.hasNext();) {
-                    Servicio serv = it.next().getServicio();
-                    DTMinServicio temp = serv.crearDTMin();
-                    nuevoSet.add(temp);
+                for (ItemPromocion it : servicios.values()) {
+                    nuevoSet.add(new DTMiniItem(it.getServicio().getIdServicio(), it.getCantidad()));
                 }
             }
-            DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.total, nuevoSet);
+            DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);
             return nuevoDT;
 	}
 
@@ -55,7 +54,7 @@ public class Promocion {
             } else {
                 servicios.put(s.getIdServicio(), new ItemPromocion(s));
             }    
-            this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
+            //this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
 	}
 
 	public void setIdPromocion(String idPromocion) {
@@ -79,7 +78,13 @@ public class Promocion {
 	}
 
 	public float getTotal() {
-		return this.total;
+            float result = 0;
+            for(ItemPromocion it : servicios.values()){
+                float precioUnit = it.getServicio().getPrecio();
+                float precioPromocional = (precioUnit * (100-this.descuento))/100;
+                result += precioPromocional*it.getCantidad();
+            }
+            return result;
 	}
 
 	public String getNicknameProveedor() {

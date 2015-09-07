@@ -20,10 +20,10 @@ public class DTPromocionTest {
 	@Test
 	public void testGetIdPromocion() {
 		System.out.println("getIdPromocion");
-		DTMinServicio s1 = new DTMinServicio("Pepe", "550");
-		DTMinServicio s2 = new DTMinServicio("Pepe", "123");
-		DTMinServicio s3 = new DTMinServicio("Pepe", "89");
-		Set<DTMinServicio> set = new HashSet();
+		DTMiniItem s1 = new DTMiniItem("Pepe", 1);
+		DTMiniItem s2 = new DTMiniItem("Pipi", 2);
+		DTMiniItem s3 = new DTMiniItem("Popo", 1);
+		Set<DTMiniItem> set = new HashSet();
 		set.add(s1);
 		set.add(s2);
 		set.add(s3);
@@ -36,10 +36,10 @@ public class DTPromocionTest {
 	@Test
 	public void testGetDescuento() {
 		System.out.println("getDescuento");
-		DTMinServicio s1 = new DTMinServicio("Pepe", "550");
-		DTMinServicio s2 = new DTMinServicio("Pepe", "123");
-		DTMinServicio s3 = new DTMinServicio("Pepe", "89");
-		Set<DTMinServicio> set = new HashSet();
+		DTMiniItem s1 = new DTMiniItem("Pepe", 1);
+		DTMiniItem s2 = new DTMiniItem("Pipi", 2);
+		DTMiniItem s3 = new DTMiniItem("Popo", 1);
+		Set<DTMiniItem> set = new HashSet();
 		set.add(s1);
 		set.add(s2);
 		set.add(s3);
@@ -52,10 +52,10 @@ public class DTPromocionTest {
 	@Test
 	public void testGetTotal() {
 		System.out.println("getTotal");
-		DTMinServicio s1 = new DTMinServicio("Pepe", "550");
-		DTMinServicio s2 = new DTMinServicio("Pepe", "123");
-		DTMinServicio s3 = new DTMinServicio("Pepe", "89");
-		Set<DTMinServicio> set = new HashSet();
+		DTMiniItem s1 = new DTMiniItem("Pepe", 1);
+		DTMiniItem s2 = new DTMiniItem("Pipi", 2);
+		DTMiniItem s3 = new DTMiniItem("Popo", 1);
+		Set<DTMiniItem> set = new HashSet();
 		set.add(s1);
 		set.add(s2);
 		set.add(s3);

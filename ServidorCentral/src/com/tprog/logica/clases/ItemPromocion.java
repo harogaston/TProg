@@ -11,8 +11,8 @@ public class ItemPromocion {
     protected Servicio servicio;
     protected int cantidad;
     
-    public ItemPromocion(Servicio servicio){
-        servicio = servicio;
+    public ItemPromocion(Servicio s){
+        servicio = s;
         cantidad = 1;
     }
     

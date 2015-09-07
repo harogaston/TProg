@@ -21,7 +21,7 @@ public class Promocion {
 	private float total;
 
 	private Proveedor proveedor;
-	private Map<String, Servicio> servicios;
+	private Map<String, ItemPromocion> servicios;
 
 	public Promocion(String idPromocion, float descuento, Proveedor proveedor) {
             this.idPromocion = idPromocion;
@@ -39,8 +39,8 @@ public class Promocion {
 	public DTPromocion crearDT() {
             Set<DTMinServicio> nuevoSet = new HashSet();
             if (servicios != null) {
-                for (Iterator<Servicio> it = servicios.values().iterator(); it.hasNext();) {
-                    Servicio serv = it.next();
+                for (Iterator<ItemPromocion> it = servicios.values().iterator(); it.hasNext();) {
+                    Servicio serv = it.next().getServicio();
                     DTMinServicio temp = serv.crearDTMin();
                     nuevoSet.add(temp);
                 }
@@ -50,7 +50,11 @@ public class Promocion {
 	}
 
 	public void addServicio(Servicio s) {
-            servicios.put(s.getIdServicio(), s);
+            if (servicios.containsKey(s.getIdServicio())){
+                servicios.get(s.getIdServicio()).addServicio();
+            } else {
+                servicios.put(s.getIdServicio(), new ItemPromocion(s));
+            }    
             this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
 	}
 
@@ -86,7 +90,7 @@ public class Promocion {
 		return this.proveedor;
 	}
         
-        public Map<String, Servicio> getServicios(){
-                return this.servicios;
+        public Map<String, ItemPromocion> getServicios(){
+            return this.servicios;
         }
 }

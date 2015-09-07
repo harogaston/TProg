@@ -21,6 +21,7 @@ import com.tprog.logica.dt.DTUbicacion;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -365,7 +366,7 @@ public class ManejadorProductos {
 	}
 
 	public void altaPromocion(String idPromocion, float descuento, String nicknameProv,
-                Set<String> servicios) {
+                List<String> servicios) {
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
             Proveedor proveedor = mu.getProveedor(nicknameProv);
             Promocion promo = new Promocion(idPromocion, descuento, proveedor);

@@ -14,7 +14,9 @@ import com.tprog.logica.dt.DTUbicacion;
 import com.tprog.logica.interfaces.ICtrlProductos;
 import com.tprog.logica.manejadores.ManejadorProductos;
 import com.tprog.logica.manejadores.ManejadorUsuarios;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -25,7 +27,7 @@ public class CtrlProductos implements ICtrlProductos {
 	protected String categoriaPadre;
 	private String idCategoria;
 	protected String nicknameP;
-	private Set<String> listaServicios;
+	private List<String> listaServicios;
 	private Set<String> listaCategorias;
 	private DTUbicacion origen;
 	private DTUbicacion destino;
@@ -36,7 +38,7 @@ public class CtrlProductos implements ICtrlProductos {
 		this.categoriaPadre = null;
 		this.idCategoria = null;
 		this.nicknameP = null;
-		this.listaServicios = new HashSet();
+		this.listaServicios = new ArrayList();
 		this.listaCategorias = new HashSet();
 		this.origen = null;
 		this.destino = null;

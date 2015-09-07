@@ -90,7 +90,6 @@ public class ReservaTest {
         
         int result = instance.getIdReserva();
         
-        // TODO review the generated test code and remove the default call to fail.
         
     }
 
@@ -155,9 +154,6 @@ public class ReservaTest {
             instance.agregarLineaReserva(lin2);
             assertTrue(instance.getLineasReserva().contains(lin1));
             assertTrue(instance.getLineasReserva().contains(lin2));
-            
-          
-        // TODO review the generated test code and remove the default call to fail.
         
     }
 
@@ -170,8 +166,7 @@ public class ReservaTest {
         
         instance.setEstadoReserva(EstadoReserva.Cancelada);
         assertEquals(EstadoReserva.Cancelada,instance.getEstado());
-        // TODO review the generated test code and remove the default call to fail.
-        
+       
     }
 
     /**
@@ -185,7 +180,6 @@ public class ReservaTest {
         
         instance.setPrecioTotal(p);
         float result = instance.getPrecioTotal();
-        // TODO review the generated test code and remove the default call to fail.
         assertEquals(p, result,0);
     }
 
@@ -196,12 +190,15 @@ public class ReservaTest {
     public void testCrearDTReserva() throws Exception {
         System.out.println("crearDTReserva");
         
-        DTReserva result = instance.crearDTReserva();
-        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstado(), instance.getPrecioTotal(),set);
-                
-        assertEquals(esperado.toString(), result.toString());
-        // TODO review the generated test code and remove the default call to fail.
         
+        DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstado(), instance.getPrecioTotal(), new HashSet());
+        
+                
+        DTReserva result = instance.crearDTReserva();        
+        assertEquals(esperado.getEstadoReserva(), result.getEstadoReserva());
+        assertEquals(esperado.getPrecioTotal(), result.getPrecioTotal(), 0);
+        assertTrue(esperado.getFCreacion().equals(result.getFCreacion()));
+        //assertEquals(esperado.getLineasReserva().size(), result.getLineasReserva().size());
     }
 
     /**

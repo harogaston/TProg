@@ -52,7 +52,6 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Actualizar Servicio - Datos Básicos");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

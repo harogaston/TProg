@@ -58,7 +58,6 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Ver Información de Reserva");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -84,7 +83,7 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
                 listaReservasInterfazInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 330, -1));
+        getContentPane().add(listaReservasInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 330, -1));
 
         detalleReserva.setEditable(false);
         detalleReserva.setColumns(20);
@@ -93,10 +92,10 @@ public class VerInformacionDeReserva extends javax.swing.JInternalFrame {
         detalleReserva.setWrapStyleWord(true);
         panelUsuario.setViewportView(detalleReserva);
 
-        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, 270, 250));
+        getContentPane().add(panelUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 270, 250));
 
         jLabel1.setText("<html>Seleccione alguna reserva del sistema para ver su información</html>");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

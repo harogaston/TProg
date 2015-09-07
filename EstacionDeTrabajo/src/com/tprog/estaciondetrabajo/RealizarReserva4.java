@@ -58,6 +58,7 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
             this.dispose();
         }
         listaPromociones.sort(null);
+		getRootPane().setDefaultButton(buttonAgregar);
     }
 
     private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
@@ -134,7 +135,6 @@ public class RealizarReserva4 extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Realizar Reserva - Agregar Promoción");
         setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaPromocionesInterfaz.addActionListener(new java.awt.event.ActionListener() {

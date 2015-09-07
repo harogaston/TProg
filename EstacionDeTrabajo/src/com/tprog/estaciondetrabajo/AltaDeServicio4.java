@@ -30,6 +30,7 @@ public class AltaDeServicio4 extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         arbolCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         seleccionCategoriasInterfaz.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		getRootPane().setDefaultButton(botonSiguiente);
     }
 
     void cargarDatos() {

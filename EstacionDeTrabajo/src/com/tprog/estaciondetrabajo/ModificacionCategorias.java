@@ -44,6 +44,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         if (seleccionCategorias.size() == 0) {
             botonQuitar.setEnabled(false);
         }
+		getRootPane().setDefaultButton(botonConfirmar);
     }
 
     /**
@@ -69,7 +70,6 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setTitle("Actualizar Servicio - Categorías");
-        setToolTipText("");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -86,7 +86,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
         getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 486, 30));
         label.getAccessibleContext().setAccessibleDescription("");
 
-        botonConfirmar.setText("<html>Confirmar cambios</html>");
+        botonConfirmar.setText("Confirmar");
         botonConfirmar.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 botonConfirmarComponentShown(evt);
@@ -97,7 +97,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 botonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, -1));
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 410, -1, -1));
 
         buttonAtras.setText("< Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +105,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, -1, -1));
+        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
 
         arbolCategorias.setModel(null);
         arbolCategorias.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {

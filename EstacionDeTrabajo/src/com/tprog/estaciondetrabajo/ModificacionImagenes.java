@@ -30,6 +30,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         initComponents();
         actualizarImagenes();
+		getRootPane().setDefaultButton(botonAtras);
     }
 
     public void actualizarImagenes() {
@@ -79,7 +80,6 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("Actualizar Servicio - Imágenes");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

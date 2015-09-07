@@ -32,7 +32,8 @@ public class AltaDePromocion2 extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         this.ctrlUsuarios = ctrlUsuarios;
         this.servicios = servicios;
-        initComponents();       
+        initComponents();
+		getRootPane().setDefaultButton(buttonSiguiente);
     }
 
     /**

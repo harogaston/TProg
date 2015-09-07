@@ -24,6 +24,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
     public ActualizarServicio(ICtrlProductos ctrlProductos) {
         this.ctrlProductos = ctrlProductos;
         initComponents();
+		getRootPane().setDefaultButton(botonModificar);
     }
 
     void cargarDatos() {
@@ -61,7 +62,6 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Actualizar Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

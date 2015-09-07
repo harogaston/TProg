@@ -24,6 +24,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         initComponents();
         arbolCategorias.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         cargarDatos();
+		getRootPane().setDefaultButton(botonServicios);
     }
 
     void cargarDatos() {
@@ -52,7 +53,6 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Ver Información de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -79,7 +79,7 @@ public class VerInformacionDeServicio extends javax.swing.JInternalFrame {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(640, 480));
         jScrollPane1.setViewportView(arbolCategorias);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 260, 320));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 260, 320));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

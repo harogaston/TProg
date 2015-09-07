@@ -33,11 +33,11 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         this.ctrlUsuarios = ctrlUsuarios;
         this.ctrlProductos = ctrlProductos;
         initComponents();
-        setTitle("Alta de Promoción");
         //construyo lista para la interfaz usando el set
         for (DTMinServicio dt : servicios) {
             listaServicios.add(dt.getIdServicio());
         }
+		getRootPane().setDefaultButton(buttonConfirmar);
     }
 
     /**
@@ -63,7 +63,6 @@ public class AltaDePromocion4 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("Alta de Promoción - Confirmación");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {

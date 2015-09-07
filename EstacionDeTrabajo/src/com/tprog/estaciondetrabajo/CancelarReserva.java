@@ -26,6 +26,7 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
         this.ctrlReservas = ctrlReservas;
         initComponents();
         cargarDatos();
+		getRootPane().setDefaultButton(botonEliminar);
     }
 
     void cargarDatos() {
@@ -64,7 +65,6 @@ public class CancelarReserva extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Cancelar Reserva");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

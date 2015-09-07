@@ -26,6 +26,7 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
         this.padre = padre;
         this.ctrlProductos = ctrlProductos;
         initComponents();
+		getRootPane().setDefaultButton(buttonSiguiente);
     }
 
     /**

@@ -29,7 +29,7 @@ public class AltaDePromocion extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         this.ctrlUsuarios = ctrlUsuarios;  
         initComponents();
-        setTitle("Alta de Promoción");
+        getRootPane().setDefaultButton(buttonSeleccionarProveedor);
     }
 
     void cargarDatos() {

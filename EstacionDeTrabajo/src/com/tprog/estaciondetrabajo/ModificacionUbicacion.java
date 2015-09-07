@@ -25,6 +25,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         this.arbolCiudades = arbolCiudades;
         initComponents();
         actualizarInterfaz();
+		getRootPane().setDefaultButton(botonConfirmar);
     }
 
     private void actualizarInterfaz() {
@@ -63,7 +64,6 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("Actualizar Servicio - Ciudades");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -77,7 +77,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
                 botonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
+        getContentPane().add(botonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, -1, -1));
 
         arbolCiudadesOrigenInterfaz.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
@@ -106,13 +106,13 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
         jLabel3.setText("<html>Las ciudades seleccionadas son las ubicaciones actuales del servicio</html>");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
 
-        botonConfirmar.setText("Confirmar cambios");
+        botonConfirmar.setText("Confirmar");
         botonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, -1));
+        getContentPane().add(botonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
 
         jLabel4.setText("Origen actual:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));

@@ -21,6 +21,7 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         this.ctrlReservas = ctrlReservas;
         initComponents();
         cargarDatos();
+		getRootPane().setDefaultButton(botonCambiarEstado);
     }
 
     @SuppressWarnings("unchecked")
@@ -82,7 +83,6 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Actualizar Estado de Reserva");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);

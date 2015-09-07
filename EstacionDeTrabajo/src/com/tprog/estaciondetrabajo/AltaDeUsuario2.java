@@ -31,9 +31,9 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		this.padre = anterior;
 		this.nickname = nickname;
 		this.email = email;
-
 		this.ictrlU = ictrlU;
 		initComponents();
+		getRootPane().setDefaultButton(buttonConfirmar);
 	}
 
 	private boolean isWhiteSpace(String s) {
@@ -130,25 +130,29 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Alta de Usuario");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Complete los datos del nuevo Usuario");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jLabelNombre.setText("Nombre");
+        jLabelNombre.setFocusable(false);
         getContentPane().add(jLabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 57, -1));
 
         jLabelApellido.setText("Apellido");
+        jLabelApellido.setFocusable(false);
         getContentPane().add(jLabelApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         jLabel4.setText("Imágen");
+        jLabel4.setFocusable(false);
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         labelImagen.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        labelImagen.setFocusable(false);
         getContentPane().add(labelImagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 140, 140));
 
         buttonSeleccionar.setText("Seleccionar...");
+        buttonSeleccionar.setNextFocusableComponent(buttonConfirmar);
         buttonSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonSeleccionarActionPerformed(evt);
@@ -160,18 +164,23 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         jLabel7.setText("Día");
+        jLabel7.setFocusable(false);
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
 
         jLabel8.setText("Mes");
+        jLabel8.setFocusable(false);
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, -1));
 
         jLabel9.setText("Año");
+        jLabel9.setFocusable(false);
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
 
         jLabel10.setText("Tipo de Usuario");
+        jLabel10.setFocusable(false);
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, -1, -1));
 
         radioButtonCliente.setText("Cliente");
+        radioButtonCliente.setNextFocusableComponent(buttonSeleccionar);
         radioButtonCliente.setSelected(true);
         radioButtonCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,6 +190,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
         getContentPane().add(radioButtonCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
 
         radioButtonProveedor.setText("Proveedor");
+        radioButtonProveedor.setFocusable(false);
+        radioButtonProveedor.setNextFocusableComponent(buttonSeleccionar);
         radioButtonCliente.setSelected(false);
         radioButtonProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,7 +225,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, -1, -1));
+
+        jTextFieldNombre.setFocusCycleRoot(true);
+        jTextFieldNombre.setNextFocusableComponent(jTextFieldApellido);
         getContentPane().add(jTextFieldNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 140, -1));
+
+        jTextFieldApellido.setNextFocusableComponent(jComboBoxDias);
         getContentPane().add(jTextFieldApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 140, -1));
 
         jTextFieldEmpresa.setVisible(false);
@@ -222,10 +238,15 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
         jTextFieldLinkEmpresa.setVisible(false);
         getContentPane().add(jTextFieldLinkEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 310, -1));
+
+        jComboBoxMeses.setNextFocusableComponent(jComboBoxAnios);
         getContentPane().add(jComboBoxMeses, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+
+        jComboBoxDias.setNextFocusableComponent(jComboBoxMeses);
         getContentPane().add(jComboBoxDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
         jComboBoxAnios.setModel(modeloAnios);
+        jComboBoxAnios.setNextFocusableComponent(radioButtonCliente);
         getContentPane().add(jComboBoxAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 60, -1));
 
         pack();

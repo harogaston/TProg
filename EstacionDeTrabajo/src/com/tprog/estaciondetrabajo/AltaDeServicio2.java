@@ -29,6 +29,7 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
         this.ctrlProductos = ctrlProductos;
         this.ctrlUsuarios = ctrlUsuarios;
         initComponents();
+		getRootPane().setDefaultButton(buttonSeleccionarProveedor);
     }
 
     void cargarDatos() {

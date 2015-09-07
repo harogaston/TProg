@@ -58,6 +58,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             this.dispose();
         }
         listaServicios.sort(null);
+		getRootPane().setDefaultButton(buttonAgregar);
     }
 
     private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
@@ -134,7 +135,6 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Realizar Reserva - Agregar Servicio");
         setPreferredSize(new java.awt.Dimension(690, 435));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {

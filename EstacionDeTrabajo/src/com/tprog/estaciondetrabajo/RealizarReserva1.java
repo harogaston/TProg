@@ -32,6 +32,7 @@ public class RealizarReserva1 extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             this.dispose();
         }
+		getRootPane().setDefaultButton(buttonSiguiente);
     }
 
     void cargarDatos() throws Exception {

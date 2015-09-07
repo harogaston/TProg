@@ -31,6 +31,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 		this.ctrlReservas = ctrlReservas;
 		jTextFieldPrecio.setEditable(false);
 		cargarDatos();
+		getRootPane().setDefaultButton(buttonConfirmar);
 	}
 
 	void cargarDatos() {

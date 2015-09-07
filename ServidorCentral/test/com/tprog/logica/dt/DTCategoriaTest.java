@@ -20,23 +20,10 @@ public class DTCategoriaTest {
 		String expResult = "testID";
 		String result = instance.getIdCategoria();
 		assertEquals(expResult, result);
-		DTCategoria instance2 = new DTCategoria("", null);
+		DTCategoria instance2 = new DTCategoria(null, null);
 		String expResult2 = "";
 		result = instance2.getIdCategoria();
 		assertEquals(expResult2, result);
-	}
-
-	@Test
-	public void testGetIdCategoriaVacio() {
-		System.out.println("getIdCategoriaVacio");
-		try {
-			DTCategoria instance = new DTCategoria("", null);
-			String result = instance.getIdCategoria();
-			String expResult2 = "";
-			assertEquals(expResult2, result);
-		} catch (Exception e) {
-			//System.out.println(e.getMessage());
-		}
 	}
 
 	@Test

@@ -119,7 +119,7 @@ public class CtrlUsuariosTest {
         System.out.println("infoCliente");
         ctrlUsuarios.seleccionarCliente("jorge1");
         try {
-            Assert.assertEquals(ctrlUsuarios.infoCliente().toString(), (new DTCliente("jorge1", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10), null)).toString());
+            Assert.assertEquals(ctrlUsuarios.infoCliente().toString(), (new DTCliente("jorge1", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10), new HashSet<>())).toString());
         } catch (Exception ex) {
             Logger.getLogger(CtrlUsuariosTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -209,9 +209,9 @@ public class CtrlUsuariosTest {
         //pruebo caso de proveedor
         ctrlUsuarios.verificarNickname("jorge5");
         ctrlUsuarios.verificarEmail("jorge5@gmail.com");
-        DTUsuario dtUsuario2 = new DTUsuario("jorge5", "N1", "A1", "jorge5@gmail.com", null, new Date(1992, 11, 10));
+        DTUsuario dtUsuario2 = new DTUsuario("jorge5", "N1", "A1", "jorge5@gmail.com", "null", new Date(1992, 11, 10));
         ctrlUsuarios.ingresarDatosUsuario(dtUsuario2, true);
-        ctrlUsuarios.ingresarDatosProveedor(null, null);
+        ctrlUsuarios.ingresarDatosProveedor("null", "null");
         ctrlUsuarios.altaUsuario();
         //testeo a ver si aparecen
         ctrlUsuarios.seleccionarCliente("jorge4");
@@ -223,7 +223,7 @@ public class CtrlUsuariosTest {
         }
         ctrlUsuarios.seleccionarProveedor("jorge5");
         try {
-            Assert.assertEquals(ctrlUsuarios.infoProveedor(), (new DTProveedor("jorge5", "N1", "A1", "jorge5@gmail.com", null, new Date(1992, 11, 10), null, null)));
+            Assert.assertEquals(ctrlUsuarios.infoProveedor(), (new DTProveedor("jorge5", "N1", "A1", "jorge5@gmail.com", "null", new Date(1992, 11, 10), "null", "null")));
         } catch (Exception ex) {
             Logger.getLogger(CtrlUsuariosTest.class.getName()).log(Level.SEVERE, null, ex);
         }

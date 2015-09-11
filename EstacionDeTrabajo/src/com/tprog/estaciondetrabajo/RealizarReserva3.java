@@ -274,7 +274,7 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
             // Verifico las fechas
 			boolean okFechaInicio = fechaValida(diaI, mesI + 1, anioI);
 			boolean okFechaFinal = fechaValida(diaF, mesF + 1, anioF);
-            boolean fechasCoherentes = fechaInicio.before(fechaFinal);
+            boolean fechasCoherentes = !fechaInicio.after(fechaFinal);
 			boolean okFechas = okFechaInicio && okFechaFinal && fechasCoherentes;
 
             // Si todo esta ok

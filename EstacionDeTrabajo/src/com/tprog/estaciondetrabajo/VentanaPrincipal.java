@@ -82,10 +82,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Help4Traveling Administrador");
+        setMaximumSize(new java.awt.Dimension(1024, 768));
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("Venatana Principal"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         setResizable(false);
+
+        desktop.setPreferredSize(new java.awt.Dimension(1024, 768));
         getContentPane().add(desktop, java.awt.BorderLayout.CENTER);
 
         menu.setMaximumSize(new java.awt.Dimension(480, 20));

@@ -3,6 +3,7 @@
  */
 package tprog.estaciondetrabajo.carga;
 
+import java.awt.Image;
 import tprog.logica.clases.Ciudad;
 import tprog.logica.clases.Pais;
 import tprog.logica.dt.DTCliente;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import tprog.logica.dt.DTUsuario;
 
 public class CtrlCarga{
 
@@ -34,39 +37,58 @@ public class CtrlCarga{
         try {
             String directorioImagenes = dir.getCanonicalPath();
             ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+			
             DTCliente dtC = new DTCliente("oWood", "Oliver", "Wood", "quidditch28@gmail.com",
-                    directorioImagenes + "/imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<DTMinReserva>());
-            mu.altaCliente(dtC);
+                    true, new Date(1988, 12 - 1, 28), new HashSet<>());
+			File file = new File(directorioImagenes + "/imagenes/clientes/oWood.jpg");
+			Image imagen = ImageIO.read(file);
+            mu.altaUsuario(dtC, false, imagen);
+			
             dtC = new DTCliente("eWatson", "Emma", "Watson", "e.watson@gmail.com",
-                    directorioImagenes + "/imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<DTMinReserva>());
-            mu.altaCliente(dtC);
+                    true, new Date(1990, 4 - 1, 15), new HashSet<>());
+            file = new File(directorioImagenes + "/imagenes/clientes/eWatson.jpg");
+			imagen = ImageIO.read(file);
+            mu.altaUsuario(dtC, false, imagen);
+			
             dtC = new DTCliente("BruceS", "Bruce", "Sewell", "bruce.sewell@gmail.com",
-                    null, new Date(1978, 12 - 1, 3), new HashSet<DTMinReserva>());
-            mu.altaCliente(dtC);
+                    false, new Date(1978, 12 - 1, 3), new HashSet<>());
+            mu.altaUsuario(dtC, false, null);
+			
             dtC = new DTCliente("JeffW", "Jeff", "Williams", "jeff.williams@gmail.com",
-                    null, new Date(1984, 11 - 1, 27), new HashSet<DTMinReserva>());
-            mu.altaCliente(dtC);
+                    false, new Date(1984, 11 - 1, 27), new HashSet<>());
+            mu.altaUsuario(dtC, false, null);
+			
             //AltaProveedores
             DTProveedor dtP = new DTProveedor("tCook", "Tim", "Cook", "air.f@gmail.com",
-                    directorioImagenes + "/imagenes/proveedores/tCook.jpg",
-                    new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
-            mu.altaProveedor(dtP);
+                    true, new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
+            file = new File(directorioImagenes + "/imagenes/proveedores/tCook.jpg");
+			imagen = ImageIO.read(file);
+            mu.altaUsuario(dtP, true, imagen);
+			
             dtP = new DTProveedor("moody", "Alastor", "Moody", "eu.car@eucar.com",
-                    directorioImagenes + "/imagenes/proveedores/moody.jpg",
-                    new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
-            mu.altaProveedor(dtP);
+                    true, new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
+            file = new File(directorioImagenes + "/imagenes/proveedores/moody.jpg");
+			imagen = ImageIO.read(file);
+            mu.altaUsuario(dtP, true, imagen);
+			
             dtP = new DTProveedor("remus", "Remus", "Lupin", "iberia@gmail.com",
-                    directorioImagenes + "/imagenes/proveedores/remus.jpg",
-                    new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
-            mu.altaProveedor(dtP);
+                    true, new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
+            file = new File(directorioImagenes + "/imagenes/proveedores/remus.jpg");
+			imagen = ImageIO.read(file);
+            mu.altaUsuario(dtP, true, imagen);
+			
             dtP = new DTProveedor("adippet", "Armando", "Dippet", "tam@outlook.com",
-                    directorioImagenes + "/imagenes/proveedores/adippet.jpg",
-                    new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
-            mu.altaProveedor(dtP);
+                    true, new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
+            file = new File(directorioImagenes + "/imagenes/proveedores/adippet.jpg");
+			imagen = ImageIO.read(file);
+            mu.altaUsuario(dtP, true, imagen);
+			
             dtP = new DTProveedor("mHooch", "Madam", "Hooch", "segHogar@gmail.com",
-                    directorioImagenes + "/imagenes/proveedores/mHooch.jpg",
-                    new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
-            mu.altaProveedor(dtP);
+                    true, new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
+            file = new File(directorioImagenes + "/imagenes/proveedores/mHooch.jpg");
+			imagen = ImageIO.read(file);
+            mu.altaUsuario(dtP, true, imagen);
+			
             //Alta Categorias
             ManejadorProductos mp = ManejadorProductos.getInstance();
             mp.altaCategoria("Vuelos", null);

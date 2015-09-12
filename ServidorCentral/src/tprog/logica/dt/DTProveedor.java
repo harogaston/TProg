@@ -13,7 +13,7 @@ public class DTProveedor extends DTUsuario {
 	private final String webEmpresa;
 
 	public DTProveedor(String nickname, String nombre, String apellido, String email,
-			String imagen, Date fechaN, String empresa, String webEmpresa) {
+			boolean imagen, Date fechaN, String empresa, String webEmpresa) {
 		super(nickname, nombre, apellido, email, imagen, fechaN);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
@@ -48,7 +48,7 @@ public class DTProveedor extends DTUsuario {
 				&& this.email.equals(dt.email)
 				&& this.empresa.equals(dt.empresa)
 				&& this.fechaNacimiento.equals(dt.fechaNacimiento)
-				&& this.imagen.equals(dt.imagen)
+				&& (this.imagen == dt.imagen)
 				&& this.nickname.equals(dt.nickname)
 				&& this.nombre.equals(dt.nombre)
 				&& this.webEmpresa.equals(dt.webEmpresa);

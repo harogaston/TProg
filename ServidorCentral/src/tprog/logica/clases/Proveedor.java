@@ -5,15 +5,15 @@
  */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinProveedor;
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTProveedor;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinProveedor;
+import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTProveedor;
 
 public class Proveedor extends Usuario {
 
@@ -24,7 +24,7 @@ public class Proveedor extends Usuario {
 	Map<String, Servicio> servicios;
 
 	public Proveedor(String nick, String nom, String ap, String email,
-			String imagen, Date fecha, String empresa, String webEmpresa) {
+			boolean imagen, Date fecha, String empresa, String webEmpresa) {
 		super(nick, nom, ap, email, imagen, fecha);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
@@ -70,11 +70,11 @@ public class Proveedor extends Usuario {
 	}
 
 	public void addServicio(Servicio s) {
-            servicios.put(s.getIdServicio(), s);
+		servicios.put(s.getIdServicio(), s);
 	}
 
 	public void addPromocion(Promocion p) {
-            promociones.put(p.getIdPromocion(), p);
+		promociones.put(p.getIdPromocion(), p);
 	}
 
 	public void setEmpresa(String empresa) {
@@ -92,11 +92,12 @@ public class Proveedor extends Usuario {
 	public String getWebEmpresa() {
 		return this.webEmpresa;
 	}
-        public Map<String, Servicio> getServicios(){
-                return this.servicios;
-        }
-        
-        public Map<String, Promocion> getPromociones(){
-                return this.promociones;
-        }
+
+	public Map<String, Servicio> getServicios() {
+		return this.servicios;
+	}
+
+	public Map<String, Promocion> getPromociones() {
+		return this.promociones;
+	}
 }

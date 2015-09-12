@@ -13,11 +13,11 @@ public class Usuario {
 	protected String nombre;
 	protected String apellido;
 	protected String email;
-	protected String imagen;
+	protected boolean imagen;
 	protected Date fechaNacimiento;
 
 	public Usuario(String nickname, String nombre, String apellido, String email,
-			String imagen, Date fechaN) {
+			boolean imagen, Date fechaN) {
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -42,7 +42,7 @@ public class Usuario {
 		return email;
 	}
 
-	public String getImagen() {
+	public boolean getImagen() {
 		return imagen;
 	}
 
@@ -66,7 +66,7 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public void setImagen(String imagen) {
+	public void setImagen(boolean imagen) {
 		this.imagen = imagen;
 	}
 

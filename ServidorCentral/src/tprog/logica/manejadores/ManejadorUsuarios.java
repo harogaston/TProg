@@ -5,6 +5,15 @@
  */
 package tprog.logica.manejadores;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import javax.imageio.ImageIO;
 import tprog.logica.clases.Cliente;
 import tprog.logica.clases.Proveedor;
 import tprog.logica.dt.DTCliente;
@@ -13,10 +22,7 @@ import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import tprog.logica.dt.DTUsuario;
 
 public class ManejadorUsuarios {
 
@@ -117,14 +123,26 @@ public class ManejadorUsuarios {
 		return true;
 	}
 
-	public void altaCliente(DTCliente dtC) {
-            Cliente nuevoCliente = new Cliente(dtC);
-            clientes.put(dtC.getNickname(), nuevoCliente);
-	}
-
-	public void altaProveedor(DTProveedor dtP) {
-            Proveedor nuevoProveedor = new Proveedor(dtP);
-            proveedores.put(dtP.getNickname(), nuevoProveedor);
+	public void altaUsuario(DTUsuario dtU, boolean esProveedor, Image imagen) throws IOException {
+		if (dtU.getImagen()) {
+			try {
+				File archivo = new File("resources/images/usuarios/" + dtU.getNickname());
+				BufferedImage buff = (BufferedImage) imagen;
+				ImageIO.write(buff, "jpg", archivo);
+			} catch (IOException ex) {
+				System.err.println(ex.toString());
+				throw new IOException("No se pudo crear la imágen");
+			}
+		}
+		if (esProveedor) {
+			Proveedor nuevoProveedor = new Proveedor((DTProveedor)dtU);
+			proveedores.put(dtU.getNickname(), nuevoProveedor);
+		}
+		else{
+			Cliente nuevoCliente = new Cliente((DTCliente)dtU);
+			clientes.put(dtU.getNickname(), nuevoCliente);
+		}
+		
 	}
 
 	public Cliente getCliente(String nickname) {
@@ -134,12 +152,12 @@ public class ManejadorUsuarios {
 	public Proveedor getProveedor(String nickname) {
 		return proveedores.get(nickname);
 	}
-        
-        public Map<String,Proveedor> getProveedores(){
-                return proveedores;
-        }
-        
-        public Map<String,Cliente> getClientes(){
-                return clientes;
-        }
+
+	public Map<String, Proveedor> getProveedores() {
+		return proveedores;
+	}
+
+	public Map<String, Cliente> getClientes() {
+		return clientes;
+	}
 }

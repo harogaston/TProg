@@ -150,9 +150,9 @@ public class VerInformacionDeCliente extends javax.swing.JInternalFrame {
             try {
                 DTCliente dt = ctrlUsuarios.infoCliente();
                 detalleUsuario.setText(dt.toString());
-                String imagen = dt.getImagen();
-                if (imagen != null) {
-                    File f = new File(imagen);
+                
+                if (dt.getImagen()) {
+                    File f = new File("resources/images/usuarios/" + dt.getNickname());
                     Image img = ImageIO.read(f);
                     Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon imageIcon = new ImageIcon(dimg);

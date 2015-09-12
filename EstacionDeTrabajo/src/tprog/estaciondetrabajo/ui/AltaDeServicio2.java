@@ -147,9 +147,8 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
             try {
                 DTProveedor dt = ctrlUsuarios.infoProveedor();
                 detalleUsuario.setText(dt.toString());
-                String imagen = dt.getImagen();
-                if (imagen != null) {
-                    File f = new File(dt.getImagen());
+                if (dt.getImagen()) {
+                    File f = new File("resources/images/usuarios/" + dt.getNickname());
                     Image img = ImageIO.read(f);
                     Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
                     ImageIcon imageIcon = new ImageIcon(dimg);

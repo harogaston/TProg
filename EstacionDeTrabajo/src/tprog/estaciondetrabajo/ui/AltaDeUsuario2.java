@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -20,11 +22,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import jdk.nashorn.internal.runtime.regexp.joni.EncodingHelper;
 
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
 	private final AltaDeUsuario1 padre;
-	private String ruta;
+	private boolean tieneImagen;
+	private Image imagen;
 	private final ICtrlUsuarios ictrlU;
 
 	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String email, ICtrlUsuarios ictrlU) {
@@ -32,6 +36,8 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		this.nickname = nickname;
 		this.email = email;
 		this.ictrlU = ictrlU;
+		this.tieneImagen = false;
+		this.imagen = null;
 		initComponents();
 		getRootPane().setDefaultButton(buttonConfirmar);
 	}
@@ -50,7 +56,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 			lista.add(i);
 		}
 		Integer[] anios = lista.toArray(new Integer[lista.size()]);
-		return new DefaultComboBoxModel<Integer>(anios);
+		return new DefaultComboBoxModel<>(anios);
 	}
 
 	private boolean fechaValida(int dia, int mes, int anio) {
@@ -262,19 +268,20 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		if (seleccion == JFileChooser.APPROVE_OPTION) {
 			// Para guardar la imagen
 			File file = fc.getSelectedFile();
-			ruta = file.getPath();
 			try {
-				Image img = ImageIO.read(file);
-				Image dimg = img.getScaledInstance(labelImagen.getWidth(), labelImagen.getHeight(), Image.SCALE_SMOOTH);
+				imagen = ImageIO.read(file);
+				Image dimg = imagen.getScaledInstance(labelImagen.getWidth(), labelImagen.getHeight(), Image.SCALE_SMOOTH);
 				ImageIcon imageIcon = new ImageIcon(dimg);
 				labelImagen.setIcon(imageIcon);
 				labelImagen.setHorizontalAlignment(JLabel.CENTER);
 				labelImagen.setVerticalAlignment(JLabel.CENTER);
-				rutaImagen = ruta;
+				tieneImagen = true;
 			} catch (IOException e) {
 				e.getMessage();
-				rutaImagen = null;
 			}
+		}
+		else {
+			tieneImagen = false;
 		}
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
 
@@ -326,7 +333,10 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// Mando los datos al controlador
 		if (okNombre && okApellido && okFecha) {
 			Date fechaNacimiento = new Date(anio, mes, dia);
-			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
+			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, tieneImagen, fechaNacimiento);
+			if (tieneImagen) {
+				ictrlU.seleccionarImagen(imagen);
+			}
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
 			if (proveedor && okNombreEmpresa && okLinkEmpresa) {
 				ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
@@ -339,12 +349,20 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		boolean creado = false;
 		if (proveedor) {
 			if (okProveedor) {
-				ictrlU.altaUsuario();
+				try {
+					ictrlU.altaUsuario();
+				} catch (Exception ex) {
+					Logger.getLogger(AltaDeUsuario2.class.getName()).log(Level.SEVERE, null, ex);
+				}
 				creado = true;
 			}
 		} else {
 			if (okCliente) {
-				ictrlU.altaUsuario();
+				try {
+					ictrlU.altaUsuario();
+				} catch (Exception ex) {
+					Logger.getLogger(AltaDeUsuario2.class.getName()).log(Level.SEVERE, null, ex);
+				}
 				creado = true;
 			}
 		}

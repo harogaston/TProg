@@ -5,6 +5,15 @@
  */
 package tprog.logica.controladores;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
 import tprog.logica.dt.DTMinProveedor;
@@ -17,7 +26,6 @@ import tprog.logica.interfaces.ICtrlUsuarios;
 import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
-import java.util.Set;
 
 public class CtrlUsuarios implements ICtrlUsuarios {
 
@@ -30,8 +38,9 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	private String web;
 	private int idReserva;
 	private String idServicio;
+	private Image imagen;
 
-	public CtrlUsuarios(){
+	public CtrlUsuarios() {
 		this.dtU = null;
 		this.email = null;
 		this.empresa = null;
@@ -41,33 +50,32 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		this.nicknameP = null;
 		this.nicknameU = null;
 		this.web = null;
+		this.imagen = null;
 	}
-	
+
 	@Override
-	public Set<DTMinCliente> listarClientes() throws Exception{
-            try{
-                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-                return mu.listarClientes();
-            } 
-            catch(Exception e){
-                throw e;
-            }
+	public Set<DTMinCliente> listarClientes() throws Exception {
+		try {
+			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+			return mu.listarClientes();
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
 	public void seleccionarCliente(String nickname) {
-            this.nicknameU = nickname;
+		this.nicknameU = nickname;
 	}
 
 	@Override
 	public DTCliente infoCliente() throws Exception {
-            try { 
-                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-                return mu.infoCliente(this.nicknameU);
-            }
-            catch(Exception e){
-                throw e;
-            }
+		try {
+			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+			return mu.infoCliente(this.nicknameU);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
@@ -80,6 +88,7 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		ManejadorReservas mu = ManejadorReservas.getInstance();
 		return mu.infoReserva(this.idReserva);
 	}
+
 	@Override
 	public boolean verificarNickname(String nickname) {
 		this.nicknameU = nickname;
@@ -107,55 +116,60 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 
 	@Override
-	public void altaUsuario() {
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        if (esProveedor) {
-            DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
-            mu.altaProveedor(nuevoDT);
+	public void altaUsuario() throws Exception{
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		DTUsuario nuevoDT;
+		if (esProveedor) {
+			nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
 
-        } else {
-            DTCliente nuevoDT = new DTCliente(dtU);
-            mu.altaCliente(nuevoDT);
-        }
-    }
+		} else {
+			nuevoDT = new DTCliente(dtU);
+		}
+		mu.altaUsuario(nuevoDT, esProveedor, imagen);
+	}
 
-    @Override
-    public Set<DTMinProveedor> listarProveedores() {
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        return mu.listarProveedores();
-    }
+	@Override
+	public Set<DTMinProveedor> listarProveedores() {
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarProveedores();
+	}
 
-    @Override
-    public void seleccionarProveedor(String nickname) {
-        this.nicknameP = nickname;
-    }
+	@Override
+	public void seleccionarProveedor(String nickname) {
+		this.nicknameP = nickname;
+	}
 
-    @Override
-    public DTProveedor infoProveedor() throws Exception {
-        try {
-            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-            return mu.infoProveedor(this.nicknameP);
-        } catch (Exception e) {
-            throw e;
-        }
-    }
+	@Override
+	public DTProveedor infoProveedor() throws Exception {
+		try {
+			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+			return mu.infoProveedor(this.nicknameP);
+		} catch (Exception e) {
+			throw e;
+		}
+	}
 
-    @Override
-    public Set<DTMinServicio> listarServiciosProveedor() {
-        ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        return mu.listarServiciosProveedor(this.nicknameP);
-    }
+	@Override
+	public Set<DTMinServicio> listarServiciosProveedor() {
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarServiciosProveedor(this.nicknameP);
+	}
 
-    @Override
-    public void seleccionarServicio(String idServicio) {
-        this.idServicio = idServicio;
-    }
+	@Override
+	public void seleccionarServicio(String idServicio) {
+		this.idServicio = idServicio;
+	}
 
-    @Override
-    public DTServicio infoServicio() {
-        ManejadorProductos mp = ManejadorProductos.getInstance();
-        DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
-        return mp.infoServicio(nuevoDT);
-    }
+	@Override
+	public DTServicio infoServicio() {
+		ManejadorProductos mp = ManejadorProductos.getInstance();
+		DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
+		return mp.infoServicio(nuevoDT);
+	}
+
+	@Override
+	public void seleccionarImagen(Image imagen) {
+		this.imagen = imagen;
+	}
 
 }

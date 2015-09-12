@@ -109,7 +109,11 @@ public class CtrlReservas implements ICtrlReservas {
 
     @Override
     public DTReserva mostrarReservaTemporal() {
-        Date fecha = new Date();
+        Date fechaTemp = new Date();
+		int anio = fechaTemp.getYear() + 1900;
+		int mes = fechaTemp.getMonth();
+		int dia = fechaTemp.getDate();
+		Date fecha = new Date(anio, mes ,dia);
         EstadoReserva estado = EstadoReserva.Registrada;
         DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
         return dtR;

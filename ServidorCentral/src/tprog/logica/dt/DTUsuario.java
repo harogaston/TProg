@@ -12,6 +12,7 @@ public class DTUsuario {
     protected String nickname;
     protected String nombre;
     protected String apellido;
+    protected String password;
     protected String email;
     protected String imagen;
     protected Date fechaNacimiento;
@@ -36,6 +37,14 @@ public class DTUsuario {
 
     public String getNickname() {
         return nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

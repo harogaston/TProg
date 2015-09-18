@@ -31,7 +31,7 @@ public class Cliente extends Usuario {
 	public DTCliente crearDT() {
 		Set<DTMinReserva> nuevoSetReservas = new HashSet<>();
 		for (Reserva r : reservas.values()) {
-			nuevoSetReservas.add(r.crearDTMinReserva());
+			nuevoSetReservas.add(r.crearDTMin());
 		}
 		DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
 				this.imagen, this.fechaNacimiento, nuevoSetReservas);

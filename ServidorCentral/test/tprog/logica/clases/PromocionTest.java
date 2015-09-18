@@ -5,7 +5,7 @@ package tprog.logica.clases;
 
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTMiniItem;
+import tprog.logica.dt.DTItemPromocion;
 import tprog.logica.dt.DTPromocion;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ public class PromocionTest {
 
 	Promocion instance;
 	Map<String, ItemPromocion> servicios;
-	Set<DTMiniItem> set;
+	Set<DTItemPromocion> set;
 	Proveedor proveedor;
 	Date fecha;
 	float total;
@@ -52,8 +52,8 @@ public class PromocionTest {
             Servicio servicio2 = new Servicio("ser2", "malo", 400, null, null, null, proveedor);
             
             set = new HashSet();
-            DTMiniItem ser1 = new DTMiniItem(new DTMinServicio("pepito", "ser1"), 1);
-            DTMiniItem ser2 = new DTMiniItem(new DTMinServicio("pepito", "ser2"), 1);
+            DTItemPromocion ser1 = new DTItemPromocion(new DTMinServicio("pepito", "ser1"), 1);
+            DTItemPromocion ser2 = new DTItemPromocion(new DTMinServicio("pepito", "ser2"), 1);
             set.add(ser1);
             set.add(ser2);
             

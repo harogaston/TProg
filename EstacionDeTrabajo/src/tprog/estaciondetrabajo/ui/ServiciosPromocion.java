@@ -5,7 +5,7 @@
  */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTMiniItem;
+import tprog.logica.dt.DTItemPromocion;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.ICtrlProductos;
 import java.awt.Image;
@@ -25,13 +25,13 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
      * @param ctrlProductos
      * @param padre
      */
-    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTMiniItem> servicios, ICtrlProductos ctrlProductos) {
+    public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTItemPromocion> servicios, ICtrlProductos ctrlProductos) {
         this.padre = padre;
         this.servicios = servicios;
         this.ctrlProductos = ctrlProductos;
         initComponents();
         //construyo lista para la interfaz usando el set
-        for (DTMiniItem dt : servicios) {
+        for (DTItemPromocion dt : servicios) {
             listaServicios.add(dt.getDTMinServicio().getIdServicio());
         }
         comboboxImagenes.setEnabled(false);
@@ -119,11 +119,11 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
         String servicio = (String) listaServiciosInterfaz.getSelectedItem();
         if (servicio != null) {
             //buscar servicio
-            DTMiniItem dt = null;
+            DTItemPromocion dt = null;
             Iterator it = servicios.iterator();
             boolean found = false;
             while (it.hasNext() && !found) {
-                DTMiniItem tmp = (DTMiniItem) it.next();
+                DTItemPromocion tmp = (DTItemPromocion) it.next();
                 if (tmp.getDTMinServicio().getIdServicio().equals(servicio)) {
                     dt = tmp; //es imposible que dt sea null al final del loop
                     found = true;
@@ -173,7 +173,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
     Vector<ImageIcon> modelComboBox = new Vector<>();
     ICtrlProductos ctrlProductos;
-    Set<DTMiniItem> servicios;
+    Set<DTItemPromocion> servicios;
     VerInformacionDePromocion padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

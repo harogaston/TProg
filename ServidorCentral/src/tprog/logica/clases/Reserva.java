@@ -115,13 +115,13 @@ public class Reserva {
         this.precioTotal = p;
     }
 
-    public DTReserva crearDTReserva() {
+    public DTReserva crearDT() {
         Set<DTLineaReserva> dtsLR = new HashSet();
 
         Iterator<LineaReserva> it = lineasReserva.iterator();
         while (it.hasNext()) {
             LineaReserva l = it.next();
-            DTLineaReserva temp = l.crearDTLineaReserva();
+            DTLineaReserva temp = l.crearDT();
             dtsLR.add(temp);
             System.out.println("Linea de reserva");
         }
@@ -130,7 +130,7 @@ public class Reserva {
         return dt;
     }
 
-    public DTMinReserva crearDTMinReserva() {
+    public DTMinReserva crearDTMin() {
         DTMinReserva dt = new DTMinReserva(this.idReserva, this.fCreacion);
         return dt;
     }

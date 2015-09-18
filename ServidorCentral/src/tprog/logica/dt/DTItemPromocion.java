@@ -7,12 +7,12 @@ package tprog.logica.dt;
  *
  * @author sofia
  */
-public class DTMiniItem {
+public class DTItemPromocion {
 
     private DTMinServicio servicio;
     private int cantidad;
 
-    public DTMiniItem(DTMinServicio servicio, int cantidad) {
+    public DTItemPromocion(DTMinServicio servicio, int cantidad) {
         this.servicio = servicio;
         this.cantidad = cantidad;
     }

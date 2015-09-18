@@ -13,9 +13,9 @@ public class DTPromocion {
 	private String idPromocion;
 	private float descuento;
 	private float total;
-	private Set<DTMiniItem> servicios;
+	private Set<DTItemPromocion> servicios;
 
-	public DTPromocion(String idPromocion, float descuento, float total, Set<DTMiniItem> servicios) {
+	public DTPromocion(String idPromocion, float descuento, float total, Set<DTItemPromocion> servicios) {
 		this.idPromocion = idPromocion;
 		this.descuento = descuento;
 		this.total = total;
@@ -34,7 +34,7 @@ public class DTPromocion {
             return this.total;
 	}
 
-	public Set<DTMiniItem> getServicios() {
+	public Set<DTItemPromocion> getServicios() {
 		return this.servicios;
 	}
 
@@ -45,7 +45,7 @@ public class DTPromocion {
 				+ "\n" + "Total: " + Float.toString(this.total)
 				+ "\n" + "Servicios: " + "\n";
 		int i = 1;
-		for (DTMiniItem dt : servicios) {
+		for (DTItemPromocion dt : servicios) {
 			output = output.concat("Servicio" + Integer.toString(i) + ": ");
 			output = output.concat(dt.getDTMinServicio().getIdServicio()) + " cantidad: " +
                                 Integer.toString(dt.getCantidad()) + "\n";

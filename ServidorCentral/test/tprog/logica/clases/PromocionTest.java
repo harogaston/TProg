@@ -43,7 +43,7 @@ public class PromocionTest {
 	@Before
 	public void setUp() {
             fecha = new Date();
-            proveedor = new Proveedor("pepito", "pedro", "elescamoso", "lalala@fing.edu.uy",
+            proveedor = new Proveedor("pepito", "pass", "pedro", "elescamoso", "lalala@fing.edu.uy",
                     "/image.gg", fecha, "montecudine", "www.montecudine.com");
             Promocion prooo;
 
@@ -142,7 +142,7 @@ public class PromocionTest {
 	@Test
 	public void testSetProveedor() {
 		System.out.println("setProveedor");
-		Proveedor prov = new Proveedor("ElNuevo", "nuevo", "elescamoso", "lalala@fing.edu.uy",
+		Proveedor prov = new Proveedor("ElNuevo", "pass", "nuevo", "elescamoso", "lalala@fing.edu.uy",
 			"/image.gg", fecha, "montecudine", "www.montecudine.com");;
 
 		instance.setProveedor(prov);

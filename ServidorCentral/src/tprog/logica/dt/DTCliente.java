@@ -13,14 +13,14 @@ public class DTCliente extends DTUsuario {
 
     private Set<DTMinReserva> reservas;
 
-    public DTCliente(String nickname, String nombre, String apellido, String email,
+    public DTCliente(String nickname, String password, String nombre, String apellido, String email,
             String imagen, Date fechaN, Set<DTMinReserva> reservas) {
-        super(nickname, nombre, apellido, email, imagen, fechaN);
+        super(nickname, password, nombre, apellido, email, imagen, fechaN);
         this.reservas = reservas;
     }
 
     public DTCliente(DTUsuario dtU) {
-        super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
+        super(dtU.nickname, dtU.password, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
         this.reservas = new HashSet<>();
     }
 

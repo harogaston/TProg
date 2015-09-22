@@ -67,7 +67,7 @@ public class ManejadorReservasTest {
         // DTReserva dtr2 = new DTReserva(r2.getIdReserva(),fecha,EstadoReserva.Registrada,300,set);
         //  Reserva r3 = new Reserva(fecha,EstadoReserva.Registrada,100,set,"gg");
         //DTReserva dtr3 = new DTReserva(r3.getIdReserva(),fecha,EstadoReserva.Registrada,100,set);
-        jorge = new Cliente("alguien", "alg", "apellido", "email", "imagen", fecha);
+        jorge = new Cliente("alguien", "pass", "alg", "apellido", "email", "imagen", fecha);
 
         instance.agregarReserva(jorge, dtr1, "jorge");
         Set<DTMinReserva> lista = instance.listarReservas();

@@ -26,10 +26,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private final AltaDeUsuario1 padre;
 	private String ruta;
 	private final ICtrlUsuarios ictrlU;
+    private final String password;
 
-	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String email, ICtrlUsuarios ictrlU) {
+	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String password, String email, ICtrlUsuarios ictrlU) {
 		this.padre = anterior;
 		this.nickname = nickname;
+        this.password = password;
 		this.email = email;
 		this.ictrlU = ictrlU;
 		initComponents();
@@ -326,7 +328,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// Mando los datos al controlador
 		if (okNombre && okApellido && okFecha) {
 			Date fechaNacimiento = new Date(anio, mes, dia);
-			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, rutaImagen, fechaNacimiento);
+			DTUsuario dtU = new DTUsuario(nickname, password, nombre, apellido, email, rutaImagen, fechaNacimiento);
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
 			if (proveedor && okNombreEmpresa && okLinkEmpresa) {
 				ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);

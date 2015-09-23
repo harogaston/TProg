@@ -29,7 +29,7 @@ public class ProveedorTest {
 	@Before
 	public void setUp() {
 		fechaN = new Date();
-		instance = new Proveedor("nick", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
+		instance = new Proveedor("nick", "pass", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class ProveedorTest {
 	@Test
 	public void testCrearDT() {
 		System.out.println("crearDT");
-		DTProveedor expResult = new DTProveedor("nick", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
+		DTProveedor expResult = new DTProveedor("nick", "pass", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
                 instance = new Proveedor(expResult);
 		DTProveedor result = instance.crearDT();
 		assertEquals(expResult, result);

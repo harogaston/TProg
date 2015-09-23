@@ -54,11 +54,11 @@ public class ManejadorUsuariosTest {
     public void setUp() {
         instance = ManejadorUsuarios.getInstance();
         Date fecha = new Date();
-        proveedor = new Proveedor("nick", "nom", "ap", "email", "imagen", fecha,"empresa", "webEmpresa");
-        dtP = new DTProveedor("nick", "nom", "ap", "email", "imagen", fecha,"empresa", "webEmpresa");
+        proveedor = new Proveedor("nick", "pass", "nom", "ap", "email", "imagen", fecha,"empresa", "webEmpresa");
+        dtP = new DTProveedor("nick", "pass", "nom", "ap", "email", "imagen", fecha,"empresa", "webEmpresa");
         instance.altaProveedor(dtP);
-        cliente = new Cliente("nickname","nombre", "apellido","email2","imagen",  fecha);
-        dtC = new DTCliente("nickname","nombre", "apellido","email2","imagen",  fecha, new HashSet());
+        cliente = new Cliente("nickname","pass", "nombre", "apellido","email2","imagen",  fecha);
+        dtC = new DTCliente("nickname","pass", "nombre", "apellido","email2","imagen",  fecha, new HashSet());
         instance.altaCliente(dtC);
         dtmin = new DTMinCliente("nickname","email2");
         /*Ciudad origen = new Ciudad("Montevideo");

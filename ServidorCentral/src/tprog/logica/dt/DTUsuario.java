@@ -17,9 +17,10 @@ public class DTUsuario {
     protected String imagen;
     protected Date fechaNacimiento;
 
-    public DTUsuario(String nickname, String nombre, String apellido, String email,
+    public DTUsuario(String nickname, String password, String nombre, String apellido, String email,
             String imagen, Date fechaNacimiento) {
         this.nickname = nickname;
+        this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;

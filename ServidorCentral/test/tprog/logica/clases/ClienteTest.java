@@ -26,13 +26,13 @@ public class ClienteTest {
 	@Before
 	public void setUp() {
 		fecha = new Date();
-		instance = new Cliente("nick", "nombre", "ap", "email", "imagen", fecha);
+		instance = new Cliente("nick", "pass", "nombre", "ap", "email", "imagen", fecha);
 	}
 
 	@Test
 	public void testCrearDT() {
 		System.out.println("crearDT");
-		DTCliente expResult = new DTCliente("nick", "nombre", "ap", "email", "imagen", fecha, new HashSet<>());
+		DTCliente expResult = new DTCliente("nick", "pass", "nombre", "ap", "email", "imagen", fecha, new HashSet<>());
                 instance = new Cliente(expResult);
 		DTCliente result = instance.crearDT();
 		assertEquals(expResult, result);

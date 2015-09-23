@@ -19,7 +19,7 @@ public class UsuarioTest {
 	@Before
 	public void setUp() {
 		fechaN = new Date(1987, 7, 23);
-		instance = new Usuario("harogaston", "Gastón", "Haro", "harogason@gmail.com", "perico", fechaN);
+		instance = new Usuario("harogaston", "pass", "Gastón", "Haro", "harogason@gmail.com", "perico", fechaN);
 	}
 
 	@Test
@@ -87,7 +87,15 @@ public class UsuarioTest {
 		String result = instance.getApellido();
 		assertEquals(apellido, result);
 	}
-
+    
+    @Test
+    public void testGetPassword() {
+        System.out.println("getPassword");
+        String expResult = "password";
+        String result = instance.getPassword();
+        assertEquals(expResult, result);
+    }
+    
 	@Test
 	public void testSetNickname() {
 		System.out.println("setNickname");

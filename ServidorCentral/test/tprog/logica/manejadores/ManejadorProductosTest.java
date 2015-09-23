@@ -50,7 +50,7 @@ public class ManejadorProductosTest{
         DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
 			new HashSet(), new DTUbicacion("Chicago", "USA"), null);
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
+        DTProveedor dtP = new DTProveedor("Harry Dresden", "pass", "Harry", "Dresden", "noUsoEmail@protonmail.com",
 			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
         mu.altaProveedor(dtP);
         Set<String> listaCategorias = new HashSet();

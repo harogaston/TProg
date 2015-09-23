@@ -86,8 +86,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         buttonAtras = new javax.swing.JButton();
         checkBoxCiudadDestino = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        textPaneDescripcion = new javax.swing.JTextPane();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textPanePrecio = new javax.swing.JTextPane();
@@ -98,19 +96,18 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
         labelImagen1 = new javax.swing.JLabel();
         labelImagen2 = new javax.swing.JLabel();
         labelImagen3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textAreaDescripcion = new javax.swing.JTextArea();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Alta de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Ingrese los datos del servicio y haga click en \"Confirmar\".");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 11, 480, -1));
 
         jLabel2.setText("Ciudad de Origen");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 147, -1));
 
         listaCiudadesOrigenInterfaz.setModel(new javax.swing.DefaultComboBoxModel(listaCiudades));
         listaCiudadesOrigenInterfaz.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +115,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 listaCiudadesOrigenInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaCiudadesOrigenInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 166, -1));
 
         listaCiudadesDestinoInterfaz.setVisible(false);
         listaCiudadesDestinoInterfaz.setModel(new javax.swing.DefaultComboBoxModel(listaCiudades));
@@ -128,7 +124,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 listaCiudadesDestinoInterfazActionPerformed(evt);
             }
         });
-        getContentPane().add(listaCiudadesDestinoInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 168, -1));
 
         buttonConfirmar.setText("Confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -136,7 +131,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonConfirmarActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
 
         buttonAtras.setText("< Atras");
         buttonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +138,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonAtrasActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 400, -1, -1));
 
         checkBoxCiudadDestino.setSelected(false);
         checkBoxCiudadDestino.setText("Ciudad de Destino");
@@ -153,24 +146,14 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 checkBoxCiudadDestinoActionPerformed(evt);
             }
         });
-        getContentPane().add(checkBoxCiudadDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         jLabel3.setText("Descripción");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 43, -1, -1));
-
-        jScrollPane1.setViewportView(textPaneDescripcion);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(72, 75, 169, -1));
 
         jLabel4.setText("Precio");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
         jScrollPane2.setViewportView(textPanePrecio);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 168, -1));
-
         jLabel5.setText("Imágenes");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(305, 43, -1, -1));
 
         jButton1.setText("Imágen 1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -178,7 +161,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, -1, -1));
 
         buttonImagen2.setText("Imágen 2");
         buttonImagen2.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +168,6 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonImagen2ActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 180, -1, -1));
 
         buttonImagen3.setText("Imágen 3");
         buttonImagen3.addActionListener(new java.awt.event.ActionListener() {
@@ -194,23 +175,123 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
                 buttonImagen3ActionPerformed(evt);
             }
         });
-        getContentPane().add(buttonImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, -1, -1));
 
         labelImagen1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 90, 90));
 
         labelImagen2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 180, 90, 90));
 
         labelImagen3.setAutoscrolls(true);
         labelImagen3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(labelImagen3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 90, 90));
+
+        textAreaDescripcion.setColumns(20);
+        textAreaDescripcion.setRows(5);
+        jScrollPane3.setViewportView(textAreaDescripcion);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel3)
+                .addGap(214, 214, 214)
+                .addComponent(jLabel5))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
+                .addComponent(jButton1)
+                .addGap(73, 73, 73)
+                .addComponent(labelImagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(163, 163, 163)
+                .addComponent(buttonImagen2)
+                .addGap(73, 73, 73)
+                .addComponent(labelImagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkBoxCiudadDestino)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(listaCiudadesOrigenInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(listaCiudadesDestinoInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addGap(112, 112, 112)
+                .addComponent(buttonImagen3)
+                .addGap(73, 73, 73)
+                .addComponent(labelImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(380, 380, 380)
+                .addComponent(buttonAtras)
+                .addGap(41, 41, 41)
+                .addComponent(buttonConfirmar))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(labelImagen1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonImagen2)
+                            .addComponent(labelImagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(listaCiudadesOrigenInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(checkBoxCiudadDestino)
+                        .addGap(7, 7, 7)
+                        .addComponent(listaCiudadesDestinoInterfaz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonImagen3)
+                            .addComponent(labelImagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonAtras)
+                    .addComponent(buttonConfirmar)))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-        String descripcion = textPaneDescripcion.getText();
+        String descripcion = textAreaDescripcion.getText();
         String precioString = textPanePrecio.getText();
 
         // Verifico precio
@@ -420,15 +501,15 @@ public class AltaDeServicio5 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel labelImagen1;
     private javax.swing.JLabel labelImagen2;
     private javax.swing.JLabel labelImagen3;
     private javax.swing.JComboBox listaCiudadesDestinoInterfaz;
     private Vector<String> listaCiudades = new Vector<>();
     private javax.swing.JComboBox listaCiudadesOrigenInterfaz;
-    private javax.swing.JTextPane textPaneDescripcion;
+    private javax.swing.JTextArea textAreaDescripcion;
     private javax.swing.JTextPane textPanePrecio;
     // End of variables declaration//GEN-END:variables
 }

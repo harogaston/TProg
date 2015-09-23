@@ -125,7 +125,7 @@ public class SimpleTest {
     public void testListarServicios() {
         System.out.println("listarServicios");
         Date fecha = new Date();
-        Proveedor prov = new Proveedor("nick","nom","ap","email",
+        Proveedor prov = new Proveedor("nick", "pass", "nom","ap","email",
 			"imagen", fecha, "empresa", "webEmpresa");
         Servicio ser = new Servicio("idServicio", "descripcion", 50,null,null,null,prov);
         instance.agregarServicio(ser);

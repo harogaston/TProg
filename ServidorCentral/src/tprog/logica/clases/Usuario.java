@@ -17,9 +17,10 @@ public class Usuario {
     protected String imagen;
     protected Date fechaNacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, String email,
+    public Usuario(String nickname, String password, String nombre, String apellido, String email,
             String imagen, Date fechaN) {
         this.nickname = nickname;
+        this.password = password;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;

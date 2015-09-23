@@ -47,7 +47,7 @@ public class CtrlUsuariosTest {
         ctrlUsuarios = new CtrlUsuarios();
         ctrlUsuarios.verificarNickname("jorge1");
         ctrlUsuarios.verificarEmail("jorge1@gmail.com");
-        ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge1", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10)), false);
+        ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge1", "pass", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10)), false);
         ctrlUsuarios.altaUsuario();
         ctrlUsuarios.seleccionarCliente("jorge1");
         try {
@@ -57,12 +57,12 @@ public class CtrlUsuariosTest {
         }
         ctrlUsuarios.verificarNickname("jorge2");
         ctrlUsuarios.verificarEmail("jorge2@gmail.com");
-        ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge2", "N1", "A1", "jorge2@gmail.com", null, new Date(1992, 11, 10)), true);
+        ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge2", "pass", "N1", "A1", "jorge2@gmail.com", null, new Date(1992, 11, 10)), true);
         ctrlUsuarios.ingresarDatosProveedor(null, null);
         ctrlUsuarios.altaUsuario();
         ctrlUsuarios.verificarNickname("jorge3");
         ctrlUsuarios.verificarEmail("jorge3@gmail.com");
-        ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge3", "N1", "A1", "jorge3@gmail.com", null, new Date(1992, 11, 10)), false);
+        ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge3", "pass", "N1", "A1", "jorge3@gmail.com", null, new Date(1992, 11, 10)), false);
         ctrlUsuarios.altaUsuario();
     }
 
@@ -118,7 +118,7 @@ public class CtrlUsuariosTest {
         System.out.println("infoCliente");
         ctrlUsuarios.seleccionarCliente("jorge1");
         try {
-            Assert.assertEquals(ctrlUsuarios.infoCliente().toString(), (new DTCliente("jorge1", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10), new HashSet<>())).toString());
+            Assert.assertEquals(ctrlUsuarios.infoCliente().toString(), (new DTCliente("jorge1", "pass", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10), new HashSet<>())).toString());
         } catch (Exception ex) {
             Logger.getLogger(CtrlUsuariosTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -196,7 +196,7 @@ public class CtrlUsuariosTest {
         //pruebo caso de cliente
         ctrlUsuarios.verificarNickname("jorge4");
         ctrlUsuarios.verificarEmail("jorge4@gmail.com");
-        DTUsuario dtusuario1 = new DTUsuario("jorge4", "N1", "A1", "jorge4@gmail.com", null, new Date(1992, 11, 10));
+        DTUsuario dtusuario1 = new DTUsuario("jorge4", "pass", "N1", "A1", "jorge4@gmail.com", null, new Date(1992, 11, 10));
         ctrlUsuarios.ingresarDatosUsuario(dtusuario1, false);
         ctrlUsuarios.altaUsuario();
         ctrlUsuarios.seleccionarCliente("jorge1");
@@ -208,21 +208,21 @@ public class CtrlUsuariosTest {
         //pruebo caso de proveedor
         ctrlUsuarios.verificarNickname("jorge5");
         ctrlUsuarios.verificarEmail("jorge5@gmail.com");
-        DTUsuario dtUsuario2 = new DTUsuario("jorge5", "N1", "A1", "jorge5@gmail.com", "null", new Date(1992, 11, 10));
+        DTUsuario dtUsuario2 = new DTUsuario("jorge5", "pass", "N1", "A1", "jorge5@gmail.com", "null", new Date(1992, 11, 10));
         ctrlUsuarios.ingresarDatosUsuario(dtUsuario2, true);
         ctrlUsuarios.ingresarDatosProveedor("null", "null");
         ctrlUsuarios.altaUsuario();
         //testeo a ver si aparecen
         ctrlUsuarios.seleccionarCliente("jorge4");
         try {
-            Assert.assertEquals(ctrlUsuarios.infoCliente(), (new DTCliente("jorge4", "N1", "N2", "jorge4@gmail.com",
+            Assert.assertEquals(ctrlUsuarios.infoCliente(), (new DTCliente("jorge4", "pass", "N1", "N2", "jorge4@gmail.com",
                     null, new Date(1992, 11, 10), new HashSet<>())));
         } catch (Exception ex) {
             Logger.getLogger(CtrlUsuariosTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         ctrlUsuarios.seleccionarProveedor("jorge5");
         try {
-            Assert.assertEquals(ctrlUsuarios.infoProveedor(), (new DTProveedor("jorge5", "N1", "A1", "jorge5@gmail.com", "null", new Date(1992, 11, 10), "null", "null")));
+            Assert.assertEquals(ctrlUsuarios.infoProveedor(), (new DTProveedor("jorge5", "pass", "N1", "A1", "jorge5@gmail.com", "null", new Date(1992, 11, 10), "null", "null")));
         } catch (Exception ex) {
             Logger.getLogger(CtrlUsuariosTest.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -271,7 +271,7 @@ public class CtrlUsuariosTest {
 //DTUsuario("jorge2", "N1", "A1", "jorge2@gmail.com", null, new Date(1992, 11, 10))
         ctrlUsuarios.seleccionarProveedor("jorge2");
         DTProveedor result = ctrlUsuarios.infoProveedor();
-        assertEquals((new DTProveedor("jorge2", "N1", "A1", "jorge2@gmail.com", null, new Date(1992, 11, 10), null, null)).toString(), result.toString());
+        assertEquals((new DTProveedor("jorge2", "pass", "N1", "A1", "jorge2@gmail.com", null, new Date(1992, 11, 10), null, null)).toString(), result.toString());
     }
 
     /**

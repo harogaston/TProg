@@ -22,7 +22,7 @@ public class DTClienteTest {
         Set<DTMinReserva> set = new HashSet();
         set.add(r1);
         set.add(r2);
-        DTCliente instance = new DTCliente("juanpe", "Juan", "Pérez", "juanpe@gmail.com", null, null, set);
+        DTCliente instance = new DTCliente("juanpe", "pass", "Juan", "Pérez", "juanpe@gmail.com", null, null, set);
         Set<DTMinReserva> expResult = set;
         Set<DTMinReserva> result = instance.getReservas();
         assertEquals(expResult, result);
@@ -35,7 +35,7 @@ public class DTClienteTest {
         Set<DTMinReserva> set = new HashSet();
         set.add(r1);
         Date fechaN = new Date(1992, 1, 8);
-        DTCliente instance = new DTCliente("juanpe", "Juan", "Pérez", "juanpe@gmail.com", "imagen", fechaN, set);
+        DTCliente instance = new DTCliente("juanpe", "pass",  "Juan", "Pérez", "juanpe@gmail.com", "imagen", fechaN, set);
         String expResult = "Nickname: " + "juanpe"
                 + "\n" + "Nombre: " + "Juan"
                 + "\n" + "Apellido: " + "Pérez"

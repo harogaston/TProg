@@ -1,44 +1,44 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTMinReserva;
-import tprog.logica.dt.EstadoReserva;
-import tprog.logica.interfaces.ICtrlReservas;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import tprog.logica.dt.DTMinReserva;
+import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.ICtrlReservas;
 
 public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 
-	/**
-	 * Creates new form ReservasCliente
-	 */
 	public ActualizarEstadoReserva(ICtrlReservas ctrlReservas) {
 		this.ctrlReservas = ctrlReservas;
 		initComponents();
+		cargarDatos();
 		getRootPane().setDefaultButton(botonCambiarEstado);
 	}
 
-	@SuppressWarnings("unchecked")
-	private void cargarDatos() {
-		Set<DTMinReserva> setReservas = ctrlReservas.listarReservas();
-		listaReservas.clear();
-		listaReservasInterfaz.setSelectedItem(null);
-        //construyo un vector con la informacion a mostrar, porque
-		//el comboBox solo funciona con Vector o List
-		if (!setReservas.isEmpty()) {
-			for (DTMinReserva dt : setReservas) {
-				listaReservas.add(Integer.toString(dt.getIdReserva()));
-			}
-			listaReservas.sort(null);
-			listaReservasInterfaz.setSelectedItem(null);
-		} else {
-			JOptionPane.showMessageDialog(this, "No existen reservas en el sistema", "Información", JOptionPane.INFORMATION_MESSAGE);
+	public void initCheck() {
+		try {
+			ctrlReservas.listarReservas();
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
+		}
+	}
+
+	private void cargarDatos() {
+		Set<DTMinReserva> setReservas;
+		listaReservas.clear();
+
+		try {
+			setReservas = ctrlReservas.listarReservas();
+			if (!setReservas.isEmpty()) {
+				for (DTMinReserva dt : setReservas) {
+					listaReservas.add(Integer.toString(dt.getIdReserva()));
+				}
+				listaReservas.sort(null);
+			}
+		} catch (Exception ex) {
+			System.out.println("No hay reservas que mostrar.");
 		}
 	}
 
@@ -65,14 +65,6 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         setTitle("Actualizar Estado de Reserva");
         setPreferredSize(new java.awt.Dimension(640, 480));
         setVisible(true);
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                formComponentShown(evt);
-            }
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                formComponentHidden(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         listaReservasInterfaz.addActionListener(new java.awt.event.ActionListener() {
@@ -85,15 +77,16 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
         jLabel1.setText("<html>Seleccione alguna reserva del sistema para cambiar su estado</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, -1, -1));
 
-        botonCambiarEstado.setText("Cambiar estado");
+        botonCambiarEstado.setText("Cambiar");
+        botonCambiarEstado.setEnabled(false);
         botonCambiarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCambiarEstadoActionPerformed(evt);
             }
         });
-        getContentPane().add(botonCambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
+        getContentPane().add(botonCambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 400, -1, -1));
 
-        listaEstados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cancelada", "Facturada", "Pagada", "Registrada" }));
+        listaEstados.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Cancelada", "Facturada", "Pagada"}));
         listaEstados.setSelectedItem(null);
         listaEstados.setEnabled(false);
         getContentPane().add(listaEstados, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 190, -1));
@@ -126,12 +119,14 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 			switch (estadoReservaSeleccionada) {
 				case Registrada:
 				case Pagada:
+					botonCambiarEstado.setEnabled(true);
 					jLabel2.setEnabled(true);
 					listaEstados.setEnabled(true);
 					jLabelMensajeNoModificarEstado.setVisible(false);
 					break;
 				case Cancelada:
 				case Facturada:
+					botonCambiarEstado.setEnabled(false);
 					jLabel2.setEnabled(false);
 					listaEstados.setEnabled(false);
 					jLabelMensajeNoModificarEstado.setVisible(true);
@@ -141,18 +136,6 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 			}
 		}
     }//GEN-LAST:event_listaReservasInterfazInterfazActionPerformed
-
-    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-		cargarDatos();
-    }//GEN-LAST:event_formComponentShown
-
-    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
-		listaReservas.clear();
-		reservas = null;
-		listaReservasInterfaz.setSelectedItem(null);
-		jLabelEstadoReservaSeleccionada.setVisible(false);
-		jLabelMensajeNoModificarEstado.setVisible(false);
-    }//GEN-LAST:event_formComponentHidden
 
     private void botonCambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCambiarEstadoActionPerformed
 		// Leo la reserva y el estado seleccionados
@@ -190,6 +173,9 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 					if (estadoNuevo == EstadoReserva.Cancelada || estadoNuevo == EstadoReserva.Pagada) {
 						ctrlReservas.cambiarEstadoReserva(estadoNuevo);
 						JOptionPane.showMessageDialog(this, "Estado cambiado con éxito", "Operación realizada", JOptionPane.INFORMATION_MESSAGE);
+						listaReservasInterfaz.setSelectedItem(null);
+						listaEstados.setSelectedItem(null);
+						cargarDatos();
 					} else {
 						JOptionPane.showMessageDialog(this, "La reserva esta " + estadoReservaSeleccionada.toString().toLowerCase() + ", su estado solo puede cambiarse a Cancelada o Pagada", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
 					}
@@ -198,6 +184,9 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 					if (estadoNuevo == EstadoReserva.Facturada) {
 						ctrlReservas.cambiarEstadoReserva(estadoNuevo);
 						JOptionPane.showMessageDialog(this, "Estado cambiado con éxito", "Operación realizada", JOptionPane.INFORMATION_MESSAGE);
+						listaReservasInterfaz.setSelectedItem(null);
+						listaEstados.setSelectedItem(null);
+						cargarDatos();
 					} else {
 						JOptionPane.showMessageDialog(this, "La reserva esta " + estadoReservaSeleccionada.toString().toLowerCase() + ", su estado solo puede cambiarse a Facturada", "Estado no cambiado", JOptionPane.INFORMATION_MESSAGE);
 					}
@@ -212,8 +201,6 @@ public class ActualizarEstadoReserva extends javax.swing.JInternalFrame {
 		} else {
 			JOptionPane.showMessageDialog(this, "Escoja una reserva y un estado nuevo", "Estado y reserva no seleccionados", JOptionPane.INFORMATION_MESSAGE);
 		}
-		listaReservasInterfaz.setSelectedItem(null);
-		listaEstados.setSelectedItem(null);
     }//GEN-LAST:event_botonCambiarEstadoActionPerformed
 
 	ICtrlReservas ctrlReservas;

@@ -23,9 +23,9 @@ public class Proveedor extends Usuario {
 	Map<String, Promocion> promociones;
 	Map<String, Servicio> servicios;
 
-	public Proveedor(String nick, String nom, String ap, String email,
+	public Proveedor(String nick, String password, String nom, String ap, String email,
 			boolean imagen, Date fecha, String empresa, String webEmpresa) {
-		super(nick, nom, ap, email, imagen, fecha);
+		super(nick, password, nom, ap, email, imagen, fecha);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
 		this.promociones = new HashMap();
@@ -33,7 +33,7 @@ public class Proveedor extends Usuario {
 	}
 
 	public Proveedor(DTProveedor dtP) {
-		super(dtP.getNickname(), dtP.getNombre(), dtP.getApellido(), dtP.getEmail(), dtP.getImagen(), dtP.getFechaNacimiento());
+		super(dtP.getNickname(), dtP.getPassword(), dtP.getNombre(), dtP.getApellido(), dtP.getEmail(), dtP.getImagen(), dtP.getFechaNacimiento());
 		this.empresa = dtP.getEmpresa();
 		this.webEmpresa = dtP.getWebEmpresa();
 		this.promociones = new HashMap();
@@ -46,7 +46,7 @@ public class Proveedor extends Usuario {
 	}
 
 	public DTProveedor crearDT() {
-		DTProveedor nuevoDT = new DTProveedor(this.nickname, this.nombre, this.apellido,
+		DTProveedor nuevoDT = new DTProveedor(this.nickname, this.password, this.nombre, this.apellido,
 				this.email, this.imagen, this.fechaNacimiento, this.empresa, this.webEmpresa);
 		return nuevoDT;
 	}

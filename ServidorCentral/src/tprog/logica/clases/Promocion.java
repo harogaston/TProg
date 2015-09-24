@@ -7,7 +7,7 @@ package tprog.logica.clases;
 
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTMiniItem;
+import tprog.logica.dt.DTItemPromocion;
 import tprog.logica.dt.DTPromocion;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,11 +38,11 @@ public class Promocion {
 	}
 
 	public DTPromocion crearDT() {
-            Set<DTMiniItem> nuevoSet = new HashSet();
+            Set<DTItemPromocion> nuevoSet = new HashSet();
             if (servicios != null) {
                 for (ItemPromocion it : servicios.values()) {
                     DTMinServicio dtS = new DTMinServicio(this.getNicknameProveedor(),it.getServicio().getIdServicio());
-                    nuevoSet.add(new DTMiniItem(dtS, it.getCantidad()));
+                    nuevoSet.add(new DTItemPromocion(dtS, it.getCantidad()));
                 }
             }
             DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);

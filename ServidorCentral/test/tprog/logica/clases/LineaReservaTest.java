@@ -198,21 +198,21 @@ public class LineaReservaTest {
     }
 
     /**
-     * Test of crearDTLineaReserva method, of class LineaReserva.
+     * Test of crearDT method, of class LineaReserva.
      */
     @Test
     public void testCrearDTLineaReserva() {
         System.out.println("crearDTLineaReserva");
         
         DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser",null,50);
-        DTLineaReserva result = instance.crearDTLineaReserva();
+        DTLineaReserva result = instance.crearDT();
         assertEquals(expResult.toString(),result.toString());
         instance.setServicio(null);
         Promocion promo = new Promocion("promo",50,null);
         instance.setPromocion(promo);
         instance.setServicio(null);
         DTLineaReserva exp = new DTLineaReserva(2,fecha,fecha,null,"promo",50);
-        DTLineaReserva res = instance.crearDTLineaReserva();
+        DTLineaReserva res = instance.crearDT();
         assertEquals(exp.toString(),res.toString());
         
         // TODO review the generated test code and remove the default call to fail.

@@ -450,7 +450,7 @@ public class CtrlProductosTest {
     public void testListarServiciosProveedor() {
         System.out.println("listarServiciosProveedor");
         Set<DTMinServicio> expResult = new HashSet();
-        DTProveedor dtP = new DTProveedor("remus", "Remus", "Lupin", "iberia@gmail.com",
+        DTProveedor dtP = new DTProveedor("remus", "pass", "Remus", "Lupin", "iberia@gmail.com",
                      "/imagenes/proveedores/remus.jpg",
                     new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();

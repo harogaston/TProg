@@ -11,7 +11,7 @@ import tprog.logica.clases.Servicio;
 import tprog.logica.clases.Simple;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTMiniItem;
+import tprog.logica.dt.DTItemPromocion;
 import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTServicio;
@@ -50,7 +50,7 @@ public class ManejadorProductosTest{
         DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
 			new HashSet(), new DTUbicacion("Chicago", "USA"), null);
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-        DTProveedor dtP = new DTProveedor("Harry Dresden", "Harry", "Dresden", "noUsoEmail@protonmail.com",
+        DTProveedor dtP = new DTProveedor("Harry Dresden", "pass", "Harry", "Dresden", "noUsoEmail@protonmail.com",
 			"Wizard", new Date(1984, 07, 16), "Charmed", "NotHaveWeb.com");
         mu.altaProveedor(dtP);
         Set<String> listaCategorias = new HashSet();
@@ -659,8 +659,8 @@ public class ManejadorProductosTest{
         instance.altaPromocion(idPromocion, descuento, nicknameProv, servicios);
         DTMinPromocion dtP = new DTMinPromocion(nicknameProv, idPromocion);
         DTMinServicio dtS = new DTMinServicio(nicknameProv, "Blue Beatle");
-        Set<DTMiniItem> serv = new HashSet();
-        serv.add(new DTMiniItem(dtS, 1));
+        Set<DTItemPromocion> serv = new HashSet();
+        serv.add(new DTItemPromocion(dtS, 1));
         DTPromocion expResult = new DTPromocion(idPromocion, 20, 40, serv);
         DTPromocion result = instance.infoPromocion(dtP);
         assertEquals(expResult.toString(), result.toString());

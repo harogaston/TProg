@@ -19,7 +19,7 @@ public class DTUsuarioTest {
     @Before
     public void setUp() {
         fecha = new Date();
-        instance = new DTUsuario("nick", "nombre", "apellido", "nombre.apellido@email.com", "imagen", fecha);
+        instance = new DTUsuario("nick", "pass", "nombre", "apellido", "nombre.apellido@email.com", "imagen", fecha);
     }
 
     @Test
@@ -43,6 +43,17 @@ public class DTUsuarioTest {
         System.out.println("getNickname");
         String expResult = "nick";
         String result = instance.getNickname();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     *
+     */
+    @Test
+    public void testGetPassword() {
+        System.out.println("getPassword");
+        String expResult = "password";
+        String result = instance.getPassword();
         assertEquals(expResult, result);
     }
 

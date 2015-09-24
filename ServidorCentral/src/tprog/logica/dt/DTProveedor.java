@@ -12,15 +12,15 @@ public class DTProveedor extends DTUsuario {
 	private final String empresa;
 	private final String webEmpresa;
 
-	public DTProveedor(String nickname, String nombre, String apellido, String email,
+	public DTProveedor(String nickname, String password, String nombre, String apellido, String email,
 			boolean imagen, Date fechaN, String empresa, String webEmpresa) {
-		super(nickname, nombre, apellido, email, imagen, fechaN);
+		super(nickname, password, nombre, apellido, email, imagen, fechaN);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
 	}
 
 	public DTProveedor(DTUsuario dtU, String empresa, String webEmpresa) {
-		super(dtU.nickname, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
+		super(dtU.nickname, dtU.password, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
 		this.empresa = empresa;
 		this.webEmpresa = webEmpresa;
 	}
@@ -50,6 +50,7 @@ public class DTProveedor extends DTUsuario {
 				&& this.fechaNacimiento.equals(dt.fechaNacimiento)
 				&& (this.imagen == dt.imagen)
 				&& this.nickname.equals(dt.nickname)
+                && this.password.equals(dt.password)
 				&& this.nombre.equals(dt.nombre)
 				&& this.webEmpresa.equals(dt.webEmpresa);
 	}

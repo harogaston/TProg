@@ -183,7 +183,7 @@ public class ReservaTest {
     }
 
     /**
-     * Test of crearDTReserva method, of class Reserva.
+     * Test of crearDT method, of class Reserva.
      */
     @Test
     public void testCrearDTReserva() throws Exception {
@@ -193,7 +193,7 @@ public class ReservaTest {
         DTReserva esperado = new DTReserva(instance.getIdReserva(),fecha,instance.getEstado(), instance.getPrecioTotal(), new HashSet());
         
                 
-        DTReserva result = instance.crearDTReserva();        
+        DTReserva result = instance.crearDT();        
         assertEquals(esperado.getEstadoReserva(), result.getEstadoReserva());
         assertEquals(esperado.getPrecioTotal(), result.getPrecioTotal(), 0);
         assertTrue(esperado.getFCreacion().equals(result.getFCreacion()));
@@ -201,7 +201,7 @@ public class ReservaTest {
     }
 
     /**
-     * Test of crearDTMinReserva method, of class Reserva.
+     * Test of crearDTMin method, of class Reserva.
      */
     @Test
     public void testCrearDTMinReserva() {
@@ -209,7 +209,7 @@ public class ReservaTest {
         
         DTMinReserva expected = new DTMinReserva(instance.getIdReserva(),this.fecha);
         
-        DTMinReserva result = instance.crearDTMinReserva();
+        DTMinReserva result = instance.crearDTMin();
         
         assertEquals(expected.toString(),result.toString());
         // TODO review the generated test code and remove the default call to fail.

@@ -6,14 +6,7 @@
 package tprog.logica.controladores;
 
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
 import tprog.logica.dt.DTMinProveedor;
@@ -55,12 +48,14 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public Set<DTMinCliente> listarClientes() throws Exception {
-		try {
-			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-			return mu.listarClientes();
-		} catch (Exception e) {
-			throw e;
-		}
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarClientes();
+	}
+
+	@Override
+	public Set<DTMinProveedor> listarProveedores() throws Exception {
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.listarProveedores();
 	}
 
 	@Override
@@ -70,12 +65,8 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public DTCliente infoCliente() throws Exception {
-		try {
-			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-			return mu.infoCliente(this.nicknameU);
-		} catch (Exception e) {
-			throw e;
-		}
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.infoCliente(this.nicknameU);
 	}
 
 	@Override
@@ -116,7 +107,7 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 
 	@Override
-	public void altaUsuario() throws Exception{
+	public void altaUsuario() throws Exception {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		DTUsuario nuevoDT;
 		if (esProveedor) {
@@ -126,12 +117,6 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 			nuevoDT = new DTCliente(dtU);
 		}
 		mu.altaUsuario(nuevoDT, esProveedor, imagen);
-	}
-
-	@Override
-	public Set<DTMinProveedor> listarProveedores() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarProveedores();
 	}
 
 	@Override
@@ -171,5 +156,4 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	public void seleccionarImagen(Image imagen) {
 		this.imagen = imagen;
 	}
-
 }

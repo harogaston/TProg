@@ -58,14 +58,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         };
         menu = new javax.swing.JMenuBar();
-        menuRegistros = new javax.swing.JMenu();
+        menuAltas = new javax.swing.JMenu();
         menuItemAltaUsuario = new javax.swing.JMenuItem();
         menuItemAltaCategoria = new javax.swing.JMenuItem();
         menuItemAltaServicio = new javax.swing.JMenuItem();
         menuItemAltaPromocion = new javax.swing.JMenuItem();
-        menuItemActualizarServicio = new javax.swing.JMenuItem();
         menuItemRealizarReserva = new javax.swing.JMenuItem();
-        menuItemActualizarEstadoReserva = new javax.swing.JMenuItem();
         cargarDatos = new javax.swing.JMenuItem();
         menuConsultas = new javax.swing.JMenu();
         menuItemVerInfoCliente = new javax.swing.JMenuItem();
@@ -73,7 +71,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemVerInfoServicio = new javax.swing.JMenuItem();
         menuItemVerInfoPromocion = new javax.swing.JMenuItem();
         menuItemVerInfoReserva = new javax.swing.JMenuItem();
-        menuBorrados = new javax.swing.JMenu();
+        menuModificaciones = new javax.swing.JMenu();
+        menuItemActualizarEstadoReserva = new javax.swing.JMenuItem();
+        menuItemActualizarServicio = new javax.swing.JMenuItem();
         menuItemCancelarReserva = new javax.swing.JMenuItem();
 
         jMenuItem6.setText("jMenuItem6");
@@ -93,7 +93,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menu.setMinimumSize(new java.awt.Dimension(240, 20));
         menu.setPreferredSize(new java.awt.Dimension(240, 20));
 
-        menuRegistros.setText("Registros");
+        menuAltas.setText("Altas");
 
         menuItemAltaUsuario.setText("Alta de Usuario");
         menuItemAltaUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +101,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuItemAltaUsuarioActionPerformed(evt);
             }
         });
-        menuRegistros.add(menuItemAltaUsuario);
+        menuAltas.add(menuItemAltaUsuario);
 
         menuItemAltaCategoria.setText("Alta de Categoría");
         menuItemAltaCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -109,7 +109,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuItemAltaCategoriaActionPerformed(evt);
             }
         });
-        menuRegistros.add(menuItemAltaCategoria);
+        menuAltas.add(menuItemAltaCategoria);
 
         menuItemAltaServicio.setText("Alta de Servicio");
         menuItemAltaServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuItemAltaServicioActionPerformed(evt);
             }
         });
-        menuRegistros.add(menuItemAltaServicio);
+        menuAltas.add(menuItemAltaServicio);
 
         menuItemAltaPromocion.setText("Alta de Promoción");
         menuItemAltaPromocion.addActionListener(new java.awt.event.ActionListener() {
@@ -125,31 +125,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuItemAltaPromocionActionPerformed(evt);
             }
         });
-        menuRegistros.add(menuItemAltaPromocion);
-
-        menuItemActualizarServicio.setText("Actualizar Servicio");
-        menuItemActualizarServicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemActualizarServicioActionPerformed(evt);
-            }
-        });
-        menuRegistros.add(menuItemActualizarServicio);
+        menuAltas.add(menuItemAltaPromocion);
 
         menuItemRealizarReserva.setText("Realizar Reserva");
+        menuItemRealizarReserva.setEnabled(false);
         menuItemRealizarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemRealizarReservaActionPerformed(evt);
             }
         });
-        menuRegistros.add(menuItemRealizarReserva);
-
-        menuItemActualizarEstadoReserva.setText("Actualizar Estado Reserva");
-        menuItemActualizarEstadoReserva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemActualizarEstadoReservaActionPerformed(evt);
-            }
-        });
-        menuRegistros.add(menuItemActualizarEstadoReserva);
+        menuAltas.add(menuItemRealizarReserva);
 
         cargarDatos.setText("Cargar datos");
         cargarDatos.addActionListener(new java.awt.event.ActionListener() {
@@ -157,9 +142,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 cargarDatosActionPerformed(evt);
             }
         });
-        menuRegistros.add(cargarDatos);
+        menuAltas.add(cargarDatos);
 
-        menu.add(menuRegistros);
+        menu.add(menuAltas);
 
         menuConsultas.setText("Consultas");
 
@@ -205,7 +190,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menu.add(menuConsultas);
 
-        menuBorrados.setText("Borrados");
+        menuModificaciones.setText("Modificaciones");
+
+        menuItemActualizarEstadoReserva.setText("Actualizar Estado Reserva");
+        menuItemActualizarEstadoReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemActualizarEstadoReservaActionPerformed(evt);
+            }
+        });
+        menuModificaciones.add(menuItemActualizarEstadoReserva);
+
+        menuItemActualizarServicio.setText("Actualizar Servicio");
+        menuItemActualizarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemActualizarServicioActionPerformed(evt);
+            }
+        });
+        menuModificaciones.add(menuItemActualizarServicio);
 
         menuItemCancelarReserva.setText("Cancelar Reserva");
         menuItemCancelarReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -213,9 +214,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 menuItemCancelarReservaActionPerformed(evt);
             }
         });
-        menuBorrados.add(menuItemCancelarReserva);
+        menuModificaciones.add(menuItemCancelarReserva);
 
-        menu.add(menuBorrados);
+        menu.add(menuModificaciones);
 
         setJMenuBar(menu);
 
@@ -255,11 +256,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemVerInfoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoClienteActionPerformed
 		VerInformacionDeCliente verInfoCliente = new VerInformacionDeCliente(fabrica.getICtrlUsuarios());
 		center(verInfoCliente);
+		verInfoCliente.initCheck();
     }//GEN-LAST:event_menuItemVerInfoClienteActionPerformed
 
     private void menuItemVerInfoProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoProveedorActionPerformed
 		VerInformacionDeProveedor verInfoProveedor = new VerInformacionDeProveedor(fabrica.getICtrlUsuarios());
 		center(verInfoProveedor);
+		verInfoProveedor.initCheck();
     }//GEN-LAST:event_menuItemVerInfoProveedorActionPerformed
 
     private void menuItemVerInfoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoServicioActionPerformed
@@ -270,16 +273,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemVerInfoPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoPromocionActionPerformed
 		VerInformacionDePromocion verInfoPromocion = new VerInformacionDePromocion(fabrica.getICtrlProductos());
 		center(verInfoPromocion);
+		verInfoPromocion.initCheck();
     }//GEN-LAST:event_menuItemVerInfoPromocionActionPerformed
 
     private void menuItemVerInfoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemVerInfoReservaActionPerformed
 		VerInformacionDeReserva verInfoReserva = new VerInformacionDeReserva(fabrica.getICtrlReservas());
 		center(verInfoReserva);
+		verInfoReserva.initCheck();
     }//GEN-LAST:event_menuItemVerInfoReservaActionPerformed
 
     private void menuItemCancelarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCancelarReservaActionPerformed
 		CancelarReserva cancelarReserva = new CancelarReserva(fabrica.getICtrlReservas());
 		center(cancelarReserva);
+		cancelarReserva.initCheck();
     }//GEN-LAST:event_menuItemCancelarReservaActionPerformed
 
     private void menuItemAltaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaCategoriaActionPerformed
@@ -295,41 +301,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemActualizarEstadoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoReservaActionPerformed
 		ActualizarEstadoReserva actualizarEstadoReserva = new ActualizarEstadoReserva(fabrica.getICtrlReservas());
 		center(actualizarEstadoReserva);
+		actualizarEstadoReserva.initCheck();
     }//GEN-LAST:event_menuItemActualizarEstadoReservaActionPerformed
 
     private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
 		ActualizarServicio actualizarServicio = new ActualizarServicio(fabrica.getICtrlProductos());
 		center(actualizarServicio);
+		actualizarServicio.initCheck();
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
         CtrlCarga ctrl = new CtrlCarga();
         ctrl.cargarDatos();
-        JOptionPane.showMessageDialog(desktop, "Datos cargados en el sistema", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(desktop, "Datos cargados con exito.", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
         cargarDatos.setEnabled(false);
     }//GEN-LAST:event_cargarDatosActionPerformed
 
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
-		AltaDeServicio2 altaDeServicio = new AltaDeServicio2(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+		AltaDeServicio1 altaDeServicio = new AltaDeServicio1(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
 		center(altaDeServicio);
+		altaDeServicio.initCheck();
 	}
 
     private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
         AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
         center(altaDePromocion);
+		altaDePromocion.initCheck();
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
-	/**
-	 * @param args the command line arguments
-	 */
 	public static void main(String args[]) {
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				new VentanaPrincipal().setVisible(true);
-			}
-		});
+		VentanaPrincipal v = new VentanaPrincipal();
+		v.setVisible(true);
 	}
 
 	Fabrica fabrica = Fabrica.getInstance();
@@ -339,7 +341,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menu;
-    private javax.swing.JMenu menuBorrados;
+    private javax.swing.JMenu menuAltas;
     private javax.swing.JMenu menuConsultas;
     private javax.swing.JMenuItem menuItemActualizarEstadoReserva;
     private javax.swing.JMenuItem menuItemActualizarServicio;
@@ -354,6 +356,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemVerInfoProveedor;
     private javax.swing.JMenuItem menuItemVerInfoReserva;
     private javax.swing.JMenuItem menuItemVerInfoServicio;
-    private javax.swing.JMenu menuRegistros;
+    private javax.swing.JMenu menuModificaciones;
     // End of variables declaration//GEN-END:variables
 }

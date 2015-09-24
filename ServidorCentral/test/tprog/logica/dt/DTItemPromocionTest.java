@@ -14,9 +14,9 @@ import static org.junit.Assert.*;
  *
  * @author sofia
  */
-public class DTMiniItemTest {
+public class DTItemPromocionTest {
     
-    public DTMiniItemTest() {
+    public DTItemPromocionTest() {
     }
     
     @Before
@@ -28,23 +28,23 @@ public class DTMiniItemTest {
     }
 
     /**
-     * Test of getIdServicio method, of class DTMiniItem.
+     * Test of getIdServicio method, of class DTItemPromocion.
      */
     @Test
     public void testGetIdServicio() {
         System.out.println("getIdServicio");
-        DTMiniItem dtMin = new DTMiniItem(new DTMinServicio("Fulano", "Ser"), 15);
+        DTItemPromocion dtMin = new DTItemPromocion(new DTMinServicio("Fulano", "Ser"), 15);
         assertEquals("Ser", dtMin.getDTMinServicio().getIdServicio());
         assertEquals("Fulano", dtMin.getDTMinServicio().getNicknameP());
     }
 
     /**
-     * Test of getCantidad method, of class DTMiniItem.
+     * Test of getCantidad method, of class DTItemPromocion.
      */
     @Test
     public void testGetCantidad() {
         System.out.println("getCantidad");
-        DTMiniItem dtMin = new DTMiniItem(new DTMinServicio("Fulano", "Ser"), 15);
+        DTItemPromocion dtMin = new DTItemPromocion(new DTMinServicio("Fulano", "Ser"), 15);
         assertEquals(15, dtMin.getCantidad());
     }
     

@@ -71,7 +71,7 @@ public class LineaReserva {
 		this.promocion = p;
 	}
 
-	public DTLineaReserva crearDTLineaReserva() {
+	public DTLineaReserva crearDT() {
 		DTLineaReserva dt = null;
 		if ((this.servicio == null) && (this.promocion != null)) {
 			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.Precio);

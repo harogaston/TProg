@@ -46,8 +46,6 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="listaClientesInterfazInterfazComponentAdded"/>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="listaClientesInterfazItemStateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listaClientesInterfazInterfazActionPerformed"/>
       </Events>
       <AuxValues>
@@ -87,7 +85,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="290" y="180" width="230" height="190"/>
+          <AbsoluteConstraints x="290" y="180" width="260" height="230"/>
         </Constraint>
       </Constraints>
 

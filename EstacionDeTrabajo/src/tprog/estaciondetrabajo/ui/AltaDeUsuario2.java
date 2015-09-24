@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTUsuario;
-import tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +15,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import jdk.nashorn.internal.runtime.regexp.joni.EncodingHelper;
+import tprog.logica.dt.DTUsuario;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
@@ -30,10 +24,12 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 	private boolean tieneImagen;
 	private Image imagen;
 	private final ICtrlUsuarios ictrlU;
+	private final String password;
 
-	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String email, ICtrlUsuarios ictrlU) {
+	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String password, String email, ICtrlUsuarios ictrlU) {
 		this.padre = anterior;
 		this.nickname = nickname;
+		this.password = password;
 		this.email = email;
 		this.ictrlU = ictrlU;
 		this.tieneImagen = false;
@@ -279,8 +275,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 			} catch (IOException e) {
 				e.getMessage();
 			}
-		}
-		else {
+		} else {
 			tieneImagen = false;
 		}
     }//GEN-LAST:event_buttonSeleccionarActionPerformed
@@ -310,14 +305,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		int mes = jComboBoxMeses.getSelectedIndex();
 		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
-		
+
 		// Verificación de nombre y apellido
 		boolean okNombre = !isWhiteSpace(nombre);
 		boolean okApellido = !isWhiteSpace(apellido);
 
 		// Verificación de la fecha de nacimiento
 		boolean okFecha = fechaValida(dia, mes + 1, anio);
-		
+
 		// Verificacion de empresa y webEmpresa
 		String nombreEmpresa = "Empresa por defecto";
 		String linkEmpresa = "empresa.com";
@@ -333,10 +328,11 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		// Mando los datos al controlador
 		if (okNombre && okApellido && okFecha) {
 			Date fechaNacimiento = new Date(anio, mes, dia);
-			DTUsuario dtU = new DTUsuario(nickname, nombre, apellido, email, tieneImagen, fechaNacimiento);
+			DTUsuario dtU = new DTUsuario(nickname, password, nombre, apellido, email, tieneImagen, fechaNacimiento);
 			if (tieneImagen) {
 				ictrlU.seleccionarImagen(imagen);
 			}
+
 			ictrlU.ingresarDatosUsuario(dtU, proveedor);
 			if (proveedor && okNombreEmpresa && okLinkEmpresa) {
 				ictrlU.ingresarDatosProveedor(nombreEmpresa, linkEmpresa);
@@ -379,7 +375,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 				error = "El apellido ingresado no es correcto.";
 			} else if (!okFecha) {
 				error = "La fecha ingresada no es correcta.";
-			}else if (!okNombreEmpresa) {
+			} else if (!okNombreEmpresa) {
 				error = "El nombre de empresa ingresado no es correcto.";
 			} else if (!okLinkEmpresa) {
 				error = "El link de empresa ingresado no es correcto.";
@@ -389,7 +385,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
 	private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {
-		this.setVisible(false);
+		super.dispose();
 		padre.setVisible(true);
 	}
 

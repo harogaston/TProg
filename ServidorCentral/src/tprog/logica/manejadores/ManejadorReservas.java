@@ -5,15 +5,15 @@
  */
 package tprog.logica.manejadores;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import tprog.logica.clases.Cliente;
 import tprog.logica.clases.Reserva;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class ManejadorReservas {
 
@@ -31,21 +31,24 @@ public class ManejadorReservas {
         reservas = new HashMap();
     }
 
-    public Set<DTMinReserva> listarReservas() {
+    public Set<DTMinReserva> listarReservas() throws Exception{
         Set<DTMinReserva> set = new HashSet();
         if (!reservas.isEmpty()) {
             for (Reserva r : reservas.values()) {
-                DTMinReserva dtMin = r.crearDTMinReserva();
+                DTMinReserva dtMin = r.crearDTMin();
                 set.add(dtMin);
             }
-        }
-        return set;
+			return set;
+        } else {
+			throw new Exception("No hay Reservas en el Sistema.");
+		}
+        
     }
 
     public DTReserva infoReserva(int idReserva) {
         Reserva r = reservas.get(idReserva);
         if (r != null) {
-            return r.crearDTReserva();
+            return r.crearDT();
         } else {
             return null;
         }

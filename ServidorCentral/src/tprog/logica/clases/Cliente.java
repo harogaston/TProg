@@ -18,22 +18,22 @@ public class Cliente extends Usuario {
 
 	Map<Integer, Reserva> reservas;
 
-	public Cliente(String nickname, String nombre, String apellido, String email, boolean imagen, Date fechaN) {
-		super(nickname, nombre, apellido, email, imagen, fechaN);
+	public Cliente(String nickname, String password, String nombre, String apellido, String email, boolean imagen, Date fechaN) {
+		super(nickname, password, nombre, apellido, email, imagen, fechaN);
 		this.reservas = new HashMap();
 	}
 
 	public Cliente(DTCliente dtC) {
-		super(dtC.getNickname(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
+		super(dtC.getNickname(), dtC.getPassword(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
 		this.reservas = new HashMap();
 	}
 
 	public DTCliente crearDT() {
 		Set<DTMinReserva> nuevoSetReservas = new HashSet<>();
 		for (Reserva r : reservas.values()) {
-			nuevoSetReservas.add(r.crearDTMinReserva());
+			nuevoSetReservas.add(r.crearDTMin());
 		}
-		DTCliente dt = new DTCliente(this.nickname, this.nombre, this.apellido, this.email,
+		DTCliente dt = new DTCliente(this.nickname, this.password, this.nombre, this.apellido, this.email,
 				this.imagen, this.fechaNacimiento, nuevoSetReservas);
 		return dt;
 	}

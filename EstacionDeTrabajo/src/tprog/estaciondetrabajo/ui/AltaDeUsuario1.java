@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
 import tprog.logica.interfaces.ICtrlUsuarios;
@@ -31,7 +26,12 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         buttonSiguiente = new javax.swing.JButton();
         jTextFieldNickname = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
@@ -43,11 +43,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         jLabel1.setText("Ingrese los datos del nuevo Usuario y haga click en \"Siguiente\" para continuar");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 560, -1));
 
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("nickname");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
 
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("email");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, -1, -1));
 
         buttonSiguiente.setText("Siguiente >");
         buttonSiguiente.addActionListener(new java.awt.event.ActionListener() {
@@ -56,8 +58,26 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(buttonSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 400, 120, -1));
-        getContentPane().add(jTextFieldNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 110, 440, -1));
-        getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(122, 170, 440, -1));
+        getContentPane().add(jTextFieldNickname, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 110, 360, -1));
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("contraseña");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 240, 180, -1));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("confirme su contraseña");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 290, 180, -1));
+        getContentPane().add(jTextFieldEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 170, 360, -1));
+
+        jPasswordField1.setColumns(20);
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 180, -1));
+
+        jPasswordField2.setColumns(20);
+        getContentPane().add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 180, -1));
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel6.setText("Debe contener entre 4 y 20 carácteres.");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 330, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -65,7 +85,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 	private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {
 		String nickname = jTextFieldNickname.getText();
 		String email = jTextFieldEmail.getText();
-
+        char[] password1 = jPasswordField1.getPassword();
+        char[] password2 = jPasswordField2.getPassword();
+        String pass1 = new String(password1);
+        String pass2 = new String(password2);
+        System.out.println(pass1);
+        System.out.println(pass2);
+		
 		//Verificacion de email
 		EmailValidator emailValidator = EmailValidator.getInstance(true);
 		boolean okEmail = emailValidator.isValid(email);
@@ -74,7 +100,12 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		boolean okEnblanco = !nickname.matches("^\\s*$");
 		boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
 		boolean okNickname = okEnblanco && okSinEspacios;
-
+        
+        //Verificacion de contraseña
+        boolean okPassword1 = pass1.length() >= 4 && pass1.length() <= 20;
+        boolean okPassword2 = pass2.length() >= 4 && pass2.length() <= 20;
+        boolean okPassword = (okPassword1 && okPassword2 && pass1.equals(pass2));
+        
 		boolean nicknameUnico = false;
 		if (okNickname) {
 			nicknameUnico = ctrlUsuarios.verificarNickname(nickname);
@@ -84,8 +115,8 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			emailUnico = ctrlUsuarios.verificarEmail(email);
 		}
 
-		if (okNickname && okEmail && emailUnico && nicknameUnico) {
-			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, email, ctrlUsuarios);
+		if (okNickname && okEmail && emailUnico && nicknameUnico && okPassword) {
+			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, pass1, email, ctrlUsuarios);
 			this.setVisible(false);
 			getParent().add(au2);
 			au2.setLocation(this.getLocation());
@@ -100,8 +131,9 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 				error = "Ya existe un usuario con el mismo nickname.";
 			} else if (!emailUnico) {
 				error = "Ya existe un usuario con el mismo email.";
-			}
-			JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+			} else if (!okPassword) {
+				error = "Por favor verifique su contraseña.";
+            }JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
@@ -112,6 +144,11 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextFieldEmail;
     private javax.swing.JTextField jTextFieldNickname;
     // End of variables declaration//GEN-END:variables

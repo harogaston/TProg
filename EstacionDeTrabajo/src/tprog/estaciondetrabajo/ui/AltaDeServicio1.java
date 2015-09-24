@@ -15,9 +15,9 @@ import tprog.logica.dt.DTProveedor;
 import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlUsuarios;
 
-public class AltaDePromocion extends javax.swing.JInternalFrame {
+public class AltaDeServicio1 extends javax.swing.JInternalFrame {
 
-	public AltaDePromocion(ICtrlUsuarios ctrlUsuarios, ICtrlProductos ctrlProductos) {
+	public AltaDeServicio1(ICtrlUsuarios ctrlUsuarios, ICtrlProductos ctrlProductos) {
 		this.ctrlProductos = ctrlProductos;
 		this.ctrlUsuarios = ctrlUsuarios;
 		initComponents();
@@ -70,7 +70,7 @@ public class AltaDePromocion extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
-        setTitle("Alta de Promoción");
+        setTitle("Alta de Servicio");
         setPreferredSize(new java.awt.Dimension(640, 480));
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -90,7 +90,7 @@ public class AltaDePromocion extends javax.swing.JInternalFrame {
         getContentPane().add(listaProveedoresInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 290, -1));
 
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setText("Seleccione el proveedor que va a dar de alta la Promoción.");
+        label.setText("Seleccione el proveedor que va a dar de alta el Servicio.");
         getContentPane().add(label, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, -1, -1));
         label.getAccessibleContext().setAccessibleDescription("");
 
@@ -128,51 +128,44 @@ public class AltaDePromocion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formComponentHidden
 
     private void listaProveedoresInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaProveedoresInterfazInterfazActionPerformed
-        //seleccionarProveedor
-        String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
-        if (proveedor != null) {
-            ctrlUsuarios.seleccionarProveedor(proveedor);
-            //muestro Text Area para la información del proveedor
-            detalleUsuario.setVisible(true);
-            try {
-                DTProveedor dt = ctrlUsuarios.infoProveedor();
-                detalleUsuario.setText(dt.toString());
-                if (dt.getImagen()) {
-                    File f = new File("resources/images/usuarios/" + dt.getNickname());
-                    Image img = ImageIO.read(f);
-                    Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
-                    ImageIcon imageIcon = new ImageIcon(dimg);
-                    imagenUsuarioHolder.setIcon(imageIcon);
-                } else {
-                    imagenUsuarioHolder.setIcon(null);
-                }
-                servicios = ctrlUsuarios.listarServiciosProveedor();
-            } catch (Exception ex) {
-                Logger.getLogger(AltaDePromocion.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("La imagen no pudo ser cargada");
-                imagenUsuarioHolder.setIcon(null);
-            }
-        }
+		//seleccionarProveedor
+		String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
+		if (proveedor != null) {
+			ctrlUsuarios.seleccionarProveedor(proveedor);
+			//muestro Text Area para la información del proveedor
+			detalleUsuario.setVisible(true);
+			try {
+				DTProveedor dt = ctrlUsuarios.infoProveedor();
+				detalleUsuario.setText(dt.toString());
+				if (dt.getImagen()) {
+					File f = new File("resources/images/usuarios/" + dt.getNickname());
+					Image img = ImageIO.read(f);
+					Image dimg = img.getScaledInstance(imagenUsuarioHolder.getWidth(), imagenUsuarioHolder.getHeight(), Image.SCALE_SMOOTH);
+					ImageIcon imageIcon = new ImageIcon(dimg);
+					imagenUsuarioHolder.setIcon(imageIcon);
+				} else {
+					imagenUsuarioHolder.setIcon(null);
+				}
+			} catch (Exception ex) {
+				Logger.getLogger(AltaDeServicio1.class.getName()).log(Level.SEVERE, null, ex);
+				System.out.println("La imagen no pudo ser cargada");
+				imagenUsuarioHolder.setIcon(null);
+			}
+		}
     }//GEN-LAST:event_listaProveedoresInterfazInterfazActionPerformed
 
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
+
 		String proveedor = (String) listaProveedoresInterfaz.getSelectedItem();
-		String error = "";
-		if (proveedor != null && !servicios.isEmpty()) {
-			ctrlUsuarios.seleccionarProveedor(proveedor);
+		if (proveedor != null) {
 			ctrlProductos.seleccionarProveedor(proveedor);
-			AltaDePromocion2 ap2 = new AltaDePromocion2(this, servicios, ctrlUsuarios, ctrlProductos, proveedor);
+			AltaDeServicio2 as4 = new AltaDeServicio2(this, ctrlProductos, proveedor);
 			this.setVisible(false);
-			getParent().add(ap2);
-			ap2.setLocation(this.getLocation());
-			ap2.setVisible(true);
+			getParent().add(as4);
+			as4.setLocation(this.getLocation());
+			as4.setVisible(true);
 		} else {
-			if (proveedor == null) {
-				error = "Seleccione un proveedor.";
-			} else if (servicios.isEmpty()) {
-				error = "El proveedor seleccionado no tiene servicios asociados.";
-			}
-			JOptionPane.showMessageDialog(this, error, "Alta de Promoción", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(this, "Seleccione un proveedor.", "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);
 		}
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 

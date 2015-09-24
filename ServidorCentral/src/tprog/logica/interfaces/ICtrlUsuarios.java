@@ -38,7 +38,7 @@ public interface ICtrlUsuarios {
 
 	public void altaUsuario() throws Exception;
 
-	public Set<DTMinProveedor> listarProveedores();
+	public Set<DTMinProveedor> listarProveedores() throws Exception;
 
 	public void seleccionarProveedor(String nickname);
 

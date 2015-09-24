@@ -10,15 +10,17 @@ import java.util.Date;
 public class DTUsuario {
 
 	protected String nickname;
+	protected String password;
 	protected String nombre;
 	protected String apellido;
 	protected String email;
 	protected boolean imagen;
 	protected Date fechaNacimiento;
 
-	public DTUsuario(String nickname, String nombre, String apellido, String email,
+	public DTUsuario(String nickname, String password, String nombre, String apellido, String email,
 			boolean imagen, Date fechaNacimiento) {
 		this.nickname = nickname;
+		this.password = password;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
@@ -41,6 +43,14 @@ public class DTUsuario {
 	public String getEmail() {
 		return email;
 	}
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 	public boolean getImagen() {
 		return imagen;

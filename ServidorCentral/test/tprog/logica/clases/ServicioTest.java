@@ -52,7 +52,7 @@ public class ServicioTest {
         Pais pais = new Pais("Uruguay");
         origen.setPais(pais);
         instance.setOrigen(origen);
-        proveedor = new Proveedor("nick","nom","ap","email",
+        proveedor = new Proveedor("nick","pass","nom","ap","email",
 			"imagen",fecha,"empresa","webEmpresa");
         instance.setProveedor(proveedor);
         

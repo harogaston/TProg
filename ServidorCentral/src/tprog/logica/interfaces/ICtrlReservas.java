@@ -21,9 +21,9 @@ public interface ICtrlReservas {
 
     public void seleccionarDTReserva(DTReserva dtr);
 
-    public Set<DTMinPromocion> listarPromociones();
+    public Set<DTMinPromocion> listarPromociones() throws Exception;
 
-    public Set<DTMinServicio> listarServicios();
+    public Set<DTMinServicio> listarServicios() throws Exception;
 
     public void seleccionarPromocion(DTMinPromocion dtP);
 
@@ -39,7 +39,7 @@ public interface ICtrlReservas {
 
     public void altaReserva() throws Exception;
 
-    public Set<DTMinReserva> listarReservas();
+    public Set<DTMinReserva> listarReservas() throws Exception;
 
     public void seleccionarReserva(int idReserva);
 

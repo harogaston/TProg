@@ -9,69 +9,78 @@ import java.util.Date;
 
 public class Usuario {
 
-	protected String nickname;
-	protected String nombre;
-	protected String apellido;
-	protected String email;
-	protected boolean imagen;
-	protected Date fechaNacimiento;
+    protected String nickname;
+    protected String nombre;
+    protected String apellido;
+    protected String password;
+    protected String email;
+    protected boolean imagen;
+    protected Date fechaNacimiento;
 
-	public Usuario(String nickname, String nombre, String apellido, String email,
-			boolean imagen, Date fechaN) {
-		this.nickname = nickname;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.imagen = imagen;
-		this.fechaNacimiento = fechaN;
-	}
+    public Usuario(String nickname, String password, String nombre, String apellido, String email,
+            boolean imagen, Date fechaN) {
+        this.nickname = nickname;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.imagen = imagen;
+        this.fechaNacimiento = fechaN;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getApellido() {
-		return apellido;
-	}
+    public String getApellido() {
+        return apellido;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public boolean getImagen() {
-		return imagen;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public boolean getImagen() {
+        return imagen;
+    }
 
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-	public void setImagen(boolean imagen) {
-		this.imagen = imagen;
-	}
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-	public void setFechaNacimiento(Date fechaN) {
-		this.fechaNacimiento = fechaN;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
+    public void setImagen(boolean imagen) {
+        this.imagen = imagen;
+    }
+
+    public void setFechaNacimiento(Date fechaN) {
+        this.fechaNacimiento = fechaN;
+    }
 }

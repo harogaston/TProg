@@ -45,8 +45,6 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="componentAdded" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="listaProveedoresInterfazInterfazComponentAdded"/>
-        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="listaProveedoresInterfazItemStateChanged"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="listaProveedoresInterfazInterfazActionPerformed"/>
       </Events>
       <AuxValues>
@@ -62,7 +60,7 @@
     <Component class="javax.swing.JLabel" name="label">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Seleccione el proveedor que va a dar de alta el Servicio."/>
+        <Property name="text" type="java.lang.String" value="Seleccione el proveedor que va a dar de alta la Promoci&#xf3;n."/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
@@ -103,12 +101,12 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="buttonSeleccionarProveedor">
+    <Component class="javax.swing.JButton" name="buttonSiguiente">
       <Properties>
         <Property name="text" type="java.lang.String" value="Siguiente &gt;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSeleccionarProveedorActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSiguienteActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

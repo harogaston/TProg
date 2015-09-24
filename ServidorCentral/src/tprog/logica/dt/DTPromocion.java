@@ -5,17 +5,17 @@
  */
 package tprog.logica.dt;
 
-import tprog.logica.clases.ItemPromocion;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DTPromocion {
 
 	private String idPromocion;
 	private float descuento;
 	private float total;
-	private Set<DTItemPromocion> servicios;
+	private Map<DTMinServicio, Integer> servicios;
 
-	public DTPromocion(String idPromocion, float descuento, float total, Set<DTItemPromocion> servicios) {
+	public DTPromocion(String idPromocion, float descuento, float total, HashMap<DTMinServicio, Integer> servicios) {
 		this.idPromocion = idPromocion;
 		this.descuento = descuento;
 		this.total = total;
@@ -31,10 +31,10 @@ public class DTPromocion {
 	}
 
 	public float getTotal() {
-            return this.total;
+		return this.total;
 	}
 
-	public Set<DTItemPromocion> getServicios() {
+	public Map<DTMinServicio, Integer> getServicios() {
 		return this.servicios;
 	}
 
@@ -45,11 +45,9 @@ public class DTPromocion {
 				+ "\n" + "Total: " + Float.toString(this.total)
 				+ "\n" + "Servicios: " + "\n";
 		int i = 1;
-		for (DTItemPromocion dt : servicios) {
-			output = output.concat("Servicio" + Integer.toString(i) + ": ");
-			output = output.concat(dt.getDTMinServicio().getIdServicio()) + " cantidad: " +
-                                Integer.toString(dt.getCantidad()) + "\n";
-			i++;
+		for (Map.Entry<DTMinServicio, Integer> par : servicios.entrySet()) {
+			output = output.concat(par.getKey().toString() + "Cantidad: "
+				+ Integer.toString(par.getValue()) + "\n");
 		}
 		return output;
 	}

@@ -368,7 +368,7 @@ public class ManejadorProductos {
 		while (it.hasNext()) {
 			String l = (String) it.next();
 			Servicio temp = this.servicios.get(nicknameProv).get(l);
-			promo.addServicio(temp);
+			promo.agregarServicio(temp);
 		}
 	}
 

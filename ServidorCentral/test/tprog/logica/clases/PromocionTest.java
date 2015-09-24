@@ -59,8 +59,8 @@ public class PromocionTest {
             
             servicios = new HashMap();
             prooo = new Promocion("Promo", 20, proveedor);
-            prooo.addServicio(servicio1);
-            prooo.addServicio(servicio2);
+            prooo.agregarServicio(servicio1);
+            prooo.agregarServicio(servicio2);
             instance = prooo;
 	}
 
@@ -97,14 +97,14 @@ public class PromocionTest {
 	}
 
 	/**
-	 * Test of addServicio method, of class Promocion.
+	 * Test of agregarServicio method, of class Promocion.
 	 */
 	@Test
 	public void testAddServicio() {
 		System.out.println("addServicio");
 
 		Servicio servicio3 = new Servicio("ser3", "malote", 220, null, null, null, proveedor);
-		instance.addServicio(servicio3);
+		instance.agregarServicio(servicio3);
                 assertTrue(instance.getServicios().containsKey("ser3"));
                 assertEquals(1, instance.getServicios().get("ser3").getCantidad());
 

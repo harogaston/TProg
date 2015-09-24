@@ -1,17 +1,9 @@
-/*
- * Header Test
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTItemPromocion;
-import tprog.logica.dt.DTPromocion;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
@@ -19,12 +11,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTPromocion;
+import tprog.logica.dt.DTProveedor;
 
 public class PromocionTest {
 
 	Promocion instance;
-	Map<String, ItemPromocion> servicios;
-	Set<DTItemPromocion> set;
+	Map<String, Integer> servicios;
+	HashMap<DTMinServicio, Integer> set;
 	Proveedor proveedor;
 	Date fecha;
 	float total;
@@ -42,26 +38,24 @@ public class PromocionTest {
 
 	@Before
 	public void setUp() {
-            fecha = new Date();
-            proveedor = new Proveedor("pepito", "pass", "pedro", "elescamoso", "lalala@fing.edu.uy",
-                    "/image.gg", fecha, "montecudine", "www.montecudine.com");
-            Promocion prooo;
+		fecha = new Date();
+		DTProveedor dtP = new DTProveedor("pepito", "pass", "pedro", "elescamoso", "lalala@fing.edu.uy", "/image.gg", fecha, "montecudine", "www.montecudine.com");
+		proveedor = new Proveedor(dtP);
+		Promocion prooo;
 
-            Servicio servicio1 = new Servicio("ser1", "bueno", 50, new HashSet(), null, null, proveedor);
-            
-            Servicio servicio2 = new Servicio("ser2", "malo", 400, null, null, null, proveedor);
-            
-            set = new HashSet();
-            DTItemPromocion ser1 = new DTItemPromocion(new DTMinServicio("pepito", "ser1"), 1);
-            DTItemPromocion ser2 = new DTItemPromocion(new DTMinServicio("pepito", "ser2"), 1);
-            set.add(ser1);
-            set.add(ser2);
-            
-            servicios = new HashMap();
-            prooo = new Promocion("Promo", 20, proveedor);
-            prooo.agregarServicio(servicio1);
-            prooo.agregarServicio(servicio2);
-            instance = prooo;
+		Servicio servicio1 = new Servicio("ser1", "bueno", 50, new HashSet(), null, null, proveedor);
+
+		Servicio servicio2 = new Servicio("ser2", "malo", 400, null, null, null, proveedor);
+
+		set = new HashMap<>();
+		set.put(new DTMinServicio("pepito", "ser1"), 1);
+		set.put(new DTMinServicio("pepito", "ser2"), 1);
+
+		servicios = new HashMap<>();
+		prooo = new Promocion("Promo", 20, proveedor);
+		prooo.agregarServicio(servicio1);
+		prooo.agregarServicio(servicio2);
+		instance = prooo;
 	}
 
 	@After
@@ -78,7 +72,7 @@ public class PromocionTest {
 		DTMinPromocion expResult = new DTMinPromocion("pepito", "Promo");
 		DTMinPromocion result = instance.crearDTMin();
 		assertEquals(expResult.toString(), result.toString());
-        // TODO review the generated test code and remove the default call to fail.
+		// TODO review the generated test code and remove the default call to fail.
 
 	}
 
@@ -92,7 +86,7 @@ public class PromocionTest {
 		DTPromocion expResult = new DTPromocion("Promo", 20, 360, set);
 		DTPromocion result = instance.crearDT();
 
-		assertEquals(expResult.toString(), result.toString()); 
+		assertEquals(expResult.toString(), result.toString());
 
 	}
 
@@ -105,9 +99,14 @@ public class PromocionTest {
 
 		Servicio servicio3 = new Servicio("ser3", "malote", 220, null, null, null, proveedor);
 		instance.agregarServicio(servicio3);
-                assertTrue(instance.getServicios().containsKey("ser3"));
-                assertEquals(1, instance.getServicios().get("ser3").getCantidad());
-
+		assertTrue(instance.getServicios().containsKey("ser3"));
+		Integer cant = 0;
+		for (Map.Entry<String, Integer> par : instance.getServicios().entrySet()) {
+			if (par.getKey().equals("ser3")) {
+				cant = par.getValue();
+			}
+		}
+		assertEquals((Integer) 1, cant);
 	}
 
 	/**
@@ -142,8 +141,9 @@ public class PromocionTest {
 	@Test
 	public void testSetProveedor() {
 		System.out.println("setProveedor");
-		Proveedor prov = new Proveedor("ElNuevo", "pass", "nuevo", "elescamoso", "lalala@fing.edu.uy",
-			"/image.gg", fecha, "montecudine", "www.montecudine.com");;
+		DTProveedor dtP = new DTProveedor("ElNuevo", "pass", "nuevo", "elescamoso", "lalala@fing.edu.uy",
+				"/image.gg", fecha, "montecudine", "www.montecudine.com");
+		Proveedor prov = new Proveedor(dtP);
 
 		instance.setProveedor(prov);
 		// TODO review the generated test code and remove the default call to fail.
@@ -160,7 +160,7 @@ public class PromocionTest {
 		String expResult = "Promo";
 		String result = instance.getIdPromocion();
 		assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
+		// TODO review the generated test code and remove the default call to fail.
 
 	}
 

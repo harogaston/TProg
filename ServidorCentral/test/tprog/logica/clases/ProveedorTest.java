@@ -1,42 +1,37 @@
-/*
- * Header Test
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinProveedor;
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTProveedor;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
+import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinProveedor;
+import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTProveedor;
 
 public class ProveedorTest {
 
 	Date fechaN;
 	Proveedor instance;
-	
+
 	public ProveedorTest() {
 	}
 
 	@Before
 	public void setUp() {
 		fechaN = new Date();
-		instance = new Proveedor("nick", "pass", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
+		DTProveedor dtP = new DTProveedor("nick", "pass", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
+		instance = new Proveedor(dtP);
 	}
 
 	@Test
 	public void testCrearDTMin() {
 		System.out.println("crearDTMin");
 		DTMinProveedor expResult = new DTMinProveedor("nick", "email", "empresa");
-                DTMinProveedor result = instance.crearDTMin();
+		DTMinProveedor result = instance.crearDTMin();
 		assertEquals(expResult, result);
 	}
 
@@ -44,7 +39,7 @@ public class ProveedorTest {
 	public void testCrearDT() {
 		System.out.println("crearDT");
 		DTProveedor expResult = new DTProveedor("nick", "pass", "nombre", "ap", "email", "imagen", fechaN, "empresa", "webEmpresa");
-                instance = new Proveedor(expResult);
+		instance = new Proveedor(expResult);
 		DTProveedor result = instance.crearDT();
 		assertEquals(expResult, result);
 	}
@@ -70,15 +65,15 @@ public class ProveedorTest {
 		System.out.println("addServicio");
 		Servicio s = new Servicio("id", "desc", 123.5F, null, null, null, instance);
 		instance.addServicio(s);
-                assertTrue(instance.getServicios().containsKey("id"));
+		assertTrue(instance.getServicios().containsKey("id"));
 	}
 
 	@Test
 	public void testAddPromocion() {
 		System.out.println("addPromocion");
-		Promocion p = new Promocion("promo",10,null);
+		Promocion p = new Promocion("promo", 10, null);
 		instance.addPromocion(p);
-                assertTrue(instance.getPromociones().containsKey("promo"));
+		assertTrue(instance.getPromociones().containsKey("promo"));
 	}
 
 	@Test
@@ -86,7 +81,7 @@ public class ProveedorTest {
 		System.out.println("setEmpresa");
 		String empresa = "nuevaEmpresa";
 		instance.setEmpresa(empresa);
-                assertEquals(empresa,instance.getEmpresa());
+		assertEquals(empresa, instance.getEmpresa());
 	}
 
 	@Test
@@ -94,7 +89,7 @@ public class ProveedorTest {
 		System.out.println("setWebEmpresa");
 		String webEmpresa = "nuevaWeb";
 		instance.setWebEmpresa(webEmpresa);
-                assertEquals(webEmpresa,instance.getWebEmpresa());
+		assertEquals(webEmpresa, instance.getWebEmpresa());
 	}
 
 	@Test

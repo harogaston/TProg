@@ -8,7 +8,7 @@ public class DTPromocion {
 	private String idPromocion;
 	private float descuento;
 	private float total;
-	private Map<DTMinServicio, Integer> servicios;
+	private HashMap<DTMinServicio, Integer> servicios;
 
 	public DTPromocion(String idPromocion, float descuento, float total, HashMap<DTMinServicio, Integer> servicios) {
 		this.idPromocion = idPromocion;
@@ -29,7 +29,7 @@ public class DTPromocion {
 		return this.total;
 	}
 
-	public Map<DTMinServicio, Integer> getServicios() {
+	public HashMap<DTMinServicio, Integer> getServicios() {
 		return this.servicios;
 	}
 
@@ -46,5 +46,4 @@ public class DTPromocion {
 		}
 		return output;
 	}
-
 }

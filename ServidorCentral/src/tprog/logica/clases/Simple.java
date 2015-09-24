@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinServicio;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
+import tprog.logica.dt.DTMinServicio;
 
 public class Simple implements Categoria {
 
@@ -22,18 +17,18 @@ public class Simple implements Categoria {
 		this.servicios = new HashSet();
 	}
 
+	public Simple(String idCategoria) {
+		this.idCategoria = idCategoria;
+		this.padre = null;
+		this.servicios = new HashSet();
+	}
+
 	public void agregarServicio(Servicio s) {
 		this.servicios.add(s);
 	}
 
 	public void quitarServicio(Servicio s) {
 		this.servicios.remove(s);
-	}
-
-	public Simple(String idCategoria) {
-		this.idCategoria = idCategoria;
-		this.padre = null;
-		this.servicios = new HashSet();
 	}
 
 	@Override
@@ -80,5 +75,4 @@ public class Simple implements Categoria {
 	public DefaultMutableTreeNode listarCategorias() {
 		return new DefaultMutableTreeNode(this.idCategoria, false);
 	}
-
 }

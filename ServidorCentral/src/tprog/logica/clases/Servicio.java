@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTServicio;
 import java.util.HashSet;
 import java.util.Set;
+import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTServicio;
 
 public class Servicio {
 
@@ -22,8 +17,8 @@ public class Servicio {
 	private Proveedor proveedor;
 	private Set<Simple> categorias;
 
-	public Servicio(String idServicio, String descripcion, float precio, Set<String> imagenes, 
-                    Ciudad origen, Ciudad destino, Proveedor proveedor) {
+	public Servicio(String idServicio, String descripcion, float precio, Set<String> imagenes,
+			Ciudad origen, Ciudad destino, Proveedor proveedor) {
 		this.idServicio = idServicio;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -148,17 +143,17 @@ public class Servicio {
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
 	}
-        
-        @Override
-        public String toString(){
-            String output = "IdServicio: " + idServicio + "\n"
-                + "Proveedor: " + proveedor.getNickname() + "\n"
-                + "Descripción: " + descripcion + "\n" 
-                + "Precio: " + Float.toString(precio) + "\n"
-                + "Origen: " + origen.toString() + "\n";
-                if (destino != null){
-                    output = output.concat("Destino: " + destino.toString() + "\n");
-                }
-            return output;        
-        }
+
+	@Override
+	public String toString() {
+		String output = "IdServicio: " + idServicio + "\n"
+				+ "Proveedor: " + proveedor.getNickname() + "\n"
+				+ "Descripción: " + descripcion + "\n"
+				+ "Precio: " + Float.toString(precio) + "\n"
+				+ "Origen: " + origen.toString() + "\n";
+		if (destino != null) {
+			output = output.concat("Destino: " + destino.toString() + "\n");
+		}
+		return output;
+	}
 }

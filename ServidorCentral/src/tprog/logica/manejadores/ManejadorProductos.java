@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.manejadores;
 
 import java.util.HashMap;
@@ -107,7 +102,7 @@ public class ManejadorProductos {
 		return result;
 	}
 
-	public Set<DTMinServicio> listarServicios() throws Exception{
+	public Set<DTMinServicio> listarServicios() throws Exception {
 		Set<DTMinServicio> result = new HashSet();
 		if (!this.servicios.isEmpty()) {
 			for (Map<String, Servicio> mapaServicio : this.servicios.values()) {
@@ -121,7 +116,7 @@ public class ManejadorProductos {
 		} else {
 			throw new Exception("No hay Servicios en el Sistema.");
 		}
-		
+
 	}
 
 	public void cambiarPrecio(DTMinServicio dtS,
@@ -339,7 +334,7 @@ public class ManejadorProductos {
 		prov.addServicio(s);
 		for (String idCategoria : listaCategorias) {
 			if (!categorias.isEmpty() && categorias.containsKey(idCategoria)) {
-				boolean success = s.agregarCategoria(categorias.get(idCategoria));
+				s.agregarCategoria(categorias.get(idCategoria));
 			}
 		}
 	}
@@ -410,5 +405,4 @@ public class ManejadorProductos {
 	public void agregarPais(Pais p) {
 		this.ubicaciones.put(p.getIdPais(), p);
 	}
-
 }

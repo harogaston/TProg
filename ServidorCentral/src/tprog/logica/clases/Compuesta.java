@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinServicio;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
+import tprog.logica.dt.DTMinServicio;
 
 public class Compuesta implements Categoria {
 
@@ -41,9 +36,9 @@ public class Compuesta implements Categoria {
 	public Set<DTMinServicio> listarServicios() {
 		Set<DTMinServicio> result = new HashSet();
 		if (!subCategorias.isEmpty()) {
-                    for (Categoria cat : this.subCategorias) {
-                        result.addAll(cat.listarServicios());
-                    }
+			for (Categoria cat : this.subCategorias) {
+				result.addAll(cat.listarServicios());
+			}
 		}
 		return result;
 	}

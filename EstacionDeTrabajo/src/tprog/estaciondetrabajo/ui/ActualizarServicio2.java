@@ -5,15 +5,15 @@ import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
 import tprog.logica.interfaces.ICtrlProductos;
 
-public class ModificacionServicio extends javax.swing.JInternalFrame {
+public class ActualizarServicio2 extends javax.swing.JInternalFrame {
 
-	public ModificacionServicio(ActualizarServicio padre, DTServicio servicio, ICtrlProductos ctrlProductos) {
+	public ActualizarServicio2(ActualizarServicio1 padre, DTServicio servicio, ICtrlProductos ctrlProductos) {
 		this.padre = padre;
 		this.servicio = servicio;
 		this.ctrlProductos = ctrlProductos;
 		initComponents();
-		descripcionInterfaz.setText(servicio.getDescripcion());
-		precioInterfaz.setText(Float.toString(servicio.getPrecio()));
+		jTextAreaDescripcion.setText(servicio.getDescripcion());
+		jTextFieldPrecio.setText(Float.toString(servicio.getPrecio()));
 	}
 
 	/**
@@ -30,18 +30,19 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         botonModificarCategorias = new javax.swing.JButton();
         botonModificarImagenes = new javax.swing.JButton();
-        descripcionInterfaz = new javax.swing.JTextField();
-        precioInterfaz = new javax.swing.JTextField();
+        jTextFieldPrecio = new javax.swing.JTextField();
         botonModificarUbicacion = new javax.swing.JButton();
         actualizarDescripcion = new javax.swing.JButton();
         actualizarPrecio = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextAreaDescripcion = new javax.swing.JTextArea();
 
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setClosable(true);
         setIconifiable(true);
         setTitle("Actualizar Servicio - Datos Básicos");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
@@ -52,11 +53,11 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
         jLabel1.setText("<html>Datos del servicio seleccionado</html>");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, -1, -1));
 
-        jLabel2.setText("Descripcion");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        jLabel2.setText("Nueva descripcion:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
-        jLabel3.setText("Precio");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, -1, -1));
+        jLabel3.setText("Nuevo precio:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
 
         botonModificarCategorias.setText("Modificar categorias");
         botonModificarCategorias.setAlignmentX(0.5F);
@@ -65,7 +66,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
                 botonModificarCategoriasActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 310, -1, -1));
+        getContentPane().add(botonModificarCategorias, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 230, -1));
 
         botonModificarImagenes.setText("Modificar imagenes");
         botonModificarImagenes.setAlignmentX(0.5F);
@@ -74,9 +75,8 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
                 botonModificarImagenesActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificarImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 180, -1));
-        getContentPane().add(descripcionInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 320, -1));
-        getContentPane().add(precioInterfaz, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 120, -1));
+        getContentPane().add(botonModificarImagenes, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 270, 230, -1));
+        getContentPane().add(jTextFieldPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 120, -1));
 
         botonModificarUbicacion.setText("Modificar origen y destino");
         botonModificarUbicacion.setAlignmentX(0.5F);
@@ -85,23 +85,41 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
                 botonModificarUbicacionActionPerformed(evt);
             }
         });
-        getContentPane().add(botonModificarUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
+        getContentPane().add(botonModificarUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, 230, -1));
 
         actualizarDescripcion.setText("Guardar");
+        actualizarDescripcion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        actualizarDescripcion.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         actualizarDescripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarDescripcionActionPerformed(evt);
             }
         });
-        getContentPane().add(actualizarDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+        getContentPane().add(actualizarDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 250, -1, -1));
 
         actualizarPrecio.setText("Guardar");
+        actualizarPrecio.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        actualizarPrecio.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         actualizarPrecio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actualizarPrecioActionPerformed(evt);
             }
         });
-        getContentPane().add(actualizarPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, -1, -1));
+        getContentPane().add(actualizarPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, -1, -1));
+
+        jButton1.setText("< Atras");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(467, 400, 120, -1));
+
+        jTextAreaDescripcion.setColumns(20);
+        jTextAreaDescripcion.setRows(5);
+        jScrollPane1.setViewportView(jTextAreaDescripcion);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 240, 120));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -114,13 +132,13 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 		servicio = ctrlProductos.infoServicio();
-		descripcionInterfaz.setText(servicio.getDescripcion());
-		precioInterfaz.setText(Float.toString(servicio.getPrecio()));
+		jTextAreaDescripcion.setText(servicio.getDescripcion());
+		jTextFieldPrecio.setText(Float.toString(servicio.getPrecio()));
     }//GEN-LAST:event_formComponentShown
 
     private void actualizarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarPrecioActionPerformed
 		try {
-			ctrlProductos.cambiarPrecio(Float.parseFloat(precioInterfaz.getText()));
+			ctrlProductos.cambiarPrecio(Float.parseFloat(jTextFieldPrecio.getText()));
 			JOptionPane.showMessageDialog(this, "El precio fue modificado", "Exito", JOptionPane.INFORMATION_MESSAGE);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "Por favor ingrese un precio valido", "Precio invalido", JOptionPane.INFORMATION_MESSAGE);
@@ -129,7 +147,7 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_actualizarPrecioActionPerformed
 
     private void actualizarDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarDescripcionActionPerformed
-		ctrlProductos.cambiarDescripcion(descripcionInterfaz.getText());
+		ctrlProductos.cambiarDescripcion(jTextAreaDescripcion.getText());
 		JOptionPane.showMessageDialog(this, "Descripción modificada con éxito", "Exito", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_actualizarDescripcionActionPerformed
 
@@ -158,21 +176,28 @@ public class ModificacionServicio extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_botonModificarImagenesActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		super.dispose();
+		padre.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 	DTUbicacion nuevoOrigen;
 	DTUbicacion nuevoDestino;
 	ICtrlProductos ctrlProductos;
 	DTServicio servicio;
-	ActualizarServicio padre;
+	ActualizarServicio1 padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actualizarDescripcion;
     private javax.swing.JButton actualizarPrecio;
     private javax.swing.JButton botonModificarCategorias;
     private javax.swing.JButton botonModificarImagenes;
     private javax.swing.JButton botonModificarUbicacion;
-    private javax.swing.JTextField descripcionInterfaz;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField precioInterfaz;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextAreaDescripcion;
+    private javax.swing.JTextField jTextFieldPrecio;
     // End of variables declaration//GEN-END:variables
 }

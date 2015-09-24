@@ -14,7 +14,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
 	 * @param idCliente
 	 * @param padre
 	 */
-	public ModificacionUbicacion(ModificacionServicio padre, DefaultMutableTreeNode arbolCiudades, ICtrlProductos ctrlProductos) {
+	public ModificacionUbicacion(ActualizarServicio2 padre, DefaultMutableTreeNode arbolCiudades, ICtrlProductos ctrlProductos) {
 		this.padre = padre;
 		this.ctrlProductos = ctrlProductos;
 		this.arbolCiudades = arbolCiudades;
@@ -172,7 +172,7 @@ public class ModificacionUbicacion extends javax.swing.JInternalFrame {
 
 	DefaultMutableTreeNode arbolCiudades;
 	ICtrlProductos ctrlProductos;
-	ModificacionServicio padre;
+	ActualizarServicio2 padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTree arbolCiudadesDestinoInterfaz;
     private javax.swing.JTree arbolCiudadesOrigenInterfaz;

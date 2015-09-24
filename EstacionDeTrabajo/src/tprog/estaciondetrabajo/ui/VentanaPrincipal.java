@@ -298,7 +298,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemActualizarEstadoReservaActionPerformed
 
     private void menuItemActualizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarServicioActionPerformed
-		ActualizarServicio actualizarServicio = new ActualizarServicio(fabrica.getICtrlProductos());
+		ActualizarServicio1 actualizarServicio = new ActualizarServicio1(fabrica.getICtrlProductos());
 		center(actualizarServicio);
 		actualizarServicio.initCheck();
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed

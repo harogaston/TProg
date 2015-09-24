@@ -14,7 +14,7 @@ import tprog.logica.interfaces.ICtrlProductos;
 
 public class ModificacionImagenes extends javax.swing.JInternalFrame {
 
-	public ModificacionImagenes(ModificacionServicio padre, ICtrlProductos ctrlProductos) {
+	public ModificacionImagenes(ActualizarServicio2 padre, ICtrlProductos ctrlProductos) {
 		this.padre = padre;
 		this.ctrlProductos = ctrlProductos;
 		initComponents();
@@ -151,7 +151,7 @@ public class ModificacionImagenes extends javax.swing.JInternalFrame {
 
 	Vector<ImageIcon> modelComboBox = new Vector<>();
 	ICtrlProductos ctrlProductos;
-	ModificacionServicio padre;
+	ActualizarServicio2 padre;
 	int cantidadImagenes = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregar;

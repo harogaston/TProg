@@ -14,7 +14,7 @@ import tprog.logica.interfaces.ICtrlProductos;
 
 public class ModificacionCategorias extends javax.swing.JInternalFrame {
 
-	public ModificacionCategorias(ModificacionServicio padre, ICtrlProductos ctrlProductos) {
+	public ModificacionCategorias(ActualizarServicio2 padre, ICtrlProductos ctrlProductos) {
 		initComponents();
 		this.padre = padre;
 		this.ctrlProductos = ctrlProductos;
@@ -213,7 +213,7 @@ public class ModificacionCategorias extends javax.swing.JInternalFrame {
 		}
     }//GEN-LAST:event_botonConfirmarActionPerformed
 
-	private ModificacionServicio padre;
+	private ActualizarServicio2 padre;
 	Set<String> categoriasServicio; //categorias originales del servicio
 	Vector<String> seleccionCategorias = new Vector<>();
 	Set<DTMinServicio> listaServicios;

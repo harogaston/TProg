@@ -36,15 +36,18 @@ public class ManejadorUsuarios {
 		return instace;
 	}
 
-	public Set<DTMinProveedor> listarProveedores() {
+	public Set<DTMinProveedor> listarProveedores() throws Exception {
 		Set<DTMinProveedor> lista = new HashSet();
 		if (!proveedores.isEmpty()) {
 			for (Proveedor p : proveedores.values()) {
 				DTMinProveedor dtMin = p.crearDTMin();
 				lista.add(dtMin);
 			}
+			return lista;
+		} else {
+			throw new Exception("No existen Proveedores registrados en el Sistema");
 		}
-		return lista;
+		
 	}
 
 	public Set<DTMinServicio> listarServiciosProveedor(String nickname) {

@@ -53,13 +53,13 @@ public class CtrlReservas implements ICtrlReservas {
     }
 
     @Override
-    public Set<DTMinPromocion> listarPromociones() {
+    public Set<DTMinPromocion> listarPromociones() throws Exception{
         ManejadorProductos mp = ManejadorProductos.getInstance();
         return mp.listarPromociones();
     }
 
     @Override
-    public Set<DTMinServicio> listarServicios() {
+    public Set<DTMinServicio> listarServicios() throws Exception{
         ManejadorProductos mp = ManejadorProductos.getInstance();
         return mp.listarServicios();
     }
@@ -135,7 +135,7 @@ public class CtrlReservas implements ICtrlReservas {
     }
 
     @Override
-    public Set<DTMinReserva> listarReservas() {
+    public Set<DTMinReserva> listarReservas() throws Exception{
         ManejadorReservas mr = ManejadorReservas.getInstance();
         return mr.listarReservas();
     }

@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTUsuario;
-import tprog.logica.interfaces.ICtrlUsuarios;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -20,18 +13,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import tprog.logica.dt.DTUsuario;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 
 	private final AltaDeUsuario1 padre;
 	private String ruta;
 	private final ICtrlUsuarios ictrlU;
-    private final String password;
+	private final String password;
 
 	public AltaDeUsuario2(AltaDeUsuario1 anterior, String nickname, String password, String email, ICtrlUsuarios ictrlU) {
 		this.padre = anterior;
 		this.nickname = nickname;
-        this.password = password;
+		this.password = password;
 		this.email = email;
 		this.ictrlU = ictrlU;
 		initComponents();
@@ -52,7 +47,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 			lista.add(i);
 		}
 		Integer[] anios = lista.toArray(new Integer[lista.size()]);
-		return new DefaultComboBoxModel<Integer>(anios);
+		return new DefaultComboBoxModel<>(anios);
 	}
 
 	private boolean fechaValida(int dia, int mes, int anio) {
@@ -305,14 +300,14 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 		int mes = jComboBoxMeses.getSelectedIndex();
 		int anio = (Integer) jComboBoxAnios.getSelectedItem();
 		boolean proveedor = radioButtonProveedor.isSelected();
-		
+
 		// Verificación de nombre y apellido
 		boolean okNombre = !isWhiteSpace(nombre);
 		boolean okApellido = !isWhiteSpace(apellido);
 
 		// Verificación de la fecha de nacimiento
 		boolean okFecha = fechaValida(dia, mes + 1, anio);
-		
+
 		// Verificacion de empresa y webEmpresa
 		String nombreEmpresa = "Empresa por defecto";
 		String linkEmpresa = "empresa.com";
@@ -363,7 +358,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
 				error = "El apellido ingresado no es correcto.";
 			} else if (!okFecha) {
 				error = "La fecha ingresada no es correcta.";
-			}else if (!okNombreEmpresa) {
+			} else if (!okNombreEmpresa) {
 				error = "El nombre de empresa ingresado no es correcto.";
 			} else if (!okLinkEmpresa) {
 				error = "El link de empresa ingresado no es correcto.";
@@ -373,7 +368,7 @@ public class AltaDeUsuario2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
 	private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {
-		this.setVisible(false);
+		super.dispose();
 		padre.setVisible(true);
 	}
 

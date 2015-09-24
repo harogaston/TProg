@@ -18,14 +18,14 @@ public interface ICtrlProductos {
 
 	public DTMinServicio infoMinServicio();
     public DTMinPromocion infoMinPromocion();
-	public Set<DTMinPromocion> listarPromociones();
+	public Set<DTMinPromocion> listarPromociones() throws Exception;
 	public void seleccionarPromocion(DTMinPromocion dtP);
 	public DTPromocion infoPromocion();
 	public void seleccionarServicio(DTMinServicio dtS);
 	public DTServicio infoServicio();
 	public DefaultMutableTreeNode listarCategorias();
 	public Set<DTMinServicio> listarServiciosCategoria(String idCategoria);
-	public Set<DTMinServicio> listarServicios();
+	public Set<DTMinServicio> listarServicios() throws Exception;
 	public void cambiarPrecio(float nuevoPrecio);
 	public void cambiarDescripcion(String nuevaDescripcion);
         public Set<String> listarImagenes();
@@ -40,7 +40,7 @@ public interface ICtrlProductos {
 	public boolean seleccionarCategoriaPadre(String padre);
 	public boolean idCategoriaDisponible(String idCategoria);
 	public void altaCategoria();
-	public Set<DTMinProveedor> listarProveedores();
+	public Set<DTMinProveedor> listarProveedores() throws Exception;
 	public void seleccionarProveedor(String nickname);
 	public boolean idServicioDisponible(String idServicio);
 	public void seleccionarOrigen(DTUbicacion origen);

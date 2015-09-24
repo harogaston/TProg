@@ -45,7 +45,7 @@ public class CtrlProductos implements ICtrlProductos {
     }
 
     @Override
-    public Set<DTMinPromocion> listarPromociones() {
+    public Set<DTMinPromocion> listarPromociones() throws Exception{
         ManejadorProductos mp = ManejadorProductos.getInstance();
         return mp.listarPromociones();
     }
@@ -95,7 +95,7 @@ public class CtrlProductos implements ICtrlProductos {
     }
 
     @Override
-    public Set<DTMinServicio> listarServicios() {
+    public Set<DTMinServicio> listarServicios() throws Exception{
         ManejadorProductos mp = ManejadorProductos.getInstance();
         return mp.listarServicios();
     }
@@ -195,7 +195,7 @@ public class CtrlProductos implements ICtrlProductos {
     }
 
     @Override
-    public Set<DTMinProveedor> listarProveedores() {
+    public Set<DTMinProveedor> listarProveedores() throws Exception{
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
         return mu.listarProveedores();
     }

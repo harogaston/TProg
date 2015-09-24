@@ -19,7 +19,6 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
   <Events>
-    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
     <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentHidden"/>
   </Events>
   <AuxValues>
@@ -58,7 +57,6 @@
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
       <Events>
-        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="botonConfirmarComponentShown"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonConfirmarActionPerformed"/>
       </Events>
       <Constraints>
@@ -98,9 +96,6 @@
               <Connection code="null" type="code"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="valueChanged" listener="javax.swing.event.TreeSelectionListener" parameters="javax.swing.event.TreeSelectionEvent" handler="arbolCategoriasValueChanged"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

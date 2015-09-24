@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.dt;
 
 import java.util.HashMap;
@@ -47,7 +42,7 @@ public class DTPromocion {
 		int i = 1;
 		for (Map.Entry<DTMinServicio, Integer> par : servicios.entrySet()) {
 			output = output.concat(par.getKey().toString() + "Cantidad: "
-				+ Integer.toString(par.getValue()) + "\n");
+					+ Integer.toString(par.getValue()) + "\n");
 		}
 		return output;
 	}

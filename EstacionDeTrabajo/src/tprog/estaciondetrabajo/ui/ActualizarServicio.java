@@ -27,7 +27,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
 	private void refresh() {
 
 		listaServicios.clear();
-		
+
 		try {
 			servicios = ctrlProductos.listarServicios();
 			if (!servicios.isEmpty()) {

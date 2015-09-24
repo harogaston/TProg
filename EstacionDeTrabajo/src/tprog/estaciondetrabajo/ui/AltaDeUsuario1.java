@@ -1,8 +1,8 @@
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.interfaces.ICtrlUsuarios;
 import javax.swing.JOptionPane;
 import org.apache.commons.validator.routines.EmailValidator;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 
@@ -85,13 +85,13 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 	private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {
 		String nickname = jTextFieldNickname.getText();
 		String email = jTextFieldEmail.getText();
-        char[] password1 = jPasswordField1.getPassword();
-        char[] password2 = jPasswordField2.getPassword();
-        String pass1 = new String(password1);
-        String pass2 = new String(password2);
-        System.out.println(pass1);
-        System.out.println(pass2);
-		
+		char[] password1 = jPasswordField1.getPassword();
+		char[] password2 = jPasswordField2.getPassword();
+		String pass1 = new String(password1);
+		String pass2 = new String(password2);
+		System.out.println(pass1);
+		System.out.println(pass2);
+
 		//Verificacion de email
 		EmailValidator emailValidator = EmailValidator.getInstance(true);
 		boolean okEmail = emailValidator.isValid(email);
@@ -100,12 +100,12 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		boolean okEnblanco = !nickname.matches("^\\s*$");
 		boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
 		boolean okNickname = okEnblanco && okSinEspacios;
-        
-        //Verificacion de contraseña
-        boolean okPassword1 = pass1.length() >= 4 && pass1.length() <= 20;
-        boolean okPassword2 = pass2.length() >= 4 && pass2.length() <= 20;
-        boolean okPassword = (okPassword1 && okPassword2 && pass1.equals(pass2));
-        
+
+		//Verificacion de contraseña
+		boolean okPassword1 = pass1.length() >= 4 && pass1.length() <= 20;
+		boolean okPassword2 = pass2.length() >= 4 && pass2.length() <= 20;
+		boolean okPassword = (okPassword1 && okPassword2 && pass1.equals(pass2));
+
 		boolean nicknameUnico = false;
 		if (okNickname) {
 			nicknameUnico = ctrlUsuarios.verificarNickname(nickname);
@@ -133,7 +133,8 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 				error = "Ya existe un usuario con el mismo email.";
 			} else if (!okPassword) {
 				error = "Por favor verifique su contraseña.";
-            }JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
+			}
+			JOptionPane.showMessageDialog(this, "Error! " + error, "Alta de Usuario", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 

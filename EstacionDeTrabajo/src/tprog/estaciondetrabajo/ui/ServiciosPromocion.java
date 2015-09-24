@@ -105,11 +105,10 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
 			ctrlProductos.seleccionarServicio(dt);
 			DTServicio dtServicio = ctrlProductos.infoServicio();
 
-			
 			detalleServicio.setVisible(true);
 			String descripcion = dt.toString() + "Cantidad: " + Integer.toString(cantidad) + "\n";
 			detalleServicio.setText(descripcion);
-			
+
 			//imagenes
 			modelComboBox.clear();
 			comboboxImagenes.setSelectedItem(null);

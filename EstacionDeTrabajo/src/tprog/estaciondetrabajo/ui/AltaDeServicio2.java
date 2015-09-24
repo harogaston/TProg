@@ -155,24 +155,24 @@ public class AltaDeServicio2 extends javax.swing.JInternalFrame {
 		boolean valido = !isWhiteSpace(nombreServicio);
 		boolean disponible = ((valido) && (ctrlProductos.idServicioDisponible(nombreServicio)));
 		boolean okCategorias = !seleccionCategorias.isEmpty();
-		
+
 		if (disponible && okCategorias) {
 			// Fijo el nombre
 			DTMinServicio dtmServicio = new DTMinServicio(proveedor, nombreServicio);
 			ctrlProductos.seleccionarServicio(dtmServicio);
-			
+
 			// Siguiente ventana
 			AltaDeServicio3 as5 = new AltaDeServicio3(this, ctrlProductos);
 			this.setVisible(false);
 			getParent().add(as5);
 			as5.setLocation(this.getLocation());
-			as5.setVisible(true);			
+			as5.setVisible(true);
 		} else {
 			if (!valido) {
 				error = "El nombre de servicio ingresado no es válido.";
 			} else if (!disponible) {
 				error = "Ya existe un Servicio con ese nombre.";
-			} else if (!okCategorias){
+			} else if (!okCategorias) {
 				error = "Por favor escoja al menos una categoría antes de avanzar.";
 			}
 			JOptionPane.showMessageDialog(this, error, "Alta de Servicio", JOptionPane.INFORMATION_MESSAGE);

@@ -17,3 +17,4 @@ hs_err_pid*
 /ServidorCentral/dist/
 /ServidorCentral/.jacocoverage/
 /WebApp/build/
+/WebApp/dist/

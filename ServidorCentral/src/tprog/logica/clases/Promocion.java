@@ -1,35 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.clases;
 
+import java.util.HashMap;
+import java.util.Map;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTItemPromocion;
 import tprog.logica.dt.DTPromocion;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import tprog.logica.manejadores.ManejadorProductos;
 
 public class Promocion {
 
 	private String idPromocion;
 	private float descuento;
-	//private float total;
 
 	private Proveedor proveedor;
-	private Map<String, ItemPromocion> servicios;
+	private Map<String, Integer> servicios;
 
 	public Promocion(String idPromocion, float descuento, Proveedor proveedor) {
-            this.idPromocion = idPromocion;
-            this.descuento = descuento;
-            this.proveedor = proveedor;
-            servicios = new HashMap();
-            //this.total = 0;
+		this.idPromocion = idPromocion;
+		this.descuento = descuento;
+		this.proveedor = proveedor;
+		servicios = new HashMap<>();
 	}
 
 	public DTMinPromocion crearDTMin() {
@@ -38,24 +28,32 @@ public class Promocion {
 	}
 
 	public DTPromocion crearDT() {
-            Set<DTItemPromocion> nuevoSet = new HashSet();
-            if (servicios != null) {
-                for (ItemPromocion it : servicios.values()) {
-                    DTMinServicio dtS = new DTMinServicio(this.getNicknameProveedor(),it.getServicio().getIdServicio());
-                    nuevoSet.add(new DTItemPromocion(dtS, it.getCantidad()));
-                }
-            }
-            DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);
-            return nuevoDT;
+		HashMap<DTMinServicio, Integer> nuevoSet = new HashMap<>();
+		if (servicios != null) {
+			for (String it : servicios.keySet()) {
+				DTMinServicio dtS = new DTMinServicio(this.getNicknameProveedor(), it);
+				nuevoSet.put(dtS, servicios.get(it));
+			}
+		}
+		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);
+		return nuevoDT;
 	}
 
-	public void addServicio(Servicio s) {
-            if (servicios.containsKey(s.getIdServicio())){
-                servicios.get(s.getIdServicio()).addServicio();
-            } else {
-                servicios.put(s.getIdServicio(), new ItemPromocion(s));
-            }    
-            //this.total += (s.getPrecio() * ((100 - this.descuento) / 100));
+	public void agregarServicio(Servicio s) {
+		String idServicio = s.getIdServicio();
+
+		// Si aún no tengo ese servicio, lo agrego con cantidad 1
+		if (!servicios.containsKey(idServicio)) {
+			servicios.put(idServicio, 1);
+		} else {
+
+			// Si ya se encuentra, lo busco y sumo 1 a su cantidad
+			for (Map.Entry<String, Integer> par : servicios.entrySet()) {
+				if (par.getKey().equals(idServicio)) {
+					par.setValue(par.getValue() + 1);
+				}
+			}
+		}
 	}
 
 	public void setIdPromocion(String idPromocion) {
@@ -79,13 +77,15 @@ public class Promocion {
 	}
 
 	public float getTotal() {
-            float result = 0;
-            for(ItemPromocion it : servicios.values()){
-                float precioUnit = it.getServicio().getPrecio();
-                float precioPromocional = (precioUnit * (100-this.descuento))/100;
-                result += precioPromocional*it.getCantidad();
-            }
-            return result;
+		float result = 0;
+		ManejadorProductos mp = ManejadorProductos.getInstance();
+
+		for (Map.Entry<String, Integer> it : servicios.entrySet()) {
+			float precioUnit = mp.getPrecioServicio(new DTMinServicio(proveedor.getNickname(), it.getKey()));
+			float precioPromocional = (precioUnit * (100 - this.descuento)) / 100;
+			result += precioPromocional * it.getValue();
+		}
+		return result;
 	}
 
 	public String getNicknameProveedor() {
@@ -95,8 +95,8 @@ public class Promocion {
 	public Proveedor getProveedor() {
 		return this.proveedor;
 	}
-        
-        public Map<String, ItemPromocion> getServicios(){
-            return this.servicios;
-        }
+
+	public Map<String, Integer> getServicios() {
+		return this.servicios;
+	}
 }

@@ -1,19 +1,8 @@
-/*
- * Header Test
- */
 package tprog.logica.manejadores;
 
-import tprog.logica.clases.Cliente;
-import tprog.logica.clases.Reserva;
-import tprog.logica.dt.DTLineaReserva;
-import tprog.logica.dt.DTMinReserva;
-import tprog.logica.dt.DTReserva;
-import tprog.logica.dt.EstadoReserva;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -23,149 +12,153 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import tprog.logica.clases.Cliente;
+import tprog.logica.clases.Reserva;
+import tprog.logica.dt.DTCategoria;
+import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTLineaReserva;
+import tprog.logica.dt.DTMinReserva;
+import tprog.logica.dt.DTReserva;
+import tprog.logica.dt.EstadoReserva;
 
-/**
- *
- * @author MarG
- */
 public class ManejadorReservasTest {
 
-    ManejadorReservas instance;
-    
-    Set<DTMinReserva> minR;
-    Set<DTLineaReserva> set;
-    Reserva r1;
-    DTReserva dtr1;
-    Cliente jorge;
-    int aux;
+	ManejadorReservas instance;
 
-    public ManejadorReservasTest() {
-    }
+	Set<DTMinReserva> minR;
+	Set<DTLineaReserva> set;
+	Reserva r1;
+	DTReserva dtr1;
+	Cliente jorge;
+	int aux;
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
+	public ManejadorReservasTest() {
+	}
 
-    @AfterClass
-    public static void tearDownClass() {
-    }
+	@BeforeClass
+	public static void setUpClass() {
+	}
 
-    @Before
-    public void setUp() throws Exception {
-        instance = ManejadorReservas.getInstance();
-        Date fecha = new Date();
-        DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", "", 10);
+	@AfterClass
+	public static void tearDownClass() {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		instance = ManejadorReservas.getInstance();
+		Date fecha = new Date();
+		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", "", 10);
                // DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, "", "idPromocion2", 20);
-        //DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", "", 30);
-        set = new HashSet();
-        set.add(l1);
+		//DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", "", 30);
+		set = new HashSet();
+		set.add(l1);
 		//set.add(l2);
-        //set.add(l3);
-        // r1 = new Reserva(fecha,EstadoReserva.Registrada,500,set,"jorge");
-        dtr1 = new DTReserva(-1, fecha, EstadoReserva.Registrada, 500, set);
+		//set.add(l3);
+		// r1 = new Reserva(fecha,EstadoReserva.Registrada,500,set,"jorge");
+		dtr1 = new DTReserva(-1, fecha, EstadoReserva.Registrada, 500, set);
                // Reserva r2 = new Reserva(fecha,EstadoReserva.Registrada,300,set,"pepito");
-        // DTReserva dtr2 = new DTReserva(r2.getIdReserva(),fecha,EstadoReserva.Registrada,300,set);
-        //  Reserva r3 = new Reserva(fecha,EstadoReserva.Registrada,100,set,"gg");
-        //DTReserva dtr3 = new DTReserva(r3.getIdReserva(),fecha,EstadoReserva.Registrada,100,set);
-        jorge = new Cliente("alguien", "pass", "alg", "apellido", "email", "imagen", fecha);
+		// DTReserva dtr2 = new DTReserva(r2.getIdReserva(),fecha,EstadoReserva.Registrada,300,set);
+		//  Reserva r3 = new Reserva(fecha,EstadoReserva.Registrada,100,set,"gg");
+		//DTReserva dtr3 = new DTReserva(r3.getIdReserva(),fecha,EstadoReserva.Registrada,100,set);
+		DTCliente dtC = new DTCliente("alguien", "pass", "alg", "apellido", "email", "imagen", fecha, null);
+		jorge = new Cliente(dtC);
 
-        instance.agregarReserva(jorge, dtr1, "jorge");
-        Set<DTMinReserva> lista = instance.listarReservas();
-        Iterator<DTMinReserva> it;
-        DTMinReserva dt = lista.iterator().next();
-        aux = dt.getIdReserva();
-        dtr1 = new DTReserva(aux, fecha, EstadoReserva.Registrada, 500, set);
-        minR = new HashSet();
-        DTMinReserva dtmin = new DTMinReserva(aux, fecha);
-        minR.add(dtmin);
+		instance.agregarReserva(jorge, dtr1, "jorge");
+		Set<DTMinReserva> lista = instance.listarReservas();
+		Iterator<DTMinReserva> it;
+		DTMinReserva dt = lista.iterator().next();
+		aux = dt.getIdReserva();
+		dtr1 = new DTReserva(aux, fecha, EstadoReserva.Registrada, 500, set);
+		minR = new HashSet();
+		DTMinReserva dtmin = new DTMinReserva(aux, fecha);
+		minR.add(dtmin);
                 //minR.add(r2.crearDTMinReserva());
-        //minR.add(r2.crearDTMinReserva());
-    }
+		//minR.add(r2.crearDTMinReserva());
+	}
 
-    @After
-    public void tearDown() {
-    }
+	@After
+	public void tearDown() {
+	}
 
-    /**
-     * Test of getInstance method, of class ManejadorReservas.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        ManejadorReservas expResult = instance;
-        ManejadorReservas result = ManejadorReservas.getInstance();
-        assertEquals(expResult, result);
-        
-    }
+	/**
+	 * Test of getInstance method, of class ManejadorReservas.
+	 */
+	@Test
+	public void testGetInstance() {
+		System.out.println("getInstance");
+		ManejadorReservas expResult = instance;
+		ManejadorReservas result = ManejadorReservas.getInstance();
+		assertEquals(expResult, result);
 
-    /**
-     * Test of listarReservas method, of class ManejadorReservas.
-     */
-    @Test
-    public void testListarReservas() {
-        System.out.println("listarReservas");
+	}
 
-        Set<DTMinReserva> expResult = minR;
-        Set<DTMinReserva> result = instance.listarReservas();
-        assertEquals(expResult.toString(), result.toString());
-    }
+	/**
+	 * Test of listarReservas method, of class ManejadorReservas.
+	 */
+	@Test
+	public void testListarReservas() throws Exception {
+		System.out.println("listarReservas");
 
-    /**
-     * Test of infoReserva method, of class ManejadorReservas.
-     */
-    @Test
-    public void testInfoReserva() {
-        System.out.println("infoReserva");
+		Set<DTMinReserva> expResult = minR;
+		Set<DTMinReserva> result = instance.listarReservas();
+		assertEquals(expResult.toString(), result.toString());
+	}
 
-        DTReserva expResult = dtr1;
-        DTReserva result = instance.infoReserva(aux);
-        assertEquals(expResult.toString(), result.toString());
-    }
+	/**
+	 * Test of infoReserva method, of class ManejadorReservas.
+	 */
+	@Test
+	public void testInfoReserva() {
+		System.out.println("infoReserva");
 
-    /**
-     * Test of cambiarEstadoReserva method, of class ManejadorReservas.
-     */
-    @Test
-    public void testCambiarEstadoReserva() {
-        System.out.println("cambiarEstadoReserva");
+		DTReserva expResult = dtr1;
+		DTReserva result = instance.infoReserva(aux);
+		assertEquals(expResult.toString(), result.toString());
+	}
 
-        EstadoReserva nuevoEstado = EstadoReserva.Pagada;
+	/**
+	 * Test of cambiarEstadoReserva method, of class ManejadorReservas.
+	 */
+	@Test
+	public void testCambiarEstadoReserva() {
+		System.out.println("cambiarEstadoReserva");
 
-        boolean expResult = true;
-        boolean result = instance.cambiarEstadoReserva(aux, nuevoEstado);
-        assertEquals(expResult, result);
-    }
+		EstadoReserva nuevoEstado = EstadoReserva.Pagada;
 
-    /**
-     * Test of eliminarReserva method, of class ManejadorReservas.
-     */
-    @Test
-    public void testEliminarReserva() {
-        System.out.println("eliminarReserva");
+		boolean expResult = true;
+		boolean result = instance.cambiarEstadoReserva(aux, nuevoEstado);
+		assertEquals(expResult, result);
+	}
 
-        instance.eliminarReserva(aux);
-        // TODO review the generated test code and remove the default call to fail.
-        assertFalse(instance.getReservas().containsKey(aux));
-    }
+	/**
+	 * Test of eliminarReserva method, of class ManejadorReservas.
+	 */
+	@Test
+	public void testEliminarReserva() {
+		System.out.println("eliminarReserva");
 
-    /**
-     * Test of agregarReserva method, of class ManejadorReservas.
-     */
-    @Test
-    public void testAgregarReserva() throws Exception {
-        System.out.println("agregarReserva");
+		instance.eliminarReserva(aux);
+		// TODO review the generated test code and remove the default call to fail.
+		assertFalse(instance.getReservas().containsKey(aux));
+	}
 
-        instance.agregarReserva(jorge, dtr1, "jorge");
-        // TODO review the generated test code and remove the default call to fail.
-        assertTrue(instance.getReservas().containsKey(aux+1));
-    }
+	/**
+	 * Test of agregarReserva method, of class ManejadorReservas.
+	 */
+	@Test
+	public void testAgregarReserva() throws Exception {
+		System.out.println("agregarReserva");
 
-    
-    @Test
-    public void testGetEstadoReserva(){
-        System.out.println("getEstadoReserva");
-        EstadoReserva estado = instance.getEstadoReserva(aux);
-        assertEquals(EstadoReserva.Registrada,estado);
-    }
+		instance.agregarReserva(jorge, dtr1, "jorge");
+		// TODO review the generated test code and remove the default call to fail.
+		assertTrue(instance.getReservas().containsKey(aux + 1));
+	}
+
+	@Test
+	public void testGetEstadoReserva() {
+		System.out.println("getEstadoReserva");
+		EstadoReserva estado = instance.getEstadoReserva(aux);
+		assertEquals(EstadoReserva.Registrada, estado);
+	}
 
 }

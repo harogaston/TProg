@@ -171,7 +171,7 @@ public class CtrlCarga {
 			p.agregarCiudad(new Ciudad("Cantón"));
 			mp.agregarPais(p);
 
-            //Alta Servicios
+			//Alta Servicios
 			//S1
 			Set<String> imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
@@ -315,7 +315,7 @@ public class CtrlCarga {
 			cats.add("Auto");
 			cats.add("Chevrolet");
 			mp.altaServicio(dtS, "mHooch", cats);
-            //Alta de Promociones
+			//Alta de Promociones
 			//P1 4 5
 
 			List<String> servs = new ArrayList<>();

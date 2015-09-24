@@ -2,25 +2,27 @@ package tprog.estaciondetrabajo.ui;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import tprog.logica.dt.DTItemPromocion;
+import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.ICtrlProductos;
 
 public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
-	public ServiciosPromocion(VerInformacionDePromocion padre, Set<DTItemPromocion> servicios, ICtrlProductos ctrlProductos) {
+	public ServiciosPromocion(VerInformacionDePromocion padre, HashMap<DTMinServicio, Integer> servicios, ICtrlProductos ctrlProductos) {
 		this.padre = padre;
 		this.servicios = servicios;
 		this.ctrlProductos = ctrlProductos;
 		initComponents();
 		//construyo lista para la interfaz usando el set
-		for (DTItemPromocion dt : servicios) {
-			listaServicios.add(dt.getDTMinServicio().getIdServicio());
+		for (Map.Entry<DTMinServicio, Integer> par : servicios.entrySet()) {
+			listaServicios.add(par.getKey().getIdServicio());
 		}
 		comboboxImagenes.setEnabled(false);
 		getRootPane().setDefaultButton(botonAtras);
@@ -87,22 +89,28 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
 		String servicio = (String) listaServiciosInterfaz.getSelectedItem();
 		if (servicio != null) {
-			//buscar servicio
-			DTItemPromocion dt = null;
-			Iterator it = servicios.iterator();
+
+			// Busco el DTMinServicio para mandarlo al controlador
+			DTMinServicio dt = null;
+			Iterator<Map.Entry<DTMinServicio, Integer>> it = servicios.entrySet().iterator();
 			boolean found = false;
+			Integer cantidad = 0;
 			while (it.hasNext() && !found) {
-				DTItemPromocion tmp = (DTItemPromocion) it.next();
-				if (tmp.getDTMinServicio().getIdServicio().equals(servicio)) {
-					dt = tmp; //es imposible que dt sea null al final del loop
+				Map.Entry<DTMinServicio, Integer> par = it.next();
+				if (par.getKey().getIdServicio().equals(servicio)) {
+					dt = par.getKey();
 					found = true;
+					cantidad = par.getValue();
 				}
 			}
-			ctrlProductos.seleccionarServicio(dt.getDTMinServicio());
+			ctrlProductos.seleccionarServicio(dt);
 			DTServicio dtServicio = ctrlProductos.infoServicio();
-			//imagenes
+
 			detalleServicio.setVisible(true);
-			detalleServicio.setText(dt.toString());
+			String descripcion = dt.toString() + "Cantidad: " + Integer.toString(cantidad) + "\n";
+			detalleServicio.setText(descripcion);
+
+			//imagenes
 			modelComboBox.clear();
 			comboboxImagenes.setSelectedItem(null);
 			Set<String> imagenes = dtServicio.getImagenes();
@@ -142,7 +150,7 @@ public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
 	Vector<ImageIcon> modelComboBox = new Vector<>();
 	ICtrlProductos ctrlProductos;
-	Set<DTItemPromocion> servicios;
+	Map<DTMinServicio, Integer> servicios;
 	VerInformacionDePromocion padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

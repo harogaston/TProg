@@ -12,7 +12,7 @@ import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.ICtrlProductos;
 
 public class ServiciosSistema extends javax.swing.JInternalFrame {
-	
+
 	public ServiciosSistema(VerInformacionDeServicio padre, Set<DTMinServicio> servicios, ICtrlProductos ctrlProductos) {
 		this.padre = padre;
 		this.servicios = servicios;

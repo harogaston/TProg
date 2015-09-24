@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
 import java.awt.Image;
@@ -28,12 +23,6 @@ public class AltaDeServicio3 extends javax.swing.JInternalFrame {
 	private ICtrlProductos ctrlProductos;
 	private AltaDeServicio2 padre;
 
-	/**
-	 * Creates new form AltaDeServicio5
-	 *
-	 * @param padre
-	 * @param ctrlProductos
-	 */
 	public AltaDeServicio3(AltaDeServicio2 padre, ICtrlProductos ctrlProductos) {
 		initComponents();
 		this.padre = padre;

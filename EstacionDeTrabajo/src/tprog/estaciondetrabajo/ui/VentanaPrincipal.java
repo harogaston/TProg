@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.estaciondetrabajo.carga.CtrlCarga;
-import tprog.logica.interfaces.Fabrica;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -18,11 +11,12 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import tprog.estaciondetrabajo.carga.CtrlCarga;
+import tprog.logica.interfaces.Fabrica;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
 	public VentanaPrincipal() {
-		//inicializacion autogenerada
 		initComponents();
 	}
 
@@ -224,7 +218,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 	public void closeAllInternalFrames() {
-
 		JInternalFrame fram[] = this.desktop.getAllFrames();
 		for (int i = 0; i < fram.length; i++) {
 			fram[i].dispose();
@@ -311,10 +304,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemActualizarServicioActionPerformed
 
     private void cargarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarDatosActionPerformed
-        CtrlCarga ctrl = new CtrlCarga();
-        ctrl.cargarDatos();
-        JOptionPane.showMessageDialog(desktop, "Datos cargados con exito.", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
-        cargarDatos.setEnabled(false);
+		CtrlCarga ctrl = new CtrlCarga();
+		ctrl.cargarDatos();
+		JOptionPane.showMessageDialog(desktop, "Datos cargados con exito.", "Carga de datos", JOptionPane.INFORMATION_MESSAGE);
+		cargarDatos.setEnabled(false);
     }//GEN-LAST:event_cargarDatosActionPerformed
 
 	private void menuItemAltaServicioActionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,8 +317,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 	}
 
     private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
-        AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
-        center(altaDePromocion);
+		AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+		center(altaDePromocion);
 		altaDePromocion.initCheck();
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 

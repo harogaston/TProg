@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.manejadores;
 
 import java.awt.Image;
@@ -53,7 +48,7 @@ public class ManejadorUsuarios {
 		} else {
 			throw new Exception("No existen Proveedores registrados en el Sistema");
 		}
-		
+
 	}
 
 	public Set<DTMinServicio> listarServiciosProveedor(String nickname) {
@@ -138,14 +133,12 @@ public class ManejadorUsuarios {
 			}
 		}
 		if (esProveedor) {
-			Proveedor nuevoProveedor = new Proveedor((DTProveedor)dtU);
+			Proveedor nuevoProveedor = new Proveedor((DTProveedor) dtU);
 			proveedores.put(dtU.getNickname(), nuevoProveedor);
-		}
-		else{
-			Cliente nuevoCliente = new Cliente((DTCliente)dtU);
+		} else {
+			Cliente nuevoCliente = new Cliente((DTCliente) dtU);
 			clientes.put(dtU.getNickname(), nuevoCliente);
 		}
-		
 	}
 
 	public Cliente getCliente(String nickname) {
@@ -156,11 +149,11 @@ public class ManejadorUsuarios {
 		return proveedores.get(nickname);
 	}
 
-	public Map<String, Proveedor> getProveedores() {
-		return proveedores;
+	public Map<String, Cliente> getClientes() {
+		return this.clientes;
 	}
 
-	public Map<String, Cliente> getClientes() {
-		return clientes;
+	public Map<String, Proveedor> getProveedores() {
+		return this.proveedores;
 	}
 }

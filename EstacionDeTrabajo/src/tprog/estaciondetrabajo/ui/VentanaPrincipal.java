@@ -136,6 +136,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuRegistros.add(menuItemActualizarServicio);
 
         menuItemRealizarReserva.setText("Realizar Reserva");
+        menuItemRealizarReserva.setEnabled(false);
         menuItemRealizarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemRealizarReservaActionPerformed(evt);

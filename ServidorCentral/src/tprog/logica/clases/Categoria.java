@@ -1,11 +1,8 @@
-/*
- * Header Test
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTMinServicio;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
+import tprog.logica.dt.DTMinServicio;
 
 public interface Categoria {
 

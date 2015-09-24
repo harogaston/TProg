@@ -1,10 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.manejadores;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import tprog.logica.clases.Cliente;
 import tprog.logica.clases.Proveedor;
 import tprog.logica.dt.DTCliente;
@@ -13,10 +12,6 @@ import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public class ManejadorUsuarios {
 
@@ -36,15 +31,18 @@ public class ManejadorUsuarios {
 		return instace;
 	}
 
-	public Set<DTMinProveedor> listarProveedores() {
+	public Set<DTMinProveedor> listarProveedores() throws Exception {
 		Set<DTMinProveedor> lista = new HashSet();
 		if (!proveedores.isEmpty()) {
 			for (Proveedor p : proveedores.values()) {
 				DTMinProveedor dtMin = p.crearDTMin();
 				lista.add(dtMin);
 			}
+			return lista;
+		} else {
+			throw new Exception("No existen Proveedores registrados en el Sistema");
 		}
-		return lista;
+
 	}
 
 	public Set<DTMinServicio> listarServiciosProveedor(String nickname) {
@@ -118,13 +116,13 @@ public class ManejadorUsuarios {
 	}
 
 	public void altaCliente(DTCliente dtC) {
-            Cliente nuevoCliente = new Cliente(dtC);
-            clientes.put(dtC.getNickname(), nuevoCliente);
+		Cliente nuevoCliente = new Cliente(dtC);
+		clientes.put(dtC.getNickname(), nuevoCliente);
 	}
 
 	public void altaProveedor(DTProveedor dtP) {
-            Proveedor nuevoProveedor = new Proveedor(dtP);
-            proveedores.put(dtP.getNickname(), nuevoProveedor);
+		Proveedor nuevoProveedor = new Proveedor(dtP);
+		proveedores.put(dtP.getNickname(), nuevoProveedor);
 	}
 
 	public Cliente getCliente(String nickname) {
@@ -134,12 +132,12 @@ public class ManejadorUsuarios {
 	public Proveedor getProveedor(String nickname) {
 		return proveedores.get(nickname);
 	}
-        
-        public Map<String,Proveedor> getProveedores(){
-                return proveedores;
-        }
-        
-        public Map<String,Cliente> getClientes(){
-                return clientes;
-        }
+
+	public Map<String, Cliente> getClientes() {
+		return this.clientes;
+	}
+
+	public Map<String, Proveedor> getProveedores() {
+		return this.proveedores;
+	}
 }

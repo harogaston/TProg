@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTLineaReserva;
-import tprog.logica.dt.DTReserva;
-import tprog.logica.interfaces.ICtrlReservas;
-import tprog.logica.interfaces.ICtrlUsuarios;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import tprog.logica.dt.DTLineaReserva;
+import tprog.logica.dt.DTReserva;
+import tprog.logica.interfaces.ICtrlReservas;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class RealizarReserva2 extends javax.swing.JInternalFrame {
 
@@ -184,7 +179,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
 		this.setVisible(false);
 		getParent().add(rr3);
 		rr3.setLocation(this.getLocation());
-		rr3.setVisible(true);	
+		rr3.setVisible(true);
     }//GEN-LAST:event_buttonAgregarServicioActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed

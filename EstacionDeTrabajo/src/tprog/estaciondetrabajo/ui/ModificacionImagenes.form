@@ -50,9 +50,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboboxImagenes">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboboxImagenesActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(modelComboBox)"/>
       </AuxValues>

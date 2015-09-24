@@ -1,50 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTLineaReserva;
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTPromocion;
-import tprog.logica.dt.DTProveedor;
-import tprog.logica.dt.DTReserva;
-import tprog.logica.dt.DTServicio;
-import tprog.logica.interfaces.ICtrlProductos;
-import tprog.logica.interfaces.ICtrlUsuarios;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTServicio;
+import tprog.logica.interfaces.ICtrlProductos;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class AltaDePromocion3 extends javax.swing.JInternalFrame {
 
-	/**
-	 * Creates new form ReservasCliente
-	 *
-	 * @param idCliente
-	 * @param padre
-	 */
 	public AltaDePromocion3(AltaDePromocion2 padre, Set<DTMinServicio> servicios, ICtrlUsuarios ctrlUsuarios, ICtrlProductos ctrlProductos, String proveedor) {
 		this.padre = padre;
-        this.proveedor = proveedor;
+		this.proveedor = proveedor;
 		this.ctrlUsuarios = ctrlUsuarios;
-        this.ctrlProductos = ctrlProductos;
-        this.servicios = servicios;
-        this.serviciosProm = new HashSet<DTMinServicio>();
-        //this.servicios = ctrlProductos.listarServiciosProveedor();
+		this.ctrlProductos = ctrlProductos;
+		this.servicios = servicios;
+		this.serviciosProm = new HashSet<DTMinServicio>();
+		//this.servicios = ctrlProductos.listarServiciosProveedor();
 		initComponents();
-        setTitle("Alta de Promoción");
 		//construyo lista para la interfaz usando el set
 		if (servicios != null) {
 			for (DTMinServicio dt : servicios) {
-                listaServicios.add(dt.getIdServicio());
+				listaServicios.add(dt.getIdServicio());
 			}
 		}
 	}
@@ -69,19 +49,8 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         setTitle("Alta de Promoción - Servicios");
         setPreferredSize(new java.awt.Dimension(640, 480));
-        setVisible(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        listaServiciosInterfaz.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                listaServiciosInterfazInterfazComponentAdded(evt);
-            }
-        });
-        listaServiciosInterfaz.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                listaServiciosInterfazItemStateChanged(evt);
-            }
-        });
         listaServiciosInterfaz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 listaServiciosInterfazInterfazActionPerformed(evt);
@@ -128,37 +97,27 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listaServiciosInterfazInterfazComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazComponentAdded
-
-    }//GEN-LAST:event_listaServiciosInterfazInterfazComponentAdded
-
-    private void listaServiciosInterfazItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_listaServiciosInterfazItemStateChanged
-		// TODO add your handling code here:
-    }//GEN-LAST:event_listaServiciosInterfazItemStateChanged
-
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
-	   String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+		String servicio = (String) listaServiciosInterfaz.getSelectedItem();
 		if (servicio != null) {
 			ctrlUsuarios.seleccionarServicio(servicio);
 			DTServicio dt = ctrlUsuarios.infoServicio();
-            
-             DTMinServicio dtm = null;
-            servicios = ctrlUsuarios.listarServiciosProveedor();
-            Iterator it = servicios.iterator();
-            boolean found = false;
-            while (it.hasNext() && !found) {
-                //System.out.println("323");
-                DTMinServicio tmp = (DTMinServicio) it.next();
-                if (tmp.getIdServicio().equals(servicio)) {
-                    dtm = tmp; //es imposible que dt sea null al final del loop
-                    //System.out.println("aaaasd");
-                }
 
-            }   
-            ctrlProductos.seleccionarServicio(dtm);
+			DTMinServicio dtm = null;
+			servicios = ctrlUsuarios.listarServiciosProveedor();
+			Iterator it = servicios.iterator();
+			boolean found = false;
+			while (it.hasNext() && !found) {
+				DTMinServicio tmp = (DTMinServicio) it.next();
+				if (tmp.getIdServicio().equals(servicio)) {
+					dtm = tmp; //es imposible que dt sea null al final del loop
+				}
+
+			}
+			ctrlProductos.seleccionarServicio(dtm);
 			detalleServicio.setVisible(true);
 			detalleServicio.setText(dt.toString());
-		}       
+		}
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void botonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAtrasActionPerformed
@@ -167,45 +126,43 @@ public class AltaDePromocion3 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botonAtrasActionPerformed
 
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
-        // TODO add your handling code here:
-        //agrego el servicio a la promo
-        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
-        if (servicio != null) {
-            //DTServicio dtS = ctrlUsuarios.infoServicio();
-            //detalleServicio.setVisible(true);
-            //detalleServicio.setText(dtS.toString());
-            DTMinServicio dtmS = ctrlProductos.infoMinServicio();
-            //String proveedorr = dtmS.getNicknameP();
-            ctrlProductos.seleccionarProveedor(proveedor);
-            ctrlProductos.seleccionarServicio(dtmS);
-            // qe wea ermano
-            ctrlProductos.seleccionarServicio(dtmS);
-            //leer cantidad y fechas
-            //validar cantidad
-            ctrlProductos.agregarServicio(dtmS);
-            serviciosProm.add(dtmS);
-            JOptionPane.showMessageDialog(this, "Servicio agregado correctamente.", "Alta de Promoción", JOptionPane.INFORMATION_MESSAGE);
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Seleccione un Servicio por favor.", "Error", JOptionPane.ERROR_MESSAGE);           
-        }                        
+		//agrego el servicio a la promo
+		String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+		if (servicio != null) {
+			//DTServicio dtS = ctrlUsuarios.infoServicio();
+			//detalleServicio.setVisible(true);
+			//detalleServicio.setText(dtS.toString());
+			DTMinServicio dtmS = ctrlProductos.infoMinServicio();
+			//String proveedorr = dtmS.getNicknameP();
+			ctrlProductos.seleccionarProveedor(proveedor);
+			ctrlProductos.seleccionarServicio(dtmS);
+			ctrlProductos.seleccionarServicio(dtmS);
+			//leer cantidad y fechas
+			//validar cantidad
+			ctrlProductos.agregarServicio(dtmS);
+			serviciosProm.add(dtmS);
+			listaServiciosInterfaz.setSelectedItem(null);
+			detalleServicio.setText(null);
+			JOptionPane.showMessageDialog(this, "Servicio agregado correctamente.", "Alta de Promoción", JOptionPane.INFORMATION_MESSAGE);
+		} else {
+			JOptionPane.showMessageDialog(this, "Seleccione un Servicio por favor.", "Error", JOptionPane.ERROR_MESSAGE);
+		}
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
     private void buttonSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSiguienteActionPerformed
-        // TODO add your handling code here:
-        AltaDePromocion4 ap4 = new AltaDePromocion4(this, serviciosProm, ctrlUsuarios, ctrlProductos, proveedor);
-        this.setVisible(false);
-        getParent().add(ap4);
-        ap4.setLocation(this.getLocation());
-        ap4.setVisible(true);
+		AltaDePromocion4 ap4 = new AltaDePromocion4(this, serviciosProm, ctrlUsuarios, ctrlProductos, proveedor);
+		this.setVisible(false);
+		getParent().add(ap4);
+		ap4.setLocation(this.getLocation());
+		ap4.setVisible(true);
     }//GEN-LAST:event_buttonSiguienteActionPerformed
 
 	ICtrlUsuarios ctrlUsuarios;
-    ICtrlProductos ctrlProductos;
+	ICtrlProductos ctrlProductos;
 	Set<DTMinServicio> servicios;
-    Set<DTMinServicio> serviciosProm;
+	Set<DTMinServicio> serviciosProm;
 	AltaDePromocion2 padre;
-    String proveedor;
+	String proveedor;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;
     private javax.swing.JButton buttonAgregar;

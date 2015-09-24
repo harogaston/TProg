@@ -1,27 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.clases;
 
-import tprog.logica.dt.DTCliente;
-import tprog.logica.dt.DTMinCliente;
-import tprog.logica.dt.DTMinReserva;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTMinCliente;
+import tprog.logica.dt.DTMinReserva;
 
 public class Cliente extends Usuario {
 
 	Map<Integer, Reserva> reservas;
-
-	public Cliente(String nickname, String password, String nombre, String apellido, String email, String imagen, Date fechaN) {
-		super(nickname, password, nombre, apellido, email, imagen, fechaN);
-		this.reservas = new HashMap();
-	}
 
 	public Cliente(DTCliente dtC) {
 		super(dtC.getNickname(), dtC.getPassword(), dtC.getNombre(), dtC.getApellido(), dtC.getEmail(), dtC.getImagen(), dtC.getFechaNacimiento());
@@ -45,11 +34,11 @@ public class Cliente extends Usuario {
 	public void agregarReserva(Reserva reserva) {
 		reservas.put(reserva.getIdReserva(), reserva);
 	}
-	
-	public void quitarReserva(int idReserva){
+
+	public void quitarReserva(int idReserva) {
 		reservas.remove(idReserva);
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		Cliente c = (Cliente) o;

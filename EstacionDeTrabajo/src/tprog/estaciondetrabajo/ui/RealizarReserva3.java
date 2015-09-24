@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.estaciondetrabajo.ui;
 
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlProductos;
-import tprog.logica.interfaces.ICtrlReservas;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -17,60 +8,68 @@ import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import tprog.logica.dt.DTMinServicio;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlProductos;
+import tprog.logica.interfaces.ICtrlReservas;
 
 public class RealizarReserva3 extends javax.swing.JInternalFrame {
 
-    public RealizarReserva3(RealizarReserva2 padre, ICtrlReservas ctrlReservas, boolean proveedorSeleccionado) {
+	public RealizarReserva3(RealizarReserva2 padre, ICtrlReservas ctrlReservas, boolean proveedorSeleccionado) {
 
-        //asignación de atributos
-        this.padre = padre;
-        this.ctrlReservas = ctrlReservas;
-        f = Fabrica.getInstance();
-        this.ctrlProductos = f.getICtrlProductos();
-        initComponents();
+		//asignación de atributos
+		this.padre = padre;
+		this.ctrlReservas = ctrlReservas;
+		f = Fabrica.getInstance();
+		this.ctrlProductos = f.getICtrlProductos();
+		initComponents();
 
 		//obtengo los servicios a mostrar
-        //si nunca elegí alguno, se muestran todos
-        //si no, se muestran sólo los de ese proveedor
-        Set<DTMinServicio> setServicios = this.ctrlReservas.listarServicios();
-        Set<DTMinServicio> setServiciosP = null;
-        if (!setServicios.isEmpty()) {
-            if (proveedorSeleccionado) {
-                //muestro solo los servicios del proveedor seleccionado
-                setServiciosP = this.ctrlReservas.listarServiciosProveedor();
-				//construyo un vector con la informacion a mostrar, porque
-                //el comboBox solo funciona con Vector o List
-                if (!setServiciosP.isEmpty()) {
-                    for (DTMinServicio dt : setServiciosP) {
-                        listaServicios.add(dt.getIdServicio());
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "No hay servicios en el sistema para el proveedor actual", "Error", JOptionPane.ERROR_MESSAGE);
-                    this.dispose();
-                }
-            } else {
-                for (DTMinServicio dt : setServicios) {
-                    listaServicios.add(dt.getIdServicio());
-                }
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "No hay servicios en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
-            this.dispose();
-        }
-        listaServicios.sort(null);
+		//si nunca elegí alguno, se muestran todos
+		//si no, se muestran sólo los de ese proveedor
+		Set<DTMinServicio> setServicios;
+		try {
+			setServicios = this.ctrlReservas.listarServicios();
+
+			Set<DTMinServicio> setServiciosP = null;
+			if (!setServicios.isEmpty()) {
+				if (proveedorSeleccionado) {
+					//muestro solo los servicios del proveedor seleccionado
+					setServiciosP = this.ctrlReservas.listarServiciosProveedor();
+					//construyo un vector con la informacion a mostrar, porque
+					//el comboBox solo funciona con Vector o List
+					if (!setServiciosP.isEmpty()) {
+						for (DTMinServicio dt : setServiciosP) {
+							listaServicios.add(dt.getIdServicio());
+						}
+					} else {
+						JOptionPane.showMessageDialog(this, "No hay servicios en el sistema para el proveedor actual", "Error", JOptionPane.ERROR_MESSAGE);
+						this.dispose();
+					}
+				} else {
+					for (DTMinServicio dt : setServicios) {
+						listaServicios.add(dt.getIdServicio());
+					}
+				}
+			}
+		} catch (Exception ex) {
+			JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+			this.dispose();
+		}
+		listaServicios.sort(null);
 		getRootPane().setDefaultButton(buttonAgregar);
-    }
+	}
 
-    private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
-        List<Integer> lista = new ArrayList<>();
-        for (int i = min; i <= max; i++) {
-            lista.add(i);
-        }
-        Integer[] anios = lista.toArray(new Integer[lista.size()]);
-        return new DefaultComboBoxModel<Integer>(anios);
-    }
+	private DefaultComboBoxModel<Integer> modelRange(int min, int max) {
+		List<Integer> lista = new ArrayList<>();
+		for (int i = min; i <= max; i++) {
+			lista.add(i);
+		}
+		Integer[] anios = lista.toArray(new Integer[lista.size()]);
+		return new DefaultComboBoxModel<Integer>(anios);
+	}
 
-		private boolean fechaValida(int dia, int mes, int anio) {
+	private boolean fechaValida(int dia, int mes, int anio) {
 		switch (mes) {
 			case 1:
 			case 3:
@@ -97,13 +96,13 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
 				return false;
 		}
 	}
-	
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
+
+	/**
+	 * This method is called from within the constructor to initialize the form.
+	 * WARNING: Do NOT modify this code. The content of this method is always
+	 * regenerated by the Form Editor.
+	 */
+	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -214,100 +213,106 @@ public class RealizarReserva3 extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listaServiciosInterfazInterfazActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaServiciosInterfazInterfazActionPerformed
-        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
-        if (servicio != null) {
-            //buscar servicio
-            DTMinServicio dt = null;
-            servicios = ctrlReservas.listarServicios();
-            Iterator it = servicios.iterator();
-            boolean found = false;
-            while (it.hasNext() && !found) {
-                DTMinServicio tmp = (DTMinServicio) it.next();
-                if (tmp.getIdServicio().equals(servicio)) {
-                    dt = tmp;
-                }
-            }
+		String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+		if (servicio != null) {
+			try {
+				//buscar servicio
+				DTMinServicio dt = null;
+				servicios = ctrlReservas.listarServicios();
 
-            // Lo mando al Ctrl y muestro su DT
-            ctrlProductos.seleccionarServicio(dt);
-            detalleServicio.setVisible(true);
-            detalleServicio.setText(ctrlProductos.infoServicio().toString());
-        }
+				Iterator it = servicios.iterator();
+				boolean found = false;
+				while (it.hasNext() && !found) {
+					DTMinServicio tmp = (DTMinServicio) it.next();
+					if (tmp.getIdServicio().equals(servicio)) {
+						dt = tmp;
+					}
+				}
+
+				// Lo mando al Ctrl y muestro su DT
+				ctrlProductos.seleccionarServicio(dt);
+				detalleServicio.setVisible(true);
+				detalleServicio.setText(ctrlProductos.infoServicio().toString());
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(this, ex.getMessage(), "Información", JOptionPane.INFORMATION_MESSAGE);
+				this.dispose();
+			}
+		}
     }//GEN-LAST:event_listaServiciosInterfazInterfazActionPerformed
 
     private void buttonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAtrasActionPerformed
-        this.setVisible(false);
-        this.padre.setVisible(true);
+		this.setVisible(false);
+		this.padre.setVisible(true);
     }//GEN-LAST:event_buttonAtrasActionPerformed
 
     private void buttonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAgregarActionPerformed
-        String servicio = (String) listaServiciosInterfaz.getSelectedItem();
-        if (servicio != null) {
-            DTMinServicio dtmS = ctrlProductos.infoMinServicio();
-            String proveedor = dtmS.getNicknameP();
-            ctrlReservas.seleccionarProveedor(proveedor);
-            ctrlReservas.seleccionarServicio(dtmS);
-            ctrlProductos.seleccionarServicio(dtmS);
+		String servicio = (String) listaServiciosInterfaz.getSelectedItem();
+		if (servicio != null) {
+			DTMinServicio dtmS = ctrlProductos.infoMinServicio();
+			String proveedor = dtmS.getNicknameP();
+			ctrlReservas.seleccionarProveedor(proveedor);
+			ctrlReservas.seleccionarServicio(dtmS);
+			ctrlProductos.seleccionarServicio(dtmS);
 
-            //validar cantidad
-            int cant = -1;
-            String cantString = jTextFieldCantidad.getText();
-            boolean okCant;
-            try {
-                cant = Integer.parseInt(cantString);
-                okCant = cant > 0;
-            } catch (NumberFormatException e) {
-                okCant = false;
-            }
+			//validar cantidad
+			int cant = -1;
+			String cantString = jTextFieldCantidad.getText();
+			boolean okCant;
+			try {
+				cant = Integer.parseInt(cantString);
+				okCant = cant > 0;
+			} catch (NumberFormatException e) {
+				okCant = false;
+			}
 
-            //fechas
-            int diaI = (Integer) comboBoxDias1.getSelectedItem();
-            int diaF = (Integer) comboBoxDias2.getSelectedItem();
-            int mesI = comboBoxMeses1.getSelectedIndex();
-            int mesF = comboBoxMeses2.getSelectedIndex();
-            int anioI = (Integer) comboBoxAnios1.getSelectedItem();
-            int anioF = (Integer) comboBoxAnios2.getSelectedItem();
+			//fechas
+			int diaI = (Integer) comboBoxDias1.getSelectedItem();
+			int diaF = (Integer) comboBoxDias2.getSelectedItem();
+			int mesI = comboBoxMeses1.getSelectedIndex();
+			int mesF = comboBoxMeses2.getSelectedIndex();
+			int anioI = (Integer) comboBoxAnios1.getSelectedItem();
+			int anioF = (Integer) comboBoxAnios2.getSelectedItem();
 
-            Date fechaInicio = new Date(anioI, mesI, diaI);
-            Date fechaFinal = new Date(anioF, mesF, diaF);
+			Date fechaInicio = new Date(anioI, mesI, diaI);
+			Date fechaFinal = new Date(anioF, mesF, diaF);
 
-            // Verifico las fechas
+			// Verifico las fechas
 			boolean okFechaInicio = fechaValida(diaI, mesI + 1, anioI);
 			boolean okFechaFinal = fechaValida(diaF, mesF + 1, anioF);
-            boolean fechasCoherentes = !fechaInicio.after(fechaFinal);
+			boolean fechasCoherentes = !fechaInicio.after(fechaFinal);
 			boolean okFechas = okFechaInicio && okFechaFinal && fechasCoherentes;
 
-            // Si todo esta ok
-            if (okCant && okFechas) {
-                // Envío la información al controlador
-                ctrlReservas.ingresarLineaReserva(cant, fechaInicio, fechaFinal);
+			// Si todo esta ok
+			if (okCant && okFechas) {
+				// Envío la información al controlador
+				ctrlReservas.ingresarLineaReserva(cant, fechaInicio, fechaFinal);
 
-                JOptionPane.showMessageDialog(this, "El servicio fue agregado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
-                this.padre.setVisible(true);
-            } else { //hay algun dato erroneo
-                String error = "";
-                if (!okCant) {
-                    error = "Por favor ingrese una cantidad válida.";
-                } else if (!fechasCoherentes) {
-                    error = "La fecha de inicio debe ser anterior a la fecha de finalización.";
-                } else if (!okFechaInicio) {
+				JOptionPane.showMessageDialog(this, "El servicio fue agregado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+				this.setVisible(false);
+				this.padre.setVisible(true);
+			} else { //hay algun dato erroneo
+				String error = "";
+				if (!okCant) {
+					error = "Por favor ingrese una cantidad válida.";
+				} else if (!fechasCoherentes) {
+					error = "La fecha de inicio debe ser anterior a la fecha de finalización.";
+				} else if (!okFechaInicio) {
 					error = "La fecha de inicio ingresada no es correcta.";
 				} else if (!okFechaFinal) {
 					error = "La fecha de finalización ingresada no es correcta.";
 				}
-                JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar un servicio.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
-        }
+				JOptionPane.showMessageDialog(this, "Error! " + error, "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+			}
+		} else {
+			JOptionPane.showMessageDialog(this, "Debe seleccionar un servicio.", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
+		}
     }//GEN-LAST:event_buttonAgregarActionPerformed
 
-    private ICtrlReservas ctrlReservas;
-    private ICtrlProductos ctrlProductos;
-    Fabrica f;
-    Set<DTMinServicio> servicios;
-    RealizarReserva2 padre;
+	private ICtrlReservas ctrlReservas;
+	private ICtrlProductos ctrlProductos;
+	Fabrica f;
+	Set<DTMinServicio> servicios;
+	RealizarReserva2 padre;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAgregar;
     private javax.swing.JButton buttonAtras;

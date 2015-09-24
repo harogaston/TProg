@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.logica.clases;
 
 import java.util.HashMap;
@@ -14,8 +9,8 @@ public class Pais {
 	private Map<String, Ciudad> ciudades;
 
 	public Pais(String id) {
-            this.idPais = id;
-            this.ciudades = new HashMap();
+		this.idPais = id;
+		this.ciudades = new HashMap();
 	}
 
 	public String getIdPais() {

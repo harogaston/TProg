@@ -7,9 +7,9 @@ import javax.swing.JOptionPane;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.interfaces.ICtrlProductos;
 
-public class ActualizarServicio extends javax.swing.JInternalFrame {
+public class ActualizarServicio1 extends javax.swing.JInternalFrame {
 
-	public ActualizarServicio(ICtrlProductos ctrlProductos) {
+	public ActualizarServicio1(ICtrlProductos ctrlProductos) {
 		this.ctrlProductos = ctrlProductos;
 		initComponents();
 		getRootPane().setDefaultButton(botonModificar);
@@ -125,7 +125,7 @@ public class ActualizarServicio extends javax.swing.JInternalFrame {
 		String cliente = (String) listaServiciosInterfaz.getSelectedItem();
 		System.out.println("servicio: " + cliente);
 		if (cliente != null) {
-			ModificacionServicio m = new ModificacionServicio(this, ctrlProductos.infoServicio(), ctrlProductos);
+			ActualizarServicio2 m = new ActualizarServicio2(this, ctrlProductos.infoServicio(), ctrlProductos);
 			this.setVisible(false);
 			getParent().add(m);
 			m.setLocation(this.getLocation());

@@ -143,4 +143,16 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
 		return mp.infoServicio(nuevoDT);
 	}
+        
+        @Override
+        public boolean idCorrecta(String id){
+            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+            return mu.idCorrecta(id);
+        }
+        
+        @Override
+        public boolean pwCorrecta(String id, String password){
+            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+            return mu.pwCorrecta(id,password);
+        }
 }

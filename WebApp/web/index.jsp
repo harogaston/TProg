@@ -1,17 +1,17 @@
-<%-- 
-    Document   : index
-    Created on : Sep 24, 2015, 3:10:57 PM
-    Author     : marccio.silva
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+<!doctype html>
+<html lang="en">
+	<head>
+		<%@include file="/WEB-INF/templates/head.jspf" %>
     </head>
-    <body>
-        <h1>Hello World!</h1>
+    <header>
+		<%@include file="/WEB-INF/templates/header.jspf" %>
+    </header>
+    <body>		
+		
+		<!-- Los imports de JavaScript deben ir al final del 'body' para favorecer 
+		el tiempo de carga de la página -->
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="js/bootstrap.min.js"></script>
     </body>
+    <%@include file="/WEB-INF/templates/footer.jspf" %>
 </html>

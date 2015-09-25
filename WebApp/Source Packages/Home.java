@@ -31,39 +31,40 @@ public class Home extends HttpServlet {
 		return (EstadoSesion) request.getSession().getAttribute("estado_sesion");
 	}
 
-	private void processRequest(HttpServletRequest req, HttpServletResponse resp)
+	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		initSession(req);
+		initSession(request);
 		
-		switch(getEstado(req)){
+		switch(getEstado(request)){
 			case NO_LOGIN:
 				// hace que se ejecute el jsp sin cambiar la url
-				req.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(req, resp);
+				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request, response);
 				break;
 			case LOGIN_INCORRECTO:
 				// hace que se ejecute el jsp sin cambiar la url
-				req.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(req, resp);
+				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request, response);
                                 // te devuelve en al pagina de inicio como si nada hubiera pasado
                                 //hay que hacer una pag de login incorrecto
                                 
 				break;
 			case LOGIN_CORRECTO:
 				// manda una redirección a otra URL (cambia la URL)
-				resp.sendRedirect("/perfil");
+				//response.sendRedirect("/WEB-INF/sesion.jsp");
+                                request.getRequestDispatcher("/WEB-INF/sesion.jsp").forward(request, response);
 				break;
 		}
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-		processRequest(req, resp);
+		processRequest(request, response);
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(req, resp);
+		processRequest(request, response);
 	}
 
 }

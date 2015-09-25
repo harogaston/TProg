@@ -12,6 +12,10 @@
         <servlet-name>EstadoSesion</servlet-name>
         <servlet-class>tprog.logica.clases.EstadoSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CerrarSesion</servlet-name>
+        <servlet-class>CerrarSesion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>EstadoSesion</servlet-name>
         <url-pattern>/EstadoSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CerrarSesion</servlet-name>
+        <url-pattern>/CerrarSesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

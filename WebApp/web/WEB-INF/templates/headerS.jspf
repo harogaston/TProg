@@ -22,7 +22,7 @@
 			</div>
 			<div class="col-md-4">
                             
-				<form action= "index.jsp" class="navbar-form navbar-right form-inline" role="form" method="POST">
+				<form action= "CerrarSesion" class="navbar-form navbar-right form-inline" role="form" method="POST">
 					<div class="form-group">
 						<label class="sr-only" for="Usuario"><Pepito</label>
 					</div>

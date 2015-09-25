@@ -25,8 +25,9 @@ public class CerrarSesion extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession objSesion = request.getSession();
-        EstadoSesion nuevoEstado = EstadoSesion.LOGIN_INCORRECTO; // ahora da siempre login incorrecot dado que no estan cargados los datos
+        EstadoSesion nuevoEstado = EstadoSesion.NO_LOGIN; // ahora da siempre login incorrecto dado que no estan cargados los datos
         objSesion.setAttribute("estado_sesion", nuevoEstado);
+        objSesion.invalidate(); // creo q sirve para cuando se esta creando el carrito q se cierra sesion y borras todo
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");
         dispatcher.forward(request, response);
     }

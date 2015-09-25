@@ -168,7 +168,11 @@ public class ManejadorUsuarios {
                             }
 			}
                     }
+                }else{
+                    return password.equals(prov.getPassword());
                 }
+            }else{
+                return password.equals(cliente.getPassword());
             }
             return false;
         }

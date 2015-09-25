@@ -1,23 +1,17 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<title>H4Travelling</title>
-
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+		<%@include file="/WEB-INF/templates/head.jspf" %>
     </head>
-    <body>
+    <header>
 		<%@include file="/WEB-INF/templates/header.jspf" %>
-		<%@include file="/WEB-INF/templates/footer.jspf" %>
+    </header>
+    <body>		
 		
-		<!-- Latest compiled jQuery -->
-		<script type="text/JavaScript" src="js/jquery-2.1.4.js"></script>
-		<!-- Latest compiled and minified JavaScript -->
-		<script type="text/JavaScript" src="js/bootstrap.min.js"></script>
+		<!-- Los imports de JavaScript deben ir al final del 'body' para favorecer 
+		el tiempo de carga de la página -->
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="js/bootstrap.min.js"></script>
     </body>
+    <%@include file="/WEB-INF/templates/footer.jspf" %>
 </html>

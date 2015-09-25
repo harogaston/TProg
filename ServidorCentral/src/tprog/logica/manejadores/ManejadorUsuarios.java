@@ -140,4 +140,36 @@ public class ManejadorUsuarios {
 	public Map<String, Proveedor> getProveedores() {
 		return this.proveedores;
 	}
+        
+        public boolean idCorrecta(String id){
+            boolean existeNick = verificarNickname(id); // es falso si existe en el sistema
+            boolean existeEmail = verificarEmail(id);
+            //uno de los 2 debe ser falso, dado que no se si se ingresa un email o un nickname
+            // en caso de ser un usuario en el sistema, sino ambos son true
+            return (!(existeNick & existeEmail));
+        }
+        
+        public boolean pwCorrecta(String id, String password){
+            Cliente cliente = getCliente(id);
+            if (cliente == null){
+                Proveedor prov = getProveedor(id);
+                if (prov == null){
+                    if (!proveedores.isEmpty()) {
+			for (Proveedor p : proveedores.values()) {
+                            if (id.equals(p.getEmail())) {
+				return (password.equals(p.getPassword()));
+                            }
+			}
+                    }
+                    if (!clientes.isEmpty()) {
+			for (Cliente c : clientes.values()) {
+                            if (id.equals(c.getEmail())) {
+				return (password.equals(c.getPassword()));
+                            }
+			}
+                    }
+                }
+            }
+            return false;
+        }
 }

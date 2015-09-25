@@ -22,18 +22,11 @@
 			</div>
 			<div class="col-md-4">
                             
-				<form action= "IniciarSesion" class="navbar-form navbar-right form-inline" role="form" method="POST">
+				<form action= "index.jsp" class="navbar-form navbar-right form-inline" role="form" method="POST">
 					<div class="form-group">
-						<label class="sr-only" for="Email">Email</label>
-						<input type="email" class="form-control" id="Email" placeholder="Nickname" autofocus required />
+						<label class="sr-only" for="Usuario"><Pepito</label>
 					</div>
-					<div class="form-group">
-						<label class="sr-only" for="Password">Password</label>
-						<input type="password" class="form-control" id="Password" placeholder="Password" required />
-					</div>
-                                        
-                                            <button type="submit" class="btn btn-success">Ingresar</button>
-                                            
+					 <button type="submit" class="btn btn-success">Cerrar Sesion</button>    
                                     </form>
 				</form>
                             

@@ -16,9 +16,6 @@
 		<servlet-name>CerrarSesion</servlet-name>
 		<servlet-class>tprog.web.CerrarSesion</servlet-class>
 	</servlet>
-	<welcome-file-list>
-		<welcome-file>/index.html</welcome-file>
-	</welcome-file-list>
 	<servlet-mapping>
 		<servlet-name>Home</servlet-name>
 		<url-pattern>/Home</url-pattern>

@@ -3,9 +3,9 @@
 		<div class="row">
 			<div class="col-md-1"></div>
 			<div class="col-md-3">
-			<div class="row">
-				<a class="navbar-brand navbar-header" href="index.html">Help4traveling</a>
-			</div>
+				<div class="row">
+					<a class="navbar-brand navbar-header" href="index.html">Help4traveling</a>
+				</div>
 				<div class="row navbar-text">
 					Ofertas en hoteles, paquetes de viajes y más!
 				</div>
@@ -21,15 +21,12 @@
 				</form>
 			</div>
 			<div class="col-md-4">
-                            
 				<form action= "CerrarSesion" class="navbar-form navbar-right form-inline" role="form" method="POST">
 					<div class="form-group">
 						<label class="sr-only" for="Usuario"><Pepito</label>
 					</div>
-					 <button type="submit" class="btn btn-success">Cerrar Sesion</button>    
-                                    </form>
+					<button type="submit" class="btn btn-success">Cerrar Sesion</button>    
 				</form>
-                            
 			</div>
 			<div class="col-md-1"></div>
 		</div><!-- /.row -->

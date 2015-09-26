@@ -29,19 +29,18 @@ public class Home extends HttpServlet {
 		switch(getEstado(request)){
 			case NO_LOGIN:
 				// hace que se ejecute el jsp sin cambiar la url
-				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/home/inicio.jsp").forward(request, response);
 				break;
 			case LOGIN_INCORRECTO:
 				// hace que se ejecute el jsp sin cambiar la url
-				request.getRequestDispatcher("/WEB-INF/inicio.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/home/sesion.jsp").forward(request, response);
                                 // te devuelve en al pagina de inicio como si nada hubiera pasado
                                 //hay que hacer una pag de login incorrecto
                                 
 				break;
 			case LOGIN_CORRECTO:
 				// manda una redirección a otra URL (cambia la URL)
-				//response.sendRedirect("/WEB-INF/sesion.jsp");
-                                request.getRequestDispatcher("/WEB-INF/sesion.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/home/sesion.jsp").forward(request, response);
 				break;
 		}
 	}

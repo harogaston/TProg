@@ -16,9 +16,13 @@
 		<servlet-name>CerrarSesion</servlet-name>
 		<servlet-class>tprog.web.CerrarSesion</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>CtrlCarga</servlet-name>
+		<servlet-class>tprog.web.carga.CtrlCarga</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Home</servlet-name>
-		<url-pattern>/Home</url-pattern>
+		<url-pattern>/Home/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>IniciarSesion</servlet-name>
@@ -27,6 +31,10 @@
 	<servlet-mapping>
 		<servlet-name>CerrarSesion</servlet-name>
 		<url-pattern>/CerrarSesion</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CtrlCarga</servlet-name>
+		<url-pattern>/CargarDatos</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>

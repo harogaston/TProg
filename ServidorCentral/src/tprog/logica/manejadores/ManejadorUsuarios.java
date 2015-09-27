@@ -94,20 +94,24 @@ public class ManejadorUsuarios {
 	}
 
 	public boolean verificarNickname(String nicknameU) {
-		return !proveedores.containsKey(nicknameU) && !clientes.containsKey(nicknameU);
+		if (nicknameU == null) {
+			return false;
+		} else {
+			return !proveedores.containsKey(nicknameU) && !clientes.containsKey(nicknameU);
+		}
 	}
 
 	public boolean verificarEmail(String email) {
 		if (!proveedores.isEmpty()) {
 			for (Proveedor p : proveedores.values()) {
-				if (email.equals(p.getEmail())) {
+				if (email != null && email.equals(p.getEmail())) {
 					return false;
 				}
 			}
 		}
 		if (!clientes.isEmpty()) {
 			for (Cliente c : clientes.values()) {
-				if (email.equals(c.getEmail())) {
+				if (email != null && email.equals(c.getEmail())) {
 					return false;
 				}
 			}
@@ -140,40 +144,40 @@ public class ManejadorUsuarios {
 	public Map<String, Proveedor> getProveedores() {
 		return this.proveedores;
 	}
-        
-        public boolean idCorrecta(String id){
-            boolean existeNick = verificarNickname(id); // es falso si existe en el sistema
-            boolean existeEmail = verificarEmail(id);
+
+	public boolean idCorrecta(String id) {
+		boolean existeNick = verificarNickname(id); // es falso si existe en el sistema
+		boolean existeEmail = verificarEmail(id);
             //uno de los 2 debe ser falso, dado que no se si se ingresa un email o un nickname
-            // en caso de ser un usuario en el sistema, sino ambos son true
-            return (!(existeNick & existeEmail));
-        }
-        
-        public boolean pwCorrecta(String id, String password){
-            Cliente cliente = getCliente(id);
-            if (cliente == null){
-                Proveedor prov = getProveedor(id);
-                if (prov == null){
-                    if (!proveedores.isEmpty()) {
-			for (Proveedor p : proveedores.values()) {
-                            if (id.equals(p.getEmail())) {
-				return (password.equals(p.getPassword()));
-                            }
+		// en caso de ser un usuario en el sistema, sino ambos son true
+		return (!(existeNick & existeEmail));
+	}
+
+	public boolean pwCorrecta(String id, String password) {
+		Cliente cliente = getCliente(id);
+		if (cliente == null) {
+			Proveedor prov = getProveedor(id);
+			if (prov == null) {
+				if (!proveedores.isEmpty()) {
+					for (Proveedor p : proveedores.values()) {
+						if (id.equals(p.getEmail())) {
+							return (password.equals(p.getPassword()));
+						}
+					}
+				}
+				if (!clientes.isEmpty()) {
+					for (Cliente c : clientes.values()) {
+						if (id.equals(c.getEmail())) {
+							return (password.equals(c.getPassword()));
+						}
+					}
+				}
+			} else {
+				return password.equals(prov.getPassword());
 			}
-                    }
-                    if (!clientes.isEmpty()) {
-			for (Cliente c : clientes.values()) {
-                            if (id.equals(c.getEmail())) {
-				return (password.equals(c.getPassword()));
-                            }
-			}
-                    }
-                }else{
-                    return password.equals(prov.getPassword());
-                }
-            }else{
-                return password.equals(cliente.getPassword());
-            }
-            return false;
-        }
+		} else {
+			return password.equals(cliente.getPassword());
+		}
+		return false;
+	}
 }

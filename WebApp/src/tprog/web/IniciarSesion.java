@@ -14,16 +14,17 @@ public class IniciarSesion extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession objSesion = request.getSession();
-		String id = request.getParameter("Nickname"); //puede ser email o nickname
-		String contraseña = request.getParameter("Password");
+		System.out.println(request.getParameterMap().toString());
+		String id = request.getParameter("nickname"); //puede ser email o nickname
+		String contrasena = request.getParameter("password");
 		EstadoSesion nuevoEstado;
 		CtrlUsuarios cu = new CtrlUsuarios();
 		// se checkean los datos de login
-		if (!(cu.idCorrecta(id) & cu.pwCorrecta(id, contraseña))) {
+		if (id != null && contrasena != null && (cu.idCorrecta(id) & cu.pwCorrecta(id, contrasena))) {
 			nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
 			request.getSession().setAttribute("usuario_logueado", id);
 		} else {
-			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO; // ahora da siempre login incorrecot dado que no estan cargados los datos
+			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
 		}
 		objSesion.setAttribute("estado_sesion", nuevoEstado);
 		// redirige a la página principal para que luego rediriga a la página
@@ -43,10 +44,4 @@ public class IniciarSesion extends HttpServlet {
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
-
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
-
 }

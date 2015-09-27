@@ -12,8 +12,12 @@ public class Home extends HttpServlet {
     
     public static void initSession(HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		System.out.println(request.getParameterMap().toString());
 		if (session.getAttribute("estado_sesion") == null) {
 			session.setAttribute("estado_sesion", EstadoSesion.NO_LOGIN);
+		}
+		if (session.getAttribute("datos_cargados") == null) {
+			session.setAttribute("datos_cargados", false);
 		}
 	}
 	
@@ -25,15 +29,16 @@ public class Home extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		initSession(request);
-		
+		HttpSession session = request.getSession();
 		switch(getEstado(request)){
 			case NO_LOGIN:
 				// hace que se ejecute el jsp sin cambiar la url
+				request.setAttribute("datos_cargados", session.getAttribute("datos_cargados"));
 				request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
 				break;
 			case LOGIN_INCORRECTO:
 				// hace que se ejecute el jsp sin cambiar la url
-				request.getRequestDispatcher("/pages/sesion.jsp").forward(request, response);
+				request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
                                 // te devuelve en al pagina de inicio como si nada hubiera pasado
                                 //hay que hacer una pag de login incorrecto
                                 

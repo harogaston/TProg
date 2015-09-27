@@ -5,7 +5,7 @@
     </head>
     <header>
         <%@page  import="tprog.web.EstadoSesion"%>
-        <%@include file="templates/header.jspf" %>
+        <%@include file="templates/header.jsp" %>
     </header>
     <body>
 
@@ -15,7 +15,7 @@
                     out.println("<form action= 'CargarDatos' method='POST'>"
                             + "<button type='submit' class='btn btn-success'>Cargar Datos</button>"
                             + "</form>");
-                            }%>
+                }%>
         </p>
 
 

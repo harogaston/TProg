@@ -7,7 +7,10 @@
             <file>file:/home/gaston/repo/TProg/WebApp/src/tprog/web/Home.java</file>
             <file>file:/home/gaston/repo/TProg/WebApp/web/WEB-INF/web.xml</file>
         </group>
-        <group name="Taller de Programación"/>
         <group name="Práctica"/>
+        <group name="Taller de Programación">
+            <file>file:/home/marccio/git/TProg/WebApp/web/pages/templates/head.jspf</file>
+            <file>file:/home/marccio/git/TProg/WebApp/src/tprog/web/CerrarSesion.java</file>
+        </group>
     </open-files>
 </project-private>

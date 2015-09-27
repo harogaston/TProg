@@ -1,3 +1,9 @@
+<%--
+    Document   : header
+    Created on : Sep 27, 2015, 6:26:11 PM
+    Author     : marccio
+--%>
+
 <%@page import="tprog.web.EstadoSesion"%>
 <!-- agrego estilo para texto -->
 <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -20,7 +26,8 @@
             </div>
 
             <%
-                if (session.getAttribute("estado_sesion") == EstadoSesion.LOGIN_CORRECTO) {
+                System.out.println("El estado de la sesión es: " + session.getAttribute("estado_sesion").toString());
+                if (session.getAttribute("estado_sesion") != EstadoSesion.LOGIN_CORRECTO) {
             %>
             <div class="col-lg-4" style="display: inline">
                 <form action= "IniciarSesion" class="form-inline" role="form" method="POST">

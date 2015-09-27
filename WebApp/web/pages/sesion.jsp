@@ -4,7 +4,7 @@
         <jsp:include page="templates/head.jspf"/>
     </head>
     <header>
-        <jsp:include page="templates/header.jspf"/>
+        <jsp:include page="templates/header.jsp"/>
     </header>
     <body
 

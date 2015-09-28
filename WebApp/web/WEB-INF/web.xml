@@ -51,7 +51,15 @@
     <servlet>
         <servlet-name>VerInfoServicio</servlet-name>
         <servlet-class>tprog.web.VerInfoServicio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListarServicios</servlet-name>
+        <servlet-class>tprog.web.ListarServicios</servlet-class>
     </servlet>    
+    <servlet-mapping>
+        <servlet-name>ListarServicios</servlet-name>
+        <url-pattern>/ListarServicios</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
 			30

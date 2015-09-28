@@ -4,10 +4,18 @@
 		<servlet-name>IniciarSesion</servlet-name>
 		<servlet-class>tprog.web.IniciarSesion</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>IniciarSesion</servlet-name>
+		<url-pattern>/IniciarSesion</url-pattern>
+	</servlet-mapping>        
 	<servlet>
 		<servlet-name>Home</servlet-name>
 		<servlet-class>tprog.web.Home</servlet-class>
 	</servlet>
+        <servlet-mapping>
+		<servlet-name>Home</servlet-name>
+		<url-pattern>/Home/*</url-pattern>
+	</servlet-mapping>
 	<servlet>
 		<servlet-name>EstadoSesion</servlet-name>
 		<servlet-class>tprog.web.EstadoSesion</servlet-class>
@@ -16,26 +24,26 @@
 		<servlet-name>CerrarSesion</servlet-name>
 		<servlet-class>tprog.web.CerrarSesion</servlet-class>
 	</servlet>
+	<servlet-mapping>
+		<servlet-name>CerrarSesion</servlet-name>
+		<url-pattern>/CerrarSesion</url-pattern>
+	</servlet-mapping>        
 	<servlet>
 		<servlet-name>CtrlCarga</servlet-name>
 		<servlet-class>tprog.web.carga.CtrlCarga</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Home</servlet-name>
-		<url-pattern>/Home/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>IniciarSesion</servlet-name>
-		<url-pattern>/IniciarSesion</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>CerrarSesion</servlet-name>
-		<url-pattern>/CerrarSesion</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>CtrlCarga</servlet-name>
 		<url-pattern>/CargarDatos</url-pattern>
 	</servlet-mapping>
+        <servlet>
+            <servlet-name>Buscar</servlet-name>
+            <servlet-class>tprog.web.Buscar</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>Buscar</servlet-name>
+            <url-pattern>/Buscar/*</url-pattern>
+        </servlet-mapping>
 	<session-config>
 		<session-timeout>
 			30

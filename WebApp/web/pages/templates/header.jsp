@@ -15,9 +15,9 @@
                 <a class="navbar-brand navbar-header" href="index.html">H4T</a>
             </div>
             <div class="col-lg-4" style="display: inline">
-                <form class="form-inline" role="search">
+                <form action="Buscar" class="form-inline" role="search" method="POST">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Buscar servicios" />
+                        <input type="text" name ="busqueda" class="form-control" placeholder="Buscar servicios" />
                     </div>
                     <button type="submit" class="btn btn-info">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>

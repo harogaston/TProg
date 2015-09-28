@@ -6,6 +6,8 @@
 package tprog.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
@@ -15,7 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
@@ -43,7 +47,11 @@ public class Buscar extends HttpServlet {
             CharSequence busqueda = request.getParameter("busqueda"); //extraigo texto buscado
             ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
             Set<DTMinServicio> servicios;
-            servicios = ctrlProductos.listarServicios();
+            try {
+                servicios = ctrlProductos.listarServicios();
+            } catch (Exception ex) {
+                servicios = new HashSet();
+            }
             if (busqueda != null) {
                 //filtro resultados de la búsqueda
 
@@ -69,7 +77,43 @@ public class Buscar extends HttpServlet {
 
                 }
             }
+            Set<DTMinPromocion> promociones;
+            try {
+                promociones = ctrlProductos.listarPromociones();
+            } catch (Exception ex) {
+                promociones = new HashSet();
+            }
+            if (busqueda != null) {
+                //filtro resultados de la búsqueda
+                Iterator<DTMinPromocion> iterator = promociones.iterator();
+                while (iterator.hasNext()) {
+                    DTMinPromocion promocion = iterator.next();
+                    ctrlProductos.seleccionarPromocion(promocion);
+                    DTPromocion infoPromocion = ctrlProductos.infoPromocion();
+                    //chequeo si alguna categoria del servicio coincide con la búsqueda
+                    boolean matcheaCategoria = false;
+                    HashMap<DTMinServicio, Integer> serviciosPromocion = infoPromocion.getServicios();
+                    for (DTMinServicio servicio : serviciosPromocion.keySet()) {
+                        ctrlProductos.seleccionarServicio(servicio);
+                        Set<String> categorias = ctrlProductos.listarCategoriasServicio();
+                        for (String categoria : categorias) {
+                            if (categoria.contains(busqueda)) {
+                                matcheaCategoria = true;
+                                break;
+                            }
+                        }
+                        if (matcheaCategoria) {
+                            break;
+                        }
+                    }
+                    if (!(infoPromocion.getIdPromocion().contains(busqueda)
+                            || matcheaCategoria)) { //si no matchea nada
+                        iterator.remove();
+                    }
+                }
+            }
             request.setAttribute("servicios", servicios);
+            request.setAttribute("promociones", promociones);
             request.getRequestDispatcher("/pages/busqueda.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Buscar.class.getName()).log(Level.SEVERE, null, ex);

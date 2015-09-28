@@ -13,7 +13,7 @@
             <%                if (!(boolean) session.getAttribute("datos_cargados")) {
             %>
         <form action= 'CargarDatos' method='POST'>
-            <button type='submit' class='btn btn-success'>Cargar Datos</button>
+            <button type='submit' class='btn btn-success' style="background-color: #23527c; border-color: #23527c">Cargar Datos</button>
         </form>
         <%
             }%>

@@ -19,7 +19,7 @@
                     <div class="form-group">
                         <input type="text" name ="busqueda" class="form-control" placeholder="Buscar servicios" />
                     </div>
-                    <button type="submit" class="btn btn-info">
+                    <button type="submit" class="btn btn-info" style="background-color: #23527c; border-color: #23527c">
                         <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                     </button>
                 </form>
@@ -39,7 +39,7 @@
                         <label class="sr-only " for="Password">Password</label>
                         <input type="password" name="password" class="input-sm" id="Password" placeholder="Password" required/>
                     </div>
-                    <button type="submit" class="btn btn-success">Ingresar</button>
+                    <button type="submit" class="btn btn-success" style="background-color: #23527c; border-color: #23527c">Ingresar</button>
                 </form>
             </div>
             <%
@@ -50,15 +50,39 @@
                     <div class="form-group">
                         <label class="sr-only" for="Usuario"><Pepito</label>
                     </div>
-                    <button type="submit" class="btn btn-success">Cerrar Sesion</button>
+                    <button type="submit" class="btn btn-success" style="background-color: #23527c; border-color: #23527c">Cerrar Sesion</button>
                 </form>
             </div>
             <%
                 }
             %>
         </div>
-        <div class="row navbar-text">
+        <div class="row navbar-text col-lg-12">
             Ofertas en hoteles, paquetes de viajes y más!
+        </div>
+        <div class="row ">
+            <div class="col-lg-5"></div>
+            <div class="dropdown col-md-1">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: #23527c; border-color: #23527c">Registros
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Registrar Cliente</a></li>
+                    <li><a href="#">Agregar Servicio o Promoción a Reserva Actual</a></li>
+                    <li><a href="#">Generar Reserva</a></li>
+                    <li><a href="#">Actualizar estado de Reserva</a></li>
+                </ul>
+            </div>
+            <div class="dropdown col-md-1">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="background-color: #23527c; border-color: #23527c"> Consultas
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Ver Información de Proveedor</a></li>
+                    <li><a href="VerInfoServicio">Ver Información de Servicio</a></li>
+                    <li><a href="#">Ver Información de Promoción</a></li>
+                    <li><a href="#">Ver Información de Reserva</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-5"></div>
         </div>
     </div>
 </nav><!-- /.navbar -->

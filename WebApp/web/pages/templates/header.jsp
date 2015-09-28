@@ -84,5 +84,12 @@
             </div>
             <div class="col-lg-5"></div>
         </div>
+        <!-- script para que funcione el dropdown siempre -->
+        <script>
+            $(document).ready(function () {
+                $(".dropdown-toggle").dropdown();
+            });
+        </script>
+
     </div>
 </nav><!-- /.navbar -->

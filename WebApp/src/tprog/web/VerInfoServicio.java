@@ -40,8 +40,6 @@ public class VerInfoServicio extends HttpServlet {
         Enumeration listado = categorias.breadthFirstEnumeration();
         // armo objeto de JSON para armar el árbol con jstree
 
-        JSONObject core = new JSONObject();
-        JSONObject obj = new JSONObject();
         JSONArray list = new JSONArray();
         while (listado.hasMoreElements()) {
             DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) listado.nextElement();
@@ -57,10 +55,8 @@ public class VerInfoServicio extends HttpServlet {
             tmp.put("text", categoria);
             list.add(tmp);
         }
-        obj.put("data", list);
-        core.put("core", obj);
 
-        request.setAttribute("arbolJson", core);
+        request.setAttribute("arbolJson", list);
 
         request.getRequestDispatcher("/pages/verinfoservicio.jsp").forward(request, response);
     }

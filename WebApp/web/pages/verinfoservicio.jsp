@@ -19,29 +19,30 @@
     <body>
         <h1>Hello World!</h1>
         <div id="jstree_demo_div">
-            <!--
             <script>
-                var dataArbol = '${arbolJson}'.toString(); // creo que no hay que parsearlo
-                $(function () {
-                    $('#jstree_demo_div').jstree(dataArbol);
-                });
-//            $('#using_json_2').jstree(dataArbol);
-            </script>
-            -->
-            <script>
-                <!--
-                $(function () {
-                    $('#jstree_demo_div').jstree({'core': {
-                            'data': [
-                                {"id": "ajson1", "parent": "#", "text": "Simple root node"},
-                                {"id": "ajson2", "parent": "#", "text": "Root node 2"},
-                                {"id": "ajson3", "parent": "ajson2", "text": "Child 1"},
-                                {"id": "ajson4", "parent": "ajson2", "text": "Child 2"},
-                            ]
-                        }});
-                });
+                        var arbol = <%=request.getAttribute("arbolJson")%>;
+                        $('#jstree_demo_div').jstree({
+                            'core': {
+                                'data': arbol
+                            }
+                        });
             </script>
         </div>
+        <!--
+        <script>
+        <!--
+        $(function () {
+            $('#jstree_demo_div').jstree({'core': {
+                    'data': [
+                        {"id": "ajson1", "parent": "#", "text": "Simple root node"},
+                        {"id": "ajson2", "parent": "#", "text": "Root node 2"},
+                        {"id": "ajson3", "parent": "ajson2", "text": "Child 1"},
+                        {"id": "ajson4", "parent": "ajson2", "text": "Child 2"},
+                    ]
+                }});
+        });
+    </script>
+        -->
     </body>
     <footer>
         <jsp:include page="templates/footer.jspf"/>

@@ -13,42 +13,84 @@
     <head>
         <%@include file="templates/head.jspf" %>
         <!--<title>Resultados de busqueda</title>-->
+        <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+        <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <script src="js/jquery-2.1.4.js"></script>
+        <script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#accordionServicios").accordion();
+                $("#accordionPromociones").accordion();
+            });
+        </script>
     </head>
     <header>
         <%@include file="templates/header.jsp" %>
     </header>
-    <body>
+    <body style="font-family: 'Alegreya Sans SC', sans-serif">
 
-        <h2>Servicios:</h2>
+        <div class="container-fluid" style="padding: 10px; font-family: 'Alegreya Sans SC', sans-serif">
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <h2>Servicios:</h2>
 
-        <% Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
-            if (!servicios.isEmpty()) {
-                for (DTMinServicio servicio : servicios) {
-        %>
-        <p> toString : <%= servicio.toString()%> </p>
-        <%
-            }
-        } else { %>
-        <p> No hay servicios para esa búsqueda </p>
-        <%
-            }
-        %>
+                    <% Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
+                        if (!servicios.isEmpty()) {
+                    %>
+                    <div id="accordionServicios">
+                        <%
+                            int contador = 0;
+                            for (DTMinServicio servicio : servicios) {
+                                contador++;
+                        %>
+                        <h3> Servicio <%= Integer.toString(contador)%> </h3>
+                        <div>
+                            <p>Proveedor: <%= servicio.getNicknameP()%></p>
+                            <p>Nombre: <%= servicio.getIdServicio()%></p>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <%
+                    } else { %>
+                    <p> No hay servicios para esa búsqueda </p>
+                    <%
+                        }
+                    %>
 
-        <h2>Promociones:</h2>
+                    <h2>Promociones:</h2>
 
-        <% Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
-            if (!promociones.isEmpty()) {
-                for (DTMinPromocion promocion : promociones) {
-        %>
-        <p> toString : <%= promocion.toString()%> </p>
-        <%
-            }
-        } else {
-        %>
-        <p> No hay promociones para esa búsqueda </p>
-        <%
-            }
-        %>
+                    <% Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
+                        if (!promociones.isEmpty()) {
+                    %>
+                    <div id="accordionPromociones">
+                        <%
+                            int contador = 0;
+                            for (DTMinPromocion promocion : promociones) {
+                                contador++;
+                        %>
+                        <h3> Promoción <%= Integer.toString(contador)%> </h3>
+                        <div>
+                            <p>Proveedor: <%= promocion.getNicknameP()%></p>
+                            <p>Nombre: <%= promocion.getIdPromocion()%></p>
+                        </div>
+                        <%
+                            }
+                        %>
+                    </div>
+                    <%
+                    } else {
+                    %>
+                    <p> No hay promociones para esa búsqueda </p>
+                    <%
+                        }
+                    %>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>

@@ -6,13 +6,13 @@
 package tprog.web;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 
@@ -20,7 +20,7 @@ import tprog.logica.interfaces.ICtrlProductos;
  *
  * @author marccio
  */
-public class ListarServicios extends HttpServlet {
+public class DetalleServicio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,28 +33,23 @@ public class ListarServicios extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
+
         Fabrica f = Fabrica.getInstance();
         ICtrlProductos ctrlProductos = f.getICtrlProductos();
-        Set<DTMinServicio> servicios = ctrlProductos.listarServiciosCategoria(categoriaSeleccionada);
-        if (servicios.isEmpty()) {
-            request.setAttribute("noHayServicios", true);
-            request.getRequestDispatcher("VerInfoServicio").forward(request, response);
-        } else { //redirijo a la página de listado de servicios
-
-            //construyo lista para la interfaz usando el set
-            //para no tener elementos repetidos
-            Set<String> listaServiciosSinRepetir = new HashSet<>();
-            for (DTMinServicio dt : servicios) {
-                String servicioActual = dt.getIdServicio();
-                if (!listaServiciosSinRepetir.contains(servicioActual)) {
-                    listaServiciosSinRepetir.add(dt.getIdServicio());
-                }
+        String idServicio = request.getParameter("idServicio");
+        Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
+        DTMinServicio dts = null;
+        //busco el DTMinServicio del servicio en el set de DTMinServicio
+        for (DTMinServicio servicio : servicios) {
+            if (servicio.getIdServicio().equals(idServicio)) {
+                dts = servicio;
+                break;
             }
-            request.setAttribute("listaServicios", listaServiciosSinRepetir);
-            request.setAttribute("servicios", servicios);
-            request.getRequestDispatcher("/pages/listarservicios.jsp").forward(request, response);
         }
+        ctrlProductos.seleccionarServicio(dts);
+        DTServicio infoServicio = ctrlProductos.infoServicio();
+        request.setAttribute("infoServicio", infoServicio);
+        request.getRequestDispatcher("/pages/listarservicios.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

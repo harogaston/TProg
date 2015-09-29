@@ -4,6 +4,10 @@
         <servlet-name>IniciarSesion</servlet-name>
         <servlet-class>tprog.web.IniciarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DetalleServicio</servlet-name>
+        <servlet-class>tprog.web.DetalleServicio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -55,10 +59,14 @@
     <servlet>
         <servlet-name>ListarServicios</servlet-name>
         <servlet-class>tprog.web.ListarServicios</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListarServicios</servlet-name>
         <url-pattern>/ListarServicios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetalleServicio</servlet-name>
+        <url-pattern>/DetalleServicio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

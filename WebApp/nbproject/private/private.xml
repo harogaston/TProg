@@ -11,10 +11,8 @@
         <group name="Taller de Programación">
             <file>file:/home/marccio/git/TProg/WebApp/web/pages/templates/header.jsp</file>
             <file>file:/home/marccio/git/TProg/WebApp/web/pages/sesion.jsp</file>
-            <file>file:/home/marccio/git/TProg/WebApp/src/tprog/web/VerInfoServicio.java</file>
             <file>file:/home/marccio/git/TProg/WebApp/web/pages/inicio.jsp</file>
             <file>file:/home/marccio/git/TProg/WebApp/web/pages/verinfoservicio.jsp</file>
-            <file>file:/home/marccio/git/TProg/WebApp/web/pages/busqueda.jsp</file>
             <file>file:/home/marccio/git/TProg/WebApp/web/WEB-INF/web.xml</file>
         </group>
     </open-files>

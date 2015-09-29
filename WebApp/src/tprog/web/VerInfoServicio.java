@@ -57,6 +57,11 @@ public class VerInfoServicio extends HttpServlet {
         }
 
         request.setAttribute("arbolJson", list);
+        //seteo noHayServicios en false porque al ser la ejecucion inicial de la pagina,
+        //no se si hay o no servicios para la categoria seleccionada
+        if (request.getAttribute("noHayServicios") == null) { //si no fue seteado anteriormente
+            request.setAttribute("noHayServicios", false);
+        }
 
         request.getRequestDispatcher("/pages/verinfoservicio.jsp").forward(request, response);
     }

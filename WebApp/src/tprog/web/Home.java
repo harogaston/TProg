@@ -26,7 +26,7 @@ public class Home extends HttpServlet {
         initSession(request);
         HttpSession session = request.getSession();
         request.setAttribute("datos_cargados", session.getAttribute("datos_cargados"));
-        request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
+        request.getRequestDispatcher("Buscar").forward(request, response);
     }
 
     @Override

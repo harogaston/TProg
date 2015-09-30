@@ -28,22 +28,21 @@ import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
 
 public class CtrlCarga extends HttpServlet {
-	
-		
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-				throws ServletException, IOException {
-		cargarDatos();
-		System.out.println("Datos cargados.");
-		request.getSession().setAttribute("datos_cargados", true);
-		request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
-	}
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        cargarDatos();
+        System.out.println("Datos cargados.");
+        request.getSession().setAttribute("datos_cargados", true);
+        request.getRequestDispatcher("Buscar").forward(request, response);
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
+    }
 
     public void cargarDatos() {
         //Alta de Clientes
@@ -171,7 +170,7 @@ public class CtrlCarga extends HttpServlet {
             p.agregarCiudad(new Ciudad("Cantón"));
             mp.agregarPais(p);
 
-			//Alta Servicios
+            //Alta Servicios
             //S1
             Set<String> imgs = new HashSet<String>();
             imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
@@ -315,7 +314,7 @@ public class CtrlCarga extends HttpServlet {
             cats.add("Auto");
             cats.add("Chevrolet");
             mp.altaServicio(dtS, "mHooch", cats);
-			//Alta de Promociones
+            //Alta de Promociones
             //P1 4 5
 
             List<String> servs = new ArrayList<>();

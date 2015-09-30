@@ -8,12 +8,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <header>
+        <%@include file="templates/header.jsp" %>
+    </header>
     <head>
         <%@include file="templates/head.jspf" %>
         <!--<title>Resultados de busqueda</title>-->
-        <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
-        <script src="js/jquery-2.1.4.js"></script>
-        <script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+        <!--        <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+                <script src="js/jquery-2.1.4.js"></script>
+                <script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>-->
         <script>
             $(function () {
                 $("#accordionServicios").accordion();
@@ -21,79 +24,84 @@
             });
         </script>
     </head>
-    <header>
-        <%@include file="templates/header.jsp" %>
-    </header>
     <body style="font-family: 'Alegreya Sans SC', sans-serif">
+        <div id="body_holder" style="visibility: hidden">
+            <div class="container-fluid" style="padding: 10px; font-family: 'Alegreya Sans SC', sans-serif">
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-4">
+                        <h2>Servicios:</h2>
 
-        <div class="container-fluid" style="padding: 10px; font-family: 'Alegreya Sans SC', sans-serif">
-            <div class="row">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-4">
-                    <h2>Servicios:</h2>
-
-                    <% Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
-                        if (!servicios.isEmpty()) {
-                    %>
-                    <div id="accordionServicios">
-                        <%
-                            for (DTMinServicio dt : servicios) {
-                                Fabrica f = Fabrica.getInstance();
-                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
-                                ctrlProductos.seleccionarServicio(dt);
-                                DTServicio servicio = ctrlProductos.infoServicio();
+                        <% Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
+                            if (!servicios.isEmpty()) {
                         %>
-                        <h3><%= servicio.getIdServicio()%> </h3>
-                        <div>
-                            <%=servicio.toString().replace("\n", "<br>")%>
+                        <div id="accordionServicios">
+                            <%
+                                for (DTMinServicio dt : servicios) {
+                                    Fabrica f = Fabrica.getInstance();
+                                    ICtrlProductos ctrlProductos = f.getICtrlProductos();
+                                    ctrlProductos.seleccionarServicio(dt);
+                                    DTServicio servicio = ctrlProductos.infoServicio();
+                            %>
+                            <h3><%= servicio.getIdServicio()%> </h3>
+                            <div>
+                                <%=servicio.toString().replace("\n", "<br>")%>
+                            </div>
+                            <%
+                                }
+                            %>
                         </div>
+                        <%
+                        } else { %>
+                        <p> No hay servicios para esa búsqueda </p>
+                        <%
+                            }
+                        %>
+
+                    </div>
+                    <div class="col-lg-4">
+
+                        <h2>Promociones:</h2>
+
+                        <% Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
+                            if (!promociones.isEmpty()) {
+                        %>
+                        <div id="accordionPromociones">
+                            <%
+                                for (DTMinPromocion dt : promociones) {
+                                    Fabrica f = Fabrica.getInstance();
+                                    ICtrlProductos ctrlProductos = f.getICtrlProductos();
+                                    ctrlProductos.seleccionarPromocion(dt);
+                                    DTPromocion promocion = ctrlProductos.infoPromocion();
+                            %>
+                            <h3> <%= promocion.getIdPromocion()%> </h3>
+                            <div>
+                                <%=promocion.toString().replace("\n", "<br>")%>
+                            </div>
+                            <%
+                                }
+                            %>
+                        </div>
+                        <%
+                        } else {
+                        %>
+                        <p> No hay promociones para esa búsqueda </p>
                         <%
                             }
                         %>
                     </div>
-                    <%
-                    } else { %>
-                    <p> No hay servicios para esa búsqueda </p>
-                    <%
-                        }
-                    %>
-
+                    <div class="col-lg-2"></div>
                 </div>
-                <div class="col-lg-4">
-
-                    <h2>Promociones:</h2>
-
-                    <% Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
-                        if (!promociones.isEmpty()) {
-                    %>
-                    <div id="accordionPromociones">
-                        <%
-                            for (DTMinPromocion dt : promociones) {
-                                Fabrica f = Fabrica.getInstance();
-                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
-                                ctrlProductos.seleccionarPromocion(dt);
-                                DTPromocion promocion = ctrlProductos.infoPromocion();
-                        %>
-                        <h3> <%= promocion.getIdPromocion()%> </h3>
-                        <div>
-                            <%=promocion.toString().replace("\n", "<br>")%>
-                        </div>
-                        <%
-                            }
-                        %>
-                    </div>
-                    <%
-                    } else {
-                    %>
-                    <p> No hay promociones para esa búsqueda </p>
-                    <%
-                        }
-                    %>
-                </div>
-                <div class="col-lg-2"></div>
             </div>
         </div>
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>
 
+<script>
+    $(window).load(function () {
+        //hago que la página interna (no header ni footer) se muestre cuando
+        //este todo cargado, para evitar glitches random
+        $("#body_holder").css("visibility", "visible");
+    });
+</script>

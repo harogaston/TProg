@@ -21,12 +21,11 @@ public class IniciarSesion extends HttpServlet {
 		CtrlUsuarios cu = new CtrlUsuarios();
 		// se checkean los datos de login
 		if (id != null && contrasena != null && (cu.idCorrecta(id) & cu.pwCorrecta(id, contrasena))) {
-			nuevoEstado = EstadoSesion.LOGIN_CORRECTO;
+			nuevoEstado = EstadoSesion.OK_LOGIN;
 			request.getSession().setAttribute("usuario_logueado", id);
-		} else {
-			nuevoEstado = EstadoSesion.LOGIN_INCORRECTO;
+			objSesion.setAttribute("estado_sesion", nuevoEstado);
 		}
-		objSesion.setAttribute("estado_sesion", nuevoEstado);
+		
 		// redirige a la página principal para que luego rediriga a la página
 		// que corresponde
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");

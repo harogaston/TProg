@@ -9,8 +9,7 @@ import javax.servlet.http.HttpSession;
 
 public class Home extends HttpServlet {
 
-    
-    public static void initSession(HttpServletRequest request) {
+	public static void initSession(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		System.out.println(request.getParameterMap().toString());
 		if (session.getAttribute("estado_sesion") == null) {
@@ -20,39 +19,19 @@ public class Home extends HttpServlet {
 			session.setAttribute("datos_cargados", false);
 		}
 	}
-	
-	public static EstadoSesion getEstado(HttpServletRequest request)
-	{
-		return (EstadoSesion) request.getSession().getAttribute("estado_sesion");
-	}
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		initSession(request);
 		HttpSession session = request.getSession();
-		switch(getEstado(request)){
-			case NO_LOGIN:
-				// hace que se ejecute el jsp sin cambiar la url
-				request.setAttribute("datos_cargados", session.getAttribute("datos_cargados"));
-				request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
-				break;
-			case LOGIN_INCORRECTO:
-				// hace que se ejecute el jsp sin cambiar la url
-				request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
-                                // te devuelve en al pagina de inicio como si nada hubiera pasado
-                                //hay que hacer una pag de login incorrecto
-                                
-				break;
-			case LOGIN_CORRECTO:
-				// manda una redirección a otra URL (cambia la URL)
-				request.getRequestDispatcher("/pages/sesion.jsp").forward(request, response);
-				break;
-		}
+		request.setAttribute("datos_cargados", session.getAttribute("datos_cargados"));
+		request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-				throws ServletException, IOException {
+			throws ServletException, IOException {
 		processRequest(request, response);
 	}
 
@@ -61,5 +40,4 @@ public class Home extends HttpServlet {
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
-
 }

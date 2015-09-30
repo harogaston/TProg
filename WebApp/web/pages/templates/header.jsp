@@ -1,3 +1,4 @@
+<%@page import="java.io.File"%>
 <%@page import="tprog.web.EstadoSesion"%>
 <head>
     <!-- imports que todas las páginas necesitan -->
@@ -101,6 +102,9 @@
                 </form>
                 <%
                     }%>
+            </div>
+            <div class="row">
+                Dir : <%= (new File(".")).getCanonicalPath()%>
             </div>
 
             <!-- script para que funcione el dropdown siempre -->

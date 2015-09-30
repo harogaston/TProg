@@ -56,6 +56,16 @@
                     <h3>Servicio : <%=servicio.getIdServicio()%></h3>
                     <div>
                         <%=infoServicio.toString().replace("\n", "<br>")%>
+                        <%
+                            Set<String> imagenes = infoServicio.getImagenes();
+                            for (String imagen : imagenes) {
+                        %>
+                        <div style="background-image: url(<%=imagen%>); height: 5vh; width: 5vw"></div>
+                        <!--<img src = url(<%=imagen%>)>-->
+                        <p><%=imagen%></p>
+                        <%
+                            }
+                        %>
                     </div>
                     <%
                             }

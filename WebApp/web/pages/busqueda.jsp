@@ -1,3 +1,7 @@
+<%@page import="tprog.logica.dt.DTPromocion"%>
+<%@page import="tprog.logica.dt.DTServicio"%>
+<%@page import="tprog.logica.interfaces.ICtrlProductos"%>
+<%@page import="tprog.logica.interfaces.Fabrica"%>
 <%@page import="tprog.logica.dt.DTMinPromocion"%>
 <%@page import="java.util.Set"%>
 <%@page import="tprog.logica.dt.DTMinServicio"%>
@@ -25,7 +29,7 @@
         <div class="container-fluid" style="padding: 10px; font-family: 'Alegreya Sans SC', sans-serif">
             <div class="row">
                 <div class="col-lg-2"></div>
-                <div class="col-lg-8">
+                <div class="col-lg-4">
                     <h2>Servicios:</h2>
 
                     <% Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
@@ -33,14 +37,15 @@
                     %>
                     <div id="accordionServicios">
                         <%
-                            int contador = 0;
-                            for (DTMinServicio servicio : servicios) {
-                                contador++;
+                            for (DTMinServicio dt : servicios) {
+                                Fabrica f = Fabrica.getInstance();
+                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
+                                ctrlProductos.seleccionarServicio(dt);
+                                DTServicio servicio = ctrlProductos.infoServicio();
                         %>
-                        <h3> Servicio <%= Integer.toString(contador)%> </h3>
+                        <h3><%= servicio.getIdServicio()%> </h3>
                         <div>
-                            <p>Proveedor: <%= servicio.getNicknameP()%></p>
-                            <p>Nombre: <%= servicio.getIdServicio()%></p>
+                            <%=servicio.toString().replace("\n", "<br>")%>
                         </div>
                         <%
                             }
@@ -53,6 +58,9 @@
                         }
                     %>
 
+                </div>
+                <div class="col-lg-4">
+
                     <h2>Promociones:</h2>
 
                     <% Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
@@ -60,14 +68,15 @@
                     %>
                     <div id="accordionPromociones">
                         <%
-                            int contador = 0;
-                            for (DTMinPromocion promocion : promociones) {
-                                contador++;
+                            for (DTMinPromocion dt : promociones) {
+                                Fabrica f = Fabrica.getInstance();
+                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
+                                ctrlProductos.seleccionarPromocion(dt);
+                                DTPromocion promocion = ctrlProductos.infoPromocion();
                         %>
-                        <h3> Promoción <%= Integer.toString(contador)%> </h3>
+                        <h3> <%= promocion.getIdPromocion()%> </h3>
                         <div>
-                            <p>Proveedor: <%= promocion.getNicknameP()%></p>
-                            <p>Nombre: <%= promocion.getIdPromocion()%></p>
+                            <%=promocion.toString().replace("\n", "<br>")%>
                         </div>
                         <%
                             }
@@ -87,3 +96,4 @@
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>
+

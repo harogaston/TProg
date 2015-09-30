@@ -17,12 +17,6 @@
 <html>
     <head>
         <jsp:include page="templates/head.jspf"/>
-        <script src="js/jquery-2.1.4.js"></script>
-        <link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css" />
-        <script src="js/vakata-jstree/dist/jstree.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
-        <script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
     </head>
     <header>
         <jsp:include page="templates/header.jsp"/>

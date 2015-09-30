@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,58 +42,15 @@ public class CtrlCarga extends HttpServlet {
         request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
     }
 
-//    private void copiarImagenesAlServidor(String src, String dest) throws IOException {
-//        // returns pathnames for files and directory
-//        File f = new File(dest + "/imagenes");
-//        // create
-//        boolean bool = f.mkdir();
-//        // returns pathnames for files and directory
-//        f = new File(dest + "/imagenes/clientes");
-//        // create
-//        bool = f.mkdir();
-//        // returns pathnames for files and directory
-//        f = new File(dest + "/imagenes/proveedores");
-//        // create
-//        bool = f.mkdir();
-//        Files.copy(Paths.get(src + "/imagenes/clientes/oWood.jpg"), Paths.get(dest + "/imagenes/clientes/oWood.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/clientes/eWatson.jpg"), Paths.get(dest + "/imagenes/clientes/eWatson.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/proveedores/tCook.jpg"), Paths.get(dest + "/imagenes/proveedores/tCook.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/proveedores/moody.jpg"), Paths.get(dest + "/imagenes/proveedores/moody.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/proveedores/remus.jpg"), Paths.get(dest + "/imagenes/proveedores/remus.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/proveedores/adippet.jpg"), Paths.get(dest + "/imagenes/proveedores/adippet.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/proveedores/mHooch.jpg"), Paths.get(dest + "/imagenes/proveedores/mHooch.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG7.jpg"), Paths.get(dest + "/imagenes/IMG7.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG7.jpg"), Paths.get(dest + "/imagenes/IMG7.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG7.jpg"), Paths.get(dest + "/imagenes/IMG7.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG8.jpg"), Paths.get(dest + "/imagenes/IMG8.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG9.jpg"), Paths.get(dest + "/imagenes/IMG9.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG10.jpg"), Paths.get(dest + "/imagenes/IMG10.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG1.jpg"), Paths.get(dest + "/imagenes/IMG1.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG2.jpg"), Paths.get(dest + "/imagenes/IMG2.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG3.jpg"), Paths.get(dest + "/imagenes/IMG3.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG4.jpg"), Paths.get(dest + "/imagenes/IMG4.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG5.jpg"), Paths.get(dest + "/imagenes/IMG5.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG6.jpg"), Paths.get(dest + "/imagenes/IMG6.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG11.jpg"), Paths.get(dest + "/imagenes/IMG11.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG12.jpg"), Paths.get(dest + "/imagenes/IMG12.jpg"), REPLACE_EXISTING);
-//        Files.copy(Paths.get(src + "/imagenes/IMG8.jpg"), Paths.get(dest + "/imagenes/IMG8.jpg"), REPLACE_EXISTING);
-//    }
     public void cargarDatos() throws IOException {
         //Alta de Clientes
-//        String dirOriginal = Fabrica.getInstance().dir;
         File dir = new File(".");
-        String directorioImagenes = null;
-        try {
-            directorioImagenes = dir.getCanonicalPath();
-        } catch (IOException ex) {
-            Logger.getLogger(CtrlCarga.class.getName()).log(Level.SEVERE, null, ex);
-        }
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
         DTCliente dtC = new DTCliente("oWood", "pass", "Oliver", "Wood", "quidditch28@gmail.com",
-                directorioImagenes + "/imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<DTMinReserva>());
+                "clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<DTMinReserva>());
         mu.altaCliente(dtC);
         dtC = new DTCliente("eWatson", "pass", "Emma", "Watson", "e.watson@gmail.com",
-                directorioImagenes + "/imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<DTMinReserva>());
+                "clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<DTMinReserva>());
         mu.altaCliente(dtC);
         dtC = new DTCliente("BruceS", "pass", "Bruce", "Sewell", "bruce.sewell@gmail.com",
                 null, new Date(1978, 12 - 1, 3), new HashSet<DTMinReserva>());
@@ -104,23 +59,23 @@ public class CtrlCarga extends HttpServlet {
                 null, new Date(1984, 11 - 1, 27), new HashSet<DTMinReserva>());
         mu.altaCliente(dtC);
         DTProveedor dtP = new DTProveedor("tCook", "pass", "Tim", "Cook", "air.f@gmail.com",
-                directorioImagenes + "/imagenes/proveedores/tCook.jpg",
+                "proveedores/tCook.jpg",
                 new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("moody", "pass", "Alastor", "Moody", "eu.car@eucar.com",
-                directorioImagenes + "/imagenes/proveedores/moody.jpg",
+                "proveedores/moody.jpg",
                 new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("remus", "pass", "Remus", "Lupin", "iberia@gmail.com",
-                directorioImagenes + "/imagenes/proveedores/remus.jpg",
+                "proveedores/remus.jpg",
                 new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
-                directorioImagenes + "/imagenes/proveedores/adippet.jpg",
+                "proveedores/adippet.jpg",
                 new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("mHooch", "pass", "Madam", "Hooch", "segHogar@gmail.com",
-                directorioImagenes + "/imagenes/proveedores/mHooch.jpg",
+                "proveedores/mHooch.jpg",
                 new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
         mu.altaProveedor(dtP);
         ManejadorProductos mp = ManejadorProductos.getInstance();
@@ -208,7 +163,7 @@ public class CtrlCarga extends HttpServlet {
         p.agregarCiudad(new Ciudad("Cantón"));
         mp.agregarPais(p);
         Set<String> imgs = new HashSet<String>();
-        imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
+        imgs.add("IMG7.jpg");
         DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad",
                 1100, imgs, new DTUbicacion("Montevideo", "Uruguay"),
                 new DTUbicacion("Valencia", "España"));
@@ -217,7 +172,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Standard");
         mp.altaServicio(dtS, "remus", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
+        imgs.add("IMG7.jpg");
         dtS = new DTServicio("Euro-Vuelo-LC", "Vuelo con excelente "
                 + "atención y comodidad a un precio accesible.", 850, imgs,
                 new DTUbicacion("Montevideo", "Uruguay"),
@@ -227,7 +182,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("LowCost");
         mp.altaServicio(dtS, "remus", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
+        imgs.add("IMG7.jpg");
         dtS = new DTServicio("Euro-Vuelo-FC", "Vuelo de primera clase. "
                 + "Excelente atención, comodidad y servicio.", 1300, imgs,
                 new DTUbicacion("Montevideo", "Uruguay"),
@@ -237,7 +192,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("First Class");
         mp.altaServicio(dtS, "remus", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG8.jpg");
+        imgs.add("IMG8.jpg");
         dtS = new DTServicio("Euro-Car-1", "Euro-Car. Autos de buena calidad "
                 + "y comodidad. Versión Económica", 300, imgs,
                 new DTUbicacion("Madrid", "España"),
@@ -248,7 +203,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Chevrolet");
         mp.altaServicio(dtS, "moody", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG9.jpg");
+        imgs.add("IMG9.jpg");
         dtS = new DTServicio("Euro-Car-2", "Euro-Car. Autos de buena calidad"
                 + " y comodidad. Versión Standard.", 300, imgs,
                 new DTUbicacion("Madrid", "España"),
@@ -259,7 +214,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Chevrolet");
         mp.altaServicio(dtS, "moody", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG10.jpg");
+        imgs.add("IMG10.jpg");
         dtS = new DTServicio("Euro-Car-3", "Euro-Car. Autos de buena calidad "
                 + "y comodidad. Una camioneta para toda la familia.", 300, imgs,
                 new DTUbicacion("Valencia", "España"), null);
@@ -269,8 +224,8 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Chevrolet");
         mp.altaServicio(dtS, "moody", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG1.jpg");
-        imgs.add(directorioImagenes + "/imagenes/IMG2.jpg");
+        imgs.add("IMG1.jpg");
+        imgs.add("IMG2.jpg");
         dtS = new DTServicio("Casa para p4 BsAs", "Esta hermosa casa, se "
                 + "encuentra ubicada en el corazón de Buenos Aires y ofrece una "
                 + "capacidad para cuatro personas. La propiedad cuenta con un "
@@ -282,9 +237,9 @@ public class CtrlCarga extends HttpServlet {
         cats.add("2 dormitorios");
         mp.altaServicio(dtS, "mHooch", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG3.jpg");
-        imgs.add(directorioImagenes + "/imagenes/IMG4.jpg");
-        imgs.add(directorioImagenes + "/imagenes/IMG5.jpg");
+        imgs.add("IMG3.jpg");
+        imgs.add("IMG4.jpg");
+        imgs.add("IMG5.jpg");
         dtS = new DTServicio("Floripa G. House", "Estamos a sólo unos pasos "
                 + "de un supermercado, restaurantes, cajero automático, "
                 + "gasolinera, farmacia, gimnasio, etc. Lagoa da Conceição es 7"
@@ -297,7 +252,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("2 dormitorios");
         mp.altaServicio(dtS, "mHooch", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG6.jpg");
+        imgs.add("IMG6.jpg");
         dtS = new DTServicio("Air-France-FC", "¡Un vuelo de primera! "
                 + "Excelencia y experiencia en mejorar sus viajes.", 100, imgs,
                 new DTUbicacion("París", "Francia"),
@@ -307,7 +262,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("First Class");
         mp.altaServicio(dtS, "tCook", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG11.jpg");
+        imgs.add("IMG11.jpg");
         dtS = new DTServicio("TAM-FC", "¡Un vuelo de primera! Excelencia y "
                 + "experiencia.", 150, imgs, new DTUbicacion("Florianópolis",
                         "Brasil"), new DTUbicacion("Pekín", "China"));
@@ -316,7 +271,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("First Class");
         mp.altaServicio(dtS, "adippet", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG12.jpg");
+        imgs.add("IMG12.jpg");
         dtS = new DTServicio("Luxury south beach corner apartament",
                 "Beautiful large 2 bedrooms 2 bathrooms apartment CORNER UNIT. "
                 + "Marble floor throughout, beautiful open kitchen, granite "
@@ -329,7 +284,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("2 dormitorios");
         mp.altaServicio(dtS, "mHooch", cats);
         imgs = new HashSet<>();
-        imgs.add(directorioImagenes + "/imagenes/IMG8.jpg");
+        imgs.add("IMG8.jpg");
         dtS = new DTServicio("Coche-Miami",
                 "A useful car to travel around Miami", 360, imgs,
                 new DTUbicacion("Miami", "EEUU"), null);
@@ -432,6 +387,5 @@ public class CtrlCarga extends HttpServlet {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//        copiarImagenesAlServidor(dirOriginal, directorioImagenes);
     }
 }

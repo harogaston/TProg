@@ -60,9 +60,7 @@
                             Set<String> imagenes = infoServicio.getImagenes();
                             for (String imagen : imagenes) {
                         %>
-                        <div style="background-image: url(<%=imagen%>); height: 5vh; width: 5vw"></div>
-                        <!--<img src = url(<%=imagen%>)>-->
-                        <p><%=imagen%></p>
+                        <img src="img/<%=imagen%>" width="60vh" height="60vh"/>
                         <%
                             }
                         %>

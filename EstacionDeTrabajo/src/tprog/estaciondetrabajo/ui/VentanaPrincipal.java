@@ -35,7 +35,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             private Image image;
             {
                 try {
-                    String directorioImagenes = Fabrica.getInstance().dir;
+                    String directorioImagenes = (new File(".")).getCanonicalPath();
                     String imagen = directorioImagenes + "/imagenes/background.jpg";
                     File f = new File(imagen);
                     image = ImageIO.read(f);

@@ -198,7 +198,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    private Image image;&#xa;    {&#xa;        try {&#xa;            String directorioImagenes = Fabrica.getInstance().dir;&#xa;            String imagen = directorioImagenes + &quot;/imagenes/background.jpg&quot;;&#xa;            File f = new File(imagen);&#xa;            image = ImageIO.read(f);&#xa;        } catch (IOException e) {&#xa;            e.printStackTrace();&#xa;        }&#xa;    }&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);&#xa;    }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    private Image image;&#xa;    {&#xa;        try {&#xa;            String directorioImagenes = (new File(&quot;.&quot;)).getCanonicalPath();&#xa;            String imagen = directorioImagenes + &quot;/imagenes/background.jpg&quot;;&#xa;            File f = new File(imagen);&#xa;            image = ImageIO.read(f);&#xa;        } catch (IOException e) {&#xa;            e.printStackTrace();&#xa;        }&#xa;    }&#xa;&#xa;    @Override&#xa;    protected void paintComponent(Graphics g) {&#xa;        super.paintComponent(g);&#xa;        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);&#xa;    }&#xa;}"/>
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

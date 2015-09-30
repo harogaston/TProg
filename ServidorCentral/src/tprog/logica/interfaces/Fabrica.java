@@ -8,8 +8,6 @@ public class Fabrica {
 
     private static Fabrica instace = null;
 
-    public static String dir = "../ServidorCentral";
-
     protected Fabrica() {
     }
 

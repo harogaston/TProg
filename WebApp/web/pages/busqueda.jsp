@@ -1,9 +1,3 @@
-<%--
-    Document   : busqueda
-    Created on : Sep 27, 2015, 7:32:36 PM
-    Author     : marccio
---%>
-
 <%@page import="tprog.logica.dt.DTMinPromocion"%>
 <%@page import="java.util.Set"%>
 <%@page import="tprog.logica.dt.DTMinServicio"%>
@@ -14,7 +8,6 @@
         <%@include file="templates/head.jspf" %>
         <!--<title>Resultados de busqueda</title>-->
         <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
-        <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <script src="js/jquery-2.1.4.js"></script>
         <script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
         <script>

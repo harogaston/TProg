@@ -11,7 +11,7 @@
         <div style="padding-bottom: 50px">
             <%if (!(boolean) session.getAttribute("datos_cargados")) {
             %>
-			<form action= 'CargarDatos' method='POST'>
+			<form action= "CargarDatos" method="POST">
 				<button type="submit" class="btn btn-success">Cargar Datos</button>
 			</form>
 			<%

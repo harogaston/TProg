@@ -19,7 +19,6 @@
     <header>
         <jsp:include page="templates/header.jsp"/>
     </header>
-    <body style="font-family: 'Alegreya Sans SC', sans-serif">
         <div class="col-lg-3"></div>
         <div class="col-lg-3">
             <p >Por favor seleccione una categoría y haga click en "Ver Servicios"</p>

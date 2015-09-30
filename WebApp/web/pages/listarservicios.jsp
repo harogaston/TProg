@@ -15,7 +15,6 @@
         <%@include file="templates/head.jspf" %>
         <title>Listado de Servicios</title>
         <link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
-        <link href='https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:400,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
         <script src="js/jquery-2.1.4.js"></script>
         <script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
     </head>

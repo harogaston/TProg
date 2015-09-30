@@ -61,35 +61,35 @@
 		<%
 			}
 		%>
-		<!--		<div class="col-md-1 pull-right"></div>
-				<div class="row ">
-					<div class="col-md-5"></div>
-					<div class="dropdown col-md-1">
-						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Registros<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<li><a href="#">Registrar Cliente</a></li>
-							<li><a href="#">Agregar Servicio o Promoción a Reserva Actual</a></li>
-							<li><a href="#">Generar Reserva</a></li>
-							<li><a href="#">Actualizar estado de Reserva</a></li>
-						</ul>
-					</div>
-					<div class="dropdown col-md-1">
-						<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Consultas<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							<li><a href="#">Ver Información de Proveedor</a></li>
-							<li><a href="VerInfoServicio">Ver Información de Servicio</a></li>
-							<li><a href="#">Ver Información de Promoción</a></li>
-							<li><a href="#">Ver Información de Reserva</a></li>
-						</ul>
-					</div>
-					<div class="col-md-5"></div>
-				</div>-->
+		<div class="col-md-1 pull-right"></div>
+		<div class="row ">
+			<div class="col-md-5"></div>
+			<div class="dropdown col-md-1">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Registros<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Registrar Cliente</a></li>
+					<li><a href="#">Agregar Servicio o Promoción a Reserva Actual</a></li>
+					<li><a href="#">Generar Reserva</a></li>
+					<li><a href="#">Actualizar estado de Reserva</a></li>
+				</ul>
+			</div>
+			<div class="dropdown col-md-1">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Consultas<span class="caret"></span></button>
+				<ul class="dropdown-menu">
+					<li><a href="#">Ver Información de Proveedor</a></li>
+					<li><a href="VerInfoServicio">Ver Información de Servicio</a></li>
+					<li><a href="#">Ver Información de Promoción</a></li>
+					<li><a href="#">Ver Información de Reserva</a></li>
+				</ul>
+			</div>
+			<div class="col-md-5"></div>
+		</div>
 
 		<!-- script para que funcione el dropdown siempre -->
-		<!--		<script>
-					$(document).ready(function () {
-						$(".dropdown-toggle").dropdown();
-					});
-				</script>-->
+		<script>
+			$(document).ready(function () {
+				$(".dropdown-toggle").dropdown();
+			});
+		</script>
 	</div><!-- /.container -->
 </nav><!-- /.navbar -->

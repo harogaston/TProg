@@ -13,7 +13,10 @@ public class IniciarSesion extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession objSesion = request.getSession();
+		HttpSession session = request.getSession();
+//		if (session.getAttribute("user_id") == null) {
+//            session.setAttribute("user_id", EstadoSesion.NO_LOGIN);
+//        }
 		System.out.println(request.getParameterMap().toString());
 		String id = request.getParameter("nickname"); //puede ser email o nickname
 		String contrasena = request.getParameter("password");
@@ -23,7 +26,7 @@ public class IniciarSesion extends HttpServlet {
 		if (id != null && contrasena != null && (cu.idCorrecta(id) & cu.pwCorrecta(id, contrasena))) {
 			nuevoEstado = EstadoSesion.OK_LOGIN;
 			request.getSession().setAttribute("usuario_logueado", id);
-			objSesion.setAttribute("estado_sesion", nuevoEstado);
+			session.setAttribute("estado_sesion", nuevoEstado);
 		}
 		
 		// redirige a la página principal para que luego rediriga a la página

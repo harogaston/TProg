@@ -7,6 +7,9 @@ package tprog.web;
 
 import java.io.IOException;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import tprog.logica.dt.DTMinServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 
@@ -59,10 +63,34 @@ public class VerInfoServicio extends HttpServlet {
         request.setAttribute("arbolJson", list);
         //seteo noHayServicios en false porque al ser la ejecucion inicial de la pagina,
         //no se si hay o no servicios para la categoria seleccionada
+
         if (request.getAttribute("noHayServicios") == null) { //si no fue seteado anteriormente
             request.setAttribute("noHayServicios", false);
         }
 
+        //me fijo si hay otra categoría seleccionada
+        if (request.getParameter("categoriaSeleccionada") != null) {
+            String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
+            Set<DTMinServicio> servicios = ctrlProductos.listarServiciosCategoria(categoriaSeleccionada);
+            if (servicios.isEmpty()) {
+                request.setAttribute("mapaServicios", null);
+                request.setAttribute("noHayServicios", true);
+//                request.getRequestDispatcher("VerInfoServicio").forward(request, response);
+            } else { //entrego lista de servicios para que la página jsp los muestre
+                //construyo mapa para la interfaz usando el set
+                //para no tener elementos repetidos
+
+                Map<String, DTMinServicio> mapaServicios = new HashMap<String, DTMinServicio>() {
+                };
+                for (DTMinServicio dt : servicios) {
+                    if (!mapaServicios.containsKey(dt.getIdServicio())) {
+                        mapaServicios.put(dt.getIdServicio(), dt);
+                    }
+                }
+                request.setAttribute("mapaServicios", mapaServicios);
+//                request.setAttribute("servicios", servicios);
+            }
+        }
         request.getRequestDispatcher("/pages/verinfoservicio.jsp").forward(request, response);
     }
 

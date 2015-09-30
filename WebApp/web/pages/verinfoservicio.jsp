@@ -60,7 +60,7 @@
                             Set<String> imagenes = infoServicio.getImagenes();
                             for (String imagen : imagenes) {
                         %>
-                        <img src="img/<%=imagen%>" width="100vh" height="100vh"/>
+                        <img src="<%=imagen%>" width="100vh" height="100vh"/>
                         <%
                             }
                         %>

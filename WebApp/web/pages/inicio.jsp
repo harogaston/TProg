@@ -7,7 +7,7 @@
         <%@include file="templates/header.jsp" %>
     </header>
     <body>
-        <!--El padding es para salvar el footer-->
+        <div style="padding-bottom: 50px"></div>
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>

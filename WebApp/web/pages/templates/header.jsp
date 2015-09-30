@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-md-5"></div>
             </div>
-            <div class="row" style="padding-bottom: 50px">
+            <div class="row">
                 <%if (!(boolean) session.getAttribute("datos_cargados")) {
                 %>
                 <form action= "CargarDatos" method="POST">
@@ -102,9 +102,6 @@
                 </form>
                 <%
                     }%>
-            </div>
-            <div class="row">
-                Dir : <%= (new File(".")).getCanonicalPath()%>
             </div>
 
             <!-- script para que funcione el dropdown siempre -->

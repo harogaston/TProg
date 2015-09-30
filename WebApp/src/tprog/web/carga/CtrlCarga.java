@@ -1,6 +1,5 @@
 package tprog.web.carga;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,13 +43,12 @@ public class CtrlCarga extends HttpServlet {
 
     public void cargarDatos() throws IOException {
         //Alta de Clientes
-        File dir = new File(".");
         ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
         DTCliente dtC = new DTCliente("oWood", "pass", "Oliver", "Wood", "quidditch28@gmail.com",
-                "clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<DTMinReserva>());
+                "imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<DTMinReserva>());
         mu.altaCliente(dtC);
         dtC = new DTCliente("eWatson", "pass", "Emma", "Watson", "e.watson@gmail.com",
-                "clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<DTMinReserva>());
+                "imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<DTMinReserva>());
         mu.altaCliente(dtC);
         dtC = new DTCliente("BruceS", "pass", "Bruce", "Sewell", "bruce.sewell@gmail.com",
                 null, new Date(1978, 12 - 1, 3), new HashSet<DTMinReserva>());
@@ -59,23 +57,23 @@ public class CtrlCarga extends HttpServlet {
                 null, new Date(1984, 11 - 1, 27), new HashSet<DTMinReserva>());
         mu.altaCliente(dtC);
         DTProveedor dtP = new DTProveedor("tCook", "pass", "Tim", "Cook", "air.f@gmail.com",
-                "proveedores/tCook.jpg",
+                "imagenes/proveedores/tCook.jpg",
                 new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("moody", "pass", "Alastor", "Moody", "eu.car@eucar.com",
-                "proveedores/moody.jpg",
+                "imagenes/proveedores/moody.jpg",
                 new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("remus", "pass", "Remus", "Lupin", "iberia@gmail.com",
-                "proveedores/remus.jpg",
+                "imagenes/proveedores/remus.jpg",
                 new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
-                "proveedores/adippet.jpg",
+                "imagenes/proveedores/adippet.jpg",
                 new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
         mu.altaProveedor(dtP);
         dtP = new DTProveedor("mHooch", "pass", "Madam", "Hooch", "segHogar@gmail.com",
-                "proveedores/mHooch.jpg",
+                "imagenes/proveedores/mHooch.jpg",
                 new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
         mu.altaProveedor(dtP);
         ManejadorProductos mp = ManejadorProductos.getInstance();
@@ -163,7 +161,7 @@ public class CtrlCarga extends HttpServlet {
         p.agregarCiudad(new Ciudad("Cantón"));
         mp.agregarPais(p);
         Set<String> imgs = new HashSet<String>();
-        imgs.add("IMG7.jpg");
+        imgs.add("imagenes/IMG7.jpg");
         DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad",
                 1100, imgs, new DTUbicacion("Montevideo", "Uruguay"),
                 new DTUbicacion("Valencia", "España"));
@@ -172,7 +170,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Standard");
         mp.altaServicio(dtS, "remus", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG7.jpg");
+        imgs.add("imagenes/IMG7.jpg");
         dtS = new DTServicio("Euro-Vuelo-LC", "Vuelo con excelente "
                 + "atención y comodidad a un precio accesible.", 850, imgs,
                 new DTUbicacion("Montevideo", "Uruguay"),
@@ -182,7 +180,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("LowCost");
         mp.altaServicio(dtS, "remus", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG7.jpg");
+        imgs.add("imagenes/IMG7.jpg");
         dtS = new DTServicio("Euro-Vuelo-FC", "Vuelo de primera clase. "
                 + "Excelente atención, comodidad y servicio.", 1300, imgs,
                 new DTUbicacion("Montevideo", "Uruguay"),
@@ -192,7 +190,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("First Class");
         mp.altaServicio(dtS, "remus", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG8.jpg");
+        imgs.add("imagenes/IMG8.jpg");
         dtS = new DTServicio("Euro-Car-1", "Euro-Car. Autos de buena calidad "
                 + "y comodidad. Versión Económica", 300, imgs,
                 new DTUbicacion("Madrid", "España"),
@@ -203,7 +201,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Chevrolet");
         mp.altaServicio(dtS, "moody", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG9.jpg");
+        imgs.add("imagenes/IMG9.jpg");
         dtS = new DTServicio("Euro-Car-2", "Euro-Car. Autos de buena calidad"
                 + " y comodidad. Versión Standard.", 300, imgs,
                 new DTUbicacion("Madrid", "España"),
@@ -214,7 +212,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Chevrolet");
         mp.altaServicio(dtS, "moody", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG10.jpg");
+        imgs.add("imagenes/IMG10.jpg");
         dtS = new DTServicio("Euro-Car-3", "Euro-Car. Autos de buena calidad "
                 + "y comodidad. Una camioneta para toda la familia.", 300, imgs,
                 new DTUbicacion("Valencia", "España"), null);
@@ -224,8 +222,8 @@ public class CtrlCarga extends HttpServlet {
         cats.add("Chevrolet");
         mp.altaServicio(dtS, "moody", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG1.jpg");
-        imgs.add("IMG2.jpg");
+        imgs.add("imagenes/IMG1.jpg");
+        imgs.add("imagenes/IMG2.jpg");
         dtS = new DTServicio("Casa para p4 BsAs", "Esta hermosa casa, se "
                 + "encuentra ubicada en el corazón de Buenos Aires y ofrece una "
                 + "capacidad para cuatro personas. La propiedad cuenta con un "
@@ -237,9 +235,9 @@ public class CtrlCarga extends HttpServlet {
         cats.add("2 dormitorios");
         mp.altaServicio(dtS, "mHooch", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG3.jpg");
-        imgs.add("IMG4.jpg");
-        imgs.add("IMG5.jpg");
+        imgs.add("imagenes/IMG3.jpg");
+        imgs.add("imagenes/IMG4.jpg");
+        imgs.add("imagenes/IMG5.jpg");
         dtS = new DTServicio("Floripa G. House", "Estamos a sólo unos pasos "
                 + "de un supermercado, restaurantes, cajero automático, "
                 + "gasolinera, farmacia, gimnasio, etc. Lagoa da Conceição es 7"
@@ -252,7 +250,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("2 dormitorios");
         mp.altaServicio(dtS, "mHooch", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG6.jpg");
+        imgs.add("imagenes/IMG6.jpg");
         dtS = new DTServicio("Air-France-FC", "¡Un vuelo de primera! "
                 + "Excelencia y experiencia en mejorar sus viajes.", 100, imgs,
                 new DTUbicacion("París", "Francia"),
@@ -262,7 +260,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("First Class");
         mp.altaServicio(dtS, "tCook", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG11.jpg");
+        imgs.add("imagenes/IMG11.jpg");
         dtS = new DTServicio("TAM-FC", "¡Un vuelo de primera! Excelencia y "
                 + "experiencia.", 150, imgs, new DTUbicacion("Florianópolis",
                         "Brasil"), new DTUbicacion("Pekín", "China"));
@@ -271,7 +269,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("First Class");
         mp.altaServicio(dtS, "adippet", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG12.jpg");
+        imgs.add("imagenes/IMG12.jpg");
         dtS = new DTServicio("Luxury south beach corner apartament",
                 "Beautiful large 2 bedrooms 2 bathrooms apartment CORNER UNIT. "
                 + "Marble floor throughout, beautiful open kitchen, granite "
@@ -284,7 +282,7 @@ public class CtrlCarga extends HttpServlet {
         cats.add("2 dormitorios");
         mp.altaServicio(dtS, "mHooch", cats);
         imgs = new HashSet<>();
-        imgs.add("IMG8.jpg");
+        imgs.add("imagenes/IMG8.jpg");
         dtS = new DTServicio("Coche-Miami",
                 "A useful car to travel around Miami", 360, imgs,
                 new DTUbicacion("Miami", "EEUU"), null);

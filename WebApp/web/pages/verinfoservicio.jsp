@@ -107,7 +107,9 @@
     });
 
     var arbol = <%=request.getAttribute("arbolJson")%>;
+    //creo jstree y sorteo nodos
     $('#arbol_categorias').jstree({
+        "plugins": ["sort"],
         'core': {
             'data': arbol
         }
@@ -118,10 +120,6 @@
         if (<%= request.getAttribute("categoriaSeleccionada") != null%>) {
             $('#arbol_categorias').jstree(true).select_node(<%= request.getAttribute("categoriaSeleccionada")%>);
         }
-        //ordeno nodos
-        $("#arbol_categorias").jstree({
-            "plugins": ["sort"]
-        });
         //abro todo el arbol
         $('#arbol_categorias').jstree('open_all');
     });

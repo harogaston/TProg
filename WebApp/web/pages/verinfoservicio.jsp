@@ -4,6 +4,7 @@
     Author     : marccio
 --%>
 
+<%@page import="java.awt.Toolkit"%>
 <%@page import="tprog.logica.dt.DTServicio"%>
 <%@page import="java.util.Map"%>
 <%@page import="tprog.logica.dt.DTMinServicio"%>
@@ -32,33 +33,7 @@
         <!--
         con el siguiente div se crea el arbol de categorias, con la data que se generó en el servlet
         -->
-        <div id="arbol_categorias" style="padding-top: 50px">
-            <script>
-                var arbol = <%=request.getAttribute("arbolJson")%>;
-                $('#arbol_categorias').jstree({
-                    'core': {
-                        'data': arbol
-                    }
-                });
-                $('#arbol_categorias').on('loaded.jstree', function () {
-//                    queda seleccionado el nodo seleccionado anteriormente
-//NO FUNCIONA TODAVÍA
-                    if (<%= request.getAttribute("categoriaSeleccionada") != null%>) {
-                        $('#arbol_categorias').jstree(true).select_node(<%= request.getAttribute("categoriaSeleccionada")%>);
-                    }
-                    //abro primer nivel
-                    $('#arbol_categorias').jstree(true).toggle_node('Categorias');
-                });
-
-                //ordeno los nodos del arbol
-                $(function () {
-                    $("#arbol_categorias").jstree({
-                        "plugins": ["sort"]
-                    });
-                });
-
-            </script>
-        </div>
+        <div id="arbol_categorias" style="padding-top: 50px; overflow: scroll; max-height: <%=(int) Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2%>px"></div>
     </div>
     <div class="col-lg-3">
         <!--
@@ -125,22 +100,24 @@
         document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios
     });
 
-    //transformo la lista de servicios en un accordion
-    //seteo el accordion para que ningún servicio esté seleccionado de una
-    $(function () {
-
+    var arbol = <%=request.getAttribute("arbolJson")%>;
+    $('#arbol_categorias').jstree({
+        'core': {
+            'data': arbol
+        }
     });
 
-    //si un servicio es seleccionado, se muestra su info servicio
-    $('#lista_servicios').on("accordionactivate", function (event, ui) {
-    <%
-//        Fabrica f = Fabrica.getInstance();
-//        ICtrlProductos ctrlProductos = f.getICtrlProductos();
-//        ctrlProductos.seleccionarServicio(dtS);
-
-
-    %>
+    $('#arbol_categorias').on('loaded.jstree', function () {
+        //queda seleccionado el nodo seleccionado anteriormente
+        if (<%= request.getAttribute("categoriaSeleccionada") != null%>) {
+            $('#arbol_categorias').jstree(true).select_node(<%= request.getAttribute("categoriaSeleccionada")%>);
+        }
+        //abro todo el arbol
+        $('#arbol_categorias').jstree('open_all');
+        //ordeno nodo
+        $("#arbol_categorias").jstree({
+            "plugins": ["sort"]
+        });
     });
-
 
 </script>

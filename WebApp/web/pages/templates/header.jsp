@@ -32,8 +32,10 @@
 				</form>
 			</div>
 			<div class="navbar-nav navbar-right">
-				<form action= "VerCarrito" class="navbar-form" method="POST">
-					<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i>Ver reserva actual</button>
+				<form action= "VerReservaActual" class="navbar-form" method="POST">
+					<button class="btn btn-warning" type="submit">
+						<i class="glyphicon glyphicon-shopping-cart"></i>Ver reserva actual (${cant_items})
+					</button>
 				</form>
 			</div>
 			<div class="navbar-nav navbar-right">

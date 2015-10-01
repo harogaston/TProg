@@ -27,6 +27,7 @@ public class IniciarSesion extends HttpServlet {
 			nuevoEstado = EstadoSesion.OK_LOGIN;
 			request.getSession().setAttribute("usuario_logueado", id);
 			session.setAttribute("estado_sesion", nuevoEstado);
+			session.setAttribute("cant_items", 0);
 		}
 		
 		// redirige a la página principal para que luego rediriga a la página

@@ -5,7 +5,7 @@
 <%@page import="tprog.logica.dt.DTMinPromocion"%>
 <%@page import="java.util.Set"%>
 <%@page import="tprog.logica.dt.DTMinServicio"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html>
     <head>
@@ -25,18 +25,18 @@
                 <!-- JSTREE -->
                 <div class="col-md-4">
                     <div class="row">
-                        <p >Seleccione una categorÃ­a mostrar los servicios de la misma</p>
+                        <p >Seleccione una categoría mostrar los servicios de la misma</p>
                         <p>Opcionalmente, se puede seleccionar Promociones para <br> visualizar a todas las promociones del sistema</p>
                         <!--
-                        con el siguiente div se crea el arbol de categorias, con la data que se generÃ³ en el servlet
+                        con el siguiente div se crea el arbol de categorias, con la data que se generó en el servlet
                         -->
                         <div id="arbol_categorias" style="padding-top: 50px; overflow: scroll; max-height: 70vh"></div>
                     </div>
                 </div>
                 <!--
                 En la siguiente form oculta, se va a guardar el nombre de la categoria seleccionada,
-                para que siempre que cambie se recargue la pÃ¡gina y se muestren los servicios asociados
-                a la categorÃ­a
+                para que siempre que cambie se recargue la página y se muestren los servicios asociados
+                a la categoría
                 -->
                 <form action= "Buscar" id="ver_servicios_form" class="form-inline" role="form" method="POST">
                     <input type="text" name="categoriaSeleccionada" id="categoriaSeleccionada" style="visibility: hidden">
@@ -88,7 +88,7 @@
                     <%
                         }
                     } else { %>
-                    <p> No hay servicios para esa bÃºsqueda </p>
+                    <p> No hay servicios para esa búsqueda </p>
                     <%
                         }
                     %>
@@ -140,7 +140,7 @@
                     <%
                     } else {
                     %>
-                    <p> No hay promociones para esa bÃºsqueda </p>
+                    <p> No hay promociones para esa búsqueda </p>
                     <%
                         }
                     %>
@@ -164,11 +164,11 @@
     });
 
     arbol.on('loaded.jstree', function () {
-        //deberÃ­a abrir la Ãºltima categorÃ­a seleccionada
+        //debería abrir la última categoría seleccionada
         arbol.jstree(true)._open_to('#<%=(String) request.getAttribute("categoriaSeleccionada")%>');
     });
 
-    //cuando se clickea algÃºn elemento del Ã¡rbol, se muestran todos los servicios asociados (y ninguna promociÃ³n)
+    //cuando se clickea algún elemento del árbol, se muestran todos los servicios asociados (y ninguna promoción)
     $('#arbol_categorias').on('activate_node.jstree', function () {
         document.getElementById('categoriaSeleccionada').value = $('.jstree-clicked').text();
         document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios

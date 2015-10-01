@@ -1,12 +1,11 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
     <head>
         <%@include file="templates/head.jspf" %>
-        <!-- ACÃ se puede especificar el tÃ­tulo de ESTA jsp de la siguiente forma:
-			<title>El tÃ­tulo</title>
+        <!-- ACÁ se puede especificar el título de ESTA jsp de la siguiente forma:
+			<title>El título</title>
 		-->
-		<!-- ACÃ includes de .js que se requieran en ESTA pÃ¡gina  -->
+		<!-- ACÁ includes de .js que se requieran en ESTA página  -->
 </head>
     <header>
         <%@include file="templates/header.jsp" %>

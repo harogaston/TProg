@@ -1,21 +1,18 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html>
     <head>
         <%@include file="templates/head.jspf" %>
-        <!-- ACÃ se puede especificar el tÃ­tulo de ESTA jsp de la siguiente forma:
-			<title>El tÃ­tulo</title>
+        <!-- ACÁ el título de ESTA página
+			<title>El título</title>
 		-->
-		<!-- ACÃ includes de .js que se requieran en ESTA pÃ¡gina  -->
+		<!-- ACÁ .js que se requieran en ESTA página  -->
 </head>
     <header>
         <%@include file="templates/header.jsp" %>
-		<!-- ACA .css que se requieran en esta jsp 
-			(sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
-		-->
+		<!-- ACÁ .css que se requieran en ESTA página -->
     </header>
     <body>
-        <!-- La PAGINA propiamente dicha  -->
+        <!-- La pagina propiamente dicha  -->
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>

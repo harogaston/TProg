@@ -1,15 +1,15 @@
 <%@page import="java.lang.String"%>
 <%@page import="java.util.Set"%>
 <%@page import="tprog.logica.dt.DTServicio"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!doctype html>
 <html>
     <head>
         <%@include file="templates/head.jspf" %>
-        <!-- ACÃ se puede especificar el tÃ­tulo de ESTA jsp de la siguiente forma:
-                        <title>El tÃ­tulo</title>
+        <!-- ACÁ se puede especificar el título de ESTA jsp de la siguiente forma:
+                        <title>El título</title>
         -->
-        <!-- ACÃ includes de .js que se requieran en ESTA pÃ¡gina  -->
+        <!-- ACÁ includes de .js que se requieran en ESTA página  -->
 		<script src="js/bootstrap-datepicker.js"></script>
 		<script src="js/bootstrap-datepicker.es.min.js"></script>
     </head>
@@ -20,14 +20,14 @@
     </header>
     <body>
         <%
-			//obtengo el atributo de info servicio para usar en toda la pÃ¡gina
+			//obtengo el atributo de info servicio para usar en toda la página
 			DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
 			String idProveedor = (String) request.getAttribute("idProveedor");
 			Set< String> imagenes = infoServicio.getImagenes();
         %>
         <div class="container">
             <div class="row">
-                <!-- Parte izquierda imÃ¡genes, origen, destino, proveedor, etc -->
+                <!-- Parte izquierda imágenes, origen, destino, proveedor, etc -->
                 <div class="col-md-4">
                     <div id="myCarousel" class="carousel slide" style="margin-bottom: 30px">
                         <%if (!imagenes.isEmpty()) {%>
@@ -55,8 +55,8 @@
 										contador++;
 									}%>
                             </div>
-                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">â€¹</a>
-                            <a class="right carousel-control" href="#myCarousel" data-slide="next">â€º</a>
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">?</a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">?</a>
                         </div>
                         <%} else {%>
                         <ol class="carousel-indicators">
@@ -67,12 +67,12 @@
                                 <img src="imagenes/sinimagen.jpeg" alt="">
                             </div>
                         </div>
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">â€¹</a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">â€º</a>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">?</a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">?</a>
                     </div>
                     <%}%>
 
-                    <!-- Panel para la informaciÃ³n detallada -->
+                    <!-- Panel para la información detallada -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">Detalle</h3>
@@ -109,7 +109,7 @@
                 <!-- Parte derecha nombre, descripcion, categorias, agregar al carro, etc -->
                 <div class="col-md-8">
                     <h1><%=infoServicio.getIdServicio()%></h1>
-                    <p><h3>DescripciÃ³n</h3> <%=infoServicio.getDescripcion()%>
+                    <p><h3>Descripción</h3> <%=infoServicio.getDescripcion()%>
                     </p>
                     <!--Solo se muestra agregar al carrito si estoy logueado-->
                     <%
@@ -128,7 +128,7 @@
 
                     <%}%>
 
-					<h3>CategorÃ­as</h3>
+					<h3>Categorías</h3>
                     <%Set<String> categorias = (Set<String>) request.getAttribute("categorias");
 						for (String categoria : categorias) {
 

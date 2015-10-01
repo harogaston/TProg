@@ -19,10 +19,10 @@
     </header>
     <body>
         <%
-            //obtengo el atributo de info servicio para usar en toda la página
-            DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
-            String idProveedor = (String) request.getAttribute("idProveedor");
-            Set< String> imagenes = infoServicio.getImagenes();
+			//obtengo el atributo de info servicio para usar en toda la página
+			DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
+			String idProveedor = (String) request.getAttribute("idProveedor");
+			Set< String> imagenes = infoServicio.getImagenes();
         %>
         <div class="container">
             <div class="row">
@@ -30,15 +30,19 @@
                 <div class="col-md-4">
                     <div id="myCarousel" class="carousel slide" style="margin-bottom: 30px">
                         <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li class="" data-target="#myCarousel" data-slide-to="1"></li>
-                            <li class="" data-target="#myCarousel" data-slide-to="2"></li>
+							<%
+								int i = 0;
+								for (String imagen : imagenes) {%>
+								<li class="" data-target="#myCarousel" data-slide-to="<%=i%>"></li>
+							<%
+								i++;
+								}%>	
                         </ol>
                         <div class="carousel-inner">
                             <%
-                                int contador = 1;
-                                for (String imagen : imagenes) {
-                                    if (contador == 1) {%>
+								int contador = 1;
+								for (String imagen : imagenes) {
+									if (contador == 1) {%>
                             <div class="item active">
                                 <%} else {%>
                                 <div class="item">
@@ -46,8 +50,8 @@
                                     <img src="<%=imagen%>" alt="">
                                 </div>
                                 <%
-                                        contador++;
-                                    }%>
+										contador++;
+									}%>
                             </div>
                             <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
                             <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
@@ -98,7 +102,7 @@
                         </form>
                         <h3>Categorías</h3>
                         <%Set<String> categorias = (Set<String>) request.getAttribute("categorias");
-                            for (String categoria : categorias) {
+							for (String categoria : categorias) {
 
                         %>
                         <h5 style="display: inline-block"><span class="label label-info"><%=categoria%></span></h5>

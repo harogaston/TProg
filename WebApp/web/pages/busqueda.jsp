@@ -77,6 +77,13 @@
                             <h3><%= servicio.getIdServicio()%> </h3>
                             <div>
                                 <%=servicio.toString().replace("\n", "<br>")%>
+                                <form action="VerServicio" class="navbar-form">
+                                    <div class="input-group">
+                                        <input type="text" name="idServicio" value="<%=dt.getIdServicio()%>" style="visibility: hidden">
+                                        <input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
+                                        <button class="btn btn-info" type="submit">Ir a Servicio</button>
+                                    </div>
+                                </form>
                             </div>
                             <%
                                 }
@@ -110,6 +117,13 @@
                             <h3> <%= promocion.getIdPromocion()%> </h3>
                             <div>
                                 <%=promocion.toString().replace("\n", "<br>")%>
+                                <form action="VerPromocion" class="navbar-form">
+                                    <div class="input-group">
+                                        <input type="text" name="idServicio" value="<%=dt.getIdPromocion()%>" style="visibility: hidden">
+                                        <input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
+                                        <button class="btn btn-info" type="submit">Ir a Promocion</button>
+                                    </div>
+                                </form>
                             </div>
                             <%
                                 }

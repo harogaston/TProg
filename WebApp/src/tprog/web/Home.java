@@ -26,6 +26,10 @@ public class Home extends HttpServlet {
         initSession(request);
         HttpSession session = request.getSession();
         request.setAttribute("datos_cargados", session.getAttribute("datos_cargados"));
+        //atributo para determinar que es la primera ejecución de la página de búsqueda,
+        //ya sea apenas se cargaron los datos, o en la primera ejecución
+        //cosa de que se muestren las promociones del sistema
+//        request.setAttribute("primeraEjecucion", true);
         request.getRequestDispatcher("Buscar").forward(request, response);
     }
 

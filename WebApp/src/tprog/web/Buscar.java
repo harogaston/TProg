@@ -6,7 +6,7 @@
 package tprog.web;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -17,9 +17,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.tree.DefaultMutableTreeNode;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
@@ -44,76 +46,134 @@ public class Buscar extends HttpServlet {
             throws ServletException, IOException {
         try {
             //        response.setContentType("text/html;charset=UTF-8");
-            CharSequence busqueda = request.getParameter("busqueda"); //extraigo texto buscado
-            ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
-            Set<DTMinServicio> servicios;
-            try {
-                servicios = ctrlProductos.listarServicios();
-            } catch (Exception ex) {
-                servicios = new HashSet();
-            }
-            if (busqueda != null) {
-                //filtro resultados de la búsqueda
+            Fabrica f = Fabrica.getInstance();
+            ICtrlProductos ctrlProductos = f.getICtrlProductos();
+            DefaultMutableTreeNode categorias = ctrlProductos.listarCategorias();
+            Enumeration listado = categorias.breadthFirstEnumeration();
 
-                Iterator<DTMinServicio> iterator = servicios.iterator();
-                while (iterator.hasNext()) {
-                    DTMinServicio servicio = iterator.next();
-                    ctrlProductos.seleccionarServicio(servicio);
-                    Set<String> categorias = ctrlProductos.listarCategoriasServicio();
-                    DTServicio infoServicio = ctrlProductos.infoServicio();
-                    //chequeo si alguna categoria del servicio coincide con la búsqueda
-                    boolean matcheaCategoria = false;
-                    for (String categoria : categorias) {
-                        if (categoria.contains(busqueda)) {
-                            matcheaCategoria = true;
-                            break;
-                        }
-                    }
-                    if (!(infoServicio.getDescripcion().contains(busqueda)
-                            || infoServicio.getIdServicio().contains(busqueda)
-                            || matcheaCategoria)) { //si no matchea nada
-                        iterator.remove();
-                    }
-
+            // armo objeto de JSON para armar el árbol con jstree
+            JSONArray list = new JSONArray();
+            while (listado.hasMoreElements()) {
+                DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) listado.nextElement();
+                String categoria = nodo.toString(); //recupero categoria
+                DefaultMutableTreeNode padre = (DefaultMutableTreeNode) nodo.getParent();
+                String categoriaPadre = "#";
+                if (padre != null) {
+                    categoriaPadre = padre.toString();
                 }
+                JSONObject tmp = new JSONObject();
+                tmp.put("id", categoria);
+                tmp.put("parent", categoriaPadre);
+                tmp.put("text", categoria);
+                if (!listado.hasMoreElements()) { //agrego nodo Promociones
+                    tmp.put("id", "Promociones");
+                    tmp.put("parent", "#");
+                    tmp.put("text", "Promociones");
+                }
+                list.add(tmp);
             }
-            Set<DTMinPromocion> promociones;
+
+            request.setAttribute("arbolJson", list);
+
+            CharSequence busqueda = request.getParameter("busqueda"); //extraigo texto buscado
+            Set<DTMinServicio> serviciosBusqueda;
             try {
-                promociones = ctrlProductos.listarPromociones();
+                serviciosBusqueda = ctrlProductos.listarServicios();
             } catch (Exception ex) {
-                promociones = new HashSet();
+                serviciosBusqueda = new HashSet();
             }
             if (busqueda != null) {
                 //filtro resultados de la búsqueda
-                Iterator<DTMinPromocion> iterator = promociones.iterator();
-                while (iterator.hasNext()) {
-                    DTMinPromocion promocion = iterator.next();
-                    ctrlProductos.seleccionarPromocion(promocion);
-                    DTPromocion infoPromocion = ctrlProductos.infoPromocion();
-                    //chequeo si alguna categoria del servicio coincide con la búsqueda
-                    boolean matcheaCategoria = false;
-                    HashMap<DTMinServicio, Integer> serviciosPromocion = infoPromocion.getServicios();
-                    for (DTMinServicio servicio : serviciosPromocion.keySet()) {
+                if (!serviciosBusqueda.isEmpty()) {
+                    request.setAttribute("noHayServicios", false);
+                    Iterator<DTMinServicio> iterator = serviciosBusqueda.iterator();
+                    while (iterator.hasNext()) {
+                        DTMinServicio servicio = iterator.next();
                         ctrlProductos.seleccionarServicio(servicio);
-                        Set<String> categorias = ctrlProductos.listarCategoriasServicio();
-                        for (String categoria : categorias) {
+                        Set<String> listaCategorias = ctrlProductos.listarCategoriasServicio();
+                        DTServicio infoServicio = ctrlProductos.infoServicio();
+                        //chequeo si alguna categoria del servicio coincide con la búsqueda
+                        boolean matcheaCategoria = false;
+                        for (String categoria : listaCategorias) {
                             if (categoria.contains(busqueda)) {
                                 matcheaCategoria = true;
                                 break;
                             }
                         }
-                        if (matcheaCategoria) {
-                            break;
+                        if (!(infoServicio.getDescripcion().contains(busqueda)
+                                || infoServicio.getIdServicio().contains(busqueda)
+                                || matcheaCategoria)) { //si no matchea nada
+                            iterator.remove();
                         }
-                    }
-                    if (!(infoPromocion.getIdPromocion().contains(busqueda)
-                            || matcheaCategoria)) { //si no matchea nada
-                        iterator.remove();
+
                     }
                 }
             }
-            request.setAttribute("servicios", servicios);
-            request.setAttribute("promociones", promociones);
+
+            //filtro servicios de acuerdo a categoria
+            if (request.getParameter("categoriaSeleccionada") != null) {
+                String categoriaSeleccionada = (String) request.getParameter("categoriaSeleccionada");
+                if (busqueda != null) {
+                    Set<DTMinServicio> serviciosPorCategoria = ctrlProductos.listarServiciosCategoria(categoriaSeleccionada);
+                    if (!serviciosPorCategoria.isEmpty() && !serviciosBusqueda.isEmpty()) { //hay posible interseccion
+                        //entrego lista de servicios para que la página jsp los muestre
+                        //construyo mapa para la interfaz usando el set
+                        //para no tener elementos repetidos
+                        Set<DTMinServicio> serviciosInterseccion = new HashSet<>(); //interseccion entre busqueda y filtro por categorias
+                        for (DTMinServicio dt1 : serviciosBusqueda) {
+                            for (DTMinServicio dt2 : serviciosPorCategoria) {
+                                if (dt1.toString().equals(dt2.toString())) {
+                                    serviciosInterseccion.add(dt1);
+                                }
+                            }
+                        }
+                        request.setAttribute("servicios", serviciosInterseccion);
+                        if (serviciosInterseccion.isEmpty()) {
+                            request.setAttribute("noHayServicios", true);
+                        } else {
+                            request.setAttribute("noHayServicios", false);
+                        }
+                    }
+                } else {
+                    Set<DTMinServicio> servicios = ctrlProductos.listarServiciosCategoria(categoriaSeleccionada);
+                    request.setAttribute("servicios", servicios);
+                    if (servicios.isEmpty()) {
+                        request.setAttribute("noHayServicios", true);
+                    } else {
+                        request.setAttribute("noHayServicios", false);
+                    }
+
+                }
+            } else {
+                request.setAttribute("servicios", serviciosBusqueda);
+                if (serviciosBusqueda.isEmpty()) {
+                    request.setAttribute("noHayServicios", true);
+                } else {
+                    request.setAttribute("noHayServicios", false);
+                }
+            }
+
+            //si se selecciona una categoria, no puedo mostrar promociones
+            //solo muestro promociones cuando no hay busqueda ni filtro (salvo "Promociones" en categoria y/o búsqueda)
+            if ((request.getParameter("categoriaSeleccionada") == null && busqueda == null)
+                    || (request.getParameter("categoriaSeleccionada") != null && request.getParameter("categoriaSeleccionada").equals("Promociones"))
+                    || (busqueda != null && busqueda.equals("Promociones"))) {
+                Set<DTMinPromocion> promociones;
+                try {
+                    promociones = ctrlProductos.listarPromociones();
+                } catch (Exception ex) {
+                    promociones = new HashSet();
+                }
+                request.setAttribute("promociones", promociones);
+                if (!promociones.isEmpty()) {
+                    request.setAttribute("mostrarPromociones", true);
+                } else {
+                    request.setAttribute("mostrarPromociones", false);
+                }
+            } else {
+                request.setAttribute("mostrarPromociones", false);
+            }
+
             request.getRequestDispatcher("/pages/busqueda.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Buscar.class.getName()).log(Level.SEVERE, null, ex);

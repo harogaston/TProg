@@ -52,6 +52,14 @@
         <servlet-name>VerInfoServicio</servlet-name>
         <servlet-class>tprog.web.VerInfoServicio</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>VerPerfil</servlet-name>
+        <url-pattern>/VerPerfil</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>VerPerfil</servlet-name>
+        <servlet-class>tprog.web.VerPerfil</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
 			30

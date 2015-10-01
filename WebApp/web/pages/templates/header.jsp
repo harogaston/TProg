@@ -71,37 +71,6 @@
         <%
 			}
         %>
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-2">
-				<%if (!(boolean) session.getAttribute("datos_cargados")) {
-				%>
-				<form action= "CargarDatos" method="POST">
-					<button type="submit" class="btn btn-success">Cargar Datos</button>
-				</form>
-				<%
-					}%>
-			</div>
-            <div class="dropdown col-md-2">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Registros<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Registrar Cliente</a></li>
-                    <li><a href="#">Agregar Servicio o Promoción a Reserva Actual</a></li>
-                    <li><a href="#">Generar Reserva</a></li>
-                    <li><a href="#">Actualizar estado de Reserva</a></li>
-                </ul>
-            </div>
-            <div class="dropdown col-md-2">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Consultas<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Ver Información de Proveedor</a></li>
-                    <li><a href="VerServicio">Ver Información de Servicio</a></li>
-                    <li><a href="#">Ver Información de Promoción</a></li>
-                    <li><a href="#">Ver Información de Reserva</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3"></div>
-        </div>
 
         <!-- script para que funcione el dropdown siempre -->
         <script>

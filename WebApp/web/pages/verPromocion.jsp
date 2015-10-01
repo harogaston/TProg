@@ -31,7 +31,7 @@
 			String idProveedor = (String) request.getAttribute("idProveedor");
 			Map<DTMinServicio, Integer> servicios = (Map<DTMinServicio, Integer>) request.getAttribute("servicios");
         %>
-        <div class="container">
+        <div class="container wrapper">
             <div class="row">
                 <!-- Parte izquierda imágenes, origen, destino, proveedor, etc -->
                 <div class="col-md-4">
@@ -44,8 +44,8 @@
                                 <img src="imagenes/sinimagen.jpeg" alt="">
                             </div>
                         </div>
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">?</a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">?</a>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><</a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">></a>
                     </div>
 
                     <!-- Panel para la información detallada -->
@@ -137,36 +137,6 @@
 							}
                         %>
                     </div>
-
-
-                    <!--
-                    <div class="accordion" id="accordion2">
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                                    Collapsible Group Item #1
-                                </a>
-                            </div>
-                            <div id="collapseOne" class="accordion-body collapse in">
-                                <div class="accordion-inner">
-                                    Anim pariatur cliche...
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                                    Collapsible Group Item #2
-                                </a>
-                            </div>
-                            <div id="collapseTwo" class="accordion-body collapse">
-                                <div class="accordion-inner">
-                                    Anim pariatur cliche...
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->
                 </div>
             </div>
         </div>

@@ -27,19 +27,13 @@ import tprog.logica.manejadores.ManejadorUsuarios;
 public class CtrlCarga extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		cargarDatos();
 		System.out.println("Datos cargados.");
 		request.getSession().setAttribute("datos_cargados", true);
 		request.setAttribute("primeraEjecucion", true);
 		request.getRequestDispatcher("Buscar").forward(request, response);
-	}
-
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
 	}
 
 	public void cargarDatos() throws IOException {
@@ -366,7 +360,6 @@ public class CtrlCarga extends HttpServlet {
 			dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
 					EstadoReserva.Registrada, 200, lineas);
 			mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
-
 			//R6    P8 S7
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),

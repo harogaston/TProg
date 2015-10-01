@@ -201,6 +201,7 @@ public class Buscar extends HttpServlet {
                 request.setAttribute("mostrarPromociones", false);
             }
 
+            request.setAttribute("categoriaSeleccionada", request.getParameter("categoriaSeleccionada"));
             request.getRequestDispatcher("/pages/busqueda.jsp").forward(request, response);
         } catch (Exception ex) {
             Logger.getLogger(Buscar.class.getName()).log(Level.SEVERE, null, ex);

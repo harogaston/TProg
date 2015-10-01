@@ -165,7 +165,7 @@
 
     arbol.on('loaded.jstree', function () {
         //debería abrir la última categoría seleccionada
-        arbol.jstree("open_node", '#Categorias');
+        arbol.jstree("open_node", '#<%=(String) request.getAttribute("categoriaSeleccionada")%>');
 
     });
 

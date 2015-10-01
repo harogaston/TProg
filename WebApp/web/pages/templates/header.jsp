@@ -32,7 +32,7 @@
 				</form>
 			</div>
 			<div class="navbar-nav navbar-right">
-				<form action= "VerReservaActual" class="navbar-form" method="POST">
+				<form action= "Carrito" class="navbar-form">
 					<button class="btn btn-warning" type="submit">
 						<i class="glyphicon glyphicon-shopping-cart"></i>Ver reserva actual (${cant_items})
 					</button>

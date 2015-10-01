@@ -7,7 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import tprog.logica.controladores.CtrlUsuarios;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlReservas;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class IniciarSesion extends HttpServlet {
 
@@ -21,7 +23,10 @@ public class IniciarSesion extends HttpServlet {
 		String id = request.getParameter("nickname"); //puede ser email o nickname
 		String contrasena = request.getParameter("password");
 		EstadoSesion nuevoEstado;
-		CtrlUsuarios cu = new CtrlUsuarios();
+		Fabrica f = Fabrica.getInstance();
+		ICtrlUsuarios cu = f.getICtrlUsuarios();
+		ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+		session.setAttribute("ctrlReservas", cr);
 		// se checkean los datos de login
 		if (id != null && contrasena != null && (cu.idCorrecta(id) & cu.pwCorrecta(id, contrasena))) {
 			nuevoEstado = EstadoSesion.OK_LOGIN;
@@ -29,7 +34,7 @@ public class IniciarSesion extends HttpServlet {
 			session.setAttribute("estado_sesion", nuevoEstado);
 			session.setAttribute("cant_items", 0);
 		}
-		
+
 		// redirige a la página principal para que luego rediriga a la página
 		// que corresponde
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");

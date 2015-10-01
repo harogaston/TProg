@@ -79,14 +79,16 @@
                 <!-- Parte derecha nombre, descripcion, categorias, agregar al carro, etc -->
                 <div class="col-md-8">
                     <h1><%=infoPromocion.getIdPromocion()%></h1>
-					<!--Solo se muestra agregar al carrito si estoy logueado--> 
+					<!--Solo se muestra agregar al carrito si estoy logueado-->
 					<%
 						if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
 					%>
-                    <form action= "VerReservaActual" method="POST">
-                        <input type="number" name="quantity" min="1" max="99" style="width: 60px">
-                        <button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
-						
+                    <form action= "Carrito" method="POST">
+                        <input type="number" name="cantidad" value="1" min="1" max="99" style="width: 60px">
+						<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
+						<input type="text" name="idPromocion" value="<%=infoPromocion.getIdPromocion()%>" style="visibility: hidden">
+						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+                        
 						<p style="padding-top: 20px">Fechas</p>
 						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
 							<input type="text" class="input-sm form-control" name="inicio" style="width: 100px"/>

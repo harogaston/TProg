@@ -32,6 +32,7 @@ public class CtrlCarga extends HttpServlet {
         cargarDatos();
         System.out.println("Datos cargados.");
         request.getSession().setAttribute("datos_cargados", true);
+        request.setAttribute("primeraEjecucion", true);
         request.getRequestDispatcher("Buscar").forward(request, response);
     }
 

@@ -125,7 +125,7 @@
                                     </div>
                                     <form action="VerPromocion" class="navbar-form">
                                         <div class="input-group">
-                                            <input type="text" name="idServicio" value="<%=dt.getIdPromocion()%>" style="visibility: hidden">
+                                            <input type="text" name="idPromocion" value="<%=dt.getIdPromocion()%>" style="visibility: hidden">
                                             <input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
                                             <button class="btn btn-info" type="submit">Ir a Promocion</button>
                                         </div>

@@ -96,11 +96,16 @@
                         <h1><%=infoServicio.getIdServicio()%></h1>
                         <p><h3>Descripcion:</h3> <%=infoServicio.getDescripcion()%>
                         </p>
-                        <form action= "VerReservaActual" method="POST">
+						<!--Solo se muestra agregar al carrito si estoy logueado--> 
+                        <%
+							if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+						%>
+						<form action= "VerReservaActual" method="POST">
                             <input type="number" name="quantity" min="1" max="99" style="width: 60px">
                             <button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
                         </form>
-                        <h3>Categorías</h3>
+                        <%}%>
+						<h3>Categorías</h3>
                         <%Set<String> categorias = (Set<String>) request.getAttribute("categorias");
 							for (String categoria : categorias) {
 

@@ -25,10 +25,10 @@
     </header>
     <body>
         <%
-            //obtengo el atributo de info servicio para usar en toda la página
-            DTPromocion infoPromocion = (DTPromocion) request.getAttribute("infoPromocion");
-            String idProveedor = (String) request.getAttribute("idProveedor");
-            Map<DTMinServicio, Integer> servicios = (Map<DTMinServicio, Integer>) request.getAttribute("servicios");
+			//obtengo el atributo de info servicio para usar en toda la página
+			DTPromocion infoPromocion = (DTPromocion) request.getAttribute("infoPromocion");
+			String idProveedor = (String) request.getAttribute("idProveedor");
+			Map<DTMinServicio, Integer> servicios = (Map<DTMinServicio, Integer>) request.getAttribute("servicios");
         %>
         <div class="container">
             <div class="row">
@@ -78,24 +78,28 @@
                 <!-- Parte derecha nombre, descripcion, categorias, agregar al carro, etc -->
                 <div class="col-md-8">
                     <h1><%=infoPromocion.getIdPromocion()%></h1>
+					<!--Solo se muestra agregar al carrito si estoy logueado--> 
+					<%
+						if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+					%>
                     <form action= "VerReservaActual" method="POST">
                         <input type="number" name="quantity" min="1" max="99" style="width: 60px">
                         <button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
                     </form>
-
+					<%}%>
 
                     <h3>Servicios:</h3>
                     <div class="panel-group" id="accordionServicios">
                         <%
-                            int i = 0;
+							int i = 0;
 
-                            for (Map.Entry<DTMinServicio, Integer> nodo : servicios.entrySet()) {
+							for (Map.Entry<DTMinServicio, Integer> nodo : servicios.entrySet()) {
 //                                System.out.println(nodo.getKey() + "/" + nodo.getValue());
-                                Fabrica f = Fabrica.getInstance();
-                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
-                                ctrlProductos.seleccionarServicio(nodo.getKey());
-                                DTServicio servicio = ctrlProductos.infoServicio();
-                                i++;
+								Fabrica f = Fabrica.getInstance();
+								ICtrlProductos ctrlProductos = f.getICtrlProductos();
+								ctrlProductos.seleccionarServicio(nodo.getKey());
+								DTServicio servicio = ctrlProductos.infoServicio();
+								i++;
                         %>
                         <div class="accordion-group">
                             <div class="panel">
@@ -120,7 +124,7 @@
                             </div>
                         </div>
                         <%
-                            }
+							}
                         %>
                     </div>
 

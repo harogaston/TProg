@@ -165,8 +165,7 @@
 
     arbol.on('loaded.jstree', function () {
         //debería abrir la última categoría seleccionada
-        arbol.jstree("open_node", '#<%=(String) request.getAttribute("categoriaSeleccionada")%>');
-
+        arbol.jstree(true)._open_to('#<%=(String) request.getAttribute("categoriaSeleccionada")%>');
     });
 
     //cuando se clickea algún elemento del árbol, se muestran todos los servicios asociados (y ninguna promoción)

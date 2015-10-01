@@ -37,8 +37,6 @@
                     <div id="myCarousel" class="carousel slide" style="margin-bottom: 30px">
                         <ol class="carousel-indicators">
                             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li class="" data-target="#myCarousel" data-slide-to="1"></li>
-                            <li class="" data-target="#myCarousel" data-slide-to="2"></li>
                         </ol>
                         <div class="carousel-inner">
                             <div class="item active">

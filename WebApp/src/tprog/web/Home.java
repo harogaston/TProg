@@ -30,6 +30,7 @@ public class Home extends HttpServlet {
         //ya sea apenas se cargaron los datos, o en la primera ejecución
         //cosa de que se muestren las promociones del sistema
 //        request.setAttribute("primeraEjecucion", true);
+        Buscar.busquedaAnterior = null; //limpio el historial
         request.getRequestDispatcher("Buscar").forward(request, response);
     }
 

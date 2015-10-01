@@ -42,6 +42,8 @@ public class Buscar extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    public static CharSequence busquedaAnterior = null;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -83,9 +85,9 @@ public class Buscar extends HttpServlet {
                 serviciosBusqueda = new HashSet();
             }
             if (busqueda != null) {
+                busquedaAnterior = busqueda;
                 //filtro resultados de la búsqueda
                 if (!serviciosBusqueda.isEmpty()) {
-                    request.setAttribute("noHayServicios", false);
                     Iterator<DTMinServicio> iterator = serviciosBusqueda.iterator();
                     while (iterator.hasNext()) {
                         DTMinServicio servicio = iterator.next();
@@ -108,8 +110,31 @@ public class Buscar extends HttpServlet {
 
                     }
                 }
-            }
+            } else if (busquedaAnterior != null) { //si busqueda es null, entonces agarro la busqueda anterior y filtro según los resultados de ella
+                if (!serviciosBusqueda.isEmpty()) {
+                    Iterator<DTMinServicio> iterator = serviciosBusqueda.iterator();
+                    while (iterator.hasNext()) {
+                        DTMinServicio servicio = iterator.next();
+                        ctrlProductos.seleccionarServicio(servicio);
+                        Set<String> listaCategorias = ctrlProductos.listarCategoriasServicio();
+                        DTServicio infoServicio = ctrlProductos.infoServicio();
+                        //chequeo si alguna categoria del servicio coincide con la búsqueda
+                        boolean matcheaCategoria = false;
+                        for (String categoria : listaCategorias) {
+                            if (categoria.contains(busquedaAnterior)) {
+                                matcheaCategoria = true;
+                                break;
+                            }
+                        }
+                        if (!(infoServicio.getDescripcion().contains(busquedaAnterior)
+                                || infoServicio.getIdServicio().contains(busquedaAnterior)
+                                || matcheaCategoria)) { //si no matchea nada
+                            iterator.remove();
+                        }
 
+                    }
+                }
+            }
             //filtro servicios de acuerdo a categoria
             if (request.getParameter("categoriaSeleccionada") != null) {
                 String categoriaSeleccionada = (String) request.getParameter("categoriaSeleccionada");
@@ -133,6 +158,8 @@ public class Buscar extends HttpServlet {
                         } else {
                             request.setAttribute("noHayServicios", false);
                         }
+                    } else { //no es posible la intersección
+                        request.setAttribute("noHayServicios", true);
                     }
                 } else {
                     Set<DTMinServicio> servicios = ctrlProductos.listarServiciosCategoria(categoriaSeleccionada);

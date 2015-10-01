@@ -36,7 +36,7 @@
 			</form>
 		</div>
 		<div class="navbar-nav navbar-right">
-			<form action= "VerPerfil" class="navbar-form" method="POST">
+			<form action= "VerPerfil" class="navbar-form" method="GET">
 
 				<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-user"></i>
 					<%//Para mostrar el nickname del usuario

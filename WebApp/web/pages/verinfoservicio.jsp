@@ -1,9 +1,3 @@
-<%--
-    Document   : verinfoservicio
-    Created on : Sep 28, 2015, 12:03:29 AM
-    Author     : marccio
---%>
-
 <%@page import="java.awt.Toolkit"%>
 <%@page import="tprog.logica.dt.DTServicio"%>
 <%@page import="java.util.Map"%>
@@ -17,9 +11,19 @@
 <html>
     <head>
         <jsp:include page="templates/head.jspf"/>
+		<script>
+			$(function () {
+				$("#accordionServicios").accordion();
+				$("#accordionPromociones").accordion();
+			});
+		</script>
+		<script src="js/vakata-jstree/dist/jstree.min.js"></script>
+		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
     </head>
     <header>
         <jsp:include page="templates/header.jsp"/>
+		<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+		<link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css">
     </header>
     <body>
         <div id="body_holder" style="visibility: hidden">
@@ -75,9 +79,7 @@
             <div class="col-lg-3"></div>
         </div>
     </body>
-    <footer>
         <jsp:include page="templates/footer.jspf"/>
-    </footer>
 </html>
 
 <script>

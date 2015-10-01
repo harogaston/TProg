@@ -4,6 +4,10 @@
         <servlet-name>IniciarSesion</servlet-name>
         <servlet-class>tprog.web.IniciarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerServicio</servlet-name>
+        <servlet-class>tprog.web.VerServicio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -60,6 +64,10 @@
         <servlet-name>VerPerfil</servlet-name>
         <servlet-class>tprog.web.VerPerfil</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>VerServicio</servlet-name>
+        <url-pattern>/VerServicio</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
 			30

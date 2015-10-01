@@ -10,19 +10,20 @@
                         <title>El título</title>
         -->
         <!-- ACÁ includes de .js que se requieran en ESTA página  -->
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/bootstrap-datepicker.es.min.js"></script>
     </head>
     <header>
         <%@include file="templates/header.jsp" %>
-        <!-- ACA .css que se requieran en esta jsp
-                (sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
-        -->
+        <!-- ACA .css que se requieran en esta jsp -->
+		<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
     </header>
     <body>
         <%
-            //obtengo el atributo de info servicio para usar en toda la página
-            DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
-            String idProveedor = (String) request.getAttribute("idProveedor");
-            Set< String> imagenes = infoServicio.getImagenes();
+			//obtengo el atributo de info servicio para usar en toda la página
+			DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
+			String idProveedor = (String) request.getAttribute("idProveedor");
+			Set< String> imagenes = infoServicio.getImagenes();
         %>
         <div class="container">
             <div class="row">
@@ -32,18 +33,18 @@
                         <%if (!imagenes.isEmpty()) {%>
                         <ol class="carousel-indicators">
                             <%
-                                int i = 0;
-                                for (String imagen : imagenes) {%>
+								int i = 0;
+								for (String imagen : imagenes) {%>
                             <li class="" data-target="#myCarousel" data-slide-to="<%=i%>"></li>
                                 <%
-                                        i++;
-                                    }%>
+										i++;
+									}%>
                         </ol>
                         <div class="carousel-inner">
                             <%
-                                int contador = 1;
-                                for (String imagen : imagenes) {
-                                    if (contador == 1) {%>
+								int contador = 1;
+								for (String imagen : imagenes) {
+									if (contador == 1) {%>
                             <div class="item active">
                                 <%} else {%>
                                 <div class="item">
@@ -51,8 +52,8 @@
                                     <img src="<%=imagen%>" alt="">
                                 </div>
                                 <%
-                                        contador++;
-                                    }%>
+										contador++;
+									}%>
                             </div>
                             <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
                             <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
@@ -108,20 +109,28 @@
                 <!-- Parte derecha nombre, descripcion, categorias, agregar al carro, etc -->
                 <div class="col-md-8">
                     <h1><%=infoServicio.getIdServicio()%></h1>
-                    <p><h3>Descripcion:</h3> <%=infoServicio.getDescripcion()%>
+                    <p><h3>Descripción</h3> <%=infoServicio.getDescripcion()%>
                     </p>
                     <!--Solo se muestra agregar al carrito si estoy logueado-->
                     <%
-                        if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+						if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
                     %>
                     <form action= "VerReservaActual" method="POST">
                         <input type="number" name="quantity" min="1" max="99" style="width: 60px">
                         <button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
-                    </form>
+						<p style="padding-top: 20px">Fechas</p>
+						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
+							<input type="text" class="input-sm form-control" name="inicio" style="width: 100px"/>
+							<span class="input-group-addon">hasta</span>
+							<input type="text" class="input-sm form-control" name="fin" style="width: 100px"/>
+						</div>
+					</form>
+
                     <%}%>
-                    <h3>Categorías</h3>
+
+					<h3>Categorías</h3>
                     <%Set<String> categorias = (Set<String>) request.getAttribute("categorias");
-                        for (String categoria : categorias) {
+						for (String categoria : categorias) {
 
                     %>
                     <h5 style="display: inline-block"><span class="label label-info"><%=categoria%></span></h5>
@@ -160,3 +169,13 @@
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>
+
+<!--Para las fechas-->
+<script>
+	$('#datepicker').datepicker({
+		format: "dd/mm/yyyy",
+		language: "es",
+		orientation: "top auto",
+		autoclose: true
+	});
+</script>

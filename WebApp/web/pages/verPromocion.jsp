@@ -16,12 +16,13 @@
                         <title>El título</title>
         -->
         <!-- ACÁ includes de .js que se requieran en ESTA página  -->
+		<script src="js/bootstrap-datepicker.js"></script>
+		<script src="js/bootstrap-datepicker.es.min.js"></script>
     </head>
     <header>
         <%@include file="templates/header.jsp" %>
-        <!-- ACA .css que se requieran en esta jsp
-                (sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
-        -->
+        <!-- ACA .css que se requieran en esta jsp -->
+		<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
     </header>
     <body>
         <%
@@ -85,6 +86,13 @@
                     <form action= "VerReservaActual" method="POST">
                         <input type="number" name="quantity" min="1" max="99" style="width: 60px">
                         <button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
+						
+						<p style="padding-top: 20px">Fechas</p>
+						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
+							<input type="text" class="input-sm form-control" name="inicio" style="width: 100px"/>
+							<span class="input-group-addon">hasta</span>
+							<input type="text" class="input-sm form-control" name="fin" style="width: 100px"/>
+						</div>
                     </form>
 					<%}%>
 
@@ -163,3 +171,13 @@
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>
+
+<!--Para las fechas-->
+<script>
+	$('#datepicker').datepicker({
+		format: "dd/mm/yyyy",
+		language: "es",
+		orientation: "top auto",
+		autoclose: true
+	});
+</script>

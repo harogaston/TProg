@@ -25,7 +25,7 @@
 			String idProveedor = (String) request.getAttribute("idProveedor");
 			Set< String> imagenes = infoServicio.getImagenes();
         %>
-        <div class="container">
+        <div class="container wrapper">
             <div class="row">
                 <!-- Parte izquierda imágenes, origen, destino, proveedor, etc -->
                 <div class="col-md-4">
@@ -55,8 +55,8 @@
 										contador++;
 									}%>
                             </div>
-                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">?</a>
-                            <a class="right carousel-control" href="#myCarousel" data-slide="next">?</a>
+                            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><</a>
+                            <a class="right carousel-control" href="#myCarousel" data-slide="next">></a>
                         </div>
                         <%} else {%>
                         <ol class="carousel-indicators">
@@ -67,8 +67,8 @@
                                 <img src="imagenes/sinimagen.jpeg" alt="">
                             </div>
                         </div>
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">?</a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">?</a>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><</a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">></a>
                     </div>
                     <%}%>
 

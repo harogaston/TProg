@@ -19,7 +19,7 @@
     </header>
 
     <body>
-        <div class="container">
+        <div class="container wrapper">
             <div class="row">
 
                 <!-- JSTREE -->

@@ -31,7 +31,7 @@
 			String idProveedor = (String) request.getAttribute("idProveedor");
 			Map<DTMinServicio, Integer> servicios = (Map<DTMinServicio, Integer>) request.getAttribute("servicios");
         %>
-        <div class="container">
+        <div class="container wrapper">
             <div class="row">
                 <!-- Parte izquierda imágenes, origen, destino, proveedor, etc -->
                 <div class="col-md-4">
@@ -44,8 +44,8 @@
                                 <img src="imagenes/sinimagen.jpeg" alt="">
                             </div>
                         </div>
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">?</a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">?</a>
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><</a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">></a>
                     </div>
 
                     <!-- Panel para la información detallada -->

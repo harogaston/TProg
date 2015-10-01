@@ -12,6 +12,10 @@
         <servlet-name>VerPromocion</servlet-name>
         <servlet-class>tprog.web.VerPromocion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Carrito</servlet-name>
+        <servlet-class>tprog.web.Carrito</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>VerPromocion</servlet-name>
         <url-pattern>/VerPromocion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Carrito</servlet-name>
+        <url-pattern>/Carrito</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

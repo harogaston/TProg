@@ -1,3 +1,8 @@
+<%@page import="tprog.logica.dt.DTServicio"%>
+<%@page import="tprog.logica.interfaces.ICtrlProductos"%>
+<%@page import="tprog.logica.interfaces.Fabrica"%>
+<%@page import="tprog.logica.dt.DTMinServicio"%>
+<%@page import="tprog.logica.dt.DTProveedor"%>
 <%@page import="tprog.logica.dt.DTLineaReserva"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
@@ -24,7 +29,7 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-pills" role="tablist" style="margin-bottom: 50px">
 					<li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Información</a></li>
-					<li role="presentation"><a href="#reservas" aria-controls="reservas" role="tab" data-toggle="tab">Reservas</a></li>
+					<li role="presentation"><a href="#servicios" aria-controls="servicios" role="tab" data-toggle="tab">Servicios</a></li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -48,97 +53,55 @@
 										<span class="text-muted">Nombre: </span> ${nombre}<br>
 										<span class="text-muted">Fecha de Nacimiento: </span>${fNac}<br>
 										<span class="text-muted">Email: </span>${email}<br><br>
+										<span class="text-muted">Empresa: </span>${empresa}<br><br>
+										<span class="text-muted"><a href="<%=(String) request.getAttribute("webempresa")%>"></a>Web: </span>${webempresa}<br><br>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<!--Reservas-->
-					<div role="tabpanel" class="tab-pane" id="reservas">
-						<% if (request.getAttribute("reservas") != null) {%>
+					<!--Servicios-->
+					<div role="tabpanel" class="tab-pane" id="servicios">
+						<% if (request.getAttribute("servicios") != null) {%>
 						<div class="panel-group" id="accordionServicios">
-							<%	int i = 0;
-								for (DTReserva dtR : (Set<DTReserva>) request.getAttribute("reservas")) {
+							<%
+								int i = 0;
+								Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
+								for (DTMinServicio dt : servicios) {
+									Fabrica f = Fabrica.getInstance();
+									ICtrlProductos ctrlProductos = f.getICtrlProductos();
+									ctrlProductos.seleccionarServicio(dt);
+									DTServicio servicio = ctrlProductos.infoServicio();
 									i++;
 							%>
 							<div class="accordion-group">
 								<div class="panel">
 									<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
 										<h4 class="panel-title">
-											Reserva #<%=dtR.getIdReserva()%>
+											<%= servicio.getIdServicio()%>
 										</h4>
 									</div>
 									<div id="s<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
-											<span class="text-muted">Estado: </span> <%=dtR.getEstadoReserva().toString()%><br>
-											<%
-												String fCreacion = Integer.toString(dtR.getFCreacion().getDate()) + "-"
-														+ Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"
-														+ Integer.toString(dtR.getFCreacion().getYear()) + "\n";
-											%>
-											<span class="text-muted">Fecha de Creación: </span><%=fCreacion%><br>
-											<div class="panel panel-default">
-												<div class="panel-heading">Detalle de la reserva</div>
-												<%	float subtotal = 0;
-													if (dtR != null) {
-														Set<DTLineaReserva> lineas = dtR.getLineasReserva();
-														float precioTotal = dtR.getPrecioTotal();
-												%>
-												<!-- Tabla -->
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Item</th>
-															<th>Tipo</th>
-															<th>Descripción</th>
-															<th>Cantidad</th>
-															<th>Total</th>
-														</tr>
-													</thead>
-													<tbody>
-														<%	int j = 0;
-															for (DTLineaReserva linea : lineas) {
-																j++;
-																subtotal += linea.getPrecio() * linea.getCantidad();
-														%>
-														<tr>
-															<th scope="row"><%=j%></th>
-																<% if (linea.getServicio() != null) {%>
-															<td>Servicio</td>
-															<td><%=linea.getServicio()%></td>
-															<%} else {%>
-															<td>Promoción</td>
-															<td><%=linea.getPromocion()%></td>
-															<%}%>
-															<td><%=linea.getCantidad()%></td>
-															<td><%=(linea.getPrecio() * linea.getCantidad())%></td>
-														</tr>
-														<%
-															}
-														%>
-													</tbody>
-												</table>
-												<%
-												} else {
-												%>
-												<div class="col-md-12">No hay ninguna linea de reserva actualmente</div>
-
-												<%
-													}
-												%>
-												<div class="panel-footer text-right" style="font-weight: bold">Subtotal: $<%=subtotal%></div>
-											</div><!-- panel -->
+											<%=servicio.toString().replace("\n", "<br>")%>
 										</div>
+										<form action="VerServicio" class="navbar-form">
+											<div class="input-group">
+												<input type="text" name="idServicio" value="<%=dt.getIdServicio()%>" style="visibility: hidden">
+												<input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
+												<button class="btn btn-info" type="submit">Ir a Servicio</button>
+											</div>
+										</form>
 									</div>
 								</div>
 							</div>
 							<%
-								}// cierra for
+								}
 							%>
 						</div>
 						<% } else { %>
-						<p> Usted no posee reservas </p>
+						<p> El proveedor no tiene servicios asociados </p>
 						<%
 							}
 						%>

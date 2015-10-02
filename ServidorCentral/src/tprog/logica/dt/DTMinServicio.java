@@ -23,7 +23,7 @@ public class DTMinServicio {
 
 	@Override
 	public String toString() {
-		return "Nickname del proveedor: " + nicknameP
+		return "Proveedor: " + nicknameP
 				+ "\n" + "ID de servicio: " + idServicio + "\n";
 	}
 

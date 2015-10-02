@@ -16,10 +16,46 @@
     <header>
         <%@include file="templates/header.jsp" %>
         <link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css">
+
+		<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+		<script>
+			$(function () {
+				$("#dialog-message").dialog({
+					modal: true,
+					buttons: {
+						Ok: function () {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+		</script>
+
     </header>
 
     <body>
         <div class="container wrapper">
+
+			<!-- MENSAJE SI SE GENERÓ UNA RESERVA-->
+
+			<%			if (request.getSession().getAttribute("reservaGenerada") != null) {
+			%>
+			<div id="dialog-message" title="Reserva realizada">
+				<p><%=(String) request.getSession().getAttribute("reservaGenerada")%></p>
+			</div>
+			<%
+					request.getSession().setAttribute("reservaGenerada", null);
+				}
+			%>
+
+
+
+
+
+
+
+
             <div class="row">
 
                 <!-- JSTREE -->

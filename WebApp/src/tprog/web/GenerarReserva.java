@@ -37,7 +37,9 @@ public class GenerarReserva extends HttpServlet {
 			ctrlReservas.liberarMemoriaControlador();
 			request.getSession().setAttribute("reservaTemporal", null);
 			request.getSession().setAttribute("cant_items", 0);
-			request.getRequestDispatcher("/pages/reservagenerada.jsp").forward(request, response);
+
+			request.getSession().setAttribute("reservaGenerada", "La reserva ha sido generada con éxito");
+			request.getRequestDispatcher("Home").forward(request, response);
 		} catch (Exception ex) {
 			Logger.getLogger(GenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
 		}

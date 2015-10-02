@@ -1,6 +1,7 @@
 package tprog.web;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
@@ -77,22 +78,26 @@ public class Buscar extends HttpServlet {
 			}
 
 			// Defino el orden
-			SortedSet<DTServicio> serviciosResultado;
-			SortedSet<DTPromocion> promocionesResultado;
+			Collection<DTServicio> serviciosResultado;
+			Collection<DTPromocion> promocionesResultado;
 			if (request.getParameter("tipo_orden") != null && request.getParameter("tipo_orden").equals("precio")) {
 				busqueda = request.getParameter("busquedaPrevia");
 				categoriaSeleccionada = request.getParameter("seleccionPrevia");
 				// Ordenados por precio
 				serviciosResultado = new TreeSet<>(DTServicio::comparePrecio);
 				promocionesResultado = new TreeSet<>(DTPromocion::comparePrecio);
-				request.setAttribute("precio", "1"); //para que aparezca marcado el precio en la proxima
-				request.setAttribute("alfabetico", "0");
-			} else {
+				request.setAttribute("tipo_orden", "precio");
+			} else if (request.getParameter("tipo_orden") != null && request.getParameter("tipo_orden").equals("alfabetico")) {
+				busqueda = request.getParameter("busquedaPrevia");
+				categoriaSeleccionada = request.getParameter("seleccionPrevia");				
 				// Ordenados por nombre
 				serviciosResultado = new TreeSet<>();
 				promocionesResultado = new TreeSet<>();
-				request.setAttribute("precio", "0"); //para que aparezca marcado el precio en la proxima
-				request.setAttribute("alfabetico", "1");
+				request.setAttribute("tipo_orden", "alfabetico");
+			} else {
+				// Orden por defecto
+				serviciosResultado = new HashSet<>();
+				promocionesResultado = new HashSet<>();
 			}
 
 			// Si no hay busqueda ni categoría muestro todo
@@ -188,7 +193,7 @@ public class Buscar extends HttpServlet {
 
 			// Redirijo
 			request.getRequestDispatcher("/pages/busqueda.jsp").forward(request, response);
-		} catch (Exception ex) {
+		} catch (ServletException | IOException ex) {
 			Logger.getLogger(Buscar.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}

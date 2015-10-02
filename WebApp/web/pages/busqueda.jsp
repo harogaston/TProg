@@ -16,10 +16,46 @@
     <header>
         <%@include file="templates/header.jsp" %>
         <link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css">
+
+		<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+		<script>
+			$(function () {
+				$("#dialog-message").dialog({
+					modal: true,
+					buttons: {
+						Ok: function () {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+		</script>
+
     </header>
 
     <body>
         <div class="container wrapper">
+
+			<!-- MENSAJE SI SE GENERÓ UNA RESERVA-->
+
+			<%			if (request.getSession().getAttribute("reservaGenerada") != null) {
+			%>
+			<div id="dialog-message" title="Reserva realizada">
+				<p><%=(String) request.getSession().getAttribute("reservaGenerada")%></p>
+			</div>
+			<%
+					request.getSession().setAttribute("reservaGenerada", null);
+				}
+			%>
+
+
+
+
+
+
+
+
             <div class="row">
 
                 <!-- JSTREE -->
@@ -44,19 +80,26 @@
 						<div class="col-md-12">
 							<form action="Buscar" id="criterio_busqueda" role="form" method="POST">
 								<div class="btn-group pull-right" data-toggle="buttons">
-									<%if (request.getAttribute("precio") != null && ((String) request.getAttribute("precio")).equals("0")) {%>
+									<%if (request.getAttribute("tipo_orden") != null && ((String) request.getAttribute("tipo_orden")).equals("alfabetico")) {%>
 									<label id="btn_alfabetico" class="btn btn-default active">
 										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>A-Z
 									</label>
 									<label id="btn_precio" class="btn btn-default">
 										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
 									</label>
-									<%} else {%>
+									<%} else if (request.getAttribute("tipo_orden") != null && ((String) request.getAttribute("tipo_orden")).equals("precio")) {%>
 									<label id="btn_alfabetico" class="btn btn-default">
 										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
 									</label>
 									<label id="btn_precio" class="btn btn-default active">
 										<input type="radio" name="precio" id="precio" autocomplete="off" checked>Precio
+									</label>
+									<%} else {%>
+									<label id="btn_alfabetico" class="btn btn-default">
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
+									</label>
+									<label id="btn_precio" class="btn btn-default">
+										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
 									</label>
 									<%}%>
 								</div>
@@ -192,10 +235,7 @@
 		document.getElementById('categoriaSeleccionada').value = $('.jstree-clicked').text();
 		document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios
 	});
-</script>
 
-
-<script>
 	$('#btn_alfabetico').on('click', function () {
 		document.getElementById('tipo_orden').value = "alfabetico";
 		document.getElementById('criterio_busqueda').submit();

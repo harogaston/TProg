@@ -24,6 +24,10 @@
         <servlet-name>VerInfoProveedor</servlet-name>
         <servlet-class>tprog.web.VerInfoProveedor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CancelarReserva</servlet-name>
+        <servlet-class>tprog.web.CancelarReserva</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -99,6 +103,10 @@
     <servlet-mapping>
         <servlet-name>VerInfoProveedor</servlet-name>
         <url-pattern>/VerInfoProveedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CancelarReserva</servlet-name>
+        <url-pattern>/CancelarReserva</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -34,7 +34,7 @@
 							dialog = modal.find('.modal-dialog');
 					modal.css('display', 'block');
 
-					// Dividing by two centers the modal exactly, but dividing by three 
+					// Dividing by two centers the modal exactly, but dividing by three
 					// or four works better for larger screens.
 					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
 				}
@@ -64,6 +64,56 @@
 		</div>
 		<%
 				request.getSession().setAttribute("reservaGenerada", null);
+			}
+		%>
+
+		<!-- MENSAJE SI SE INTENTÓ ENTRAR A UNA CUENTA NO REGISTRADA -->
+		<%if (request.getSession().getAttribute("inicioIncorrecto") != null) {%>
+		<script type="text/javascript">
+			$(window).load(function () {
+				$('#myModal').modal('show');
+			});
+
+			/**
+			 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+			 */
+			$(function () {
+				function reposition() {
+					var modal = $(this),
+							dialog = modal.find('.modal-dialog');
+					modal.css('display', 'block');
+
+					// Dividing by two centers the modal exactly, but dividing by three
+					// or four works better for larger screens.
+					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+				}
+				// Reposition when a modal is shown
+				$('.modal').on('show.bs.modal', reposition);
+				// Reposition when the window is resized
+				$(window).on('resize', function () {
+					$('.modal:visible').each(reposition);
+				});
+			});
+		</script>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
+			<div class="modal-dialog" style="vertical-align: middle;">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title text-center">Credenciales incorrectas</h4>
+					</div>
+					<div class="modal-body">
+						<%=request.getSession().getAttribute("inicioIncorrecto")%>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<%
+				request.getSession().setAttribute("inicioIncorrecto", null);
 			}
 		%>
 

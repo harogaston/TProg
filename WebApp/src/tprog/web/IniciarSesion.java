@@ -25,14 +25,19 @@ public class IniciarSesion extends HttpServlet {
 		EstadoSesion nuevoEstado;
 		Fabrica f = Fabrica.getInstance();
 		ICtrlUsuarios cu = f.getICtrlUsuarios();
-		ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-		session.setAttribute("ctrlReservas", cr);
 		// se checkean los datos de login
-		if (id != null && contrasena != null && (cu.idCorrecta(id) & cu.pwCorrecta(id, contrasena))) {
+		if (cu.idCorrecta(id) && cu.pwCorrecta(id, contrasena)) {
+			ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+			cr.liberarMemoriaControlador();
+			session.setAttribute("ctrlReservas", cr);
 			nuevoEstado = EstadoSesion.OK_LOGIN;
+			//en caso de que id sea un email
+			id = cu.obtenerIdCliente(id, contrasena);
 			request.getSession().setAttribute("usuario_logueado", id);
 			session.setAttribute("estado_sesion", nuevoEstado);
 			session.setAttribute("cant_items", 0);
+		} else {
+			session.setAttribute("inicioIncorrecto", "Las credenciales que ingresó no corresponden a ningún cliente registrado en el sistema");
 		}
 
 		// redirige a la página principal para que luego rediriga a la página

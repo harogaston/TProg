@@ -143,16 +143,26 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
 		return mp.infoServicio(nuevoDT);
 	}
-        
-        @Override
-        public boolean idCorrecta(String id){
-            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-            return mu.idCorrecta(id);
-        }
-        
-        @Override
-        public boolean pwCorrecta(String id, String password){
-            ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-            return mu.pwCorrecta(id,password);
-        }
+
+	@Override
+	public boolean idCorrecta(String id) {
+		//tiene que verificar que la id pertenezca a un cliente
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.idCorrecta(id);
+	}
+
+	@Override
+	public boolean pwCorrecta(String id, String password) {
+		//tiene que verificar que la contraseña esté asociada al id
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.pwCorrecta(id, password);
+	}
+
+	@Override
+	public String obtenerIdCliente(String id, String pass) {
+		//en caso de que id sea un email, se devuelve el id asociado a ese cliente
+		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		return mu.obtenerIdCliente(id, pass);
+	}
+
 }

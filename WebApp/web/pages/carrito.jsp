@@ -1,3 +1,4 @@
+<%@page import="tprog.logica.interfaces.ICtrlReservas"%>
 <%@page import="java.util.Set"%>
 <%@page import="tprog.logica.dt.DTLineaReserva"%>
 <%@page import="tprog.logica.dt.DTReserva"%>
@@ -42,7 +43,7 @@
 						<%	int i = 0;
 							for (DTLineaReserva linea : lineas) {
 								i++;
-								subtotal += linea.getPrecio()*linea.getCantidad();
+								subtotal += linea.getPrecio() * linea.getCantidad();
 						%>
 						<tr>
 							<th scope="row"><%=i%></th>
@@ -54,7 +55,7 @@
 							<td><%=linea.getPromocion()%></td>
 							<%}%>
 							<td><%=linea.getCantidad()%></td>
-							<td><%=(linea.getPrecio()*linea.getCantidad())%></td>
+							<td><%=(linea.getPrecio() * linea.getCantidad())%></td>
 						</tr>
 						<%
 							}
@@ -71,6 +72,24 @@
 				%>
 				<div class="panel-footer text-right" style="font-weight: bold">Subtotal: $<%=subtotal%></div>
 			</div><!-- panel -->
+
+
+			<form action="GenerarReserva" class="text-right" method="POST">
+				<%
+					//si el carrito no está vacío, habilito el botón de confirmación de reserva
+					if (!((ICtrlReservas) request.getSession().getAttribute("ctrlReservas")).mostrarReservaTemporal().getLineasReserva().isEmpty()) {
+				%>
+				<button class="btn btn-success" style="text-align: right">Confirmar</button>
+				<%
+				} else {
+				%>
+
+				<button class="btn btn-success" disabled="disabled" style="text-align: right">Confirmar</button>
+				<%
+					}
+				%>
+
+			</form>
 		</div><!-- container -->
 	</body>
 	<%@include file="templates/footer.jspf" %>

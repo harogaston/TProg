@@ -57,7 +57,12 @@
                                 <tbody>
                                     <tr>
                                         <td>Proveedor</td>
-                                        <td><%=idProveedor%></td>
+                                        <td>
+											<form action="VerInfoProveedor" method="POST">
+												<button type="submit" class="btn btn-link"><%=idProveedor%></button>
+												<input name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+											</form>
+										</td>
                                     </tr>
                                     <tr>
                                         <td>Descuento</td>

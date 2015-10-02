@@ -45,20 +45,20 @@
                 <div class="col-md-4">
                     <h2>Servicios:</h2>
                     <% if (request.getAttribute("noHayServicios") != null
-                                && !(boolean) request.getAttribute("noHayServicios")
-                                && request.getAttribute("servicios") != null) {
-                            Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
-                            if (!servicios.isEmpty()) {
+								&& !(boolean) request.getAttribute("noHayServicios")
+								&& request.getAttribute("servicios") != null) {
+							Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
+							if (!servicios.isEmpty()) {
                     %>
                     <div class="panel-group" id="accordionServicios">
                         <%
-                            int i = 0;
-                            for (DTMinServicio dt : servicios) {
-                                Fabrica f = Fabrica.getInstance();
-                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
-                                ctrlProductos.seleccionarServicio(dt);
-                                DTServicio servicio = ctrlProductos.infoServicio();
-                                i++;
+							int i = 0;
+							for (DTMinServicio dt : servicios) {
+								Fabrica f = Fabrica.getInstance();
+								ICtrlProductos ctrlProductos = f.getICtrlProductos();
+								ctrlProductos.seleccionarServicio(dt);
+								DTServicio servicio = ctrlProductos.infoServicio();
+								i++;
                         %>
                         <div class="accordion-group">
                             <div class="panel">
@@ -70,6 +70,10 @@
                                 <div id="s<%=i%>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <%=servicio.toString().replace("\n", "<br>")%>
+										<form action="VerInfoProveedor" method="POST">
+											<button type="submit" class="btn btn-link">Proveedor: <%=dt.getNicknameP()%></button>
+											<input name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
+										</form>
                                     </div>
                                     <form action="VerServicio" class="navbar-form">
                                         <div class="input-group">
@@ -82,15 +86,15 @@
                             </div>
                         </div>
                         <%
-                            }
+							}
                         %>
                     </div>
                     <%
-                        }
-                    } else { %>
+						}
+					} else { %>
                     <p> No hay servicios para esa búsqueda </p>
                     <%
-                        }
+						}
                     %>
 
                 </div>
@@ -99,18 +103,18 @@
                     <h2>Promociones:</h2>
 
                     <%if (request.getAttribute("mostrarPromociones") != null
-                                && (boolean) request.getAttribute("mostrarPromociones")) {
-                            Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
+								&& (boolean) request.getAttribute("mostrarPromociones")) {
+							Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
                     %>
                     <div class="panel-group" id="accordionPromociones">
                         <%
-                            int j = 0;
-                            for (DTMinPromocion dt : promociones) {
-                                Fabrica f = Fabrica.getInstance();
-                                ICtrlProductos ctrlProductos = f.getICtrlProductos();
-                                ctrlProductos.seleccionarPromocion(dt);
-                                DTPromocion promocion = ctrlProductos.infoPromocion();
-                                j++;
+							int j = 0;
+							for (DTMinPromocion dt : promociones) {
+								Fabrica f = Fabrica.getInstance();
+								ICtrlProductos ctrlProductos = f.getICtrlProductos();
+								ctrlProductos.seleccionarPromocion(dt);
+								DTPromocion promocion = ctrlProductos.infoPromocion();
+								j++;
                         %>
                         <div class="accordion-group">
                             <div class="panel">
@@ -122,6 +126,10 @@
                                 <div id="p<%=j%>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <%=promocion.toString().replace("\n", "<br>")%>
+										<form action="VerInfoProveedor" method="POST">
+											<button type="submit" class="btn btn-link">Proveedor: <%=dt.getNicknameP()%></button>
+											<input name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
+										</form>
                                     </div>
                                     <form action="VerPromocion" class="navbar-form">
                                         <div class="input-group">
@@ -134,15 +142,15 @@
                             </div>
                         </div>
                         <%
-                            }
+							}
                         %>
                     </div>
                     <%
-                    } else {
+					} else {
                     %>
                     <p> No hay promociones para esa búsqueda </p>
                     <%
-                        }
+						}
                     %>
                 </div>
             </div>
@@ -152,25 +160,25 @@
 </html>
 
 <script>
-    var arbolJSON = <%=request.getAttribute("arbolJson")%>;
+	var arbolJSON = <%=request.getAttribute("arbolJson")%>;
 
-    //creo jstree y sorteo nodos
-    $.jstree.defaults.core.themes.icons = false;
-    var arbol = $('#arbol_categorias').jstree({
-        "plugins": ["sort"],
-        'core': {
-            'data': arbolJSON
-        }
-    });
+	//creo jstree y sorteo nodos
+	$.jstree.defaults.core.themes.icons = false;
+	var arbol = $('#arbol_categorias').jstree({
+		"plugins": ["sort"],
+		'core': {
+			'data': arbolJSON
+		}
+	});
 
-    arbol.on('loaded.jstree', function () {
-        //debería abrir la última categoría seleccionada
-        arbol.jstree(true)._open_to('#<%=(String) request.getAttribute("categoriaSeleccionada")%>');
-    });
+	arbol.on('loaded.jstree', function () {
+		//debería abrir la última categoría seleccionada
+		arbol.jstree(true)._open_to('#<%=(String) request.getAttribute("categoriaSeleccionada")%>');
+	});
 
-    //cuando se clickea algún elemento del árbol, se muestran todos los servicios asociados (y ninguna promoción)
-    $('#arbol_categorias').on('activate_node.jstree', function () {
-        document.getElementById('categoriaSeleccionada').value = $('.jstree-clicked').text();
-        document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios
-    });
+	//cuando se clickea algún elemento del árbol, se muestran todos los servicios asociados (y ninguna promoción)
+	$('#arbol_categorias').on('activate_node.jstree', function () {
+		document.getElementById('categoriaSeleccionada').value = $('.jstree-clicked').text();
+		document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios
+	});
 </script>

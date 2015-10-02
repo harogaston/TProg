@@ -81,22 +81,27 @@
                                 <tbody>
                                     <tr>
                                         <td>Proveedor</td>
-                                        <td><%=idProveedor%></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Origen</td>
-                                        <td><%=infoServicio.getOrigen().toString()%></td>
-                                    </tr>
-                                    <%if (infoServicio.getDestino() != null) {%>
-                                    <tr>
-                                        <td>Destino</td>
-                                        <td><%=infoServicio.getDestino().toString()%></td>
-                                    </tr>
-                                    <%}%>
-                                    <tr>
-                                        <td>Precio</td>
-                                        <td>$<%=Float.toString(infoServicio.getPrecio())%></td>
-                                    </tr>
+										<td>
+											<form action="VerInfoProveedor" method="POST">
+												<button type="submit" class="btn btn-link"><%=idProveedor%></button>
+												<input name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+											</form>
+										</td>
+									</tr>
+									<tr>
+										<td>Origen</td>
+										<td><%=infoServicio.getOrigen().toString()%></td>
+									</tr>
+									<%if (infoServicio.getDestino() != null) {%>
+									<tr>
+										<td>Destino</td>
+										<td><%=infoServicio.getDestino().toString()%></td>
+									</tr>
+									<%}%>
+									<tr>
+										<td>Precio</td>
+										<td>$<%=Float.toString(infoServicio.getPrecio())%></td>
+									</tr>
                                 </tbody>
                             </table>
                         </div>

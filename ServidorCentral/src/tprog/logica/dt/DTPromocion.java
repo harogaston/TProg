@@ -41,7 +41,7 @@ public class DTPromocion {
 				+ "\n" + "Servicios: " + "\n";
 		int i = 1;
 		for (Map.Entry<DTMinServicio, Integer> par : servicios.entrySet()) {
-			output = output.concat(par.getKey().toString() + "Cantidad: "
+			output = output.concat("ID de servicio: " + par.getKey().getIdServicio() + "\n" + "Cantidad: "
 					+ Integer.toString(par.getValue()) + "\n");
 		}
 		return output;

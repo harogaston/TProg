@@ -2,19 +2,20 @@ package tprog.web;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlUsuarios;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTReserva;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class VerPerfil extends HttpServlet {
 
@@ -33,21 +34,21 @@ public class VerPerfil extends HttpServlet {
 				request.setAttribute("nombre", nombreCompleto);
 				Date fechaNacimiento = dtC.getFechaNacimiento();
 				String fNac = Integer.toString(fechaNacimiento.getDate()) + "-"
-								+ Integer.toString(fechaNacimiento.getMonth() + 1) + "-"
-								+ Integer.toString(fechaNacimiento.getYear()) + "\n";
+						+ Integer.toString(fechaNacimiento.getMonth() + 1) + "-"
+						+ Integer.toString(fechaNacimiento.getYear()) + "\n";
 				request.setAttribute("fNac", fNac);
 				request.setAttribute("email", dtC.getEmail());
 				request.setAttribute("imagen", dtC.getImagen());
-				
+
 				Set<DTMinReserva> reservasMin = dtC.getReservas();
 				// Voy a crear un Set<DTReserva> para pasarle a la jsp
-				Set<DTReserva> reservas = new HashSet<>();
-				for(DTMinReserva dtMinR : reservasMin){
+				SortedSet<DTReserva> reservas = new TreeSet<>();
+				for (DTMinReserva dtMinR : reservasMin) {
 					ctrlU.seleccionarReserva(dtMinR.getIdReserva());
 					reservas.add(ctrlU.infoReserva());
 				}
 				request.setAttribute("reservas", reservas);
-				
+
 				request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 			} catch (Exception ex) {
 				Logger.getLogger(VerPerfil.class.getName()).log(Level.SEVERE, null, ex);

@@ -3,7 +3,7 @@ package tprog.logica.dt;
 import java.util.Date;
 import java.util.Set;
 
-public class DTReserva {
+public class DTReserva implements Comparable<DTReserva> {
 
 	private int idReserva;
 	private Date fCreacion;
@@ -62,4 +62,14 @@ public class DTReserva {
 		}
 		return output;
 	}
+
+	@Override
+	public int compareTo(DTReserva o) {
+		if (this.idReserva == o.getIdReserva()) {
+			return (this.fCreacion.toString().compareToIgnoreCase(o.getFCreacion().toString()));
+		} else {
+			return idReserva - o.getIdReserva();
+		}
+	}
+
 }

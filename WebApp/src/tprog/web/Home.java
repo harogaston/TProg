@@ -22,15 +22,7 @@ public class Home extends HttpServlet {
 
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         initSession(request);
-        HttpSession session = request.getSession();
-        request.setAttribute("datos_cargados", session.getAttribute("datos_cargados"));
-        //atributo para determinar que es la primera ejecución de la página de búsqueda,
-        //ya sea apenas se cargaron los datos, o en la primera ejecución
-        //cosa de que se muestren las promociones del sistema
-//        request.setAttribute("primeraEjecucion", true);
-        Buscar.busquedaAnterior = null; //limpio el historial
         request.getRequestDispatcher("Buscar").forward(request, response);
     }
 

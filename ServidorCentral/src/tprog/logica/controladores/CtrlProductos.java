@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTServicio;
@@ -230,7 +229,7 @@ public class CtrlProductos implements ICtrlProductos {
 	@Override
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
-		DTServicio serv = new DTServicio(this.dtS.getIdServicio(), descripcion,
+		DTServicio serv = new DTServicio(this.dtS.getIdServicio(), this.dtS.getNicknameP(), descripcion,
 				precio, imagenes, this.origen, this.destino);
 		mp.altaServicio(serv, this.nicknameP, this.listaCategorias);
 	}

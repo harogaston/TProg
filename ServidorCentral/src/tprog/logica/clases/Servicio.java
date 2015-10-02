@@ -31,9 +31,9 @@ public class Servicio {
 
 	public DTServicio crearDT() {
 		if (this.destino != null) {
-			return new DTServicio(idServicio, descripcion, precio, imagenes, origen.crearDT(), destino.crearDT());
+			return new DTServicio(idServicio, proveedor.getNickname(), descripcion, precio, imagenes, origen.crearDT(), destino.crearDT());
 		} else {
-			return new DTServicio(idServicio, descripcion, precio, imagenes, origen.crearDT(), null);
+			return new DTServicio(idServicio, proveedor.getNickname(), descripcion, precio, imagenes, origen.crearDT(), null);
 		}
 	}
 

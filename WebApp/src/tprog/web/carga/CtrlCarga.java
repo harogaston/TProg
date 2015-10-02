@@ -28,12 +28,13 @@ public class CtrlCarga extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("datos_cargados") == null || !((boolean) request.getSession().getAttribute("datos_cargados"))) {
+		if (request.getSession().getAttribute("datos_cargados") == null) {
 			cargarDatos();
-			System.out.println("Datos cargados.");
 			request.getSession().setAttribute("datos_cargados", true);
-			request.setAttribute("primeraEjecucion", true);
 		}
+		request.setAttribute("categoriaSeleccionada", null);
+		request.setAttribute("busqueda", null);
+		request.setAttribute("precio", "0");
 		request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 
@@ -158,7 +159,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.agregarPais(p);
 		Set<String> imgs = new HashSet<>();
 		imgs.add("imagenes/IMG7.jpg");
-		DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad",
+		DTServicio dtS = new DTServicio("Euro-Vuelo-S", "remus", "Vuelo con excelente atención y comodidad",
 				1100, imgs, new DTUbicacion("Montevideo", "Uruguay"),
 				new DTUbicacion("Valencia", "España"));
 		Set<String> cats = new HashSet<>();
@@ -167,7 +168,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "remus", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG7.jpg");
-		dtS = new DTServicio("Euro-Vuelo-LC", "Vuelo con excelente "
+		dtS = new DTServicio("Euro-Vuelo-LC", "remus", "Vuelo con excelente "
 				+ "atención y comodidad a un precio accesible.", 850, imgs,
 				new DTUbicacion("Montevideo", "Uruguay"),
 				new DTUbicacion("Valencia", "España"));
@@ -177,7 +178,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "remus", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG7.jpg");
-		dtS = new DTServicio("Euro-Vuelo-FC", "Vuelo de primera clase. "
+		dtS = new DTServicio("Euro-Vuelo-FC", "remus", "Vuelo de primera clase. "
 				+ "Excelente atención, comodidad y servicio.", 1300, imgs,
 				new DTUbicacion("Montevideo", "Uruguay"),
 				new DTUbicacion("Valencia", "España"));
@@ -187,7 +188,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "remus", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG8.jpg");
-		dtS = new DTServicio("Euro-Car-1", "Euro-Car. Autos de buena calidad "
+		dtS = new DTServicio("Euro-Car-1", "moody", "Euro-Car. Autos de buena calidad "
 				+ "y comodidad. Versión Económica", 300, imgs,
 				new DTUbicacion("Madrid", "España"),
 				new DTUbicacion("Valencia", "España"));
@@ -198,7 +199,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "moody", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG9.jpg");
-		dtS = new DTServicio("Euro-Car-2", "Euro-Car. Autos de buena calidad"
+		dtS = new DTServicio("Euro-Car-2", "moody", "Euro-Car. Autos de buena calidad"
 				+ " y comodidad. Versión Standard.", 300, imgs,
 				new DTUbicacion("Madrid", "España"),
 				new DTUbicacion("Valencia", "España"));
@@ -209,7 +210,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "moody", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG10.jpg");
-		dtS = new DTServicio("Euro-Car-3", "Euro-Car. Autos de buena calidad "
+		dtS = new DTServicio("Euro-Car-3", "moody", "Euro-Car. Autos de buena calidad "
 				+ "y comodidad. Una camioneta para toda la familia.", 300, imgs,
 				new DTUbicacion("Valencia", "España"), null);
 		cats = new HashSet<>();
@@ -220,7 +221,7 @@ public class CtrlCarga extends HttpServlet {
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG1.jpg");
 		imgs.add("imagenes/IMG2.jpg");
-		dtS = new DTServicio("Casa para p4 BsAs", "Esta hermosa casa, se "
+		dtS = new DTServicio("Casa para p4 BsAs", "mHooch", "Esta hermosa casa, se "
 				+ "encuentra ubicada en el corazón de Buenos Aires y ofrece una "
 				+ "capacidad para cuatro personas. La propiedad cuenta con un "
 				+ "dormitorio con dos camas simples, que pueden transformarse en "
@@ -234,7 +235,7 @@ public class CtrlCarga extends HttpServlet {
 		imgs.add("imagenes/IMG3.jpg");
 		imgs.add("imagenes/IMG4.jpg");
 		imgs.add("imagenes/IMG5.jpg");
-		dtS = new DTServicio("Floripa G. House", "Estamos a sólo unos pasos "
+		dtS = new DTServicio("Floripa G. House", "mHooch", "Estamos a sólo unos pasos "
 				+ "de un supermercado, restaurantes, cajero automático, "
 				+ "gasolinera, farmacia, gimnasio, etc. Lagoa da Conceição es 7"
 				+ " km de nuestra casa de huéspedes y tarda sólo 10-15 minutos "
@@ -247,7 +248,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "mHooch", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG6.jpg");
-		dtS = new DTServicio("Air-France-FC", "¡Un vuelo de primera! "
+		dtS = new DTServicio("Air-France-FC", "tCook", "¡Un vuelo de primera! "
 				+ "Excelencia y experiencia en mejorar sus viajes.", 100, imgs,
 				new DTUbicacion("París", "Francia"),
 				new DTUbicacion("Berlín", "Alemania"));
@@ -257,7 +258,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "tCook", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG11.jpg");
-		dtS = new DTServicio("TAM-FC", "¡Un vuelo de primera! Excelencia y "
+		dtS = new DTServicio("TAM-FC", "adippet", "¡Un vuelo de primera! Excelencia y "
 				+ "experiencia.", 150, imgs, new DTUbicacion("Florianópolis",
 						"Brasil"), new DTUbicacion("Pekín", "China"));
 		cats = new HashSet<>();
@@ -266,7 +267,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "adippet", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG12.jpg");
-		dtS = new DTServicio("Luxury south beach corner apartament",
+		dtS = new DTServicio("Luxury south beach corner apartament", "mHooch",
 				"Beautiful large 2 bedrooms 2 bathrooms apartment CORNER UNIT. "
 				+ "Marble floor throughout, beautiful open kitchen, granite "
 				+ "counter top, spacious dining room area and living room area."
@@ -279,7 +280,7 @@ public class CtrlCarga extends HttpServlet {
 		mp.altaServicio(dtS, "mHooch", cats);
 		imgs = new HashSet<>();
 		imgs.add("imagenes/IMG8.jpg");
-		dtS = new DTServicio("Coche-Miami",
+		dtS = new DTServicio("Coche-Miami", "mHooch",
 				"A useful car to travel around Miami", 360, imgs,
 				new DTUbicacion("Miami", "EEUU"), null);
 		cats = new HashSet<>();

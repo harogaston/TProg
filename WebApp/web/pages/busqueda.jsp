@@ -16,47 +16,59 @@
     <header>
         <%@include file="templates/header.jsp" %>
         <link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css">
+    </header>
+    <body>
+		<!-- MENSAJE SI SE GENERÓ UNA RESERVA-->
+		<%if (request.getSession().getAttribute("reservaGenerada") != null && request.getSession().getAttribute("reservaGenerada").equals("OK")) {%>
+		<script type="text/javascript">
+			$(window).load(function () {
+				$('#myModal').modal('show');
+			});
 
-		<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
-		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-		<script>
+			/**
+			 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+			 */
 			$(function () {
-				$("#dialog-message").dialog({
-					modal: true,
-					buttons: {
-						Ok: function () {
-							$(this).dialog("close");
-						}
-					}
+				function reposition() {
+					var modal = $(this),
+							dialog = modal.find('.modal-dialog');
+					modal.css('display', 'block');
+
+					// Dividing by two centers the modal exactly, but dividing by three 
+					// or four works better for larger screens.
+					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+				}
+				// Reposition when a modal is shown
+				$('.modal').on('show.bs.modal', reposition);
+				// Reposition when the window is resized
+				$(window).on('resize', function () {
+					$('.modal:visible').each(reposition);
 				});
 			});
 		</script>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
+			<div class="modal-dialog" style="vertical-align: middle;">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title text-center">Reserva generada con éxito</h4>
+					</div>
+					<div class="modal-body">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+					</div>
+				</div>
 
-    </header>
-
-    <body>
-        <div class="container wrapper">
-
-			<!-- MENSAJE SI SE GENERÓ UNA RESERVA-->
-
-			<%			if (request.getSession().getAttribute("reservaGenerada") != null) {
-			%>
-			<div id="dialog-message" title="Reserva realizada">
-				<p><%=(String) request.getSession().getAttribute("reservaGenerada")%></p>
 			</div>
-			<%
-					request.getSession().setAttribute("reservaGenerada", null);
-				}
-			%>
+		</div>
+		<%
+				request.getSession().setAttribute("reservaGenerada", null);
+			}
+		%>
 
-
-
-
-
-
-
-
-            <div class="row">
+        <div class="container wrapper">
+			<div class="row">
 
                 <!-- JSTREE -->
                 <div class="col-md-4">

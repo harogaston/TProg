@@ -138,7 +138,7 @@
 													</button>
 
 													<!-- Modal -->
-													<div class="modal" id="myModal" role="dialog" style="text-align: center;">
+													<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
 														<div class="modal-dialog" style="vertical-align: middle;">
 															<!-- Modal content-->
 															<div class="modal-content">

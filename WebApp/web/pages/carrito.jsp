@@ -26,7 +26,6 @@
 					float subtotal = 0;
 					if (reservaTemporal != null) {
 						Set<DTLineaReserva> lineas = reservaTemporal.getLineasReserva();
-						float precioTotal = reservaTemporal.getPrecioTotal();
 				%>
 				<!-- Tabla -->
 				<table class="table">
@@ -81,14 +80,8 @@
 				%>
 				<button class="btn btn-success" style="text-align: right">Confirmar</button>
 				<%
-				} else {
+				}
 				%>
-
-				<button class="btn btn-success" disabled="disabled" style="text-align: right">Confirmar</button>
-				<%
-					}
-				%>
-
 			</form>
 		</div><!-- container -->
 	</body>

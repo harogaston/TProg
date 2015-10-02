@@ -67,6 +67,7 @@
 									<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
 										<h4 class="panel-title">
 											Reserva #<%=dtR.getIdReserva()%>
+
 										</h4>
 									</div>
 									<div id="s<%=i%>" class="panel-collapse collapse">
@@ -127,7 +128,18 @@
 												<%
 													}
 												%>
-												<div class="panel-footer text-right" style="font-weight: bold">Subtotal: $<%=subtotal%></div>
+												<div class="panel-footer text-right" style="font-weight: bold">
+													<p>Subtotal: $<%=subtotal%></p>
+
+													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
+													<form action="CancelarReserva" method="GET" class="navbar-form">
+														<input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="visibility: hidden">
+														<button class="btn btn-danger" type="submit"><i class="glyphicon glyphicon-remove"></i></button>
+													</form>
+													<%} else {%>
+													<button class="btn btn-danger" disabled="disabled" type="submit"><i class="glyphicon glyphicon-remove"></i></button>
+														<%}%>
+												</div>
 											</div><!-- panel -->
 										</div>
 									</div>

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.apache.commons.lang3.StringUtils;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
@@ -89,7 +89,7 @@ public class Buscar extends HttpServlet {
 				request.setAttribute("tipo_orden", "precio");
 			} else if (request.getParameter("tipo_orden") != null && request.getParameter("tipo_orden").equals("alfabetico")) {
 				busqueda = request.getParameter("busquedaPrevia");
-				categoriaSeleccionada = request.getParameter("seleccionPrevia");				
+				categoriaSeleccionada = request.getParameter("seleccionPrevia");
 				// Ordenados por nombre
 				serviciosResultado = new TreeSet<>();
 				promocionesResultado = new TreeSet<>();
@@ -132,8 +132,8 @@ public class Buscar extends HttpServlet {
 						boolean matcheaServicio = false;
 						for (String categoria : listaCategoriasServicio) {
 							// Me fijo si el termino buscado conincide con algo del servicio
-							if (categoria.contains(busqueda) || infoServicio.getDescripcion().contains(busqueda)
-									|| infoServicio.getIdServicio().contains(busqueda)) {
+							if ( StringUtils.containsIgnoreCase(categoria, busqueda) || StringUtils.containsIgnoreCase(infoServicio.getDescripcion(), busqueda)
+									|| StringUtils.containsIgnoreCase(infoServicio.getIdServicio(), busqueda)) {
 								matcheaServicio = true;
 								break;
 							}
@@ -151,7 +151,7 @@ public class Buscar extends HttpServlet {
 						DTPromocion infoPromocion = ctrlProductos.infoPromocion();
 
 						// Me fijo si el termino buscado conincide con algo de la promoción
-						if (infoPromocion.getIdPromocion().contains(busqueda)) {
+						if (StringUtils.containsIgnoreCase(infoPromocion.getIdPromocion(), busqueda)) {
 							promocionesResultado.add(infoPromocion);
 						}
 					}

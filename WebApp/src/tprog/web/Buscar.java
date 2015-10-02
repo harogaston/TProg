@@ -57,7 +57,7 @@ public class Buscar extends HttpServlet {
 			request.setAttribute("arbolJson", list);
 
 			// El texto buscado o la categoría seleccionada
-			CharSequence busqueda = request.getParameter("busqueda");
+			String busqueda = request.getParameter("busqueda");
 			String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
 
 			// Obtengo todos los servicios del sistema
@@ -79,18 +79,24 @@ public class Buscar extends HttpServlet {
 			// Defino el orden
 			SortedSet<DTServicio> serviciosResultado;
 			SortedSet<DTPromocion> promocionesResultado;
-//			if (request.getParameter("precio").equals("1")) {
-//				 Ordenados por precio
-//				serviciosResultado = new TreeSet<>(DTServicio::comparePrecio);
-//				promocionesResultado = new TreeSet<>(DTPromocion::comparePrecio);
-//			} else {
-				// Ordenados por nombre (*** Como no puedo hacer que ande lo dejo siempre por nombre ***)
+			if (request.getParameter("tipo_orden") != null && request.getParameter("tipo_orden").equals("precio")) {
+				busqueda = request.getParameter("busquedaPrevia");
+				categoriaSeleccionada = request.getParameter("seleccionPrevia");
+				// Ordenados por precio
+				serviciosResultado = new TreeSet<>(DTServicio::comparePrecio);
+				promocionesResultado = new TreeSet<>(DTPromocion::comparePrecio);
+				request.setAttribute("precio", "1"); //para que aparezca marcado el precio en la proxima
+				request.setAttribute("alfabetico", "0");
+			} else {
+				// Ordenados por nombre
 				serviciosResultado = new TreeSet<>();
 				promocionesResultado = new TreeSet<>();
-//			}
+				request.setAttribute("precio", "0"); //para que aparezca marcado el precio en la proxima
+				request.setAttribute("alfabetico", "1");
+			}
 
 			// Si no hay busqueda ni categoría muestro todo
-			if (busqueda == null && categoriaSeleccionada == null) {
+			if ((busqueda == null || busqueda.equals("null")) && (categoriaSeleccionada == null || categoriaSeleccionada.equals("null"))) {
 				// Todos los servicios
 				if (!serviciosTodos.isEmpty()) {
 					for (DTMinServicio dtMinS : serviciosTodos) {
@@ -109,7 +115,8 @@ public class Buscar extends HttpServlet {
 					}
 				}
 				// Si se realizó una búsqueda	
-			} else if (busqueda != null) {
+			} else if (busqueda != null && !busqueda.equals("null")) {
+				System.out.println("if de busqueda");
 				// Busco servicios que contengan el término buscado
 				if (!serviciosTodos.isEmpty()) {
 					for (DTMinServicio dtMinS : serviciosTodos) {
@@ -145,7 +152,8 @@ public class Buscar extends HttpServlet {
 					}
 				}
 				// Si se seleccionó una categoría del árbol
-			} else if (categoriaSeleccionada != null) {
+			} else if (categoriaSeleccionada != null && !categoriaSeleccionada.equals("null")) {
+				System.out.println("if de categorias");
 				// Me fijo si debo listar las promociones
 				if (categoriaSeleccionada.equals("Promociones")) {
 					// Devuelvo todas las promociones
@@ -170,7 +178,7 @@ public class Buscar extends HttpServlet {
 			// Mando los resultados
 			request.setAttribute("servicios", serviciosResultado);
 			request.setAttribute("promociones", promocionesResultado);
-			request.setAttribute("seleccionPrevia", categoriaSeleccionada);
+			request.setAttribute("categoriaPrevia", (String) categoriaSeleccionada);
 			request.setAttribute("busquedaPrevia", (String) busqueda);
 
 			// Reseteo los atributos para que en el próximo llamado no

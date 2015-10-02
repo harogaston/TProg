@@ -43,14 +43,26 @@
 					<div class="row">
 						<div class="col-md-12">
 							<form action="Buscar" id="criterio_busqueda" role="form" method="POST">
-							<div class="btn-group pull-right" data-toggle="buttons">
-								<label class="btn btn-default active">
-									<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>A-Z
-								</label>
-								<label class="btn btn-default">
-									<input type="radio" name="precio" id="precio" autocomplete="off">Precio
-								</label>
-							</div>
+								<div class="btn-group pull-right" data-toggle="buttons">
+									<%if (request.getAttribute("precio") != null && ((String) request.getAttribute("precio")).equals("0")) {%>
+									<label id="btn_alfabetico" class="btn btn-default active">
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>A-Z
+									</label>
+									<label id="btn_precio" class="btn btn-default">
+										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
+									</label>
+									<%} else {%>
+									<label id="btn_alfabetico" class="btn btn-default">
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
+									</label>
+									<label id="btn_precio" class="btn btn-default active">
+										<input type="radio" name="precio" id="precio" autocomplete="off" checked>Precio
+									</label>
+									<%}%>
+								</div>
+								<input name="busquedaPrevia" value="<%=(String) request.getAttribute("busquedaPrevia")%>" style="visibility: hidden">
+								<input name="seleccionPrevia" value="<%=(String) request.getAttribute("categoriaPrevia")%>" style="visibility: hidden">
+								<input id="tipo_orden" name="tipo_orden" style="visibility: hidden">
 							</form>
 						</div>
 					</div>
@@ -172,7 +184,7 @@
 
 	arbol.on('loaded.jstree', function () {
 		//debería abrir la última categoría seleccionada
-		arbol.jstree(true)._open_to('#<%=(String) request.getAttribute("seleccionPrevia")%>');
+		arbol.jstree(true)._open_to('#<%=(String) request.getAttribute("categoriaPrevia")%>');
 	});
 
 	//cuando se clickea algún elemento del árbol, se muestran todos los servicios asociados (y ninguna promoción)
@@ -184,14 +196,12 @@
 
 
 <script>
-  $('#alfabetico').on('click', function () {
-	$(this).value = "1";
-	document.getElementById('precio').value = "0";
-	document.getElementById('criterio_busqueda').submit();
-  });
-  $('#precio').on('click', function () {
-	$(this).value = "1";
-	document.getElementById('alfabetico').value = "0";
-	document.getElementById('criterio_busqueda').submit();
-  });
+	$('#btn_alfabetico').on('click', function () {
+		document.getElementById('tipo_orden').value = "alfabetico";
+		document.getElementById('criterio_busqueda').submit();
+	});
+	$('#btn_precio').on('click', function () {
+		document.getElementById('tipo_orden').value = "precio";
+		document.getElementById('criterio_busqueda').submit();
+	});
 </script>

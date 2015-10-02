@@ -96,27 +96,7 @@ public class Buscar extends HttpServlet {
 				request.setAttribute("precio", "0");
 			}
 
-			// Si no hay busqueda ni categoría muestro todo
-			if (busqueda == null && categoriaSeleccionada == null) {
-				// Todos los servicios
-				if (!serviciosTodos.isEmpty()) {
-					for (DTMinServicio dtMinS : serviciosTodos) {
-						ctrlProductos.seleccionarServicio(dtMinS);
-						DTServicio infoServicio = ctrlProductos.infoServicio();
-						serviciosResultado.add(infoServicio);
-					}
-				}
-
-				// Todas las promociones
-				if (!promocionesTodas.isEmpty()) {
-					for (DTMinPromocion dtMinP : promocionesTodas) {
-						ctrlProductos.seleccionarPromocion(dtMinP);
-						DTPromocion infoPromocion = ctrlProductos.infoPromocion();
-						promocionesResultado.add(infoPromocion);
-					}
-				}
-				// Si se realizó una búsqueda
-			} else if (busqueda != null) {
+			if (categoriaSeleccionada == null) {
 				// Busco servicios que contengan el término buscado
 				if (!serviciosTodos.isEmpty()) {
 					for (DTMinServicio dtMinS : serviciosTodos) {
@@ -152,7 +132,7 @@ public class Buscar extends HttpServlet {
 					}
 				}
 				// Si se seleccionó una categoría del árbol
-			} else if (categoriaSeleccionada != null) {
+			} else {
 				// Me fijo si debo listar las promociones
 				if (categoriaSeleccionada.equals("Promociones")) {
 					// Devuelvo todas las promociones
@@ -187,7 +167,7 @@ public class Buscar extends HttpServlet {
 
 			// Redirijo
 			request.getRequestDispatcher("/pages/busqueda.jsp").forward(request, response);
-		} catch (Exception ex) {
+		} catch (ServletException | IOException ex) {
 			Logger.getLogger(Buscar.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}

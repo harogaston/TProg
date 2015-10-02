@@ -44,6 +44,7 @@
 						<div class="col-md-12">
 							<form action="Buscar" id="criterio_busqueda" role="form" method="POST">
 								<div class="btn-group pull-right" data-toggle="buttons">
+									<!-- Determino qué botón dejar apretado, de acuerdo a si se ordenó por precio o A-Z -->
 									<%if (request.getAttribute("precio") != null && ((String) request.getAttribute("precio")).equals("1")) {%>
 									<label class="btn btn-default">
 										<input   type = "radio" name = "ordenamiento" value = "alfabetico" autocomplete = "off" > A - Z
@@ -192,35 +193,17 @@
 		document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios
 	});
 
-
 	$('#criterio_busqueda').change(function () {
 		var radios = document.getElementsByName('ordenamiento');
-
 		for (var i = 0, length = radios.length; i < length; i++) {
 			if (radios[i].checked) {
-				// do whatever you want with the checked radio
-//				alert(radios[i].value);
 				var inputOrdenamiento = document.getElementById('tipo_orden');
 				inputOrdenamiento.value = radios[i].value;
 				this.submit();
-
-				// only one radio can be logically checked, don't check the rest
 				break;
 			}
 		}
 
 	});
 
-
-
-//	$('#alfabetico').(function () {
-//		$(this).value = "1";
-//		document.getElementById('precio').value = "0";
-//		document.getElementById('criterio_busqueda').submit();
-//	});
-//	$('#precio').click(function () {
-//		$(this).value = "1";
-//		document.getElementById('alfabetico').value = "0";
-//		document.getElementById('criterio_busqueda').submit();
-//	});
 </script>

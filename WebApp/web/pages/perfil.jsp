@@ -133,12 +133,13 @@
 
 													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
 													<form action="CancelarReserva" method="GET" class="navbar-form">
-														<input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="visibility: hidden">
-														<button class="btn btn-danger" type="submit"><i class="glyphicon glyphicon-remove"></i></button>
+														<input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+														<button class="btn btn-danger" type="submit">
+															<i class="glyphicon glyphicon-remove"></i>
+															<span style="font-weight: bold">Cancelar</span>
+														</button>
 													</form>
-													<%} else {%>
-													<button class="btn btn-danger" disabled="disabled" type="submit"><i class="glyphicon glyphicon-remove"></i></button>
-														<%}%>
+													<%}%>
 												</div>
 											</div><!-- panel -->
 										</div>
@@ -159,6 +160,5 @@
 			</div>
 		</div>
 	</body>
-	<!-- ACÁ includes de .js que se requieran en ESTA página  -->
-	<%@include file="templates/footer.jspf" %> <!-- El footer ya incluye bootstrap.min.js y jquery-2.1.4.js -->
+	<%@include file="templates/footer.jspf" %>
 </html>

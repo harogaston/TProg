@@ -50,7 +50,10 @@ public class CancelarReserva extends HttpServlet {
 		ICtrlReservas ctrlReservas = (ICtrlReservas) request.getSession().getAttribute("ctrlReservas");
 		ctrlReservas.seleccionarReserva(Integer.parseInt(idReserva));
 		ctrlReservas.cambiarEstadoReserva(EstadoReserva.Cancelada);
-		request.getRequestDispatcher("/pages/reservacancelada.jsp").forward(request, response);
+//		request.getRequestDispatcher("/pages/reservacancelada.jsp").forward(request, response);
+		request.getSession().setAttribute("reservaCancelada", "La reserva ha sido cancelada con éxito");
+		// volver a la página que llamó al servlet
+		response.sendRedirect("/WebApp/VerPerfil#reservas");
 	}
 
 	/**

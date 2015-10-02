@@ -16,10 +16,45 @@
 		<!-- ACA .css que se requieran en esta jsp
 		(sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
 		-->
+
+		<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
+		<script src="js/jquery-2.1.4.js"></script>
+		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+		<script>
+			$(function () {
+				$("#dialog-message").dialog({
+					modal: true,
+					buttons: {
+						Ok: function () {
+							$(this).dialog("close");
+						}
+					}
+				});
+			});
+		</script>
+
+
+
+
     </header>
 	<body>
 
 		<div class="container wrapper" style="padding: 30px">
+
+			<!--ALERTA POR SI SE CANCELO RESERVA-->
+			<%			if (request.getSession().getAttribute("reservaCancelada") != null) {
+			%>
+			<div id="dialog-message" title="Reserva cancelada">
+				<p><%=(String) request.getSession().getAttribute("reservaCancelada")%></p>
+			</div>
+			<%
+					request.getSession().setAttribute("reservaCancelada", null);
+				}
+			%>
+
+
+
+
 			<div class="row">
 				<!-- Nav tabs -->
 				<ul class="nav nav-pills" role="tablist" style="margin-bottom: 50px">
@@ -28,7 +63,7 @@
 				</ul>
 
 				<!-- Tab panes -->
-				<div class="tab-content">
+				<div class="tab-content" id="tabs">
 					<!--Información de perfil-->
 					<div role="tabpanel" class="tab-pane active" id="info">
 						<div class="row">
@@ -162,3 +197,13 @@
 	</body>
 	<%@include file="templates/footer.jspf" %>
 </html>
+
+<script>
+
+	$("#tabs").find("reservas").click(function () {
+		alert("calling alert...");
+		$(this).parent(".ui-tabs-panel").load(this.href);
+		return false;
+	});
+
+</script>

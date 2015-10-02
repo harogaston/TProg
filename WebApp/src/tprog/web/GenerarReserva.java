@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tprog.logica.dt.DTReserva;
 import tprog.logica.interfaces.ICtrlReservas;
 
 /**
@@ -66,8 +67,10 @@ public class GenerarReserva extends HttpServlet {
 			ICtrlReservas ctrlReservas = (ICtrlReservas) request.getSession().getAttribute("ctrlReservas");
 			//doy de alta a la reserva temporal
 
-			ctrlReservas.seleccionarDTReserva(ctrlReservas.mostrarReservaTemporal());
+			DTReserva dtr = ctrlReservas.mostrarReservaTemporal();
+			ctrlReservas.seleccionarDTReserva(dtr);
 			ctrlReservas.altaReserva();
+			ctrlReservas.liberarMemoriaControlador();
 			request.getSession().setAttribute("reservaTemporal", null);
 			request.getSession().setAttribute("cant_items", 0);
 			request.getRequestDispatcher("/pages/reservagenerada.jsp").forward(request, response);

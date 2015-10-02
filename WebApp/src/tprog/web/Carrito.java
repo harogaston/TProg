@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlReservas;
 
 /**
@@ -73,6 +75,7 @@ public class Carrito extends HttpServlet {
 			//aca se reciben parametros y se modifica la reserva (agregando lineas)
 			HttpSession session = request.getSession(false);
 			ICtrlReservas ctrlReservas = (ICtrlReservas) session.getAttribute("ctrlReservas"); //el controlador asociado a la sesion
+			ICtrlProductos ctrlProductos = (ICtrlProductos) Fabrica.getInstance().getICtrlProductos();
 			ctrlReservas.seleccionarCliente((String) session.getAttribute("usuario_logueado")); //selecciono cliente
 			String idProveedor = request.getParameter("idProveedor");
 //			if (request.getParameter("idServicio") != null) { da lo mismo controlar así o con lo que está
@@ -80,16 +83,20 @@ public class Carrito extends HttpServlet {
 				//en este caso llame al servlet desde un servicio
 				String idServicio = request.getParameter("idServicio");
 				DTMinServicio dt = new DTMinServicio(idProveedor, idServicio);
+				ctrlReservas.seleccionarProveedor(idProveedor);
 				ctrlReservas.seleccionarServicio(dt);
+				ctrlProductos.seleccionarServicio(dt);
+
 			} else if (request.getHeader("referer").contains("VerPromocion")) {
 				//la llame desde una promocion
-
 				//esto es para evitar un problema de diseño del servidor central, que se fija si es null el dtServicio
 				//cuando en realidad tendría que preguntar qué se le está pidiendo
 				ctrlReservas.seleccionarServicio(null);
+				ctrlReservas.seleccionarProveedor(idProveedor);
 				String idPromocion = request.getParameter("idPromocion");
 				DTMinPromocion dt = new DTMinPromocion(idProveedor, idPromocion);
 				ctrlReservas.seleccionarPromocion(dt);
+				ctrlProductos.seleccionarPromocion(dt);
 			}
 			//corregir la fecha de acuerdo a parámetros de entrada
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));

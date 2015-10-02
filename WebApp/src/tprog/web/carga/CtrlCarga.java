@@ -29,10 +29,12 @@ public class CtrlCarga extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		cargarDatos();
-		System.out.println("Datos cargados.");
-		request.getSession().setAttribute("datos_cargados", true);
-		request.setAttribute("primeraEjecucion", true);
+		if (request.getSession().getAttribute("datos_cargados") == null || !((boolean) request.getSession().getAttribute("datos_cargados"))) {
+			cargarDatos();
+			System.out.println("Datos cargados.");
+			request.getSession().setAttribute("datos_cargados", true);
+			request.setAttribute("primeraEjecucion", true);
+		}
 		request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 

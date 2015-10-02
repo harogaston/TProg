@@ -25,8 +25,7 @@
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
     </header>
     <body>
-        <%
-			//obtengo el atributo de info servicio para usar en toda la página
+        <%			//obtengo el atributo de info servicio para usar en toda la página
 			DTPromocion infoPromocion = (DTPromocion) request.getAttribute("infoPromocion");
 			String idProveedor = (String) request.getAttribute("idProveedor");
 			Map<DTMinServicio, Integer> servicios = (Map<DTMinServicio, Integer>) request.getAttribute("servicios");
@@ -88,12 +87,12 @@
 						<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
 						<input type="text" name="idPromocion" value="<%=infoPromocion.getIdPromocion()%>" style="visibility: hidden">
 						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
-                        
+
 						<p style="padding-top: 20px">Fechas</p>
 						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
-							<input type="text" class="input-sm form-control" name="inicio" style="width: 100px"/>
+							<input type="text" class="input-sm form-control" name="inicio" value="07/10/2015" style="width: 100px"/>
 							<span class="input-group-addon">hasta</span>
-							<input type="text" class="input-sm form-control" name="fin" style="width: 100px"/>
+							<input type="text" class="input-sm form-control" name="fin" value="07/10/2015" style="width: 100px"/>
 						</div>
                     </form>
 					<%}%>

@@ -360,7 +360,6 @@ public class CtrlCarga extends HttpServlet {
 			dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
 					EstadoReserva.Registrada, 200, lineas);
 			mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
-
 			//R6    P8 S7
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),

@@ -19,8 +19,7 @@
 		<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
     </header>
     <body>
-        <%
-			//obtengo el atributo de info servicio para usar en toda la página
+        <%			//obtengo el atributo de info servicio para usar en toda la página
 			DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
 			String idProveedor = (String) request.getAttribute("idProveedor");
 			Set< String> imagenes = infoServicio.getImagenes();
@@ -110,7 +109,7 @@
                 <div class="col-md-8">
                     <h1><%=infoServicio.getIdServicio()%></h1>
                     <p><h3>Descripción</h3> <%=infoServicio.getDescripcion()%></p>
-				
+
                     <!--Solo se muestra agregar al carrito si estoy logueado-->
                     <%
 						if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
@@ -120,12 +119,13 @@
 						<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
 						<input type="text" name="idServicio" value="<%=infoServicio.getIdServicio()%>" style="visibility: hidden">
 						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
-                        
+
+                        <!-- SECCION DE FECHAS -->
 						<p style="padding-top: 20px">Fechas</p>
 						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
-							<input type="text" class="input-sm form-control" name="inicio" style="width: 100px"/>
+							<input type="text" class="input-sm form-control" name="inicio" value="07/10/2015" style="width: 100px"/>
 							<span class="input-group-addon">hasta</span>
-							<input type="text" class="input-sm form-control" name="fin" style="width: 100px"/>
+							<input type="text" class="input-sm form-control" name="fin" value="07/10/2015" style="width: 100px"/>
 						</div>
 					</form>
 

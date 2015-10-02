@@ -52,7 +52,6 @@
 
 					<!--Reservas-->
 					<div role="tabpanel" class="tab-pane" id="reservas">
-						<h2>Reservas:</h2>
 						<% if (request.getAttribute("reservas") != null) {%>
 						<div class="panel-group" id="accordionServicios">
 							<%	int i = 0;
@@ -63,7 +62,7 @@
 								<div class="panel">
 									<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
 										<h4 class="panel-title">
-											<%=dtR.getIdReserva()%>
+											Reserva #<%=dtR.getIdReserva()%>
 										</h4>
 									</div>
 									<div id="s<%=i%>" class="panel-collapse collapse">
@@ -76,7 +75,7 @@
 											%>
 											<span class="text-muted">Fecha de Creación: </span><%=fCreacion%><br>
 											<div class="panel panel-default">
-												<div class="panel-heading"><i class="glyphicon glyphicon-shopping-cart"></i>  Carrito de compras</div>
+												<div class="panel-heading">Detalle de la reserva</div>
 												<%	float subtotal = 0;
 													if (dtR != null) {
 														Set<DTLineaReserva> lineas = dtR.getLineasReserva();
@@ -96,7 +95,7 @@
 													<tbody>
 														<%	int j = 0;
 															for (DTLineaReserva linea : lineas) {
-																i++;
+																j++;
 																subtotal += linea.getPrecio() * linea.getCantidad();
 														%>
 														<tr>

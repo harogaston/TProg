@@ -16,45 +16,9 @@
 		<!-- ACA .css que se requieran en esta jsp
 		(sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
 		-->
-
-		<link rel="stylesheet" href="js/jquery-ui-1.11.4.custom/jquery-ui.css">
-		<script src="js/jquery-2.1.4.js"></script>
-		<script src="js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-		<script>
-			$(function () {
-				$("#dialog-message").dialog({
-					modal: true,
-					buttons: {
-						Ok: function () {
-							$(this).dialog("close");
-						}
-					}
-				});
-			});
-		</script>
-
-
-
-
     </header>
 	<body>
-
 		<div class="container wrapper" style="padding: 30px">
-
-			<!--ALERTA POR SI SE CANCELO RESERVA-->
-			<%			if (request.getSession().getAttribute("reservaCancelada") != null) {
-			%>
-			<div id="dialog-message" title="Reserva cancelada">
-				<p><%=(String) request.getSession().getAttribute("reservaCancelada")%></p>
-			</div>
-			<%
-					request.getSession().setAttribute("reservaCancelada", null);
-				}
-			%>
-
-
-
-
 			<div class="row">
 				<!-- Nav tabs -->
 				<ul class="nav nav-pills" role="tablist" style="margin-bottom: 50px">
@@ -63,7 +27,7 @@
 				</ul>
 
 				<!-- Tab panes -->
-				<div class="tab-content" id="tabs">
+				<div class="tab-content">
 					<!--Información de perfil-->
 					<div role="tabpanel" class="tab-pane active" id="info">
 						<div class="row">
@@ -167,13 +131,32 @@
 													<p>Subtotal: $<%=subtotal%></p>
 
 													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
-													<form action="CancelarReserva" method="GET" class="navbar-form">
-														<input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
-														<button class="btn btn-danger" type="submit">
-															<i class="glyphicon glyphicon-remove"></i>
-															<span style="font-weight: bold">Cancelar</span>
-														</button>
-													</form>
+													<!-- Trigger the modal with a button -->
+													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+														<i class="glyphicon glyphicon-remove"></i>
+														<span style="font-weight: bold">Cancelar</span>
+													</button>
+
+													<!-- Modal -->
+													<div class="modal" id="myModal" role="dialog" style="text-align: center;">
+														<div class="modal-dialog" style="vertical-align: middle;">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title text-center">Confirmar acción</h4>
+																</div>
+																<div class="modal-body">
+																	<form action="CancelarReserva" method="GET">
+																		<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+																		<button type="submit" class="btn btn-danger">Sí, cancelar</button>
+																		<input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+																	</form>
+																</div>
+															</div>
+
+														</div>
+													</div>
 													<%}%>
 												</div>
 											</div><!-- panel -->
@@ -197,13 +180,25 @@
 	</body>
 	<%@include file="templates/footer.jspf" %>
 </html>
-
 <script>
+	/**
+	 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+	 */
+	$(function () {
+		function reposition() {
+			var modal = $(this),
+					dialog = modal.find('.modal-dialog');
+			modal.css('display', 'block');
 
-	$("#tabs").find("reservas").click(function () {
-		alert("calling alert...");
-		$(this).parent(".ui-tabs-panel").load(this.href);
-		return false;
+			// Dividing by two centers the modal exactly, but dividing by three 
+			// or four works better for larger screens.
+			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+		}
+		// Reposition when a modal is shown
+		$('.modal').on('show.bs.modal', reposition);
+		// Reposition when the window is resized
+		$(window).on('resize', function () {
+			$('.modal:visible').each(reposition);
+		});
 	});
-
 </script>

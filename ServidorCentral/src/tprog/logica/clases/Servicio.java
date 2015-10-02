@@ -139,6 +139,10 @@ public class Servicio {
 	public Proveedor getProveedor() {
 		return proveedor;
 	}
+	
+	public String getNicknameProveedor() {
+		return proveedor.getNickname();
+	}
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;

@@ -69,9 +69,9 @@ public class LineaReserva {
 	public DTLineaReserva crearDT() {
 		DTLineaReserva dt = null;
 		if ((this.servicio == null) && (this.promocion != null)) {
-			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.Precio);
+			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.promocion.getNicknameProveedor(), this.Precio);
 		} else if ((this.servicio != null) && (this.promocion == null)) {
-			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), null, this.Precio);
+			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), null, this.servicio.getNicknameProveedor(), this.Precio);
 		}
 		return dt;
 	}

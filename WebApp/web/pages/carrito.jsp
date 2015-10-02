@@ -43,7 +43,7 @@
 						<%	int i = 0;
 							for (DTLineaReserva linea : lineas) {
 								i++;
-								subtotal += linea.getPrecio() * linea.getCantidad();
+								subtotal += (linea.getPrecio() * linea.getCantidad());
 						%>
 						<tr>
 							<th scope="row"><%=i%></th>

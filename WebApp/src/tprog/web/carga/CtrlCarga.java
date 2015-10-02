@@ -14,7 +14,6 @@ import tprog.logica.clases.Ciudad;
 import tprog.logica.clases.Pais;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTLineaReserva;
-import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
@@ -42,16 +41,16 @@ public class CtrlCarga extends HttpServlet {
 		//Alta de Clientes
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		DTCliente dtC = new DTCliente("oWood", "pass", "Oliver", "Wood", "quidditch28@gmail.com",
-				"imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<DTMinReserva>());
+				"imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<>());
 		mu.altaCliente(dtC);
 		dtC = new DTCliente("eWatson", "pass", "Emma", "Watson", "e.watson@gmail.com",
-				"imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<DTMinReserva>());
+				"imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<>());
 		mu.altaCliente(dtC);
 		dtC = new DTCliente("BruceS", "pass", "Bruce", "Sewell", "bruce.sewell@gmail.com",
-				null, new Date(1978, 12 - 1, 3), new HashSet<DTMinReserva>());
+				null, new Date(1978, 12 - 1, 3), new HashSet<>());
 		mu.altaCliente(dtC);
 		dtC = new DTCliente("JeffW", "pass", "Jeff", "Williams", "jeff.williams@gmail.com",
-				null, new Date(1984, 11 - 1, 27), new HashSet<DTMinReserva>());
+				null, new Date(1984, 11 - 1, 27), new HashSet<>());
 		mu.altaCliente(dtC);
 		DTProveedor dtP = new DTProveedor("tCook", "pass", "Tim", "Cook", "air.f@gmail.com",
 				"imagenes/proveedores/tCook.jpg",
@@ -157,12 +156,12 @@ public class CtrlCarga extends HttpServlet {
 		p.agregarCiudad(new Ciudad("Pekín"));
 		p.agregarCiudad(new Ciudad("Cantón"));
 		mp.agregarPais(p);
-		Set<String> imgs = new HashSet<String>();
+		Set<String> imgs = new HashSet<>();
 		imgs.add("imagenes/IMG7.jpg");
 		DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad",
 				1100, imgs, new DTUbicacion("Montevideo", "Uruguay"),
 				new DTUbicacion("Valencia", "España"));
-		Set<String> cats = new HashSet<String>();
+		Set<String> cats = new HashSet<>();
 		cats.add("Iberia");
 		cats.add("Standard");
 		mp.altaServicio(dtS, "remus", cats);
@@ -325,59 +324,59 @@ public class CtrlCarga extends HttpServlet {
 			//R1 S1
 			Set<DTLineaReserva> lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
-					new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, 1100));
+					new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, "remus", 1100));
 			DTReserva dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
 					EstadoReserva.Facturada, 1100, lineas);
-			mr.agregarReserva(mu.getCliente("oWood"), dtR, "remus");
+			mr.agregarReserva(mu.getCliente("oWood"), dtR);
 			//R2    S1 S2
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(2, new Date(2015, 1 - 1, 1),
-					new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, 1100));
+					new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, "remus", 1100));
 			lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
-					new Date(2015, 1 - 1, 1), "Euro-Vuelo-LC", null, 850));
+					new Date(2015, 1 - 1, 1), "Euro-Vuelo-LC", null, "remus", 850));
 			dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
 					EstadoReserva.Cancelada, 3050, lineas);
-			mr.agregarReserva(mu.getCliente("eWatson"), dtR, "remus");
+			mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 
 			//R3    P7
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 3 - 1, 5),
-					new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", 135));
+					new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", "mHooch", 135));
 			dtR = new DTReserva(0, new Date(2015, 3 - 1, 5),
 					EstadoReserva.Pagada, 135, lineas);
-			mr.agregarReserva(mu.getCliente("BruceS"), dtR, "mHooch");
+			mr.agregarReserva(mu.getCliente("BruceS"), dtR);
 			//R4    S5 S6
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
-					new Date(2015, 5 - 1, 12), "Euro-Car-2", null, 300));
+					new Date(2015, 5 - 1, 12), "Euro-Car-2", null, "moody", 300));
 			lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
-					new Date(2015, 5 - 1, 12), "Euro-Car-3", null, 300));
+					new Date(2015, 5 - 1, 12), "Euro-Car-3", null, "moody", 300));
 			dtR = new DTReserva(0, new Date(2015, 5 - 1, 8),
 					EstadoReserva.Pagada, 600, lineas);
-			mr.agregarReserva(mu.getCliente("JeffW"), dtR, "moody");
+			mr.agregarReserva(mu.getCliente("JeffW"), dtR);
 			//R5    S9
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
-					new Date(2015, 8 - 1, 10), "Air-France-FC", null, 100));
+					new Date(2015, 8 - 1, 10), "Air-France-FC", null, "tCook", 100));
 			dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
 					EstadoReserva.Registrada, 200, lineas);
-			mr.agregarReserva(mu.getCliente("oWood"), dtR, "tCook");
+			mr.agregarReserva(mu.getCliente("oWood"), dtR);
 			//R6    P8 S7
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),
-					new Date(2015, 8 - 1, 14), null, "Miami-Viaje", 462));
+					new Date(2015, 8 - 1, 14), null, "Miami-Viaje", "mHooch", 462));
 			lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 14),
-					new Date(2015, 8 - 1, 21), "Casa para p4 BsAs", null, 80));
+					new Date(2015, 8 - 1, 21), "Casa para p4 BsAs", null, "mHooch", 80));
 			dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
 					EstadoReserva.Registrada, 542, lineas);
-			mr.agregarReserva(mu.getCliente("eWatson"), dtR, "mHooch");
+			mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 			//R7    S2
 			lineas = new HashSet<>();
 			lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
-					new Date(2015, 8 - 1, 7), "Euro-Vuelo-LC", null, 850));
+					new Date(2015, 8 - 1, 7), "Euro-Vuelo-LC", null, "remus", 850));
 			dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
 					EstadoReserva.Registrada, 1700, lineas);
-			mr.agregarReserva(mu.getCliente("BruceS"), dtR, "remus");
+			mr.agregarReserva(mu.getCliente("BruceS"), dtR);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

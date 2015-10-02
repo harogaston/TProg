@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprog.web;
 
 import java.io.IOException;
@@ -23,34 +18,12 @@ import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlReservas;
 
-/**
- *
- * @author marccio
- */
 public class Carrito extends HttpServlet {
 
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-	 * methods.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
 
-	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/**
-	 * Handles the HTTP <code>GET</code> method.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -59,14 +32,6 @@ public class Carrito extends HttpServlet {
 		request.getRequestDispatcher("/pages/carrito.jsp").forward(request, response);
 	}
 
-	/**
-	 * Handles the HTTP <code>POST</code> method.
-	 *
-	 * @param request servlet request
-	 * @param response servlet response
-	 * @throws ServletException if a servlet-specific error occurs
-	 * @throws IOException if an I/O error occurs
-	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -75,28 +40,25 @@ public class Carrito extends HttpServlet {
 			//aca se reciben parametros y se modifica la reserva (agregando lineas)
 			HttpSession session = request.getSession(false);
 			ICtrlReservas ctrlReservas = (ICtrlReservas) session.getAttribute("ctrlReservas"); //el controlador asociado a la sesion
-			ICtrlProductos ctrlProductos = (ICtrlProductos) Fabrica.getInstance().getICtrlProductos();
 			ctrlReservas.seleccionarCliente((String) session.getAttribute("usuario_logueado")); //selecciono cliente
 			String idProveedor = request.getParameter("idProveedor");
+			
 //			if (request.getParameter("idServicio") != null) { da lo mismo controlar así o con lo que está
 			if (request.getHeader("referer").contains("VerServicio")) {
 				//en este caso llame al servlet desde un servicio
+				ctrlReservas.seleccionarPromocion(null);
 				String idServicio = request.getParameter("idServicio");
 				DTMinServicio dt = new DTMinServicio(idProveedor, idServicio);
-				ctrlReservas.seleccionarProveedor(idProveedor);
 				ctrlReservas.seleccionarServicio(dt);
-				ctrlProductos.seleccionarServicio(dt);
 
 			} else if (request.getHeader("referer").contains("VerPromocion")) {
 				//la llame desde una promocion
 				//esto es para evitar un problema de diseño del servidor central, que se fija si es null el dtServicio
 				//cuando en realidad tendría que preguntar qué se le está pidiendo
 				ctrlReservas.seleccionarServicio(null);
-				ctrlReservas.seleccionarProveedor(idProveedor);
 				String idPromocion = request.getParameter("idPromocion");
 				DTMinPromocion dt = new DTMinPromocion(idProveedor, idPromocion);
 				ctrlReservas.seleccionarPromocion(dt);
-				ctrlProductos.seleccionarPromocion(dt);
 			}
 			//corregir la fecha de acuerdo a parámetros de entrada
 			int cantidad = Integer.parseInt(request.getParameter("cantidad"));
@@ -117,15 +79,4 @@ public class Carrito extends HttpServlet {
 			Logger.getLogger(Carrito.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
-	/**
-	 * Returns a short description of the servlet.
-	 *
-	 * @return a String containing servlet description
-	 */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
-
 }

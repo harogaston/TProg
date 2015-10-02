@@ -43,14 +43,25 @@
 					<div class="row">
 						<div class="col-md-12">
 							<form action="Buscar" id="criterio_busqueda" role="form" method="POST">
-							<div class="btn-group pull-right" data-toggle="buttons">
-								<label class="btn btn-default active">
-									<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>A-Z
-								</label>
-								<label class="btn btn-default">
-									<input type="radio" name="precio" id="precio" autocomplete="off">Precio
-								</label>
-							</div>
+								<div class="btn-group pull-right" data-toggle="buttons">
+									<%if (request.getAttribute("precio") != null && ((String) request.getAttribute("precio")).equals("1")) {%>
+									<label class="btn btn-default">
+										<input   type = "radio" name = "ordenamiento" value = "alfabetico" autocomplete = "off" > A - Z
+									</label>
+									<label class="btn btn-default active">
+										<input type="radio" name="ordenamiento" value="precio" autocomplete="off" checked>Precio
+									</label>
+									<%		} else {%>
+									<label class="btn btn-default active">
+										<input   type = "radio" name = "ordenamiento" value = "alfabetico" autocomplete = "off" checked> A - Z
+									</label>
+									<label class="btn btn-default">
+										<input type="radio" name="ordenamiento" value="precio" autocomplete="off">Precio
+									</label>
+									<%}%>
+								</div>
+								<input name="busqueda" value="<%=(String) request.getAttribute("busquedaPrevia")%>" style="visibility: hidden">
+								<input id="tipo_orden" name="tipo_orden" style="visibility: hidden">
 							</form>
 						</div>
 					</div>
@@ -180,18 +191,36 @@
 		document.getElementById('categoriaSeleccionada').value = $('.jstree-clicked').text();
 		document.getElementById('ver_servicios_form').submit(); //mando la form para actualizar la lista de servicios
 	});
-</script>
 
 
-<script>
-  $('#alfabetico').on('click', function () {
-	$(this).value = "1";
-	document.getElementById('precio').value = "0";
-	document.getElementById('criterio_busqueda').submit();
-  });
-  $('#precio').on('click', function () {
-	$(this).value = "1";
-	document.getElementById('alfabetico').value = "0";
-	document.getElementById('criterio_busqueda').submit();
-  });
+	$('#criterio_busqueda').change(function () {
+		var radios = document.getElementsByName('ordenamiento');
+
+		for (var i = 0, length = radios.length; i < length; i++) {
+			if (radios[i].checked) {
+				// do whatever you want with the checked radio
+//				alert(radios[i].value);
+				var inputOrdenamiento = document.getElementById('tipo_orden');
+				inputOrdenamiento.value = radios[i].value;
+				this.submit();
+
+				// only one radio can be logically checked, don't check the rest
+				break;
+			}
+		}
+
+	});
+
+
+
+//	$('#alfabetico').(function () {
+//		$(this).value = "1";
+//		document.getElementById('precio').value = "0";
+//		document.getElementById('criterio_busqueda').submit();
+//	});
+//	$('#precio').click(function () {
+//		$(this).value = "1";
+//		document.getElementById('alfabetico').value = "0";
+//		document.getElementById('criterio_busqueda').submit();
+//	});
 </script>

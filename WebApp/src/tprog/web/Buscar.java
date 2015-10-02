@@ -58,6 +58,9 @@ public class Buscar extends HttpServlet {
 
 			// El texto buscado o la categoría seleccionada
 			CharSequence busqueda = request.getParameter("busqueda");
+			if (busqueda == null) {
+				busqueda = "";
+			}
 			String categoriaSeleccionada = request.getParameter("categoriaSeleccionada");
 
 			// Obtengo todos los servicios del sistema
@@ -79,15 +82,19 @@ public class Buscar extends HttpServlet {
 			// Defino el orden
 			SortedSet<DTServicio> serviciosResultado;
 			SortedSet<DTPromocion> promocionesResultado;
-//			if (request.getParameter("precio").equals("1")) {
+			if (request.getParameter("tipo_orden") != null && request.getParameter("tipo_orden").equals("precio")) {
 //				 Ordenados por precio
-//				serviciosResultado = new TreeSet<>(DTServicio::comparePrecio);
-//				promocionesResultado = new TreeSet<>(DTPromocion::comparePrecio);
-//			} else {
+				serviciosResultado = new TreeSet<>(DTServicio::comparePrecio);
+				promocionesResultado = new TreeSet<>(DTPromocion::comparePrecio);
+				request.setAttribute("precio", "1"); //para que aparezca marcado el precio en la proxima
+				request.setAttribute("alfabetico", "0");
+			} else {
 				// Ordenados por nombre (*** Como no puedo hacer que ande lo dejo siempre por nombre ***)
 				serviciosResultado = new TreeSet<>();
 				promocionesResultado = new TreeSet<>();
-//			}
+				request.setAttribute("alfabetico", "1"); //para que aparezca marcado el A-Z en la proxima
+				request.setAttribute("precio", "0");
+			}
 
 			// Si no hay busqueda ni categoría muestro todo
 			if (busqueda == null && categoriaSeleccionada == null) {
@@ -108,7 +115,7 @@ public class Buscar extends HttpServlet {
 						promocionesResultado.add(infoPromocion);
 					}
 				}
-				// Si se realizó una búsqueda	
+				// Si se realizó una búsqueda
 			} else if (busqueda != null) {
 				// Busco servicios que contengan el término buscado
 				if (!serviciosTodos.isEmpty()) {

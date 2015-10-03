@@ -16,7 +16,7 @@
 			<div class="navbar-nav">
 				<form action="Buscar" role="search" class="navbar-form">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Buscar servicios" name="busqueda" size="40">
+						<input id="tatest" type="text" class="form-control typehead tt-query" placeholder="Buscar servicios" name="busqueda" size="40">
 						<div class="input-group-btn">
 							<button class="btn btn-info" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 						</div>

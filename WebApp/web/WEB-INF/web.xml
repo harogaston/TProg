@@ -25,6 +25,10 @@
         <servlet-class>tprog.web.VerInfoProveedor</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>RegistrarCliente</servlet-name>
+        <servlet-class>tprog.web.RegistrarCliente</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CancelarReserva</servlet-name>
         <servlet-class>tprog.web.CancelarReserva</servlet-class>
     </servlet>

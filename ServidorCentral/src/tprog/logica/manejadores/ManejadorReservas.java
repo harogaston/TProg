@@ -70,9 +70,9 @@ public class ManejadorReservas {
 		return false;
 	}
 
-	public void agregarReserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
+	public void agregarReserva(Cliente cliente, DTReserva dtR) throws Exception {
 		if (dtR != null) {
-			Reserva nuevaReserva = new Reserva(cliente, dtR, nicknameP);
+			Reserva nuevaReserva = new Reserva(cliente, dtR);
 			reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
 			cliente.agregarReserva(nuevaReserva);
 		} else {

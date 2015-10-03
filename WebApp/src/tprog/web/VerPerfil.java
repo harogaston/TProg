@@ -1,9 +1,9 @@
 package tprog.web;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +42,7 @@ public class VerPerfil extends HttpServlet {
 
 				Set<DTMinReserva> reservasMin = dtC.getReservas();
 				// Voy a crear un Set<DTReserva> para pasarle a la jsp
-				SortedSet<DTReserva> reservas = new TreeSet<>();
+				Collection<DTReserva> reservas = new TreeSet<>();
 				for (DTMinReserva dtMinR : reservasMin) {
 					ctrlU.seleccionarReserva(dtMinR.getIdReserva());
 					reservas.add(ctrlU.infoReserva());

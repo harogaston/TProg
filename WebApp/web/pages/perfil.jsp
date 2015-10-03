@@ -132,13 +132,13 @@
 
 													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
 													<!-- Trigger the modal with a button -->
-													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
 														<i class="glyphicon glyphicon-remove"></i>
 														<span style="font-weight: bold">Cancelar</span>
 													</button>
 
 													<!-- Modal -->
-													<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
+													<div class="modal fade" id="myModal<%=String.valueOf(i)%>" role="dialog" style="text-align: center">
 														<div class="modal-dialog" style="vertical-align: middle;">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -190,7 +190,7 @@
 					dialog = modal.find('.modal-dialog');
 			modal.css('display', 'block');
 
-			// Dividing by two centers the modal exactly, but dividing by three 
+			// Dividing by two centers the modal exactly, but dividing by three
 			// or four works better for larger screens.
 			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
 		}
@@ -200,5 +200,6 @@
 		$(window).on('resize', function () {
 			$('.modal:visible').each(reposition);
 		});
+
 	});
 </script>

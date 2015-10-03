@@ -37,8 +37,7 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Nickname" name="nickname" autofocus required>
 					</div>
-                            </div> 
-                            <div class="container wrapper" style="padding: 30px">
+                            
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Mail" name="mail" required>
 					</div>
@@ -49,8 +48,7 @@
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="Password" name="password" required>
 					</div>
-                            </div> 
-                            <div class="container wrapper" style="padding: 30px">
+                            
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="Confirmación de Password" name="password2" required>
 					</div>
@@ -59,8 +57,7 @@
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Nombre" name="nombre" autofocus required>
 					</div>
-                            </div> 
-                            <div class="container wrapper" style="padding: 30px">
+                            
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Apellido" name="apellido" required>
 					</div>
@@ -76,10 +73,9 @@
                             
                             <div class="container wrapper" style="padding: 30px">
 				<div class="form-group">
-                                    <p style="padding-top: 20px">Fecha de Nacimiento</p>
+                                    <p style="padding-top: 10px">Fecha de Nacimiento</p>
 						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
-							<input type="text" class="input-sm form-control" name="fNac" value="01/01/1980" style="width: 100px"/>
-                                                        <span class="input-group-addon">fecha</span>
+							<input type="text" class="input-sm form-control" name="fNac" value="01/01/1980" style="width: 100px" required>
                                                 </div>
                                 </div>  
                             </div>   

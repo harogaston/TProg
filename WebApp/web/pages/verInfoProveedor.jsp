@@ -41,7 +41,7 @@
 								<%if (request.getAttribute("imagen") != null) {%>
 								<img class="img-thumbnail" src="${imagen}" style="border-radius: 50%"/>
 								<%} else {%>
-								<img class="img-thumbnail" src="imagenes/sinimagen.jpeg" style="border-radius: 50%"/>
+								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpeg" style="border-radius: 50%"/>
 								<%}%>
 							</div>
 							<div class="col-md-9">

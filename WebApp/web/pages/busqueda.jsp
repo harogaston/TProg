@@ -24,27 +24,6 @@
 			$(window).load(function () {
 				$('#myModal').modal('show');
 			});
-
-			/**
-			 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
-			 */
-			$(function () {
-				function reposition() {
-					var modal = $(this),
-							dialog = modal.find('.modal-dialog');
-					modal.css('display', 'block');
-
-					// Dividing by two centers the modal exactly, but dividing by three
-					// or four works better for larger screens.
-					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
-				}
-				// Reposition when a modal is shown
-				$('.modal').on('show.bs.modal', reposition);
-				// Reposition when the window is resized
-				$(window).on('resize', function () {
-					$('.modal:visible').each(reposition);
-				});
-			});
 		</script>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
@@ -73,27 +52,6 @@
 			$(window).load(function () {
 				$('#myModal').modal('show');
 			});
-
-			/**
-			 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
-			 */
-			$(function () {
-				function reposition() {
-					var modal = $(this),
-							dialog = modal.find('.modal-dialog');
-					modal.css('display', 'block');
-
-					// Dividing by two centers the modal exactly, but dividing by three
-					// or four works better for larger screens.
-					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
-				}
-				// Reposition when a modal is shown
-				$('.modal').on('show.bs.modal', reposition);
-				// Reposition when the window is resized
-				$(window).on('resize', function () {
-					$('.modal:visible').each(reposition);
-				});
-			});
 		</script>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
@@ -117,16 +75,14 @@
 			}
 		%>
 
-        <div class="container wrapper">
+        <div class="container">
 			<div class="row">
 
                 <!-- JSTREE -->
-                <div class="col-md-4">
-                    <div class="row">
-                        <!--
-                        con el siguiente div se crea el arbol de categorias, con la data que se generó en el servlet
-                        -->
-                        <div id="arbol_categorias" style="padding-top: 50px; overflow: scroll; min-height: 30vh; max-height: 70vh"></div>
+                <div class=" wrapper col-md-3">
+                    <div class="row" style="padding-left: 20px; padding-right: 20px">
+                        <!-- con el siguiente div se crea el arbol de categorias, con la data que se generó en el servlet -->
+                        <div id="arbol_categorias"></div>
                     </div>
                 </div>
                 <!--
@@ -137,7 +93,12 @@
                 <form action= "Buscar" id="ver_servicios_form" class="form-inline" role="form" method="POST">
                     <input type="text" name="categoriaSeleccionada" id="categoriaSeleccionada" style="display: none">
                 </form>
-				<div class="col-md-8">
+				
+				<!--Espacio entre containers-->
+				<div class="col-md-1" style="width: 50px">
+				</div>
+
+				<div class="wrapper col-md-8">
 					<div class="row">
 						<div class="col-md-12">
 							<form action="Buscar" id="criterio_busqueda" role="form" method="POST">
@@ -173,7 +134,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Servicios:</h2>
+							<h2 class="text-center">Servicios:</h2>
 							<%	Set<DTServicio> servicios = (Set<DTServicio>) request.getAttribute("servicios");
 								if (!servicios.isEmpty()) {
 							%>
@@ -186,7 +147,7 @@
 								<div class="accordion-group">
 									<div class="panel">
 										<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
-											<h4 class="panel-title">
+											<h4 class="panel-title text-center">
 												<%= servicio.getIdServicio()%>
 											</h4>
 										</div>
@@ -221,7 +182,7 @@
 						</div>
 						<div class="col-md-6">
 
-							<h2>Promociones:</h2>
+							<h2 class="text-center">Promociones:</h2>
 
 							<%	Set<DTPromocion> promociones = (Set<DTPromocion>) request.getAttribute("promociones");
 								if (!promociones.isEmpty()) {
@@ -235,7 +196,7 @@
 								<div class="accordion-group">
 									<div class="panel">
 										<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
-											<h4 class="panel-title">
+											<h4 class="panel-title text-center">
 												<%= promocion.getIdPromocion()%>
 											</h4>
 										</div>
@@ -305,5 +266,26 @@
 	$('#btn_precio').on('click', function () {
 		document.getElementById('tipo_orden').value = "precio";
 		document.getElementById('criterio_busqueda').submit();
+	});
+
+	/**
+	 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+	 */
+	$(function () {
+		function reposition() {
+			var modal = $(this),
+					dialog = modal.find('.modal-dialog');
+			modal.css('display', 'block');
+
+			// Dividing by two centers the modal exactly, but dividing by three
+			// or four works better for larger screens.
+			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+		}
+		// Reposition when a modal is shown
+		$('.modal').on('show.bs.modal', reposition);
+		// Reposition when the window is resized
+		$(window).on('resize', function () {
+			$('.modal:visible').each(reposition);
+		});
 	});
 </script>

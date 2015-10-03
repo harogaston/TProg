@@ -64,7 +64,7 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="item active">
-                                <img src="imagenes/sinimagen.jpeg" alt="">
+                                <img src="imagenes/sinimagen.jpg" alt="">
                             </div>
                         </div>
                         <a class="left carousel-control" href="#myCarousel" data-slide="prev"><</a>

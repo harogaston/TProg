@@ -28,10 +28,12 @@ public class CtrlCarga extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("datos_cargados") == null) {
+
+		if (this.getServletConfig().getServletContext().getAttribute("datos_cargados") == null) {
 			cargarDatos();
-			request.getSession().setAttribute("datos_cargados", true);
+			this.getServletConfig().getServletContext().setAttribute("datos_cargados", true);
 		}
+
 		request.setAttribute("categoriaSeleccionada", null);
 		request.setAttribute("busqueda", null);
 		request.setAttribute("precio", "0");

@@ -60,7 +60,7 @@
                                         <td>
 											<form action="VerInfoProveedor" method="POST">
 												<button type="submit" class="btn btn-link"><%=idProveedor%></button>
-												<input name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+												<input name="idProveedor" value="<%=idProveedor%>" style="display: none">
 											</form>
 										</td>
                                     </tr>
@@ -90,8 +90,8 @@
                     <form action= "Carrito" method="POST">
                         <input type="number" name="cantidad" value="1" min="1" max="99" style="width: 60px">
 						<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
-						<input type="text" name="idPromocion" value="<%=infoPromocion.getIdPromocion()%>" style="visibility: hidden">
-						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+						<input type="text" name="idPromocion" value="<%=infoPromocion.getIdPromocion()%>" style="display: none">
+						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="display: none">
 
 						<p style="padding-top: 20px">Fechas</p>
 						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
@@ -129,8 +129,8 @@
                                     </div>
                                     <form action="VerServicio" class="navbar-form">
                                         <div class="input-group">
-                                            <input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="visibility: hidden">
-                                            <input type="text" name="idProveedor" value="<%=nodo.getKey().getNicknameP()%>" style="visibility: hidden">
+                                            <input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="display: none">
+                                            <input type="text" name="idProveedor" value="<%=nodo.getKey().getNicknameP()%>" style="display: none">
                                             <button class="btn btn-info" type="submit">Ir a Servicio</button>
                                         </div>
                                     </form>

@@ -144,7 +144,7 @@
                 </form>
 
 				<!--Espacio entre containers-->
-				<div class="col-md-1" style="width: 50px">
+				<div class="col-md-1">
 				</div>
 
 				<div class="wrapper col-md-8">
@@ -175,15 +175,15 @@
 									</label>
 									<%}%>
 								</div>
-								<input name="busquedaPrevia" value="<%=(String) request.getAttribute("busquedaPrevia")%>" style="visibility: hidden">
-								<input name="seleccionPrevia" value="<%=(String) request.getAttribute("categoriaPrevia")%>" style="visibility: hidden">
-								<input id="tipo_orden" name="tipo_orden" style="visibility: hidden">
+								<input name="busquedaPrevia" value="<%=(String) request.getAttribute("busquedaPrevia")%>" style="display: none">
+								<input name="seleccionPrevia" value="<%=(String) request.getAttribute("categoriaPrevia")%>" style="display: none">
+								<input id="tipo_orden" name="tipo_orden" style="display: none">
 							</form>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<h2 class="text-center">Servicios:</h2>
+							<h2 class="text-center">Servicios</h2>
 							<%	Set<DTServicio> servicios = (Set<DTServicio>) request.getAttribute("servicios");
 								if (!servicios.isEmpty()) {
 							%>
@@ -205,13 +205,13 @@
 												<%=servicio.toString().replace("\n", "<br>")%>
 												<form action="VerInfoProveedor" method="POST">
 													<button type="submit" class="btn btn-link">Proveedor: <%=servicio.getNicknameProveedor()%></button>
-													<input name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="visibility: hidden">
+													<input name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
 												</form>
 											</div>
 											<form action="VerServicio" class="navbar-form">
 												<div class="input-group">
-													<input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="visibility: hidden">
-													<input type="text" name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="visibility: hidden">
+													<input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="display: none">
+													<input type="text" name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
 													<button class="btn btn-info" type="submit">Ir a Servicio</button>
 												</div>
 											</form>
@@ -223,7 +223,7 @@
 								%>
 							</div>
 							<% } else { %>
-							<p> No hay servicios para esa búsqueda </p>
+							<p> No hay servicios para la búsqueda realizada</p>
 							<%
 								}
 							%>
@@ -231,7 +231,7 @@
 						</div>
 						<div class="col-md-6">
 
-							<h2 class="text-center">Promociones:</h2>
+							<h2 class="text-center">Promociones</h2>
 
 							<%	Set<DTPromocion> promociones = (Set<DTPromocion>) request.getAttribute("promociones");
 								if (!promociones.isEmpty()) {
@@ -244,7 +244,7 @@
 								%>
 								<div class="accordion-group">
 									<div class="panel">
-										<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
+										<div class="panel-heading" style="background-color: rgb(186, 155, 211); color: white; border-color: rgb(154, 137, 167)" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
 											<h4 class="panel-title text-center">
 												<%= promocion.getIdPromocion()%>
 											</h4>
@@ -254,14 +254,14 @@
 												<%=promocion.toString().replace("\n", "<br>")%>
 												<form action="VerInfoProveedor" method="POST">
 													<button type="submit" class="btn btn-link">Proveedor: <%=promocion.getNicknameProveedor()%></button>
-													<input name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="visibility: hidden">
+													<input name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
 												</form>
 											</div>
 											<form action="VerPromocion" class="navbar-form">
 												<div class="input-group">
-													<input type="text" name="idPromocion" value="<%=promocion.getIdPromocion()%>" style="visibility: hidden">
-													<input type="text" name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="visibility: hidden">
-													<button class="btn btn-info" type="submit">Ir a Promocion</button>
+													<input type="text" name="idPromocion" value="<%=promocion.getIdPromocion()%>" style="display: none">
+													<input type="text" name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
+													<button class="btn btn-info" type="submit" style="background-color: rgb(186, 155, 211); color: white; border-color: rgb(154, 137, 167)">Ir a Promocion</button>
 												</div>
 											</form>
 										</div>
@@ -272,7 +272,7 @@
 								%>
 							</div>
 							<% } else { %>
-							<p> No hay promociones para esa búsqueda </p>
+							<p> No hay promociones para la búsqueda realizada</p>
 							<%
 								}
 							%>

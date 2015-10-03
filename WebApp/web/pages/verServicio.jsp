@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.lang.String"%>
 <%@page import="java.util.Set"%>
 <%@page import="tprog.logica.dt.DTServicio"%>
@@ -72,36 +73,46 @@
                     <%}%>
 
                     <!-- Panel para la información detallada -->
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" style="margin-bottom: 0px">
                         <div class="panel-heading">
                             <h3 class="panel-title">Detalle</h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-hover">
+                            <table class="table table-hover" style="margin-bottom: 0px">
                                 <tbody>
                                     <tr>
                                         <td>Proveedor</td>
 										<td>
 											<form action="VerInfoProveedor" method="POST">
 												<button type="submit" class="btn btn-link"><%=idProveedor%></button>
-												<input name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+												<input name="idProveedor" value="<%=idProveedor%>" style="display: none">
 											</form>
 										</td>
 									</tr>
 									<tr>
+										<td>Precio</td>
+										<td>$<%=Float.toString(infoServicio.getPrecio())%></td>
+									</tr>
+									<tr>
 										<td>Origen</td>
-										<td><%=infoServicio.getOrigen().toString()%></td>
+										<td><%=infoServicio.getOrigen().toString()%>
+											<%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(),"UTF-8");%>
+											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=origenSafe%>
+												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
+												 <%=origenSafe%>" alt="Google Map of caracas" style="padding-top: 10px;">
+										</td>
 									</tr>
 									<%if (infoServicio.getDestino() != null) {%>
 									<tr>
 										<td>Destino</td>
-										<td><%=infoServicio.getDestino().toString()%></td>
+										<td><%=infoServicio.getDestino().toString()%>
+											<%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(),"UTF-8");%>
+											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=destinoSafe%>
+												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
+												 <%=destinoSafe%>" alt="Google Map of caracas"  style="padding-top: 10px;">
+										</td>
 									</tr>
 									<%}%>
-									<tr>
-										<td>Precio</td>
-										<td>$<%=Float.toString(infoServicio.getPrecio())%></td>
-									</tr>
                                 </tbody>
                             </table>
                         </div>
@@ -122,8 +133,8 @@
                     <form action= "Carrito" method="POST">
                         <input type="number" name="cantidad" value="1" min="1" max="99" style="width: 60px">
 						<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-shopping-cart"></i> Agregar al carrito</button>
-						<input type="text" name="idServicio" value="<%=infoServicio.getIdServicio()%>" style="visibility: hidden">
-						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="visibility: hidden">
+						<input type="text" name="idServicio" value="<%=infoServicio.getIdServicio()%>" style="display: none">
+						<input type="text" name="idProveedor" value="<%=idProveedor%>" style="display: none">
 
                         <!-- SECCION DE FECHAS -->
 						<p style="padding-top: 20px">Fechas</p>
@@ -141,7 +152,7 @@
 						for (String categoria : categorias) {
 
                     %>
-                    <h5 style="display: inline-block"><span class="label label-info"><%=categoria%></span></h5>
+                    <h4 style="display: inline-block"><span class="label label-info"><%=categoria%></span></h4>
                         <%}%>
                 </div>
             </div>

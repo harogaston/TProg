@@ -29,6 +29,10 @@
         <servlet-class>tprog.web.RegistrarCliente</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>NuevoCliente</servlet-name>
+        <servlet-class>tprog.web.NuevoCliente</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>CancelarReserva</servlet-name>
         <servlet-class>tprog.web.CancelarReserva</servlet-class>
     </servlet>

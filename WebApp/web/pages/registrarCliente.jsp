@@ -67,7 +67,7 @@
                             <!-- FALTA AGREGAR LA IMAGEN DE PERFIL -->
                             <div class="container wrapper" style="padding: 30px">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Imágen" name="imagen" required>
+						<input type="text" class="form-control" placeholder="Imágen" name="imagen" >
 					</div>
                             </div> 
                             

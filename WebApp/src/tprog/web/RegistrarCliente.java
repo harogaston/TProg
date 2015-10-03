@@ -43,9 +43,9 @@ public class RegistrarCliente extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
                         throws ServletException, IOException {
+            HttpSession session = request.getSession();
             try { 
-                HttpSession session = request.getSession();
-                if (session.getAttribute("estado_sesion") != EstadoSesion.OK_LOGIN) { //no estoy logueado
+                 
                     System.out.println(request.getParameterMap().toString());
                     
                     // leo los datos -falta checkear que sean correctos y esas manos-
@@ -77,17 +77,20 @@ public class RegistrarCliente extends HttpServlet {
                     boolean okEnblanco = !id.matches("^\\s*$");
                     boolean okSinEspacios = !id.matches(".*(\\s+).*");
                     boolean okNickname = okEnblanco && okSinEspacios;
-                    
                     boolean nicknameUnico = false;
                     if (okNickname) {
                             nicknameUnico = cu.verificarNickname(id);
+                            System.out.println(id);
                     }
+                    if (nicknameUnico == true) System.out.println("averliaassasss");
                     boolean emailUnico = false;
                    // if (okEmail) 
                             emailUnico = cu.verificarEmail(mail);
+                            if (emailUnico == true) System.out.println("555555averlia");
                     boolean okNickMail = false;
-                    if (okNickname && emailUnico && nicknameUnico){ // &&okEmail
+                    if (okNickname && !emailUnico && !nicknameUnico){ // &&okEmail
                         okNickMail = true;
+                        System.out.println("ave33rla");
                     }
                     if (okNickMail){ //mail y nick correctos - falta hacer con ajax
                          //Verificacion de contraseña
@@ -95,7 +98,7 @@ public class RegistrarCliente extends HttpServlet {
                         boolean okPassword2 = contrasena2.length() >= 4 && contrasena2.length() <= 20;
                         boolean okPassword = (okPassword1 && okPassword2 && contrasena.equals(contrasena2));
 
-
+                            System.out.println("averla");
 
                         // Verificación de nombre y apellido
                         boolean okNombre = !nombre.matches("^\\s*$");
@@ -109,34 +112,27 @@ public class RegistrarCliente extends HttpServlet {
 
                         if (okNombre && okApellido && okFecha && okImagen && okPassword) { // &&okEmail
                             // doy de alta el cliente
+                            System.out.println("averla<zx");
                             DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
                             cu.ingresarDatosUsuario(dtU, false);
                             cu.altaUsuario();
+                            
 
 
                             //logueo el usuario recien registrado
-                            ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+                          /*  ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
                             cr.liberarMemoriaControlador();
                             session.setAttribute("ctrlReservas", cr);
                             nuevoEstado = EstadoSesion.OK_LOGIN;
                             request.getSession().setAttribute("usuario_logueado", id);
                             session.setAttribute("estado_sesion", nuevoEstado);
-                            session.setAttribute("cant_items", 0);
+                            session.setAttribute("cant_items", 0);*/
                         }
                         request.getRequestDispatcher("/pages/registrarCliente.jsp").forward(request, response);
+                        request.getRequestDispatcher("Home").forward(request, response);
                     }
 
-                }else{
-                        //ya estoy logueado. Deslogueo automaticamente? no lo dejo registrarse?
-                        // FALTA 
-                        response.setContentType("text/html");
-                        PrintWriter out = response.getWriter();
-                        out.println("<html>");
-                        out.println("<body>");
-                        out.println("<h1>YA ESTAS LOGUEADO PAPU, deslogueate o algo</h1>");
-                        out.println("</body>");
-                        out.println("</html>");   
-                    }
+                
             } catch (ParseException ex) {
                         Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
                     }

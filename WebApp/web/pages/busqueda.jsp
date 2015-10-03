@@ -105,24 +105,30 @@
 								<div class="btn-group pull-right" data-toggle="buttons">
 									<%if (request.getAttribute("tipo_orden") != null && ((String) request.getAttribute("tipo_orden")).equals("alfabetico")) {%>
 									<label id="btn_alfabetico" class="btn btn-default active">
-										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>A-Z
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>
+										<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span> Nombre
 									</label>
 									<label id="btn_precio" class="btn btn-default">
-										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
+										<input type="radio" name="precio" id="precio" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Precio
 									</label>
 									<%} else if (request.getAttribute("tipo_orden") != null && ((String) request.getAttribute("tipo_orden")).equals("precio")) {%>
 									<label id="btn_alfabetico" class="btn btn-default">
-										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span> Nombre
 									</label>
 									<label id="btn_precio" class="btn btn-default active">
-										<input type="radio" name="precio" id="precio" autocomplete="off" checked>Precio
+										<input type="radio" name="precio" id="precio" autocomplete="off" checked>
+										<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Precio
 									</label>
 									<%} else {%>
 									<label id="btn_alfabetico" class="btn btn-default">
-										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span> Nombre
 									</label>
 									<label id="btn_precio" class="btn btn-default">
-										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
+										<input type="radio" name="precio" id="precio" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Precio
 									</label>
 									<%}%>
 								</div>
@@ -154,8 +160,8 @@
 										<div id="s<%=i%>" class="panel-collapse collapse">
 											<div class="panel-body">
 												<%=servicio.toString().replace("\n", "<br>")%>
-												<form action="VerInfoProveedor" method="POST">
-													<button type="submit" class="btn btn-link">Proveedor: <%=servicio.getNicknameProveedor()%></button>
+												<form action="VerInfoProveedor" id="myform<%=i%>" method="POST">
+													<h4 style="text-align: center"><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-info"><%=servicio.getNicknameProveedor()%></span></a></h4>
 													<input name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
 												</form>
 											</div>
@@ -174,7 +180,7 @@
 								%>
 							</div>
 							<% } else { %>
-							<p> No hay servicios para la búsqueda realizada</p>
+							<p class="text-center"> No hay servicios para la búsqueda realizada</p>
 							<%
 								}
 							%>
@@ -195,16 +201,16 @@
 								%>
 								<div class="accordion-group">
 									<div class="panel">
-										<div class="panel-heading" style="background-color: rgb(186, 155, 211); color: white; border-color: rgb(154, 137, 167)" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
+										<div class="panel-heading promocion" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
 											<h4 class="panel-title text-center">
-												<%= promocion.getIdPromocion()%>
+												<span><%= promocion.getIdPromocion()%></span> <span class="badge"><%=Math.round(promocion.getDescuento())%>%</span>
 											</h4>
 										</div>
 										<div id="p<%=j%>" class="panel-collapse collapse">
 											<div class="panel-body">
 												<%=promocion.toString().replace("\n", "<br>")%>
-												<form action="VerInfoProveedor" method="POST">
-													<button type="submit" class="btn btn-link">Proveedor: <%=promocion.getNicknameProveedor()%></button>
+												<form action="VerInfoProveedor" id="myform<%=j%>" method="POST">
+													<h4 style="text-align: center"><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=j%>').submit()"><span class="label promocion"><%=promocion.getNicknameProveedor()%></span></a></h4>
 													<input name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
 												</form>
 											</div>
@@ -212,7 +218,7 @@
 												<div class="input-group">
 													<input type="text" name="idPromocion" value="<%=promocion.getIdPromocion()%>" style="display: none">
 													<input type="text" name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
-													<button class="btn btn-info" type="submit" style="background-color: rgb(186, 155, 211); color: white; border-color: rgb(154, 137, 167)">Ir a Promocion</button>
+													<button class="btn promocion" type="submit"><span style="color: white">Ir a Promocion</span></button>
 												</div>
 											</form>
 										</div>
@@ -223,7 +229,7 @@
 								%>
 							</div>
 							<% } else { %>
-							<p> No hay promociones para la búsqueda realizada</p>
+							<p class="text-center"> No hay promociones para la búsqueda realizada</p>
 							<%
 								}
 							%>

@@ -20,8 +20,8 @@
     </header>
     <body>
 		<div class="container wrapper" style="border: #000; border-radius: 4px;">
-			<div class="panel panel-default">
-				<div class="panel-heading"><h2> <i class="glyphicon glyphicon-shopping-cart"></i>  Carrito de compras</h2></div>
+			<div class="panel panel-warning">
+				<div class="panel-heading"><h2> <span class="glyphicon glyphicon-shopping-cart"></span>  Carrito de compras</h2></div>
 				<%	DTReserva reservaTemporal = (DTReserva) session.getAttribute("reservaTemporal");
 					float subtotal = 0;
 					if (reservaTemporal != null) {
@@ -34,8 +34,9 @@
 							<th>Item</th>
 							<th>Tipo</th>
 							<th>Descripción</th>
+							<th>Precio unitario</th>
 							<th>Cantidad</th>
-							<th>Total</th>
+							<th>Subotal</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -53,8 +54,9 @@
 							<td>Promoción</td>
 							<td><%=linea.getPromocion()%></td>
 							<%}%>
+							<td>$<%=linea.getPrecio()%></td>
 							<td><%=linea.getCantidad()%></td>
-							<td><%=(linea.getPrecio() * linea.getCantidad())%></td>
+							<td>$<%=(linea.getPrecio() * linea.getCantidad())%></td>
 						</tr>
 						<%
 							}
@@ -64,26 +66,71 @@
 				<%
 				} else {
 				%>
-				<div class="col-md-12">No hay ninguna linea de reserva actualmente</div>
+				<div class="col-md-12" style="margin-top: 10px">No ha agregado productos a su reserva</div>
 
 				<%
 					}
 				%>
-				<div class="panel-footer text-right" style="font-weight: bold">Subtotal: $<%=subtotal%></div>
+				<div class="panel-footer text-right" style="font-weight: bold">
+					<div>Total $<%=subtotal%></div>
+					<%
+						//si el carrito no está vacío, habilito el botón de confirmación de reserva
+						if (!((ICtrlReservas) request.getSession().getAttribute("ctrlReservas")).mostrarReservaTemporal().getLineasReserva().isEmpty()) {
+					%>
+					<!-- Trigger the modal with a button -->
+					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+						<i class="glyphicon glyphicon-check"></i>
+						<span style="font-weight: bold">Confirmar</span>
+					</button>
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" role="dialog" style="text-align: center">
+						<div class="modal-dialog" style="vertical-align: middle;">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title text-center">Confirmar acción</h4>
+								</div>
+								<div class="modal-body">
+									<form action="GenerarReserva" method="POST">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+										<button type="submit" class="btn btn-success">Crear reserva</button>
+									</form>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<%
+						}
+					%>
+				</div>
 			</div><!-- panel -->
-
-
-			<form action="GenerarReserva" class="text-right" method="POST">
-				<%
-					//si el carrito no está vacío, habilito el botón de confirmación de reserva
-					if (!((ICtrlReservas) request.getSession().getAttribute("ctrlReservas")).mostrarReservaTemporal().getLineasReserva().isEmpty()) {
-				%>
-				<button class="btn btn-success" style="text-align: right">Confirmar</button>
-				<%
-				}
-				%>
-			</form>
 		</div><!-- container -->
 	</body>
 	<%@include file="templates/footer.jspf" %>
 </html>
+<script>
+	/**
+	 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+	 */
+	$(function () {
+		function reposition() {
+			var modal = $(this),
+					dialog = modal.find('.modal-dialog');
+			modal.css('display', 'block');
+
+			// Dividing by two centers the modal exactly, but dividing by three
+			// or four works better for larger screens.
+			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+		}
+		// Reposition when a modal is shown
+		$('.modal').on('show.bs.modal', reposition);
+		// Reposition when the window is resized
+		$(window).on('resize', function () {
+			$('.modal:visible').each(reposition);
+		});
+
+	});
+</script>

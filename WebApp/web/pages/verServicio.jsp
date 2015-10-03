@@ -149,10 +149,14 @@
 
 					<h3>Categorías</h3>
                     <%Set<String> categorias = (Set<String>) request.getAttribute("categorias");
+						int i = 0;
 						for (String categoria : categorias) {
-
+							i++;
                     %>
-                    <h4 style="display: inline-block"><span class="label label-info"><%=categoria%></span></h4>
+					<form action="Buscar" id="myform<%=i%>" method="POST" style="display: inline-block">
+						<h4><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-warning"><%=categoria%></span></a></h4>
+						<input name="categoriaSeleccionada" value="<%=categoria%>" style="display: none">
+					</form>
                         <%}%>
                 </div>
             </div>

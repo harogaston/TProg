@@ -62,8 +62,8 @@
 									i++;
 							%>
 							<div class="accordion-group">
-								<div class="panel">
-									<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
+								<div class="panel panel-warning">
+									<div class="panel-heading" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
 										<h4 class="panel-title">
 											Reserva #<%=dtR.getIdReserva()%>
 
@@ -81,9 +81,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">Detalle de la reserva</div>
 												<%	float subtotal = 0;
-													if (dtR != null) {
-														Set<DTLineaReserva> lineas = dtR.getLineasReserva();
-														float precioTotal = dtR.getPrecioTotal();
+													Set<DTLineaReserva> lineas = dtR.getLineasReserva();
 												%>
 												<!-- Tabla -->
 												<table class="table">
@@ -92,8 +90,9 @@
 															<th>Item</th>
 															<th>Tipo</th>
 															<th>Descripción</th>
+															<th>Precio unitario</th>
 															<th>Cantidad</th>
-															<th>Total</th>
+															<th>Subtotal</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -111,24 +110,17 @@
 															<td>Promoción</td>
 															<td><%=linea.getPromocion()%></td>
 															<%}%>
+															<td>$<%=linea.getPrecio()%></td>
 															<td><%=linea.getCantidad()%></td>
-															<td><%=(linea.getPrecio() * linea.getCantidad())%></td>
+															<td>$<%=(linea.getPrecio() * linea.getCantidad())%></td>
 														</tr>
 														<%
 															}
 														%>
 													</tbody>
 												</table>
-												<%
-												} else {
-												%>
-												<div class="col-md-12">No hay ninguna linea de reserva actualmente</div>
-
-												<%
-													}
-												%>
 												<div class="panel-footer text-right" style="font-weight: bold">
-													<p>Subtotal: $<%=subtotal%></p>
+													<div>Total $<%=subtotal%></div>
 
 													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
 													<!-- Trigger the modal with a button -->

@@ -39,23 +39,23 @@
 			%>
 			<div class="navbar-nav navbar-right">
 				<form action= "CerrarSesion" class="navbar-form" method="POST">
-					<button class="btn btn-warning" type="submit">Cerrar Sesión</button>
+					<button class="btn btn-warning" type="submit">
+						<i class="glyphicon glyphicon-off"></i> Cerrar Sesión
+					</button>
 				</form>
 			</div>
 			<div class="navbar-nav navbar-right">
 				<form action= "Carrito" class="navbar-form">
 					<button class="btn btn-warning" type="submit">
-						<i class="glyphicon glyphicon-shopping-cart"></i>Ver reserva actual (${cant_items})
+						<span class="badge"><%if((Integer)session.getAttribute("cant_items") > 0){%>${cant_items}<%}%></span> <i class="glyphicon glyphicon-shopping-cart"></i> Carrito
 					</button>
 				</form>
 			</div>
 			<div class="navbar-nav navbar-right">
 				<form action= "VerPerfil" class="navbar-form" method="GET">
-
-					<button class="btn btn-warning" type="submit"><i class="glyphicon glyphicon-user"></i>
-						<%//Para mostrar el nickname del usuario
-							out.print(session.getAttribute("usuario_logueado"));
-						%>
+					<button class="btn btn-warning" type="submit">
+						<i class="glyphicon glyphicon-user"></i>
+						<%=" " + session.getAttribute("usuario_logueado")%>
 					</button>
 				</form>
 			</div>
@@ -70,12 +70,16 @@
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="Password" name="password" required>
 					</div>
-					<button class="btn btn-success" type="submit">Ingresar</button>
+					<button class="btn btn-success" type="submit">
+						<i class="glyphicon glyphicon-log-in"></i> Ingresar
+					</button>
 				</form>
 			</div>
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "AltaCliente" class="navbar-form" method="POST">
-					<button class="btn btn-default" type="submit">Registrarse</button>
+					<button class="btn btn-default" type="submit">
+						<i class="glyphicon glyphicon-edit"></i> Registrarse
+					</button>
 				</form>
 			</div>
 		</div>

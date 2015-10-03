@@ -14,6 +14,12 @@ body {
 	background-color: #fff;
 }
 
+.promocion{
+	background-color: rgb(186, 155, 211);
+	color: white; 
+	border-color: rgb(154, 137, 167);
+}
+
 // Esto es del TYPEAHEAD
 .typeahead {
 	background-color: #FFFFFF;

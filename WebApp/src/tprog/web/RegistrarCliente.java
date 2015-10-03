@@ -5,7 +5,7 @@
  */
 
 package tprog.web;
-
+import org.apache.commons.validator.routines.EmailValidator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -70,8 +70,8 @@ public class RegistrarCliente extends HttpServlet {
                     // se checkean los datos del registro
                     //Verificación de email
                     
-                    //EmailValidator emailValidator = EmailValidator.getInstance(true);
-                    //boolean okEmail = emailValidator.isValid(email);
+                    EmailValidator emailValidator = EmailValidator.getInstance(true);
+                    boolean okEmail = emailValidator.isValid(mail);
 
                     //Verificacion de nickname
                     boolean okEnblanco = !id.matches("^\\s*$");
@@ -80,26 +80,20 @@ public class RegistrarCliente extends HttpServlet {
                     boolean nicknameUnico = false;
                     if (okNickname) {
                             nicknameUnico = cu.verificarNickname(id);
-                            System.out.println(id);
                     }
-                    if (nicknameUnico == true) System.out.println("averliaassasss");
-                    boolean emailUnico = false;
-                   // if (okEmail) 
+                    boolean emailUnico = true;
+                    if (okEmail) 
                             emailUnico = cu.verificarEmail(mail);
-                            if (emailUnico == true) System.out.println("555555averlia");
                     boolean okNickMail = false;
-                    if (okNickname && !emailUnico && !nicknameUnico){ // &&okEmail
+                    if (okNickname &&okEmail && !emailUnico && !nicknameUnico){ 
                         okNickMail = true;
-                        System.out.println("ave33rla");
                     }
                     if (okNickMail){ //mail y nick correctos - falta hacer con ajax
                          //Verificacion de contraseña
                         boolean okPassword1 = contrasena.length() >= 4 && contrasena.length() <= 20;
                         boolean okPassword2 = contrasena2.length() >= 4 && contrasena2.length() <= 20;
                         boolean okPassword = (okPassword1 && okPassword2 && contrasena.equals(contrasena2));
-
-                            System.out.println("averla");
-
+                        
                         // Verificación de nombre y apellido
                         boolean okNombre = !nombre.matches("^\\s*$");
                         boolean okApellido = !apellido.matches("^\\s*$");
@@ -110,9 +104,8 @@ public class RegistrarCliente extends HttpServlet {
                         //Verificación de Imagen - falta
                         boolean okImagen = true;
 
-                        if (okNombre && okApellido && okFecha && okImagen && okPassword) { // &&okEmail
+                        if (okNombre && okApellido && okFecha && okImagen && okPassword) { 
                             // doy de alta el cliente
-                            System.out.println("averla<zx");
                             DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
                             cu.ingresarDatosUsuario(dtU, false);
                             cu.altaUsuario();
@@ -120,17 +113,24 @@ public class RegistrarCliente extends HttpServlet {
 
 
                             //logueo el usuario recien registrado
-                          /*  ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+                            ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
                             cr.liberarMemoriaControlador();
                             session.setAttribute("ctrlReservas", cr);
                             nuevoEstado = EstadoSesion.OK_LOGIN;
                             request.getSession().setAttribute("usuario_logueado", id);
                             session.setAttribute("estado_sesion", nuevoEstado);
-                            session.setAttribute("cant_items", 0);*/
+                            session.setAttribute("cant_items", 0);
+                            request.getRequestDispatcher("Home").forward(request, response);
                         }
-                        request.getRequestDispatcher("/pages/registrarCliente.jsp").forward(request, response);
-                        request.getRequestDispatcher("Home").forward(request, response);
+                        else{
+                            request.getRequestDispatcher("RegistrarCliente").forward(request, response);
+                        }
+                        
+                        
                     }
+                     else{
+                            request.getRequestDispatcher("RegistrarCliente").forward(request, response);
+                        }
 
                 
             } catch (ParseException ex) {

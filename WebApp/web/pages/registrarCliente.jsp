@@ -71,6 +71,7 @@
 					</div>
                             </div> 
                             
+                            <!-- MUY INCÓMODA LA FECHA -CAMBIAR -->
                             <div class="container wrapper" style="padding: 30px">
 				<div class="form-group">
                                     <p style="padding-top: 10px">Fecha de Nacimiento</p>

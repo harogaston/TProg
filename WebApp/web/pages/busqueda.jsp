@@ -12,61 +12,12 @@
         <%@include file="templates/head.jspf" %>
         <title>Resultados de busqueda</title>
         <script src="js/vakata-jstree/dist/jstree.min.js"></script>
-        <script src="js/typeahead.js"></script>
     </head>
     <header>
         <%@include file="templates/header.jsp" %>
         <link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css">
-		<style type="text/css">
-			.typeahead {
-				background-color: #FFFFFF;
-			}
-			.typeahead:focus {
-				border: 2px solid #0097CF;
-			}
-			.tt-query {
-				box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-			}
-			.tt-hint {
-				color: rgba(0,0,0,0);
-			}
-			.tt-dropdown-menu {
-				background-color: #FFFFFF;
-				border: 1px solid rgba(0, 0, 0, 0.2);
-				border-radius: 8px;
-				box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-				margin-top: 5px;
-				//padding: 8px 0;
-				width: 315px;
-				top: 30px !important;
-			}
-			.twitter-typeahead{
-				display: block !important;
-			}
-			.tt-suggestion {
-				line-height: 24px;
-				padding: 3px 20px;
-			}
-			.tt-suggestion.tt-is-under-cursor {
-				background-color: #0097CF;
-				color: #FFFFFF;
-			}
-			.tt-suggestion p {
-				margin: 0;
-			}
-		</style>
     </header>
     <body>
-		<!--TYPEAHEAD-->
-		<script type="text/javascript">
-			$(document).ready(function () {
-				$('#tatest').typeahead({
-					name: 'accounts',
-					local: <%=request.getAttribute("terminos")%>
-				});
-			});
-		</script>
-
 		<!-- MENSAJE SI SE GENERÓ UNA RESERVA-->
 		<%if (request.getSession().getAttribute("reservaGenerada") != null && request.getSession().getAttribute("reservaGenerada").equals("OK")) {%>
 		<script type="text/javascript">

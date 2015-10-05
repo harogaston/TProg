@@ -26,8 +26,7 @@ private static final long serialVersionUID = 1L;
 
 protected void doGet(HttpServletRequest request,
 		HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();        
-	String id = request.getParameter("userName");
+	String id = request.getParameter("nickname");
         String resultado;
         ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
         if (id.matches("^\\s*$")){

@@ -77,7 +77,9 @@
 			</div>
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "NuevoCliente" class="navbar-form">
-					<button class="btn btn-default" type="submit">Registrarse</button>
+					<button class="btn btn-default" type="submit">
+						<i class="glyphicon glyphicon-edit"></i> Registrarse
+					</button>
 				</form>
 			</div>
 		</div>

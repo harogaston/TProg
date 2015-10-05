@@ -1,114 +1,81 @@
-<%-- 
-    Document   : registrarCliente
-    Created on : Oct 2, 2015, 10:24:52 PM
-    Author     : ignacio.prandi
---%>
-<%@page import="java.lang.String"%>
-<%@page import="java.util.Set"%>
 <!doctype html>
 <html>
     <head>
-    
+
         <%@include file="templates/head.jspf" %>
-        <!-- Acá se puede especificar el título de ESTA jsp de la siguiente forma:
+        <!-- ACÁ el título de ESTA página
 			<title>El título</title>
 		-->
-                
-        <!-- ACÁ includes de .js que se requieran en ESTA página  -->
+		<script src="js/validator.min.js"></script>
+		
+		<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
+		<script type="text/javascript" src="ajax.js"></script>
 		<script src="js/bootstrap-datepicker.js"></script>
-                <script src="js/bootstrap-datepicker.es.min.js"></script>
-                <script src="js/jquery-1.11.1.js" type="text/javascript"></script>
-                <script type="text/javascript" src="ajax.js"></script>
+		<script src="js/bootstrap-datepicker.es.min.js"></script>
 	</head>
     <header>
         <%@include file="templates/header.jsp" %>
-		<!-- ACA .css que se requieran en esta jsp
-		(sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
-		-->
+		<!-- ACÁ .css que se requieran en ESTA página -->
+		<link rel="stylesheet" href="css/bootstrap-datepicker3.css">
     </header>
-	<body>
-            
-		<div class="container wrapper" style="padding: 30px">
-			<form action="RegistrarCliente" class="navbar-form" method="POST">
-				
-                            <div class="container wrapper" style="padding: 30px">
+    <body>
+		<div class="container wrapper" style="padding: 50px; width: 50%">
+			<div class="row">
+				<form action="RegistrarCliente" id="alta" data-toggle="validator" role="form" method="POST">
 					<div class="form-group">
-						REGÍSTRATE
+						<label for="inputNombre" class="control-label">Nombre</label>
+						<input type="text" name= "nombre" id="inputNombre" class="form-control" placeholder="Oliver" required>
 					</div>
-                            </div> 
-                            <div class="container wrapper" style="padding: 30px">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Nickname" name= "userName" id="userName" required>
-                                               <div class="form-group">
-                                                   <%--glyphicon glyphicon-alert si falla, glyphicon glyphicon-ok si ok --%>
-                                                   <div  id="ajaxResponse"></div> 
-                                               </div>  
+						<label for="inputApellido" class="control-label">Apellido</label>
+						<input type="text" name="apellido" class="form-control" id="inputApellido" placeholder="Wood" required>
 					</div>
-                            </br>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Mail" name="mail" id="mail" required>
-                                                <div class="form-group">
-                                                    <div  id="ajaxResponse2"></div> 
-                                                </div>   
+						<label for="inputNickname" class="control-label">Nickname</label>
+						<input type="text" name="nickname" id="nickname" pattern="^[_A-z0-9]{1,}$" class="form-control" id="inputNickname" placeholder="oWood" data-error="El nickname ingresado no es correcto" required>
+						<div class="form-group">
+							<div  id="ajaxResponse"></div> 
+                        </div> 
 					</div>
-                                        
-                            </div> 
-                            <!-- NICKNAME Y MAIL SE DEBEN VERIFICAR EN EL MOMENTO CON AJAX? -->
-                            
-                            <div class="container wrapper" style="padding: 30px">
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Password" name="password" required>
+						<label for="mail" class="control-label">Email</label>
+						<input type="email" name="mail" class="form-control" id="mail" placeholder="email@domain" data-error="El email ingresado no es correcto" required>
+						<div class="form-group">
+							<div  id="ajaxResponse2"></div> 
+                        </div> 
+						<div class="help-block with-errors"></div>
 					</div>
-                            
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Confirmación de Password" name="password2" required>
+						<label for="inputPassword" class="control-label">Password</label>
+						<div class="form-group">
+							<input type="password" name="password" data-minlength="4" class="form-control" id="inputPassword" placeholder="Password" required>
+							<span class="help-block">Mínimo de 6 carácteres</span>
+						</div>
+						<div class="form-group">
+							<input type="password" name="password2" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Las claves no coinciden" placeholder="Confirmar" required>
+							<div class="help-block with-errors"></div>
+						</div>
 					</div>
-                            </div> 
-                            <div class="container wrapper" style="padding: 30px">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Nombre" name="nombre" autofocus required>
+						<label for="datepicker" class="control-label">Fecha de Nacimiento</label>
+						<input type="text" name="fNac" id="datepicker" class="form-control" style="width: 100px">
 					</div>
-                            
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Apellido" name="apellido" required>
+					<div class="form-group text-right">
+						<button type="submit" class="btn btn-primary">Enviar</button>
 					</div>
-                            </div> 
-                            <!-- IMAGEN Y FECHA PROVISORIOS -->
-                            
-                            <!-- FALTA AGREGAR LA IMAGEN DE PERFIL -->
-                            <div class="container wrapper" style="padding: 30px">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Imágen" name="imagen" >
-					</div>
-                            </div> 
-                            
-                            <!-- MUY INCÓMODA LA FECHA -CAMBIAR -->
-                            <div class="container wrapper" style="padding: 30px">
-				<div class="form-group">
-                                    <p style="padding-top: 10px">Fecha de Nacimiento</p>
-						<div class="input-daterange input-group input-sm" id="datepicker" style="width: 10%">
-							<input type="text" class="input-sm form-control" name="fNac" value="01/01/1980" style="width: 100px" required>
-                                                </div>
-                                </div>  
-                            </div>   
-                            <div class="container wrapper" style="padding: 30px">
-                                
-					<button class="btn btn-success" type="submit">Ingresar</button>
-                            </div>
-			</form>
-                            
+				</form>
+			</div>
 		</div>
 	</body>
-	<!-- ACÁ includes de .js que se requieran en ESTA página  -->
-	<%@include file="templates/footer.jspf" %> <!-- El footer ya incluye bootstrap.min.js y jquery-2.1.4.js -->
+	<%@include file="templates/footer.jspf" %>
 </html>
 
-<!--Para las fechas-->
-<script>    
+<script>
 	$('#datepicker').datepicker({
 		format: "dd/mm/yyyy",
 		language: "es",
-		orientation: "top auto",
-		autoclose: true
+		autoclose: true,
+		startView: 2,
+		endDate: "+Infinity"
 	});
 </script>

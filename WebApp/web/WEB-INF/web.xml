@@ -48,6 +48,10 @@
         <servlet-name>AjaxMail</servlet-name>
         <servlet-class>tprog.web.AjaxMail</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VerProveedores</servlet-name>
+        <servlet-class>tprog.web.VerProveedores</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -139,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>AjaxMail</servlet-name>
         <url-pattern>/AjaxMail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VerProveedores</servlet-name>
+        <url-pattern>/VerProveedores</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

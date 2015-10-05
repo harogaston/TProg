@@ -16,20 +16,16 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.validator.routines.EmailValidator;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.interfaces.ICtrlUsuarios;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
 
-@Override
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		try {
-
-			System.out.println(request.getParameterMap().toString());
-
 			// leo los datos -falta checkear que sean correctos y esas manos-
 			String id = request.getParameter("nickname");
 			String mail = request.getParameter("mail");
@@ -39,8 +35,10 @@ public class RegistrarCliente extends HttpServlet {
 			String contrasena2 = request.getParameter("password2");
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
+
 			//falta imagen
 			String imagen = request.getParameter("imagen");
+
 			//obtengo strings para las fechas, en formato dd/mm/aaaa, hay que parsearlas
 			String fechaNac = request.getParameter("fNac");
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -48,9 +46,8 @@ public class RegistrarCliente extends HttpServlet {
 			EstadoSesion nuevoEstado;
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios cu = f.getICtrlUsuarios();
-			// se checkean los datos del registro
-			//Verificación de email
 
+			//Verificación de email
 			EmailValidator emailValidator = EmailValidator.getInstance(true);
 			boolean okEmail = emailValidator.isValid(mail);
 
@@ -70,7 +67,7 @@ public class RegistrarCliente extends HttpServlet {
 			if (okNickname && okEmail && !emailUnico && !nicknameUnico) {
 				okNickMail = true;
 			}
-			if (okNickMail) { //mail y nick correctos - falta hacer con ajax
+			if (okNickMail) {
 				//Verificacion de contraseña
 				boolean okPassword1 = contrasena.length() >= 4 && contrasena.length() <= 20;
 				boolean okPassword2 = contrasena2.length() >= 4 && contrasena2.length() <= 20;
@@ -89,14 +86,7 @@ public class RegistrarCliente extends HttpServlet {
 					cu.altaUsuario();
 
 					//logueo el usuario recien registrado
-					ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-					cr.liberarMemoriaControlador();
-					session.setAttribute("ctrlReservas", cr);
-					nuevoEstado = EstadoSesion.OK_LOGIN;
-					request.getSession().setAttribute("usuario_logueado", id);
-					session.setAttribute("estado_sesion", nuevoEstado);
-					session.setAttribute("cant_items", 0);
-					request.getRequestDispatcher("Home").forward(request, response);
+					request.getRequestDispatcher("IniciarSesion").forward(request, response);
 				} else {
 					request.getRequestDispatcher("Home").forward(request, response);
 				}

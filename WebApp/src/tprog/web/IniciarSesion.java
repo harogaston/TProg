@@ -16,10 +16,7 @@ public class IniciarSesion extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-//		if (session.getAttribute("user_id") == null) {
-//            session.setAttribute("user_id", EstadoSesion.NO_LOGIN);
-//        }
-		System.out.println(request.getParameterMap().toString());
+
 		String id = request.getParameter("nickname"); //puede ser email o nickname
 		String contrasena = request.getParameter("password");
 		EstadoSesion nuevoEstado;

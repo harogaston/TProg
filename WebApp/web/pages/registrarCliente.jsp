@@ -7,9 +7,7 @@
 			<title>El título</title>
 		-->
 		<script src="js/validator.min.js"></script>
-		
-		<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
-		<script type="text/javascript" src="ajax.js"></script>
+		<script type="text/javascript" src="js/ajax.js"></script>
 		<script src="js/bootstrap-datepicker.js"></script>
 		<script src="js/bootstrap-datepicker.es.min.js"></script>
 	</head>
@@ -49,7 +47,7 @@
 						<label for="inputPassword" class="control-label">Password</label>
 						<div class="form-group">
 							<input type="password" name="password" data-minlength="4" class="form-control" id="inputPassword" placeholder="Password" required>
-							<span class="help-block">Mínimo de 6 carácteres</span>
+							<span class="help-block">Mínimo de 4 carácteres</span>
 						</div>
 						<div class="form-group">
 							<input type="password" name="password2" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Las claves no coinciden" placeholder="Confirmar" required>

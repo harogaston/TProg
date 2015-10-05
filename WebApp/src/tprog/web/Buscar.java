@@ -77,6 +77,21 @@ public class Buscar extends HttpServlet {
 				promocionesTodas = new HashSet();
 			}
 
+			// TYPEAHEAD
+			JSONArray termsArray = new JSONArray();
+			if (!serviciosTodos.isEmpty()) {
+				for (DTMinServicio dtMinS : serviciosTodos) {
+					termsArray.add(dtMinS.getIdServicio());
+				}
+			}
+			if (!promocionesTodas.isEmpty()) {
+				for (DTMinPromocion dtMinP : promocionesTodas) {
+					termsArray.add(dtMinP.getIdPromocion());
+				}
+			}
+			request.setAttribute("terminos", termsArray);
+			
+			
 			// Defino el orden
 			Collection<DTServicio> serviciosResultado;
 			Collection<DTPromocion> promocionesResultado;

@@ -35,7 +35,7 @@
 								<%if (request.getAttribute("imagen") != null) {%>
 								<img class="img-thumbnail" src="${imagen}" style="border-radius: 50%"/>
 								<%} else {%>
-								<img class="img-thumbnail" src="imagenes/sinimagen.jpeg" style="border-radius: 50%"/>
+								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpg" style="border-radius: 50%; height: 100px"/>
 								<%}%>
 							</div>
 							<div class="col-md-9">
@@ -62,8 +62,8 @@
 									i++;
 							%>
 							<div class="accordion-group">
-								<div class="panel">
-									<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
+								<div class="panel panel-warning">
+									<div class="panel-heading" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
 										<h4 class="panel-title">
 											Reserva #<%=dtR.getIdReserva()%>
 
@@ -81,9 +81,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">Detalle de la reserva</div>
 												<%	float subtotal = 0;
-													if (dtR != null) {
-														Set<DTLineaReserva> lineas = dtR.getLineasReserva();
-														float precioTotal = dtR.getPrecioTotal();
+													Set<DTLineaReserva> lineas = dtR.getLineasReserva();
 												%>
 												<!-- Tabla -->
 												<table class="table">
@@ -92,8 +90,9 @@
 															<th>Item</th>
 															<th>Tipo</th>
 															<th>Descripción</th>
+															<th>Precio unitario</th>
 															<th>Cantidad</th>
-															<th>Total</th>
+															<th>Subtotal</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -111,34 +110,27 @@
 															<td>Promoción</td>
 															<td><%=linea.getPromocion()%></td>
 															<%}%>
+															<td>$<%=linea.getPrecio()%></td>
 															<td><%=linea.getCantidad()%></td>
-															<td><%=(linea.getPrecio() * linea.getCantidad())%></td>
+															<td>$<%=(linea.getPrecio() * linea.getCantidad())%></td>
 														</tr>
 														<%
 															}
 														%>
 													</tbody>
 												</table>
-												<%
-												} else {
-												%>
-												<div class="col-md-12">No hay ninguna linea de reserva actualmente</div>
-
-												<%
-													}
-												%>
 												<div class="panel-footer text-right" style="font-weight: bold">
-													<p>Subtotal: $<%=subtotal%></p>
+													<div>Total $<%=subtotal%></div>
 
 													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
 													<!-- Trigger the modal with a button -->
-													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">
+													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
 														<i class="glyphicon glyphicon-remove"></i>
 														<span style="font-weight: bold">Cancelar</span>
 													</button>
 
 													<!-- Modal -->
-													<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
+													<div class="modal fade" id="myModal<%=String.valueOf(i)%>" role="dialog" style="text-align: center">
 														<div class="modal-dialog" style="vertical-align: middle;">
 															<!-- Modal content-->
 															<div class="modal-content">
@@ -190,7 +182,7 @@
 					dialog = modal.find('.modal-dialog');
 			modal.css('display', 'block');
 
-			// Dividing by two centers the modal exactly, but dividing by three 
+			// Dividing by two centers the modal exactly, but dividing by three
 			// or four works better for larger screens.
 			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
 		}
@@ -200,5 +192,6 @@
 		$(window).on('resize', function () {
 			$('.modal:visible').each(reposition);
 		});
+
 	});
 </script>

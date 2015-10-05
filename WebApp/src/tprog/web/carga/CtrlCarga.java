@@ -10,15 +10,20 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.json.simple.JSONArray;
 import tprog.logica.clases.Ciudad;
 import tprog.logica.clases.Pais;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTLineaReserva;
+import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
 import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
@@ -28,16 +33,55 @@ public class CtrlCarga extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("datos_cargados") == null) {
+
+		if (this.getServletConfig().getServletContext().getAttribute("datos_cargados") == null) {
 			cargarDatos();
-			request.getSession().setAttribute("datos_cargados", true);
+			this.getServletConfig().getServletContext().setAttribute("datos_cargados", true);
 		}
+		if (request.getSession().getAttribute("terminos") == null) {
+			typeaheadInit(request);
+		}
+
 		request.setAttribute("categoriaSeleccionada", null);
 		request.setAttribute("busqueda", null);
 		request.setAttribute("precio", "0");
 		request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 
+	public void typeaheadInit(HttpServletRequest request){
+			// Obtengo todos los servicios del sistema
+			Fabrica f = Fabrica.getInstance();
+			ICtrlProductos ctrlProductos = f.getICtrlProductos();
+			Set<DTMinServicio> serviciosTodos;
+			try {
+				serviciosTodos = ctrlProductos.listarServicios();
+			} catch (Exception ex) {
+				serviciosTodos = new HashSet();
+			}
+
+			// Obtengo todas las promociones del sistema
+			Set<DTMinPromocion> promocionesTodas;
+			try {
+				promocionesTodas = ctrlProductos.listarPromociones();
+			} catch (Exception ex) {
+				promocionesTodas = new HashSet();
+			}
+
+			// TYPEAHEAD
+			JSONArray termsArray = new JSONArray();
+			if (!serviciosTodos.isEmpty()) {
+				for (DTMinServicio dtMinS : serviciosTodos) {
+					termsArray.add(dtMinS.getIdServicio());
+				}
+			}
+			if (!promocionesTodas.isEmpty()) {
+				for (DTMinPromocion dtMinP : promocionesTodas) {
+					termsArray.add(dtMinP.getIdPromocion());
+				}
+			}
+			request.getSession().setAttribute("terminos", termsArray);
+	}
+	
 	public void cargarDatos() throws IOException {
 		//Alta de Clientes
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();

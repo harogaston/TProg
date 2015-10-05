@@ -41,7 +41,7 @@
 								<%if (request.getAttribute("imagen") != null) {%>
 								<img class="img-thumbnail" src="${imagen}" style="border-radius: 50%"/>
 								<%} else {%>
-								<img class="img-thumbnail" src="imagenes/sinimagen.jpeg" style="border-radius: 50%"/>
+								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpeg" style="border-radius: 50%"/>
 								<%}%>
 							</div>
 							<div class="col-md-9">
@@ -88,8 +88,8 @@
 										</div>
 										<form action="VerServicio" class="navbar-form">
 											<div class="input-group">
-												<input type="text" name="idServicio" value="<%=dt.getIdServicio()%>" style="visibility: hidden">
-												<input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="visibility: hidden">
+												<input type="text" name="idServicio" value="<%=dt.getIdServicio()%>" style="display: none">
+												<input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="display: none">
 												<button class="btn btn-info" type="submit">Ir a Servicio</button>
 											</div>
 										</form>

@@ -19,13 +19,14 @@ public class CancelarReserva extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		processRequest(request, response);
+		System.out.println("Llego hasta el servlet");
 		String idReserva = request.getParameter("idReserva");
 		ICtrlReservas ctrlReservas = (ICtrlReservas) request.getSession().getAttribute("ctrlReservas");
 		ctrlReservas.seleccionarReserva(Integer.parseInt(idReserva));
 		ctrlReservas.cambiarEstadoReserva(EstadoReserva.Cancelada);
 		request.getSession().setAttribute("reservaCancelada", "La reserva ha sido cancelada con éxito");
 		// volver a la página que llamó al servlet
-		response.sendRedirect("/WebApp/VerPerfil#reservas");
+		response.sendRedirect("/WebApp/VerPerfil");
 	}
 
 	@Override

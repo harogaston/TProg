@@ -24,27 +24,6 @@
 			$(window).load(function () {
 				$('#myModal').modal('show');
 			});
-
-			/**
-			 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
-			 */
-			$(function () {
-				function reposition() {
-					var modal = $(this),
-							dialog = modal.find('.modal-dialog');
-					modal.css('display', 'block');
-
-					// Dividing by two centers the modal exactly, but dividing by three
-					// or four works better for larger screens.
-					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
-				}
-				// Reposition when a modal is shown
-				$('.modal').on('show.bs.modal', reposition);
-				// Reposition when the window is resized
-				$(window).on('resize', function () {
-					$('.modal:visible').each(reposition);
-				});
-			});
 		</script>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
@@ -73,27 +52,6 @@
 			$(window).load(function () {
 				$('#myModal').modal('show');
 			});
-
-			/**
-			 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
-			 */
-			$(function () {
-				function reposition() {
-					var modal = $(this),
-							dialog = modal.find('.modal-dialog');
-					modal.css('display', 'block');
-
-					// Dividing by two centers the modal exactly, but dividing by three
-					// or four works better for larger screens.
-					dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
-				}
-				// Reposition when a modal is shown
-				$('.modal').on('show.bs.modal', reposition);
-				// Reposition when the window is resized
-				$(window).on('resize', function () {
-					$('.modal:visible').each(reposition);
-				});
-			});
 		</script>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
@@ -117,16 +75,14 @@
 			}
 		%>
 
-        <div class="container wrapper">
+        <div class="container">
 			<div class="row">
 
                 <!-- JSTREE -->
-                <div class="col-md-4">
-                    <div class="row">
-                        <!--
-                        con el siguiente div se crea el arbol de categorias, con la data que se generó en el servlet
-                        -->
-                        <div id="arbol_categorias" style="padding-top: 50px; overflow: scroll; min-height: 30vh; max-height: 70vh"></div>
+                <div class=" wrapper col-md-3">
+                    <div class="row" style="padding-left: 20px; padding-right: 20px">
+                        <!-- con el siguiente div se crea el arbol de categorias, con la data que se generó en el servlet -->
+                        <div id="arbol_categorias"></div>
                     </div>
                 </div>
                 <!--
@@ -137,43 +93,54 @@
                 <form action= "Buscar" id="ver_servicios_form" class="form-inline" role="form" method="POST">
                     <input type="text" name="categoriaSeleccionada" id="categoriaSeleccionada" style="display: none">
                 </form>
-				<div class="col-md-8">
+
+				<!--Espacio entre containers-->
+				<div class="col-md-1">
+				</div>
+
+				<div class="wrapper col-md-8">
 					<div class="row">
 						<div class="col-md-12">
 							<form action="Buscar" id="criterio_busqueda" role="form" method="POST">
 								<div class="btn-group pull-right" data-toggle="buttons">
 									<%if (request.getAttribute("tipo_orden") != null && ((String) request.getAttribute("tipo_orden")).equals("alfabetico")) {%>
 									<label id="btn_alfabetico" class="btn btn-default active">
-										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>A-Z
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off" checked>
+										<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span> Nombre
 									</label>
 									<label id="btn_precio" class="btn btn-default">
-										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
+										<input type="radio" name="precio" id="precio" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Precio
 									</label>
 									<%} else if (request.getAttribute("tipo_orden") != null && ((String) request.getAttribute("tipo_orden")).equals("precio")) {%>
 									<label id="btn_alfabetico" class="btn btn-default">
-										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span> Nombre
 									</label>
 									<label id="btn_precio" class="btn btn-default active">
-										<input type="radio" name="precio" id="precio" autocomplete="off" checked>Precio
+										<input type="radio" name="precio" id="precio" autocomplete="off" checked>
+										<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Precio
 									</label>
 									<%} else {%>
 									<label id="btn_alfabetico" class="btn btn-default">
-										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">A-Z
+										<input type="radio" name="alfabetico" id="alfabetico" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span> Nombre
 									</label>
 									<label id="btn_precio" class="btn btn-default">
-										<input type="radio" name="precio" id="precio" autocomplete="off">Precio
+										<input type="radio" name="precio" id="precio" autocomplete="off">
+										<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span> Precio
 									</label>
 									<%}%>
 								</div>
-								<input name="busquedaPrevia" value="<%=(String) request.getAttribute("busquedaPrevia")%>" style="visibility: hidden">
-								<input name="seleccionPrevia" value="<%=(String) request.getAttribute("categoriaPrevia")%>" style="visibility: hidden">
-								<input id="tipo_orden" name="tipo_orden" style="visibility: hidden">
+								<input name="busquedaPrevia" value="<%=(String) request.getAttribute("busquedaPrevia")%>" style="display: none">
+								<input name="seleccionPrevia" value="<%=(String) request.getAttribute("categoriaPrevia")%>" style="display: none">
+								<input id="tipo_orden" name="tipo_orden" style="display: none">
 							</form>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<h2>Servicios:</h2>
+							<h2 class="text-center">Servicios</h2>
 							<%	Set<DTServicio> servicios = (Set<DTServicio>) request.getAttribute("servicios");
 								if (!servicios.isEmpty()) {
 							%>
@@ -186,22 +153,22 @@
 								<div class="accordion-group">
 									<div class="panel">
 										<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionServicios" href="#s<%=i%>">
-											<h4 class="panel-title">
+											<h4 class="panel-title text-center">
 												<%= servicio.getIdServicio()%>
 											</h4>
 										</div>
 										<div id="s<%=i%>" class="panel-collapse collapse">
 											<div class="panel-body">
 												<%=servicio.toString().replace("\n", "<br>")%>
-												<form action="VerInfoProveedor" method="POST">
-													<button type="submit" class="btn btn-link">Proveedor: <%=servicio.getNicknameProveedor()%></button>
-													<input name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="visibility: hidden">
+												<form action="VerInfoProveedor" id="myform<%=i%>" method="POST">
+													<h4 style="text-align: center"><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-info"><%=servicio.getNicknameProveedor()%></span></a></h4>
+													<input name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
 												</form>
 											</div>
 											<form action="VerServicio" class="navbar-form">
 												<div class="input-group">
-													<input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="visibility: hidden">
-													<input type="text" name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="visibility: hidden">
+													<input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="display: none">
+													<input type="text" name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
 													<button class="btn btn-info" type="submit">Ir a Servicio</button>
 												</div>
 											</form>
@@ -213,7 +180,7 @@
 								%>
 							</div>
 							<% } else { %>
-							<p> No hay servicios para esa búsqueda </p>
+							<p class="text-center"> No hay servicios para la búsqueda realizada</p>
 							<%
 								}
 							%>
@@ -221,7 +188,7 @@
 						</div>
 						<div class="col-md-6">
 
-							<h2>Promociones:</h2>
+							<h2 class="text-center">Promociones</h2>
 
 							<%	Set<DTPromocion> promociones = (Set<DTPromocion>) request.getAttribute("promociones");
 								if (!promociones.isEmpty()) {
@@ -234,24 +201,24 @@
 								%>
 								<div class="accordion-group">
 									<div class="panel">
-										<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
-											<h4 class="panel-title">
-												<%= promocion.getIdPromocion()%>
+										<div class="panel-heading promocion" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=j%>">
+											<h4 class="panel-title text-center">
+												<span><%= promocion.getIdPromocion()%></span> <span class="badge"><%=Math.round(promocion.getDescuento())%>%</span>
 											</h4>
 										</div>
 										<div id="p<%=j%>" class="panel-collapse collapse">
 											<div class="panel-body">
 												<%=promocion.toString().replace("\n", "<br>")%>
-												<form action="VerInfoProveedor" method="POST">
-													<button type="submit" class="btn btn-link">Proveedor: <%=promocion.getNicknameProveedor()%></button>
-													<input name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="visibility: hidden">
+												<form action="VerInfoProveedor" id="myform<%=j%>" method="POST">
+													<h4 style="text-align: center"><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=j%>').submit()"><span class="label promocion"><%=promocion.getNicknameProveedor()%></span></a></h4>
+													<input name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
 												</form>
 											</div>
 											<form action="VerPromocion" class="navbar-form">
 												<div class="input-group">
-													<input type="text" name="idPromocion" value="<%=promocion.getIdPromocion()%>" style="visibility: hidden">
-													<input type="text" name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="visibility: hidden">
-													<button class="btn btn-info" type="submit">Ir a Promocion</button>
+													<input type="text" name="idPromocion" value="<%=promocion.getIdPromocion()%>" style="display: none">
+													<input type="text" name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
+													<button class="btn promocion" type="submit"><span style="color: white">Ir a Promocion</span></button>
 												</div>
 											</form>
 										</div>
@@ -262,7 +229,7 @@
 								%>
 							</div>
 							<% } else { %>
-							<p> No hay promociones para esa búsqueda </p>
+							<p class="text-center"> No hay promociones para la búsqueda realizada</p>
 							<%
 								}
 							%>
@@ -305,5 +272,26 @@
 	$('#btn_precio').on('click', function () {
 		document.getElementById('tipo_orden').value = "precio";
 		document.getElementById('criterio_busqueda').submit();
+	});
+
+	/**
+	 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+	 */
+	$(function () {
+		function reposition() {
+			var modal = $(this),
+					dialog = modal.find('.modal-dialog');
+			modal.css('display', 'block');
+
+			// Dividing by two centers the modal exactly, but dividing by three
+			// or four works better for larger screens.
+			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+		}
+		// Reposition when a modal is shown
+		$('.modal').on('show.bs.modal', reposition);
+		// Reposition when the window is resized
+		$(window).on('resize', function () {
+			$('.modal:visible').each(reposition);
+		});
 	});
 </script>

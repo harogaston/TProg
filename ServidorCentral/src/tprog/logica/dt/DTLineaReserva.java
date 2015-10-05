@@ -9,14 +9,16 @@ public class DTLineaReserva {
 	private Date fechaFin;
 	private String servicio;
 	private String promocion;
+	private String nicknameProveedor;
 	private float precio;
 
-	public DTLineaReserva(int cantidad, Date fechaInicio, Date fechaFin, String servicio, String promocion, float precio) {
+	public DTLineaReserva(int cantidad, Date fechaInicio, Date fechaFin, String servicio, String promocion, String nicknameProveedor, float precio) {
 		this.cantidad = cantidad;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.servicio = servicio;
 		this.promocion = promocion;
+		this.nicknameProveedor = nicknameProveedor;
 		this.precio = precio;
 	}
 
@@ -42,6 +44,10 @@ public class DTLineaReserva {
 
 	public float getPrecio() {
 		return this.precio;
+	}
+
+	public String getNicknameProveedor() {
+		return this.nicknameProveedor;
 	}
 
 	@Override

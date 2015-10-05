@@ -11,10 +11,11 @@
 hs_err_pid*
 /EstacionDeTrabajo/nbproject/private/
 /EstacionDeTrabajo/build/
+/EstacionDeTrabajo/dist/
 /ServidorCentral/nbproject/private/
 /ServidorCentral/build/
-/EstacionDeTrabajo/dist/
 /ServidorCentral/dist/
 /ServidorCentral/.jacocoverage/
 /WebApp/build/
 /WebApp/dist/
+/WebApp/nbproject/private/

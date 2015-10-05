@@ -6,30 +6,30 @@ import tprog.logica.controladores.CtrlUsuarios;
 
 public class Fabrica {
 
-	private static Fabrica instace = null;
+    private static Fabrica instace = null;
 
-	protected Fabrica() {
-	}
-	
-	public static Fabrica getInstance() {
-		if (instace == null) {
-			instace = new Fabrica();
-		}
-		return instace;
-	}
+    protected Fabrica() {
+    }
 
-	public ICtrlProductos getICtrlProductos() {
-		ICtrlProductos ctrl = new CtrlProductos();
-		return ctrl;
-	}
+    public static Fabrica getInstance() {
+        if (instace == null) {
+            instace = new Fabrica();
+        }
+        return instace;
+    }
 
-	public ICtrlUsuarios getICtrlUsuarios() {
-		ICtrlUsuarios ctrl = new CtrlUsuarios();
-		return ctrl;
-	}
+    public ICtrlProductos getICtrlProductos() {
+        ICtrlProductos ctrl = new CtrlProductos();
+        return ctrl;
+    }
 
-	public ICtrlReservas getICtrlReservas() {
-		ICtrlReservas ctrl = new CtrlReservas();
-		return ctrl;
-	}
+    public ICtrlUsuarios getICtrlUsuarios() {
+        ICtrlUsuarios ctrl = new CtrlUsuarios();
+        return ctrl;
+    }
+
+    public ICtrlReservas getICtrlReservas() {
+        ICtrlReservas ctrl = new CtrlReservas();
+        return ctrl;
+    }
 }

@@ -70,21 +70,16 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void seleccionarDTReserva(DTReserva dtR) {
-		this.dtR = dtR;
-	}
-
-	@Override
 	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		if (dtS == null) {
 			float precio = mp.getPrecioPromocion(dtP);
-			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, null, dtP.getIdPromocion(), precio);
+			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, null, dtP.getIdPromocion(), dtP.getNicknameP(), precio);
 			lineasReserva.add(dtLR);
 			precioTotal += precio * cant;
 		} else {
 			float precio = mp.getPrecioServicio(dtS);
-			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), null, precio);
+			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), null, dtS.getNicknameP(), precio);
 			lineasReserva.add(dtLR);
 			precioTotal += precio * cant;
 		}
@@ -110,23 +105,15 @@ public class CtrlReservas implements ICtrlReservas {
 		int dia = fechaTemp.getDate();
 		Date fecha = new Date(anio, mes, dia);
 		EstadoReserva estado = EstadoReserva.Registrada;
-		DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
-		return dtR;
+		return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
 	}
 
 	@Override
-	public void altaReserva() throws Exception {
+	public void altaReserva(DTReserva dtR) throws Exception {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		Cliente cliente = mu.getCliente(nickname);
 		ManejadorReservas mr = ManejadorReservas.getInstance();
-		if (dtS != null) {
-			mr.agregarReserva(cliente, dtR, dtS.getNicknameP());
-		} else if (dtP != null) {
-			mr.agregarReserva(cliente, dtR, dtP.getNicknameP());
-		} else {
-			throw new Exception("No se seleccionó ningún servicio o promoción");
-		}
-
+		mr.agregarReserva(cliente, dtR);
 	}
 
 	@Override

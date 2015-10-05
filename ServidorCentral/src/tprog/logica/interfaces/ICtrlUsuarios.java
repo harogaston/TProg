@@ -43,4 +43,10 @@ public interface ICtrlUsuarios {
 	public void seleccionarServicio(String idServicio);
 
 	public DTServicio infoServicio();
+
+	public boolean idCorrecta(String id);
+
+	public boolean pwCorrecta(String id, String password);
+
+	public String obtenerIdCliente(String id, String pass);
 }

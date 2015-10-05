@@ -22,7 +22,7 @@ public class Reserva {
 	private float precioTotal;
 	private Set<LineaReserva> lineasReserva;
 
-	public Reserva(Cliente cliente, DTReserva dtR, String nicknameP) throws Exception {
+	public Reserva(Cliente cliente, DTReserva dtR) throws Exception {
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
 		this.cliente = cliente;
@@ -36,11 +36,11 @@ public class Reserva {
 		LineaReserva linea; // debe declararse fuera de los if
 		for (DTLineaReserva dtLinea : dtR.getLineasReserva()) {
 			if (dtLinea.getServicio() != null) {
-				DTMinServicio dtMinS = new DTMinServicio(nicknameP, dtLinea.getServicio());
+				DTMinServicio dtMinS = new DTMinServicio(dtLinea.getNicknameProveedor(), dtLinea.getServicio());
 				Servicio s = mp.getServicio(dtMinS);
 				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
 			} else if (dtLinea.getPromocion() != null) {
-				DTMinPromocion dtMinP = new DTMinPromocion(nicknameP, dtLinea.getPromocion());
+				DTMinPromocion dtMinP = new DTMinPromocion(dtLinea.getNicknameProveedor(), dtLinea.getPromocion());
 				Promocion p = mp.getPromocion(dtMinP);
 				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
 			} else {
@@ -72,7 +72,7 @@ public class Reserva {
 
 	public void agregarLineaReserva(LineaReserva linea) {
 		lineasReserva.add(linea);
-		precioTotal += linea.getPrecio();
+		precioTotal += linea.getPrecio()*linea.getCantidad();
 	}
 
 	public void setEstadoReserva(EstadoReserva est) {

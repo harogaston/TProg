@@ -35,7 +35,7 @@ public class Promocion {
 				nuevoSet.put(dtS, servicios.get(it));
 			}
 		}
-		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.descuento, this.getTotal(), nuevoSet);
+		DTPromocion nuevoDT = new DTPromocion(this.idPromocion, this.getNicknameProveedor(), this.descuento, this.getTotal(), nuevoSet);
 		return nuevoDT;
 	}
 

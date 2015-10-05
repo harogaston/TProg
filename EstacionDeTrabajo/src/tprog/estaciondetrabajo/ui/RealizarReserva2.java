@@ -190,8 +190,7 @@ public class RealizarReserva2 extends javax.swing.JInternalFrame {
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
 		try {
 			DTReserva dtr = ctrlReservas.mostrarReservaTemporal();
-			ctrlReservas.seleccionarDTReserva(dtr);
-			ctrlReservas.altaReserva();
+			ctrlReservas.altaReserva(dtr);
 			JOptionPane.showMessageDialog(this, "Reserva creada con éxito", "Realizar Reserva", JOptionPane.INFORMATION_MESSAGE);
 			this.dispose();
 		} catch (Exception ex) {

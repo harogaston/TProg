@@ -93,28 +93,6 @@ public class ManejadorUsuarios {
 		}
 	}
 
-	public boolean verificarNickname(String nicknameU) {
-		return !proveedores.containsKey(nicknameU) && !clientes.containsKey(nicknameU);
-	}
-
-	public boolean verificarEmail(String email) {
-		if (!proveedores.isEmpty()) {
-			for (Proveedor p : proveedores.values()) {
-				if (email.equals(p.getEmail())) {
-					return false;
-				}
-			}
-		}
-		if (!clientes.isEmpty()) {
-			for (Cliente c : clientes.values()) {
-				if (email.equals(c.getEmail())) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
 	public void altaCliente(DTCliente dtC) {
 		Cliente nuevoCliente = new Cliente(dtC);
 		clientes.put(dtC.getNickname(), nuevoCliente);
@@ -140,4 +118,65 @@ public class ManejadorUsuarios {
 	public Map<String, Proveedor> getProveedores() {
 		return this.proveedores;
 	}
+
+	public boolean idCorrecta(String id) {
+		boolean nickCorrecto = verificarNickname(id);
+		boolean mailCorrecto = verificarEmail(id);
+		//uno de los dos debe ser verdadero para que la función evalúe verdadero
+		return nickCorrecto || mailCorrecto;
+	}
+
+	public boolean verificarNickname(String nicknameU) {
+		if (nicknameU == null) {
+			return false;
+		} else {
+			return clientes.containsKey(nicknameU);
+		}
+	}
+
+	public boolean verificarEmail(String email) {
+		if (email == null) {
+			return false;
+		}
+		for (Cliente c : clientes.values()) {
+			if (email.equals(c.getEmail())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean pwCorrecta(String id, String password) {
+		//intento encontrar al cliente por id
+		Cliente cliente = clientes.get(id);
+		if (cliente == null) { //si no encontré por id
+			//pruebo por email
+			for (Cliente c : clientes.values()) {
+				if (c.getEmail().equals(id)) {
+					cliente = c;
+					break;
+				}
+			}
+		}
+		//si tras buscarlo no encontré, devuelvo false
+		if (cliente == null) {
+			return false;
+		} else {
+			return cliente.getPassword().equals(password);
+		}
+	}
+
+	public String obtenerIdCliente(String id, String pass) {
+		Cliente cliente;
+		cliente = clientes.get(id);
+		if (cliente == null) { //en caso de que sea un email (no se encontró por nickname)
+			for (Cliente c : clientes.values()) {
+				if (c.getEmail().equals(id) && c.getPassword().equals(pass)) {
+					return c.getNickname();
+				}
+			}
+		}
+		return id; //en cualquier otro caso (no email)
+	}
+
 }

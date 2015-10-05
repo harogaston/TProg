@@ -1,0 +1,59 @@
+.container {
+	width: 70%;
+}
+
+body {
+	background-color: #f4f4f4;
+}
+
+.wrapper {
+	border: 1px #e4e4e4 solid;
+	padding: 20px;
+	border-radius: 4px;
+	box-shadow: 0 0 6px #ccc;
+	background-color: #fff;
+}
+
+.promocion{
+	background-color: rgb(186, 155, 211);
+	color: white; 
+	border-color: rgb(154, 137, 167);
+}
+
+// Esto es del TYPEAHEAD
+.typeahead {
+	background-color: #FFFFFF;
+}
+.typeahead:focus {
+	border: 2px solid #0097CF;
+}
+.tt-query {
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+.tt-hint {
+	color: rgba(0,0,0,0);
+}
+.tt-dropdown-menu {
+	background-color: #FFFFFF;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 8px;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	margin-top: 5px;
+	//padding: 8px 0;
+	width: 315px;
+	top: 30px !important;
+}
+.twitter-typeahead{
+	display: block !important;
+}
+.tt-suggestion {
+	line-height: 24px;
+	padding: 3px 20px;
+}
+.tt-suggestion.tt-is-under-cursor {
+	background-color: #0097CF;
+	color: #FFFFFF;
+}
+.tt-suggestion p {
+	margin: 0;
+}

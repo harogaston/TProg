@@ -50,7 +50,7 @@ public class RegistrarCliente extends HttpServlet {
                     
                     // leo los datos -falta checkear que sean correctos y esas manos-
                     
-                    String id = request.getParameter("nickname"); 
+                    String id = request.getParameter("userName"); 
                     String mail = request.getParameter("mail"); 
                     // el checkeo de mail y nick es "en tiempo real" con ajax -falta-
                     
@@ -123,13 +123,13 @@ public class RegistrarCliente extends HttpServlet {
                             request.getRequestDispatcher("Home").forward(request, response);
                         }
                         else{
-                            request.getRequestDispatcher("RegistrarCliente").forward(request, response);
+                            request.getRequestDispatcher("Home").forward(request, response);
                         }
                         
                         
                     }
                      else{
-                            request.getRequestDispatcher("RegistrarCliente").forward(request, response);
+                            request.getRequestDispatcher("Home").forward(request, response);
                         }
 
                 

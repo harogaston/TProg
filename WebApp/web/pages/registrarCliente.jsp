@@ -8,6 +8,7 @@
 <!doctype html>
 <html>
     <head>
+    
         <%@include file="templates/head.jspf" %>
         <!-- Acá se puede especificar el título de ESTA jsp de la siguiente forma:
 			<title>El título</title>
@@ -15,7 +16,9 @@
                 
         <!-- ACÁ includes de .js que se requieran en ESTA página  -->
 		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/bootstrap-datepicker.es.min.js"></script>
+                <script src="js/bootstrap-datepicker.es.min.js"></script>
+                <script src="js/jquery-1.11.1.js" type="text/javascript"></script>
+                <script type="text/javascript" src="ajax.js"></script>
 	</head>
     <header>
         <%@include file="templates/header.jsp" %>
@@ -24,9 +27,9 @@
 		-->
     </header>
 	<body>
-
+            
 		<div class="container wrapper" style="padding: 30px">
-			<form action= "RegistrarCliente" class="navbar-form" method="POST">
+			<form action="RegistrarCliente" class="navbar-form" method="POST">
 				
                             <div class="container wrapper" style="padding: 30px">
 					<div class="form-group">
@@ -35,12 +38,20 @@
                             </div> 
                             <div class="container wrapper" style="padding: 30px">
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Nickname" name="nickname" autofocus required>
+						<input type="text" class="form-control" placeholder="Nickname" name= "userName" id="userName" required>
+                                               <div class="form-group">
+                                                   <%--glyphicon glyphicon-alert si falla, glyphicon glyphicon-ok si ok --%>
+                                                   <div  id="ajaxResponse"></div> 
+                                               </div>  
 					</div>
-                            
+                            </br>
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Mail" name="mail" required>
+						<input type="text" class="form-control" placeholder="Mail" name="mail" id="mail" required>
+                                                <div class="form-group">
+                                                    <div  id="ajaxResponse2"></div> 
+                                                </div>   
 					</div>
+                                        
                             </div> 
                             <!-- NICKNAME Y MAIL SE DEBEN VERIFICAR EN EL MOMENTO CON AJAX? -->
                             
@@ -81,6 +92,7 @@
                                 </div>  
                             </div>   
                             <div class="container wrapper" style="padding: 30px">
+                                
 					<button class="btn btn-success" type="submit">Ingresar</button>
                             </div>
 			</form>
@@ -92,7 +104,7 @@
 </html>
 
 <!--Para las fechas-->
-<script>
+<script>    
 	$('#datepicker').datepicker({
 		format: "dd/mm/yyyy",
 		language: "es",

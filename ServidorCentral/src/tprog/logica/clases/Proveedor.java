@@ -55,12 +55,12 @@ public class Proveedor extends Usuario {
 		return nuevoSet;
 	}
 
-	public void addServicio(Servicio s) {
-		servicios.put(s.getIdServicio(), s);
+	public void addServicio(Servicio service) {
+		servicios.put(service.getIdServicio(), service);
 	}
 
-	public void addPromocion(Promocion p) {
-		promociones.put(p.getIdPromocion(), p);
+	public void addPromocion(Promocion promo) {
+		promociones.put(promo.getIdPromocion(), promo);
 	}
 
 	public void setEmpresa(String Empresa) {

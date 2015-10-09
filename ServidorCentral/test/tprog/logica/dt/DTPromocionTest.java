@@ -58,8 +58,8 @@ public class DTPromocionTest {
 	public void testGetServicios() {
 		System.out.println("getServicios");
 		DTPromocion instance = new DTPromocion("id", null, 0.25F, 550.0F, set);
-		HashMap<DTMinServicio, Integer> expResult = set;
-		HashMap<DTMinServicio, Integer>  result = instance.getServicios();
+		Map<DTMinServicio, Integer> expResult = set;
+		Map<DTMinServicio, Integer>  result = instance.getServicios();
 		assertEquals(expResult.size(), result.size());
 	}
 }

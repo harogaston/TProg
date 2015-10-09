@@ -32,8 +32,8 @@ public class DTMinProveedor {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		DTMinProveedor dt = (DTMinProveedor) o;
-		return ((this.email.equals(dt.getEmail())) && (this.nickname.equals(dt.getNickname())) && (this.empresa.equals(dt.getEmpresa())));
+	public boolean equals(Object objeto) {
+		DTMinProveedor dataP = (DTMinProveedor) objeto;
+		return ((this.email.equals(dataP.getEmail())) && (this.nickname.equals(dataP.getNickname())) && (this.empresa.equals(dataP.getEmpresa())));
 	}
 }

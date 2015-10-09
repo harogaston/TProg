@@ -46,8 +46,8 @@ public class LineaReserva {
 		return this.Precio;
 	}
 
-	public void setCantidad(int c) {
-		this.Cantidad = c;
+	public void setCantidad(int cantidad) {
+		this.Cantidad = cantidad;
 	}
 
 	public void setFechaInicio(Date finicio) {
@@ -58,22 +58,22 @@ public class LineaReserva {
 		this.FechaFin = ffin;
 	}
 
-	public void setServicio(Servicio s) {
-		this.servicio = s;
+	public void setServicio(Servicio service) {
+		this.servicio = service;
 	}
 
-	public void setPromocion(Promocion p) {
-		this.promocion = p;
+	public void setPromocion(Promocion promo) {
+		this.promocion = promo;
 	}
 
 	public DTLineaReserva crearDT() {
-		DTLineaReserva dt = null;
+		DTLineaReserva dtL = null;
 		if ((this.servicio == null) && (this.promocion != null)) {
-			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.promocion.getNicknameProveedor(), this.Precio);
+			dtL = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.promocion.getNicknameProveedor(), this.Precio);
 		} else if ((this.servicio != null) && (this.promocion == null)) {
-			dt = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), null, this.servicio.getNicknameProveedor(), this.Precio);
+			dtL = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), null, this.servicio.getNicknameProveedor(), this.Precio);
 		}
-		return dt;
+		return dtL;
 	}
 
 }

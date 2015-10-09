@@ -49,14 +49,14 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public Set<DTMinPromocion> listarPromociones() throws Exception {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		return mp.listarPromociones();
+		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
+		return manejadorP.listarPromociones();
 	}
 
 	@Override
 	public Set<DTMinServicio> listarServicios() throws Exception {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
-		return mp.listarServicios();
+		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
+		return manejadorP.listarServicios();
 	}
 
 	@Override
@@ -71,14 +71,14 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal) {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
+		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
 		if (dtS == null) {
-			float precio = mp.getPrecioPromocion(dtP);
+			float precio = manejadorP.getPrecioPromocion(dtP);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, null, dtP.getIdPromocion(), dtP.getNicknameP(), precio);
 			lineasReserva.add(dtLR);
 			precioTotal += precio * cant;
 		} else {
-			float precio = mp.getPrecioServicio(dtS);
+			float precio = manejadorP.getPrecioServicio(dtS);
 			DTLineaReserva dtLR = new DTLineaReserva(cant, fInicial, fFinal, dtS.getIdServicio(), null, dtS.getNicknameP(), precio);
 			lineasReserva.add(dtLR);
 			precioTotal += precio * cant;
@@ -87,14 +87,14 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarServiciosProveedor(nicknameP);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.listarServiciosProveedor(nicknameP);
 	}
 
 	@Override
 	public Set<DTMinPromocion> listarPromocionesProveedor() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarPromocionesProveedor(nicknameP);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.listarPromocionesProveedor(nicknameP);
 	}
 
 	@Override
@@ -110,16 +110,16 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public void altaReserva(DTReserva DTR) throws Exception {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		Cliente cliente = mu.getCliente(nickname);
-		ManejadorReservas mr = ManejadorReservas.getInstance();
-		mr.agregarReserva(cliente, DTR);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		Cliente cliente = manejadorU.getCliente(nickname);
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		manejadorR.agregarReserva(cliente, DTR);
 	}
 
 	@Override
 	public Set<DTMinReserva> listarReservas() throws Exception {
-		ManejadorReservas mr = ManejadorReservas.getInstance();
-		return mr.listarReservas();
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		return manejadorR.listarReservas();
 	}
 
 	@Override
@@ -129,27 +129,27 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public DTReserva infoReserva() {
-		ManejadorReservas mr = ManejadorReservas.getInstance();
-		dtR = mr.infoReserva(idReserva);
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		dtR = manejadorR.infoReserva(idReserva);
 		return dtR;
 	}
 
 	@Override
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {
-		ManejadorReservas mr = ManejadorReservas.getInstance();
-		return mr.cambiarEstadoReserva(idReserva, nuevoEstado);
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		return manejadorR.cambiarEstadoReserva(idReserva, nuevoEstado);
 	}
 
 	@Override
 	public boolean eliminarReserva() {
-		ManejadorReservas mr = ManejadorReservas.getInstance();
-		return mr.eliminarReserva(idReserva);
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		return manejadorR.eliminarReserva(idReserva);
 	}
 
 	@Override
 	public EstadoReserva getEstadoReserva() {
-		ManejadorReservas mr = ManejadorReservas.getInstance();
-		return mr.getEstadoReserva(this.idReserva);
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		return manejadorR.getEstadoReserva(this.idReserva);
 	}
 
 	@Override

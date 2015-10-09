@@ -51,12 +51,12 @@ public class DTReserva implements Comparable<DTReserva> {
 				+ "\n" + "\n";
 		if (!lineasReserva.isEmpty()) {
 			output = output.concat("Lineas de reserva: " + "\n" + "\n");
-			int i = 1;
-			for (DTLineaReserva dt : lineasReserva) {
-				if (dt != null) {
-					output = output.concat("Linea " + Integer.toString(i) + "\n" + "\n");
-					output = output.concat(dt.toString() + "\n");
-					i++;
+			int iterador = 1;
+			for (DTLineaReserva dtL : lineasReserva) {
+				if (dtL != null) {
+					output = output.concat("Linea " + Integer.toString(iterador) + "\n" + "\n");
+					output = output.concat(dtL.toString() + "\n");
+					iterador++;
 				}
 			}
 		}
@@ -64,11 +64,11 @@ public class DTReserva implements Comparable<DTReserva> {
 	}
 
 	@Override
-	public int compareTo(DTReserva o) {
-		if (this.idReserva == o.getIdReserva()) {
-			return (this.fCreacion.toString().compareToIgnoreCase(o.getFCreacion().toString()));
+	public int compareTo(DTReserva object) {
+		if (this.idReserva == object.getIdReserva()) {
+			return (this.fCreacion.toString().compareToIgnoreCase(object.getFCreacion().toString()));
 		} else {
-			return idReserva - o.getIdReserva();
+			return idReserva - object.getIdReserva();
 		}
 	}
 

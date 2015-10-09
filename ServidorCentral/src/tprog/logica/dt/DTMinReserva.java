@@ -30,9 +30,9 @@ public class DTMinReserva {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		DTMinReserva dt = (DTMinReserva) o;
-		return (this.idReserva == dt.idReserva) && this.fechaCreacion.equals(dt.fechaCreacion);
+	public boolean equals(Object objeto) {
+		DTMinReserva dtMinR = (DTMinReserva) objeto;
+		return (this.idReserva == dtMinR.idReserva) && this.fechaCreacion.equals(dtMinR.fechaCreacion);
 	}
 
 }

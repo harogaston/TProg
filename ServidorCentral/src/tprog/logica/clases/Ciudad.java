@@ -7,8 +7,8 @@ public class Ciudad {
 	private String idCiudad;
 	private Pais pais;
 
-	public Ciudad(String id) {
-		this.idCiudad = id;
+	public Ciudad(String nombreCiudad) {
+		this.idCiudad = nombreCiudad;
 	}
 
 	public String getIdCiudad() {

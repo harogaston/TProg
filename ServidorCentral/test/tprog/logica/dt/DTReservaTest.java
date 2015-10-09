@@ -22,14 +22,14 @@ public class DTReservaTest {
     @Before
     public void setUp() {
         fecha = new Date();
-        DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, null, 10.0F);
+        DTLineaReserva linea1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, null, 10.0F);
 //        DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", 20.0F);
 //        DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, 30.0F);
         set = new HashSet();
-        set.add(l1);
+        set.add(linea1);
 //        set.add(l2);
 //        set.add(l3);
-        float precioTotal = l1.getPrecio();
+        float precioTotal = linea1.getPrecio();
         instance = new DTReserva(15, fecha, EstadoReserva.Pagada, precioTotal, set);
     }
 

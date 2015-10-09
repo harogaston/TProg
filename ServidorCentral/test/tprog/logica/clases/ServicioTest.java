@@ -139,8 +139,8 @@ public class ServicioTest {
 
 		Set<String> expResult = new HashSet();
 		expResult.add("idCategoria");
-		Categoria c = new Simple("idCategoria");
-		boolean random = instance.agregarCategoria(c);
+		Categoria categoria = new Simple("idCategoria");
+		boolean random = instance.agregarCategoria(categoria);
 		Set<String> result = instance.listarCategorias();
 		assertEquals(expResult, result);
                 assertEquals(true, random);
@@ -154,9 +154,9 @@ public class ServicioTest {
 	@Test
 	public void testAgregarCategoria() {
 		System.out.println("agregarCategoria");
-		Categoria c = new Simple("idCategoria");
+		Categoria categoria = new Simple("idCategoria");
 		boolean expResult = true;
-		boolean result = instance.agregarCategoria(c);
+		boolean result = instance.agregarCategoria(categoria);
 		assertEquals(expResult, result);
 		// TODO review the generated test code and remove the default call to fail.
 
@@ -168,9 +168,9 @@ public class ServicioTest {
 	@Test
 	public void testQuitarCategoria() {
 		System.out.println("quitarCategoria");
-		Categoria c = new Simple("idCategoria");
-		boolean entro = instance.agregarCategoria(c);
-		Categoria categoria_a_quitar = c;
+		Categoria categoria = new Simple("idCategoria");
+		boolean entro = instance.agregarCategoria(categoria);
+		Categoria categoria_a_quitar = categoria;
 
 		boolean expResult = true;
 		boolean result = instance.quitarCategoria(categoria_a_quitar);
@@ -200,9 +200,9 @@ public class ServicioTest {
 	@Test
 	public void testSetIdServicio() {
 		System.out.println("setIdServicio");
-		String id = "";
-		instance.setIdServicio(id);
-		assertEquals(id, instance.getIdServicio());
+		String idS = "";
+		instance.setIdServicio(idS);
+		assertEquals(idS, instance.getIdServicio());
 		// TODO review the generated test code and remove the default call to fail.
 
 	}

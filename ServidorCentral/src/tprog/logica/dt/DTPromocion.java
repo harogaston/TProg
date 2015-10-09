@@ -45,7 +45,6 @@ public class DTPromocion implements Comparable<DTPromocion> {
 				+ "\n" + "Descuento: " + Float.toString(descuento)
 				+ "\n" + "Total: " + Float.toString(this.total)
 				+ "\n" + "Servicios: " + "\n";
-		int i = 1;
 		for (Map.Entry<DTMinServicio, Integer> par : servicios.entrySet()) {
 			output = output.concat("ID de servicio: " + par.getKey().getIdServicio() + "\n" + "Cantidad: "
 					+ Integer.toString(par.getValue()) + "\n");

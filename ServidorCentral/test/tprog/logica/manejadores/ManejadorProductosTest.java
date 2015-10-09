@@ -41,7 +41,7 @@ public class ManejadorProductosTest {
 		p.agregarCiudad(c);
 		instance.agregarPais(p);
 		instance.altaCategoria("SubCat", null);
-		DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
+		DTServicio dtS = new DTServicio("Blue Beatle", "Just an old blue beatle","Harry", 50,
 				new HashSet(), new DTUbicacion("Chicago", "USA"), null);
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		DTProveedor dtP = new DTProveedor("Harry Dresden", "pass", "Harry", "Dresden", "noUsoEmail@protonmail.com",
@@ -288,7 +288,7 @@ public class ManejadorProductosTest {
 	public void testInfoServicio() {
 		System.out.println("infoServicio");
 		//Se compara con el Servicio dado de Alta en SetUp
-		DTServicio expResult = new DTServicio("Blue Beatle", "Just an old blue beatle", 50,
+		DTServicio expResult = new DTServicio("Blue Beatle", "Just an old blue beatle","Harry", 50,
 				new HashSet(), new DTUbicacion("Chicago", "USA"), null);
 		DTServicio result = instance.infoServicio(new DTMinServicio("Harry Dresden", "Blue Beatle"));
 		assertEquals(expResult.toString(), result.toString());
@@ -657,7 +657,7 @@ public class ManejadorProductosTest {
 		DTMinServicio dtS = new DTMinServicio(nicknameProv, "Blue Beatle");
 		HashMap<DTMinServicio, Integer> serv = new HashMap<>();
 		serv.put(dtS, 1);
-		DTPromocion expResult = new DTPromocion(idPromocion, 20, 40, serv);
+		DTPromocion expResult = new DTPromocion(idPromocion,"Harry", 20, 40, serv);
 		DTPromocion result = instance.infoPromocion(dtP);
 		assertEquals(expResult.toString(), result.toString());
 	}

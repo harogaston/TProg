@@ -43,11 +43,11 @@ public class CtrlUsuariosTest {
 		ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge1", "pass", "N1", "A1", "jorge1@gmail.com", null, new Date(1992, 11, 10)), false);
 		ctrlUsuarios.altaUsuario();
 		ctrlUsuarios.seleccionarCliente("jorge1");
-		try {
+		/*try {
 			DTCliente dtJorge1 = ctrlUsuarios.infoCliente();
 		} catch (Exception ex) {
 			Logger.getLogger(CtrlUsuariosTest.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		}*/
 		ctrlUsuarios.verificarNickname("jorge2");
 		ctrlUsuarios.verificarEmail("jorge2@gmail.com");
 		ctrlUsuarios.ingresarDatosUsuario(new DTUsuario("jorge2", "pass", "N1", "A1", "jorge2@gmail.com", null, new Date(1992, 11, 10)), true);

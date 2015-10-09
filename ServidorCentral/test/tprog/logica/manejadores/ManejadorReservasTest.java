@@ -47,7 +47,7 @@ public class ManejadorReservasTest {
 	public void setUp() throws Exception {
 		instance = ManejadorReservas.getInstance();
 		Date fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", "", 10);
+		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null,"jorge", 10);
                // DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, "", "idPromocion2", 20);
 		//DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", "", 30);
 		set = new HashSet();
@@ -63,9 +63,8 @@ public class ManejadorReservasTest {
 		DTCliente dtC = new DTCliente("alguien", "pass", "alg", "apellido", "email", "imagen", fecha, null);
 		jorge = new Cliente(dtC);
 
-		instance.agregarReserva(jorge, dtr1, "jorge");
+		instance.agregarReserva(jorge, dtr1);
 		Set<DTMinReserva> lista = instance.listarReservas();
-		Iterator<DTMinReserva> it;
 		DTMinReserva dt = lista.iterator().next();
 		aux = dt.getIdReserva();
 		dtr1 = new DTReserva(aux, fecha, EstadoReserva.Registrada, 500, set);
@@ -149,7 +148,7 @@ public class ManejadorReservasTest {
 	public void testAgregarReserva() throws Exception {
 		System.out.println("agregarReserva");
 
-		instance.agregarReserva(jorge, dtr1, "jorge");
+		instance.agregarReserva(jorge, dtr1);
 		// TODO review the generated test code and remove the default call to fail.
 		assertTrue(instance.getReservas().containsKey(aux + 1));
 	}

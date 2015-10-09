@@ -4,7 +4,6 @@
 package tprog.logica.dt;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,7 +13,7 @@ import org.junit.Test;
  */
 public class DTUbicacionTest {
 
-	DTUbicacion instance;
+	private DTUbicacion instance;
 
 	public DTUbicacionTest() {
 	}

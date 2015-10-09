@@ -65,14 +65,14 @@ public class ServicioTest {
 
 		DTServicio expResult = new DTServicio("idServicio", "descripcion", null, 50, null, origen.crearDT(), null);
 		DTServicio result = instance.crearDT();
-		boolean prim = (expResult.toString().equals(result.toString()));
+		boolean prim = expResult.toString().equals(result.toString());
 		destino = new Ciudad("Colonia");
 		Pais pais = new Pais("Brasil");
 		destino.setPais(pais);
 		instance.setDestino(destino);
 		DTServicio expResult2 = new DTServicio("idServicio", "descripcion", null, 50, null, origen.crearDT(), destino.crearDT());
 		DTServicio result2 = instance.crearDT();
-		boolean prim2 = (expResult2.toString().equals(result2.toString()));
+		boolean prim2 = expResult2.toString().equals(result2.toString());
 		assertEquals(prim, prim2);
 		// TODO review the generated test code and remove the default call to fail.
 

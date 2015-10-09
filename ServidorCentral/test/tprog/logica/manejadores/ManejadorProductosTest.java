@@ -54,12 +54,12 @@ public class ManejadorProductosTest {
 
 	@After
 	public void tearDown() {
-		instance.categorias = new HashMap();
-		instance.servicios = new HashMap();
-		instance.promociones = new HashMap();
-		instance.ubicaciones = new HashMap();
-		instance.root = new Simple("Categorias");
-		instance.categorias.put(instance.root.getIdCategoria(), instance.root);
+		instance.setCategorias(new HashMap());
+		instance.setServicios(new HashMap());
+		instance.setPromociones(new HashMap());
+		instance.setUbicaciones(new HashMap());
+		instance.setRoot(new Simple("Categorias"));
+		instance.getCategorias().put(instance.getRoot().getIdCategoria(), instance.getRoot());
 	}
 
 	/**
@@ -79,9 +79,9 @@ public class ManejadorProductosTest {
 	public void testAgregarPais() {
 		System.out.println("agregarPais");
 		//Se agregó Pais "USA" en el SetUp
-		assertTrue(!instance.ubicaciones.isEmpty());
-		assertEquals(1, instance.ubicaciones.size());
-		assertTrue(instance.ubicaciones.containsKey("USA"));
+		assertTrue(!instance.getUbicaciones().isEmpty());
+		assertEquals(1, instance.getUbicaciones().size());
+		assertTrue(instance.getUbicaciones().containsKey("USA"));
 	}
 
 	/**
@@ -153,10 +153,10 @@ public class ManejadorProductosTest {
 		System.out.println("altaCategoriaToRoot");
 		String idCategoria = "NewCategoria";
 		instance.altaCategoria(idCategoria, null);
-		assertEquals(3, instance.categorias.size());
-		assertTrue(instance.categorias.containsKey("NewCategoria"));
-		Categoria newC = instance.categorias.get("NewCategoria");
-		Categoria root = instance.categorias.get("Categorias");
+		assertEquals(3, instance.getCategorias().size());
+		assertTrue(instance.getCategorias().containsKey("NewCategoria"));
+		Categoria newC = instance.getCategorias().get("NewCategoria");
+		Categoria root = instance.getCategorias().get("Categorias");
 		assertTrue(root.esCategoriaPadre());
 		assertFalse(root.esCategoriaSimple());
 		assertTrue(newC.esCategoriaSimple());
@@ -170,10 +170,10 @@ public class ManejadorProductosTest {
 	public void testAltaCategoria2() {
 		System.out.println("altaCategoria");
 		instance.altaCategoria("BabyCategoria", "SubCat");
-		assertEquals(3, instance.categorias.size());
-		assertTrue(instance.categorias.containsKey("BabyCategoria"));
-		Categoria baby = instance.categorias.get("BabyCategoria");
-		Categoria newC = instance.categorias.get("SubCat");
+		assertEquals(3, instance.getCategorias().size());
+		assertTrue(instance.getCategorias().containsKey("BabyCategoria"));
+		Categoria baby = instance.getCategorias().get("BabyCategoria");
+		Categoria newC = instance.getCategorias().get("SubCat");
 		assertTrue(newC.esCategoriaPadre());
 		assertFalse(newC.esCategoriaSimple());
 		assertTrue(baby.esCategoriaSimple());
@@ -248,8 +248,8 @@ public class ManejadorProductosTest {
 	public void testAltaServicio() {
 		System.out.println("altaServicio");
 		//Se creó un Servicio en el SetUp        
-		assertTrue(instance.servicios.containsKey("Harry Dresden"));
-		assertTrue(instance.servicios.get("Harry Dresden").containsKey("Blue Beatle"));
+		assertTrue(instance.getServicios().containsKey("Harry Dresden"));
+		assertTrue(instance.getServicios().get("Harry Dresden").containsKey("Blue Beatle"));
 		assertFalse(instance.idServicioDisponible("Blue Beatle", "Harry Dresden"));
 	}
 
@@ -320,7 +320,7 @@ public class ManejadorProductosTest {
 		DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
 		String descripcion = "Nueva Descripción";
 		instance.cambiarDescripcion(dtMinS, descripcion);
-		String result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getDescripcion();
+		String result = instance.getServicios().get("Harry Dresden").get("Blue Beatle").getDescripcion();
 		assertEquals(descripcion, result);
 	}
 
@@ -334,7 +334,7 @@ public class ManejadorProductosTest {
 		DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
 		Float precio = 55.5F;
 		instance.cambiarPrecio(dtMinS, precio);
-		Float result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getPrecio();
+		Float result = instance.getServicios().get("Harry Dresden").get("Blue Beatle").getPrecio();
 		assertEquals(precio, result);
 	}
 
@@ -358,7 +358,7 @@ public class ManejadorProductosTest {
 		//Se modifica el Servicio creado en SetUp
 		DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
 		instance.agregarImagen(dtMinS, "Beatle");
-		Set<String> result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getImagenes();
+		Set<String> result = instance.getServicios().get("Harry Dresden").get("Blue Beatle").getImagenes();
 		assertFalse(result.isEmpty());
 		assertEquals(1, result.size());
 		assertTrue(result.contains("Beatle"));
@@ -385,7 +385,7 @@ public class ManejadorProductosTest {
 	public void testAgregarImagenFail2() throws Exception {
 		System.out.println("agregarImagenFail2");
 		try {
-			instance.servicios = new HashMap();
+			instance.setServicios(new HashMap());
 			DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Red Beatle");
 			instance.agregarImagen(dtMinS, "Beatle");
 		} catch (Exception e) {
@@ -403,7 +403,7 @@ public class ManejadorProductosTest {
 		DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
 		instance.agregarImagen(dtMinS, "Beatle");
 		instance.quitarImagen(dtMinS, "Beatle");
-		Set<String> result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getImagenes();
+		Set<String> result = instance.getServicios().get("Harry Dresden").get("Blue Beatle").getImagenes();
 		assertTrue(result.isEmpty());
 	}
 
@@ -428,7 +428,7 @@ public class ManejadorProductosTest {
 	public void testquitarImagenFail2() throws Exception {
 		System.out.println("quitarImagenFail2");
 		try {
-			instance.servicios = new HashMap();
+			instance.setServicios(new HashMap());
 			DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Red Beatle");
 			instance.quitarImagen(dtMinS, "Beatle");
 		} catch (Exception e) {
@@ -450,7 +450,7 @@ public class ManejadorProductosTest {
 		instance.agregarPais(p);
 
 		instance.cambiarOrigen(dtMinS, new DTUbicacion("FairyLand", "The NeverNever"));
-		Ciudad result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getOrigen();
+		Ciudad result = instance.getServicios().get("Harry Dresden").get("Blue Beatle").getOrigen();
 		assertEquals(c, result);
 	}
 
@@ -462,9 +462,9 @@ public class ManejadorProductosTest {
 		System.out.println("cambiarDestino");
 		//Se modifica el Servicio creado en SetUp con Destino = null
 		DTMinServicio dtMinS = new DTMinServicio("Harry Dresden", "Blue Beatle");
-		Ciudad c = instance.ubicaciones.get("USA").getCiudades().get("Chicago");
+		Ciudad c = instance.getUbicaciones().get("USA").getCiudades().get("Chicago");
 		instance.cambiarDestino(dtMinS, new DTUbicacion("Chicago", "USA"));
-		Ciudad result = instance.servicios.get("Harry Dresden").get("Blue Beatle").getDestino();
+		Ciudad result = instance.getServicios().get("Harry Dresden").get("Blue Beatle").getDestino();
 		assertEquals(c, result);
 	}
 
@@ -575,7 +575,7 @@ public class ManejadorProductosTest {
 		System.out.println("getServicio");
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		Servicio s = new Servicio("Blue Beatle", "Just an old blue beatle", 50,
-				new HashSet(), instance.ubicaciones.get("USA").getCiudades().get("Chicago"),
+				new HashSet(), instance.getUbicaciones().get("USA").getCiudades().get("Chicago"),
 				null, mu.getProveedor("Harry Dresden"));
 		Servicio result = instance.getServicio(new DTMinServicio("Harry Dresden", "Blue Beatle"));
 		assertEquals(s.toString(), result.toString());
@@ -621,9 +621,9 @@ public class ManejadorProductosTest {
 		servicios.add("Blue Beatle");
 		instance.altaPromocion(idPromocion, descuento, nicknameProv, servicios);
 
-		assertFalse(instance.promociones.isEmpty());
-		assertTrue(instance.promociones.containsKey("Harry Dresden"));
-		assertTrue(instance.promociones.get("Harry Dresden").containsKey("Blue Opportunity"));
+		assertFalse(instance.getPromociones().isEmpty());
+		assertTrue(instance.getPromociones().containsKey("Harry Dresden"));
+		assertTrue(instance.getPromociones().get("Harry Dresden").containsKey("Blue Opportunity"));
 		Promocion p = instance.getPromocion(new DTMinPromocion("Harry Dresden", "Blue Opportunity"));
 		assertEquals("Blue Opportunity", p.getIdPromocion());
 		assertEquals("Harry Dresden", p.getNicknameProveedor());

@@ -15,11 +15,11 @@ import tprog.logica.manejadores.ManejadorProductos;
 
 public class CtrlProductos implements ICtrlProductos {
 
-	protected DTMinPromocion dtP;
-	protected DTMinServicio dtS;
-	protected String categoriaPadre;
+	private DTMinPromocion dtP;
+	private DTMinServicio dtS;
+	private String categoriaPadre;
 	private String idCategoria;
-	protected String nicknameP;
+	private String nicknameP;
 	private List<String> listaServicios;
 	private Set<String> listaCategorias;
 	private DTUbicacion origen;
@@ -259,4 +259,26 @@ public class CtrlProductos implements ICtrlProductos {
 	public DTUbicacion getOrigen() {
 		return this.origen;
 	}
+
+    public DTMinPromocion getDtP() {
+        return dtP;
+    }
+
+    public DTMinServicio getDtS() {
+        return dtS;
+    }
+
+    public String getCategoriaPadre() {
+        return categoriaPadre;
+    }
+
+    public String getIdCategoria() {
+        return idCategoria;
+    }
+
+    public String getNicknameP() {
+        return nicknameP;
+    }
+        
+        
 }

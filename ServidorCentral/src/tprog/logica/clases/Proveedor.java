@@ -1,6 +1,5 @@
 package tprog.logica.clases;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -15,8 +14,8 @@ public class Proveedor extends Usuario {
 	private String empresa;
 	private String webEmpresa;
 
-	Map<String, Promocion> promociones;
-	Map<String, Servicio> servicios;
+	private Map<String, Promocion> promociones;
+	private Map<String, Servicio> servicios;
 
 	public Proveedor(DTProveedor dtP) {
 		super(dtP.getNickname(), dtP.getPassword(), dtP.getNombre(), dtP.getApellido(), dtP.getEmail(), dtP.getImagen(), dtP.getFechaNacimiento());
@@ -27,13 +26,13 @@ public class Proveedor extends Usuario {
 	}
 
 	public DTMinProveedor crearDTMin() {
-		DTMinProveedor nuevoDT = new DTMinProveedor(this.nickname, this.email, this.empresa);
+		DTMinProveedor nuevoDT = new DTMinProveedor(this.getNickname(), this.getEmail(), this.getEmpresa());
 		return nuevoDT;
 	}
 
 	public DTProveedor crearDT() {
-		DTProveedor nuevoDT = new DTProveedor(this.nickname, this.password, this.nombre, this.apellido,
-				this.email, this.imagen, this.fechaNacimiento, this.empresa, this.webEmpresa);
+		DTProveedor nuevoDT = new DTProveedor(this.getNickname(), this.getPassword(), this.getNombre(), this.getApellido(),
+				this.getEmail(), this.getImagen(), this.getFechaNacimiento(), this.getEmpresa(), this.getWebEmpresa());
 		return nuevoDT;
 	}
 

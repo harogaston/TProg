@@ -9,7 +9,7 @@ public class Compuesta implements Categoria {
 
 	private String idCategoria;
 	private Set<Categoria> subCategorias;
-	protected Compuesta padre;
+	private Compuesta padre;
 
 	public Compuesta(String IdCategoria) {
 		this.idCategoria = IdCategoria;

@@ -22,13 +22,13 @@ public class Cliente extends Usuario {
 		for (Reserva r : reservas.values()) {
 			nuevoSetReservas.add(r.crearDTMin());
 		}
-		DTCliente dt = new DTCliente(this.nickname, this.password, this.nombre, this.apellido, this.email,
-				this.imagen, this.fechaNacimiento, nuevoSetReservas);
+		DTCliente dt = new DTCliente(this.getNickname(), this.getPassword(), this.getNombre(), this.getApellido(), this.getEmail(),
+				this.getImagen(), this.getFechaNacimiento(), nuevoSetReservas);
 		return dt;
 	}
 
 	public DTMinCliente crearDTMin() {
-		return new DTMinCliente(this.nickname, this.email);
+		return new DTMinCliente(this.getNickname(), this.getEmail());
 	}
 
 	public void agregarReserva(Reserva reserva) {

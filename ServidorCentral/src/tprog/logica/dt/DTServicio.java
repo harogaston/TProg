@@ -67,9 +67,9 @@ public class DTServicio implements Comparable<DTServicio> {
 	@Override
 	public int compareTo(DTServicio object) {
 		if (this.idServicio.equals(object.getIdServicio())) {
-			return (this.nicknameProveedor.compareToIgnoreCase(object.getNicknameProveedor()));
+			return this.nicknameProveedor.compareToIgnoreCase(object.getNicknameProveedor());
 		} else {
-			return (this.idServicio.compareToIgnoreCase(object.getIdServicio()));
+			return this.idServicio.compareToIgnoreCase(object.getIdServicio());
 		}
 	}
 	

@@ -15,7 +15,7 @@ public class DTProveedor extends DTUsuario {
 	}
 
 	public DTProveedor(DTUsuario dtU, String Empresa, String WebEmpresa) {
-		super(dtU.nickname, dtU.password, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
+		super(dtU.getNickname(), dtU.getPassword(), dtU.getNombre(), dtU.getApellido(), dtU.getEmail(), dtU.getImagen(), dtU.getFechaNacimiento());
 		this.empresa = Empresa;
 		this.webEmpresa = WebEmpresa;
 	}
@@ -39,14 +39,14 @@ public class DTProveedor extends DTUsuario {
 	@Override
 	public boolean equals(Object object) {
 		DTProveedor dtP = (DTProveedor) object;
-		return this.apellido.equals(dtP.apellido)
-				&& this.email.equals(dtP.email)
-				&& this.empresa.equals(dtP.empresa)
-				&& this.fechaNacimiento.equals(dtP.fechaNacimiento)
-				&& this.imagen.equals(dtP.imagen)
-				&& this.nickname.equals(dtP.nickname)
-				&& this.password.equals(dtP.password)
-				&& this.nombre.equals(dtP.nombre)
-				&& this.webEmpresa.equals(dtP.webEmpresa);
+		return this.getApellido().equals(dtP.getApellido())
+				&& this.getEmail().equals(dtP.getEmail())
+				&& this.getEmpresa().equals(dtP.getEmpresa())
+				&& this.getFechaNacimiento().equals(dtP.getFechaNacimiento())
+				&& this.getImagen().equals(dtP.getImagen())
+				&& this.getNickname().equals(dtP.getNickname())
+				&& this.getPassword().equals(dtP.getPassword())
+				&& this.getNombre().equals(dtP.getNombre())
+				&& this.getWebEmpresa().equals(dtP.getWebEmpresa());
 	}
 }

@@ -10,8 +10,8 @@ import org.junit.Test;
 
 public class DTUsuarioTest {
 
-    DTUsuario instance;
-    Date fecha;
+    private DTUsuario instance;
+    private Date fecha;
 
     public DTUsuarioTest() {
     }

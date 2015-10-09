@@ -12,9 +12,9 @@ import org.junit.Test;
 
 public class DTReservaTest {
 
-    DTReserva instance;
-    Date fecha;
-    Set<DTLineaReserva> set;
+    private DTReserva instance;
+    private Date fecha;
+    private Set<DTLineaReserva> set;
 
     public DTReservaTest() {
     }

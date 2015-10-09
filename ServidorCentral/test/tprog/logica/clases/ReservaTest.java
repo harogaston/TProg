@@ -42,11 +42,9 @@ public class ReservaTest {
 	@Before
 	public void setUp() throws Exception {
 		fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, 10);
-		DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", 20);
-		DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, 30);
-		DTLineaReserva l4 = new DTLineaReserva(3, fecha, fecha, null, null, 30);
-
+		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null,null, 10);
+		DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2",null, 20);
+		DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null,null, 30);
 		set = new HashSet();
 		set.add(l1);
 		set.add(l2);
@@ -57,7 +55,7 @@ public class ReservaTest {
 		this.nicknameProv = "Pedro";
 		estado = EstadoReserva.Registrada;
 		DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, set);
-		instance = new Reserva(null, dtR, nicknameProv);
+		instance = new Reserva(null, dtR);
 		//instance = new Reserva(fecha,estado,precioTotal,set,nicknameProv);
 
 	}
@@ -75,7 +73,7 @@ public class ReservaTest {
 		System.out.println("getIdReserva");
 
 		int result = instance.getIdReserva();
-
+                assertEquals(result,result);
 	}
 
 	/**

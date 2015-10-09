@@ -50,7 +50,7 @@ public class ClienteTest {
 		DTReserva r = new DTReserva(123, fecha, EstadoReserva.Pagada, 180.53F, new HashSet<>());
 		Reserva reserva;
 		try {
-			reserva = new Reserva(instance, r, "Pepe");
+			reserva = new Reserva(instance, r);
 			instance.agregarReserva(reserva);
 		} catch (Exception ex) {
 			Logger.getLogger(ClienteTest.class.getName()).log(Level.SEVERE, null, ex);

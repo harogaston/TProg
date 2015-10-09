@@ -6,13 +6,29 @@ import tprog.logica.dt.DTMinServicio;
 
 public interface Categoria {
 
-	public Set<DTMinServicio> listarServicios();
+    /**
+     *
+     * @return
+     */
+    public abstract Set<DTMinServicio> listarServicios();
 
-	public boolean esCategoriaSimple();
+    /**
+     *
+     * @return
+     */
+    public abstract boolean esCategoriaSimple();
 
-	public String getIdCategoria();
+    /**
+     *
+     * @return
+     */
+    public String getIdCategoria();
 
-	public Compuesta getPadre();
+    /**
+     *
+     * @return
+     */
+    public Compuesta getPadre();
 
 	public boolean esCategoriaPadre();
 

@@ -89,7 +89,7 @@ public class CompuestaTest {
     @Test
     public void testListarServicios() {
         System.out.println("listarServicios");
-        Categoria cat = new Simple("idCategoria");;
+        Categoria cat = new Simple("idCategoria");
         instance.add(cat);
         Set<DTMinServicio> expResult = new HashSet();
         Set<DTMinServicio> result = instance.listarServicios();
@@ -117,7 +117,7 @@ public class CompuestaTest {
     @Test
     public void testAdd() {
         System.out.println("add");
-        Categoria cat = new Simple("idCategoria");;
+        Categoria cat = new Simple("idCategoria");
         instance.add(cat);
         // TODO review the generated test code and remove the default call to fail.
         

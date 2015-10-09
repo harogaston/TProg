@@ -22,7 +22,7 @@ public class DTReservaTest {
     @Before
     public void setUp() {
         fecha = new Date();
-        DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, 10.0F);
+        DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null,null, 10.0F);
 //        DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", 20.0F);
 //        DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, 30.0F);
         set = new HashSet();

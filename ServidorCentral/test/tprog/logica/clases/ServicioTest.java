@@ -63,14 +63,14 @@ public class ServicioTest {
 	public void testCrearDT() {
 		System.out.println("crearDT");
 
-		DTServicio expResult = new DTServicio("idServicio", "descripcion", 50, null, origen.crearDT(), null);
+		DTServicio expResult = new DTServicio("idServicio", "descripcion",null, 50, null, origen.crearDT(), null);
 		DTServicio result = instance.crearDT();
 		boolean prim = (expResult.toString().equals(result.toString()));
 		destino = new Ciudad("Colonia");
 		Pais pais = new Pais("Brasil");
 		destino.setPais(pais);
 		instance.setDestino(destino);
-		DTServicio expResult2 = new DTServicio("idServicio", "descripcion", 50, null, origen.crearDT(), destino.crearDT());
+		DTServicio expResult2 = new DTServicio("idServicio", "descripcion",null, 50, null, origen.crearDT(), destino.crearDT());
 		DTServicio result2 = instance.crearDT();
 		boolean prim2 = (expResult2.toString().equals(result2.toString()));
 		assertEquals(prim, prim2);
@@ -143,6 +143,7 @@ public class ServicioTest {
 		boolean random = instance.agregarCategoria(c);
 		Set<String> result = instance.listarCategorias();
 		assertEquals(expResult, result);
+                assertEquals(true,random);
 		// TODO review the generated test code and remove the default call to fail.
 
 	}
@@ -174,6 +175,7 @@ public class ServicioTest {
 		boolean expResult = true;
 		boolean result = instance.quitarCategoria(categoria_a_quitar);
 		assertEquals(expResult, result);
+                assertEquals(entro,true);
 		// TODO review the generated test code and remove the default call to fail.
 
 	}

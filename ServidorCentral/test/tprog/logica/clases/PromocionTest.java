@@ -83,7 +83,7 @@ public class PromocionTest {
 	public void testCrearDT() {
 		System.out.println("crearDT");
 
-		DTPromocion expResult = new DTPromocion("","Promo", 20, 360, set);
+		DTPromocion expResult = new DTPromocion("", "Promo", 20, 360, set);
 		DTPromocion result = instance.crearDT();
 
 		assertEquals(expResult.toString(), result.toString());

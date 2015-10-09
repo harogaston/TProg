@@ -12,15 +12,15 @@ public class DTUsuario {
 	protected String imagen;
 	protected Date fechaNacimiento;
 
-	public DTUsuario(String nickname, String password, String nombre, String apellido, String email,
-			String imagen, Date fechaNacimiento) {
-		this.nickname = nickname;
-		this.password = password;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.imagen = imagen;
-		this.fechaNacimiento = fechaNacimiento;
+	public DTUsuario(String Nickname, String Password, String Nombre, String Apellido, String Email,
+			String Imagen, Date FechaNacimiento) {
+		this.nickname = Nickname;
+		this.password = Password;
+		this.nombre = Nombre;
+		this.apellido = Apellido;
+		this.email = Email;
+		this.imagen = Imagen;
+		this.fechaNacimiento = FechaNacimiento;
 	}
 
 	public String getNombre() {

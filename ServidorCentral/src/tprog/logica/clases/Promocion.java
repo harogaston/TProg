@@ -15,10 +15,10 @@ public class Promocion {
 	private Proveedor proveedor;
 	private Map<String, Integer> servicios;
 
-	public Promocion(String idPromocion, float descuento, Proveedor proveedor) {
-		this.idPromocion = idPromocion;
-		this.descuento = descuento;
-		this.proveedor = proveedor;
+	public Promocion(String IdPromocion, float Descuento, Proveedor Proveedor) {
+		this.idPromocion = IdPromocion;
+		this.descuento = Descuento;
+		this.proveedor = Proveedor;
 		servicios = new HashMap<>();
 	}
 
@@ -56,16 +56,16 @@ public class Promocion {
 		}
 	}
 
-	public void setIdPromocion(String idPromocion) {
-		this.idPromocion = idPromocion;
+	public void setIdPromocion(String IdPromocion) {
+		this.idPromocion = IdPromocion;
 	}
 
-	public void setDescuento(float descuento) {
-		this.descuento = descuento;
+	public void setDescuento(float Descuento) {
+		this.descuento = Descuento;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setProveedor(Proveedor Proveedor) {
+		this.proveedor = Proveedor;
 	}
 
 	public String getIdPromocion() {

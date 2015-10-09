@@ -47,7 +47,7 @@ public class ManejadorReservasTest {
 	public void setUp() throws Exception {
 		instance = ManejadorReservas.getInstance();
 		Date fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null,"jorge", 10);
+		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, "jorge", 10);
                // DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, "", "idPromocion2", 20);
 		//DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", "", 30);
 		set = new HashSet();

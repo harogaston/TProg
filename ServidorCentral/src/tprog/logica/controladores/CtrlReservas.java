@@ -38,13 +38,13 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void seleccionarCliente(String nickname) {
-		this.nickname = nickname;
+	public void seleccionarCliente(String Nickname) {
+		this.nickname = Nickname;
 	}
 
 	@Override
-	public void seleccionarProveedor(String nicknameP) {
-		this.nicknameP = nicknameP;
+	public void seleccionarProveedor(String NicknameP) {
+		this.nicknameP = NicknameP;
 	}
 
 	@Override
@@ -60,13 +60,13 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void seleccionarPromocion(DTMinPromocion dtP) {
-		this.dtP = dtP;
+	public void seleccionarPromocion(DTMinPromocion DTP) {
+		this.dtP = DTP;
 	}
 
 	@Override
-	public void seleccionarServicio(DTMinServicio dtS) {
-		this.dtS = dtS;
+	public void seleccionarServicio(DTMinServicio DTS) {
+		this.dtS = DTS;
 	}
 
 	@Override
@@ -109,11 +109,11 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void altaReserva(DTReserva dtR) throws Exception {
+	public void altaReserva(DTReserva DTR) throws Exception {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		Cliente cliente = mu.getCliente(nickname);
 		ManejadorReservas mr = ManejadorReservas.getInstance();
-		mr.agregarReserva(cliente, dtR);
+		mr.agregarReserva(cliente, DTR);
 	}
 
 	@Override
@@ -123,8 +123,8 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void seleccionarReserva(int idReserva) {
-		this.idReserva = idReserva;
+	public void seleccionarReserva(int IdReserva) {
+		this.idReserva = IdReserva;
 	}
 
 	@Override

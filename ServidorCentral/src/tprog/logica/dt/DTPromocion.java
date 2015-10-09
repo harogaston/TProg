@@ -11,12 +11,12 @@ public class DTPromocion implements Comparable<DTPromocion> {
 	private float total;
 	private HashMap<DTMinServicio, Integer> servicios;
 
-	public DTPromocion(String idPromocion, String nicknameP, float descuento, float total, HashMap<DTMinServicio, Integer> servicios) {
-		this.idPromocion = idPromocion;
-		this.nicknameProveedor = nicknameP;
-		this.descuento = descuento;
-		this.total = total;
-		this.servicios = servicios;
+	public DTPromocion(String IdPromocion, String NicknameP, float Descuento, float Total, HashMap<DTMinServicio, Integer> Servicios) {
+		this.idPromocion = IdPromocion;
+		this.nicknameProveedor = NicknameP;
+		this.descuento = Descuento;
+		this.total = Total;
+		this.servicios = Servicios;
 	}
 
 	public String getIdPromocion() {
@@ -61,7 +61,7 @@ public class DTPromocion implements Comparable<DTPromocion> {
 		}
 	}
 	
-	public int comparePrecio(DTPromocion o){
+	public int comparePrecio(DTPromocion o) {
 		if (Float.compare(total, o.getTotal()) == 0) {
 			return this.compareTo(o);
 		} else {

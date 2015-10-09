@@ -65,8 +65,8 @@ public class ManejadorProductos {
 
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
 		DTPromocion result = null;
-		if ((!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) &&
-			( (!promociones.get(dtP.getNicknameP()).isEmpty()
+		if ((!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) 
+                        && ((!promociones.get(dtP.getNicknameP()).isEmpty()
 					&& promociones.get(dtP.getNicknameP()).containsKey(dtP.getIdPromocion())))) {
 				Promocion p = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
 				result = p.crearDT();
@@ -350,7 +350,7 @@ public class ManejadorProductos {
 	}
 
 	public void altaPromocion(String idPromocion, float descuento, String nicknameProv,
-			List<String> servicios) {
+			List<String> Servicios) {
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		Proveedor proveedor = mu.getProveedor(nicknameProv);
 		Promocion promo = new Promocion(idPromocion, descuento, proveedor);
@@ -358,7 +358,7 @@ public class ManejadorProductos {
 			promociones.put(nicknameProv, new HashMap());
 		}
 		this.promociones.get(nicknameProv).put(idPromocion, promo);
-		Iterator<String> it = servicios.iterator();
+		Iterator<String> it = Servicios.iterator();
 		proveedor.addPromocion(promo);
 		while (it.hasNext()) {
 			String l = (String) it.next();

@@ -6,10 +6,10 @@ public class DTMinProveedor {
 	private final String email;
 	private final String empresa;
 
-	public DTMinProveedor(String nickname, String email, String empresa) {
-		this.nickname = nickname;
-		this.email = email;
-		this.empresa = empresa;
+	public DTMinProveedor(String Nickname, String Email, String Empresa) {
+		this.nickname = Nickname;
+		this.email = Email;
+		this.empresa = Empresa;
 	}
 
 	public String getNickname() {

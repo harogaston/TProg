@@ -13,12 +13,12 @@ public class LineaReserva {
 	private Servicio servicio;
 	private Promocion promocion;
 
-	public LineaReserva(int cantidad, Date fInicio, Date fFin, Servicio servicio, Promocion promocion, float precio) {
+	public LineaReserva(int cantidad, Date fInicio, Date fFin, Servicio Servicio, Promocion Promocion, float precio) {
 		this.Cantidad = cantidad;
 		this.FechaInicio = fInicio;
 		this.FechaFin = fFin;
-		this.servicio = servicio;
-		this.promocion = promocion;
+		this.servicio = Servicio;
+		this.promocion = Promocion;
 		this.Precio = precio;
 	}
 

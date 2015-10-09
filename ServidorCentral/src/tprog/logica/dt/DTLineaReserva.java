@@ -12,14 +12,14 @@ public class DTLineaReserva {
 	private String nicknameProveedor;
 	private float precio;
 
-	public DTLineaReserva(int cantidad, Date fechaInicio, Date fechaFin, String servicio, String promocion, String nicknameProveedor, float precio) {
-		this.cantidad = cantidad;
-		this.fechaInicio = fechaInicio;
-		this.fechaFin = fechaFin;
-		this.servicio = servicio;
-		this.promocion = promocion;
-		this.nicknameProveedor = nicknameProveedor;
-		this.precio = precio;
+	public DTLineaReserva(int Cantidad, Date FechaInicio, Date FechaFin, String Servicio, String Promocion, String NicknameProveedor, float Precio) {
+		this.cantidad = Cantidad;
+		this.fechaInicio = FechaInicio;
+		this.fechaFin = FechaFin;
+		this.servicio = Servicio;
+		this.promocion = Promocion;
+		this.nicknameProveedor = NicknameProveedor;
+		this.precio = Precio;
 	}
 
 	public int getCantidad() {

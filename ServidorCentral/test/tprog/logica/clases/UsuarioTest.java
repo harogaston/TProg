@@ -126,7 +126,7 @@ public class UsuarioTest {
 	@Test
 	public void testSetFechaNacimiento() {
 		System.out.println("setFechaNacimiento");
-		Date fechaN = new Date();
+		fechaN = new Date();
 		instance.setFechaNacimiento(fechaN);
 		Date result = instance.getFechaNacimiento();
 		assertEquals(fechaN, result);

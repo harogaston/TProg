@@ -22,10 +22,10 @@ public class Reserva {
 	private float precioTotal;
 	private Set<LineaReserva> lineasReserva;
 
-	public Reserva(Cliente cliente, DTReserva dtR) throws Exception {
+	public Reserva(Cliente client, DTReserva dtR) throws Exception {
 		this.idReserva = Reserva.contador;
 		Reserva.contador++;
-		this.cliente = cliente;
+		this.cliente = client;
 		this.fCreacion = dtR.getFCreacion();
 		this.estado = dtR.getEstadoReserva();
 		this.lineasReserva = new HashSet();
@@ -72,7 +72,7 @@ public class Reserva {
 
 	public void agregarLineaReserva(LineaReserva linea) {
 		lineasReserva.add(linea);
-		precioTotal += linea.getPrecio()*linea.getCantidad();
+		precioTotal += linea.getPrecio() * linea.getCantidad();
 	}
 
 	public void setEstadoReserva(EstadoReserva est) {

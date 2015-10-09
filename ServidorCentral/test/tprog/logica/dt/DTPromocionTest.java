@@ -30,7 +30,7 @@ public class DTPromocionTest {
 	@Test
 	public void testGetIdPromocion() {
 		System.out.println("getIdPromocion");
-		DTPromocion instance = new DTPromocion("id",null, 0.25F, 550.0F, set);
+		DTPromocion instance = new DTPromocion("id", null, 0.25F, 550.0F, set);
 		String expResult = "id";
 		String result = instance.getIdPromocion();
 		assertEquals(expResult, result);
@@ -39,7 +39,7 @@ public class DTPromocionTest {
 	@Test
 	public void testGetDescuento() {
 		System.out.println("getDescuento");
-		DTPromocion instance = new DTPromocion("id",null, 0.25F, 550.0F, set);
+		DTPromocion instance = new DTPromocion("id", null, 0.25F, 550.0F, set);
 		float expResult = 0.25F;
 		float result = instance.getDescuento();
 		assertEquals(expResult, result, 0.001);
@@ -48,7 +48,7 @@ public class DTPromocionTest {
 	@Test
 	public void testGetTotal() {
 		System.out.println("getTotal");
-		DTPromocion instance = new DTPromocion("id",null, 0.25F, 550.0F, set);
+		DTPromocion instance = new DTPromocion("id", null, 0.25F, 550.0F, set);
 		float expResult = 550.0F;
 		float result = instance.getTotal();
 		assertEquals(expResult, result, 0.001);
@@ -57,7 +57,7 @@ public class DTPromocionTest {
 	@Test
 	public void testGetServicios() {
 		System.out.println("getServicios");
-		DTPromocion instance = new DTPromocion("id",null, 0.25F, 550.0F, set);
+		DTPromocion instance = new DTPromocion("id", null, 0.25F, 550.0F, set);
 		HashMap<DTMinServicio, Integer> expResult = set;
 		HashMap<DTMinServicio, Integer>  result = instance.getServicios();
 		assertEquals(expResult.size(), result.size());

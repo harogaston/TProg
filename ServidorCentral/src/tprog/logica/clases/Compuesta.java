@@ -11,15 +11,15 @@ public class Compuesta implements Categoria {
 	private Set<Categoria> subCategorias;
 	protected Compuesta padre;
 
-	public Compuesta(String idCategoria) {
-		this.idCategoria = idCategoria;
+	public Compuesta(String IdCategoria) {
+		this.idCategoria = IdCategoria;
 		this.padre = null;
 		this.subCategorias = new HashSet();
 	}
 
 	@Override
-	public void setPadre(Compuesta padre) {
-		this.padre = padre;
+	public void setPadre(Compuesta Padre) {
+		this.padre = Padre;
 	}
 
 	@Override

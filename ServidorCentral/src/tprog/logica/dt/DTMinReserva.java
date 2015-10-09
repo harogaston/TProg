@@ -7,9 +7,9 @@ public class DTMinReserva {
 	private int idReserva;
 	private Date fechaCreacion;
 
-	public DTMinReserva(int idReserva, Date fechaCreacion) {
-		this.idReserva = idReserva;
-		this.fechaCreacion = fechaCreacion;
+	public DTMinReserva(int IdReserva, Date FechaCreacion) {
+		this.idReserva = IdReserva;
+		this.fechaCreacion = FechaCreacion;
 	}
 
 	public int getIdReserva() {

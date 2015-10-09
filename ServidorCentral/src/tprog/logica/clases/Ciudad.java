@@ -19,8 +19,8 @@ public class Ciudad {
 		return this.pais;
 	}
 
-	public void setPais(Pais pais) {
-		this.pais = pais;
+	public void setPais(Pais Pais) {
+		this.pais = Pais;
 	}
 
 	public DTUbicacion crearDT() {

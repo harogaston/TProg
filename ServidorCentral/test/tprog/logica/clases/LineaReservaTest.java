@@ -38,8 +38,8 @@ public class LineaReservaTest {
     public void setUp() {
         fecha = new Date();
         promocion = null;
-        servicio = new Servicio("ser","bueno",50,null,null,null,null);
-        instance = new LineaReserva(2,fecha,fecha,servicio,promocion,50);
+        servicio = new Servicio("ser", "bueno", 50, null, null, null, null);
+        instance = new LineaReserva(2, fecha, fecha, servicio, promocion, 50);
         
     }
     
@@ -141,7 +141,7 @@ public class LineaReservaTest {
         
         instance.setCantidad(c);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(0,instance.getCantidad(),0.0);
+        assertEquals(0, instance.getCantidad(), 0.0);
     }
 
     /**
@@ -154,7 +154,7 @@ public class LineaReservaTest {
         
         instance.setFechaInicio(finicio);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(finicio,instance.getFechaInicio());
+        assertEquals(finicio, instance.getFechaInicio());
     }
 
     /**
@@ -167,7 +167,7 @@ public class LineaReservaTest {
         
         instance.setFechaFin(ffin);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(ffin,instance.getFechaFin());
+        assertEquals(ffin, instance.getFechaFin());
     }
 
     /**
@@ -176,11 +176,11 @@ public class LineaReservaTest {
     @Test
     public void testSetServicio() {
         System.out.println("setServicio");
-        Servicio s = new Servicio("gordo","bueno",50,null,null,null,null);
+        Servicio s = new Servicio("gordo", "bueno", 50, null, null, null, null);
         
         instance.setServicio(s);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(s,instance.getServicio());
+        assertEquals(s, instance.getServicio());
     }
 
     /**
@@ -189,11 +189,11 @@ public class LineaReservaTest {
     @Test
     public void testSetPromocion() {
         System.out.println("setPromocion");
-        Promocion p = new Promocion("promo",50,null);
+        Promocion p = new Promocion("promo", 50, null);
         
         instance.setPromocion(p);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(p,instance.getPromocion());
+        assertEquals(p, instance.getPromocion());
         
     }
 
@@ -204,16 +204,16 @@ public class LineaReservaTest {
     public void testCrearDTLineaReserva() {
         System.out.println("crearDTLineaReserva");
         
-        DTLineaReserva expResult = new DTLineaReserva(2,fecha,fecha,"ser",null,null,50);
+        DTLineaReserva expResult = new DTLineaReserva(2, fecha, fecha, "ser", null, null, 50);
         DTLineaReserva result = instance.crearDT();
-        assertEquals(expResult.toString(),result.toString());
+        assertEquals(expResult.toString(), result.toString());
         instance.setServicio(null);
-        Promocion promo = new Promocion("promo",50,null);
+        Promocion promo = new Promocion("promo", 50, null);
         instance.setPromocion(promo);
         instance.setServicio(null);
-        DTLineaReserva exp = new DTLineaReserva(2,fecha,fecha,null,"promo",null,50);
+        DTLineaReserva exp = new DTLineaReserva(2, fecha, fecha, null, "promo", null, 50);
         DTLineaReserva res = instance.crearDT();
-        assertEquals(exp.toString(),res.toString());
+        assertEquals(exp.toString(), res.toString());
         
         // TODO review the generated test code and remove the default call to fail.
         

@@ -62,8 +62,8 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 
 	@Override
-	public void seleccionarReserva(int idReserva) {
-		this.idReserva = idReserva;
+	public void seleccionarReserva(int IdReserva) {
+		this.idReserva = IdReserva;
 	}
 
 	@Override
@@ -80,22 +80,22 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 
 	@Override
-	public boolean verificarEmail(String email) {
-		this.email = email;
+	public boolean verificarEmail(String Email) {
+		this.email = Email;
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 		return mu.verificarEmail(this.email);
 	}
 
 	@Override
-	public void ingresarDatosUsuario(DTUsuario dtU, boolean esProveedor) {
-		this.dtU = dtU;
-		this.esProveedor = esProveedor;
+	public void ingresarDatosUsuario(DTUsuario DTU, boolean EsProveedor) {
+		this.dtU = DTU;
+		this.esProveedor = EsProveedor;
 	}
 
 	@Override
-	public void ingresarDatosProveedor(String empresa, String web) {
-		this.empresa = empresa;
-		this.web = web;
+	public void ingresarDatosProveedor(String Empresa, String Web) {
+		this.empresa = Empresa;
+		this.web = Web;
 	}
 
 	@Override
@@ -133,8 +133,8 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	}
 
 	@Override
-	public void seleccionarServicio(String idServicio) {
-		this.idServicio = idServicio;
+	public void seleccionarServicio(String IdServicio) {
+		this.idServicio = IdServicio;
 	}
 
 	@Override

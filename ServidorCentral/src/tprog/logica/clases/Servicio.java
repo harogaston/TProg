@@ -17,15 +17,15 @@ public class Servicio {
 	private Proveedor proveedor;
 	private Set<Simple> categorias;
 
-	public Servicio(String idServicio, String descripcion, float precio, Set<String> imagenes,
-			Ciudad origen, Ciudad destino, Proveedor proveedor) {
-		this.idServicio = idServicio;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.imagenes = imagenes;
-		this.origen = origen;
-		this.destino = destino;
-		this.proveedor = proveedor;
+	public Servicio(String IdServicio, String Descripcion, float Precio, Set<String> Imagenes,
+			Ciudad Origen, Ciudad Destino, Proveedor Proveedor) {
+		this.idServicio = IdServicio;
+		this.descripcion = Descripcion;
+		this.precio = Precio;
+		this.imagenes = Imagenes;
+		this.origen = Origen;
+		this.destino = Destino;
+		this.proveedor = Proveedor;
 		this.categorias = new HashSet(); //Se crea vacío
 	}
 
@@ -92,48 +92,48 @@ public class Servicio {
 		return idServicio;
 	}
 
-	public void setIdServicio(String idServicio) {
-		this.idServicio = idServicio;
+	public void setIdServicio(String IdServicio) {
+		this.idServicio = IdServicio;
 	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescripcion(String Descripcion) {
+		this.descripcion = Descripcion;
 	}
 
 	public float getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(float precio) {
-		this.precio = precio;
+	public void setPrecio(float Precio) {
+		this.precio = Precio;
 	}
 
 	public Set<String> getImagenes() {
 		return imagenes;
 	}
 
-	public void setImagenes(Set<String> imagenes) {
-		this.imagenes = imagenes;
+	public void setImagenes(Set<String> Imagenes) {
+		this.imagenes = Imagenes;
 	}
 
 	public Ciudad getOrigen() {
 		return origen;
 	}
 
-	public void setOrigen(Ciudad origen) {
-		this.origen = origen;
+	public void setOrigen(Ciudad Origen) {
+		this.origen = Origen;
 	}
 
 	public Ciudad getDestino() {
 		return destino;
 	}
 
-	public void setDestino(Ciudad destino) {
-		this.destino = destino;
+	public void setDestino(Ciudad Destino) {
+		this.destino = Destino;
 	}
 
 	public Proveedor getProveedor() {
@@ -144,8 +144,8 @@ public class Servicio {
 		return proveedor.getNickname();
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setProveedor(Proveedor Proveedor) {
+		this.proveedor = Proveedor;
 	}
 
 	@Override

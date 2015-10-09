@@ -5,14 +5,13 @@ package tprog.logica.dt;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.*;
 
 public class EstadoReservaTest {
 	EstadoReserva instance;
 	public EstadoReservaTest() {
 	}
-
+	
 	@Before
 	public void setUp() {
 		instance = EstadoReserva.Cancelada;
@@ -47,4 +46,5 @@ public class EstadoReservaTest {
 		String result = instance.toString();
 		assertEquals(expResult, result);
 	}
+	
 }

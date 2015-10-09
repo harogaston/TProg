@@ -1,7 +1,6 @@
 package tprog.logica.dt;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class DTProveedor extends DTUsuario {
 
@@ -50,12 +49,4 @@ public class DTProveedor extends DTUsuario {
 				&& this.nombre.equals(dt.nombre)
 				&& this.webEmpresa.equals(dt.webEmpresa);
 	}
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 61 * hash + Objects.hashCode(this.empresa);
-        hash = 61 * hash + Objects.hashCode(this.webEmpresa);
-        return hash;
-    }
 }

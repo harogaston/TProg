@@ -9,36 +9,35 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author MarG
  */
 public class CiudadTest {
-
+    
     Ciudad instance;
     String idCiudad;
     Pais pais;
-
+    
     public CiudadTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
         instance = new Ciudad("Madrid");
         instance.setPais(new Pais("España"));
     }
-
+    
     @After
     public void tearDown() {
     }
@@ -49,6 +48,7 @@ public class CiudadTest {
     @Test
     public void testGetIdCiudad() {
         System.out.println("getIdCiudad");
+        
         String expResult = "Madrid";
         String result = instance.getIdCiudad();
         assertEquals(expResult, result);
@@ -71,10 +71,11 @@ public class CiudadTest {
     @Test
     public void testCrearDT() {
         System.out.println("crearDT");
+        
         DTUbicacion expResult = new DTUbicacion("Madrid", "España");
         DTUbicacion result = instance.crearDT();
         assertEquals(expResult.getCiudad(), result.getCiudad());
         assertEquals(expResult.getPais(), result.getPais());
     }
-
+    
 }

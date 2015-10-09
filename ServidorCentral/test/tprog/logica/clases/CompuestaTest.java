@@ -12,32 +12,32 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  *
  * @author MarG
  */
 public class CompuestaTest {
-
+    
     Compuesta instance;
-
+    
     public CompuestaTest() {
     }
-
+    
     @BeforeClass
     public static void setUpClass() {
     }
-
+    
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     @Before
     public void setUp() {
         instance = new Compuesta("idCategoria");
     }
-
+    
     @After
     public void tearDown() {
     }
@@ -50,8 +50,9 @@ public class CompuestaTest {
         System.out.println("setPadre");
         Compuesta padre = new Compuesta("padre");
         instance.setPadre(padre);
+        
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -66,7 +67,7 @@ public class CompuestaTest {
         Compuesta result = instance.getPadre();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -79,7 +80,7 @@ public class CompuestaTest {
         String result = instance.getIdCategoria();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -94,7 +95,7 @@ public class CompuestaTest {
         Set<DTMinServicio> result = instance.listarServicios();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -107,7 +108,7 @@ public class CompuestaTest {
         boolean result = instance.esCategoriaSimple();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -119,7 +120,7 @@ public class CompuestaTest {
         Categoria cat = new Simple("idCategoria");
         instance.add(cat);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -132,7 +133,7 @@ public class CompuestaTest {
         instance.add(cat);
         instance.remove(cat);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -145,7 +146,7 @@ public class CompuestaTest {
         boolean result = instance.esCategoriaPadre();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
 
     /**
@@ -160,7 +161,7 @@ public class CompuestaTest {
         DefaultMutableTreeNode result = instance.listarCategorias();
         assertEquals(expResult.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.
-
+        
     }
-
+    
 }

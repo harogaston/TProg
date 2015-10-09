@@ -3,6 +3,7 @@ package tprog.logica.dt;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;

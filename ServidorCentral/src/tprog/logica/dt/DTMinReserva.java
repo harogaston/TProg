@@ -1,7 +1,6 @@
 package tprog.logica.dt;
 
 import java.util.Date;
-import java.util.Objects;
 
 public class DTMinReserva {
 
@@ -35,13 +34,5 @@ public class DTMinReserva {
 		DTMinReserva dt = (DTMinReserva) o;
 		return (this.idReserva == dt.idReserva) && this.fechaCreacion.equals(dt.fechaCreacion);
 	}
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.idReserva;
-        hash = 89 * hash + Objects.hashCode(this.fechaCreacion);
-        return hash;
-    }
 
 }

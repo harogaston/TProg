@@ -45,7 +45,7 @@ public class DTUsuarioTest {
         String result = instance.getNickname();
         assertEquals(expResult, result);
     }
-
+    
     /**
      *
      */

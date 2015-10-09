@@ -4,10 +4,10 @@
 package tprog.logica.dt;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DTMinProveedorTest {
-
+	
 	public DTMinProveedorTest() {
 	}
 
@@ -48,5 +48,5 @@ public class DTMinProveedorTest {
 		String result = instance.toString();
 		assertEquals(expResult, result);
 	}
-
+	
 }

@@ -247,7 +247,7 @@ public class ManejadorProductosTest {
 	@Test
 	public void testAltaServicio() {
 		System.out.println("altaServicio");
-		//Se creó un Servicio en el SetUp
+		//Se creó un Servicio en el SetUp        
 		assertTrue(instance.servicios.containsKey("Harry Dresden"));
 		assertTrue(instance.servicios.get("Harry Dresden").containsKey("Blue Beatle"));
 		assertFalse(instance.idServicioDisponible("Blue Beatle", "Harry Dresden"));

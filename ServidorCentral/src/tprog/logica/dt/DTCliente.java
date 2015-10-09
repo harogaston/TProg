@@ -2,7 +2,6 @@ package tprog.logica.dt;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 public class DTCliente extends DTUsuario {
@@ -42,11 +41,4 @@ public class DTCliente extends DTUsuario {
 		DTCliente dt = (DTCliente) o;
 		return this.reservas.equals(dt.reservas);
 	}
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.reservas);
-        return hash;
-    }
 }

@@ -3,7 +3,6 @@ package tprog.logica.clases;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
@@ -45,11 +44,4 @@ public class Cliente extends Usuario {
 		Cliente c = (Cliente) o;
 		return this.reservas.equals(c.reservas);
 	}
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.reservas);
-        return hash;
-    }
 }

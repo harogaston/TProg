@@ -1,5 +1,6 @@
 package tprog.logica.controladores;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -10,10 +11,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
+import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
+import tprog.logica.manejadores.ManejadorUsuarios;
 
 public class CtrlProductosTest {
 
@@ -177,7 +181,7 @@ public class CtrlProductosTest {
 	 String descripcion = "";
 	 CtrlProductos instance = new CtrlProductos();
 	 instance.cambiarDescripcion(descripcion);
-
+        
 	 }
 
 	 /**

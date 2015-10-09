@@ -49,7 +49,7 @@ public class ReservaTest {
 		set.add(l1);
 		set.add(l2);
 		set.add(l3);
-                //set.add(l4);
+                //set.add(l4); 
 
 		precioTotal = l1.getPrecio() + l2.getPrecio() * 2 + l3.getPrecio() * 3;
 		this.nicknameProv = "Pedro";

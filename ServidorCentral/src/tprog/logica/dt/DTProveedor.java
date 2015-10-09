@@ -7,17 +7,17 @@ public class DTProveedor extends DTUsuario {
 	private final String empresa;
 	private final String webEmpresa;
 
-	public DTProveedor(String nickname, String password, String nombre, String apellido, String email,
-			String imagen, Date fechaN, String empresa, String webEmpresa) {
-		super(nickname, password, nombre, apellido, email, imagen, fechaN);
-		this.empresa = empresa;
-		this.webEmpresa = webEmpresa;
+	public DTProveedor(String Nickname, String Password, String Nombre, String Apellido, String Email,
+			String Imagen, Date FechaN, String Empresa, String WebEmpresa) {
+		super(Nickname, Password, Nombre, Apellido, Email, Imagen, FechaN);
+		this.empresa = Empresa;
+		this.webEmpresa = WebEmpresa;
 	}
 
-	public DTProveedor(DTUsuario dtU, String empresa, String webEmpresa) {
+	public DTProveedor(DTUsuario dtU, String Empresa, String WebEmpresa) {
 		super(dtU.nickname, dtU.password, dtU.nombre, dtU.apellido, dtU.email, dtU.imagen, dtU.fechaNacimiento);
-		this.empresa = empresa;
-		this.webEmpresa = webEmpresa;
+		this.empresa = Empresa;
+		this.webEmpresa = WebEmpresa;
 	}
 
 	public String getEmpresa() {

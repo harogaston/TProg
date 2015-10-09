@@ -10,16 +10,16 @@ public class DTCategoria {
 	private String idCategoria;
 	private Set<DTCategoria> subCategorias;
 
-	public DTCategoria(String idCategoria, Set<DTCategoria> subCategorias) {
+	public DTCategoria(String IdCategoria, Set<DTCategoria> SubCategorias) {
 		try {
-			if (idCategoria == null || idCategoria.equals("")) {
+			if (IdCategoria == null || IdCategoria.equals("")) {
 				throw new InvalidAttributeValueException("No se ingresó un idCategoria");
 			}
 		} catch (InvalidAttributeValueException ex) {
 			Logger.getLogger(DTCategoria.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		this.idCategoria = idCategoria;
-		this.subCategorias = subCategorias;
+		this.idCategoria = IdCategoria;
+		this.subCategorias = SubCategorias;
 	}
 
 	public String getIdCategoria() {

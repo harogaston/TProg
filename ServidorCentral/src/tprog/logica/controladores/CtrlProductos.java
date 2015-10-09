@@ -44,8 +44,8 @@ public class CtrlProductos implements ICtrlProductos {
 	}
 
 	@Override
-	public void seleccionarPromocion(DTMinPromocion dtP) {
-		this.dtP = dtP;
+	public void seleccionarPromocion(DTMinPromocion DTP) {
+		this.dtP = DTP;
 	}
 
 	@Override
@@ -60,8 +60,8 @@ public class CtrlProductos implements ICtrlProductos {
 	}
 
 	@Override
-	public void seleccionarServicio(DTMinServicio dtS) {
-		this.dtS = dtS;
+	public void seleccionarServicio(DTMinServicio DTS) {
+		this.dtS = DTS;
 	}
 
 	@Override
@@ -82,9 +82,9 @@ public class CtrlProductos implements ICtrlProductos {
 	}
 
 	@Override
-	public Set<DTMinServicio> listarServiciosCategoria(String idCategoria) {
+	public Set<DTMinServicio> listarServiciosCategoria(String IdCategoria) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
-		return mp.listarServiciosCategoria(idCategoria);
+		return mp.listarServiciosCategoria(IdCategoria);
 	}
 
 	@Override
@@ -156,27 +156,27 @@ public class CtrlProductos implements ICtrlProductos {
 	}
 
 	@Override
-	public boolean agregarCategoria(String idCategoria) {
+	public boolean agregarCategoria(String IdCategoria) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
-		return mp.esCategoriaSimpleAgregar(dtS, idCategoria);
+		return mp.esCategoriaSimpleAgregar(dtS, IdCategoria);
 	}
 
 	@Override
-	public boolean quitarCategoria(String idCategoria) {
+	public boolean quitarCategoria(String IdCategoria) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
-		return mp.esCategoriaSimpleQuitar(dtS, idCategoria);
+		return mp.esCategoriaSimpleQuitar(dtS, IdCategoria);
 	}
 
 	@Override
-	public boolean seleccionarCategoriaPadre(String padre) {
-		this.categoriaPadre = padre;
+	public boolean seleccionarCategoriaPadre(String Padre) {
+		this.categoriaPadre = Padre;
 		ManejadorProductos mp = ManejadorProductos.getInstance();
-		return mp.esCategoriaPadre(padre);
+		return mp.esCategoriaPadre(Padre);
 	}
 
 	@Override
-	public boolean idCategoriaDisponible(String idCategoria) {
-		this.idCategoria = idCategoria;
+	public boolean idCategoriaDisponible(String IdCategoria) {
+		this.idCategoria = IdCategoria;
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		return mp.idCategoriaDisponible(idCategoria);
 	}
@@ -210,19 +210,19 @@ public class CtrlProductos implements ICtrlProductos {
 	}
 
 	@Override
-	public boolean seleccionarCategoriaSimple(String idCategoria) {
+	public boolean seleccionarCategoriaSimple(String IdCategoria) {
 		ManejadorProductos mp = ManejadorProductos.getInstance();
-		boolean esValida = mp.esCategoriaSimple(idCategoria);
+		boolean esValida = mp.esCategoriaSimple(IdCategoria);
 		if (esValida) {
-			this.listaCategorias.add(idCategoria);
+			this.listaCategorias.add(IdCategoria);
 		}
 		return esValida;
 	}
 
 	@Override
-	public void quitarCategoriaListada(String idCategoria) {
-		if (!listaCategorias.isEmpty() && listaCategorias.contains(idCategoria)) {
-			listaCategorias.remove(idCategoria);
+	public void quitarCategoriaListada(String IdCategoria) {
+		if (!listaCategorias.isEmpty() && listaCategorias.contains(IdCategoria)) {
+			listaCategorias.remove(IdCategoria);
 		}
 	}
 
@@ -235,8 +235,8 @@ public class CtrlProductos implements ICtrlProductos {
 	}
 
 	@Override
-	public void agregarServicio(DTMinServicio dtS) {
-		this.listaServicios.add(dtS.getIdServicio());
+	public void agregarServicio(DTMinServicio DTS) {
+		this.listaServicios.add(DTS.getIdServicio());
 	}
 
 	@Override

@@ -8,9 +8,9 @@ public class DTMinServicio {
 	private final String nicknameP;
 	private final String idServicio;
 
-	public DTMinServicio(String nicknameP, String idServicio) {
-		this.nicknameP = nicknameP;
-		this.idServicio = idServicio;
+	public DTMinServicio(String NicknameP, String IdServicio) {
+		this.nicknameP = NicknameP;
+		this.idServicio = IdServicio;
 	}
 
 	public String getNicknameP() {
@@ -29,9 +29,9 @@ public class DTMinServicio {
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder(17, 31). // two randomly chosen prime numbers
+		return new HashCodeBuilder(17, 31).// two randomly chosen prime numbers
 				// if deriving: appendSuper(super.hashCode()).
-				append(idServicio).
+				append(idServicio). 
 				append(nicknameP).
 				toHashCode();
 	}

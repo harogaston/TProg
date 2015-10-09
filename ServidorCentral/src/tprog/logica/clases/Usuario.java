@@ -17,15 +17,15 @@ public class Usuario {
     protected String imagen;
     protected Date fechaNacimiento;
 
-    public Usuario(String nickname, String password, String nombre, String apellido, String email,
-            String imagen, Date fechaN) {
-        this.nickname = nickname;
-        this.password = password;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.email = email;
-        this.imagen = imagen;
-        this.fechaNacimiento = fechaN;
+    public Usuario(String Nickname, String Password, String Nombre, String Apellido, String Email,
+            String Imagen, Date FechaN) {
+        this.nickname = Nickname;
+        this.password = Password;
+        this.nombre = Nombre;
+        this.apellido = Apellido;
+        this.email = Email;
+        this.imagen = Imagen;
+        this.fechaNacimiento = FechaN;
     }
 
     public String getNombre() {
@@ -40,8 +40,8 @@ public class Usuario {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String Password) {
+        this.password = Password;
     }
 
     public String getNickname() {
@@ -60,28 +60,28 @@ public class Usuario {
         return fechaNacimiento;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombre(String Nombre) {
+        this.nombre = Nombre;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setApellido(String Apellido) {
+        this.apellido = Apellido;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setNickname(String Nickname) {
+        this.nickname = Nickname;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String Email) {
+        this.email = Email;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
+    public void setImagen(String Imagen) {
+        this.imagen = Imagen;
     }
 
-    public void setFechaNacimiento(Date fechaN) {
-        this.fechaNacimiento = fechaN;
+    public void setFechaNacimiento(Date FechaN) {
+        this.fechaNacimiento = FechaN;
     }
 
 }

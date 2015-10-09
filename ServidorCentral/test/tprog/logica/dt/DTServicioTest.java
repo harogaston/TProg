@@ -31,7 +31,7 @@ public class DTServicioTest {
 		imagenes.add("Im1");
 		imagenes.add("Im2");
 		imagenes.add("Im3");
-		instance = new DTServicio("id", "desc",null, 480.23F, imagenes, origen, destino);
+		instance = new DTServicio("id", "desc", null, 480.23F, imagenes, origen, destino);
 	}
 
 	@Test

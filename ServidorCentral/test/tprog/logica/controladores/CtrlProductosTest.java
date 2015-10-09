@@ -140,7 +140,7 @@ public class CtrlProductosTest {
 	public void testListarServiciosCategoria() {
 		System.out.println("listarServiciosCategoria");
 		String idCategoria = "";
-		CtrlProductos instance = new CtrlProductos();
+		instance = new CtrlProductos();
 		Set<DTMinServicio> expResult = new HashSet();
 		Set<DTMinServicio> result = instance.listarServiciosCategoria(idCategoria);
 		assertEquals(expResult, result);
@@ -228,7 +228,7 @@ public class CtrlProductosTest {
 	@Test
 	public void testListarCiudades() {
 		System.out.println("listarCiudades");
-		CtrlProductos instance = new CtrlProductos();
+		instance = new CtrlProductos();
 		DefaultMutableTreeNode expResult = new DefaultMutableTreeNode();
 		DefaultMutableTreeNode result = instance.listarCiudades();
 		assertEquals(expResult.toString(), result.toString());

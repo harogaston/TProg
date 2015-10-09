@@ -5,9 +5,9 @@ public class DTMinPromocion {
 	private final String nicknameP;
 	private final String idPromocion;
 
-	public DTMinPromocion(String nicknameP, String idPromocion) {
-		this.nicknameP = nicknameP;
-		this.idPromocion = idPromocion;
+	public DTMinPromocion(String NicknameP, String IdPromocion) {
+		this.nicknameP = NicknameP;
+		this.idPromocion = IdPromocion;
 	}
 
 	public String getNicknameP() {

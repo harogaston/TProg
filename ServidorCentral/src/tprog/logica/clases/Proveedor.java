@@ -63,12 +63,12 @@ public class Proveedor extends Usuario {
 		promociones.put(p.getIdPromocion(), p);
 	}
 
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
+	public void setEmpresa(String Empresa) {
+		this.empresa = Empresa;
 	}
 
-	public void setWebEmpresa(String webEmpresa) {
-		this.webEmpresa = webEmpresa;
+	public void setWebEmpresa(String WebEmpresa) {
+		this.webEmpresa = WebEmpresa;
 	}
 
 	public String getEmpresa() {

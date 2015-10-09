@@ -60,9 +60,9 @@ public class CiudadTest {
     @Test
     public void testSetPais() {
         System.out.println("setPais");
-        Pais nuevo= new Pais("Mexico");
+        Pais nuevo = new Pais("Mexico");
         instance.setPais(nuevo);
-        assertTrue(instance.getPais()==nuevo);
+        assertTrue(instance.getPais() == nuevo);
     }
 
     /**

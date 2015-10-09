@@ -44,7 +44,7 @@ public class ManejadorUsuariosTest {
 	@Before
 	public void setUp() {
 		instance = ManejadorUsuarios.getInstance();
-		Date fecha = new Date();
+		fecha = new Date();
 		DTProveedor dtP1 = new DTProveedor("nick", "pass", "nom", "ap", "email", "imagen", fecha, "empresa", "webEmpresa");
 		proveedor = new Proveedor(dtP1);
 		dtP = new DTProveedor("nick", "pass", "nom", "ap", "email", "imagen", fecha, "empresa", "webEmpresa");
@@ -94,9 +94,9 @@ public class ManejadorUsuariosTest {
 	@Test
 	public void testListarProveedores() throws Exception {
 		System.out.println("listarProveedores");
-		DTMinProveedor dtmin = new DTMinProveedor("nick", "email", "empresa");
+		DTMinProveedor dtMinProv = new DTMinProveedor("nick", "email", "empresa");
 		Set<DTMinProveedor> expResult = new HashSet();
-		expResult.add(dtmin);
+		expResult.add(dtMinProv);
 		Set<DTMinProveedor> result = instance.listarProveedores();
 		assertEquals(expResult.toString(), result.toString());
         // TODO review the generated test code and remove the default call to fail.

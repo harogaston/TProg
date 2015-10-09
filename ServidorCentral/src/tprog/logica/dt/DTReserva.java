@@ -11,12 +11,12 @@ public class DTReserva implements Comparable<DTReserva> {
 	private float precioTotal;
 	Set<DTLineaReserva> lineasReserva;
 
-	public DTReserva(int idReserva, Date fCreacion, EstadoReserva estado, float precioTotal, Set<DTLineaReserva> lineasReserva) {
-		this.idReserva = idReserva;
-		this.fCreacion = fCreacion;
-		this.estado = estado;
-		this.precioTotal = precioTotal;
-		this.lineasReserva = lineasReserva;
+	public DTReserva(int IdReserva, Date FCreacion, EstadoReserva Estado, float PrecioTotal, Set<DTLineaReserva> LineasReserva) {
+		this.idReserva = IdReserva;
+		this.fCreacion = FCreacion;
+		this.estado = Estado;
+		this.precioTotal = PrecioTotal;
+		this.lineasReserva = LineasReserva;
 	}
 
 	public int getIdReserva() {

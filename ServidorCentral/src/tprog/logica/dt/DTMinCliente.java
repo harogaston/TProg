@@ -5,9 +5,9 @@ public class DTMinCliente {
 	private String nickname;
 	private String email;
 
-	public DTMinCliente(String nickname, String email) {
-		this.nickname = nickname;
-		this.email = email;
+	public DTMinCliente(String Nickname, String Email) {
+		this.nickname = Nickname;
+		this.email = Email;
 	}
 
 	public String getNickname() {

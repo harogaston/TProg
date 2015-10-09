@@ -12,15 +12,15 @@ public class DTServicio implements Comparable<DTServicio> {
 	private final DTUbicacion origen;
 	private final DTUbicacion destino;
 
-	public DTServicio(String idServicio, String nicknameP, String descripcion, float precio,
-			Set<String> imagenes, DTUbicacion origen, DTUbicacion destino) {
-		this.idServicio = idServicio;
-		this.nicknameProveedor = nicknameP;
-		this.descripcion = descripcion;
-		this.precio = precio;
-		this.imagenes = imagenes;
-		this.origen = origen;
-		this.destino = destino;
+	public DTServicio(String IdServicio, String NicknameP, String Descripcion, float Precio,
+			Set<String> Imagenes, DTUbicacion Origen, DTUbicacion Destino) {
+		this.idServicio = IdServicio;
+		this.nicknameProveedor = NicknameP;
+		this.descripcion = Descripcion;
+		this.precio = Precio;
+		this.imagenes = Imagenes;
+		this.origen = Origen;
+		this.destino = Destino;
 	}
 
 	public String getIdServicio() {
@@ -73,7 +73,7 @@ public class DTServicio implements Comparable<DTServicio> {
 		}
 	}
 	
-	public int comparePrecio(DTServicio o){
+	public int comparePrecio(DTServicio o) {
 		if (Float.compare(precio, o.getPrecio()) == 0) {
 			return this.compareTo(o);
 		} else {

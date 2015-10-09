@@ -11,14 +11,14 @@ public class Simple implements Categoria {
 	protected Compuesta padre;
 	private Set<Servicio> servicios;
 
-	public Simple(String idCategoria, Compuesta padre) {
-		this.idCategoria = idCategoria;
-		this.padre = padre;
+	public Simple(String IdCategoria, Compuesta Padre) {
+		this.idCategoria = IdCategoria;
+		this.padre = Padre;
 		this.servicios = new HashSet();
 	}
 
-	public Simple(String idCategoria) {
-		this.idCategoria = idCategoria;
+	public Simple(String IdCategoria) {
+		this.idCategoria = IdCategoria;
 		this.padre = null;
 		this.servicios = new HashSet();
 	}
@@ -46,8 +46,8 @@ public class Simple implements Categoria {
 	}
 
 	@Override
-	public void setPadre(Compuesta padre) {
-		this.padre = padre;
+	public void setPadre(Compuesta Padre) {
+		this.padre = Padre;
 	}
 
 	@Override

@@ -31,7 +31,7 @@ public class DTMinServicio {
 	public int hashCode() {
 		return new HashCodeBuilder(17, 31).// two randomly chosen prime numbers
 				// if deriving: appendSuper(super.hashCode()).
-				append(idServicio). 
+				append(idServicio).
 				append(nicknameP).
 				toHashCode();
 	}

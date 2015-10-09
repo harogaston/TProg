@@ -1,5 +1,7 @@
 package tprog.logica.dt;
 
+import java.util.Objects;
+
 public class DTMinProveedor {
 
 	private final String nickname;
@@ -36,4 +38,13 @@ public class DTMinProveedor {
 		DTMinProveedor dt = (DTMinProveedor) o;
 		return ((this.email.equals(dt.getEmail())) && (this.nickname.equals(dt.getNickname())) && (this.empresa.equals(dt.getEmpresa())));
 	}
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.nickname);
+        hash = 37 * hash + Objects.hashCode(this.email);
+        hash = 37 * hash + Objects.hashCode(this.empresa);
+        return hash;
+    }
 }

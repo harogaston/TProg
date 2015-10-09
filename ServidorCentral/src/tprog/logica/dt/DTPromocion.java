@@ -60,7 +60,7 @@ public class DTPromocion implements Comparable<DTPromocion> {
 			return (this.idPromocion.compareToIgnoreCase(o.getIdPromocion()));
 		}
 	}
-	
+
 	public int comparePrecio(DTPromocion o) {
 		if (Float.compare(total, o.getTotal()) == 0) {
 			return this.compareTo(o);

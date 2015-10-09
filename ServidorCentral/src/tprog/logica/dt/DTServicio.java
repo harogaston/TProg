@@ -72,7 +72,7 @@ public class DTServicio implements Comparable<DTServicio> {
 			return (this.idServicio.compareToIgnoreCase(o.getIdServicio()));
 		}
 	}
-	
+
 	public int comparePrecio(DTServicio o) {
 		if (Float.compare(precio, o.getPrecio()) == 0) {
 			return this.compareTo(o);

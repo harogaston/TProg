@@ -87,7 +87,7 @@ public class UsuarioTest {
 		String result = instance.getApellido();
 		assertEquals(apellido, result);
 	}
-    
+
     @Test
     public void testGetPassword() {
         System.out.println("getPassword");
@@ -95,7 +95,7 @@ public class UsuarioTest {
         String result = instance.getPassword();
         assertEquals(expResult, result);
     }
-    
+
 	@Test
 	public void testSetNickname() {
 		System.out.println("setNickname");

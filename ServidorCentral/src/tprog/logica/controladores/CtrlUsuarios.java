@@ -40,14 +40,14 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public Set<DTMinCliente> listarClientes() throws Exception {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarClientes();
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.listarClientes();
 	}
 
 	@Override
 	public Set<DTMinProveedor> listarProveedores() throws Exception {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarProveedores();
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.listarProveedores();
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public DTCliente infoCliente() throws Exception {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.infoCliente(this.nicknameU);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.infoCliente(this.nicknameU);
 	}
 
 	@Override
@@ -68,22 +68,22 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public DTReserva infoReserva() {
-		ManejadorReservas mu = ManejadorReservas.getInstance();
-		return mu.infoReserva(this.idReserva);
+		ManejadorReservas manejadorU = ManejadorReservas.getInstance();
+		return manejadorU.infoReserva(this.idReserva);
 	}
 
 	@Override
 	public boolean verificarNickname(String nickname) {
 		this.nicknameU = nickname;
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.verificarNickname(this.nicknameU);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.verificarNickname(this.nicknameU);
 	}
 
 	@Override
 	public boolean verificarEmail(String Email) {
 		this.email = Email;
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.verificarEmail(this.email);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.verificarEmail(this.email);
 	}
 
 	@Override
@@ -100,14 +100,14 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public void altaUsuario() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		if (esProveedor) {
 			DTProveedor nuevoDT = new DTProveedor(dtU, this.empresa, this.web);
-			mu.altaProveedor(nuevoDT);
+			manejadorU.altaProveedor(nuevoDT);
 
 		} else {
 			DTCliente nuevoDT = new DTCliente(dtU);
-			mu.altaCliente(nuevoDT);
+			manejadorU.altaCliente(nuevoDT);
 		}
 	}
 
@@ -119,8 +119,8 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	@Override
 	public DTProveedor infoProveedor() throws Exception {
 		try {
-			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-			return mu.infoProveedor(this.nicknameP);
+			ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+			return manejadorU.infoProveedor(this.nicknameP);
 		} catch (Exception e) {
 			throw e;
 		}
@@ -128,8 +128,8 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.listarServiciosProveedor(this.nicknameP);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.listarServiciosProveedor(this.nicknameP);
 	}
 
 	@Override
@@ -139,30 +139,30 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 
 	@Override
 	public DTServicio infoServicio() {
-		ManejadorProductos mp = ManejadorProductos.getInstance();
+		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
 		DTMinServicio nuevoDT = new DTMinServicio(this.nicknameP, this.idServicio);
-		return mp.infoServicio(nuevoDT);
+		return manejadorP.infoServicio(nuevoDT);
 	}
 
 	@Override
-	public boolean idCorrecta(String id) {
+	public boolean idCorrecta(String identificador) {
 		//tiene que verificar que la id pertenezca a un cliente
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.idCorrecta(id);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.idCorrecta(identificador);
 	}
 
 	@Override
-	public boolean pwCorrecta(String id, String password) {
+	public boolean pwCorrecta(String identificador, String password) {
 		//tiene que verificar que la contraseña esté asociada al id
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.pwCorrecta(id, password);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.pwCorrecta(identificador, password);
 	}
 
 	@Override
-	public String obtenerIdCliente(String id, String pass) {
+	public String obtenerIdCliente(String identificador, String pass) {
 		//en caso de que id sea un email, se devuelve el id asociado a ese cliente
-		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		return mu.obtenerIdCliente(id, pass);
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.obtenerIdCliente(identificador, pass);
 	}
 
 }

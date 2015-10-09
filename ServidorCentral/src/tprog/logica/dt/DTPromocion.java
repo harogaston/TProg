@@ -9,9 +9,9 @@ public class DTPromocion implements Comparable<DTPromocion> {
 	private String nicknameProveedor;
 	private float descuento;
 	private float total;
-	private HashMap<DTMinServicio, Integer> servicios;
+	private Map<DTMinServicio, Integer> servicios;
 
-	public DTPromocion(String IdPromocion, String NicknameP, float Descuento, float Total, HashMap<DTMinServicio, Integer> Servicios) {
+	public DTPromocion(String IdPromocion, String NicknameP, float Descuento, float Total, Map<DTMinServicio, Integer> Servicios) {
 		this.idPromocion = IdPromocion;
 		this.nicknameProveedor = NicknameP;
 		this.descuento = Descuento;
@@ -35,7 +35,7 @@ public class DTPromocion implements Comparable<DTPromocion> {
 		return this.total;
 	}
 
-	public HashMap<DTMinServicio, Integer> getServicios() {
+	public Map<DTMinServicio, Integer> getServicios() {
 		return this.servicios;
 	}
 
@@ -53,19 +53,19 @@ public class DTPromocion implements Comparable<DTPromocion> {
 	}
 
 	@Override
-	public int compareTo(DTPromocion o) {
-		if (this.idPromocion.equals(o.getIdPromocion())) {
-			return (this.nicknameProveedor.compareToIgnoreCase(o.getNicknameProveedor()));
+	public int compareTo(DTPromocion object) {
+		if (this.idPromocion.equals(object.getIdPromocion())) {
+			return (this.nicknameProveedor.compareToIgnoreCase(object.getNicknameProveedor()));
 		} else {
-			return (this.idPromocion.compareToIgnoreCase(o.getIdPromocion()));
+			return (this.idPromocion.compareToIgnoreCase(object.getIdPromocion()));
 		}
 	}
 	
-	public int comparePrecio(DTPromocion o) {
-		if (Float.compare(total, o.getTotal()) == 0) {
-			return this.compareTo(o);
+	public int comparePrecio(DTPromocion object) {
+		if (Float.compare(total, object.getTotal()) == 0) {
+			return this.compareTo(object);
 		} else {
-			return Float.compare(total, o.getTotal());
+			return Float.compare(total, object.getTotal());
 		}
 	}
 }

@@ -27,7 +27,6 @@ public class ManejadorReservasTest {
 
 	Set<DTMinReserva> minR;
 	Set<DTLineaReserva> set;
-	Reserva r1;
 	DTReserva dtr1;
 	Cliente jorge;
 	int aux;
@@ -47,11 +46,11 @@ public class ManejadorReservasTest {
 	public void setUp() throws Exception {
 		instance = ManejadorReservas.getInstance();
 		Date fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, "jorge", 10);
+		DTLineaReserva linea1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, "jorge", 10);
                // DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, "", "idPromocion2", 20);
 		//DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", "", 30);
 		set = new HashSet();
-		set.add(l1);
+		set.add(linea1);
 		//set.add(l2);
 		//set.add(l3);
 		// r1 = new Reserva(fecha,EstadoReserva.Registrada,500,set,"jorge");
@@ -65,8 +64,8 @@ public class ManejadorReservasTest {
 
 		instance.agregarReserva(jorge, dtr1);
 		Set<DTMinReserva> lista = instance.listarReservas();
-		DTMinReserva dt = lista.iterator().next();
-		aux = dt.getIdReserva();
+		DTMinReserva dtMinR = lista.iterator().next();
+		aux = dtMinR.getIdReserva();
 		dtr1 = new DTReserva(aux, fecha, EstadoReserva.Registrada, 500, set);
 		minR = new HashSet();
 		DTMinReserva dtmin = new DTMinReserva(aux, fecha);

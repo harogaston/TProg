@@ -42,16 +42,16 @@ public class ReservaTest {
 	@Before
 	public void setUp() throws Exception {
 		fecha = new Date();
-		DTLineaReserva l1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, null, 10);
-		DTLineaReserva l2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", null, 20);
-		DTLineaReserva l3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, null, 30);
+		DTLineaReserva linea1 = new DTLineaReserva(1, fecha, fecha, "idServicio1", null, null, 10);
+		DTLineaReserva linea2 = new DTLineaReserva(2, fecha, fecha, null, "idPromocion2", null, 20);
+		DTLineaReserva linea3 = new DTLineaReserva(3, fecha, fecha, "idServicio3", null, null, 30);
 		set = new HashSet();
-		set.add(l1);
-		set.add(l2);
-		set.add(l3);
+		set.add(linea1);
+		set.add(linea2);
+		set.add(linea3);
                 //set.add(l4); 
 
-		precioTotal = l1.getPrecio() + l2.getPrecio() * 2 + l3.getPrecio() * 3;
+		precioTotal = linea1.getPrecio() + linea2.getPrecio() * 2 + linea3.getPrecio() * 3;
 		this.nicknameProv = "Pedro";
 		estado = EstadoReserva.Registrada;
 		DTReserva dtR = new DTReserva(-1, fecha, estado, precioTotal, set);
@@ -159,11 +159,11 @@ public class ReservaTest {
 	public void testSetPrecioTotal() {
 		System.out.println("setPrecioTotal");
 
-		float p = 20;
+		float precio = 20;
 
-		instance.setPrecioTotal(p);
+		instance.setPrecioTotal(precio);
 		float result = instance.getPrecioTotal();
-		assertEquals(p, result, 0);
+		assertEquals(precio, result, 0);
 	}
 
 	/**

@@ -8,8 +8,8 @@ public class Pais {
 	private String idPais;
 	private Map<String, Ciudad> ciudades;
 
-	public Pais(String id) {
-		this.idPais = id;
+	public Pais(String idPais) {
+		this.idPais = idPais;
 		this.ciudades = new HashMap();
 	}
 
@@ -21,12 +21,12 @@ public class Pais {
 		return this.ciudades;
 	}
 
-	public void setIdPais(String id) {
-		this.idPais = id;
+	public void setIdPais(String idPais) {
+		this.idPais = idPais;
 	}
 
-	public void agregarCiudad(Ciudad c) {
-		this.ciudades.put(c.getIdCiudad(), c);
-		c.setPais(this);
+	public void agregarCiudad(Ciudad ciudad) {
+		this.ciudades.put(ciudad.getIdCiudad(), ciudad);
+		ciudad.setPais(this);
 	}
 }

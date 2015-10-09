@@ -37,16 +37,16 @@ public class DTProveedor extends DTUsuario {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		DTProveedor dt = (DTProveedor) o;
-		return this.apellido.equals(dt.apellido)
-				&& this.email.equals(dt.email)
-				&& this.empresa.equals(dt.empresa)
-				&& this.fechaNacimiento.equals(dt.fechaNacimiento)
-				&& this.imagen.equals(dt.imagen)
-				&& this.nickname.equals(dt.nickname)
-				&& this.password.equals(dt.password)
-				&& this.nombre.equals(dt.nombre)
-				&& this.webEmpresa.equals(dt.webEmpresa);
+	public boolean equals(Object object) {
+		DTProveedor dtP = (DTProveedor) object;
+		return this.apellido.equals(dtP.apellido)
+				&& this.email.equals(dtP.email)
+				&& this.empresa.equals(dtP.empresa)
+				&& this.fechaNacimiento.equals(dtP.fechaNacimiento)
+				&& this.imagen.equals(dtP.imagen)
+				&& this.nickname.equals(dtP.nickname)
+				&& this.password.equals(dtP.password)
+				&& this.nombre.equals(dtP.nombre)
+				&& this.webEmpresa.equals(dtP.webEmpresa);
 	}
 }

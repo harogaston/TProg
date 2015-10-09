@@ -44,8 +44,8 @@ public class SimpleTest {
 	@Test
 	public void testAgregarServicio() {
 		System.out.println("agregarServicio");
-		Servicio s = null;
-		instance.agregarServicio(s);
+		Servicio servicio = null;
+		instance.agregarServicio(servicio);
 		assertTrue(instance.getServicios().contains(null));
 	}
 
@@ -55,11 +55,11 @@ public class SimpleTest {
 	@Test
 	public void testQuitarServicio() {
 		System.out.println("quitarServicio");
-		Servicio s = null;
+		Servicio servicio = null;
 
-		instance.quitarServicio(s);
+		instance.quitarServicio(servicio);
 		// TODO review the generated test code and remove the default call to fail.
-		assertFalse(instance.getServicios().contains(s));
+		assertFalse(instance.getServicios().contains(servicio));
 	}
 
 	/**

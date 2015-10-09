@@ -58,10 +58,10 @@ public class PaisTest {
     @Test
     public void testSetIdPais() {
         System.out.println("TEST: setIdPais");
-        String id = "Uruguay";
+        String idPais = "Uruguay";
         
-        instance.setIdPais(id);
-        assertEquals(id, instance.getIdPais());
+        instance.setIdPais(idPais);
+        assertEquals(idPais, instance.getIdPais());
         
     }
 

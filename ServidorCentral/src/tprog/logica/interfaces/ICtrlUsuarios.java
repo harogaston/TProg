@@ -44,9 +44,9 @@ public interface ICtrlUsuarios {
 
 	public DTServicio infoServicio();
 
-	public boolean idCorrecta(String id);
+	public boolean idCorrecta(String identificador);
 
-	public boolean pwCorrecta(String id, String password);
+	public boolean pwCorrecta(String identificador, String password);
 
-	public String obtenerIdCliente(String id, String pass);
+	public String obtenerIdCliente(String identificador, String pass);
 }

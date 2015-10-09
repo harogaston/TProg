@@ -32,17 +32,17 @@ public class Reserva {
 		this.precioTotal = dtR.getPrecioTotal();
 
 		// Creo y agrego las lineasReserva
-		ManejadorProductos mp = ManejadorProductos.getInstance();
+		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
 		LineaReserva linea; // debe declararse fuera de los if
 		for (DTLineaReserva dtLinea : dtR.getLineasReserva()) {
 			if (dtLinea.getServicio() != null) {
 				DTMinServicio dtMinS = new DTMinServicio(dtLinea.getNicknameProveedor(), dtLinea.getServicio());
-				Servicio s = mp.getServicio(dtMinS);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), s, null, dtLinea.getPrecio());
+				Servicio servicio = manejadorP.getServicio(dtMinS);
+				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), servicio, null, dtLinea.getPrecio());
 			} else if (dtLinea.getPromocion() != null) {
 				DTMinPromocion dtMinP = new DTMinPromocion(dtLinea.getNicknameProveedor(), dtLinea.getPromocion());
-				Promocion p = mp.getPromocion(dtMinP);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, p, dtLinea.getPrecio());
+				Promocion promo = manejadorP.getPromocion(dtMinP);
+				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, promo, dtLinea.getPrecio());
 			} else {
 				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
 			}
@@ -79,28 +79,28 @@ public class Reserva {
 		this.estado = est;
 	}
 
-	public void setPrecioTotal(float p) {
-		this.precioTotal = p;
+	public void setPrecioTotal(float precio) {
+		this.precioTotal = precio;
 	}
 
 	public DTReserva crearDT() {
 		Set<DTLineaReserva> dtsLR = new HashSet();
 
-		Iterator<LineaReserva> it = lineasReserva.iterator();
-		while (it.hasNext()) {
-			LineaReserva l = it.next();
-			DTLineaReserva temp = l.crearDT();
+		Iterator<LineaReserva> iterador = lineasReserva.iterator();
+		while (iterador.hasNext()) {
+			LineaReserva linea = iterador.next();
+			DTLineaReserva temp = linea.crearDT();
 			dtsLR.add(temp);
 			System.out.println("Linea de reserva");
 		}
-		DTReserva dt = new DTReserva(this.idReserva, this.fCreacion, this.estado,
+		DTReserva dtR = new DTReserva(this.idReserva, this.fCreacion, this.estado,
 				this.precioTotal, dtsLR);
-		return dt;
+		return dtR;
 	}
 
 	public DTMinReserva crearDTMin() {
-		DTMinReserva dt = new DTMinReserva(this.idReserva, this.fCreacion);
-		return dt;
+		DTMinReserva dtMinR = new DTMinReserva(this.idReserva, this.fCreacion);
+		return dtMinR;
 	}
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {

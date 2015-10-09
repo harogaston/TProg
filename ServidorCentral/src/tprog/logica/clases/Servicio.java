@@ -67,10 +67,10 @@ public class Servicio {
 	}
 
 	public boolean agregarCategoria(Categoria nueva_categoria) {
-		Simple cs = (Simple) nueva_categoria;
-		if (categorias.isEmpty() || !categorias.contains(cs)) {
-			categorias.add(cs);
-			cs.agregarServicio(this);
+		Simple catSimple = (Simple) nueva_categoria;
+		if (categorias.isEmpty() || !categorias.contains(catSimple)) {
+			categorias.add(catSimple);
+			catSimple.agregarServicio(this);
 			return true;
 		} else {
 			return false;
@@ -78,10 +78,10 @@ public class Servicio {
 	}
 
 	public boolean quitarCategoria(Categoria categoria_a_quitar) {
-		Simple cs = (Simple) categoria_a_quitar;
-		if (!categorias.isEmpty() && categorias.contains(cs)) {
-			categorias.remove(cs);
-			cs.quitarServicio(this);
+		Simple catSimple = (Simple) categoria_a_quitar;
+		if (!categorias.isEmpty() && categorias.contains(catSimple)) {
+			categorias.remove(catSimple);
+			catSimple.quitarServicio(this);
 			return true;
 		} else {
 			return false;

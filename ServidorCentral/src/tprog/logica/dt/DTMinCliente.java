@@ -25,9 +25,9 @@ public class DTMinCliente {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		DTMinCliente dt = (DTMinCliente) o;
-		return (this.email.equals(dt.email)) && (this.nickname.equals(dt.nickname));
+	public boolean equals(Object objeto) {
+		DTMinCliente dtMinC = (DTMinCliente) objeto;
+		return (this.email.equals(dtMinC.email)) && (this.nickname.equals(dtMinC.nickname));
 	}
 
 }

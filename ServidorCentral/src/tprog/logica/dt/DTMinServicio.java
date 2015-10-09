@@ -47,13 +47,13 @@ public class DTMinServicio {
 		if (obj.getClass() != getClass()) {
 			return false;
 		}
-		DTMinServicio dt = (DTMinServicio) obj;
+		DTMinServicio dtMinS = (DTMinServicio) obj;
 
 		//magia especialmente negra para determinar igualdad de dos objetos de este tipo
 		return new EqualsBuilder().
 				// if deriving: appendSuper(super.equals(obj)).
-				append(idServicio, dt.getIdServicio()).
-				append(nicknameP, dt.getNicknameP()).
+				append(idServicio, dtMinS.getIdServicio()).
+				append(nicknameP, dtMinS.getNicknameP()).
 				isEquals();
 
 	}

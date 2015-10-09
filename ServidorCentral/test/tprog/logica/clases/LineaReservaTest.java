@@ -137,9 +137,8 @@ public class LineaReservaTest {
     @Test
     public void testSetCantidad() {
         System.out.println("setCantidad");
-        int c = 0;
-        
-        instance.setCantidad(c);
+        int cantidad = 0;
+        instance.setCantidad(cantidad);
         // TODO review the generated test code and remove the default call to fail.
         assertEquals(0, instance.getCantidad(), 0.0);
     }
@@ -176,11 +175,10 @@ public class LineaReservaTest {
     @Test
     public void testSetServicio() {
         System.out.println("setServicio");
-        Servicio s = new Servicio("gordo", "bueno", 50, null, null, null, null);
-        
-        instance.setServicio(s);
+        Servicio service = new Servicio("gordo", "bueno", 50, null, null, null, null);
+        instance.setServicio(service);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(s, instance.getServicio());
+        assertEquals(service, instance.getServicio());
     }
 
     /**
@@ -189,11 +187,10 @@ public class LineaReservaTest {
     @Test
     public void testSetPromocion() {
         System.out.println("setPromocion");
-        Promocion p = new Promocion("promo", 50, null);
-        
-        instance.setPromocion(p);
+        Promocion promocion = new Promocion("promo", 50, null);
+        instance.setPromocion(promocion);
         // TODO review the generated test code and remove the default call to fail.
-        assertEquals(p, instance.getPromocion());
+        assertEquals(promocion, instance.getPromocion());
         
     }
 

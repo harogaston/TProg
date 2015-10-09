@@ -23,12 +23,12 @@ public class Simple implements Categoria {
 		this.servicios = new HashSet();
 	}
 
-	public void agregarServicio(Servicio s) {
-		this.servicios.add(s);
+	public void agregarServicio(Servicio servicio) {
+		this.servicios.add(servicio);
 	}
 
-	public void quitarServicio(Servicio s) {
-		this.servicios.remove(s);
+	public void quitarServicio(Servicio servicio) {
+		this.servicios.remove(servicio);
 	}
 
 	@Override

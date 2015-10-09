@@ -9,13 +9,13 @@ import java.util.Date;
 
 public class Usuario {
 
-    protected String nickname;
-    protected String nombre;
-    protected String apellido;
-    protected String password;
-    protected String email;
-    protected String imagen;
-    protected Date fechaNacimiento;
+    private String nickname;
+    private String nombre;
+    private String apellido;
+    private String password;
+    private String email;
+    private String imagen;
+    private Date fechaNacimiento;
 
     public Usuario(String Nickname, String Password, String Nombre, String Apellido, String Email,
             String Imagen, Date FechaN) {

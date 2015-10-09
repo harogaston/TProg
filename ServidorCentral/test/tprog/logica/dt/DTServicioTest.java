@@ -15,10 +15,10 @@ import org.junit.Test;
  */
 public class DTServicioTest {
 
-	DTServicio instance;
-	DTUbicacion origen;
-	DTUbicacion destino;
-	Set<String> imagenes;
+	private DTServicio instance;
+	private DTUbicacion origen;
+	private DTUbicacion destino;
+	private Set<String> imagenes;
 
 	public DTServicioTest() {
 	}

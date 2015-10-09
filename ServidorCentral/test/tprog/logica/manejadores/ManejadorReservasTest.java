@@ -2,7 +2,6 @@ package tprog.logica.manejadores;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -13,8 +12,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import tprog.logica.clases.Cliente;
-import tprog.logica.clases.Reserva;
-import tprog.logica.dt.DTCategoria;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinReserva;
@@ -24,7 +21,6 @@ import tprog.logica.dt.EstadoReserva;
 public class ManejadorReservasTest {
 
 	ManejadorReservas instance;
-
 	Set<DTMinReserva> minR;
 	Set<DTLineaReserva> set;
 	DTReserva dtr1;

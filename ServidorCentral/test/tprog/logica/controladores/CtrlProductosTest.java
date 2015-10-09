@@ -1,6 +1,5 @@
 package tprog.logica.controladores;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -11,13 +10,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
-import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
-import tprog.logica.manejadores.ManejadorUsuarios;
 
 public class CtrlProductosTest {
 
@@ -43,8 +39,8 @@ public class CtrlProductosTest {
 		System.out.println("seleccionarPromocion");
 		DTMinPromocion dtP = new DTMinPromocion("Rachel Morgan", "Vacations");
 		instance.seleccionarPromocion(dtP);
-		assertEquals(dtP.getNicknameP(), instance.dtP.getNicknameP());
-		assertEquals(dtP.getIdPromocion(), instance.dtP.getIdPromocion());
+		assertEquals(dtP.getNicknameP(), instance.getDtP().getNicknameP());
+		assertEquals(dtP.getIdPromocion(), instance.getDtP().getIdPromocion());
 	}
 
 	/**
@@ -91,8 +87,8 @@ public class CtrlProductosTest {
 		System.out.println("seleccionarServicio");
 		DTMinServicio dtS = new DTMinServicio("Rachel Morgan", "Trip to Cincy");
 		instance.seleccionarServicio(dtS);
-		assertEquals(dtS.getNicknameP(), instance.dtS.getNicknameP());
-		assertEquals(dtS.getIdServicio(), instance.dtS.getIdServicio());
+		assertEquals(dtS.getNicknameP(), instance.getDtS().getNicknameP());
+		assertEquals(dtS.getIdServicio(), instance.getDtS().getIdServicio());
 	}
 
 	/**
@@ -309,7 +305,7 @@ public class CtrlProductosTest {
 		System.out.println("seleccionarCategoriaPadre");
 		assertFalse(instance.seleccionarCategoriaPadre("No existe"));
 		assertTrue(instance.seleccionarCategoriaPadre("Categorias"));
-		assertEquals("Categorias", instance.categoriaPadre);
+		assertEquals("Categorias", instance.getCategoriaPadre());
 	}
 
 	/**
@@ -346,7 +342,7 @@ public class CtrlProductosTest {
 		String nick = "";
 		instance.seleccionarProveedor(nick);
 		// TODO review the generated test code and remove the default call to fail.
-		assertEquals(nick, instance.nicknameP);
+		assertEquals(nick, instance.getNicknameP());
 	}
 
 	/**

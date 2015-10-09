@@ -25,11 +25,11 @@ public class ManejadorProductos {
 
 	private static ManejadorProductos instace = null;
 
-	protected Map<String, Categoria> categorias;
-	protected Categoria root;
-	protected Map<String, Pais> ubicaciones;
-	protected Map<String, Map<String, Servicio>> servicios;
-	protected Map<String, Map<String, Promocion>> promociones;
+	private Map<String, Categoria> categorias;
+	private Categoria root;
+	private Map<String, Pais> ubicaciones;
+	private Map<String, Map<String, Servicio>> servicios;
+	private Map<String, Map<String, Promocion>> promociones;
 
 	private ManejadorProductos() {
 		categorias = new HashMap();
@@ -405,4 +405,49 @@ public class ManejadorProductos {
 	public void agregarPais(Pais pais) {
 		this.ubicaciones.put(pais.getIdPais(), pais);
 	}
+
+    public Map<String, Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public Map<String, Pais> getUbicaciones() {
+        return ubicaciones;
+    }
+
+    public Map<String, Map<String, Servicio>> getServicios() {
+        return servicios;
+    }
+
+    public Map<String, Map<String, Promocion>> getPromociones() {
+        return promociones;
+    }
+
+    public static ManejadorProductos getInstace() {
+        return instace;
+    }
+
+    public Categoria getRoot() {
+        return root;
+    }
+
+    public void setCategorias(Map<String, Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public void setRoot(Categoria root) {
+        this.root = root;
+    }
+
+    public void setServicios(Map<String, Map<String, Servicio>> servicios) {
+        this.servicios = servicios;
+    }
+
+    public void setPromociones(Map<String, Map<String, Promocion>> promociones) {
+        this.promociones = promociones;
+    }
+
+    public void setUbicaciones(Map<String, Pais> ubicaciones) {
+        this.ubicaciones = ubicaciones;
+    }
+        
 }

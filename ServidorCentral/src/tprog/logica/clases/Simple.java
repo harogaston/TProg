@@ -8,7 +8,7 @@ import tprog.logica.dt.DTMinServicio;
 public class Simple implements Categoria {
 
 	private final String idCategoria;
-	protected Compuesta padre;
+	private Compuesta padre;
 	private Set<Servicio> servicios;
 
 	public Simple(String IdCategoria, Compuesta Padre) {

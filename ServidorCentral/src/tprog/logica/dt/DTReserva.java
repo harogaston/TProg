@@ -9,7 +9,7 @@ public class DTReserva implements Comparable<DTReserva> {
 	private Date fCreacion;
 	private EstadoReserva estado;
 	private float precioTotal;
-	Set<DTLineaReserva> lineasReserva;
+	private Set<DTLineaReserva> lineasReserva;
 
 	public DTReserva(int IdReserva, Date FCreacion, EstadoReserva Estado, float PrecioTotal, Set<DTLineaReserva> LineasReserva) {
 		this.idReserva = IdReserva;
@@ -66,7 +66,7 @@ public class DTReserva implements Comparable<DTReserva> {
 	@Override
 	public int compareTo(DTReserva object) {
 		if (this.idReserva == object.getIdReserva()) {
-			return (this.fCreacion.toString().compareToIgnoreCase(object.getFCreacion().toString()));
+			return this.fCreacion.toString().compareToIgnoreCase(object.getFCreacion().toString());
 		} else {
 			return idReserva - object.getIdReserva();
 		}

@@ -1,6 +1,5 @@
 package tprog.logica.dt;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class DTPromocion implements Comparable<DTPromocion> {
@@ -55,9 +54,9 @@ public class DTPromocion implements Comparable<DTPromocion> {
 	@Override
 	public int compareTo(DTPromocion object) {
 		if (this.idPromocion.equals(object.getIdPromocion())) {
-			return (this.nicknameProveedor.compareToIgnoreCase(object.getNicknameProveedor()));
+			return this.nicknameProveedor.compareToIgnoreCase(object.getNicknameProveedor());
 		} else {
-			return (this.idPromocion.compareToIgnoreCase(object.getIdPromocion()));
+			return this.idPromocion.compareToIgnoreCase(object.getIdPromocion());
 		}
 	}
 	

@@ -245,4 +245,22 @@ public class ManejadorUsuariosTest {
 
 	}
 
+        @Test
+	public void testIdCorrecta() {
+		System.out.println("idCorrect");
+                assertFalse(instance.idCorrecta("jorge1"));
+        }
+
+        @Test
+	public void testPwCorrecta() {
+		System.out.println("infoServicio");
+                assertFalse(instance.pwCorrecta("jorge1", "pass"));
+        }
+
+        @Test
+	public void testObtenerIdCliente() {
+		System.out.println("infoServicio");
+		assertEquals("jorge1", instance.obtenerIdCliente("jorge1@gmail.com", "pass"));
+	}
+
 }

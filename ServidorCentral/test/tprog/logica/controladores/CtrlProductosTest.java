@@ -1,5 +1,6 @@
 package tprog.logica.controladores;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -9,11 +10,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
+import tprog.logica.clases.Ciudad;
+import tprog.logica.clases.Pais;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
+import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
+import tprog.logica.manejadores.ManejadorProductos;
+import tprog.logica.manejadores.ManejadorUsuarios;
 
 public class CtrlProductosTest {
 
@@ -25,6 +31,59 @@ public class CtrlProductosTest {
 	@Before
 	public void setUp() {
 		instance = new CtrlProductos();
+                DTProveedor dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
+					"/imagenes/proveedores/adippet.jpg",
+					new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
+                ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+		mu.altaProveedor(dtP);
+                ManejadorProductos mp = ManejadorProductos.getInstance();
+			mp.altaCategoria("Vuelos", null);
+			mp.altaCategoria("Empresas", "Vuelos");
+			mp.altaCategoria("Iberia", "Empresas");
+			mp.altaCategoria("American Airlines", "Empresas");
+			mp.altaCategoria("Air France", "Empresas");
+			mp.altaCategoria("TAM", "Empresas");
+			mp.altaCategoria("Tipo vuelo", "Vuelos");
+			mp.altaCategoria("LowCost", "Tipo vuelo");
+			mp.altaCategoria("Standard", "Tipo vuelo");
+			mp.altaCategoria("First Class", "Tipo vuelo");
+			mp.altaCategoria("Alojamientos", null);
+			mp.altaCategoria("Tipo alojamiento", "Alojamientos");
+			mp.altaCategoria("Hotel", "Tipo alojamiento");
+			mp.altaCategoria("Hostal", "Tipo alojamiento");
+			mp.altaCategoria("Apartamento", "Tipo alojamiento");
+			mp.altaCategoria("Casa", "Tipo alojamiento");
+			mp.altaCategoria("Ubicación", "Alojamientos");
+			mp.altaCategoria("Playa", "Ubicación");
+			mp.altaCategoria("Rural", "Ubicación");
+			mp.altaCategoria("Montaña", "Ubicación");
+			mp.altaCategoria("Habitaciones", "Alojamientos");
+			mp.altaCategoria("1 ambiente", "Habitaciones");
+			mp.altaCategoria("1 dormitorio", "Habitaciones");
+			mp.altaCategoria("2 dormitorios", "Habitaciones");
+			mp.altaCategoria("Automóviles", null);
+			mp.altaCategoria("Tarifa", "Automóviles");
+			mp.altaCategoria("Mini", "Tarifa");
+			mp.altaCategoria("Económico", "Tarifa");
+			mp.altaCategoria("Común", "Tarifa");
+			mp.altaCategoria("Full", "Tarifa");
+			mp.altaCategoria("Tipo vehículo", "Automóviles");
+			mp.altaCategoria("Auto", "Tipo vehículo");
+			mp.altaCategoria("Camioneta", "Tipo vehículo");
+			mp.altaCategoria("Camión", "Tipo vehículo");
+			mp.altaCategoria("Moto", "Tipo vehículo");
+			mp.altaCategoria("Marca", "Automóviles");
+			mp.altaCategoria("Chevrolet", "Marca");
+			mp.altaCategoria("Peugeot", "Marca");
+			mp.altaCategoria("Daihatsu", "Marca");
+			mp.altaCategoria("Fiat", "Marca");
+			mp.altaCategoria("Ford", "Marca");
+			mp.altaCategoria("Cruceros", null);
+			mp.altaCategoria("Mediterráneo", "Cruceros");
+			mp.altaCategoria("Mar Negro", "Cruceros");
+			mp.altaCategoria("Caribe", "Cruceros");
+			mp.altaCategoria("Nilo", "Cruceros");
+			mp.altaCategoria("Alaska", "Cruceros");
 	}
 
 	@After
@@ -158,27 +217,56 @@ public class CtrlProductosTest {
 	/**
 	 * Test of cambiarPrecio method, of class CtrlProductos.
 	 */
-	/*@Test
-	 public void testCambiarPrecio() {
-	 System.out.println("cambiarPrecio");
-	 float nuevoPrecio = 0.0F;
-	 CtrlProductos instance = new CtrlProductos();
-	 instance.cambiarPrecio(nuevoPrecio);
-	 // TODO review the generated test code and remove the default call to fail.
-	 fail("The test case is a prototype.");
-	 }
+	@Test
+	public void testCambiarPrecio() {
+                System.out.println("cambiarPrecio");
+                
+                Set<String> cats = new HashSet();
+                cats.add("Económico");
+		cats.add("Auto");
+                Pais p = new Pais("Uruguay");
+                ManejadorProductos mp = ManejadorProductos.getInstace();
+                Ciudad ciudad = new Ciudad("Montevideo");
+		p.agregarCiudad(ciudad);
+		mp.agregarPais(p);
+                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                instance.seleccionarOrigen(dtU);
+                instance.seleccionarDestino(dtU);
+                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+                instance.seleccionarServicio(dts);
+                instance.seleccionarProveedor("adippet");
+                instance.altaServicio("bueno", 150, cats);
+                float nuevoPrecio = 0.0F;
+                instance.cambiarPrecio(nuevoPrecio);
+                assertEquals(nuevoPrecio, instance.infoServicio().getPrecio(),0.0F);
+	// TODO review the generated test code and remove the default call to fail.
+	}
 
 	 /**
 	 * Test of cambiarDescripcion method, of class CtrlProductos.
 	 */
-	/*@Test
-	 public void testCambiarDescripcion() {
-	 System.out.println("cambiarDescripcion");
-	 String descripcion = "";
-	 CtrlProductos instance = new CtrlProductos();
-	 instance.cambiarDescripcion(descripcion);
-        
-	 }
+	@Test
+	public void testCambiarDescripcion() {
+                System.out.println("cambiarDescripcion");
+                Set<String> cats = new HashSet();
+                cats.add("Económico");
+		cats.add("Auto");
+                Pais p = new Pais("Uruguay");
+                ManejadorProductos mp = ManejadorProductos.getInstace();
+                Ciudad ciudad = new Ciudad("Montevideo");
+		p.agregarCiudad(ciudad);
+		mp.agregarPais(p);
+                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                instance.seleccionarOrigen(dtU);
+                instance.seleccionarDestino(dtU);
+                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+                instance.seleccionarServicio(dts);
+                instance.seleccionarProveedor("adippet");
+                instance.altaServicio("bueno", 150, cats);
+                String descripcion = "";
+                instance.cambiarDescripcion(descripcion);
+                assertEquals(descripcion, instance.infoServicio().getDescripcion());
+        }
 
 	 /**
 	 * Test of listarImagenes method, of class CtrlProductos.
@@ -234,28 +322,59 @@ public class CtrlProductosTest {
 	/**
 	 * Test of cambiarOrigen method, of class CtrlProductos.
 	 */
-	/*@Test
-	 public void testCambiarOrigen() {
-	 System.out.println("cambiarOrigen");
-	 DTUbicacion dtU = null;
-	 CtrlProductos instance = new CtrlProductos();
-	 instance.cambiarOrigen(dtU);
-	 // TODO review the generated test code and remove the default call to fail.
-	 fail("The test case is a prototype.");
-	 }
+	@Test
+	public void testCambiarOrigen() {
+                System.out.println("cambiarOrigen");
+                Set<String> cats = new HashSet();
+                cats.add("Económico");
+		cats.add("Auto");
+                Pais p = new Pais("Uruguay");
+                ManejadorProductos mp = ManejadorProductos.getInstace();
+                Ciudad ciudad = new Ciudad("Montevideo");
+		p.agregarCiudad(ciudad);
+                p.agregarCiudad(new Ciudad("Maldonado"));
+		mp.agregarPais(p);
+                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                instance.seleccionarOrigen(dtU);
+                instance.seleccionarDestino(dtU);
+                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+                instance.seleccionarServicio(dts);
+                instance.seleccionarProveedor("adippet");
+                instance.altaServicio("bueno", 150, cats);
+                DTUbicacion cambio = new DTUbicacion("Maldonado","Uruguay");
+                instance.cambiarOrigen(cambio);
+                assertEquals(cambio.toString(), instance.getOrigen().toString());
+	
+	}
 
 	 /**
 	 * Test of cambiarDestino method, of class CtrlProductos.
 	 */
-	/*@Test
-	 public void testCambiarDestino() {
-	 System.out.println("cambiarDestino");
-	 DTUbicacion dtU = null;
-	 CtrlProductos instance = new CtrlProductos();
-	 instance.cambiarDestino(dtU);
+	@Test
+	public void testCambiarDestino() {
+                System.out.println("cambiarDestino");
+                Set<String> cats = new HashSet();
+                cats.add("Económico");
+		cats.add("Auto");
+                Pais p = new Pais("Uruguay");
+                ManejadorProductos mp = ManejadorProductos.getInstace();
+                Ciudad ciudad = new Ciudad("Montevideo");
+		p.agregarCiudad(ciudad);
+                p.agregarCiudad(new Ciudad("Maldonado"));
+		mp.agregarPais(p);
+                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                instance.seleccionarOrigen(dtU);
+                instance.seleccionarDestino(dtU);
+                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+                instance.seleccionarServicio(dts);
+                instance.seleccionarProveedor("adippet");
+                instance.altaServicio("bueno", 150, cats);
+                DTUbicacion cambio = new DTUbicacion("Maldonado","Uruguay");
+                instance.cambiarDestino(dtU);
+                assertEquals(cambio.toString(), instance.getDestino().toString());
 	 // TODO review the generated test code and remove the default call to fail.
-	 fail("The test case is a prototype.");
-	 }
+	 
+	}
 
 	 /**
 	 * Test of listarCategoriasServicio method, of class CtrlProductos.

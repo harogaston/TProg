@@ -145,7 +145,7 @@ public class CtrlUsuariosTest {
 	@Test
 	public void testVerificarNickname() {
 		System.out.println("verificarNickname");
-		boolean expResult = false;
+		boolean expResult = true;
 		boolean result = ctrlUsuarios.verificarNickname("jorge1");
 		assertEquals(expResult, result);
 	}
@@ -156,7 +156,7 @@ public class CtrlUsuariosTest {
 	@Test
 	public void testVerificarEmail() {
 		System.out.println("verificarEmail");
-		boolean expResult = false;
+		boolean expResult = true;
 		boolean result = ctrlUsuarios.verificarEmail("jorge1@gmail.com");
 		assertEquals(expResult, result);
 	}
@@ -295,6 +295,24 @@ public class CtrlUsuariosTest {
 	public void testInfoServicio() {
 		System.out.println("infoServicio");
 		assertEquals(null, ctrlUsuarios.infoServicio());
+	}
+
+        @Test
+	public void testIdCorrecta() {
+		System.out.println("idCorrect");
+                assertTrue(ctrlUsuarios.idCorrecta("jorge1"));
+	}
+
+        @Test
+	public void testPwCorrecta() {
+		System.out.println("infoServicio");
+                assertTrue(ctrlUsuarios.pwCorrecta("jorge1", "pass"));
+	}
+
+        @Test
+	public void testObtenerIdCliente() {
+		System.out.println("infoServicio");
+		assertEquals("jorge1", ctrlUsuarios.obtenerIdCliente("jorge1@gmail.com", "pass"));
 	}
 
 }

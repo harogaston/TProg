@@ -15,7 +15,7 @@ import tprog.logica.interfaces.ICtrlProductos;
 
 public class ServiciosPromocion extends javax.swing.JInternalFrame {
 
-	public ServiciosPromocion(VerInformacionDePromocion padre, HashMap<DTMinServicio, Integer> servicios, ICtrlProductos ctrlProductos) {
+	public ServiciosPromocion(VerInformacionDePromocion padre, Map<DTMinServicio, Integer> servicios, ICtrlProductos ctrlProductos) {
 		this.padre = padre;
 		this.servicios = servicios;
 		this.ctrlProductos = ctrlProductos;

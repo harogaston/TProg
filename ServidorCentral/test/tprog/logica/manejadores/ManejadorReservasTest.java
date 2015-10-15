@@ -20,12 +20,12 @@ import tprog.logica.dt.EstadoReserva;
 
 public class ManejadorReservasTest {
 
-	ManejadorReservas instance;
-	Set<DTMinReserva> minR;
-	Set<DTLineaReserva> set;
-	DTReserva dtr1;
-	Cliente jorge;
-	int aux;
+	private ManejadorReservas instance;
+	private Set<DTMinReserva> minR;
+	private Set<DTLineaReserva> set;
+	private DTReserva dtr1;
+	private Cliente jorge;
+	private int aux;
 
 	public ManejadorReservasTest() {
 	}

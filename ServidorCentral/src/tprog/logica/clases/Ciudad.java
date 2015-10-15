@@ -24,7 +24,8 @@ public class Ciudad {
 	}
 
 	public DTUbicacion crearDT() {
-		DTUbicacion nuevoDT = new DTUbicacion(this.idCiudad, this.pais.getIdPais());
+		DTUbicacion nuevoDT = new DTUbicacion(this.idCiudad, 
+                this.pais.getIdPais());
 		return nuevoDT;
 	}
 }

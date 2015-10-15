@@ -33,18 +33,26 @@ public class Reserva {
 
 		// Creo y agrego las lineasReserva
 		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
-		LineaReserva linea; // debe declararse fuera de los if
+        LineaReserva linea; // debe declararse fuera de los if
 		for (DTLineaReserva dtLinea : dtR.getLineasReserva()) {
 			if (dtLinea.getServicio() != null) {
-				DTMinServicio dtMinS = new DTMinServicio(dtLinea.getNicknameProveedor(), dtLinea.getServicio());
+				DTMinServicio dtMinS = new DTMinServicio(
+                        dtLinea.getNicknameProveedor(), dtLinea.getServicio());
 				Servicio servicio = manejadorP.getServicio(dtMinS);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), servicio, null, dtLinea.getPrecio());
+				linea = new LineaReserva(dtLinea.getCantidad(),
+                        dtLinea.getFechaInicio(), dtLinea.getFechaFin(),
+                        servicio, null, dtLinea.getPrecio());
 			} else if (dtLinea.getPromocion() != null) {
-				DTMinPromocion dtMinP = new DTMinPromocion(dtLinea.getNicknameProveedor(), dtLinea.getPromocion());
+				DTMinPromocion dtMinP = 
+                        new DTMinPromocion(dtLinea.getNicknameProveedor(),
+                        dtLinea.getPromocion());
 				Promocion promo = manejadorP.getPromocion(dtMinP);
-				linea = new LineaReserva(dtLinea.getCantidad(), dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null, promo, dtLinea.getPrecio());
+				linea = new LineaReserva(dtLinea.getCantidad(),
+                        dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null,
+                        promo, dtLinea.getPrecio());
 			} else {
-				throw new Exception("DTLineaReserva sin Servicio o Promocion especificado");
+				throw new Exception("DTLineaReserva sin Servicio o Promocion "
+                        + "especificado");
 			}
 			lineasReserva.add(linea);
 		}

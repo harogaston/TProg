@@ -1,3 +1,5 @@
+<%@page import="tprog.logica.dt.DTPromocion"%>
+<%@page import="tprog.logica.dt.DTMinPromocion"%>
 <%@page import="tprog.logica.dt.DTServicio"%>
 <%@page import="tprog.logica.interfaces.ICtrlProductos"%>
 <%@page import="tprog.logica.interfaces.Fabrica"%>
@@ -30,6 +32,7 @@
 				<ul class="nav nav-pills" role="tablist" style="margin-bottom: 50px">
 					<li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Información</a></li>
 					<li role="presentation"><a href="#servicios" aria-controls="servicios" role="tab" data-toggle="tab">Servicios</a></li>
+					<li role="presentation"><a href="#promociones" aria-controls="promociones" role="tab" data-toggle="tab">Promociones</a></li>
 				</ul>
 
 				<!-- Tab panes -->
@@ -102,6 +105,52 @@
 						</div>
 						<% } else { %>
 						<p> El proveedor no tiene servicios asociados </p>
+						<%
+							}
+						%>
+					</div>
+					
+					<!--Promociones-->
+					<div role="tabpanel" class="tab-pane" id="promociones">
+						<% if (request.getAttribute("promociones") != null) {%>
+						<div class="panel-group" id="accordionPromociones">
+							<%
+								int i = 0;
+								Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
+								for (DTMinPromocion dt : promociones) {
+									Fabrica f = Fabrica.getInstance();
+									ICtrlProductos ctrlProductos = f.getICtrlProductos();
+									ctrlProductos.seleccionarPromocion(dt);
+									DTPromocion promocion = ctrlProductos.infoPromocion();
+									i++;
+							%>
+							<div class="accordion-group">
+								<div class="panel">
+									<div class="panel-heading" style="background-color: rgb(91, 192, 222); color: white" data-toggle="collapse" data-parent="#accordionPromociones" href="#p<%=i%>">
+										<h4 class="panel-title">
+											<%= promocion.getIdPromocion()%>
+										</h4>
+									</div>
+									<div id="p<%=i%>" class="panel-collapse collapse">
+										<div class="panel-body">
+											<%=promocion.toString().replace("\n", "<br>")%>
+										</div>
+										<form action="VerPromocion" class="navbar-form">
+											<div class="input-group">
+												<input type="text" name="idPromocion" value="<%=dt.getIdPromocion()%>" style="display: none">
+												<input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="display: none">
+												<button class="btn btn-info" type="submit">Ir a Promoción</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+							<%
+								}
+							%>
+						</div>
+						<% } else { %>
+						<p> El proveedor no tiene promociones asociadas </p>
 						<%
 							}
 						%>

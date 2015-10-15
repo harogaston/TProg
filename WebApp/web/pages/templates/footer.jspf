@@ -5,12 +5,7 @@
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-5 navbar-text">© 2015 TProg Grupo 17</div>
-				<div class="col-md-5"></div>
-				<div class="col-md-1 pull-right">
-					<form action= "About" class="navbar-form">
-						<button class="btn btn-link" type="submit">About</button>
-					</form>
-				</div>
+				<div class="col-md-6"></div>
 			</div><!-- /.row -->
 		</div><!-- /.container-fluid -->
 	</nav><!-- /.navbar -->

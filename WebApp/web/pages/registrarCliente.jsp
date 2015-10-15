@@ -19,7 +19,7 @@
     <body>
 		<div class="container wrapper" style="padding: 50px; width: 50%">
 			<div class="row">
-				<form action="RegistrarCliente" id="alta" data-toggle="validator" role="form" method="POST">
+				<form action="RegistrarCliente" id="alta" role="form" method="POST">
 					<div class="form-group">
 						<label for="inputNombre" class="control-label">Nombre</label>
 						<input type="text" name= "nombre" id="inputNombre" class="form-control" placeholder="Oliver" required>
@@ -30,14 +30,14 @@
 					</div>
 					<div class="form-group">
 						<label for="inputNickname" class="control-label">Nickname</label>
-						<input type="text" name="nickname" id="nickname" pattern="^[_A-z0-9]{1,}$" class="form-control" id="inputNickname" placeholder="oWood" data-error="El nickname ingresado no es correcto" required>
+						<input type="text" name="nickname" id="nickname" pattern="^[_A-z0-9]{1,}$" class="form-control" id="inputNickname" placeholder="oWood" required>
 						<div class="form-group">
 							<div  id="ajaxResponse"></div> 
                         </div> 
 					</div>
 					<div class="form-group">
 						<label for="mail" class="control-label">Email</label>
-						<input type="email" name="mail" class="form-control" id="mail" placeholder="email@domain" data-error="El email ingresado no es correcto" required>
+						<input type="email" name="mail" class="form-control" id="mail" placeholder="email@domain" required>
 						<div class="form-group">
 							<div  id="ajaxResponse2"></div> 
                         </div> 
@@ -59,7 +59,7 @@
 						<input type="text" name="fNac" id="datepicker" class="form-control" style="width: 100px">
 					</div>
 					<div class="form-group text-right">
-						<button type="submit" class="btn btn-primary">Enviar</button>
+						<button type="submit" id="boton-enviar" class="btn btn-primary" disabled>Enviar</button>
 					</div>
 				</form>
 			</div>

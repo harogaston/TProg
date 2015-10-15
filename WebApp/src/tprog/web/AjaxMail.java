@@ -1,5 +1,6 @@
 package tprog.web;
 
+import org.apache.commons.validator.EmailValidator;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +21,8 @@ public class AjaxMail extends HttpServlet {
 			resultado = "";
 		} else if (id.matches(".*(\\s+).*")) {
 			resultado = "SIN_ESPACIOS";
+		} else if (!EmailValidator.getInstance().isValid(id)) {
+			resultado = "FORMATO_INVALIDO";
 		} else if (!ctrlUsuarios.verificarEmail(id)) {
 			resultado = "OK";
 		} else {

@@ -5,33 +5,33 @@ import tprog.logica.dt.DTLineaReserva;
 
 public class LineaReserva {
 
-	private int Cantidad;
-	private Date FechaInicio;
-	private Date FechaFin;
-	private float Precio;
+	private int cantidad;
+	private Date fechaInicio;
+	private Date fechaFin;
+	private float precio;
 
 	private Servicio servicio;
 	private Promocion promocion;
 
-	public LineaReserva(int cantidad, Date fInicio, Date fFin, Servicio Servicio, Promocion Promocion, float precio) {
-		this.Cantidad = cantidad;
-		this.FechaInicio = fInicio;
-		this.FechaFin = fFin;
+	public LineaReserva(int Cantidad, Date FInicio, Date FFin, Servicio Servicio, Promocion Promocion, float Precio) {
+		this.cantidad = Cantidad;
+		this.fechaInicio = FInicio;
+		this.fechaFin = FFin;
 		this.servicio = Servicio;
 		this.promocion = Promocion;
-		this.Precio = precio;
+		this.precio = Precio;
 	}
 
 	public int getCantidad() {
-		return this.Cantidad;
+		return this.cantidad;
 	}
 
 	public Date getFechaInicio() {
-		return this.FechaInicio;
+		return this.fechaInicio;
 	}
 
 	public Date getFechaFin() {
-		return this.FechaFin;
+		return this.fechaFin;
 	}
 
 	public Servicio getServicio() {
@@ -43,23 +43,23 @@ public class LineaReserva {
 	}
 
 	public float getPrecio() {
-		return this.Precio;
+		return this.precio;
 	}
 
-	public void setCantidad(int cantidad) {
-		this.Cantidad = cantidad;
+	public void setCantidad(int Cantidad) {
+		this.cantidad = Cantidad;
 	}
 
-	public void setFechaInicio(Date finicio) {
-		this.FechaInicio = finicio;
+	public void setFechaInicio(Date Finicio) {
+		this.fechaInicio = Finicio;
 	}
 
-	public void setFechaFin(Date ffin) {
-		this.FechaFin = ffin;
+	public void setFechaFin(Date Ffin) {
+		this.fechaFin = Ffin;
 	}
 
-	public void setServicio(Servicio service) {
-		this.servicio = service;
+	public void setServicio(Servicio Service) {
+		this.servicio = Service;
 	}
 
 	public void setPromocion(Promocion promo) {
@@ -69,9 +69,9 @@ public class LineaReserva {
 	public DTLineaReserva crearDT() {
 		DTLineaReserva dtL = null;
 		if ((this.servicio == null) && (this.promocion != null)) {
-			dtL = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, null, this.promocion.getIdPromocion(), this.promocion.getNicknameProveedor(), this.Precio);
+			dtL = new DTLineaReserva(this.getCantidad(), this.getFechaInicio(), this.getFechaFin(), null, this.getPromocion().getIdPromocion(), this.getPromocion().getNicknameProveedor(), this.getPrecio());
 		} else if ((this.servicio != null) && (this.promocion == null)) {
-			dtL = new DTLineaReserva(this.Cantidad, this.FechaInicio, this.FechaFin, this.servicio.getIdServicio(), null, this.servicio.getNicknameProveedor(), this.Precio);
+			dtL = new DTLineaReserva(this.getCantidad(), this.getFechaInicio(), this.getFechaFin(), this.getServicio().getIdServicio(), null, this.getServicio().getNicknameProveedor(), this.getPrecio());
 		}
 		return dtL;
 	}

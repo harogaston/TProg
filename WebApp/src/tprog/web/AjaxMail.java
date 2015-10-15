@@ -19,7 +19,7 @@ public class AjaxMail extends HttpServlet {
 		if (id.matches("^\\s*$")) {
 			resultado = "";
 		} else if (id.matches(".*(\\s+).*")) {
-			resultado = "SIN_ESPACIOS.";
+			resultado = "SIN_ESPACIOS";
 		} else if (!ctrlUsuarios.verificarEmail(id)) {
 			resultado = "OK";
 		} else {

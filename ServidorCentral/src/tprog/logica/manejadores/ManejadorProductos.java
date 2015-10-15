@@ -66,24 +66,25 @@ public class ManejadorProductos {
 	public DTPromocion infoPromocion(DTMinPromocion dtP) {
 		DTPromocion result = null;
 		if ((!promociones.isEmpty() && promociones.containsKey(dtP.getNicknameP())) 
-                        && ((!promociones.get(dtP.getNicknameP()).isEmpty()
-					&& promociones.get(dtP.getNicknameP()).containsKey(dtP.getIdPromocion())))) {
-				Promocion promo = promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
+                && ((!promociones.get(dtP.getNicknameP()).isEmpty()
+                && promociones.get(dtP.getNicknameP()).containsKey(dtP.getIdPromocion())))) {
+            Promocion promo = 
+                  promociones.get(dtP.getNicknameP()).get(dtP.getIdPromocion());
 				result = promo.crearDT();
-			}
-		
+		}
 		return result;
 	}
 
 	public DTServicio infoServicio(DTMinServicio dtS) {
 		DTServicio result = null;
-		if ((!servicios.isEmpty() && servicios.containsKey(dtS.getNicknameP())) 
-			&& ((!servicios.get(dtS.getNicknameP()).isEmpty()
-					&& servicios.get(dtS.getNicknameP()).containsKey(dtS.getIdServicio())))) {
-				Servicio service = servicios.get(dtS.getNicknameP()).get(dtS.getIdServicio());
-				result = service.crearDT();
-			}
-		
+        final String idServicio = dtS.getIdServicio();
+        final String nickP = dtS.getNicknameP();
+		if ((!servicios.isEmpty() && servicios.containsKey(nickP))
+                && ((!servicios.get(nickP).isEmpty()
+                && servicios.get(nickP).containsKey(idServicio)))){
+            final Servicio service = servicios.get(nickP).get(idServicio);
+            result = service.crearDT();
+		}
 		return result;
 	}
 

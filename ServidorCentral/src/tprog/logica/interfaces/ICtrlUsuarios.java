@@ -12,7 +12,7 @@ import tprog.logica.dt.DTUsuario;
 
 public interface ICtrlUsuarios {
 
-	public Set<DTMinCliente> listarClientes() throws Exception;
+	Set<DTMinCliente> listarClientes() throws Exception;
 
 	public void seleccionarCliente(String nickname);
 

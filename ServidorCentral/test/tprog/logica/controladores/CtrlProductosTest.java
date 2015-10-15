@@ -229,7 +229,7 @@ public class CtrlProductosTest {
                 Ciudad ciudad = new Ciudad("Montevideo");
 		p.agregarCiudad(ciudad);
 		mp.agregarPais(p);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
                 instance.seleccionarOrigen(dtU);
                 instance.seleccionarDestino(dtU);
                 DTMinServicio dts = new DTMinServicio("adippet", "TAM");
@@ -238,7 +238,7 @@ public class CtrlProductosTest {
                 instance.altaServicio("bueno", 150, cats);
                 float nuevoPrecio = 0.0F;
                 instance.cambiarPrecio(nuevoPrecio);
-                assertEquals(nuevoPrecio, instance.infoServicio().getPrecio(),0.0F);
+                assertEquals(nuevoPrecio, instance.infoServicio().getPrecio(), 0.0F);
 	// TODO review the generated test code and remove the default call to fail.
 	}
 
@@ -256,7 +256,7 @@ public class CtrlProductosTest {
                 Ciudad ciudad = new Ciudad("Montevideo");
 		p.agregarCiudad(ciudad);
 		mp.agregarPais(p);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
                 instance.seleccionarOrigen(dtU);
                 instance.seleccionarDestino(dtU);
                 DTMinServicio dts = new DTMinServicio("adippet", "TAM");
@@ -334,14 +334,14 @@ public class CtrlProductosTest {
 		p.agregarCiudad(ciudad);
                 p.agregarCiudad(new Ciudad("Maldonado"));
 		mp.agregarPais(p);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
                 instance.seleccionarOrigen(dtU);
                 instance.seleccionarDestino(dtU);
                 DTMinServicio dts = new DTMinServicio("adippet", "TAM");
                 instance.seleccionarServicio(dts);
                 instance.seleccionarProveedor("adippet");
                 instance.altaServicio("bueno", 150, cats);
-                DTUbicacion cambio = new DTUbicacion("Maldonado","Uruguay");
+                DTUbicacion cambio = new DTUbicacion("Maldonado", "Uruguay");
                 instance.cambiarOrigen(cambio);
                 assertEquals(cambio.toString(), instance.getOrigen().toString());
 	
@@ -362,14 +362,14 @@ public class CtrlProductosTest {
 		p.agregarCiudad(ciudad);
                 p.agregarCiudad(new Ciudad("Maldonado"));
 		mp.agregarPais(p);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+                DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
                 instance.seleccionarOrigen(dtU);
                 instance.seleccionarDestino(dtU);
                 DTMinServicio dts = new DTMinServicio("adippet", "TAM");
                 instance.seleccionarServicio(dts);
                 instance.seleccionarProveedor("adippet");
                 instance.altaServicio("bueno", 150, cats);
-                DTUbicacion cambio = new DTUbicacion("Maldonado","Uruguay");
+                DTUbicacion cambio = new DTUbicacion("Maldonado", "Uruguay");
                 instance.cambiarDestino(dtU);
                 assertEquals(cambio.toString(), instance.getDestino().toString());
 	 // TODO review the generated test code and remove the default call to fail.

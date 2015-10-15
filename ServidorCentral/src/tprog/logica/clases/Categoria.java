@@ -10,25 +10,25 @@ public interface Categoria {
      *
      * @return
      */
-    public abstract Set<DTMinServicio> listarServicios();
+    abstract Set<DTMinServicio> listarServicios();
 
     /**
      *
      * @return
      */
-    public abstract boolean esCategoriaSimple();
+    abstract boolean esCategoriaSimple();
 
     /**
      *
      * @return
      */
-    public String getIdCategoria();
+    String getIdCategoria();
 
     /**
      *
      * @return
      */
-    public Compuesta getPadre();
+    Compuesta getPadre();
 
 	public boolean esCategoriaPadre();
 

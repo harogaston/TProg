@@ -47,7 +47,7 @@
 			<div class="navbar-nav navbar-right">
 				<form action= "Carrito" class="navbar-form">
 					<button class="btn btn-warning" type="submit">
-						<span class="badge"><%if((Integer)session.getAttribute("cant_items") > 0){%>${cant_items}<%}%></span> <i class="glyphicon glyphicon-shopping-cart"></i> Carrito
+						<span class="badge"><%if ((Integer) session.getAttribute("cant_items") > 0) {%>${cant_items}<%}%></span> <i class="glyphicon glyphicon-shopping-cart"></i> Carrito
 					</button>
 				</form>
 			</div>
@@ -58,14 +58,7 @@
 						<%=" " + session.getAttribute("usuario_logueado")%>
 					</button>
 				</form>
-			</div>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
-                            <form action= "VerProveedores" class="navbar-form" method="POST">
-					<button class="btn btn-default" type="submit">
-						<i class="glyphicon glyphicon-list-alt"></i> Proveedores
-					</button>
-				</form>
-			</div>                
+			</div>               
 			<%
 			} else {
 			%>
@@ -88,13 +81,6 @@
 
 					<button class="btn btn-default" type="submit">
 						<i class="glyphicon glyphicon-edit"></i> Registrarse
-					</button>
-				</form>
-			</div>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
-                            <form action= "VerProveedores" class="navbar-form" method="POST">
-					<button class="btn btn-default" type="submit">
-						<i class="glyphicon glyphicon-list-alt"></i> Proveedores
 					</button>
 				</form>
 			</div>

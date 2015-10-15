@@ -3,6 +3,7 @@ package tprog.logica.controladores;
 import java.util.Set;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
+import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
@@ -130,6 +131,12 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	public Set<DTMinServicio> listarServiciosProveedor() {
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		return manejadorU.listarServiciosProveedor(this.nicknameP);
+	}
+
+	@Override
+	public Set<DTMinPromocion> listarPromocionesProveedor() {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.listarPromocionesProveedor(this.nicknameP);
 	}
 
 	@Override

@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.interfaces.Fabrica;
@@ -50,7 +51,9 @@ public class VerInfoProveedor extends HttpServlet {
 			DTProveedor dt = ctrlUsuarios.infoProveedor();
 
 			Set<DTMinServicio> servicios = ctrlUsuarios.listarServiciosProveedor();
+			Set<DTMinPromocion> promociones = ctrlUsuarios.listarPromocionesProveedor();
 			request.setAttribute("servicios", servicios);
+			request.setAttribute("promociones", promociones);
 			request.setAttribute("nick", dt.getNickname());
 			String nombreCompleto = dt.getNombre() + " " + dt.getApellido();
 			request.setAttribute("nombre", nombreCompleto);
@@ -69,11 +72,4 @@ public class VerInfoProveedor extends HttpServlet {
 			Logger.getLogger(VerInfoProveedor.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
-
-	
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
-
 }

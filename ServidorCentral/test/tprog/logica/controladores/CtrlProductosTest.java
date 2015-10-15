@@ -227,18 +227,19 @@ public class CtrlProductosTest {
                 Pais pais = new Pais("Uruguay");
                 ManejadorProductos manejadorP = ManejadorProductos.getInstace();
                 Ciudad ciudad = new Ciudad("Montevideo");
+
 		pais.agregarCiudad(ciudad);
 		manejadorP.agregarPais(pais);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
-                instance.seleccionarOrigen(dtU);
-                instance.seleccionarDestino(dtU);
-                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
-                instance.seleccionarServicio(dts);
-                instance.seleccionarProveedor("adippet");
-                instance.altaServicio("bueno", 150, cats);
-                float nuevoPrecio = 0.0F;
-                instance.cambiarPrecio(nuevoPrecio);
-                assertEquals(nuevoPrecio, instance.infoServicio().getPrecio(),0.0F);
+        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        instance.seleccionarOrigen(dtU);
+        instance.seleccionarDestino(dtU);
+        DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+        instance.seleccionarServicio(dts);
+        instance.seleccionarProveedor("adippet");
+        instance.altaServicio("bueno", 150, cats);
+        float nuevoPrecio = 0.0F;
+        instance.cambiarPrecio(nuevoPrecio);
+        assertEquals(nuevoPrecio, instance.infoServicio().getPrecio(), 0.0F);
 	// TODO review the generated test code and remove the default call to fail.
 	}
 
@@ -247,26 +248,26 @@ public class CtrlProductosTest {
 	 */
 	@Test
 	public void testCambiarDescripcion() {
-                System.out.println("cambiarDescripcion");
-                Set<String> cats = new HashSet();
-                cats.add("Económico");
+        System.out.println("cambiarDescripcion");
+        Set<String> cats = new HashSet();
+        cats.add("Económico");
 		cats.add("Auto");
-                Pais pais = new Pais("Uruguay");
-                ManejadorProductos manejadorP = ManejadorProductos.getInstace();
-                Ciudad ciudad = new Ciudad("Montevideo");
+        Pais pais = new Pais("Uruguay");
+        ManejadorProductos manejadorP = ManejadorProductos.getInstace();
+        Ciudad ciudad = new Ciudad("Montevideo");
 		pais.agregarCiudad(ciudad);
 		manejadorP.agregarPais(pais);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
-                instance.seleccionarOrigen(dtU);
-                instance.seleccionarDestino(dtU);
-                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
-                instance.seleccionarServicio(dts);
-                instance.seleccionarProveedor("adippet");
-                instance.altaServicio("bueno", 150, cats);
-                String descripcion = "";
-                instance.cambiarDescripcion(descripcion);
-                assertEquals(descripcion, instance.infoServicio().getDescripcion());
-        }
+        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        instance.seleccionarOrigen(dtU);
+        instance.seleccionarDestino(dtU);
+        DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+        instance.seleccionarServicio(dts);
+        instance.seleccionarProveedor("adippet");
+        instance.altaServicio("bueno", 150, cats);
+        String descripcion = "";
+        instance.cambiarDescripcion(descripcion);
+        assertEquals(descripcion, instance.infoServicio().getDescripcion());
+    }
 
 	 /**
 	 * Test of listarImagenes method, of class CtrlProductos.
@@ -324,27 +325,26 @@ public class CtrlProductosTest {
 	 */
 	@Test
 	public void testCambiarOrigen() {
-                System.out.println("cambiarOrigen");
-                Set<String> cats = new HashSet();
-                cats.add("Económico");
+        System.out.println("cambiarOrigen");
+        Set<String> cats = new HashSet();
+        cats.add("Económico");
 		cats.add("Auto");
-                Pais pais = new Pais("Uruguay");
-                ManejadorProductos manejadorP = ManejadorProductos.getInstace();
-                Ciudad ciudad = new Ciudad("Montevideo");
+        Pais pais = new Pais("Uruguay");
+        ManejadorProductos manejadorP = ManejadorProductos.getInstace();
+        Ciudad ciudad = new Ciudad("Montevideo");
 		pais.agregarCiudad(ciudad);
-                pais.agregarCiudad(new Ciudad("Maldonado"));
+        pais.agregarCiudad(new Ciudad("Maldonado"));
 		manejadorP.agregarPais(pais);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
-                instance.seleccionarOrigen(dtU);
-                instance.seleccionarDestino(dtU);
-                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
-                instance.seleccionarServicio(dts);
-                instance.seleccionarProveedor("adippet");
-                instance.altaServicio("bueno", 150, cats);
-                DTUbicacion cambio = new DTUbicacion("Maldonado","Uruguay");
-                instance.cambiarOrigen(cambio);
-                assertEquals(cambio.toString(), instance.getOrigen().toString());
-	
+        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        instance.seleccionarOrigen(dtU);
+        instance.seleccionarDestino(dtU);
+        DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+        instance.seleccionarServicio(dts);
+        instance.seleccionarProveedor("adippet");
+        instance.altaServicio("bueno", 150, cats);
+        DTUbicacion cambio = new DTUbicacion("Maldonado", "Uruguay");
+        instance.cambiarOrigen(cambio);
+        assertEquals(cambio.toString(), instance.getOrigen().toString());
 	}
 
 	 /**
@@ -352,28 +352,26 @@ public class CtrlProductosTest {
 	 */
 	@Test
 	public void testCambiarDestino() {
-                System.out.println("cambiarDestino");
-                Set<String> cats = new HashSet();
-                cats.add("Económico");
+        System.out.println("cambiarDestino");
+        Set<String> cats = new HashSet();
+        cats.add("Económico");
 		cats.add("Auto");
-                Pais pais = new Pais("Uruguay");
-                ManejadorProductos manejadorP = ManejadorProductos.getInstace();
-                Ciudad ciudad = new Ciudad("Montevideo");
+        Pais pais = new Pais("Uruguay");
+        ManejadorProductos manejadorP = ManejadorProductos.getInstace();
+        Ciudad ciudad = new Ciudad("Montevideo");
 		pais.agregarCiudad(ciudad);
-                pais.agregarCiudad(new Ciudad("Maldonado"));
+        pais.agregarCiudad(new Ciudad("Maldonado"));
 		manejadorP.agregarPais(pais);
-                DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
-                instance.seleccionarOrigen(dtU);
-                instance.seleccionarDestino(dtU);
-                DTMinServicio dts = new DTMinServicio("adippet", "TAM");
-                instance.seleccionarServicio(dts);
-                instance.seleccionarProveedor("adippet");
-                instance.altaServicio("bueno", 150, cats);
-                DTUbicacion cambio = new DTUbicacion("Maldonado","Uruguay");
-                instance.cambiarDestino(dtU);
-                assertEquals(cambio.toString(), instance.getDestino().toString());
-	 // TODO review the generated test code and remove the default call to fail.
-	 
+        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        instance.seleccionarOrigen(dtU);
+        instance.seleccionarDestino(dtU);
+        DTMinServicio dts = new DTMinServicio("adippet", "TAM");
+        instance.seleccionarServicio(dts);
+        instance.seleccionarProveedor("adippet");
+        instance.altaServicio("bueno", 150, cats);
+        DTUbicacion cambio = new DTUbicacion("Maldonado", "Uruguay");
+        instance.cambiarDestino(dtU);
+        assertEquals(cambio.toString(), instance.getDestino().toString());
 	}
 
 	 /**
@@ -385,7 +383,6 @@ public class CtrlProductosTest {
 		Set<String> expResult = new HashSet();
 		Set<String> result = instance.listarCategoriasServicio();
 		assertEquals(expResult, result);
-
 	}
 
 	/**

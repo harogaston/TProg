@@ -12,7 +12,9 @@ $(document).ready(function () {
 				div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> El nickname ingresado no esta disponible</h4></div>');
 			}else if (responseText === 'SIN_ESPACIOS') {
 				div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> No debe contener espacios</h4></div>');
-			};
+			}else if (responseText === ''){
+                            div.text('').html('<div><h4></h4></div>');
+                        };
 		});
 	});
 });
@@ -31,7 +33,9 @@ $(document).ready(function () {
 			}else if (responseText === 'SIN_ESPACIOS') {
                                 div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> No debe contener espacios</h4></div>');
 				
-			};
+			}else if (responseText === ''){
+                            div.text('').html('<div><h4> </h4></div>');;
+                        };
 		});
 	});
 });

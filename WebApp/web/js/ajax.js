@@ -6,11 +6,12 @@ $(document).ready(function () {
 		}, function (responseText) {
 			var div = $('#ajaxResponse');
 			if (responseText === 'OK') {
-				div.text("Nickname disponible.");
+                            div.text('').html('<div><h4><i class="glyphicon glyphicon-ok"></i> <a style="color:##00FF00"> Nickname disponible</h4></div>');
+                            				
 			} else if (responseText === 'EN_USO') {
-				div.text("El nickname ingresado no esta disponible.");
+				div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> El nickname ingresado no esta disponible</h4></div>');
 			}else if (responseText === 'SIN_ESPACIOS') {
-				div.text("No debe contener espacios.");
+				div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> No debe contener espacios</h4></div>');
 			};
 		});
 	});
@@ -24,11 +25,12 @@ $(document).ready(function () {
 		}, function (responseText) {
 			var div = $('#ajaxResponse2');
 			if (responseText === 'OK') {
-				div.text("Email disponible.");
+                                div.text('').html('<div><h4><i class="glyphicon glyphicon-ok"></i> <a style="color:##00FF00"> Email disponible</h4></div>');
 			} else if (responseText === 'EN_USO') {
-				div.text("El email ingresado no esta disponible.");
+				div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> El email no esta disponible</h4></div>');
 			}else if (responseText === 'SIN_ESPACIOS') {
-				div.text("No debe contener espacios.");
+                                div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> No debe contener espacios</h4></div>');
+				
 			};
 		});
 	});

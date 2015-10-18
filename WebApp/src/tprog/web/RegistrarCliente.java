@@ -1,6 +1,11 @@
 package tprog.web;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,15 +22,48 @@ import org.apache.commons.validator.routines.EmailValidator;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlUsuarios;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
+         
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		try {
+                // configures upload settings
+        // checks if the request actually contains upload file
+                boolean isMultiPart = ServletFileUpload.isMultipartContent(request);
+                if (isMultiPart){
+                    ServletFileUpload upload = new ServletFileUpload();
+                    try{
+                        FileItemIterator itr = upload.getItemIterator(request);
+                        while(itr.hasNext()){
+                            FileItemStream item = itr.next();
+                            if(item.isFormField()){
+                                //do field specific process
+                                
+                            }else{
+                                //do field upload specific process
+                                String path = getServletContext().getRealPath("/");
+                                //call a method to upload file
+                                if (FileUpload.processFile(path, item)){
+                                    
+                                }else response.getWriter().println("file uploaded failed");
+                            }
+                        }
+                        
+                    
+               
+		
+                        
+                        
 			// leo los datos -falta checkear que sean correctos y esas manos-
 			String id = request.getParameter("nickname");
 			String mail = request.getParameter("mail");
@@ -95,8 +133,13 @@ public class RegistrarCliente extends HttpServlet {
 				request.getRequestDispatcher("Home").forward(request, response);
 			}
 
-		} catch (ParseException ex) {
+		}catch(FileUploadException fue){
+                        fue.printStackTrace();
+                    } catch (ParseException ex) {
 			Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		} catch (Exception ex) {
+             Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
 	}
+}
 }

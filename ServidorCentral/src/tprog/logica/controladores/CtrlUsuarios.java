@@ -171,5 +171,11 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		return manejadorU.obtenerIdCliente(identificador, pass);
 	}
+        
+        @Override
+        public void cambiarImagenCliente(String path){
+                ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		manejadorU.cambiarImagenCliente(this.nicknameU, path);
+        }
 
 }

@@ -50,10 +50,15 @@
 									</div>
 								</div>
 							</div>
+                                                                        <div>
                                                         <form action="upload" method="POST" class="col-md-9" enctype="multipart/form-data">
-                                                                <input type="file" name="file"/>
-                                                                <input type="submit" value="upload" />
-                                                        </form>                
+                                                                
+                                                                <input type="file"  name="file" />
+                                                                <button class="btn btn-info" type="submit">
+                                                                    <i class="glyphicon glyphicon-upload"></i> Subir Imagen
+                                                                </button>
+                                                        </form>    
+                                                                        </div>
 						</div>
 					</div>
 

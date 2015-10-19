@@ -279,6 +279,14 @@ public class CtrlProductos implements ICtrlProductos {
     public String getNicknameP() {
         return nicknameP;
     }
-        
-        
+    
+    public Set<DTServicio> listarServiciosPorTermino(String termino){
+        ManejadorProductos manejadorP = ManejadorProductos.getInstance();
+		return manejadorP.listarServiciosPorTermino(termino);
+    }
+    
+    public Set<DTPromocion> listarPromocionesPorTermino(String termino){
+        ManejadorProductos manejadorP = ManejadorProductos.getInstance();
+		return manejadorP.listarPromocionesPorTermino(termino);
+    }
 }

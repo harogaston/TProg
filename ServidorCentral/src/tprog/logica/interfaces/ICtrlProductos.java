@@ -77,4 +77,8 @@ public interface ICtrlProductos {
 	public boolean idPromocionDisponible(String idPromocion);
 
 	public void altaPromocion(float descuento);
+    
+    public Set<DTServicio> listarServiciosPorTermino(String termino);
+    
+    public Set<DTPromocion> listarPromocionesPorTermino(String termino);
 }

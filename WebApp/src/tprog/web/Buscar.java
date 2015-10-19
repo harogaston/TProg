@@ -138,39 +138,9 @@ public class Buscar extends HttpServlet {
 			} else if (busqueda != null && !busqueda.equals("null")) {
 				System.out.println("if de busqueda");
 				// Busco servicios que contengan el término buscado
-				if (!serviciosTodos.isEmpty()) {
-					for (DTMinServicio dtMinS : serviciosTodos) {
-						ctrlProductos.seleccionarServicio(dtMinS);
-						DTServicio infoServicio = ctrlProductos.infoServicio();
-						Set<String> listaCategoriasServicio = ctrlProductos.listarCategoriasServicio();
-
-						boolean matcheaServicio = false;
-						for (String categoria : listaCategoriasServicio) {
-							// Me fijo si el termino buscado conincide con algo del servicio
-							if ( StringUtils.containsIgnoreCase(categoria, busqueda) || StringUtils.containsIgnoreCase(infoServicio.getDescripcion(), busqueda)
-									|| StringUtils.containsIgnoreCase(infoServicio.getIdServicio(), busqueda)) {
-								matcheaServicio = true;
-								break;
-							}
-						}
-						if (matcheaServicio) {
-							serviciosResultado.add(infoServicio);
-						}
-					}
-				}
-
-				// Busco promociones que contengan el término buscado
-				if (!promocionesTodas.isEmpty()) {
-					for (DTMinPromocion dtMinP : promocionesTodas) {
-						ctrlProductos.seleccionarPromocion(dtMinP);
-						DTPromocion infoPromocion = ctrlProductos.infoPromocion();
-
-						// Me fijo si el termino buscado conincide con algo de la promoción
-						if (StringUtils.containsIgnoreCase(infoPromocion.getIdPromocion(), busqueda)) {
-							promocionesResultado.add(infoPromocion);
-						}
-					}
-				}
+				serviciosResultado = ctrlProductos.listarServiciosPorTermino(busqueda);
+                // Busco promociones que contengan el término buscado
+				promocionesResultado = ctrlProductos.listarPromocionesPorTermino(busqueda);
 				// Si se seleccionó una categoría del árbol
 			} else if (categoriaSeleccionada != null && !categoriaSeleccionada.equals("null")) {
 				System.out.println("if de categorias");

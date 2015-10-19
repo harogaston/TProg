@@ -230,7 +230,7 @@ public class CtrlProductosTest {
 
 		pais.agregarCiudad(ciudad);
 		manejadorP.agregarPais(pais);
-        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
         instance.seleccionarOrigen(dtU);
         instance.seleccionarDestino(dtU);
         DTMinServicio dts = new DTMinServicio("adippet", "TAM");
@@ -257,7 +257,7 @@ public class CtrlProductosTest {
         Ciudad ciudad = new Ciudad("Montevideo");
 		pais.agregarCiudad(ciudad);
 		manejadorP.agregarPais(pais);
-        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
         instance.seleccionarOrigen(dtU);
         instance.seleccionarDestino(dtU);
         DTMinServicio dts = new DTMinServicio("adippet", "TAM");
@@ -335,7 +335,7 @@ public class CtrlProductosTest {
 		pais.agregarCiudad(ciudad);
         pais.agregarCiudad(new Ciudad("Maldonado"));
 		manejadorP.agregarPais(pais);
-        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
         instance.seleccionarOrigen(dtU);
         instance.seleccionarDestino(dtU);
         DTMinServicio dts = new DTMinServicio("adippet", "TAM");
@@ -362,7 +362,7 @@ public class CtrlProductosTest {
 		pais.agregarCiudad(ciudad);
         pais.agregarCiudad(new Ciudad("Maldonado"));
 		manejadorP.agregarPais(pais);
-        DTUbicacion dtU = new DTUbicacion("Montevideo","Uruguay");
+        DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
         instance.seleccionarOrigen(dtU);
         instance.seleccionarDestino(dtU);
         DTMinServicio dts = new DTMinServicio("adippet", "TAM");

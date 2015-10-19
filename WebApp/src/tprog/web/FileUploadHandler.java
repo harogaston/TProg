@@ -53,7 +53,7 @@ public class FileUploadHandler extends HttpServlet {
                //File uploaded successfully
                
                //request.setAttribute("message", "File Uploaded Successfully");
-               request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
+               request.getRequestDispatcher("Home").forward(request, response);
             } catch (Exception ex) {
                request.setAttribute("message", "File Upload Failed due to " + ex);
             }          

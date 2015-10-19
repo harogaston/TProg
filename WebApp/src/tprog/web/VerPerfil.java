@@ -35,7 +35,7 @@ public class VerPerfil extends HttpServlet {
 				Date fechaNacimiento = dtC.getFechaNacimiento();
 				String fNac = Integer.toString(fechaNacimiento.getDate()) + "-"
 						+ Integer.toString(fechaNacimiento.getMonth() + 1) + "-"
-						+ Integer.toString(fechaNacimiento.getYear()) + "\n";
+						+ Integer.toString(fechaNacimiento.getYear() + 1900) + "\n";
 				request.setAttribute("fNac", fNac);
 				request.setAttribute("email", dtC.getEmail());
 				request.setAttribute("imagen", dtC.getImagen());

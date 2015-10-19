@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,7 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import tprog.logica.interfaces.ICtrlReservas;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
@@ -50,6 +52,7 @@ public class RegistrarCliente extends HttpServlet {
 			String fechaNac = request.getParameter("fNac");
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateNac = sourceFormat.parse(fechaNac);
+					System.err.println("XXXXX " +Integer.toString(dateNac.getYear() + 1900)); 
 			EstadoSesion nuevoEstado;
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios cu = f.getICtrlUsuarios();
@@ -76,8 +79,8 @@ public class RegistrarCliente extends HttpServlet {
 			}
 			if (okNickMail) {
 				//Verificacion de contraseña
-				boolean okPassword1 = contrasena.length() >= 4 && contrasena.length() <= 20;
-				boolean okPassword2 = contrasena2.length() >= 4 && contrasena2.length() <= 20;
+				boolean okPassword1 = contrasena.length() >= 3 && contrasena.length() <= 20;
+				boolean okPassword2 = contrasena2.length() >= 3 && contrasena2.length() <= 20;
 				boolean okPassword = (okPassword1 && okPassword2 && contrasena.equals(contrasena2));
 				// Verificación de nombre y apellido
 				boolean okNombre = !nombre.matches("^\\s*$");
@@ -88,9 +91,18 @@ public class RegistrarCliente extends HttpServlet {
 					DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
 					cu.ingresarDatosUsuario(dtU, false);
 					cu.altaUsuario();
-
-					//logueo el usuario recien registrado
-					request.getRequestDispatcher("IniciarSesion").forward(request, response);
+                                        
+                                        //ya logueo el usuario registrado
+                                        
+                                        ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+                                        cr.liberarMemoriaControlador();
+                                        session.setAttribute("ctrlReservas", cr);
+                                        nuevoEstado = EstadoSesion.OK_LOGIN;
+                                        request.getSession().setAttribute("usuario_logueado", id);
+                                        session.setAttribute("estado_sesion", nuevoEstado);
+                                        session.setAttribute("cant_items", 0);
+                                    
+					request.getRequestDispatcher("/pages/subirImagen.jsp").forward(request, response);
 				} else {
 					request.getRequestDispatcher("Home").forward(request, response);
 				}

@@ -1,11 +1,16 @@
 package tprog.web.carga;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,75 +53,85 @@ public class CtrlCarga extends HttpServlet {
 		request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 
-	public void typeaheadInit(HttpServletRequest request){
-			// Obtengo todos los servicios del sistema
-			Fabrica f = Fabrica.getInstance();
-			ICtrlProductos ctrlProductos = f.getICtrlProductos();
-			Set<DTMinServicio> serviciosTodos;
-			try {
-				serviciosTodos = ctrlProductos.listarServicios();
-			} catch (Exception ex) {
-				serviciosTodos = new HashSet();
-			}
+	public void typeaheadInit(HttpServletRequest request) {
+		// Obtengo todos los servicios del sistema
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		Set<DTMinServicio> serviciosTodos;
+		try {
+			serviciosTodos = ctrlProductos.listarServicios();
+		} catch (Exception ex) {
+			serviciosTodos = new HashSet();
+		}
 
-			// Obtengo todas las promociones del sistema
-			Set<DTMinPromocion> promocionesTodas;
-			try {
-				promocionesTodas = ctrlProductos.listarPromociones();
-			} catch (Exception ex) {
-				promocionesTodas = new HashSet();
-			}
+		// Obtengo todas las promociones del sistema
+		Set<DTMinPromocion> promocionesTodas;
+		try {
+			promocionesTodas = ctrlProductos.listarPromociones();
+		} catch (Exception ex) {
+			promocionesTodas = new HashSet();
+		}
 
-			// TYPEAHEAD
-			JSONArray termsArray = new JSONArray();
-			if (!serviciosTodos.isEmpty()) {
-				for (DTMinServicio dtMinS : serviciosTodos) {
-					termsArray.add(dtMinS.getIdServicio());
-				}
+		// TYPEAHEAD
+		JSONArray termsArray = new JSONArray();
+		if (!serviciosTodos.isEmpty()) {
+			for (DTMinServicio dtMinS : serviciosTodos) {
+				termsArray.add(dtMinS.getIdServicio());
 			}
-			if (!promocionesTodas.isEmpty()) {
-				for (DTMinPromocion dtMinP : promocionesTodas) {
-					termsArray.add(dtMinP.getIdPromocion());
-				}
+		}
+		if (!promocionesTodas.isEmpty()) {
+			for (DTMinPromocion dtMinP : promocionesTodas) {
+				termsArray.add(dtMinP.getIdPromocion());
 			}
-			request.getSession().setAttribute("terminos", termsArray);
+		}
+		request.getSession().setAttribute("terminos", termsArray);
 	}
-	
+
 	public void cargarDatos() throws IOException {
-		//Alta de Clientes
 		ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-		DTCliente dtC = new DTCliente("oWood", "123", "Oliver", "Wood", "quidditch28@gmail.com",
-				"imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<>());
-		mu.altaCliente(dtC);
-		dtC = new DTCliente("eWatson", "123", "Emma", "Watson", "e.watson@gmail.com",
-				"imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<>());
-		mu.altaCliente(dtC);
-		dtC = new DTCliente("BruceS", "123", "Bruce", "Sewell", "bruce.sewell@gmail.com",
-				null, new Date(1978, 12 - 1, 3), new HashSet<>());
-		mu.altaCliente(dtC);
-		dtC = new DTCliente("JeffW", "123", "Jeff", "Williams", "jeff.williams@gmail.com",
-				null, new Date(1984, 11 - 1, 27), new HashSet<>());
-		mu.altaCliente(dtC);
-		DTProveedor dtP = new DTProveedor("tCook", "123", "Tim", "Cook", "air.f@gmail.com",
-				"imagenes/proveedores/tCook.jpg",
-				new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
-		mu.altaProveedor(dtP);
-		dtP = new DTProveedor("moody", "123", "Alastor", "Moody", "eu.car@eucar.com",
-				"imagenes/proveedores/moody.jpg",
-				new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
-		mu.altaProveedor(dtP);
-		dtP = new DTProveedor("remus", "123", "Remus", "Lupin", "iberia@gmail.com",
-				"imagenes/proveedores/remus.jpg",
-				new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
-		mu.altaProveedor(dtP);
-		dtP = new DTProveedor("adippet", "123", "Armando", "Dippet", "tam@outlook.com",
-				"imagenes/proveedores/adippet.jpg",
-				new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
-		mu.altaProveedor(dtP);
-		dtP = new DTProveedor("mHooch", "123", "Madam", "Hooch", "segHogar@gmail.com",
-				"imagenes/proveedores/mHooch.jpg",
-				new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
-		mu.altaProveedor(dtP);
+		try {
+			//Alta de Clientes
+			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+			
+			DTCliente dtC;
+
+			dtC = new DTCliente("oWood", "123", "Oliver", "Wood", "quidditch28@gmail.com",
+					"imagenes/clientes/oWood.jpg", sourceFormat.parse("28/12/1988"), new HashSet<>());
+
+			mu.altaCliente(dtC);
+			dtC = new DTCliente("eWatson", "123", "Emma", "Watson", "e.watson@gmail.com",
+					"imagenes/clientes/eWatson.jpg", sourceFormat.parse("15/04/1990"), new HashSet<>());
+			mu.altaCliente(dtC);
+			dtC = new DTCliente("BruceS", "123", "Bruce", "Sewell", "bruce.sewell@gmail.com",
+					null, sourceFormat.parse("3/12/1978"), new HashSet<>());
+			mu.altaCliente(dtC);
+			dtC = new DTCliente("JeffW", "123", "Jeff", "Williams", "jeff.williams@gmail.com",
+					null, sourceFormat.parse("27/11/1984"), new HashSet<>());
+			mu.altaCliente(dtC);
+
+			DTProveedor dtP = new DTProveedor("tCook", "123", "Tim", "Cook", "air.f@gmail.com",
+					"imagenes/proveedores/tCook.jpg",
+					sourceFormat.parse("1/11/1960"), "AirFrance", "http://www.airfrance.com/");
+			mu.altaProveedor(dtP);
+			dtP = new DTProveedor("moody", "123", "Alastor", "Moody", "eu.car@eucar.com",
+					"imagenes/proveedores/moody.jpg",
+					sourceFormat.parse("2/09/1965"), "EuropCar", "http://www.europcar.com.uy/");
+			mu.altaProveedor(dtP);
+			dtP = new DTProveedor("remus", "123", "Remus", "Lupin", "iberia@gmail.com",
+					"imagenes/proveedores/remus.jpg",
+					sourceFormat.parse("4/05/1970"), "Iberia", "http://www.iberia.com/uy/");
+			mu.altaProveedor(dtP);
+			dtP = new DTProveedor("adippet", "123", "Armando", "Dippet", "tam@outlook.com",
+					"imagenes/proveedores/adippet.jpg",
+					sourceFormat.parse("12/02/1967"), "Tam", "http://www.tam.com.br/");
+			mu.altaProveedor(dtP);
+			dtP = new DTProveedor("mHooch", "123", "Madam", "Hooch", "segHogar@gmail.com",
+					"imagenes/proveedores/mHooch.jpg",
+					sourceFormat.parse("5/08/1963"), "Segundo Hogar", "http://www.segundohogar.com/");
+			mu.altaProveedor(dtP);
+		} catch (ParseException ex) {
+			Logger.getLogger(CtrlCarga.class.getName()).log(Level.SEVERE, null, ex);
+		}
 		ManejadorProductos mp = ManejadorProductos.getInstance();
 		mp.altaCategoria("Vuelos", null);
 		mp.altaCategoria("Empresas", "Vuelos");

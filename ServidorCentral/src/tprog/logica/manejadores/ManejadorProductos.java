@@ -450,5 +450,16 @@ public class ManejadorProductos {
     public void setUbicaciones(Map<String, Pais> ubicaciones) {
         this.ubicaciones = ubicaciones;
     }
-        
+    
+    public Set<DTServicio> listarServiciosPorTermino(String termino){
+        Set<DTServicio> result = new HashSet<DTServicio>();
+        for (Map<String, Servicio> map : servicios.values()){
+            for (Servicio serv : map.values()){
+                if (serv.getIdServicio().contains(termino)){
+                    result.add(serv.crearDT());
+                }
+            }
+        }
+        return result;
+    }
 }

@@ -95,37 +95,37 @@ public class CtrlCarga extends HttpServlet {
 			
 			DTCliente dtC;
 
-			dtC = new DTCliente("oWood", "1234", "Oliver", "Wood", "quidditch28@gmail.com",
+			dtC = new DTCliente("oWood", "123", "Oliver", "Wood", "quidditch28@gmail.com",
 					"imagenes/clientes/oWood.jpg", sourceFormat.parse("28/12/1988"), new HashSet<>());
 
 			mu.altaCliente(dtC);
-			dtC = new DTCliente("eWatson", "1234", "Emma", "Watson", "e.watson@gmail.com",
+			dtC = new DTCliente("eWatson", "123", "Emma", "Watson", "e.watson@gmail.com",
 					"imagenes/clientes/eWatson.jpg", sourceFormat.parse("15/04/1990"), new HashSet<>());
 			mu.altaCliente(dtC);
-			dtC = new DTCliente("BruceS", "1234", "Bruce", "Sewell", "bruce.sewell@gmail.com",
+			dtC = new DTCliente("BruceS", "123", "Bruce", "Sewell", "bruce.sewell@gmail.com",
 					null, sourceFormat.parse("3/12/1978"), new HashSet<>());
 			mu.altaCliente(dtC);
-			dtC = new DTCliente("JeffW", "1234", "Jeff", "Williams", "jeff.williams@gmail.com",
+			dtC = new DTCliente("JeffW", "123", "Jeff", "Williams", "jeff.williams@gmail.com",
 					null, sourceFormat.parse("27/11/1984"), new HashSet<>());
 			mu.altaCliente(dtC);
 
-			DTProveedor dtP = new DTProveedor("tCook", "1234", "Tim", "Cook", "air.f@gmail.com",
+			DTProveedor dtP = new DTProveedor("tCook", "123", "Tim", "Cook", "air.f@gmail.com",
 					"imagenes/proveedores/tCook.jpg",
 					sourceFormat.parse("1/11/1960"), "AirFrance", "http://www.airfrance.com/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("moody", "1234", "Alastor", "Moody", "eu.car@eucar.com",
+			dtP = new DTProveedor("moody", "123", "Alastor", "Moody", "eu.car@eucar.com",
 					"imagenes/proveedores/moody.jpg",
 					sourceFormat.parse("2/09/1965"), "EuropCar", "http://www.europcar.com.uy/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("remus", "1234", "Remus", "Lupin", "iberia@gmail.com",
+			dtP = new DTProveedor("remus", "123", "Remus", "Lupin", "iberia@gmail.com",
 					"imagenes/proveedores/remus.jpg",
 					sourceFormat.parse("4/05/1970"), "Iberia", "http://www.iberia.com/uy/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("adippet", "1234", "Armando", "Dippet", "tam@outlook.com",
+			dtP = new DTProveedor("adippet", "123", "Armando", "Dippet", "tam@outlook.com",
 					"imagenes/proveedores/adippet.jpg",
 					sourceFormat.parse("12/02/1967"), "Tam", "http://www.tam.com.br/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("mHooch", "1234", "Madam", "Hooch", "segHogar@gmail.com",
+			dtP = new DTProveedor("mHooch", "123", "Madam", "Hooch", "segHogar@gmail.com",
 					"imagenes/proveedores/mHooch.jpg",
 					sourceFormat.parse("5/08/1963"), "Segundo Hogar", "http://www.segundohogar.com/");
 			mu.altaProveedor(dtP);

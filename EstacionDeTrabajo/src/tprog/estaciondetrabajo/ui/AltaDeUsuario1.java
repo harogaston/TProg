@@ -76,7 +76,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
         getContentPane().add(jPasswordField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 180, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText("Debe contener entre 4 y 20 carácteres.");
+        jLabel6.setText("Debe contener entre 3 y 20 carácteres.");
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 330, -1));
 
         pack();
@@ -99,7 +99,8 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		//Verificacion de nickname
 		boolean okEnblanco = !nickname.matches("^\\s*$");
 		boolean okSinEspacios = !nickname.matches(".*(\\s+).*");
-		boolean okNickname = okEnblanco && okSinEspacios;
+                boolean okSize = nickname.length()>=3; 
+		boolean okNickname = okEnblanco && okSinEspacios && okSize;
 
 		//Verificacion de contraseña
 		boolean okPassword1 = pass1.length() >= 3 && pass1.length() <= 20;

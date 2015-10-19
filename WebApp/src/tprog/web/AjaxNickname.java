@@ -18,11 +18,13 @@ public class AjaxNickname extends HttpServlet {
 		String id = request.getParameter("nickname");
 		String resultado;
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
-		if (id.matches("^\\s*$")) {
+		if (id.matches("^\\s*$") &&  (id.length()>=3)) {
 			resultado = "";
-		} else if (id.matches(".*(\\s+).*")) {
+		}else if (id.matches(".*(\\s+).*")) {
 			resultado = "SIN_ESPACIOS";
-		} else if (!ctrlUsuarios.verificarNickname(id)) {
+		}  else if (id.length()<3) {
+			resultado = "CORTO";
+		}else if (!ctrlUsuarios.verificarNickname(id)) {
 			resultado = "OK";
 		} else {
 			resultado = "EN_USO";

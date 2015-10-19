@@ -26,6 +26,7 @@ import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import tprog.logica.interfaces.ICtrlReservas;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
@@ -88,9 +89,18 @@ public class RegistrarCliente extends HttpServlet {
 					DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
 					cu.ingresarDatosUsuario(dtU, false);
 					cu.altaUsuario();
-
-					//logueo el usuario recien registrado
-					request.getRequestDispatcher("IniciarSesion").forward(request, response);
+                                        
+                                        //ya logueo el usuario registrado
+                                        
+                                        ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+                                        cr.liberarMemoriaControlador();
+                                        session.setAttribute("ctrlReservas", cr);
+                                        nuevoEstado = EstadoSesion.OK_LOGIN;
+                                        request.getSession().setAttribute("usuario_logueado", id);
+                                        session.setAttribute("estado_sesion", nuevoEstado);
+                                        session.setAttribute("cant_items", 0);
+                                    
+					request.getRequestDispatcher("/pages/subirImagen.jsp").forward(request, response);
 				} else {
 					request.getRequestDispatcher("Home").forward(request, response);
 				}

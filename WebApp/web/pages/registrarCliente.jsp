@@ -96,7 +96,9 @@ $(document).ready(function () {
             } else {
                 if (responseText === 'EN_USO') {
                     div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> Nickname no disponible</h4></div>');
-                } else if (responseText === 'SIN_ESPACIOS') {
+                } else  if (responseText === 'CORTO') {
+                    div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> Debe contener al menos 3 caracteres</h4></div>');
+                }else if (responseText === 'SIN_ESPACIOS') {
                     div.text('').html('<div><h4><i class="glyphicon glyphicon-warning-sign"></i> <a style="color:#FF0000"> No debe contener espacios</h4></div>');
                 } else if (responseText === '') {
                     div.text('').html('<div><h4></h4></div>');
@@ -136,12 +138,12 @@ function checkform(){
                 
                 cansubmit = true;
                                
-                for (var i = 0; i < 3; i++) {
+                for (var i = 0; i < 2; i++) {
                         if (f[i].value.length === 0) 
                             cansubmit = false;
                 }
-                for (var i = 3; i < 6; i++) {
-                        if (f[i].value.length < 4)
+                for (var i = 2; i < 5; i++) {
+                        if (f[i].value.length < 3)
                             cansubmit = false;
                 }
                 if (!f[3].value.toString().match(".*\.com"))

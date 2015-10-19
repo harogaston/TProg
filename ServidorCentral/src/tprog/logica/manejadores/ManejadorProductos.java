@@ -455,8 +455,28 @@ public class ManejadorProductos {
         Set<DTServicio> result = new HashSet<DTServicio>();
         for (Map<String, Servicio> map : servicios.values()){
             for (Servicio serv : map.values()){
-                if (serv.getIdServicio().contains(termino)){
+                if (serv.getIdServicio().toLowerCase().contains(termino.toLowerCase()) 
+                        || serv.getDescripcion().toLowerCase().contains(termino.toLowerCase())){
                     result.add(serv.crearDT());
+                } else {
+                    for (String categoria : serv.listarCategorias()){
+                        if (categoria.toLowerCase().contains(termino.toLowerCase())){
+                            result.add(serv.crearDT());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    
+    public Set<DTPromocion> listarPromocionesPorTermino(String termino){
+        Set<DTPromocion> result = new HashSet<DTPromocion>();
+        for (Map<String, Promocion> map : promociones.values()){
+            for (Promocion promo : map.values()){
+                if (promo.getIdPromocion().toLowerCase().contains(termino.toLowerCase())){
+                    result.add(promo.crearDT());
                 }
             }
         }

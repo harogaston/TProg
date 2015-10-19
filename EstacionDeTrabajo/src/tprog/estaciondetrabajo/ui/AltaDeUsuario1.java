@@ -102,8 +102,8 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 		boolean okNickname = okEnblanco && okSinEspacios;
 
 		//Verificacion de contraseña
-		boolean okPassword1 = pass1.length() >= 4 && pass1.length() <= 20;
-		boolean okPassword2 = pass2.length() >= 4 && pass2.length() <= 20;
+		boolean okPassword1 = pass1.length() >= 3 && pass1.length() <= 20;
+		boolean okPassword2 = pass2.length() >= 3 && pass2.length() <= 20;
 		boolean okPassword = (okPassword1 && okPassword2 && pass1.equals(pass2));
 
 		boolean nicknameUnico = false;
@@ -115,7 +115,7 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 			emailUnico = ctrlUsuarios.verificarEmail(email);
 		}
 
-		if (okNickname && okEmail && emailUnico && nicknameUnico && okPassword) {
+		if (okNickname && okEmail && !emailUnico && !nicknameUnico && okPassword) {
 			AltaDeUsuario2 au2 = new AltaDeUsuario2(this, nickname, pass1, email, ctrlUsuarios);
 			this.setVisible(false);
 			getParent().add(au2);
@@ -127,9 +127,9 @@ public class AltaDeUsuario1 extends javax.swing.JInternalFrame {
 				error = "Por favor ingrese un nickname válido.";
 			} else if (!okEmail) {
 				error = "Por favor ingrese un email válido.";
-			} else if (!nicknameUnico) {
+			} else if (nicknameUnico) {
 				error = "Ya existe un usuario con el mismo nickname.";
-			} else if (!emailUnico) {
+			} else if (emailUnico) {
 				error = "Ya existe un usuario con el mismo email.";
 			} else if (!okPassword) {
 				error = "Por favor verifique su contraseña.";

@@ -76,8 +76,8 @@ public class RegistrarCliente extends HttpServlet {
 			}
 			if (okNickMail) {
 				//Verificacion de contraseña
-				boolean okPassword1 = contrasena.length() >= 4 && contrasena.length() <= 20;
-				boolean okPassword2 = contrasena2.length() >= 4 && contrasena2.length() <= 20;
+				boolean okPassword1 = contrasena.length() >= 3 && contrasena.length() <= 20;
+				boolean okPassword2 = contrasena2.length() >= 3 && contrasena2.length() <= 20;
 				boolean okPassword = (okPassword1 && okPassword2 && contrasena.equals(contrasena2));
 				// Verificación de nombre y apellido
 				boolean okNombre = !nombre.matches("^\\s*$");

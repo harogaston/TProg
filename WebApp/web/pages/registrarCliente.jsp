@@ -30,7 +30,7 @@
 					</div>
 					<div class="form-group">
 						<label for="inputNickname" class="control-label">Nickname</label>
-						<input type="text" name="nickname" id="nickname" pattern="^[_A-z0-9]{1,}$" class="form-control" id="inputNickname" placeholder="usuario" required onKeyup="checkform()">
+						<input type="text" name="nickname" id="nickname" pattern="^[_A-z0-9]{1,}$" class="form-control" id="inputNickname" placeholder="usuario" required>
 						<div class="form-group">
 							<div  id="ajaxResponse"></div> 
                         </div> 
@@ -38,7 +38,7 @@
 					</div>
 					<div class="form-group">
 						<label for="mail" class="control-label">Email</label>
-						<input type="email" name="mail" class="form-control" id="mail" placeholder="email@domain" required onKeyup="checkform()">
+						<input type="email" name="mail" class="form-control" id="mail" placeholder="email@domain" required>
 						<div class="form-group">
 							<div  id="ajaxResponse2"></div> 
                         </div> 
@@ -91,7 +91,7 @@
 	var fecha = false;
 
 	$(document).ready(function () {
-		$('#nickname').blur(function (event) {
+		$('#nickname').keyup(function (event) {
 			var name = $('#nickname').val();
 			$.get('JqueryServlet', {
 				nickname: name
@@ -100,19 +100,24 @@
 				if (responseText === 'OK') {
 					div.text('').html('<div><h5><i class="glyphicon glyphicon-ok"></i> <a style="color:##00FF00"> Nickname disponible</h5></div>');
 					nick = true;
+					checkform();
 				} else {
 					if (responseText === 'EN_USO') {
 						div.text('').html('<div><h5><i class="glyphicon glyphicon-remove"></i> <a style="color:#FF0000"> Nickname no disponible</h5></div>');
 						nick = false;
+						checkform();
 					} else if (responseText === 'CORTO') {
 						div.text('').html('<div><h5><i class="glyphicon glyphicon-remove"></i> <a style="color:#FF0000"> Debe contener al menos 3 caracteres</h5></div>');
 						nick = false;
+						checkform();
 					} else if (responseText === 'SIN_ESPACIOS') {
 						div.text('').html('<div><h5><i class="glyphicon glyphicon-remove"></i> <a style="color:#FF0000"> No debe contener espacios</h5></div>');
 						nick = false;
+						checkform();
 					} else if (responseText === '') {
 						div.text('').html('<div><h5></h5></div>');
 						nick = false;
+						checkform();
 					}
 				}
 			});
@@ -120,7 +125,7 @@
 	});
 
 	$(document).ready(function () {
-		$('#mail').blur(function (event) {
+		$('#mail').keyup(function (event) {
 			var name = $('#mail').val();
 			$.get('AjaxMail', {
 				mail: name
@@ -129,19 +134,24 @@
 				if (responseText === 'OK') {
 					div.text('').html('<div><h5><i class="glyphicon glyphicon-ok"></i> <a style="color:##00FF00"> Email disponible</h5></div>');
 					mail = true;
+					checkform();
 				} else {
 					if (responseText === 'EN_USO') {
 						div.text('').html('<div><h5><i class="glyphicon glyphicon-remove"></i> <a style="color:#FF0000"> Email no disponible</h5></div>');
 						mail = false;
+						checkform();
 					} else if (responseText === 'SIN_ESPACIOS') {
 						div.text('').html('<div><h5><i class="glyphicon glyphicon-remove"></i> <a style="color:#FF0000"> No debe contener espacios</h5></div>');
 						mail = false;
+						checkform();
 					} else if (responseText === 'FORMATO_INVALIDO') {
 						div.text('').html('<div><h5><i class="glyphicon glyphicon-remove"></i> <a style="color:#FF0000"> Formato invalido</h5></div>');
 						mail = false;
+						checkform();
 					} else {
 						div.text('').html('<div><h5></h5></div>');
 						mail = false;
+						checkform();
 					}
 				}
 				;

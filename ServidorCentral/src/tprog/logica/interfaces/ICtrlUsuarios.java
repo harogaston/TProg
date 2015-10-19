@@ -3,6 +3,7 @@ package tprog.logica.interfaces;
 import java.util.Set;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
+import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
@@ -39,6 +40,8 @@ public interface ICtrlUsuarios {
 	public DTProveedor infoProveedor() throws Exception;
 
 	public Set<DTMinServicio> listarServiciosProveedor();
+	
+	public Set<DTMinPromocion> listarPromocionesProveedor();
 
 	public void seleccionarServicio(String idServicio);
 

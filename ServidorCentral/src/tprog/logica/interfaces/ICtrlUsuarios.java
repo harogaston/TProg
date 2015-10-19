@@ -52,4 +52,6 @@ public interface ICtrlUsuarios {
 	public boolean pwCorrecta(String identificador, String password);
 
 	public String obtenerIdCliente(String identificador, String pass);
+        
+        public void cambiarImagenCliente(String path);
 }

@@ -178,5 +178,10 @@ public class ManejadorUsuarios {
 		}
 		return idCliente; //en cualquier otro caso (no email)
 	}
+        
+        public void cambiarImagenCliente(String cliente, String path){
+                Cliente client = getCliente(cliente);
+                client.setImagen(path);
+        }
 
 }

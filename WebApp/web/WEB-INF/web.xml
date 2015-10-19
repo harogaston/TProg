@@ -52,6 +52,10 @@
         <servlet-name>VerProveedores</servlet-name>
         <servlet-class>tprog.web.VerProveedores</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FileUploadHandler</servlet-name>
+        <servlet-class>tprog.web.FileUploadHandler</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>VerProveedores</servlet-name>
         <url-pattern>/VerProveedores</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FileUploadHandler</servlet-name>
+        <url-pattern>/upload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -38,7 +38,7 @@
 								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpg" style="border-radius: 50%; height: 100px"/>
 								<%}%>
 							</div>
-							<div class="col-md-9">
+                                                        <div class="col-md-9">
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h3 class="panel-title">${nick}</h3>
@@ -50,6 +50,10 @@
 									</div>
 								</div>
 							</div>
+                                                        <form action="upload" method="POST" class="col-md-9" enctype="multipart/form-data">
+                                                                <input type="file" name="file"/>
+                                                                <input type="submit" value="upload" />
+                                                        </form>                
 						</div>
 					</div>
 

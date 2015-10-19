@@ -19,7 +19,7 @@
         
 		<div class="container wrapper" style="padding: 50px; width: 50%">
 			<div class="row">
-				<form name="theform" action="RegistrarCliente" id="alta" role="form" method="POST">
+				<form name="theform" action="RegistrarCliente" id="alta" role="form" method="POST" >
 					<div class="form-group">
 						<label for="inputNombre" class="control-label">Nombre</label>
 						<input type="text" name= "nombre" id="inputNombre" pattern="^[_A-z]{1,}$" class="form-control" placeholder="Oliver" required onKeyup="checkform()">
@@ -57,11 +57,12 @@
 							<div class="help-block with-errors"></div>
 						</div>
 					</div>
-					<div class="form-group">
+                                        <div class="form-group">
 						<label for="datepicker" class="control-label">Fecha de Nacimiento</label>
 						<input type="text" name="fNac" id="datepicker" pattern="[_0-9]{2}/[_0-9]{2}/[_0-9]{4}" class="form-control" style="width: 100px" onKeyup="checkform()" required>
                                         </div>
                                         <div class="form-group text-right">
+                                                
 						<button type="submit" id="boton-enviar" class="btn btn-primary" disabled="disabled" value="Submit">Enviar</button>
 					</div>
 				</form>

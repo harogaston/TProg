@@ -1,6 +1,11 @@
 package tprog.web;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,16 +22,21 @@ import org.apache.commons.validator.routines.EmailValidator;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlUsuarios;
+import org.apache.commons.fileupload.FileItemIterator;
+import org.apache.commons.fileupload.FileItemStream;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
+         
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		try {
-			// leo los datos -falta checkear que sean correctos y esas manos-
+                try{
+                        // leo los datos -falta checkear que sean correctos y esas manos-
 			String id = request.getParameter("nickname");
 			String mail = request.getParameter("mail");
 			// el checkeo de mail y nick es "en tiempo real" con ajax -falta-
@@ -36,9 +46,6 @@ public class RegistrarCliente extends HttpServlet {
 			String nombre = request.getParameter("nombre");
 			String apellido = request.getParameter("apellido");
 
-			//falta imagen
-			String imagen = request.getParameter("imagen");
-
 			//obtengo strings para las fechas, en formato dd/mm/aaaa, hay que parsearlas
 			String fechaNac = request.getParameter("fNac");
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -46,7 +53,7 @@ public class RegistrarCliente extends HttpServlet {
 			EstadoSesion nuevoEstado;
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios cu = f.getICtrlUsuarios();
-
+                         
 			//Verificación de email
 			EmailValidator emailValidator = EmailValidator.getInstance(true);
 			boolean okEmail = emailValidator.isValid(mail);
@@ -76,10 +83,7 @@ public class RegistrarCliente extends HttpServlet {
 				boolean okNombre = !nombre.matches("^\\s*$");
 				boolean okApellido = !apellido.matches("^\\s*$");
 
-				//Verificación de Imagen - falta
-				boolean okImagen = true;
-
-				if (okNombre && okApellido && okImagen && okPassword) {
+				if (okNombre && okApellido && okPassword) {
 					// doy de alta el cliente
 					DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
 					cu.ingresarDatosUsuario(dtU, false);
@@ -95,8 +99,12 @@ public class RegistrarCliente extends HttpServlet {
 				request.getRequestDispatcher("Home").forward(request, response);
 			}
 
-		} catch (ParseException ex) {
+		
+                    } catch (ParseException ex) {
 			Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		} catch (Exception ex) {
+             Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+         }
 	}
 }
+

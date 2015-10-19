@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,6 +52,7 @@ public class RegistrarCliente extends HttpServlet {
 			String fechaNac = request.getParameter("fNac");
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateNac = sourceFormat.parse(fechaNac);
+					System.err.println("XXXXX " +Integer.toString(dateNac.getYear() + 1900)); 
 			EstadoSesion nuevoEstado;
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios cu = f.getICtrlUsuarios();

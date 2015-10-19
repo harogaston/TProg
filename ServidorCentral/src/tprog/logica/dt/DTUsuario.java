@@ -60,7 +60,7 @@ public class DTUsuario {
 				+ "\n" + "Fecha de nacimiento: "
 				+ Integer.toString(fechaNacimiento.getDate()) + "-"
 				+ Integer.toString(fechaNacimiento.getMonth() + 1) + "-"
-				+ Integer.toString(fechaNacimiento.getYear()) + "\n";
+				+ Integer.toString(fechaNacimiento.getYear() + 1900) + "\n";
 
 	}
 }

@@ -18,18 +18,17 @@
 		<!-- ACÁ .css que se requieran en ESTA página -->
     </header>
     <body>
-        <div class="container wrapper" style="padding: 50px; width: 50%">
+        <div class="container wrapper" style="padding: 50px; padding-top: 20px; width: 50%">
             <div class="row">                            
                 <div class="form-group">
-                    <form action="upload" method="POST" class="col-md-9" enctype="multipart/form-data">
+                    <form action="upload" method="POST" enctype="multipart/form-data">
                         <! -- El usuario ya está registrado, se da la opción de subir un foto de perfil
                             en caso de que no se seleccione ninguna simplemente se asigna la imágen por defecto -->
-                        <label for="up" class="control-label">Seleccione una Imagen de Perfil</label>                                        
-                        <input type="file"  name="file" id="up"> 
-                        <div class="form-group text-right">
+							<h4>Seleccione una imágen de perfil:</h4>                                        
+							<input type="file"  name="file">
+                        <div class="form-group text-center">
                             <button class="btn btn-info" type="submit">
-                            <i class="glyphicon glyphicon-upload"></i> Subir Imagen 
-                            </button>
+                            <i class="glyphicon glyphicon-upload"></i> Subir Imagen</button>
                         </div>
                     </form>
                 </div>

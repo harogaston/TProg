@@ -30,35 +30,34 @@ public class FileUploadHandler extends HttpServlet {
 				List<FileItem> multiparts = new ServletFileUpload(
 						new DiskFileItemFactory()).parseRequest(request);
 				String name;
-				for (FileItem item : multiparts) {
-					if (!item.isFormField()) {
-						String path = getServletContext().getRealPath("/");
-						File f = new File(path + File.separator + "imagenes" + File.separator + "clientes");
-						if (!f.exists()) {
-							f.mkdir();
+				if (!multiparts.isEmpty()) {
+					for (FileItem item : multiparts) {
+						if (!item.isFormField()) {
+							String path = getServletContext().getRealPath("/");
+							File f = new File(path + File.separator + "imagenes" + File.separator + "clientes");
+							if (!f.exists()) {
+								f.mkdir();
+							}
+							name = new File(item.getName()).getName();
+							item.write(new File(f.getAbsolutePath() + File.separator + name));
+
+							Fabrica fabrica = Fabrica.getInstance();
+							ICtrlUsuarios ctrlU = fabrica.getICtrlUsuarios();
+							ctrlU.seleccionarCliente((String) request.getSession().getAttribute("usuario_logueado"));
+							ctrlU.cambiarImagenCliente("imagenes/clientes/" + name);
+
+						} else {
+							response.sendRedirect("VerPerfil");
 						}
-						name = new File(item.getName()).getName();
-						item.write(new File(f.getAbsolutePath() + File.separator + name));
-
-						Fabrica fabrica = Fabrica.getInstance();
-						ICtrlUsuarios ctrlU = fabrica.getICtrlUsuarios();
-						ctrlU.seleccionarCliente((String) request.getSession().getAttribute("usuario_logueado"));
-						ctrlU.cambiarImagenCliente("imagenes/clientes/" + name);
-
 					}
 				}
-
-               //File uploaded successfully
-				//request.setAttribute("message", "File Uploaded Successfully");
+				//File uploaded successfully
 				response.sendRedirect("VerPerfil");
-				//request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 			} catch (Exception ex) {
-				request.setAttribute("message", "File Upload Failed due to " + ex);
+				response.sendRedirect("VerPerfil");
 			}
-
 		} else {
-			request.setAttribute("message",
-					"Sorry this Servlet only handles file upload request");
+			response.sendRedirect("VerPerfil");
 		}
 	}
 }

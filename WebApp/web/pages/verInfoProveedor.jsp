@@ -42,9 +42,9 @@
 						<div class="row">
 							<div class="col-md-3 text-center">
 								<%if (request.getAttribute("imagen") != null) {%>
-								<img class="img-thumbnail" src="${imagen}" style="border-radius: 50%"/>
+								<img class="img-thumbnail" src="${imagen}" style="border-radius: 50%; height: 100px; width: 100px"/>
 								<%} else {%>
-								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpeg" style="border-radius: 50%"/>
+								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpeg" style="border-radius: 50%; height: 100px; width: 100px"/>
 								<%}%>
 							</div>
 							<div class="col-md-9">

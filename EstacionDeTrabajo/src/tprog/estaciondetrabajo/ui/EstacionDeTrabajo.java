@@ -18,7 +18,8 @@ public class EstacionDeTrabajo {
 //            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
         //</editor-fold>
-		
+	Publicador p = new Publicador();
+        p.publicar();	
         VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
         ventanaPrincipal.setLocationRelativeTo(null);
 		ventanaPrincipal.setVisible(true);

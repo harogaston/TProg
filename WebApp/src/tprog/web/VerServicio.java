@@ -24,13 +24,10 @@ public class VerServicio extends HttpServlet {
         Publicador port = service.getPublicadorPort();
         String[] ret = port.verServicio(idServicio, idProveedor);
         
+        //hay que ver como pido las clases de la lógica cuando se saca el .jar
         Fabrica f = Fabrica.getInstance();
         ICtrlProductos ctrlProductos = f.getICtrlProductos();
-        System.out.println(ret[0]);
-        System.out.println(ret[1]);
         DTMinServicio dtMin = new DTMinServicio(ret[1], ret[0]);
-        System.out.println(dtMin.getIdServicio());
-        System.out.println(dtMin.getNicknameP());
         ctrlProductos.seleccionarServicio(dtMin);
         DTServicio dtFull = ctrlProductos.infoServicio();
         //necesito el nickname del proveedor

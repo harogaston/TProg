@@ -39,5 +39,10 @@ public class Publicador {
         
     }
     
+    @WebMethod
+    public String[] verServicio(String idServicio, String idProveedor){
+        return new String[] {idServicio, idProveedor};
+    }
+    
     
 }

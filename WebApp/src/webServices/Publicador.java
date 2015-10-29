@@ -32,4 +32,10 @@ public interface Publicador {
     public int nuevoCliente(
         @WebParam(name = "arg0", partName = "arg0")
         int arg0);
+    
+    @WebMethod
+    @WebResult(partName = "return")
+    public String[] verServicio(@WebParam(name = "arg0", partName = "arg0")
+        String arg0, @WebParam(name = "arg1", partName = "arg1")
+        String arg1);
 }

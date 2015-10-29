@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
  *
  * @author ignacio.prandi
  */
-@WebServiceClient(name = "PublicadorService", targetNamespace = "http://servidor/", wsdlLocation = "http://localhost:9128/publicador?wsdl")
+@WebServiceClient(name = "PublicadorService", targetNamespace = "http://ui.estaciondetrabajo.tprog/", wsdlLocation = "http://localhost:9128/publicador?wsdl")
 public class PublicadorService extends Service {
     private final static URL PUBLICADORSERVICE_WSDL_LOCATION;
     private final static Logger logger = Logger.getLogger(PublicadorService.class.getName());
@@ -42,7 +42,7 @@ public class PublicadorService extends Service {
     }
 
     public PublicadorService() {
-        super(PUBLICADORSERVICE_WSDL_LOCATION, new QName("http://servidor/", "PublicadorService"));
+        super(PUBLICADORSERVICE_WSDL_LOCATION, new QName("http://ui.estaciondetrabajo.tprog/", "PublicadorService"));
     }
 
     /**
@@ -52,7 +52,7 @@ public class PublicadorService extends Service {
      */
     @WebEndpoint(name = "PublicadorPort")
     public Publicador getPublicadorPort() {
-        return super.getPort(new QName("http://servidor/", "PublicadorPort"), Publicador.class);
+        return super.getPort(new QName("http://ui.estaciondetrabajo.tprog/", "PublicadorPort"), Publicador.class);
     }
 
     /**
@@ -64,6 +64,6 @@ public class PublicadorService extends Service {
      */
     @WebEndpoint(name = "PublicadorPort")
     public Publicador getPublicadorPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://servidor/", "PublicadorPort"), Publicador.class, features);
+        return super.getPort(new QName("http://ui.estaciondetrabajo.tprog/", "PublicadorPort"), Publicador.class, features);
     }
 }

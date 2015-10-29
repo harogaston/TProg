@@ -33,5 +33,11 @@ public class Publicador {
             return endpoint;
     }
     
+    @WebMethod
+    public int nuevoCliente(int i){
+        return i;
+        
+    }
+    
     
 }

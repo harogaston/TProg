@@ -10,6 +10,8 @@ import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
+import webServices.Publicador;
+import webServices.PublicadorService;
 
 public class VerServicio extends HttpServlet {
 
@@ -17,9 +19,15 @@ public class VerServicio extends HttpServlet {
             throws ServletException, IOException {
         String idServicio = request.getParameter("idServicio");
         String idProveedor = request.getParameter("idProveedor");
+        //uso el publicador
+        PublicadorService service =  new PublicadorService();
+        Publicador port = service.getPublicadorPort();
+        String[] ret = port.verServicio(idServicio, idProveedor);
+        
+        //hay que ver como pido las clases de la lógica cuando se saca el .jar
         Fabrica f = Fabrica.getInstance();
         ICtrlProductos ctrlProductos = f.getICtrlProductos();
-        DTMinServicio dtMin = new DTMinServicio(idProveedor, idServicio);
+        DTMinServicio dtMin = new DTMinServicio(ret[1], ret[0]);
         ctrlProductos.seleccionarServicio(dtMin);
         DTServicio dtFull = ctrlProductos.infoServicio();
         //necesito el nickname del proveedor

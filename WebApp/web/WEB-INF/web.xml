@@ -56,6 +56,14 @@
         <servlet-name>FileUploadHandler</servlet-name>
         <servlet-class>tprog.web.FileUploadHandler</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TipoUsuario</servlet-name>
+        <servlet-class>tprog.web.TipoUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CambiarUsuario</servlet-name>
+        <servlet-class>tprog.web.CambiarUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -155,6 +163,14 @@
     <servlet-mapping>
         <servlet-name>FileUploadHandler</servlet-name>
         <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TipoUsuario</servlet-name>
+        <url-pattern>/TipoUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CambiarUsuario</servlet-name>
+        <url-pattern>/CambiarUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

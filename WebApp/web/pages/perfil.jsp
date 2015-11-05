@@ -23,7 +23,9 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-pills" role="tablist" style="margin-bottom: 50px">
 					<li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Información</a></li>
+                                        <% if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){ %>   
 					<li role="presentation"><a href="#reservas" aria-controls="reservas" role="tab" data-toggle="tab">Reservas</a></li>
+                                        <% } %>   
 				</ul>
 
 				<!-- Tab panes -->
@@ -46,13 +48,19 @@
 									<div class="panel-body">
 										<span class="text-muted">Nombre: </span> ${nombre}<br>
 										<span class="text-muted">Fecha de Nacimiento: </span>${fNac}<br>
-										<span class="text-muted">Email: </span>${email}<br><br>
+										<span class="text-muted">Email: </span>${email}<br>
+                                                                                <% if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR){ %> 
+                                                                                <span class="text-muted">Empresa: </span> ${nombreEmpresa}<br>
+										<span class="text-muted">Link Empresa: </span>${linkEmpresa}<br>
+                                                                                <% } %>
+                                                                                <br>
+                                                                                 
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
+                                <% if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){ %>                                    
 					<!--Reservas-->
 					<div role="tabpanel" class="tab-pane" id="reservas">
 						<% if (request.getAttribute("reservas") != null) {%>
@@ -166,6 +174,9 @@
 							}
 						%>
 					</div>
+                                        <% }else{
+                                                                                    
+                                                                                }%>    
 				</div>
 			</div>
 		</div>

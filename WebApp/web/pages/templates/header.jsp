@@ -1,3 +1,4 @@
+<%@page import="tprog.web.TipoUsuario"%>
 <%@page import="tprog.web.EstadoSesion"%>
 
 <!--TYPEAHEAD-->
@@ -35,7 +36,7 @@
 				</form>
 			</div>
 			<%
-				if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+				if ((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE)) {
 			%>
 			<div class="navbar-nav navbar-right">
 				<form action= "CerrarSesion" class="navbar-form" method="POST">
@@ -60,9 +61,42 @@
 				</form>
 			</div>               
 			<%
-			} else {
+			} else if((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
 			%>
-			<div class="navbar-nav navbar-right" style="display: inline-block">
+			<div class="navbar-nav navbar-right">
+				<form action= "CerrarSesion" class="navbar-form" method="POST">
+					<button class="btn btn-warning" type="submit">
+						<i class="glyphicon glyphicon-off"></i> Cerrar Sesión
+					</button>
+				</form>
+			</div>
+			<div class="navbar-nav navbar-right">
+				<form action= "Carrito" class="navbar-form">
+					<button class="btn btn-warning" type="submit">
+						<span class="badge"><%if ((Integer) session.getAttribute("cant_items") > 0) {%>${cant_items}<%}%></span> <i class="glyphicon glyphicon-shopping-cart"></i> Carrito
+					</button>
+				</form>
+			</div>
+			<div class="navbar-nav navbar-right">
+				<form action= "VerPerfil" class="navbar-form" method="GET">
+					<button class="btn btn-warning" type="submit">
+						<i class="glyphicon glyphicon-user"></i>
+						<%=" " + session.getAttribute("usuario_logueado")%>
+					</button>
+				</form>
+			</div> 
+		
+        <%
+			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
+        %>
+                        <div class="navbar-nav navbar-right" style="display: inline-block">
+				<form action= "CambiarUsuario" class="navbar-form" method="POST">
+					<button class="btn btn-success" type="submit">
+						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Cliente
+					</button>
+				</form>
+			</div>
+                        <div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "IniciarSesion" class="navbar-form" method="POST">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Nickname" name="nickname" autofocus required>
@@ -77,6 +111,39 @@
 			</div>
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 
+				<form action= "RegistrarProveedor" class="navbar-form" >
+
+					<button class="btn btn-default" type="submit">
+						<i class="glyphicon glyphicon-edit"></i> Registrarse
+					</button>
+				</form>
+			</div>
+        <%
+			}else {
+        %>
+                        <div class="navbar-nav navbar-right" style="display: inline-block">
+				<form action= "CambiarUsuario" class="navbar-form" method="POST">
+					<button class="btn btn-success" type="submit">
+						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Proveedor
+					</button>
+				</form>
+			</div>
+                        <div class="navbar-nav navbar-right" style="display: inline-block">
+				<form action= "IniciarSesion" class="navbar-form" method="POST">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Nickname" name="nickname" autofocus required>
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" placeholder="Password" name="password" required>
+					</div>
+					<button class="btn btn-success" type="submit">
+						<i class="glyphicon glyphicon-log-in"></i> Ingresar
+					</button>
+				</form>
+			</div>
+                        
+			<div class="navbar-nav navbar-right" style="display: inline-block">
+
 				<form action= "NuevoCliente" class="navbar-form" >
 
 					<button class="btn btn-default" type="submit">
@@ -84,11 +151,10 @@
 					</button>
 				</form>
 			</div>
-		</div>
         <%
 			}
-        %>
-
+        %>                
+        </div>
         <!-- script para que funcione el dropdown siempre -->
         <script>
 			$(document).ready(function () {

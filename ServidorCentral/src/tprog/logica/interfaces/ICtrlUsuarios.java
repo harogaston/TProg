@@ -54,4 +54,12 @@ public interface ICtrlUsuarios {
 	public String obtenerIdCliente(String identificador, String pass);
         
         public void cambiarImagenCliente(String path);
+        
+        public boolean idCorrectaProveedor(String identificador);
+
+	public boolean pwCorrectaProveedor(String identificador, String password);
+
+	public String obtenerIdProveedor(String identificador, String pass);
+        
+        public void setEsProveedor(boolean esProveedor);
 }

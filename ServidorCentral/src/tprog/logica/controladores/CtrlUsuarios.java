@@ -177,5 +177,31 @@ public class CtrlUsuarios implements ICtrlUsuarios {
                 ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		manejadorU.cambiarImagenCliente(this.nicknameU, path);
         }
+        
+        @Override
+	public boolean idCorrectaProveedor(String identificador) {
+		//tiene que verificar que la id pertenezca a un cliente
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.idCorrectaProveedor(identificador);
+	}
 
+	@Override
+	public boolean pwCorrectaProveedor(String identificador, String password) {
+		//tiene que verificar que la contraseña esté asociada al id
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.pwCorrectaProveedor(identificador, password);
+	}
+
+	@Override
+	public String obtenerIdProveedor(String identificador, String pass) {
+		//en caso de que id sea un email, se devuelve el id asociado a ese cliente
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.obtenerIdProveedor(identificador, pass);
+	}
+        
+        @Override
+        public void setEsProveedor(boolean esProveedor) {
+                    this.esProveedor = esProveedor;
+    }
+        
 }

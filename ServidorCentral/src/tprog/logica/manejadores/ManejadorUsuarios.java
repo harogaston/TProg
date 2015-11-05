@@ -183,5 +183,65 @@ public class ManejadorUsuarios {
                 Cliente client = getCliente(cliente);
                 client.setImagen(path);
         }
+        
+        public boolean idCorrectaProveedor(String identificador) {
+		boolean nickCorrecto = verificarNicknameProveedor(identificador);
+		boolean mailCorrecto = verificarEmailProveedor(identificador);
+		//uno de los dos debe ser verdadero para que la función evalúe verdadero
+		return nickCorrecto || mailCorrecto;
+	}
+        
+        public boolean pwCorrectaProveedor(String identificador, String password) {
+		//intento encontrar al cliente por id
+		Proveedor proveedor = proveedores.get(identificador);
+		if (proveedor == null) { //si no encontré por id
+			//pruebo por email
+			for (Proveedor prov : proveedores.values()) {
+				if (prov.getEmail().equals(identificador)) {
+					proveedor = prov;
+					break;
+				}
+			}
+		}
+		//si tras buscarlo no encontré, devuelvo false
+		if (proveedor == null) {
+			return false;
+		} else {
+			return proveedor.getPassword().equals(password);
+		}
+	}
+
+	public String obtenerIdProveedor(String idProveedor, String pass) {
+		Proveedor proveedor;
+		proveedor = proveedores.get(idProveedor);
+		if (proveedor == null) { //en caso de que sea un email (no se encontró por nickname)
+			for (Proveedor prov : proveedores.values()) {
+				if (prov.getEmail().equals(idProveedor) && prov.getPassword().equals(pass)) {
+					return prov.getNickname();
+				}
+			}
+		}
+		return idProveedor; //en cualquier otro caso (no email)
+	}
+        
+        public boolean verificarNicknameProveedor(String nicknameU) {
+		if (nicknameU == null) {
+			return false;
+		} else {
+			return proveedores.containsKey(nicknameU);
+		}
+	}
+
+	public boolean verificarEmailProveedor(String email) {
+		if (email == null) {
+			return false;
+		}
+		for (Proveedor prov : proveedores.values()) {
+			if (email.equals(prov.getEmail())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

@@ -63,6 +63,7 @@
 			<%
 			} else if((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
 			%>
+                       
 			<div class="navbar-nav navbar-right">
 				<form action= "CerrarSesion" class="navbar-form" method="POST">
 					<button class="btn btn-warning" type="submit">
@@ -70,22 +71,38 @@
 					</button>
 				</form>
 			</div>
-			<div class="navbar-nav navbar-right">
-				<form action= "Carrito" class="navbar-form">
-					<button class="btn btn-warning" type="submit">
-						<span class="badge"><%if ((Integer) session.getAttribute("cant_items") > 0) {%>${cant_items}<%}%></span> <i class="glyphicon glyphicon-shopping-cart"></i> Carrito
-					</button>
-				</form>
-			</div>
+			
 			<div class="navbar-nav navbar-right">
 				<form action= "VerPerfil" class="navbar-form" method="GET">
 					<button class="btn btn-warning" type="submit">
 						<i class="glyphicon glyphicon-user"></i>
 						<%=" " + session.getAttribute("usuario_logueado")%>
-					</button>
+                                                <div class="dropdown navbar-nav navbar-right">
+                                                        
+                                                    
+                                                </div>
+                                                </button>
+                                                
+                        
+					
 				</form>
+                                              
 			</div> 
-		
+                                                <div class="navbar-nav navbar-right">
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-warning"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="glyphicon glyphicon-align-justify"></i>
+                                                        </button>
+                                                        <u1 class="dropdown-menu" >
+                                                             <li><a href="VerServiciosProveedor">Ver Servicios</a></li>
+                                                            <li><a href="VerReservasProveedor">Ver Reservas</a></li>
+                                                            <li><a href="VerPromociones">Ver Promociones</a></li>
+                                
+                                                        </u1>
+                                                </div>  
+                                                </div>                        
+                        
+                                                
         <%
 			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
         %>

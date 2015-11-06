@@ -38,7 +38,6 @@ public class CtrlCarga extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		if (this.getServletConfig().getServletContext().getAttribute("datos_cargados") == null) {
 			cargarDatos();
 			this.getServletConfig().getServletContext().setAttribute("datos_cargados", true);
@@ -92,7 +91,7 @@ public class CtrlCarga extends HttpServlet {
 		try {
 			//Alta de Clientes
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
-			
+
 			DTCliente dtC;
 
 			dtC = new DTCliente("oWood", "123", "Oliver", "Wood", "quidditch28@gmail.com",

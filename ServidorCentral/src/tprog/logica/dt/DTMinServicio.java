@@ -1,8 +1,11 @@
 package tprog.logica.dt;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTMinServicio {
 
 	private final String nicknameP;
@@ -31,7 +34,7 @@ public class DTMinServicio {
 	public int hashCode() {
 		return new HashCodeBuilder(17, 31).// two randomly chosen prime numbers
 				// if deriving: appendSuper(super.hashCode()).
-				append(idServicio). 
+				append(idServicio).
 				append(nicknameP).
 				toHashCode();
 	}

@@ -1,6 +1,9 @@
 package tprog.logica.controladores;
 
 import java.util.Set;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
 import tprog.logica.dt.DTMinPromocion;
@@ -15,6 +18,7 @@ import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class CtrlUsuarios implements ICtrlUsuarios {
 
 	private String nicknameU;
@@ -171,14 +175,14 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		return manejadorU.obtenerIdCliente(identificador, pass);
 	}
-        
-        @Override
-        public void cambiarImagenCliente(String path){
-                ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+
+	@Override
+	public void cambiarImagenCliente(String path) {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		manejadorU.cambiarImagenCliente(this.nicknameU, path);
-        }
-        
-        @Override
+	}
+
+	@Override
 	public boolean idCorrectaProveedor(String identificador) {
 		//tiene que verificar que la id pertenezca a un cliente
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
@@ -198,10 +202,24 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		return manejadorU.obtenerIdProveedor(identificador, pass);
 	}
-        
-        @Override
-        public void setEsProveedor(boolean esProveedor) {
-                    this.esProveedor = esProveedor;
-    }
-        
+
+	@Override
+	public void setEsProveedor(boolean esProveedor) {
+		this.esProveedor = esProveedor;
+	}
+
+	public static class Adapter extends XmlAdapter<CtrlUsuarios, ICtrlUsuarios> {
+
+		@Override
+		public ICtrlUsuarios unmarshal(CtrlUsuarios v) {
+			return v;
+		}
+
+		@Override
+		public CtrlUsuarios marshal(ICtrlUsuarios v) {
+			return (CtrlUsuarios) v;
+		}
+
+	}
+
 }

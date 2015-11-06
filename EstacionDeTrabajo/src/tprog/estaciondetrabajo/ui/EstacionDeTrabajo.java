@@ -1,13 +1,13 @@
 package tprog.estaciondetrabajo.ui;
 
-import tprog.webservice.Publicador;
+import tprog.webservice.PublicadorProductos;
 
 public class EstacionDeTrabajo {
 
 	public static void main(String[] args) {
 
 		/* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 //        try {
 //            javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 //        } catch (ClassNotFoundException ex) {
@@ -20,8 +20,8 @@ public class EstacionDeTrabajo {
 //            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 		//</editor-fold>
-		Publicador p = new Publicador();
-		p.publicar();
+		PublicadorProductos publicadorProductos = new PublicadorProductos();
+		publicadorProductos.publicar();
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		ventanaPrincipal.setLocationRelativeTo(null);
 		ventanaPrincipal.setVisible(true);

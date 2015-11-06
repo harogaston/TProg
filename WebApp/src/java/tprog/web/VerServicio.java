@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.tuple.Triple;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
@@ -36,6 +37,12 @@ public class VerServicio extends HttpServlet {
 		request.setAttribute("infoServicio", dtFull);
 		//busco categorias y las seteo como atributo a pasarle a la pagina jsp
 		Set<String> categorias = ctrlProductos.listarCategoriasServicio();
+
+//		webservice.PublicadorService service = new webservice.PublicadorService();
+//		webservice.Publicador proxy = service.getPublicadorPort();
+		request.setAttribute("idProveedor", proxy.verServicio_getNicknameP);
+		request.setAttribute("infoServicio", proxy.verServicio_getInfoServicio);
+
 		request.setAttribute("categorias", categorias);
 		request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
 	}

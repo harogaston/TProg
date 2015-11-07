@@ -4,6 +4,7 @@
 <xs:sequence>
 <xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
 <xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

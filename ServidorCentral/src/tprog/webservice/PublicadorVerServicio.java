@@ -3,6 +3,13 @@
  */
 package tprog.webservice;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
@@ -45,6 +52,21 @@ public class PublicadorVerServicio {
 		result.dtServicio = ctrlProductos.infoServicio();;
 		//busco categorias y las seteo como atributo a pasarle a la pagina jsp
 		result.categorias = ctrlProductos.listarCategoriasServicio();
+		//devuelvo una lista con bytes para generar las imagenes
+		//desde el lado de la web app
+		List<byte[]> imagenes = new ArrayList<>();
+		for (String imagen : result.dtServicio.getImagenes()) {
+			try {
+				File file = new File(imagen);
+				FileInputStream streamer = new FileInputStream(file);
+				byte[] byteArray = new byte[streamer.available()];
+				streamer.read(byteArray);
+				imagenes.add(byteArray);
+			} catch (IOException ex) {
+				Logger.getLogger(PublicadorVerServicio.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		}
+		result.imagenes = imagenes;
 		return result;
 	}
 

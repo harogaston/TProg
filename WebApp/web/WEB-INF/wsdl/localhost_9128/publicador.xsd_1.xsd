@@ -27,6 +27,72 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dtProveedor">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="webEmpresa" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtUsuario">
+<xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPerfilCliente">
+<xs:sequence>
+<xs:element name="cliente" type="tns:dtCliente" minOccurs="0"></xs:element>
+<xs:element name="reservas" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtCliente">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="reservas" type="tns:dtMinReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtMinReserva">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtReserva">
+<xs:sequence>
+<xs:element name="idReserva" type="xs:int"></xs:element>
+<xs:element name="fCreacion" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="estado" type="tns:estadoReserva" minOccurs="0"></xs:element>
+<xs:element name="precioTotal" type="xs:float"></xs:element>
+<xs:element name="lineasReserva" type="tns:dtLineaReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtLineaReserva">
+<xs:sequence>
+<xs:element name="cantidad" type="xs:int"></xs:element>
+<xs:element name="fechaInicio" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="fechaFin" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="servicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="promocion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="wrapperVerInfoProveedor">
 <xs:sequence>
 <xs:element name="proveedor" type="tns:dtProveedor" minOccurs="0"></xs:element>
@@ -58,29 +124,6 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtProveedor">
-<xs:complexContent>
-<xs:extension base="tns:dtUsuario">
-<xs:sequence>
-<xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="webEmpresa" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="dtUsuario">
-<xs:sequence>
-<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -133,4 +176,13 @@
 <xs:element name="promocion" type="tns:dtPromocion" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
+
+<xs:simpleType name="estadoReserva">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Registrada"></xs:enumeration>
+<xs:enumeration value="Cancelada"></xs:enumeration>
+<xs:enumeration value="Pagada"></xs:enumeration>
+<xs:enumeration value="Facturada"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
 </xs:schema>

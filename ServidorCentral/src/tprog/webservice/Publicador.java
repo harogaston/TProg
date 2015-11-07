@@ -7,20 +7,26 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
+import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
@@ -103,6 +109,7 @@ public class Publicador {
 		return ctrlProductos.infoServicio();
 	}
 
+	@WebMethod
 	public WrapperVerInfoProveedor verInfoProveedor(String idProveedor) {
 		try {
 			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
@@ -128,6 +135,43 @@ public class Publicador {
 			result.servicios = mapServicios;
 			result.proveedor = dtProveedor;
 			return result;
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
+	public WrapperVerPerfilCliente verPerfilCliente(String idCliente) {
+		try {
+			Fabrica f = Fabrica.getInstance();
+			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+			ctrlU.seleccionarCliente(idCliente);
+			DTCliente dtC = ctrlU.infoCliente();
+			Set<DTMinReserva> reservasMin = dtC.getReservas();
+			// Voy a crear un Set<DTReserva> para pasarle a la jsp
+			Collection<DTReserva> reservas = new TreeSet<>();
+			for (DTMinReserva dtMinR : reservasMin) {
+				ctrlU.seleccionarReserva(dtMinR.getIdReserva());
+				reservas.add(ctrlU.infoReserva());
+			}
+			WrapperVerPerfilCliente result = new WrapperVerPerfilCliente();
+			result.cliente = dtC;
+			result.reservas = reservas;
+			return result;
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
+	public DTProveedor verPerfilProveedor(String idProveedor) {
+		try {
+			Fabrica f = Fabrica.getInstance();
+			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+			ctrlU.seleccionarProveedor(idProveedor);
+			return ctrlU.infoProveedor();
 		} catch (Exception ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
 		}

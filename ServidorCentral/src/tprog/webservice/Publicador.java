@@ -19,6 +19,7 @@ import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTServicio;
+import tprog.logica.dt.DTUbicacion;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 
@@ -34,7 +35,7 @@ public class Publicador {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://localhost:9128/publicadorverservicio", this);
+		endpoint = Endpoint.publish("http://localhost:9128/publicador", this);
 	}
 
 	@WebMethod(exclude = true)
@@ -106,6 +107,11 @@ public class Publicador {
 		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
 		ctrlProductos.seleccionarServicio(dt);
 		return ctrlProductos.infoServicio();
+	}
+
+	@WebMethod
+	public <T> String toString(T o) {
+		return o.toString();
 	}
 
 }

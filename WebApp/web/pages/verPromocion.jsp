@@ -122,7 +122,7 @@
                                 <div id="s<%=i%>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <p>Cantidad: <%=nodo.getValue()%></p>
-                                        <p><%=servicio.toString().replace("\n", "<br>")%></p>
+                                        <p><%=proxy.toString(servicio).replace("\n", "<br>")%></p>
                                     </div>
                                     <form action="VerServicio" class="navbar-form">
                                         <div class="input-group">

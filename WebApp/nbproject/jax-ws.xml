@@ -2,9 +2,9 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services/>
   <clients>
-    <client name="publicadorverservicio">
-      <wsdl-url>http://localhost:9128/publicadorverservicio?wsdl</wsdl-url>
-      <local-wsdl-file>localhost_9128/publicadorverservicio.wsdl</local-wsdl-file>
+    <client name="publicador">
+      <wsdl-url>http://localhost:9128/publicador?wsdl</wsdl-url>
+      <local-wsdl-file>localhost_9128/publicador.wsdl</local-wsdl-file>
       <package-name forceReplace="true">webservice</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
@@ -22,7 +22,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:9128/publicadorverservicio?wsdl</wsimport-option-value>
+          <wsimport-option-value>http://localhost:9128/publicador?wsdl</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>

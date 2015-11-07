@@ -9,6 +9,11 @@ public class DTUbicacion {
 	private final String ciudad;
 	private final String pais;
 
+	public DTUbicacion() {
+		ciudad = null;
+		pais = null;
+	}
+
 	public DTUbicacion(String Ciudad, String Pais) {
 		this.ciudad = Ciudad;
 		this.pais = Pais;

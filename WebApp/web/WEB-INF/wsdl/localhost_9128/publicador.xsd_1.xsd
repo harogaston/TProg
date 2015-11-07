@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://webservice.tprog/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.tprog/">
 
-<xs:complexType name="wrapperSet">
+<xs:complexType name="wrapperVerServicio">
 <xs:sequence>
-<xs:element name="set" type="xs:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
+<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="dtMinPromocion">
+<xs:complexType name="dtServicio">
 <xs:sequence>
-<xs:element name="nicknameP" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="idPromocion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -27,49 +34,24 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="wrapperDefaultMutableTreeNode">
+<xs:complexType name="wrapperVerPromocion">
 <xs:sequence>
-<xs:element name="tree" type="tns:defaultMutableTreeNode" minOccurs="0"></xs:element>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtMinServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:int"></xs:element>
 </xs:sequence>
 </xs:complexType>
-
-<xs:complexType name="defaultMutableTreeNode">
-<xs:sequence>
-<xs:element name="allowsChildren" type="xs:boolean"></xs:element>
-<xs:element name="userObject" type="xs:anyType" minOccurs="0"></xs:element>
+</xs:element>
 </xs:sequence>
 </xs:complexType>
-
-<xs:complexType name="dtServicio">
-<xs:sequence>
-<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="precio" type="xs:float"></xs:element>
-<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
-<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+</xs:element>
+<xs:element name="promocion" type="tns:dtPromocion" minOccurs="0"></xs:element>
 </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="arrayList">
-<xs:complexContent>
-<xs:extension base="tns:abstractList">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractList" abstract="true">
-<xs:complexContent>
-<xs:extension base="tns:abstractCollection">
-<xs:sequence></xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="abstractCollection" abstract="true">
-<xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtPromocion">

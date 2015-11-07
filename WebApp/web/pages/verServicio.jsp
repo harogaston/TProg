@@ -96,7 +96,11 @@
 									</tr>
 									<tr>
 										<td>Origen</td>
-										<td><%="Ciudad: " + infoServicio.getOrigen().getCiudad() + ", Pais: " + infoServicio.getOrigen().getPais()%>
+										<%
+											webservice.PublicadorService service = new webservice.PublicadorService();
+											webservice.Publicador proxy = service.getPublicadorPort();
+										%>
+										<td><%=proxy.toString(infoServicio.getOrigen())%>
 											<%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(), "UTF-8");%>
 											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=origenSafe%>
 												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
@@ -106,7 +110,7 @@
 									<%if (infoServicio.getDestino() != null) {%>
 									<tr>
 										<td>Destino</td>
-										<td><%="Ciudad: " + infoServicio.getDestino().getCiudad() + ", Pais: " + infoServicio.getDestino().getPais()%>
+										<td><%=proxy.toString(infoServicio.getDestino())%>
 											<%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(), "UTF-8");%>
 											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=destinoSafe%>
 												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C

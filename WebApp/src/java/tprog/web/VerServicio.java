@@ -21,6 +21,9 @@ public class VerServicio extends HttpServlet {
 		request.setAttribute("idProveedor", idProveedor);
 		request.setAttribute("infoServicio", wrapper.getDtServicio());
 		Set<String> categorias = new HashSet<>(wrapper.getCategorias());
+		System.out.println("Web App");
+		System.out.println("Ciudad origen : " + wrapper.getDtServicio().getOrigen().getCiudad());
+		System.out.println("Pais origen : " + wrapper.getDtServicio().getOrigen().getPais());
 		request.setAttribute("categorias", categorias);
 		request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
 	}

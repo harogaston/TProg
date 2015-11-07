@@ -21,8 +21,6 @@ public class EstacionDeTrabajo {
 //            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 		//</editor-fold>
-//		PublicadorProductos publicadorProductos = new PublicadorProductos();
-//		publicadorProductos.publicar();
 		PublicadorVerServicio publicadorVerServicio = new PublicadorVerServicio();
 		publicadorVerServicio.publicar();
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();

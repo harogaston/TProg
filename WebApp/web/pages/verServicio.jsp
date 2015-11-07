@@ -96,7 +96,7 @@
 									</tr>
 									<tr>
 										<td>Origen</td>
-										<td><%=infoServicio.getOrigen().toString()%>
+										<td><%="Ciudad: " + infoServicio.getOrigen().getCiudad() + ", Pais: " + infoServicio.getOrigen().getPais()%>
 											<%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(), "UTF-8");%>
 											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=origenSafe%>
 												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
@@ -106,7 +106,7 @@
 									<%if (infoServicio.getDestino() != null) {%>
 									<tr>
 										<td>Destino</td>
-										<td><%=infoServicio.getDestino().toString()%>
+										<td><%="Ciudad: " + infoServicio.getDestino().getCiudad() + ", Pais: " + infoServicio.getDestino().getPais()%>
 											<%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(), "UTF-8");%>
 											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=destinoSafe%>
 												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C

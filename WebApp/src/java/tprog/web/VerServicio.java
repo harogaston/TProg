@@ -13,8 +13,8 @@ public class VerServicio extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		webservice.PublicadorVerServicioService service = new webservice.PublicadorVerServicioService();
-		webservice.PublicadorVerServicio proxy = service.getPublicadorVerServicioPort();
+		webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
 		String idServicio = request.getParameter("idServicio");
 		String idProveedor = request.getParameter("idProveedor");
 		WrapperVerServicio wrapper = proxy.verServicio(idServicio, idProveedor);

@@ -8,13 +8,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTPromocion;
+import tprog.logica.dt.DTServicio;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 
@@ -24,7 +28,7 @@ import tprog.logica.interfaces.ICtrlProductos;
  */
 @WebService
 @SOAPBinding(style = SOAPBinding.Style.RPC, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
-public class PublicadorVerServicio {
+public class Publicador {
 
 	private Endpoint endpoint = null;
 
@@ -63,11 +67,45 @@ public class PublicadorVerServicio {
 				streamer.read(byteArray);
 				imagenes.add(byteArray);
 			} catch (IOException ex) {
-				Logger.getLogger(PublicadorVerServicio.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		}
 		result.imagenes = imagenes;
 		return result;
+	}
+
+//	@WebMethod
+//	public WrapperVerProveedores verProveedores() {
+//		try {
+//			WrapperVerProveedores result = new WrapperVerProveedores();
+//			result.proveedores = Fabrica.getInstance().getICtrlUsuarios().listarProveedores();
+//			return result;
+//		} catch (Exception ex) {
+//			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+//		}
+//		return null;
+//	}
+	@WebMethod
+	public WrapperVerPromocion verPromocion(String idPromocion, String idProveedor) {
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		DTMinPromocion dtMin = new DTMinPromocion(idProveedor, idPromocion);
+		ctrlProductos.seleccionarPromocion(dtMin);
+		DTPromocion dtFull = ctrlProductos.infoPromocion();
+		Map<DTMinServicio, Integer> servicios = dtFull.getServicios();
+		WrapperVerPromocion result = new WrapperVerPromocion();
+		result.promocion = dtFull;
+		result.servicios = servicios;
+		return result;
+	}
+
+	@WebMethod
+	public DTServicio seleccionarInfoServicio(DTMinServicio dt) {
+		//selecciona y servicio y devuelve su información
+		//se combinan operaciones para hacerla atómica y evitar problemas
+		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
+		ctrlProductos.seleccionarServicio(dt);
+		return ctrlProductos.infoServicio();
 	}
 
 }

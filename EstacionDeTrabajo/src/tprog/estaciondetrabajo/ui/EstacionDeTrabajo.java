@@ -1,7 +1,6 @@
 package tprog.estaciondetrabajo.ui;
 
-import tprog.webservice.PublicadorProductos;
-import tprog.webservice.PublicadorVerServicio;
+import tprog.webservice.Publicador;
 
 public class EstacionDeTrabajo {
 
@@ -21,7 +20,7 @@ public class EstacionDeTrabajo {
 //            java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 		//</editor-fold>
-		PublicadorVerServicio publicadorVerServicio = new PublicadorVerServicio();
+		Publicador publicadorVerServicio = new Publicador();
 		publicadorVerServicio.publicar();
 		VentanaPrincipal ventanaPrincipal = new VentanaPrincipal();
 		ventanaPrincipal.setLocationRelativeTo(null);

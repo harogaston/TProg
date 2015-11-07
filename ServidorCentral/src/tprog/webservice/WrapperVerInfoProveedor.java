@@ -3,10 +3,10 @@
  */
 package tprog.webservice;
 
-import java.util.Set;
-import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinServicio;
+import java.util.Map;
+import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
+import tprog.logica.dt.DTServicio;
 
 /**
  *
@@ -15,6 +15,7 @@ import tprog.logica.dt.DTProveedor;
 public class WrapperVerInfoProveedor {
 
 	public DTProveedor proveedor;
-	public Set<DTMinServicio> servicios;
-	public Set<DTMinPromocion> promociones;
+	//map de dt con su representacion en string
+	public Map<DTServicio, String> servicios;
+	public Map<DTPromocion, String> promociones;
 }

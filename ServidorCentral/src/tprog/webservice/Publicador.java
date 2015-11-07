@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -104,13 +105,26 @@ public class Publicador {
 		try {
 			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 			ctrlUsuarios.seleccionarProveedor(idProveedor);
-			DTProveedor dt = ctrlUsuarios.infoProveedor();
-			Set<DTMinServicio> servicios = ctrlUsuarios.listarServiciosProveedor();
-			Set<DTMinPromocion> promociones = ctrlUsuarios.listarPromocionesProveedor();
+			DTProveedor dtProveedor = ctrlUsuarios.infoProveedor();
+			ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
+			Set<DTMinPromocion> setPromociones = ctrlUsuarios.listarPromocionesProveedor();
+			Map<DTPromocion, String> mapPromociones = new HashMap<>();
+			for (DTMinPromocion dt : setPromociones) {
+				ctrlProductos.seleccionarPromocion(dt);
+				DTPromocion tmp = ctrlProductos.infoPromocion();
+				mapPromociones.put(tmp, tmp.toString());
+			}
+			Set<DTMinServicio> setServicios = ctrlUsuarios.listarServiciosProveedor();
+			Map<DTServicio, String> mapServicios = new HashMap<>();
+			for (DTMinServicio dt : setServicios) {
+				ctrlProductos.seleccionarServicio(dt);
+				DTServicio tmp = ctrlProductos.infoServicio();
+				mapServicios.put(tmp, tmp.toString());
+			}
 			WrapperVerInfoProveedor result = new WrapperVerInfoProveedor();
-			result.promociones = promociones;
-			result.servicios = servicios;
-			result.proveedor = dt;
+			result.promociones = mapPromociones;
+			result.servicios = mapServicios;
+			result.proveedor = dtProveedor;
 			return result;
 		} catch (Exception ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,17 +133,17 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public DTPromocion seleccionarInfoPromocion(DTMinPromocion dt) {
-		//selecciona y servicio y devuelve su información
-		//se combinan operaciones para hacerla atómica y evitar problemas
-		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
-		ctrlProductos.seleccionarPromocion(dt);
-		return ctrlProductos.infoPromocion();
-	}
-
-	@WebMethod
 	public <T> String toString(T o) {
 		return o.toString();
 	}
 
+//ésto quedó inutilizado porque ya se hace en verInfoProveedor
+//	@WebMethod
+//	public DTPromocion seleccionarInfoPromocion(DTMinPromocion dt) {
+//		//selecciona y servicio y devuelve su información
+//		//se combinan operaciones para hacerla atómica y evitar problemas
+//		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
+//		ctrlProductos.seleccionarPromocion(dt);
+//		return ctrlProductos.infoPromocion();
+//	}
 }

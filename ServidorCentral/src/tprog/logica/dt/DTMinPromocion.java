@@ -9,6 +9,11 @@ public class DTMinPromocion {
 	private final String nicknameP;
 	private final String idPromocion;
 
+	public DTMinPromocion() {
+		nicknameP = null;
+		idPromocion = null;
+	}
+
 	public DTMinPromocion(String NicknameP, String IdPromocion) {
 		this.nicknameP = NicknameP;
 		this.idPromocion = IdPromocion;

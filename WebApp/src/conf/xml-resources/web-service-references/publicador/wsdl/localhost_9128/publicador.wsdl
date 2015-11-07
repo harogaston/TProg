@@ -24,6 +24,18 @@
 <message name="seleccionarInfoServicioResponse">
 <part name="return" type="tns:dtServicio"></part>
 </message>
+<message name="verInfoProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="verInfoProveedorResponse">
+<part name="return" type="tns:wrapperVerInfoProveedor"></part>
+</message>
+<message name="seleccionarInfoPromocion">
+<part name="arg0" type="tns:dtMinPromocion"></part>
+</message>
+<message name="seleccionarInfoPromocionResponse">
+<part name="return" type="tns:dtPromocion"></part>
+</message>
 <message name="toString">
 <part name="arg0" type="xsd:anyType"></part>
 </message>
@@ -42,6 +54,14 @@
 <operation name="seleccionarInfoServicio">
 <input wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioRequest" message="tns:seleccionarInfoServicio"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioResponse" message="tns:seleccionarInfoServicioResponse"></output>
+</operation>
+<operation name="verInfoProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verInfoProveedorRequest" message="tns:verInfoProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verInfoProveedorResponse" message="tns:verInfoProveedorResponse"></output>
+</operation>
+<operation name="seleccionarInfoPromocion">
+<input wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoPromocionRequest" message="tns:seleccionarInfoPromocion"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoPromocionResponse" message="tns:seleccionarInfoPromocionResponse"></output>
 </operation>
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
@@ -69,6 +89,24 @@
 </output>
 </operation>
 <operation name="seleccionarInfoServicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verInfoProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="seleccionarInfoPromocion">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

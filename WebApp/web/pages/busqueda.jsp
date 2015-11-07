@@ -142,11 +142,11 @@
 						<div class="col-md-6">
 							<h2 class="text-center">Servicios</h2>
 							<%	Set<DTServicio> servicios = (Set<DTServicio>) request.getAttribute("servicios");
+								int i = 0;
 								if (!servicios.isEmpty()) {
 							%>
 							<div class="panel-group" id="accordionServicios">
 								<%
-									int i = 0;
 									for (DTServicio servicio : servicios) {
 										i++;
 								%>
@@ -195,7 +195,7 @@
 							%>
 							<div class="panel-group" id="accordionPromociones">
 								<%
-									int j = 0;
+									int j = i + 1;
 									for (DTPromocion promocion : promociones) {
 										j++;
 								%>

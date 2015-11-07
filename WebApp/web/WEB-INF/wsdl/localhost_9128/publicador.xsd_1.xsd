@@ -27,6 +27,37 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="wrapperVerInfoProveedor">
+<xs:sequence>
+<xs:element name="proveedor" type="tns:dtProveedor" minOccurs="0"></xs:element>
+<xs:element name="servicios" type="tns:dtMinServicio" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="promociones" type="tns:dtMinPromocion" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtProveedor">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="webEmpresa" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtUsuario">
+<xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dtMinServicio">
 <xs:sequence>
 <xs:element name="nicknameP" type="xs:string" minOccurs="0"></xs:element>
@@ -34,23 +65,10 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="wrapperVerPromocion">
+<xs:complexType name="dtMinPromocion">
 <xs:sequence>
-<xs:element name="servicios">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
-<xs:complexType>
-<xs:sequence>
-<xs:element name="key" minOccurs="0" type="tns:dtMinServicio"></xs:element>
-<xs:element name="value" minOccurs="0" type="xs:int"></xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-</xs:sequence>
-</xs:complexType>
-</xs:element>
-<xs:element name="promocion" type="tns:dtPromocion" minOccurs="0"></xs:element>
+<xs:element name="nicknameP" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idPromocion" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -74,6 +92,26 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPromocion">
+<xs:sequence>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtMinServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="promocion" type="tns:dtPromocion" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

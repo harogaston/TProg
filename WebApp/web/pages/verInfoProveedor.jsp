@@ -1,14 +1,9 @@
-<%@page import="tprog.logica.dt.DTPromocion"%>
-<%@page import="tprog.logica.dt.DTMinPromocion"%>
-<%@page import="tprog.logica.dt.DTServicio"%>
-<%@page import="tprog.logica.interfaces.ICtrlProductos"%>
-<%@page import="tprog.logica.interfaces.Fabrica"%>
-<%@page import="tprog.logica.dt.DTMinServicio"%>
-<%@page import="tprog.logica.dt.DTProveedor"%>
-<%@page import="tprog.logica.dt.DTLineaReserva"%>
+<%@page import="webservice.DtPromocion"%>
+<%@page import="webservice.DtMinPromocion"%>
+<%@page import="webservice.DtServicio"%>
+<%@page import="webservice.DtMinServicio"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="tprog.logica.dt.DTReserva"%>
 
 <!doctype html>
 <html>
@@ -25,7 +20,9 @@
 		-->
     </header>
 	<body>
-
+		<%	webservice.PublicadorService service = new webservice.PublicadorService();
+			webservice.Publicador proxy = service.getPublicadorPort();
+		%>
 		<div class="container wrapper" style="padding: 30px">
 			<div class="row">
 				<!-- Nav tabs -->
@@ -70,12 +67,9 @@
 						<div class="panel-group" id="accordionServicios">
 							<%
 								int i = 0;
-								Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
-								for (DTMinServicio dt : servicios) {
-									Fabrica f = Fabrica.getInstance();
-									ICtrlProductos ctrlProductos = f.getICtrlProductos();
-									ctrlProductos.seleccionarServicio(dt);
-									DTServicio servicio = ctrlProductos.infoServicio();
+								Set<DtMinServicio> servicios = (Set<DtMinServicio>) request.getAttribute("servicios");
+								for (DtMinServicio dt : servicios) {
+									DtServicio servicio = proxy.seleccionarInfoServicio(dt);
 									i++;
 							%>
 							<div class="accordion-group">
@@ -109,19 +103,16 @@
 							}
 						%>
 					</div>
-					
+
 					<!--Promociones-->
 					<div role="tabpanel" class="tab-pane" id="promociones">
 						<% if (request.getAttribute("promociones") != null) {%>
 						<div class="panel-group" id="accordionPromociones">
 							<%
 								int i = 0;
-								Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
-								for (DTMinPromocion dt : promociones) {
-									Fabrica f = Fabrica.getInstance();
-									ICtrlProductos ctrlProductos = f.getICtrlProductos();
-									ctrlProductos.seleccionarPromocion(dt);
-									DTPromocion promocion = ctrlProductos.infoPromocion();
+								Set<DtMinPromocion> promociones = (Set<DtMinPromocion>) request.getAttribute("promociones");
+								for (DtMinPromocion dt : promociones) {
+									DtPromocion promocion = proxy.seleccionarInfoPromocion(dt);
 									i++;
 							%>
 							<div class="accordion-group">

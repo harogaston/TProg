@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
@@ -18,10 +19,11 @@ import javax.xml.ws.Endpoint;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
+import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTServicio;
-import tprog.logica.dt.DTUbicacion;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 /**
  *
@@ -75,17 +77,6 @@ public class Publicador {
 		return result;
 	}
 
-//	@WebMethod
-//	public WrapperVerProveedores verProveedores() {
-//		try {
-//			WrapperVerProveedores result = new WrapperVerProveedores();
-//			result.proveedores = Fabrica.getInstance().getICtrlUsuarios().listarProveedores();
-//			return result;
-//		} catch (Exception ex) {
-//			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
-//		}
-//		return null;
-//	}
 	@WebMethod
 	public WrapperVerPromocion verPromocion(String idPromocion, String idProveedor) {
 		Fabrica f = Fabrica.getInstance();
@@ -107,6 +98,33 @@ public class Publicador {
 		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
 		ctrlProductos.seleccionarServicio(dt);
 		return ctrlProductos.infoServicio();
+	}
+
+	public WrapperVerInfoProveedor verInfoProveedor(String idProveedor) {
+		try {
+			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+			ctrlUsuarios.seleccionarProveedor(idProveedor);
+			DTProveedor dt = ctrlUsuarios.infoProveedor();
+			Set<DTMinServicio> servicios = ctrlUsuarios.listarServiciosProveedor();
+			Set<DTMinPromocion> promociones = ctrlUsuarios.listarPromocionesProveedor();
+			WrapperVerInfoProveedor result = new WrapperVerInfoProveedor();
+			result.promociones = promociones;
+			result.servicios = servicios;
+			result.proveedor = dt;
+			return result;
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
+	public DTPromocion seleccionarInfoPromocion(DTMinPromocion dt) {
+		//selecciona y servicio y devuelve su información
+		//se combinan operaciones para hacerla atómica y evitar problemas
+		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
+		ctrlProductos.seleccionarPromocion(dt);
+		return ctrlProductos.infoPromocion();
 	}
 
 	@WebMethod

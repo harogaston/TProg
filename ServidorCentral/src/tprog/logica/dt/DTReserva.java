@@ -48,7 +48,7 @@ public class DTReserva implements Comparable<DTReserva> {
 				+ "\n" + "Fecha de creacion: "
 				+ Integer.toString(fCreacion.getDate()) + "-"
 				+ Integer.toString(fCreacion.getMonth() + 1) + "-"
-				+ Integer.toString(fCreacion.getYear()) + "\n"
+				+ Integer.toString(fCreacion.getYear() + 1900) + "\n"
 				+ "\n" + "Estado: " + estado.toString()
 				+ "\n" + "Precio total: " + Float.toString(precioTotal)
 				+ "\n" + "\n";

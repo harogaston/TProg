@@ -92,6 +92,8 @@ public class Publicador {
 		return result;
 	}
 
+	//este metodo se podria incorporar a ver Promocion, pero
+	//no me pintó
 	@WebMethod
 	public DTServicio seleccionarInfoServicio(DTMinServicio dt) {
 		//selecciona y servicio y devuelve su información

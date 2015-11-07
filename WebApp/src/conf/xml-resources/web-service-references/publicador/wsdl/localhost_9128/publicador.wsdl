@@ -3,62 +3,81 @@
 <xsd:schema>
 <xsd:import namespace="http://webservice.tprog/" schemaLocation="http://localhost:9128/publicador?xsd=1"></xsd:import>
 </xsd:schema>
-<xsd:schema>
-<xsd:import namespace="http://jaxb.dev.java.net/array" schemaLocation="http://localhost:9128/publicador?xsd=2"></xsd:import>
-</xsd:schema>
 </types>
-<message name="getCtrlUsuarios"></message>
-<message name="getCtrlUsuariosResponse">
-<part name="return" type="tns:ctrlUsuarios"></part>
-</message>
-<message name="nuevoCliente">
-<part name="arg0" type="xsd:int"></part>
-</message>
-<message name="nuevoClienteResponse">
-<part name="return" type="xsd:int"></part>
-</message>
 <message name="verServicio">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
 </message>
 <message name="verServicioResponse">
-<part xmlns:ns1="http://jaxb.dev.java.net/array" name="return" type="ns1:stringArray"></part>
+<part name="return" type="tns:wrapperVerServicio"></part>
+</message>
+<message name="verPromocion">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="verPromocionResponse">
+<part name="return" type="tns:wrapperVerPromocion"></part>
+</message>
+<message name="seleccionarInfoServicio">
+<part name="arg0" type="tns:dtMinServicio"></part>
+</message>
+<message name="seleccionarInfoServicioResponse">
+<part name="return" type="tns:dtServicio"></part>
+</message>
+<message name="toString">
+<part name="arg0" type="xsd:anyType"></part>
+</message>
+<message name="toStringResponse">
+<part name="return" type="xsd:string"></part>
 </message>
 <portType name="Publicador">
-<operation name="getCtrlUsuarios">
-<input wsam:Action="http://webservice.tprog/Publicador/getCtrlUsuariosRequest" message="tns:getCtrlUsuarios"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/getCtrlUsuariosResponse" message="tns:getCtrlUsuariosResponse"></output>
-</operation>
-<operation name="nuevoCliente">
-<input wsam:Action="http://webservice.tprog/Publicador/nuevoClienteRequest" message="tns:nuevoCliente"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/nuevoClienteResponse" message="tns:nuevoClienteResponse"></output>
-</operation>
 <operation name="verServicio" parameterOrder="arg0 arg1">
 <input wsam:Action="http://webservice.tprog/Publicador/verServicioRequest" message="tns:verServicio"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verServicioResponse" message="tns:verServicioResponse"></output>
 </operation>
+<operation name="verPromocion" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/verPromocionRequest" message="tns:verPromocion"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verPromocionResponse" message="tns:verPromocionResponse"></output>
+</operation>
+<operation name="seleccionarInfoServicio">
+<input wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioRequest" message="tns:seleccionarInfoServicio"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioResponse" message="tns:seleccionarInfoServicioResponse"></output>
+</operation>
+<operation name="toString">
+<input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/toStringResponse" message="tns:toStringResponse"></output>
+</operation>
 </portType>
 <binding name="PublicadorPortBinding" type="tns:Publicador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
-<operation name="getCtrlUsuarios">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="nuevoCliente">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
 <operation name="verServicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verPromocion">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="seleccionarInfoServicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="toString">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

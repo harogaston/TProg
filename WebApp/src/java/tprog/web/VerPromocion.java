@@ -6,16 +6,15 @@
 package tprog.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tprog.logica.dt.DTMinPromocion;
-import tprog.logica.dt.DTMinServicio;
-import tprog.logica.dt.DTPromocion;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlProductos;
+import webservice.DtMinServicio;
+import webservice.WrapperVerPromocion;
 
 /**
  *
@@ -23,44 +22,42 @@ import tprog.logica.interfaces.ICtrlProductos;
  */
 public class VerPromocion extends HttpServlet {
 
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String idPromocion = request.getParameter("idPromocion");
-        String idProveedor = request.getParameter("idProveedor");
-        Fabrica f = Fabrica.getInstance();
-        ICtrlProductos ctrlProductos = f.getICtrlProductos();
-        DTMinPromocion dtMin = new DTMinPromocion(idProveedor, idPromocion);
-        ctrlProductos.seleccionarPromocion(dtMin);
-        DTPromocion dtFull = ctrlProductos.infoPromocion();
-        Map<DTMinServicio, Integer> servicios = dtFull.getServicios();
-        //necesito el nickname del proveedor
-        request.setAttribute("idProveedor", dtMin.getNicknameP());
-        //y el resto de la info del servicio
-        request.setAttribute("infoPromocion", dtFull);
-        //paso los servicios
-        request.setAttribute("servicios", servicios);
-        request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
-    }
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
+		String idPromocion = request.getParameter("idPromocion");
+		String idProveedor = request.getParameter("idProveedor");
+		WrapperVerPromocion result = proxy.verPromocion(idPromocion, idProveedor);
+		//paso los servicios
+		Map<DtMinServicio, Integer> servicios = new HashMap<>();
+		List<WrapperVerPromocion.Servicios.Entry> entries = result.getServicios().getEntry();
+		for (WrapperVerPromocion.Servicios.Entry entry : entries) {
+			servicios.put(entry.getKey(), entry.getValue());
+		}
+		request.setAttribute("servicios", servicios);
+		//necesito el nickname del proveedor
+		request.setAttribute("idProveedor", idProveedor);
+		//y el resto de la info del servicio
+		request.setAttribute("infoPromocion", result.getPromocion());
+		request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
+	}
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}// </editor-fold>
 
 }

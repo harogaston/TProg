@@ -1,12 +1,10 @@
+<%@page import="webservice.DtPromocion"%>
+<%@page import="webservice.DtMinServicio"%>
+<%@page import="webservice.DtServicio"%>
 <%@page import="java.util.Map.Entry"%>
-<%@page import="tprog.logica.interfaces.Fabrica"%>
-<%@page import="tprog.logica.interfaces.ICtrlProductos"%>
 <%@page import="java.util.Map"%>
-<%@page import="tprog.logica.dt.DTMinServicio"%>
-<%@page import="tprog.logica.dt.DTPromocion"%>
 <%@page import="java.lang.String"%>
 <%@page import="java.util.Set"%>
-<%@page import="tprog.logica.dt.DTServicio"%>
 
 <!doctype html>
 <html>
@@ -26,9 +24,9 @@
     </header>
     <body>
         <%			//obtengo el atributo de info servicio para usar en toda la página
-			DTPromocion infoPromocion = (DTPromocion) request.getAttribute("infoPromocion");
+			DtPromocion infoPromocion = (DtPromocion) request.getAttribute("infoPromocion");
 			String idProveedor = (String) request.getAttribute("idProveedor");
-			Map<DTMinServicio, Integer> servicios = (Map<DTMinServicio, Integer>) request.getAttribute("servicios");
+			Map<DtMinServicio, Integer> servicios = (Map<DtMinServicio, Integer>) request.getAttribute("servicios");
         %>
         <div class="container wrapper">
             <div class="row">
@@ -107,12 +105,11 @@
                         <%
 							int i = 0;
 
-							for (Map.Entry<DTMinServicio, Integer> nodo : servicios.entrySet()) {
+							for (Map.Entry<DtMinServicio, Integer> nodo : servicios.entrySet()) {
 //                                System.out.println(nodo.getKey() + "/" + nodo.getValue());
-								Fabrica f = Fabrica.getInstance();
-								ICtrlProductos ctrlProductos = f.getICtrlProductos();
-								ctrlProductos.seleccionarServicio(nodo.getKey());
-								DTServicio servicio = ctrlProductos.infoServicio();
+								webservice.PublicadorService service = new webservice.PublicadorService();
+								webservice.Publicador proxy = service.getPublicadorPort();
+								DtServicio servicio = proxy.seleccionarInfoServicio(nodo.getKey());
 								i++;
                         %>
                         <div class="accordion-group">
@@ -125,7 +122,7 @@
                                 <div id="s<%=i%>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <p>Cantidad: <%=nodo.getValue()%></p>
-                                        <p><%=servicio.toString().replace("\n", "<br>")%></p>
+                                        <p><%=proxy.toString(servicio).replace("\n", "<br>")%></p>
                                     </div>
                                     <form action="VerServicio" class="navbar-form">
                                         <div class="input-group">

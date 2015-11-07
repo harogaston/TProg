@@ -4,7 +4,9 @@
 	<system systemId="http://localhost:9129/publicador?xsd=1" uri="src/conf/xml-resources/web-service-references/publicador/wsdl/localhost_9129/publicador.xsd_1.xsd"/>
 	<system systemId="http://localhost:8084/WebService/NewWebService?wsdl" uri="src/conf/xml-resources/web-service-references/NewWebService/wsdl/localhost_8084/WebService/NewWebService.wsdl"/>
 	<system systemId="http://localhost:8084/WebService/NewWebService?xsd=1" uri="src/conf/xml-resources/web-service-references/NewWebService/wsdl/localhost_8084/WebService/NewWebService.xsd_1.xsd"/>
+	<system systemId="http://localhost:9128/publicador?xsd=2" uri="src/conf/xml-resources/web-service-references/publicador/wsdl/localhost_9128/publicador.xsd_2.xsd"/>
 	<system systemId="http://localhost:9128/publicador?wsdl" uri="src/conf/xml-resources/web-service-references/publicador/wsdl/localhost_9128/publicador.wsdl"/>
 	<system systemId="http://localhost:9128/publicador?xsd=1" uri="src/conf/xml-resources/web-service-references/publicador/wsdl/localhost_9128/publicador.xsd_1.xsd"/>
-	<system systemId="http://localhost:9128/publicador?xsd=2" uri="src/conf/xml-resources/web-service-references/publicador/wsdl/localhost_9128/publicador.xsd_2.xsd"/>
+	<system systemId="http://localhost:9128/publicadorverservicio?wsdl" uri="src/conf/xml-resources/web-service-references/publicadorverservicio/wsdl/localhost_9128/publicadorverservicio.wsdl"/>
+	<system systemId="http://localhost:9128/publicadorverservicio?xsd=1" uri="src/conf/xml-resources/web-service-references/publicadorverservicio/wsdl/localhost_9128/publicadorverservicio.xsd_1.xsd"/>
 </catalog>

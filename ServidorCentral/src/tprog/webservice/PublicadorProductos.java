@@ -5,8 +5,8 @@
  */
 package tprog.webservice;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
@@ -14,14 +14,12 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.ws.Endpoint;
-import org.apache.commons.lang3.tuple.Triple;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
 import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlProductos;
 
 /**
  *
@@ -33,6 +31,9 @@ public class PublicadorProductos {
 
 	//private Logica logica = new Logica();
 	private Endpoint endpoint = null;
+
+	public PublicadorProductos() {
+	}
 
 	@WebMethod(exclude = true)
 	public void publicar() {
@@ -55,9 +56,11 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public DTMinPromocion[] listarPromociones() {
+	public WrapperSet listarPromociones() {
 		try {
-			return (DTMinPromocion[]) Fabrica.getInstance().getICtrlProductos().listarPromociones().toArray();
+			WrapperSet wrapper = new WrapperSet();
+			wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarPromociones());
+			return wrapper;
 		} catch (Exception ex) {
 			Logger.getLogger(PublicadorProductos.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -77,6 +80,8 @@ public class PublicadorProductos {
 	@WebMethod
 	public void seleccionarServicio(DTMinServicio dtS) {
 		Fabrica.getInstance().getICtrlProductos().seleccionarServicio(dtS);
+		System.out.println("Servicio con id = " + dtS.getIdServicio()
+				+ " y proveedor = " + dtS.getNicknameP() + " seleccionado");
 	}
 
 	@WebMethod
@@ -85,20 +90,25 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public DefaultMutableTreeNode listarCategorias() {
-		//cambiar a arbol de json (un string)
-		return Fabrica.getInstance().getICtrlProductos().listarCategorias();
+	public WrapperDefaultMutableTreeNode listarCategorias() {
+		WrapperDefaultMutableTreeNode wrapper = new WrapperDefaultMutableTreeNode();
+		wrapper.setTree(Fabrica.getInstance().getICtrlProductos().listarCategorias());
+		return wrapper;
 	}
 
 	@WebMethod
-	public DTMinServicio[] listarServiciosCategoria(String idCategoria) {
-		return (DTMinServicio[]) Fabrica.getInstance().getICtrlProductos().listarServiciosCategoria(idCategoria).toArray();
+	public WrapperSet listarServiciosCategoria(String idCategoria) {
+		WrapperSet wrapper = new WrapperSet();
+		wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarServiciosCategoria(idCategoria));
+		return wrapper;
 	}
 
 	@WebMethod
-	public DTMinServicio[] listarServicios() {
+	public WrapperSet listarServicios() {
 		try {
-			return (DTMinServicio[]) Fabrica.getInstance().getICtrlProductos().listarServicios().toArray();
+			WrapperSet wrapper = new WrapperSet();
+			wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarServicios());
+			return wrapper;
 		} catch (Exception ex) {
 			Logger.getLogger(PublicadorProductos.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -116,8 +126,10 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public String[] listarImagenes() {
-		return (String[]) Fabrica.getInstance().getICtrlProductos().listarImagenes().toArray();
+	public WrapperSet listarImagenes() {
+		WrapperSet wrapper = new WrapperSet();
+		wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarImagenes());
+		return wrapper;
 	}
 
 	@WebMethod
@@ -139,8 +151,10 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public DefaultMutableTreeNode listarCiudades() {
-		return Fabrica.getInstance().getICtrlProductos().listarCiudades();
+	public WrapperDefaultMutableTreeNode listarCiudades() {
+		WrapperDefaultMutableTreeNode wrapper = new WrapperDefaultMutableTreeNode();
+		wrapper.setTree(Fabrica.getInstance().getICtrlProductos().listarCiudades());
+		return wrapper;
 	}
 
 	@WebMethod
@@ -154,8 +168,10 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public String[] listarCategoriasServicio() {
-		return (String[]) Fabrica.getInstance().getICtrlProductos().listarCategoriasServicio().toArray();
+	public WrapperSet listarCategoriasServicio() {
+		WrapperSet wrapper = new WrapperSet();
+		wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarCategoriasServicio());
+		return wrapper;
 	}
 
 	@WebMethod
@@ -214,12 +230,8 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public void altaServicio(String descripcion, float precio, String[] imagenes) {
-		Set<String> setImagenes = new HashSet<>();
-		for (String imagen : imagenes) {
-			setImagenes.add(imagen);
-		}
-		Fabrica.getInstance().getICtrlProductos().altaServicio(descripcion, precio, setImagenes);
+	public void altaServicio(String descripcion, float precio, ArrayList<String> imagenes) {
+		Fabrica.getInstance().getICtrlProductos().altaServicio(descripcion, precio, new HashSet<>(imagenes));
 	}
 
 	@WebMethod
@@ -238,12 +250,16 @@ public class PublicadorProductos {
 	}
 
 	@WebMethod
-	public DTServicio[] listarServiciosPorTermino(String termino) {
-		return (DTServicio[]) Fabrica.getInstance().getICtrlProductos().listarServiciosPorTermino(termino).toArray();
+	public WrapperSet listarServiciosPorTermino(String termino) {
+		WrapperSet wrapper = new WrapperSet();
+		wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarServiciosPorTermino(termino));
+		return wrapper;
 	}
 
 	@WebMethod
-	public DTPromocion[] listarPromocionesPorTermino(String termino) {
-		return (DTPromocion[]) Fabrica.getInstance().getICtrlProductos().listarPromocionesPorTermino(termino).toArray();
+	public WrapperSet listarPromocionesPorTermino(String termino) {
+		WrapperSet wrapper = new WrapperSet();
+		wrapper.setSet(Fabrica.getInstance().getICtrlProductos().listarPromocionesPorTermino(termino));
+		return wrapper;
 	}
 }

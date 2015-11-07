@@ -15,6 +15,16 @@ public class DTServicio implements Comparable<DTServicio> {
 	private final DTUbicacion origen;
 	private final DTUbicacion destino;
 
+	public DTServicio() {
+		idServicio = null;
+		nicknameProveedor = null;
+		descripcion = null;
+		precio = 0;
+		imagenes = null;
+		origen = null;
+		destino = null;
+	}
+
 	public DTServicio(String IdServicio, String NicknameP, String Descripcion, float Precio,
 			Set<String> Imagenes, DTUbicacion Origen, DTUbicacion Destino) {
 		this.idServicio = IdServicio;

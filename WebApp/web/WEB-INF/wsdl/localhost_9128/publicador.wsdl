@@ -3,9 +3,6 @@
 <xsd:schema>
 <xsd:import namespace="http://webservice.tprog/" schemaLocation="http://localhost:9128/publicador?xsd=1"></xsd:import>
 </xsd:schema>
-<xsd:schema>
-<xsd:import namespace="http://jaxb.dev.java.net/array" schemaLocation="http://localhost:9128/publicador?xsd=2"></xsd:import>
-</xsd:schema>
 </types>
 <message name="infoMinPromocion"></message>
 <message name="infoMinPromocionResponse">
@@ -17,7 +14,7 @@
 </message>
 <message name="listarPromociones"></message>
 <message name="listarPromocionesResponse">
-<part name="return" type="tns:dtMinPromocionArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <message name="seleccionarPromocion">
 <part name="arg0" type="tns:dtMinPromocion"></part>
@@ -37,17 +34,17 @@
 </message>
 <message name="listarCategorias"></message>
 <message name="listarCategoriasResponse">
-<part name="return" type="tns:defaultMutableTreeNode"></part>
+<part name="return" type="tns:wrapperDefaultMutableTreeNode"></part>
 </message>
 <message name="listarServiciosCategoria">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="listarServiciosCategoriaResponse">
-<part name="return" type="tns:dtMinServicioArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <message name="listarServicios"></message>
 <message name="listarServiciosResponse">
-<part name="return" type="tns:dtMinServicioArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <message name="cambiarPrecio">
 <part name="arg0" type="xsd:float"></part>
@@ -59,7 +56,7 @@
 <message name="cambiarDescripcionResponse"></message>
 <message name="listarImagenes"></message>
 <message name="listarImagenesResponse">
-<part xmlns:ns1="http://jaxb.dev.java.net/array" name="return" type="ns1:stringArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <message name="agregarImagen">
 <part name="arg0" type="xsd:string"></part>
@@ -71,7 +68,7 @@
 <message name="quitarImagenResponse"></message>
 <message name="listarCiudades"></message>
 <message name="listarCiudadesResponse">
-<part name="return" type="tns:defaultMutableTreeNode"></part>
+<part name="return" type="tns:wrapperDefaultMutableTreeNode"></part>
 </message>
 <message name="cambiarOrigen">
 <part name="arg0" type="tns:dtUbicacion"></part>
@@ -83,7 +80,7 @@
 <message name="cambiarDestinoResponse"></message>
 <message name="listarCategoriasServicio"></message>
 <message name="listarCategoriasServicioResponse">
-<part xmlns:ns2="http://jaxb.dev.java.net/array" name="return" type="ns2:stringArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <message name="agregarCategoria">
 <part name="arg0" type="xsd:string"></part>
@@ -142,7 +139,7 @@
 <message name="altaServicio">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:float"></part>
-<part xmlns:ns3="http://jaxb.dev.java.net/array" name="arg2" type="ns3:stringArray"></part>
+<part name="arg2" type="tns:arrayList"></part>
 </message>
 <message name="altaServicioResponse"></message>
 <message name="agregarServicio">
@@ -163,13 +160,13 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="listarServiciosPorTerminoResponse">
-<part name="return" type="tns:dtServicioArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <message name="listarPromocionesPorTermino">
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="listarPromocionesPorTerminoResponse">
-<part name="return" type="tns:dtPromocionArray"></part>
+<part name="return" type="tns:wrapperSet"></part>
 </message>
 <portType name="PublicadorProductos">
 <operation name="infoMinPromocion">

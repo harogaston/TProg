@@ -11,6 +11,11 @@ public class DTMinServicio {
 	private final String nicknameP;
 	private final String idServicio;
 
+	public DTMinServicio() {
+		nicknameP = null;
+		idServicio = null;
+	}
+
 	public DTMinServicio(String NicknameP, String IdServicio) {
 		this.nicknameP = NicknameP;
 		this.idServicio = IdServicio;

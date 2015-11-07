@@ -26,21 +26,21 @@
             <isset property="conf.dir"/>
         </condition>
     </target>
-    <target name="wsimport-client-publicador" depends="wsimport-init">
-        <mkdir dir="${build.generated.dir}/jax-wsCache/publicador"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/publicador" destdir="${build.generated.dir}/jax-wsCache/publicador" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/publicador/wsdl/localhost_9128/publicador.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9128/publicador?wsdl" xnocompile="true" xendorsed="true" package="webservice">
-            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/publicador/wsdl/localhost_9128/publicador.wsdl"/>
-            <produces dir="${build.generated.dir}/jax-wsCache/publicador"/>
+    <target name="wsimport-client-publicadorverservicio" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/publicadorverservicio"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/publicadorverservicio" destdir="${build.generated.dir}/jax-wsCache/publicadorverservicio" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/publicadorverservicio/wsdl/localhost_9128/publicadorverservicio.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9128/publicadorverservicio?wsdl" xnocompile="true" xendorsed="true" package="webservice">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/publicadorverservicio/wsdl/localhost_9128/publicadorverservicio.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/publicadorverservicio"/>
         </wsimport>
         <copy todir="${build.generated.sources.dir}/jax-ws">
-            <fileset dir="${build.generated.dir}/jax-wsCache/publicador">
+            <fileset dir="${build.generated.dir}/jax-wsCache/publicadorverservicio">
                 <include name="**/*.java"/>
             </fileset>
         </copy>
     </target>
-    <target name="wsimport-client-clean-publicador" depends="-init-project">
+    <target name="wsimport-client-clean-publicadorverservicio" depends="-init-project">
         <delete dir="${build.generated.sources.dir}/jax-ws/webservice"/>
-        <delete dir="${build.generated.dir}/jax-wsCache/publicador"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/publicadorverservicio"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-publicador"/>
+    <target name="wsimport-client-generate" depends="wsimport-client-publicadorverservicio"/>
 </project>

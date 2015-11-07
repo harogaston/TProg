@@ -1,7 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="webservice.DtServicio"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.lang.String"%>
 <%@page import="java.util.Set"%>
-<%@page import="tprog.logica.dt.DTServicio"%>
 
 <!doctype html>
 <html>
@@ -21,9 +22,9 @@
     </header>
     <body>
         <%			//obtengo el atributo de info servicio para usar en toda la página
-			DTServicio infoServicio = (DTServicio) request.getAttribute("infoServicio");
+			DtServicio infoServicio = (DtServicio) request.getAttribute("infoServicio");
 			String idProveedor = (String) request.getAttribute("idProveedor");
-			Set< String> imagenes = infoServicio.getImagenes();
+			List< String> imagenes = infoServicio.getImagenes();
         %>
         <div class="container wrapper">
             <div class="row">
@@ -96,7 +97,7 @@
 									<tr>
 										<td>Origen</td>
 										<td><%=infoServicio.getOrigen().toString()%>
-											<%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(),"UTF-8");%>
+											<%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(), "UTF-8");%>
 											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=origenSafe%>
 												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
 												 <%=origenSafe%>" alt="Google Map of caracas" style="padding-top: 10px;">
@@ -106,7 +107,7 @@
 									<tr>
 										<td>Destino</td>
 										<td><%=infoServicio.getDestino().toString()%>
-											<%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(),"UTF-8");%>
+											<%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(), "UTF-8");%>
 											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=destinoSafe%>
 												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
 												 <%=destinoSafe%>" alt="Google Map of caracas"  style="padding-top: 10px;">
@@ -157,7 +158,7 @@
 						<h4><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-warning"><%=categoria%></span></a></h4>
 						<input name="categoriaSeleccionada" value="<%=categoria%>" style="display: none">
 					</form>
-                        <%}%>
+					<%}%>
                 </div>
             </div>
         </div>

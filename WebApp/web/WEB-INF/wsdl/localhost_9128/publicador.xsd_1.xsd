@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://webservice.tprog/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.tprog/">
 
-<xs:complexType name="dtMinServicio">
+<xs:complexType name="wrapperSet">
 <xs:sequence>
-<xs:element name="nicknameP" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="set" type="xs:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -21,6 +20,26 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="dtMinServicio">
+<xs:sequence>
+<xs:element name="nicknameP" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperDefaultMutableTreeNode">
+<xs:sequence>
+<xs:element name="tree" type="tns:defaultMutableTreeNode" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="defaultMutableTreeNode">
+<xs:sequence>
+<xs:element name="allowsChildren" type="xs:boolean"></xs:element>
+<xs:element name="userObject" type="xs:anyType" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="dtServicio">
 <xs:sequence>
 <xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
@@ -31,6 +50,26 @@
 <xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
 <xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="arrayList">
+<xs:complexContent>
+<xs:extension base="tns:abstractList">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractList" abstract="true">
+<xs:complexContent>
+<xs:extension base="tns:abstractCollection">
+<xs:sequence></xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="abstractCollection" abstract="true">
+<xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtPromocion">
@@ -53,37 +92,6 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="defaultMutableTreeNode">
-<xs:sequence>
-<xs:element name="allowsChildren" type="xs:boolean"></xs:element>
-<xs:element name="userObject" type="xs:anyType" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtMinServicioArray" final="#all">
-<xs:sequence>
-<xs:element name="item" type="tns:dtMinServicio" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtServicioArray" final="#all">
-<xs:sequence>
-<xs:element name="item" type="tns:dtServicio" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtMinPromocionArray" final="#all">
-<xs:sequence>
-<xs:element name="item" type="tns:dtMinPromocion" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtPromocionArray" final="#all">
-<xs:sequence>
-<xs:element name="item" type="tns:dtPromocion" minOccurs="0" maxOccurs="unbounded" nillable="true"></xs:element>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

@@ -54,7 +54,6 @@
 										<span class="text-muted">Link Empresa: </span>${linkEmpresa}<br>
 										<% } %>
 										<br>
-
 									</div>
 								</div>
 							</div>

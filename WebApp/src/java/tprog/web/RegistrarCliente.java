@@ -1,15 +1,9 @@
 package tprog.web;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,22 +17,17 @@ import org.apache.commons.validator.routines.EmailValidator;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlUsuarios;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import tprog.logica.interfaces.ICtrlReservas;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
-         
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-                try{
-                        // leo los datos -falta checkear que sean correctos y esas manos-
+		try {
+			// leo los datos -falta checkear que sean correctos y esas manos-
 			String id = request.getParameter("nickname");
 			String mail = request.getParameter("mail");
 			// el checkeo de mail y nick es "en tiempo real" con ajax -falta-
@@ -52,11 +41,11 @@ public class RegistrarCliente extends HttpServlet {
 			String fechaNac = request.getParameter("fNac");
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateNac = sourceFormat.parse(fechaNac);
-					System.err.println("XXXXX " +Integer.toString(dateNac.getYear() + 1900)); 
+			System.err.println("XXXXX " + Integer.toString(dateNac.getYear() + 1900));
 			EstadoSesion nuevoEstado;
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios cu = f.getICtrlUsuarios();
-                         
+
 			//Verificación de email
 			EmailValidator emailValidator = EmailValidator.getInstance(true);
 			boolean okEmail = emailValidator.isValid(mail);
@@ -91,17 +80,16 @@ public class RegistrarCliente extends HttpServlet {
 					DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
 					cu.ingresarDatosUsuario(dtU, false);
 					cu.altaUsuario();
-                                        
+
                                         //ya logueo el usuario registrado
-                                        
-                                        ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-                                        cr.liberarMemoriaControlador();
-                                        session.setAttribute("ctrlReservas", cr);
-                                        nuevoEstado = EstadoSesion.OK_LOGIN;
-                                        request.getSession().setAttribute("usuario_logueado", id);
-                                        session.setAttribute("estado_sesion", nuevoEstado);
-                                        session.setAttribute("cant_items", 0);
-                                    
+					ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+					cr.liberarMemoriaControlador();
+					session.setAttribute("ctrlReservas", cr);
+					nuevoEstado = EstadoSesion.OK_LOGIN;
+					request.getSession().setAttribute("usuario_logueado", id);
+					session.setAttribute("estado_sesion", nuevoEstado);
+					session.setAttribute("cant_items", 0);
+
 					request.getRequestDispatcher("/pages/subirImagen.jsp").forward(request, response);
 				} else {
 					request.getRequestDispatcher("Home").forward(request, response);
@@ -111,12 +99,10 @@ public class RegistrarCliente extends HttpServlet {
 				request.getRequestDispatcher("Home").forward(request, response);
 			}
 
-		
-                    } catch (ParseException ex) {
+		} catch (ParseException ex) {
 			Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
 		} catch (Exception ex) {
-             Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-         }
+			Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 }
-

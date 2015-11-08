@@ -365,10 +365,13 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public void altaUsuario(DTUsuario dt, boolean esProveedor) {
+	public void altaUsuario(DTUsuario dt, boolean esProveedor, String empresa, String web) {
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
-		ctrlUsuarios.altaUsuario();
+                if (esProveedor){
+                    ctrlUsuarios.ingresarDatosProveedor(empresa, web);
+                }    
+                ctrlUsuarios.altaUsuario();
 	}
 
 	@WebMethod
@@ -388,7 +391,7 @@ public class Publicador {
 //	}
 
         @WebMethod
-        public boolean iniciarSesionCliente(String idCliente, String contrasena){
+        public boolean verificarCliente(String idCliente, String contrasena){
                 
                     Fabrica f = Fabrica.getInstance();
                     ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -398,7 +401,7 @@ public class Publicador {
         }
         
         @WebMethod
-        public boolean iniciarSesionProveedor(String idProveedor, String contrasena){
+        public boolean verificarProveedor(String idProveedor, String contrasena){
                 
                     Fabrica f = Fabrica.getInstance();
                     ICtrlUsuarios ctrlU = f.getICtrlUsuarios();

@@ -20,7 +20,7 @@ public class IniciarSesion extends HttpServlet {
 		EstadoSesion nuevoEstado;
                 // se checkean los datos de login
                 if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-                    if (proxy.iniciarSesionCliente(id, contrasena)) {
+                    if (proxy.verificarCliente(id, contrasena)) {
                         
                         //session.setAttribute("ctrlReservas", cr);
 			nuevoEstado = EstadoSesion.OK_LOGIN;
@@ -37,7 +37,7 @@ public class IniciarSesion extends HttpServlet {
                 }
                     
                 if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR){
-                    if (proxy.iniciarSesionProveedor(id, contrasena)) {
+                    if (proxy.verificarProveedor(id, contrasena)) {
                         
                         
 			nuevoEstado = EstadoSesion.OK_LOGIN;

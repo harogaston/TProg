@@ -17,14 +17,16 @@ public class AjaxNickname extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("nickname");
 		String resultado;
+		webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
-		if (id.matches("^\\s*$") &&  (id.length()>=3)) {
+		if (id.matches("^\\s*$") && (id.length() >= 3)) {
 			resultado = "";
-		}else if (id.matches(".*(\\s+).*")) {
+		} else if (id.matches(".*(\\s+).*")) {
 			resultado = "SIN_ESPACIOS";
-		}  else if (id.length()<3) {
+		} else if (id.length() < 3) {
 			resultado = "CORTO";
-		}else if (!ctrlUsuarios.verificarNickname(id)) {
+		} else if (!proxy.verificarNickname(id)) {
 			resultado = "OK";
 		} else {
 			resultado = "EN_USO";

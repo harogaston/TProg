@@ -8,8 +8,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +20,11 @@ import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.ws.Endpoint;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -28,6 +33,7 @@ import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
+import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlUsuarios;
@@ -53,7 +59,10 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerServicio verServicio(String idServicio, String idProveedor) {
+	public WrapperVerServicio verServicio(
+			@WebParam(name = "id_servicio") String idServicio,
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		//hay que ver como pido las clases de la lógica cuando se saca el .jar
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
@@ -85,7 +94,10 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerPromocion verPromocion(String idPromocion, String idProveedor) {
+	public WrapperVerPromocion verPromocion(
+			@WebParam(name = "id_promocion") String idPromocion,
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
 		DTMinPromocion dtMin = new DTMinPromocion(idProveedor, idPromocion);
@@ -101,7 +113,9 @@ public class Publicador {
 	//este metodo se podria incorporar a ver Promocion, pero
 	//no me pintó
 	@WebMethod
-	public DTServicio seleccionarInfoServicio(DTMinServicio dt) {
+	public DTServicio seleccionarInfoServicio(
+			@WebParam(name = "dt") DTMinServicio dt
+	) {
 		//selecciona y servicio y devuelve su información
 		//se combinan operaciones para hacerla atómica y evitar problemas
 		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
@@ -110,7 +124,9 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerInfoProveedor verInfoProveedor(String idProveedor) {
+	public WrapperVerInfoProveedor verInfoProveedor(
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		try {
 			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 			ctrlUsuarios.seleccionarProveedor(idProveedor);
@@ -142,7 +158,9 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerPerfilCliente verPerfilCliente(String idCliente) {
+	public WrapperVerPerfilCliente verPerfilCliente(
+			@WebParam(name = "id_cliente") String idCliente
+	) {
 		try {
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -166,7 +184,9 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public DTProveedor verPerfilProveedor(String idProveedor) {
+	public DTProveedor verPerfilProveedor(
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		try {
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -179,7 +199,181 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public <T> String toString(T o) {
+	public WrapperBuscar buscar(
+			@WebParam(name = "busqueda_previa") String busquedaPrevia,
+			@WebParam(name = "seleccion_previa") String seleccionPrevia,
+			@WebParam(name = "tipo_orden") String tipoOrden,
+			@WebParam(name = "busqueda") String busqueda,
+			@WebParam(name = "categoria_seleccionada") String categoriaSeleccionada
+	) {
+		WrapperBuscar result = new WrapperBuscar();
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		DefaultMutableTreeNode categorias = ctrlProductos.listarCategorias();
+		Enumeration listado = categorias.breadthFirstEnumeration();
+
+		// armo objeto de JSON para armar el árbol con jstree
+		JsonArray list = new JsonArray();
+		while (listado.hasMoreElements()) {
+			DefaultMutableTreeNode nodo = (DefaultMutableTreeNode) listado.nextElement();
+			String categoria = nodo.toString(); //recupero categoria
+			DefaultMutableTreeNode padre = (DefaultMutableTreeNode) nodo.getParent();
+			String categoriaPadre = "#";
+			if (padre != null) {
+				categoriaPadre = padre.toString();
+			}
+			JsonObject tmp = new JsonObject();
+			tmp.addProperty("id", categoria);
+			tmp.addProperty("parent", categoriaPadre);
+			tmp.addProperty("text", categoria);
+			if (!listado.hasMoreElements()) { //agrego nodo Promociones
+				tmp.addProperty("id", "Promociones");
+				tmp.addProperty("parent", "#");
+				tmp.addProperty("text", "Promociones");
+			}
+			list.add(tmp);
+		}
+		result.arbolCategorias = list.toString();
+		// Obtengo todos los servicios del sistema
+		Set<DTMinServicio> serviciosTodos;
+		try {
+			serviciosTodos = ctrlProductos.listarServicios();
+		} catch (Exception ex) {
+			serviciosTodos = new HashSet();
+		}
+		// Obtengo todas las promociones del sistema
+		Set<DTMinPromocion> promocionesTodas;
+		try {
+			promocionesTodas = ctrlProductos.listarPromociones();
+		} catch (Exception ex) {
+			promocionesTodas = new HashSet();
+		}
+		// TYPEAHEAD
+		JsonArray termsArray = new JsonArray();
+		if (!serviciosTodos.isEmpty()) {
+			for (DTMinServicio dtMinS : serviciosTodos) {
+				termsArray.add(dtMinS.getIdServicio());
+			}
+		}
+		if (!promocionesTodas.isEmpty()) {
+			for (DTMinPromocion dtMinP : promocionesTodas) {
+				termsArray.add(dtMinP.getIdPromocion());
+			}
+		}
+		result.terminosTypeAhead = termsArray.toString();
+		// Defino el orden
+		Collection<DTServicio> serviciosResultado;
+		Collection<DTPromocion> promocionesResultado;
+		if (tipoOrden != null && tipoOrden.equals("precio")) {
+			// Ordenados por precio
+			busqueda = busquedaPrevia;
+			categoriaSeleccionada = seleccionPrevia;
+			serviciosResultado = new TreeSet<>(DTServicio::comparePrecio);
+			promocionesResultado = new TreeSet<>(DTPromocion::comparePrecio);
+			result.tipoOrden = "precio";
+		} else if (tipoOrden != null && tipoOrden.equals("alfabetico")) {
+			// Ordenados por nombre
+			busqueda = busquedaPrevia;
+			categoriaSeleccionada = seleccionPrevia;
+			serviciosResultado = new TreeSet<>();
+			promocionesResultado = new TreeSet<>();
+			result.tipoOrden = "alfabetico";
+		} else {
+			// Orden por defecto
+			serviciosResultado = new HashSet<>();
+			promocionesResultado = new HashSet<>();
+			result.tipoOrden = "";
+		}
+		// Si no hay busqueda ni categoría muestro todo
+		if ((busqueda == null || busqueda.equals("null"))
+				&& (categoriaSeleccionada == null || categoriaSeleccionada.equals("null"))) {
+			// Todos los servicios
+			if (!serviciosTodos.isEmpty()) {
+				for (DTMinServicio dtMinS : serviciosTodos) {
+					ctrlProductos.seleccionarServicio(dtMinS);
+					DTServicio infoServicio = ctrlProductos.infoServicio();
+					serviciosResultado.add(infoServicio);
+				}
+			}
+			// Todas las promociones
+			if (!promocionesTodas.isEmpty()) {
+				for (DTMinPromocion dtMinP : promocionesTodas) {
+					ctrlProductos.seleccionarPromocion(dtMinP);
+					DTPromocion infoPromocion = ctrlProductos.infoPromocion();
+					promocionesResultado.add(infoPromocion);
+				}
+			}
+			// Si se realizó una búsqueda
+		} else if (busqueda != null && !busqueda.equals("null")) {
+			System.out.println("if de busqueda");
+			// Busco servicios que contengan el término buscado
+			serviciosResultado = ctrlProductos.listarServiciosPorTermino(busqueda);
+			// Busco promociones que contengan el término buscado
+			promocionesResultado = ctrlProductos.listarPromocionesPorTermino(busqueda);
+			// Si se seleccionó una categoría del árbol
+		} else if (categoriaSeleccionada != null && !categoriaSeleccionada.equals("null")) {
+			System.out.println("if de categorias");
+			// Me fijo si debo listar las promociones
+			if (categoriaSeleccionada.equals("Promociones")) {
+				// Devuelvo todas las promociones
+				if (!promocionesTodas.isEmpty()) {
+					for (DTMinPromocion dtMinP : promocionesTodas) {
+						ctrlProductos.seleccionarPromocion(dtMinP);
+						DTPromocion infoPromocion = ctrlProductos.infoPromocion();
+						promocionesResultado.add(infoPromocion);
+					}
+				}
+			} else {
+				// Agrego todos los servicios de esa categoría
+				Set<DTMinServicio> serviciosDeCategoria = ctrlProductos.listarServiciosCategoria(categoriaSeleccionada);
+				for (DTMinServicio dtMinS : serviciosDeCategoria) {
+					ctrlProductos.seleccionarServicio(dtMinS);
+					DTServicio infoServicio = ctrlProductos.infoServicio();
+					serviciosResultado.add(infoServicio);
+				}
+			}
+		}
+		Map<DTServicio, String> servicios = new HashMap<>();
+		for (DTServicio dt : serviciosResultado) {
+			servicios.put(dt, dt.toString());
+		}
+		Map<DTPromocion, String> promociones = new HashMap<>();
+		for (DTPromocion dt : promocionesResultado) {
+			promociones.put(dt, dt.toString());
+		}
+		result.servicios = servicios;
+		result.promociones = promociones;
+		result.categoriaPrevia = categoriaSeleccionada;
+		result.busquedaPrevia = busqueda;
+		return result;
+	}
+
+	@WebMethod
+	public boolean verificarEmail(
+			@WebParam(name = "email") String email
+	) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.verificarEmail(email);
+	}
+
+	@WebMethod
+	public boolean verificarNickname(
+			@WebParam(name = "nickname") String nickname
+	) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.verificarNickname(nickname);
+	}
+
+	@WebMethod
+	public void altaUsuario(DTUsuario dt, boolean esProveedor) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
+		ctrlUsuarios.altaUsuario();
+	}
+
+	@WebMethod
+	public <T> String toString(
+			@WebParam(name = "objeto_generico") T o) {
 		return o.toString();
 	}
 

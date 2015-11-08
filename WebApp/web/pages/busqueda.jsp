@@ -1,10 +1,9 @@
-<%@page import="tprog.logica.dt.DTPromocion"%>
-<%@page import="tprog.logica.dt.DTServicio"%>
-<%@page import="tprog.logica.interfaces.ICtrlProductos"%>
-<%@page import="tprog.logica.interfaces.Fabrica"%>
-<%@page import="tprog.logica.dt.DTMinPromocion"%>
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.Collection"%>
+<%@page import="webservice.DtPromocion"%>
+<%@page import="webservice.DtServicio"%>
 <%@page import="java.util.Set"%>
-<%@page import="tprog.logica.dt.DTMinServicio"%>
 
 <!doctype html>
 <html>
@@ -141,13 +140,15 @@
 					<div class="row">
 						<div class="col-md-6">
 							<h2 class="text-center">Servicios</h2>
-							<%	Set<DTServicio> servicios = (Set<DTServicio>) request.getAttribute("servicios");
+							<%
+								Map<DtServicio, String> servicios = (Map<DtServicio, String>) request.getAttribute("servicios");
 								int i = 0;
 								if (!servicios.isEmpty()) {
 							%>
 							<div class="panel-group" id="accordionServicios">
 								<%
-									for (DTServicio servicio : servicios) {
+									for (Entry<DtServicio, String> entry : servicios.entrySet()) {
+										DtServicio servicio = entry.getKey();
 										i++;
 								%>
 								<div class="accordion-group">
@@ -159,7 +160,7 @@
 										</div>
 										<div id="s<%=i%>" class="panel-collapse collapse">
 											<div class="panel-body">
-												<%=servicio.toString().replace("\n", "<br>")%>
+												<%=entry.getValue().replace("\n", "<br>")%>
 												<form action="VerInfoProveedor" id="myform<%=i%>" method="POST">
 													<h4 style="text-align: center"><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-info"><%=servicio.getNicknameProveedor()%></span></a></h4>
 													<input name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
@@ -190,13 +191,15 @@
 
 							<h2 class="text-center">Promociones</h2>
 
-							<%	Set<DTPromocion> promociones = (Set<DTPromocion>) request.getAttribute("promociones");
+							<%
+								Map<DtPromocion, String> promociones = (Map<DtPromocion, String>) request.getAttribute("promociones");
 								if (!promociones.isEmpty()) {
 							%>
 							<div class="panel-group" id="accordionPromociones">
 								<%
 									int j = i + 1;
-									for (DTPromocion promocion : promociones) {
+									for (Entry<DtPromocion, String> entry : promociones.entrySet()) {
+										DtPromocion promocion = entry.getKey();
 										j++;
 								%>
 								<div class="accordion-group">
@@ -208,7 +211,7 @@
 										</div>
 										<div id="p<%=j%>" class="panel-collapse collapse">
 											<div class="panel-body">
-												<%=promocion.toString().replace("\n", "<br>")%>
+												<%=entry.getValue().replace("\n", "<br>")%>
 												<form action="VerInfoProveedor" id="myform<%=j%>" method="POST">
 													<h4 style="text-align: center"><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=j%>').submit()"><span class="label promocion"><%=promocion.getNicknameProveedor()%></span></a></h4>
 													<input name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">

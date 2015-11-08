@@ -388,7 +388,7 @@ public class Publicador {
 //	}
 
         @WebMethod
-        public boolean iniciarSesionCliente(String idCliente, String contrasena){
+        public boolean verificarCliente(@WebParam(name = "idCliente") String idCliente, @WebParam(name = "contrasena") String contrasena){
                 
                     Fabrica f = Fabrica.getInstance();
                     ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -398,7 +398,7 @@ public class Publicador {
         }
         
         @WebMethod
-        public boolean iniciarSesionProveedor(String idProveedor, String contrasena){
+        public boolean verificarProveedor(@WebParam(name = "idProveedor") String idProveedor, @WebParam(name = "contrasena") String contrasena){
                 
                     Fabrica f = Fabrica.getInstance();
                     ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -408,11 +408,9 @@ public class Publicador {
         }
         
         @WebMethod
-        public String obtenerIdCliente(String idCliente, String contrasena){
-                
-                
-                    Fabrica f = Fabrica.getInstance();
-                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+        public String obtenerIdCliente(@WebParam(name = "idCliente") String idCliente, @WebParam(name = "contrasena") String contrasena){
+                Fabrica f = Fabrica.getInstance();
+                ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
                     return ctrlU.obtenerIdCliente(idCliente, contrasena);
                     
                     
@@ -420,7 +418,7 @@ public class Publicador {
         }
         
         @WebMethod
-        public String obtenerIdProveedor(String idProveedor, String contrasena){
+        public String obtenerIdProveedor(@WebParam(name = "idProveedor") String idProveedor, @WebParam(name = "contrasena") String contrasena){
                 
                 
                     Fabrica f = Fabrica.getInstance();

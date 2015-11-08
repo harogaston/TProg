@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 //import webServices.Publicador;
 //import webServices.PublicadorService;
 
@@ -15,9 +16,15 @@ public class NuevoCliente extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+            HttpSession session = request.getSession();
 //                PublicadorService service =  new PublicadorService();
 //                Publicador port = service.getPublicadorPort();
 //                int ret = port.nuevoCliente(0);
-		request.getRequestDispatcher("/pages/registrarCliente.jsp").forward(request, response);
+            if(session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
+                request.getRequestDispatcher("/pages/registrarCliente.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/pages/registrarProveedor.jsp").forward(request, response);
+            }
+		
 	}
 }

@@ -20,12 +20,10 @@ public class IniciarSesion extends HttpServlet {
 		EstadoSesion nuevoEstado;
                 // se checkean los datos de login
                 if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-                    if (proxy.iniciarSesionCliente(id, contrasena)) {
-                        
+                    if (proxy.verificarCliente(id, contrasena)) {
                         //session.setAttribute("ctrlReservas", cr);
 			nuevoEstado = EstadoSesion.OK_LOGIN;
-                        
-			//en caso de que id sea un email
+                        //en caso de que id sea un email
 			id = proxy.obtenerIdCliente(id, contrasena);
 			request.getSession().setAttribute("usuario_logueado", id);
                         
@@ -37,10 +35,8 @@ public class IniciarSesion extends HttpServlet {
                 }
                     
                 if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR){
-                    if (proxy.iniciarSesionProveedor(id, contrasena)) {
-                        
-                        
-			nuevoEstado = EstadoSesion.OK_LOGIN;
+                    if (proxy.verificarProveedor(id, contrasena)) {
+                        nuevoEstado = EstadoSesion.OK_LOGIN;
                         //en caso de que id sea un email
 			id = proxy.obtenerIdProveedor(id, contrasena);
 			request.getSession().setAttribute("usuario_logueado", id);

@@ -42,6 +42,16 @@
 <message name="verPerfilProveedorResponse">
 <part name="return" type="tns:dtProveedor"></part>
 </message>
+<message name="buscar">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+<part name="arg2" type="xsd:string"></part>
+<part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+</message>
+<message name="buscarResponse">
+<part name="return" type="tns:wrapperBuscar"></part>
+</message>
 <message name="toString">
 <part name="arg0" type="xsd:anyType"></part>
 </message>
@@ -72,6 +82,10 @@
 <operation name="verPerfilProveedor">
 <input wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorRequest" message="tns:verPerfilProveedor"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorResponse" message="tns:verPerfilProveedorResponse"></output>
+</operation>
+<operation name="buscar" parameterOrder="arg0 arg1 arg2 arg3 arg4">
+<input wsam:Action="http://webservice.tprog/Publicador/buscarRequest" message="tns:buscar"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/buscarResponse" message="tns:buscarResponse"></output>
 </operation>
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
@@ -126,6 +140,15 @@
 </output>
 </operation>
 <operation name="verPerfilProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="buscar">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

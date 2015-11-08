@@ -1,4 +1,4 @@
-﻿package tprog.web;
+package tprog.web;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;

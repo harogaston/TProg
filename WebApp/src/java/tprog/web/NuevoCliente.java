@@ -16,15 +16,9 @@ public class NuevoCliente extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-            HttpSession session = request.getSession();
-//                PublicadorService service =  new PublicadorService();
-//                Publicador port = service.getPublicadorPort();
-//                int ret = port.nuevoCliente(0);
-            if(session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
+            
                 request.getRequestDispatcher("/pages/registrarCliente.jsp").forward(request, response);
-            }else{
-                request.getRequestDispatcher("/pages/registrarProveedor.jsp").forward(request, response);
-            }
+            
 		
 	}
 }

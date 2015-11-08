@@ -58,6 +58,12 @@
 <message name="verificarEmailResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
+<message name="verificarNickname">
+<part name="nickname" type="xsd:string"></part>
+</message>
+<message name="verificarNicknameResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="toString">
 <part name="objeto_generico" type="xsd:anyType"></part>
 </message>
@@ -96,6 +102,10 @@
 <operation name="verificarEmail">
 <input wsam:Action="http://webservice.tprog/Publicador/verificarEmailRequest" message="tns:verificarEmail"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verificarEmailResponse" message="tns:verificarEmailResponse"></output>
+</operation>
+<operation name="verificarNickname">
+<input wsam:Action="http://webservice.tprog/Publicador/verificarNicknameRequest" message="tns:verificarNickname"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verificarNicknameResponse" message="tns:verificarNicknameResponse"></output>
 </operation>
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
@@ -168,6 +178,15 @@
 </output>
 </operation>
 <operation name="verificarEmail">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verificarNickname">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

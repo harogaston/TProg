@@ -356,6 +356,14 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public boolean verificarNickname(
+			@WebParam(name = "nickname") String nickname
+	) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.verificarNickname(nickname);
+	}
+
+	@WebMethod
 	public <T> String toString(
 			@WebParam(name = "objeto_generico") T o) {
 		return o.toString();

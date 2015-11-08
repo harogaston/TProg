@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Header Test
  */
 package tprog.webservice;
@@ -365,10 +365,13 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public void altaUsuario(DTUsuario dt, boolean esProveedor) {
+	public void altaUsuario(DTUsuario dt, boolean esProveedor, String empresa, String web) {
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
-		ctrlUsuarios.altaUsuario();
+                if (esProveedor){
+                    ctrlUsuarios.ingresarDatosProveedor(empresa, web);
+                }    
+                ctrlUsuarios.altaUsuario();
 	}
 
 	@WebMethod
@@ -388,7 +391,8 @@ public class Publicador {
 //	}
 
         @WebMethod
-        public boolean verificarCliente(@WebParam(name = "idCliente") String idCliente, @WebParam(name = "contrasena") String contrasena){
+	public boolean verificarCliente(@WebParam(name = "idCliente") String idCliente, @WebParam(name = "contrasena") String contrasena){
+
                 
                     Fabrica f = Fabrica.getInstance();
                     ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -398,7 +402,10 @@ public class Publicador {
         }
         
         @WebMethod
+
         public boolean verificarProveedor(@WebParam(name = "idProveedor") String idProveedor, @WebParam(name = "contrasena") String contrasena){
+
+
                 
                     Fabrica f = Fabrica.getInstance();
                     ICtrlUsuarios ctrlU = f.getICtrlUsuarios();

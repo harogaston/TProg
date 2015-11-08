@@ -57,13 +57,22 @@
 							<span id="mensaje-pass"></span>
 						</div>
 					</div>
+                                    <% if(session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR){ %>
+                                        <div class="form-group">
+						<label for="inputEmpresa" class="control-label">Empresa</label>
+						<input type="text" name="empresa" id="inputNombre" pattern="^[_A-z]{1,}$" id="inputEmpresa" placeholder="Empresa" >
+					</div>
+					<div class="form-group">
+						<label for="inputLinkEmpresa" class="control-label">Web Empresa</label>
+						<input type="text" name="UrlEmpresa" class="form-control" pattern="^[_A-z]{1,}$" id="inputUrlEmpresa" placeholder="UrlEmpresa" >
+					</div>
+                                    <% } %>
 					<div class="form-group">
 						<label for="datepicker" class="control-label">Fecha de Nacimiento</label>
 						<input type="text" name="fNac" id="datepicker" pattern="[_0-9]{2}/[_0-9]{2}/[_0-9]{4}" class="form-control" style="width: 100px" required>
 					</div>
-					<div class="form-group text-right">
-
-						<button type="submit" id="boton-enviar" class="btn btn-primary" disabled="disabled" value="Submit">Enviar</button>
+                                        <div class="form-group text-right">
+                                                <button type="submit" id="boton-enviar" class="btn btn-primary" disabled="disabled" value="Submit">Enviar</button>
 					</div>
 				</form>
 			</div>

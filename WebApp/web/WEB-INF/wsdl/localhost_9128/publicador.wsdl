@@ -4,6 +4,12 @@
 <xsd:import namespace="http://webservice.tprog/" schemaLocation="http://localhost:9128/publicador?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="toString">
+<part name="arg0" type="xsd:anyType"></part>
+</message>
+<message name="toStringResponse">
+<part name="return" type="xsd:string"></part>
+</message>
 <message name="verServicio">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
@@ -11,18 +17,45 @@
 <message name="verServicioResponse">
 <part name="return" type="tns:wrapperVerServicio"></part>
 </message>
+<message name="seleccionarInfoServicio">
+<part name="arg0" type="tns:dtMinServicio"></part>
+</message>
+<message name="seleccionarInfoServicioResponse">
+<part name="return" type="tns:dtServicio"></part>
+</message>
+<message name="verPerfilProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="verPerfilProveedorResponse">
+<part name="return" type="tns:dtProveedor"></part>
+</message>
+<message name="iniciarSesionCliente">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="iniciarSesionClienteResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="iniciarSesionProveedor">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="iniciarSesionProveedorResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="obtenerIdProveedor">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="obtenerIdProveedorResponse">
+<part name="return" type="xsd:string"></part>
+</message>
 <message name="verPromocion">
 <part name="arg0" type="xsd:string"></part>
 <part name="arg1" type="xsd:string"></part>
 </message>
 <message name="verPromocionResponse">
 <part name="return" type="tns:wrapperVerPromocion"></part>
-</message>
-<message name="seleccionarInfoServicio">
-<part name="arg0" type="tns:dtMinServicio"></part>
-</message>
-<message name="seleccionarInfoServicioResponse">
-<part name="return" type="tns:dtServicio"></part>
 </message>
 <message name="verInfoProveedor">
 <part name="arg0" type="xsd:string"></part>
@@ -36,30 +69,45 @@
 <message name="verPerfilClienteResponse">
 <part name="return" type="tns:wrapperVerPerfilCliente"></part>
 </message>
-<message name="verPerfilProveedor">
+<message name="obtenerIdCliente">
 <part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
 </message>
-<message name="verPerfilProveedorResponse">
-<part name="return" type="tns:dtProveedor"></part>
-</message>
-<message name="toString">
-<part name="arg0" type="xsd:anyType"></part>
-</message>
-<message name="toStringResponse">
+<message name="obtenerIdClienteResponse">
 <part name="return" type="xsd:string"></part>
 </message>
 <portType name="Publicador">
+<operation name="toString">
+<input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/toStringResponse" message="tns:toStringResponse"></output>
+</operation>
 <operation name="verServicio" parameterOrder="arg0 arg1">
 <input wsam:Action="http://webservice.tprog/Publicador/verServicioRequest" message="tns:verServicio"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verServicioResponse" message="tns:verServicioResponse"></output>
 </operation>
-<operation name="verPromocion" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webservice.tprog/Publicador/verPromocionRequest" message="tns:verPromocion"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verPromocionResponse" message="tns:verPromocionResponse"></output>
-</operation>
 <operation name="seleccionarInfoServicio">
 <input wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioRequest" message="tns:seleccionarInfoServicio"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioResponse" message="tns:seleccionarInfoServicioResponse"></output>
+</operation>
+<operation name="verPerfilProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorRequest" message="tns:verPerfilProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorResponse" message="tns:verPerfilProveedorResponse"></output>
+</operation>
+<operation name="iniciarSesionCliente" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/iniciarSesionClienteRequest" message="tns:iniciarSesionCliente"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/iniciarSesionClienteResponse" message="tns:iniciarSesionClienteResponse"></output>
+</operation>
+<operation name="iniciarSesionProveedor" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/iniciarSesionProveedorRequest" message="tns:iniciarSesionProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/iniciarSesionProveedorResponse" message="tns:iniciarSesionProveedorResponse"></output>
+</operation>
+<operation name="obtenerIdProveedor" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/obtenerIdProveedorRequest" message="tns:obtenerIdProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/obtenerIdProveedorResponse" message="tns:obtenerIdProveedorResponse"></output>
+</operation>
+<operation name="verPromocion" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/verPromocionRequest" message="tns:verPromocion"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verPromocionResponse" message="tns:verPromocionResponse"></output>
 </operation>
 <operation name="verInfoProveedor">
 <input wsam:Action="http://webservice.tprog/Publicador/verInfoProveedorRequest" message="tns:verInfoProveedor"></input>
@@ -69,18 +117,68 @@
 <input wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteRequest" message="tns:verPerfilCliente"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteResponse" message="tns:verPerfilClienteResponse"></output>
 </operation>
-<operation name="verPerfilProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorRequest" message="tns:verPerfilProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorResponse" message="tns:verPerfilProveedorResponse"></output>
-</operation>
-<operation name="toString">
-<input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/toStringResponse" message="tns:toStringResponse"></output>
+<operation name="obtenerIdCliente" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/obtenerIdClienteRequest" message="tns:obtenerIdCliente"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/obtenerIdClienteResponse" message="tns:obtenerIdClienteResponse"></output>
 </operation>
 </portType>
 <binding name="PublicadorPortBinding" type="tns:Publicador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="toString">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
 <operation name="verServicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="seleccionarInfoServicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verPerfilProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="iniciarSesionCliente">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="iniciarSesionProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="obtenerIdProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
@@ -98,15 +196,6 @@
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
 </output>
 </operation>
-<operation name="seleccionarInfoServicio">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
 <operation name="verInfoProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -125,16 +214,7 @@
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
 </output>
 </operation>
-<operation name="verPerfilProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="toString">
+<operation name="obtenerIdCliente">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

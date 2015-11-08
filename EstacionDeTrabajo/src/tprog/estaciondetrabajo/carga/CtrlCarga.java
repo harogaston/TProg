@@ -32,43 +32,43 @@ public class CtrlCarga {
 			System.out.println("Dir imagenes: " + directorioImagenes);
 			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
 			calendar.set(1988, 12 - 1, 28);
-			DTCliente dtC = new DTCliente("oWood", "pass", "Oliver", "Wood", "quidditch28@gmail.com",
+			DTCliente dtC = new DTCliente("oWood", "123", "Oliver", "Wood", "quidditch28@gmail.com",
 					directorioImagenes + "/imagenes/clientes/oWood.jpg", calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
 			calendar.set(1990, 4 - 1, 15);
-			dtC = new DTCliente("eWatson", "pass", "Emma", "Watson", "e.watson@gmail.com",
+			dtC = new DTCliente("eWatson", "123", "Emma", "Watson", "e.watson@gmail.com",
 					directorioImagenes + "/imagenes/clientes/eWatson.jpg", calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
 			calendar.set(1978, 12 - 1, 3);
-			dtC = new DTCliente("BruceS", "pass", "Bruce", "Sewell", "bruce.sewell@gmail.com",
+			dtC = new DTCliente("BruceS", "123", "Bruce", "Sewell", "bruce.sewell@gmail.com",
 					null, calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
 			calendar.set(1984, 11 - 1, 27);
-			dtC = new DTCliente("JeffW", "pass", "Jeff", "Williams", "jeff.williams@gmail.com",
+			dtC = new DTCliente("JeffW", "123", "Jeff", "Williams", "jeff.williams@gmail.com",
 					null, calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
 			calendar.set(1960, 11 - 1, 1);
-			DTProveedor dtP = new DTProveedor("tCook", "pass", "Tim", "Cook", "air.f@gmail.com",
+			DTProveedor dtP = new DTProveedor("tCook", "123", "Tim", "Cook", "air.f@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/tCook.jpg",
 					calendar.getTime(), "AirFrance", "http://www.airfrance.com/");
 			mu.altaProveedor(dtP);
 			calendar.set(1965, 9 - 1, 2);
-			dtP = new DTProveedor("moody", "pass", "Alastor", "Moody", "eu.car@eucar.com",
+			dtP = new DTProveedor("moody", "123", "Alastor", "Moody", "eu.car@eucar.com",
 					directorioImagenes + "/imagenes/proveedores/moody.jpg",
 					calendar.getTime(), "EuropCar", "http://www.europcar.com.uy/");
 			mu.altaProveedor(dtP);
 			calendar.set(1970, 5 - 1, 4);
-			dtP = new DTProveedor("remus", "pass", "Remus", "Lupin", "iberia@gmail.com",
+			dtP = new DTProveedor("remus", "123", "Remus", "Lupin", "iberia@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/remus.jpg",
 					calendar.getTime(), "Iberia", "http://www.iberia.com/uy/");
 			mu.altaProveedor(dtP);
 			calendar.set(1967, 2 - 1, 12);
-			dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
+			dtP = new DTProveedor("adippet", "123", "Armando", "Dippet", "tam@outlook.com",
 					directorioImagenes + "/imagenes/proveedores/adippet.jpg",
 					calendar.getTime(), "Tam", "http://www.tam.com.br/");
 			mu.altaProveedor(dtP);
 			calendar.set(1963, 8 - 1, 5);
-			dtP = new DTProveedor("mHooch", "pass", "Madam", "Hooch", "segHogar@gmail.com",
+			dtP = new DTProveedor("mHooch", "123", "Madam", "Hooch", "segHogar@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/mHooch.jpg",
 					calendar.getTime(), "Segundo Hogar", "http://www.segundohogar.com/");
 			mu.altaProveedor(dtP);
@@ -101,7 +101,7 @@ public class CtrlCarga {
 			mp.altaCategoria("Tarifa", "Automóviles");
 			mp.altaCategoria("Mini", "Tarifa");
 			mp.altaCategoria("Económico", "Tarifa");
-			mp.altaCategoria("Común", "Tarifa");
+			mp.altaCategoria("Standard", "Tarifa");
 			mp.altaCategoria("Full", "Tarifa");
 			mp.altaCategoria("Tipo vehículo", "Automóviles");
 			mp.altaCategoria("Auto", "Tipo vehículo");

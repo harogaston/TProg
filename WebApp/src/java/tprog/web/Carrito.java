@@ -25,6 +25,7 @@ public class Carrito extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//sólo cuando se quiere ver el carrito
 		processRequest(request, response);
 		//solo redirige al carrito
 		request.getRequestDispatcher("/pages/carrito.jsp").forward(request, response);
@@ -33,6 +34,7 @@ public class Carrito extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		//cuando se agrega algo al carrito
 		try {
 			processRequest(request, response);
 			//aca se reciben parametros y se modifica la reserva (agregando lineas)

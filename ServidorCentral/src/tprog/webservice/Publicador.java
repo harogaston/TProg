@@ -365,9 +365,42 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public void altaUsuario(DTUsuario dt, boolean esProveedor) {
+	public boolean verificarLoginProveedor(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
-		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
+		return ctrlUsuarios.idCorrectaProveedor(id) && ctrlUsuarios.pwCorrectaProveedor(id, pass);
+	}
+
+	@WebMethod
+	public boolean verificarLoginCliente(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.idCorrecta(id) && ctrlUsuarios.pwCorrecta(id, pass);
+	}
+
+	@WebMethod
+	public String obtenerIdCliente(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.obtenerIdCliente(id, pass);
+	}
+
+	@WebMethod
+	public String obtenerIdProveedor(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.obtenerIdProveedor(id, pass);
+	}
+
+	@WebMethod
+	public void altaUsuario(
+			@WebParam(name = "dtU") DTUsuario dtU,
+			@WebParam(name = "es_proveedor") boolean esProveedor) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		ctrlUsuarios.altaUsuario();
 	}
 

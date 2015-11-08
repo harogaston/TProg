@@ -64,9 +64,37 @@
 <message name="verificarNicknameResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
+<message name="verificarLoginProveedor">
+<part name="id" type="xsd:string"></part>
+<part name="pass" type="xsd:string"></part>
+</message>
+<message name="verificarLoginProveedorResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="verificarLoginCliente">
+<part name="id" type="xsd:string"></part>
+<part name="pass" type="xsd:string"></part>
+</message>
+<message name="verificarLoginClienteResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="obtenerIdCliente">
+<part name="id" type="xsd:string"></part>
+<part name="pass" type="xsd:string"></part>
+</message>
+<message name="obtenerIdClienteResponse">
+<part name="return" type="xsd:string"></part>
+</message>
+<message name="obtenerIdProveedor">
+<part name="id" type="xsd:string"></part>
+<part name="pass" type="xsd:string"></part>
+</message>
+<message name="obtenerIdProveedorResponse">
+<part name="return" type="xsd:string"></part>
+</message>
 <message name="altaUsuario">
-<part name="arg0" type="tns:dtUsuario"></part>
-<part name="arg1" type="xsd:boolean"></part>
+<part name="dtU" type="tns:dtUsuario"></part>
+<part name="es_proveedor" type="xsd:boolean"></part>
 </message>
 <message name="altaUsuarioResponse"></message>
 <message name="toString">
@@ -112,7 +140,23 @@
 <input wsam:Action="http://webservice.tprog/Publicador/verificarNicknameRequest" message="tns:verificarNickname"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verificarNicknameResponse" message="tns:verificarNicknameResponse"></output>
 </operation>
-<operation name="altaUsuario" parameterOrder="arg0 arg1">
+<operation name="verificarLoginProveedor" parameterOrder="id pass">
+<input wsam:Action="http://webservice.tprog/Publicador/verificarLoginProveedorRequest" message="tns:verificarLoginProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verificarLoginProveedorResponse" message="tns:verificarLoginProveedorResponse"></output>
+</operation>
+<operation name="verificarLoginCliente" parameterOrder="id pass">
+<input wsam:Action="http://webservice.tprog/Publicador/verificarLoginClienteRequest" message="tns:verificarLoginCliente"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verificarLoginClienteResponse" message="tns:verificarLoginClienteResponse"></output>
+</operation>
+<operation name="obtenerIdCliente" parameterOrder="id pass">
+<input wsam:Action="http://webservice.tprog/Publicador/obtenerIdClienteRequest" message="tns:obtenerIdCliente"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/obtenerIdClienteResponse" message="tns:obtenerIdClienteResponse"></output>
+</operation>
+<operation name="obtenerIdProveedor" parameterOrder="id pass">
+<input wsam:Action="http://webservice.tprog/Publicador/obtenerIdProveedorRequest" message="tns:obtenerIdProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/obtenerIdProveedorResponse" message="tns:obtenerIdProveedorResponse"></output>
+</operation>
+<operation name="altaUsuario" parameterOrder="dtU es_proveedor">
 <input wsam:Action="http://webservice.tprog/Publicador/altaUsuarioRequest" message="tns:altaUsuario"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/altaUsuarioResponse" message="tns:altaUsuarioResponse"></output>
 </operation>
@@ -196,6 +240,42 @@
 </output>
 </operation>
 <operation name="verificarNickname">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verificarLoginProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verificarLoginCliente">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="obtenerIdCliente">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="obtenerIdProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

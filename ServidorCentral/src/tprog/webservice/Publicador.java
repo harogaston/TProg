@@ -24,6 +24,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.ws.Endpoint;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
@@ -34,8 +38,10 @@ import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUsuario;
+import tprog.logica.dt.EstadoReserva;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
+import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.interfaces.ICtrlUsuarios;
 
 /**
@@ -46,6 +52,8 @@ import tprog.logica.interfaces.ICtrlUsuarios;
 @SOAPBinding(style = SOAPBinding.Style.RPC, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class Publicador {
 
+	private int sigNumCliente = 0;
+	Map<Integer, ICtrlReservas> mapControladoresReserva = new HashMap<>();
 	private Endpoint endpoint = null;
 
 	@WebMethod(exclude = true)
@@ -56,6 +64,16 @@ public class Publicador {
 	@WebMethod(exclude = true)
 	public Endpoint getEndpoint() {
 		return endpoint;
+	}
+
+	@WebMethod
+	public int pedirNumeroCtrlReservas() {
+		while (mapControladoresReserva.containsKey(sigNumCliente)) {
+			sigNumCliente++;
+		}
+		mapControladoresReserva.put(sigNumCliente, Fabrica.getInstance().getICtrlReservas());
+		mapControladoresReserva.get(sigNumCliente).liberarMemoriaControlador();
+		return sigNumCliente;
 	}
 
 	@WebMethod
@@ -365,13 +383,140 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public boolean verificarLoginProveedor(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.idCorrectaProveedor(id) && ctrlUsuarios.pwCorrectaProveedor(id, pass);
+	}
+
+	@WebMethod
+	public boolean verificarLoginCliente(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.idCorrecta(id) && ctrlUsuarios.pwCorrecta(id, pass);
+	}
+
+	@WebMethod
+	public String obtenerIdCliente(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.obtenerIdCliente(id, pass);
+	}
+
+	@WebMethod
+	public String obtenerIdProveedor(
+			@WebParam(name = "id") String id,
+			@WebParam(name = "pass") String pass) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.obtenerIdProveedor(id, pass);
+	}
+
+	@WebMethod
 	public void altaUsuario(DTUsuario dt, boolean esProveedor, String empresa, String web) {
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
-                if (esProveedor){
-                    ctrlUsuarios.ingresarDatosProveedor(empresa, web);
-                }    
-                ctrlUsuarios.altaUsuario();
+		if (esProveedor) {
+			ctrlUsuarios.ingresarDatosProveedor(empresa, web);
+		}
+		ctrlUsuarios.altaUsuario();
+	}
+
+	@WebMethod
+	public void cancelarReserva(
+			@WebParam(name = "id_ctrl_reservas") int idCtrlReservas,
+			@WebParam(name = "id_reserva") String idReserva) {
+		ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
+		ctrlReservas.seleccionarReserva(Integer.parseInt(idReserva));
+		ctrlReservas.cambiarEstadoReserva(EstadoReserva.Cancelada);
+	}
+
+	@WebMethod
+	public void generarReserva(
+			@WebParam(name = "nickname") String nickname,
+			@WebParam(name = "idCtrlReservas") int idCtrlReservas) {
+		try {
+
+			//brujeria para convertir string de Json a el set que preciso
+//			Gson gson = new Gson();
+//			Type token = new TypeToken<Set<DTLineaReserva>>() {
+//			}.getType();
+//			Set<DTLineaReserva> lineas = gson.fromJson(lineasReserva, token);
+//			//genero reserva como siempre
+//			ICtrlReservas ctrlReservas = Fabrica.getInstance().getICtrlReservas();
+			ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
+//			ctrlReservas.seleccionarCliente(nickname);
+//			for (DTLineaReserva linea : lineas) {
+//				ctrlReservas.ingresarLineaReserva(
+//						linea.getCantidad(),
+//						linea.getFechaInicio(),
+//						linea.getFechaFin()
+//				);
+//			}
+			ctrlReservas.seleccionarCliente(nickname);
+			ctrlReservas.altaReserva(ctrlReservas.mostrarReservaTemporal());
+			ctrlReservas.liberarMemoriaControlador();
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
+	@WebMethod
+	public DTReserva agregarServicioCarrito(
+			@WebParam(name = "id_ctrl_reservas") int idCtrlReservas,
+			@WebParam(name = "nickname") String nickname,
+			@WebParam(name = "id_servicio") String idServicio,
+			@WebParam(name = "id_proveedor") String idProveedor,
+			@WebParam(name = "cantidad") int cantidad,
+			@WebParam(name = "fecha_inicio") String fechaInicio,
+			@WebParam(name = "fecha_fin") String fechaFin
+	) {
+		//devuelve reserva temporal
+		try {
+			ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
+			ctrlReservas.seleccionarCliente(nickname);
+			ctrlReservas.seleccionarPromocion(null);
+			DTMinServicio dt = new DTMinServicio(idProveedor, idServicio);
+			ctrlReservas.seleccionarServicio(dt);
+			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date dateInicio = sourceFormat.parse(fechaInicio);
+			Date dateFin = sourceFormat.parse(fechaFin);
+			ctrlReservas.ingresarLineaReserva(cantidad, dateInicio, dateFin);
+			return ctrlReservas.mostrarReservaTemporal();
+		} catch (ParseException ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
+	}
+
+	@WebMethod
+	public DTReserva agregarPromocionCarrito(
+			@WebParam(name = "id_ctrl_reservas") int idCtrlReservas,
+			@WebParam(name = "nickname") String nickname,
+			@WebParam(name = "id_promocion") String idPromocion,
+			@WebParam(name = "id_proveedor") String idProveedor,
+			@WebParam(name = "cantidad") int cantidad,
+			@WebParam(name = "fecha_inicio") String fechaInicio,
+			@WebParam(name = "fecha_fin") String fechaFin
+	) {
+		//devuelve reserva temporal
+		try {
+			ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
+			ctrlReservas.seleccionarCliente(nickname);
+			ctrlReservas.seleccionarServicio(null);
+			DTMinPromocion dt = new DTMinPromocion(idProveedor, idPromocion);
+			ctrlReservas.seleccionarPromocion(dt);
+			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date dateInicio = sourceFormat.parse(fechaInicio);
+			Date dateFin = sourceFormat.parse(fechaFin);
+			ctrlReservas.ingresarLineaReserva(cantidad, dateInicio, dateFin);
+			return ctrlReservas.mostrarReservaTemporal();
+		} catch (ParseException ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+			return null;
+		}
 	}
 
 	@WebMethod
@@ -389,49 +534,22 @@ public class Publicador {
 //		ctrlProductos.seleccionarPromocion(dt);
 //		return ctrlProductos.infoPromocion();
 //	}
+	@WebMethod
+	public boolean verificarCliente(String idCliente, String contrasena) {
 
-        @WebMethod
-        public boolean verificarCliente(String idCliente, String contrasena){
-                
-                    Fabrica f = Fabrica.getInstance();
-                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
-                    return ctrlU.idCorrecta(idCliente) && ctrlU.pwCorrecta(idCliente, contrasena);
-                     
-                
-        }
-        
-        @WebMethod
-        public boolean verificarProveedor(String idProveedor, String contrasena){
-                
-                    Fabrica f = Fabrica.getInstance();
-                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
-                    return ctrlU.idCorrectaProveedor(idProveedor) && ctrlU.pwCorrectaProveedor(idProveedor, contrasena);
-                     
-                
-        }
-        
-        @WebMethod
-        public String obtenerIdCliente(String idCliente, String contrasena){
-                
-                
-                    Fabrica f = Fabrica.getInstance();
-                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
-                    return ctrlU.obtenerIdCliente(idCliente, contrasena);
-                    
-                    
-                
-        }
-        
-        @WebMethod
-        public String obtenerIdProveedor(String idProveedor, String contrasena){
-                
-                
-                    Fabrica f = Fabrica.getInstance();
-                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
-                    return ctrlU.obtenerIdProveedor(idProveedor, contrasena);
-                    
-                    
-                
-        }
-        
+		Fabrica f = Fabrica.getInstance();
+		ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+		return ctrlU.idCorrecta(idCliente) && ctrlU.pwCorrecta(idCliente, contrasena);
+
+	}
+
+	@WebMethod
+	public boolean verificarProveedor(String idProveedor, String contrasena) {
+
+		Fabrica f = Fabrica.getInstance();
+		ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+		return ctrlU.idCorrectaProveedor(idProveedor) && ctrlU.pwCorrectaProveedor(idProveedor, contrasena);
+
+	}
+
 }

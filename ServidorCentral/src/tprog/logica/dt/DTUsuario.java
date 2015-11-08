@@ -15,6 +15,16 @@ public class DTUsuario {
 	private String imagen;
 	private Date fechaNacimiento;
 
+	public DTUsuario() {
+		this.nickname = null;
+		this.password = null;
+		this.nombre = null;
+		this.apellido = null;
+		this.email = null;
+		this.imagen = null;
+		this.fechaNacimiento = null;
+	}
+
 	public DTUsuario(String Nickname, String Password, String Nombre, String Apellido, String Email,
 			String Imagen, Date FechaNacimiento) {
 		this.nickname = Nickname;

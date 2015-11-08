@@ -89,13 +89,14 @@ public class RegistrarCliente extends HttpServlet {
 					fecha.setMonth(dateNac.getMonth());
 					fecha.setDay(dateNac.getDate());
 					dtU.setFechaNacimiento(fecha);
-                                        if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-                                                proxy.altaUsuario(dtU, false, null, null);
-                                        } else{
-                                            String empresa = request.getParameter("empresa");
-                                            String linkEmpresa = request.getParameter("UrlEmpresa");
-                                            proxy.altaUsuario(dtU, false, empresa, linkEmpresa);
-                                        }        
+					dtU.setImagen("");
+					if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+						proxy.altaUsuario(dtU, false, null, null);
+					} else {
+						String empresa = request.getParameter("empresa");
+						String linkEmpresa = request.getParameter("UrlEmpresa");
+						proxy.altaUsuario(dtU, false, empresa, linkEmpresa);
+					}
 
 					//ya logueo el usuario registrado
 //					ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion

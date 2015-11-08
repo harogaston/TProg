@@ -56,6 +56,10 @@
 <message name="buscarResponse">
 <part name="return" type="tns:wrapperBuscar"></part>
 </message>
+<message name="typeahead"></message>
+<message name="typeaheadResponse">
+<part name="return" type="xsd:string"></part>
+</message>
 <message name="verificarEmail">
 <part name="email" type="xsd:string"></part>
 </message>
@@ -196,6 +200,10 @@
 <input wsam:Action="http://webservice.tprog/Publicador/buscarRequest" message="tns:buscar"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/buscarResponse" message="tns:buscarResponse"></output>
 </operation>
+<operation name="typeahead">
+<input wsam:Action="http://webservice.tprog/Publicador/typeaheadRequest" message="tns:typeahead"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/typeaheadResponse" message="tns:typeaheadResponse"></output>
+</operation>
 <operation name="verificarEmail">
 <input wsam:Action="http://webservice.tprog/Publicador/verificarEmailRequest" message="tns:verificarEmail"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verificarEmailResponse" message="tns:verificarEmailResponse"></output>
@@ -319,6 +327,15 @@
 </output>
 </operation>
 <operation name="buscar">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="typeahead">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

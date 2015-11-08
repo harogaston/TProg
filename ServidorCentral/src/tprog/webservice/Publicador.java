@@ -24,6 +24,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.ws.Endpoint;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -57,7 +58,10 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerServicio verServicio(String idServicio, String idProveedor) {
+	public WrapperVerServicio verServicio(
+			@WebParam(name = "id_servicio") String idServicio,
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		//hay que ver como pido las clases de la lógica cuando se saca el .jar
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
@@ -89,7 +93,10 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerPromocion verPromocion(String idPromocion, String idProveedor) {
+	public WrapperVerPromocion verPromocion(
+			@WebParam(name = "id_promocion") String idPromocion,
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
 		DTMinPromocion dtMin = new DTMinPromocion(idProveedor, idPromocion);
@@ -105,7 +112,9 @@ public class Publicador {
 	//este metodo se podria incorporar a ver Promocion, pero
 	//no me pintó
 	@WebMethod
-	public DTServicio seleccionarInfoServicio(DTMinServicio dt) {
+	public DTServicio seleccionarInfoServicio(
+			@WebParam(name = "dt") DTMinServicio dt
+	) {
 		//selecciona y servicio y devuelve su información
 		//se combinan operaciones para hacerla atómica y evitar problemas
 		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
@@ -114,7 +123,9 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerInfoProveedor verInfoProveedor(String idProveedor) {
+	public WrapperVerInfoProveedor verInfoProveedor(
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		try {
 			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 			ctrlUsuarios.seleccionarProveedor(idProveedor);
@@ -146,7 +157,9 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerPerfilCliente verPerfilCliente(String idCliente) {
+	public WrapperVerPerfilCliente verPerfilCliente(
+			@WebParam(name = "id_cliente") String idCliente
+	) {
 		try {
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -170,7 +183,9 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public DTProveedor verPerfilProveedor(String idProveedor) {
+	public DTProveedor verPerfilProveedor(
+			@WebParam(name = "id_proveedor") String idProveedor
+	) {
 		try {
 			Fabrica f = Fabrica.getInstance();
 			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
@@ -183,8 +198,13 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperBuscar buscar(String busquedaPrevia, String seleccionPrevia,
-			String tipoOrden, String busqueda, String categoriaSeleccionada) {
+	public WrapperBuscar buscar(
+			@WebParam(name = "busqueda_previa") String busquedaPrevia,
+			@WebParam(name = "seleccion_previa") String seleccionPrevia,
+			@WebParam(name = "tipo_orden") String tipoOrden,
+			@WebParam(name = "busqueda") String busqueda,
+			@WebParam(name = "categoria_seleccionada") String categoriaSeleccionada
+	) {
 		WrapperBuscar result = new WrapperBuscar();
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
@@ -328,7 +348,8 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public <T> String toString(T o) {
+	public <T> String toString(
+			@WebParam(name = "objeto_generico") T o) {
 		return o.toString();
 	}
 

@@ -29,6 +29,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.jws.WebParam;
+import javax.xml.datatype.XMLGregorianCalendar;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -415,13 +416,41 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public void altaUsuario(DTUsuario dt, boolean esProveedor, String empresa, String web) {
-		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
-		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
-		if (esProveedor) {
-			ctrlUsuarios.ingresarDatosProveedor(empresa, web);
+	public void altaUsuario(
+			String id,
+			String contrasena,
+			String nombre,
+			String apellido,
+			String mail,
+			String fechaNac,
+			String imagen,
+			boolean esProveedor,
+			String empresa,
+			String web
+	) {
+
+		try {
+			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+			Date dateNac = sourceFormat.parse(fechaNac);
+			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+			//se crea un nuevo dt por quilombos con la fecha
+			DTUsuario dtNuevo = new DTUsuario(
+					id,
+					contrasena,
+					nombre,
+					apellido,
+					mail,
+					imagen,
+					dateNac
+			);
+			ctrlUsuarios.ingresarDatosUsuario(dtNuevo, esProveedor);
+			if (esProveedor) {
+				ctrlUsuarios.ingresarDatosProveedor(empresa, web);
+			}
+			ctrlUsuarios.altaUsuario();
+		} catch (ParseException ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		ctrlUsuarios.altaUsuario();
 	}
 
 	@WebMethod

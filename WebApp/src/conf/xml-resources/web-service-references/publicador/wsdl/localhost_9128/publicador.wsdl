@@ -97,10 +97,16 @@
 <part name="return" type="xsd:string"></part>
 </message>
 <message name="altaUsuario">
-<part name="arg0" type="tns:dtUsuario"></part>
-<part name="arg1" type="xsd:boolean"></part>
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
 <part name="arg2" type="xsd:string"></part>
 <part name="arg3" type="xsd:string"></part>
+<part name="arg4" type="xsd:string"></part>
+<part name="arg5" type="xsd:string"></part>
+<part name="arg6" type="xsd:string"></part>
+<part name="arg7" type="xsd:boolean"></part>
+<part name="arg8" type="xsd:string"></part>
+<part name="arg9" type="xsd:string"></part>
 </message>
 <message name="altaUsuarioResponse"></message>
 <message name="cancelarReserva">
@@ -214,7 +220,7 @@
 <input wsam:Action="http://webservice.tprog/Publicador/obtenerIdProveedorRequest" message="tns:obtenerIdProveedor"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/obtenerIdProveedorResponse" message="tns:obtenerIdProveedorResponse"></output>
 </operation>
-<operation name="altaUsuario" parameterOrder="arg0 arg1 arg2 arg3">
+<operation name="altaUsuario" parameterOrder="arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9">
 <input wsam:Action="http://webservice.tprog/Publicador/altaUsuarioRequest" message="tns:altaUsuario"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/altaUsuarioResponse" message="tns:altaUsuarioResponse"></output>
 </operation>

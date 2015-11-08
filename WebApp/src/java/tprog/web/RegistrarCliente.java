@@ -40,9 +40,6 @@ public class RegistrarCliente extends HttpServlet {
 
 			//obtengo strings para las fechas, en formato dd/mm/aaaa, hay que parsearlas
 			String fechaNac = request.getParameter("fNac");
-			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
-			Date dateNac = sourceFormat.parse(fechaNac);
-			System.err.println("XXXXX " + Integer.toString(dateNac.getYear() + 1900));
 			EstadoSesion nuevoEstado;
 //			Fabrica f = Fabrica.getInstance();
 //			ICtrlUsuarios cu = f.getICtrlUsuarios();
@@ -78,24 +75,35 @@ public class RegistrarCliente extends HttpServlet {
 
 				if (okNombre && okApellido && okPassword) {
 					// doy de alta el cliente
-					DtUsuario dtU = new DtUsuario();
-					dtU.setNickname(id);
-					dtU.setPassword(contrasena);
-					dtU.setNombre(nombre);
-					dtU.setApellido(apellido);
-					dtU.setEmail(mail);
-					XMLGregorianCalendar fecha = new XMLGregorianCalendarImpl();
-					fecha.setYear(dateNac.getYear() - 1900);
-					fecha.setMonth(dateNac.getMonth());
-					fecha.setDay(dateNac.getDate());
-					dtU.setFechaNacimiento(fecha);
-					dtU.setImagen("");
+//					DtUsuario dtU = new DtUsuario();
 					if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
-						proxy.altaUsuario(dtU, false, null, null);
+						proxy.altaUsuario(
+								id,
+								contrasena,
+								nombre,
+								apellido,
+								mail,
+								fechaNac,
+								"null", //imagen
+								false,
+								"null",
+								"null"
+						);
 					} else {
-						String empresa = request.getParameter("empresa");
-						String linkEmpresa = request.getParameter("UrlEmpresa");
-						proxy.altaUsuario(dtU, false, empresa, linkEmpresa);
+						String empresa = (request.getParameter("empresa") == null) ? "null" : request.getParameter("empresa");
+						String linkEmpresa = (request.getParameter("UrlEmpresa") == null) ? "null" : request.getParameter("UrlEmpresa");
+						proxy.altaUsuario(
+								id,
+								contrasena,
+								nombre,
+								apellido,
+								mail,
+								fechaNac,
+								"null",
+								true,
+								empresa,
+								linkEmpresa
+						);
 					}
 
 					//ya logueo el usuario registrado
@@ -116,9 +124,7 @@ public class RegistrarCliente extends HttpServlet {
 				request.getRequestDispatcher("Home").forward(request, response);
 			}
 
-		} catch (ParseException ex) {
-			Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (Exception ex) {
+		} catch (ServletException | IOException ex) {
 			Logger.getLogger(RegistrarCliente.class.getName()).log(Level.SEVERE, null, ex);
 		}
 	}

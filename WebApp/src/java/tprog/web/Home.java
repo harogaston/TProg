@@ -15,7 +15,7 @@ public class Home extends HttpServlet {
 		if (session.getAttribute("estado_sesion") == null) {
 			session.setAttribute("estado_sesion", EstadoSesion.NO_LOGIN);
 		}
-                if (session.getAttribute("tipo_usuario") == null) {
+		if (session.getAttribute("tipo_usuario") == null) {
 			session.setAttribute("tipo_usuario", TipoUsuario.CLIENTE);
 		}
 		if (session.getAttribute("datos_cargados") == null) {

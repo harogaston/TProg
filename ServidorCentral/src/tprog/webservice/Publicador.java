@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Header Test
  */
 package tprog.webservice;
@@ -580,5 +580,52 @@ public class Publicador {
 		return ctrlU.idCorrectaProveedor(idProveedor) && ctrlU.pwCorrectaProveedor(idProveedor, contrasena);
 
 	}
+
+        @WebMethod
+	public boolean verificarCliente(@WebParam(name = "idCliente") String idCliente, @WebParam(name = "contrasena") String contrasena){
+
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.idCorrecta(idCliente) && ctrlU.pwCorrecta(idCliente, contrasena);
+                     
+                
+        }
+        
+        @WebMethod
+
+        public boolean verificarProveedor(@WebParam(name = "idProveedor") String idProveedor, @WebParam(name = "contrasena") String contrasena){
+
+
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.idCorrectaProveedor(idProveedor) && ctrlU.pwCorrectaProveedor(idProveedor, contrasena);
+                     
+                
+        }
+        
+        @WebMethod
+        public String obtenerIdCliente(@WebParam(name = "idCliente") String idCliente, @WebParam(name = "contrasena") String contrasena){
+                Fabrica f = Fabrica.getInstance();
+                ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.obtenerIdCliente(idCliente, contrasena);
+                    
+                    
+                
+        }
+        
+        @WebMethod
+        public String obtenerIdProveedor(@WebParam(name = "idProveedor") String idProveedor, @WebParam(name = "contrasena") String contrasena){
+                
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.obtenerIdProveedor(idProveedor, contrasena);
+                    
+                    
+                
+        }
+        
 
 }

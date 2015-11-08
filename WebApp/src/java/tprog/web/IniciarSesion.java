@@ -1,4 +1,4 @@
-package tprog.web;
+﻿package tprog.web;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +18,7 @@ public class IniciarSesion extends HttpServlet {
 		String id = request.getParameter("nickname"); //puede ser email o nickname
 		String contrasena = request.getParameter("password");
 		EstadoSesion nuevoEstado;
+
 //                Fabrica f = Fabrica.getInstance();
 //		ICtrlUsuarios cu = f.getICtrlUsuarios();
 		// se checkean los datos de login
@@ -56,6 +57,7 @@ public class IniciarSesion extends HttpServlet {
 				session.setAttribute("inicioIncorrecto", "Las credenciales que ingresó no corresponden a ningún proveedor registrado en el sistema");
 			}
 		}
+
 		// redirige a la página principal para que luego rediriga a la página
 		// que corresponde
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");

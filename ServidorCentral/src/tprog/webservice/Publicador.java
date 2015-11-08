@@ -7,21 +7,30 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.ws.Endpoint;
+import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
+import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
+import tprog.logica.dt.DTProveedor;
+import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
-import tprog.logica.dt.DTUbicacion;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
+import tprog.logica.interfaces.ICtrlUsuarios;
 
 /**
  *
@@ -75,17 +84,6 @@ public class Publicador {
 		return result;
 	}
 
-//	@WebMethod
-//	public WrapperVerProveedores verProveedores() {
-//		try {
-//			WrapperVerProveedores result = new WrapperVerProveedores();
-//			result.proveedores = Fabrica.getInstance().getICtrlUsuarios().listarProveedores();
-//			return result;
-//		} catch (Exception ex) {
-//			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
-//		}
-//		return null;
-//	}
 	@WebMethod
 	public WrapperVerPromocion verPromocion(String idPromocion, String idProveedor) {
 		Fabrica f = Fabrica.getInstance();
@@ -100,6 +98,8 @@ public class Publicador {
 		return result;
 	}
 
+	//este metodo se podria incorporar a ver Promocion, pero
+	//no me pintó
 	@WebMethod
 	public DTServicio seleccionarInfoServicio(DTMinServicio dt) {
 		//selecciona y servicio y devuelve su información
@@ -110,8 +110,86 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public WrapperVerInfoProveedor verInfoProveedor(String idProveedor) {
+		try {
+			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+			ctrlUsuarios.seleccionarProveedor(idProveedor);
+			DTProveedor dtProveedor = ctrlUsuarios.infoProveedor();
+			ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
+			Set<DTMinPromocion> setPromociones = ctrlUsuarios.listarPromocionesProveedor();
+			Map<DTPromocion, String> mapPromociones = new HashMap<>();
+			for (DTMinPromocion dt : setPromociones) {
+				ctrlProductos.seleccionarPromocion(dt);
+				DTPromocion tmp = ctrlProductos.infoPromocion();
+				mapPromociones.put(tmp, tmp.toString());
+			}
+			Set<DTMinServicio> setServicios = ctrlUsuarios.listarServiciosProveedor();
+			Map<DTServicio, String> mapServicios = new HashMap<>();
+			for (DTMinServicio dt : setServicios) {
+				ctrlProductos.seleccionarServicio(dt);
+				DTServicio tmp = ctrlProductos.infoServicio();
+				mapServicios.put(tmp, tmp.toString());
+			}
+			WrapperVerInfoProveedor result = new WrapperVerInfoProveedor();
+			result.promociones = mapPromociones;
+			result.servicios = mapServicios;
+			result.proveedor = dtProveedor;
+			return result;
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
+	public WrapperVerPerfilCliente verPerfilCliente(String idCliente) {
+		try {
+			Fabrica f = Fabrica.getInstance();
+			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+			ctrlU.seleccionarCliente(idCliente);
+			DTCliente dtC = ctrlU.infoCliente();
+			Set<DTMinReserva> reservasMin = dtC.getReservas();
+			// Voy a crear un Set<DTReserva> para pasarle a la jsp
+			Collection<DTReserva> reservas = new TreeSet<>();
+			for (DTMinReserva dtMinR : reservasMin) {
+				ctrlU.seleccionarReserva(dtMinR.getIdReserva());
+				reservas.add(ctrlU.infoReserva());
+			}
+			WrapperVerPerfilCliente result = new WrapperVerPerfilCliente();
+			result.cliente = dtC;
+			result.reservas = reservas;
+			return result;
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
+	public DTProveedor verPerfilProveedor(String idProveedor) {
+		try {
+			Fabrica f = Fabrica.getInstance();
+			ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+			ctrlU.seleccionarProveedor(idProveedor);
+			return ctrlU.infoProveedor();
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
 	public <T> String toString(T o) {
 		return o.toString();
 	}
 
+//ésto quedó inutilizado porque ya se hace en verInfoProveedor
+//	@WebMethod
+//	public DTPromocion seleccionarInfoPromocion(DTMinPromocion dt) {
+//		//selecciona y servicio y devuelve su información
+//		//se combinan operaciones para hacerla atómica y evitar problemas
+//		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
+//		ctrlProductos.seleccionarPromocion(dt);
+//		return ctrlProductos.infoPromocion();
+//	}
 }

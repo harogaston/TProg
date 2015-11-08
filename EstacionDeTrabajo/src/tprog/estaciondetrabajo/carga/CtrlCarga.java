@@ -3,6 +3,7 @@ package tprog.estaciondetrabajo.carga;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -26,40 +27,50 @@ public class CtrlCarga {
 
 	public void cargarDatos() {
 		try {
+			Calendar calendar = Calendar.getInstance();
 			String directorioImagenes = (new File(".")).getCanonicalPath();
 			System.out.println("Dir imagenes: " + directorioImagenes);
 			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
+			calendar.set(1988, 12 - 1, 28);
 			DTCliente dtC = new DTCliente("oWood", "pass", "Oliver", "Wood", "quidditch28@gmail.com",
-					directorioImagenes + "/imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet<>());
+					directorioImagenes + "/imagenes/clientes/oWood.jpg", calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
+			calendar.set(1990, 4 - 1, 15);
 			dtC = new DTCliente("eWatson", "pass", "Emma", "Watson", "e.watson@gmail.com",
-					directorioImagenes + "/imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet<>());
+					directorioImagenes + "/imagenes/clientes/eWatson.jpg", calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
+			calendar.set(1978, 12 - 1, 3);
 			dtC = new DTCliente("BruceS", "pass", "Bruce", "Sewell", "bruce.sewell@gmail.com",
-					null, new Date(1978, 12 - 1, 3), new HashSet<>());
+					null, calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
+			calendar.set(1984, 11 - 1, 27);
 			dtC = new DTCliente("JeffW", "pass", "Jeff", "Williams", "jeff.williams@gmail.com",
-					null, new Date(1984, 11 - 1, 27), new HashSet<>());
+					null, calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
+			calendar.set(1960, 11 - 1, 1);
 			DTProveedor dtP = new DTProveedor("tCook", "pass", "Tim", "Cook", "air.f@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/tCook.jpg",
-					new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
+					calendar.getTime(), "AirFrance", "http://www.airfrance.com/");
 			mu.altaProveedor(dtP);
+			calendar.set(1965, 9 - 1, 2);
 			dtP = new DTProveedor("moody", "pass", "Alastor", "Moody", "eu.car@eucar.com",
 					directorioImagenes + "/imagenes/proveedores/moody.jpg",
-					new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
+					calendar.getTime(), "EuropCar", "http://www.europcar.com.uy/");
 			mu.altaProveedor(dtP);
+			calendar.set(1970, 5 - 1, 4);
 			dtP = new DTProveedor("remus", "pass", "Remus", "Lupin", "iberia@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/remus.jpg",
-					new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
+					calendar.getTime(), "Iberia", "http://www.iberia.com/uy/");
 			mu.altaProveedor(dtP);
+			calendar.set(1967, 2 - 1, 12);
 			dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
 					directorioImagenes + "/imagenes/proveedores/adippet.jpg",
-					new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
+					calendar.getTime(), "Tam", "http://www.tam.com.br/");
 			mu.altaProveedor(dtP);
+			calendar.set(1963, 8 - 1, 5);
 			dtP = new DTProveedor("mHooch", "pass", "Madam", "Hooch", "segHogar@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/mHooch.jpg",
-					new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
+					calendar.getTime(), "Segundo Hogar", "http://www.segundohogar.com/");
 			mu.altaProveedor(dtP);
 			ManejadorProductos mp = ManejadorProductos.getInstance();
 			mp.altaCategoria("Vuelos", null);
@@ -311,60 +322,114 @@ public class CtrlCarga {
 			ManejadorReservas mr = ManejadorReservas.getInstance();
 			try {
 				//R1 S1
+
+				calendar.set(2015, 1 - 1, 1);
+
 				Set<DTLineaReserva> lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
-						new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, "remus", 1100));
-				DTReserva dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
+				lineas.add(new DTLineaReserva(1, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-S", null, "remus", 1100));
+				DTReserva dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Facturada, 1100, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
 				//R2    S1 S2
 				lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 1 - 1, 1),
-						new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, "remus", 1100));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
-						new Date(2015, 1 - 1, 1), "Euro-Vuelo-LC", null, "remus", 850));
-				dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
+				lineas.add(new DTLineaReserva(2, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-S", null, "remus", 1100));
+				lineas.add(new DTLineaReserva(1, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-LC", null, "remus", 850));
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Cancelada, 3050, lineas);
 				mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 
 				//R3    P7
 				lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 3 - 1, 5),
-						new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", "mHooch", 135));
-				dtR = new DTReserva(0, new Date(2015, 3 - 1, 5),
+
+				calendar.set(2015, 3 - 1, 5);
+				Date inicio = calendar.getTime();
+				calendar.set(2015, 4 - 1, 2);
+				Date fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, null, "Sudamerica-Casas", "mHooch", 135));
+
+				calendar.set(2015, 3 - 1, 5);
+
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Pagada, 135, lineas);
 				mr.agregarReserva(mu.getCliente("BruceS"), dtR);
 				//R4    S5 S6
 				lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
-						new Date(2015, 5 - 1, 12), "Euro-Car-2", null, "moody", 300));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
-						new Date(2015, 5 - 1, 12), "Euro-Car-3", null, "moody", 300));
-				dtR = new DTReserva(0, new Date(2015, 5 - 1, 8),
+
+				calendar.set(2015, 5 - 1, 8);
+				inicio = calendar.getTime();
+				calendar.set(2015, 5 - 1, 12);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, "Euro-Car-2", null, "moody", 300));
+
+				calendar.set(2015, 5 - 1, 8);
+				inicio = calendar.getTime();
+				calendar.set(2015, 5 - 1, 12);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, "Euro-Car-3", null, "moody", 300));
+
+				calendar.set(2015, 5 - 1, 8);
+
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Pagada, 600, lineas);
 				mr.agregarReserva(mu.getCliente("JeffW"), dtR);
 				//R5    S9
 				lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
-						new Date(2015, 8 - 1, 10), "Air-France-FC", null, "tCook", 100));
-				dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
+
+				calendar.set(2015, 8 - 1, 7);
+				inicio = calendar.getTime();
+				calendar.set(2015, 8 - 1, 10);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(2, inicio,
+						fin, "Air-France-FC", null, "tCook", 100));
+
+				calendar.set(2015, 8 - 1, 7);
+
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Registrada, 200, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
 
 				//R6    P8 S7
 				lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),
-						new Date(2015, 8 - 1, 14), null, "Miami-Viaje", "mHooch", 462));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 14),
-						new Date(2015, 8 - 1, 21), "Casa para p4 BsAs", null, "mHooch", 80));
-				dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
+
+				calendar.set(2015, 8 - 1, 7);
+				inicio = calendar.getTime();
+				calendar.set(2015, 8 - 1, 14);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, null, "Miami-Viaje", "mHooch", 462));
+
+				calendar.set(2015, 8 - 1, 14);
+				inicio = calendar.getTime();
+				calendar.set(2015, 8 - 1, 21);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, "Casa para p4 BsAs", null, "mHooch", 80));
+
+				calendar.set(2015, 8 - 1, 7);
+
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Registrada, 542, lineas);
 				mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 				//R7    S2
 				lineas = new HashSet<>();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
-						new Date(2015, 8 - 1, 7), "Euro-Vuelo-LC", null, "remus", 850));
-				dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
+
+				calendar.set(2015, 8 - 1, 7);
+
+				lineas.add(new DTLineaReserva(2, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-LC", null, "remus", 850));
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Registrada, 1700, lineas);
 				mr.agregarReserva(mu.getCliente("BruceS"), dtR);
 			} catch (Exception e) {

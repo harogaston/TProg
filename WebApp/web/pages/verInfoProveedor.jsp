@@ -1,14 +1,9 @@
-<%@page import="tprog.logica.dt.DTPromocion"%>
-<%@page import="tprog.logica.dt.DTMinPromocion"%>
-<%@page import="tprog.logica.dt.DTServicio"%>
-<%@page import="tprog.logica.interfaces.ICtrlProductos"%>
-<%@page import="tprog.logica.interfaces.Fabrica"%>
-<%@page import="tprog.logica.dt.DTMinServicio"%>
-<%@page import="tprog.logica.dt.DTProveedor"%>
-<%@page import="tprog.logica.dt.DTLineaReserva"%>
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.Map"%>
+<%@page import="webservice.DtPromocion"%>
+<%@page import="webservice.DtServicio"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="tprog.logica.dt.DTReserva"%>
 
 <!doctype html>
 <html>
@@ -70,12 +65,9 @@
 						<div class="panel-group" id="accordionServicios">
 							<%
 								int i = 0;
-								Set<DTMinServicio> servicios = (Set<DTMinServicio>) request.getAttribute("servicios");
-								for (DTMinServicio dt : servicios) {
-									Fabrica f = Fabrica.getInstance();
-									ICtrlProductos ctrlProductos = f.getICtrlProductos();
-									ctrlProductos.seleccionarServicio(dt);
-									DTServicio servicio = ctrlProductos.infoServicio();
+								Map<DtServicio, String> servicios = (Map<DtServicio, String>) request.getAttribute("servicios");
+								for (Entry<DtServicio, String> entry : servicios.entrySet()) {
+									DtServicio servicio = entry.getKey();
 									i++;
 							%>
 							<div class="accordion-group">
@@ -87,12 +79,12 @@
 									</div>
 									<div id="s<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
-											<%=servicio.toString().replace("\n", "<br>")%>
+											<%=entry.getValue().replace("\n", "<br>")%>
 										</div>
 										<form action="VerServicio" class="navbar-form">
 											<div class="input-group">
-												<input type="text" name="idServicio" value="<%=dt.getIdServicio()%>" style="display: none">
-												<input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="display: none">
+												<input type="text" name="idServicio" value="<%=servicio.getIdServicio()%>" style="display: none">
+												<input type="text" name="idProveedor" value="<%=servicio.getNicknameProveedor()%>" style="display: none">
 												<button class="btn btn-info" type="submit">Ir a Servicio</button>
 											</div>
 										</form>
@@ -109,19 +101,17 @@
 							}
 						%>
 					</div>
-					
+
 					<!--Promociones-->
 					<div role="tabpanel" class="tab-pane" id="promociones">
 						<% if (request.getAttribute("promociones") != null) {%>
 						<div class="panel-group" id="accordionPromociones">
 							<%
 								int i = 0;
-								Set<DTMinPromocion> promociones = (Set<DTMinPromocion>) request.getAttribute("promociones");
-								for (DTMinPromocion dt : promociones) {
-									Fabrica f = Fabrica.getInstance();
-									ICtrlProductos ctrlProductos = f.getICtrlProductos();
-									ctrlProductos.seleccionarPromocion(dt);
-									DTPromocion promocion = ctrlProductos.infoPromocion();
+
+								Map<DtPromocion, String> promociones = (Map<DtPromocion, String>) request.getAttribute("promociones");
+								for (Entry<DtPromocion, String> entry : promociones.entrySet()) {
+									DtPromocion promocion = entry.getKey();
 									i++;
 							%>
 							<div class="accordion-group">
@@ -133,12 +123,12 @@
 									</div>
 									<div id="p<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
-											<%=promocion.toString().replace("\n", "<br>")%>
+											<%=entry.getValue().replace("\n", "<br>")%>
 										</div>
 										<form action="VerPromocion" class="navbar-form">
 											<div class="input-group">
-												<input type="text" name="idPromocion" value="<%=dt.getIdPromocion()%>" style="display: none">
-												<input type="text" name="idProveedor" value="<%=dt.getNicknameP()%>" style="display: none">
+												<input type="text" name="idPromocion" value="<%=promocion.getIdPromocion()%>" style="display: none">
+												<input type="text" name="idProveedor" value="<%=promocion.getNicknameProveedor()%>" style="display: none">
 												<button class="btn btn-info" type="submit">Ir a Promoción</button>
 											</div>
 										</form>

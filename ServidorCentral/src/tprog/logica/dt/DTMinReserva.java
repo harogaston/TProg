@@ -26,7 +26,7 @@ public class DTMinReserva {
 				+ "\n" + "Fecha de creacion: "
 				+ Integer.toString(fechaCreacion.getDate()) + "-"
 				+ Integer.toString(fechaCreacion.getMonth() + 1) + "-"
-				+ Integer.toString(fechaCreacion.getYear()) + "\n";
+				+ Integer.toString(fechaCreacion.getYear() + 1900) + "\n";
 	}
 
 	@Override

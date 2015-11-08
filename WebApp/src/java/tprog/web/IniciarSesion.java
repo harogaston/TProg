@@ -7,31 +7,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlReservas;
-import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class IniciarSesion extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-                
+                webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
 		String id = request.getParameter("nickname"); //puede ser email o nickname
 		String contrasena = request.getParameter("password");
 		EstadoSesion nuevoEstado;
-                Fabrica f = Fabrica.getInstance();
-		ICtrlUsuarios cu = f.getICtrlUsuarios();
-		// se checkean los datos de login
+                // se checkean los datos de login
                 if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-                    if (cu.idCorrecta(id) && cu.pwCorrecta(id, contrasena)) {
-                        ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-                        cr.liberarMemoriaControlador();
-                        session.setAttribute("ctrlReservas", cr);
+                    if (proxy.iniciarSesionCliente(id, contrasena)) {
+                        
+                        //session.setAttribute("ctrlReservas", cr);
 			nuevoEstado = EstadoSesion.OK_LOGIN;
                         
 			//en caso de que id sea un email
-			id = cu.obtenerIdCliente(id, contrasena);
+			id = proxy.obtenerIdCliente(id, contrasena);
 			request.getSession().setAttribute("usuario_logueado", id);
                         
 			session.setAttribute("estado_sesion", nuevoEstado);
@@ -42,13 +37,12 @@ public class IniciarSesion extends HttpServlet {
                 }
                     
                 if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR){
-                    if (cu.idCorrectaProveedor(id) && cu.pwCorrectaProveedor(id, contrasena)) {
-                        ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-                        cr.liberarMemoriaControlador();
-                        session.setAttribute("ctrlReservas", cr);
+                    if (proxy.iniciarSesionProveedor(id, contrasena)) {
+                        
+                        
 			nuevoEstado = EstadoSesion.OK_LOGIN;
                         //en caso de que id sea un email
-			id = cu.obtenerIdProveedor(id, contrasena);
+			id = proxy.obtenerIdProveedor(id, contrasena);
 			request.getSession().setAttribute("usuario_logueado", id);
                         session.setAttribute("estado_sesion", nuevoEstado);
 			session.setAttribute("cant_items", 0);

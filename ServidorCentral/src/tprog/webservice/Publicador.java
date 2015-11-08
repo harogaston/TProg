@@ -386,4 +386,49 @@ public class Publicador {
 //		ctrlProductos.seleccionarPromocion(dt);
 //		return ctrlProductos.infoPromocion();
 //	}
+
+        @WebMethod
+        public boolean iniciarSesionCliente(String idCliente, String contrasena){
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.idCorrecta(idCliente) && ctrlU.pwCorrecta(idCliente, contrasena);
+                     
+                
+        }
+        
+        @WebMethod
+        public boolean iniciarSesionProveedor(String idProveedor, String contrasena){
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.idCorrectaProveedor(idProveedor) && ctrlU.pwCorrectaProveedor(idProveedor, contrasena);
+                     
+                
+        }
+        
+        @WebMethod
+        public String obtenerIdCliente(String idCliente, String contrasena){
+                
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.obtenerIdCliente(idCliente, contrasena);
+                    
+                    
+                
+        }
+        
+        @WebMethod
+        public String obtenerIdProveedor(String idProveedor, String contrasena){
+                
+                
+                    Fabrica f = Fabrica.getInstance();
+                    ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
+                    return ctrlU.obtenerIdProveedor(idProveedor, contrasena);
+                    
+                    
+                
+        }
+        
 }

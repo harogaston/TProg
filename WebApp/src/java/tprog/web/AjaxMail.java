@@ -6,8 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class AjaxMail extends HttpServlet {
 
@@ -16,14 +14,15 @@ public class AjaxMail extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("mail");
 		String resultado;
-		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
 		if (id.matches("^\\s*$")) {
 			resultado = "";
 		} else if (id.matches(".*(\\s+).*")) {
 			resultado = "SIN_ESPACIOS";
 		} else if (!EmailValidator.getInstance().isValid(id)) {
 			resultado = "FORMATO_INVALIDO";
-		} else if (!ctrlUsuarios.verificarEmail(id)) {
+		} else if (!proxy.verificarEmail(id)) {
 			resultado = "OK";
 		} else {
 			resultado = "EN_USO";

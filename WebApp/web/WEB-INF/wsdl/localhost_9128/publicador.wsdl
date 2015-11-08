@@ -52,6 +52,12 @@
 <message name="buscarResponse">
 <part name="return" type="tns:wrapperBuscar"></part>
 </message>
+<message name="verificarEmail">
+<part name="email" type="xsd:string"></part>
+</message>
+<message name="verificarEmailResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="toString">
 <part name="objeto_generico" type="xsd:anyType"></part>
 </message>
@@ -86,6 +92,10 @@
 <operation name="buscar" parameterOrder="busqueda_previa seleccion_previa tipo_orden busqueda categoria_seleccionada">
 <input wsam:Action="http://webservice.tprog/Publicador/buscarRequest" message="tns:buscar"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/buscarResponse" message="tns:buscarResponse"></output>
+</operation>
+<operation name="verificarEmail">
+<input wsam:Action="http://webservice.tprog/Publicador/verificarEmailRequest" message="tns:verificarEmail"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verificarEmailResponse" message="tns:verificarEmailResponse"></output>
 </operation>
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
@@ -149,6 +159,15 @@
 </output>
 </operation>
 <operation name="buscar">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verificarEmail">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

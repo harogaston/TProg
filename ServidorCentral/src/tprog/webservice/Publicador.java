@@ -348,6 +348,14 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public boolean verificarEmail(
+			@WebParam(name = "email") String email
+	) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		return ctrlUsuarios.verificarEmail(email);
+	}
+
+	@WebMethod
 	public <T> String toString(
 			@WebParam(name = "objeto_generico") T o) {
 		return o.toString();

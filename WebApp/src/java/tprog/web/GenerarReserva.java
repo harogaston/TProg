@@ -7,8 +7,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tprog.logica.dt.DTReserva;
-import tprog.logica.interfaces.ICtrlReservas;
 
 public class GenerarReserva extends HttpServlet {
 
@@ -23,17 +21,20 @@ public class GenerarReserva extends HttpServlet {
 		try {
 			//es imposible llegar acá si no hay una reserva temporal no vacía,
 			//debido a la interfaz; entonces acá asumo que está todo bien
-			ICtrlReservas ctrlReservas = (ICtrlReservas) request.getSession().getAttribute("ctrlReservas");
-			//doy de alta a la reserva temporal
+			webservice.PublicadorService service = new webservice.PublicadorService();
+			webservice.Publicador proxy = service.getPublicadorPort();
+			int idCtrlReservas = (int) request.getSession().getAttribute("idCtrlReservas");
+			//es imposible llegar acá si no hay una reserva temporal no vacía,
+			//debido a la interfaz; entonces acá asumo que está todo bien
+			String nickname = (String) request.getSession().getAttribute("usuario_logueado");
+			proxy.generarReserva(nickname, idCtrlReservas);
 
-			DTReserva dtr = ctrlReservas.mostrarReservaTemporal();
-			ctrlReservas.altaReserva(dtr);
-			ctrlReservas.liberarMemoriaControlador();
 			request.getSession().setAttribute("reservaTemporal", null);
 			request.getSession().setAttribute("cant_items", 0);
 
 			request.getSession().setAttribute("reservaGenerada", "OK");
 			request.getRequestDispatcher("Home").forward(request, response);
+
 		} catch (Exception ex) {
 			Logger.getLogger(GenerarReserva.class.getName()).log(Level.SEVERE, null, ex);
 		}

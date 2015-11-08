@@ -42,6 +42,10 @@ public class DTReserva implements Comparable<DTReserva> {
 		return this.lineasReserva;
 	}
 
+	public void setLineasReserva(Set<DTLineaReserva> lineas) {
+		this.lineasReserva = lineas;
+	}
+
 	@Override
 	public String toString() {
 		String output = "ID de reserva: " + Integer.toString(idReserva)

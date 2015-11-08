@@ -11,6 +11,10 @@ public class DTCliente extends DTUsuario {
 
 	private Set<DTMinReserva> reservas;
 
+	public DTCliente() {
+		reservas = null;
+	}
+
 	public DTCliente(String nickname, String password, String nombre, String apellido, String email,
 			String imagen, Date fechaN, Set<DTMinReserva> Reservas) {
 		super(nickname, password, nombre, apellido, email, imagen, fechaN);

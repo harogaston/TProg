@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.validator.routines.EmailValidator;
-import tprog.logica.dt.DTUsuario;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlUsuarios;
-import tprog.logica.interfaces.ICtrlReservas;
 import webservice.DtUsuario;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
@@ -94,6 +90,7 @@ public class RegistrarCliente extends HttpServlet {
 					fecha.setDay(dateNac.getDate());
 					dtU.setFechaNacimiento(fecha);
 					proxy.altaUsuario(dtU, false);
+					dtU.setImagen("");
 
 					//ya logueo el usuario registrado
 //					ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion

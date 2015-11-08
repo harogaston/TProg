@@ -4,6 +4,10 @@
 <xsd:import namespace="http://webservice.tprog/" schemaLocation="http://localhost:9128/publicador?xsd=1"></xsd:import>
 </xsd:schema>
 </types>
+<message name="pedirNumeroCtrlReservas"></message>
+<message name="pedirNumeroCtrlReservasResponse">
+<part name="return" type="xsd:int"></part>
+</message>
 <message name="verServicio">
 <part name="id_servicio" type="xsd:string"></part>
 <part name="id_proveedor" type="xsd:string"></part>
@@ -97,6 +101,40 @@
 <part name="es_proveedor" type="xsd:boolean"></part>
 </message>
 <message name="altaUsuarioResponse"></message>
+<message name="cancelarReserva">
+<part name="id_ctrl_reservas" type="xsd:int"></part>
+<part name="id_reserva" type="xsd:string"></part>
+</message>
+<message name="cancelarReservaResponse"></message>
+<message name="generarReserva">
+<part name="nickname" type="xsd:string"></part>
+<part name="idCtrlReservas" type="xsd:int"></part>
+</message>
+<message name="generarReservaResponse"></message>
+<message name="agregarServicioCarrito">
+<part name="id_ctrl_reservas" type="xsd:int"></part>
+<part name="nickname" type="xsd:string"></part>
+<part name="id_servicio" type="xsd:string"></part>
+<part name="id_proveedor" type="xsd:string"></part>
+<part name="cantidad" type="xsd:int"></part>
+<part name="fecha_inicio" type="xsd:string"></part>
+<part name="fecha_fin" type="xsd:string"></part>
+</message>
+<message name="agregarServicioCarritoResponse">
+<part name="return" type="tns:dtReserva"></part>
+</message>
+<message name="agregarPromocionCarrito">
+<part name="id_ctrl_reservas" type="xsd:int"></part>
+<part name="nickname" type="xsd:string"></part>
+<part name="id_promocion" type="xsd:string"></part>
+<part name="id_proveedor" type="xsd:string"></part>
+<part name="cantidad" type="xsd:int"></part>
+<part name="fecha_inicio" type="xsd:string"></part>
+<part name="fecha_fin" type="xsd:string"></part>
+</message>
+<message name="agregarPromocionCarritoResponse">
+<part name="return" type="tns:dtReserva"></part>
+</message>
 <message name="toString">
 <part name="objeto_generico" type="xsd:anyType"></part>
 </message>
@@ -104,6 +142,10 @@
 <part name="return" type="xsd:string"></part>
 </message>
 <portType name="Publicador">
+<operation name="pedirNumeroCtrlReservas">
+<input wsam:Action="http://webservice.tprog/Publicador/pedirNumeroCtrlReservasRequest" message="tns:pedirNumeroCtrlReservas"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/pedirNumeroCtrlReservasResponse" message="tns:pedirNumeroCtrlReservasResponse"></output>
+</operation>
 <operation name="verServicio" parameterOrder="id_servicio id_proveedor">
 <input wsam:Action="http://webservice.tprog/Publicador/verServicioRequest" message="tns:verServicio"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verServicioResponse" message="tns:verServicioResponse"></output>
@@ -160,6 +202,22 @@
 <input wsam:Action="http://webservice.tprog/Publicador/altaUsuarioRequest" message="tns:altaUsuario"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/altaUsuarioResponse" message="tns:altaUsuarioResponse"></output>
 </operation>
+<operation name="cancelarReserva" parameterOrder="id_ctrl_reservas id_reserva">
+<input wsam:Action="http://webservice.tprog/Publicador/cancelarReservaRequest" message="tns:cancelarReserva"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/cancelarReservaResponse" message="tns:cancelarReservaResponse"></output>
+</operation>
+<operation name="generarReserva" parameterOrder="nickname idCtrlReservas">
+<input wsam:Action="http://webservice.tprog/Publicador/generarReservaRequest" message="tns:generarReserva"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/generarReservaResponse" message="tns:generarReservaResponse"></output>
+</operation>
+<operation name="agregarServicioCarrito" parameterOrder="id_ctrl_reservas nickname id_servicio id_proveedor cantidad fecha_inicio fecha_fin">
+<input wsam:Action="http://webservice.tprog/Publicador/agregarServicioCarritoRequest" message="tns:agregarServicioCarrito"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/agregarServicioCarritoResponse" message="tns:agregarServicioCarritoResponse"></output>
+</operation>
+<operation name="agregarPromocionCarrito" parameterOrder="id_ctrl_reservas nickname id_promocion id_proveedor cantidad fecha_inicio fecha_fin">
+<input wsam:Action="http://webservice.tprog/Publicador/agregarPromocionCarritoRequest" message="tns:agregarPromocionCarrito"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/agregarPromocionCarritoResponse" message="tns:agregarPromocionCarritoResponse"></output>
+</operation>
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/toStringResponse" message="tns:toStringResponse"></output>
@@ -167,6 +225,15 @@
 </portType>
 <binding name="PublicadorPortBinding" type="tns:Publicador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
+<operation name="pedirNumeroCtrlReservas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
 <operation name="verServicio">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -285,6 +352,42 @@
 </output>
 </operation>
 <operation name="altaUsuario">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="cancelarReserva">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="generarReserva">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="agregarServicioCarrito">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="agregarPromocionCarrito">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

@@ -29,7 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.jws.WebParam;
-import javax.xml.datatype.XMLGregorianCalendar;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -267,19 +266,23 @@ public class Publicador {
 		} catch (Exception ex) {
 			promocionesTodas = new HashSet();
 		}
-		// TYPEAHEAD
-		JsonArray termsArray = new JsonArray();
-		if (!serviciosTodos.isEmpty()) {
-			for (DTMinServicio dtMinS : serviciosTodos) {
-				termsArray.add(dtMinS.getIdServicio());
-			}
-		}
-		if (!promocionesTodas.isEmpty()) {
-			for (DTMinPromocion dtMinP : promocionesTodas) {
-				termsArray.add(dtMinP.getIdPromocion());
-			}
-		}
-		result.terminosTypeAhead = termsArray.toString();
+
+		/*
+		 // TYPEAHEAD
+		 JsonArray termsArray = new JsonArray();
+		 if (!serviciosTodos.isEmpty()) {
+		 for (DTMinServicio dtMinS : serviciosTodos) {
+		 termsArray.add(dtMinS.getIdServicio());
+		 }
+		 }
+		 if (!promocionesTodas.isEmpty()) {
+		 for (DTMinPromocion dtMinP : promocionesTodas) {
+		 termsArray.add(dtMinP.getIdPromocion());
+		 }
+		 }
+		 result.terminosTypeAhead = termsArray.toString();
+		 */
+		result.terminosTypeAhead = typeahead();
 		// Defino el orden
 		Collection<DTServicio> serviciosResultado;
 		Collection<DTPromocion> promocionesResultado;
@@ -365,6 +368,38 @@ public class Publicador {
 		result.categoriaPrevia = categoriaSeleccionada;
 		result.busquedaPrevia = busqueda;
 		return result;
+	}
+
+	@WebMethod
+	public String typeahead() {
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		Set<DTMinServicio> serviciosTodos;
+		try {
+			serviciosTodos = ctrlProductos.listarServicios();
+		} catch (Exception ex) {
+			serviciosTodos = new HashSet();
+		}
+		// Obtengo todas las promociones del sistema
+		Set<DTMinPromocion> promocionesTodas;
+		try {
+			promocionesTodas = ctrlProductos.listarPromociones();
+		} catch (Exception ex) {
+			promocionesTodas = new HashSet();
+		}
+		// TYPEAHEAD
+		JsonArray termsArray = new JsonArray();
+		if (!serviciosTodos.isEmpty()) {
+			for (DTMinServicio dtMinS : serviciosTodos) {
+				termsArray.add(dtMinS.getIdServicio());
+			}
+		}
+		if (!promocionesTodas.isEmpty()) {
+			for (DTMinPromocion dtMinP : promocionesTodas) {
+				termsArray.add(dtMinP.getIdPromocion());
+			}
+		}
+		return termsArray.toString();
 	}
 
 	@WebMethod

@@ -5,8 +5,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class AjaxNickname extends HttpServlet {
 
@@ -19,7 +17,6 @@ public class AjaxNickname extends HttpServlet {
 		String resultado;
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
-		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		if (id.matches("^\\s*$") && (id.length() >= 3)) {
 			resultado = "";
 		} else if (id.matches(".*(\\s+).*")) {

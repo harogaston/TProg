@@ -1,5 +1,7 @@
 package tprog.web;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +28,17 @@ public class Home extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		initSession(request);
+		if (request.getSession().getAttribute("terminos") == null) {
+			webservice.PublicadorService service = new webservice.PublicadorService();
+			webservice.Publicador proxy = service.getPublicadorPort();
+			JsonParser jsonParser = new JsonParser();
+			JsonArray termsArray = (JsonArray) jsonParser.parse(proxy.typeahead());
+			request.getSession().setAttribute("terminos", termsArray);
+		}
+		request.setAttribute("categoriaSeleccionada", null);
+		request.setAttribute("busqueda", null);
+		request.setAttribute("precio", "0");
+
 		request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 
@@ -40,4 +53,5 @@ public class Home extends HttpServlet {
 			throws ServletException, IOException {
 		processRequest(request, response);
 	}
+
 }

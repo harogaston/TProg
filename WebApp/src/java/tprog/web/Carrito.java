@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlReservas;
 
 public class Carrito extends HttpServlet {
@@ -42,7 +40,7 @@ public class Carrito extends HttpServlet {
 			ICtrlReservas ctrlReservas = (ICtrlReservas) session.getAttribute("ctrlReservas"); //el controlador asociado a la sesion
 			ctrlReservas.seleccionarCliente((String) session.getAttribute("usuario_logueado")); //selecciono cliente
 			String idProveedor = request.getParameter("idProveedor");
-			
+
 //			if (request.getParameter("idServicio") != null) { da lo mismo controlar así o con lo que está
 			if (request.getHeader("referer").contains("VerServicio")) {
 				//en este caso llame al servlet desde un servicio

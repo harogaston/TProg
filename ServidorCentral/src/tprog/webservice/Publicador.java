@@ -33,6 +33,7 @@ import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
+import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlUsuarios;
@@ -361,6 +362,13 @@ public class Publicador {
 	) {
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		return ctrlUsuarios.verificarNickname(nickname);
+	}
+
+	@WebMethod
+	public void altaUsuario(DTUsuario dt, boolean esProveedor) {
+		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+		ctrlUsuarios.ingresarDatosUsuario(dt, esProveedor);
+		ctrlUsuarios.altaUsuario();
 	}
 
 	@WebMethod

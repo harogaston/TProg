@@ -1,5 +1,6 @@
 package tprog.web;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,11 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.XMLGregorianCalendar;
 import org.apache.commons.validator.routines.EmailValidator;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlUsuarios;
 import tprog.logica.interfaces.ICtrlReservas;
+import webservice.DtUsuario;
 
 @WebServlet(name = "RegistrarCliente", urlPatterns = {"/RegistrarCliente"})
 public class RegistrarCliente extends HttpServlet {
@@ -26,6 +29,8 @@ public class RegistrarCliente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
 		try {
 			// leo los datos -falta checkear que sean correctos y esas manos-
 			String id = request.getParameter("nickname");
@@ -43,8 +48,8 @@ public class RegistrarCliente extends HttpServlet {
 			Date dateNac = sourceFormat.parse(fechaNac);
 			System.err.println("XXXXX " + Integer.toString(dateNac.getYear() + 1900));
 			EstadoSesion nuevoEstado;
-			Fabrica f = Fabrica.getInstance();
-			ICtrlUsuarios cu = f.getICtrlUsuarios();
+//			Fabrica f = Fabrica.getInstance();
+//			ICtrlUsuarios cu = f.getICtrlUsuarios();
 
 			//Verificación de email
 			EmailValidator emailValidator = EmailValidator.getInstance(true);
@@ -56,11 +61,11 @@ public class RegistrarCliente extends HttpServlet {
 			boolean okNickname = okEnblanco && okSinEspacios;
 			boolean nicknameUnico = false;
 			if (okNickname) {
-				nicknameUnico = cu.verificarNickname(id);
+				nicknameUnico = proxy.verificarNickname(id);
 			}
 			boolean emailUnico = true;
 			if (okEmail) {
-				emailUnico = cu.verificarEmail(mail);
+				emailUnico = proxy.verificarEmail(mail);
 			}
 			boolean okNickMail = false;
 			if (okNickname && okEmail && !emailUnico && !nicknameUnico) {
@@ -77,14 +82,23 @@ public class RegistrarCliente extends HttpServlet {
 
 				if (okNombre && okApellido && okPassword) {
 					// doy de alta el cliente
-					DTUsuario dtU = new DTUsuario(id, contrasena, nombre, apellido, mail, null, dateNac);
-					cu.ingresarDatosUsuario(dtU, false);
-					cu.altaUsuario();
+					DtUsuario dtU = new DtUsuario();
+					dtU.setNickname(id);
+					dtU.setPassword(contrasena);
+					dtU.setNombre(nombre);
+					dtU.setApellido(apellido);
+					dtU.setEmail(mail);
+					XMLGregorianCalendar fecha = new XMLGregorianCalendarImpl();
+					fecha.setYear(dateNac.getYear() - 1900);
+					fecha.setMonth(dateNac.getMonth());
+					fecha.setDay(dateNac.getDate());
+					dtU.setFechaNacimiento(fecha);
+					proxy.altaUsuario(dtU, false);
 
-                                        //ya logueo el usuario registrado
-					ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-					cr.liberarMemoriaControlador();
-					session.setAttribute("ctrlReservas", cr);
+					//ya logueo el usuario registrado
+//					ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
+//					cr.liberarMemoriaControlador();
+//					session.setAttribute("ctrlReservas", cr);
 					nuevoEstado = EstadoSesion.OK_LOGIN;
 					request.getSession().setAttribute("usuario_logueado", id);
 					session.setAttribute("estado_sesion", nuevoEstado);

@@ -64,6 +64,11 @@
 <message name="verificarNicknameResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
+<message name="altaUsuario">
+<part name="arg0" type="tns:dtUsuario"></part>
+<part name="arg1" type="xsd:boolean"></part>
+</message>
+<message name="altaUsuarioResponse"></message>
 <message name="toString">
 <part name="objeto_generico" type="xsd:anyType"></part>
 </message>
@@ -106,6 +111,10 @@
 <operation name="verificarNickname">
 <input wsam:Action="http://webservice.tprog/Publicador/verificarNicknameRequest" message="tns:verificarNickname"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verificarNicknameResponse" message="tns:verificarNicknameResponse"></output>
+</operation>
+<operation name="altaUsuario" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/altaUsuarioRequest" message="tns:altaUsuario"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/altaUsuarioResponse" message="tns:altaUsuarioResponse"></output>
 </operation>
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
@@ -187,6 +196,15 @@
 </output>
 </operation>
 <operation name="verificarNickname">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="altaUsuario">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

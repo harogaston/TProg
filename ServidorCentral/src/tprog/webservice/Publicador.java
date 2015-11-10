@@ -29,9 +29,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.jws.WebParam;
-import tprog.logica.clases.Cliente;
-import tprog.logica.clases.LineaReserva;
-import tprog.logica.clases.Reserva;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinCliente;
@@ -48,7 +45,6 @@ import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlProductos;
 import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.interfaces.ICtrlUsuarios;
-import tprog.logica.manejadores.ManejadorUsuarios;
 
 /**
  *
@@ -93,7 +89,6 @@ public class Publicador {
 		DTMinServicio dtMin = new DTMinServicio(idProveedor, idServicio);
 		ctrlProductos.seleccionarServicio(dtMin);
 		//necesito el nickname del proveedor
-//		request.setAttribute("idProveedor", dtMin.getNicknameP());
 		//y el resto de la info del servicio
 		WrapperVerServicio result = new WrapperVerServicio();
 		result.dtServicio = ctrlProductos.infoServicio();;
@@ -192,7 +187,7 @@ public class Publicador {
 			DTCliente dtC = ctrlU.infoCliente();
 			Set<DTMinReserva> reservasMin = dtC.getReservas();
 			// Voy a crear un Set<DTReserva> para pasarle a la jsp
-			Collection<DTReserva> reservas = new TreeSet<>();
+			Set<DTReserva> reservas = new TreeSet<>();
 			for (DTMinReserva dtMinR : reservasMin) {
 				ctrlU.seleccionarReserva(dtMinR.getIdReserva());
 				reservas.add(ctrlU.infoReserva());
@@ -211,68 +206,49 @@ public class Publicador {
 	public WrapperVerPerfilProveedor verPerfilProveedor(
 			@WebParam(name = "id_proveedor") String idProveedor
 	) throws Exception {
-
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		ctrlUsuarios.seleccionarProveedor(idProveedor);
 		DTProveedor dtProveedor = ctrlUsuarios.infoProveedor();
 		WrapperVerPerfilProveedor result = new WrapperVerPerfilProveedor();
 		result.dtP = dtProveedor;
 		// Creo el wrapper del proveedor pasandole su dt
-		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
 		Set<DTMinCliente> clientes = ctrlUsuarios.listarClientes();
-		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		result.reservasCliente = new HashSet();
 		// obtengo todos los clientes del sistema
 		for (DTMinCliente dtMinC : clientes) {
-
-			Collection<DTReserva> reservasProv = new TreeSet<>();
+			Set<DTReserva> reservasProv = new TreeSet<>(DTReserva::compareId);
 			WrapperVerPerfilCliente resultCliente = new WrapperVerPerfilCliente();
-			Cliente client = manejadorU.getCliente(dtMinC.getNickname());
-			System.out.println("1");
-			Map<Integer, Reserva> reservas = client.getReservas();
-			for (Reserva r : reservas.values()) {
-				System.out.println("2");
+//			Cliente client = manejadorU.getCliente(dtMinC.getNickname());
+			ctrlUsuarios.seleccionarCliente(dtMinC.getNickname());
+			DTCliente cliente = ctrlUsuarios.infoCliente();
+			Set<DTMinReserva> reservas = cliente.getReservas();
+			for (DTMinReserva r : reservas) {
 				// Para cada cliente itero por sus reservas
-				Set<LineaReserva> lineas = r.getLineasReserva();
-				Set<DTLineaReserva> dtLineasReserva = new HashSet();
-				for (LineaReserva lineaR : lineas) {
-					System.out.println("3");
-					// si algunas de sus lineas es del proveedor la agrego a un SetDTLineaReserva
-					if (lineaR.getPromocion() != null) {
-						if (lineaR.getPromocion().getProveedor().getNickname().equals(idProveedor)) {
-							DTLineaReserva dtLinea = lineaR.crearDT();
-							dtLineasReserva.add(dtLinea);
-						}
-					} else if (lineaR.getServicio() != null) {
-						if (lineaR.getServicio().getProveedor().getNickname().equals(idProveedor)) {
-							DTLineaReserva dtLinea = lineaR.crearDT();
-							dtLineasReserva.add(dtLinea);
-						}
+				ctrlUsuarios.seleccionarReserva(r.getIdReserva());
+				DTReserva reserva = ctrlUsuarios.infoReserva();
+				Set<DTLineaReserva> tmp = reserva.getLineasReserva();
+				Set<DTLineaReserva> dtLineasReserva = new HashSet<>();
+				for (DTLineaReserva lineaR : tmp) {
+					//saco toda linea de reserva que no sea del proveedor
+					if (lineaR.getNicknameProveedor().equals(idProveedor)) {
+						dtLineasReserva.add(lineaR);
 					}
 				}
-				System.out.println("4");
 				if (!dtLineasReserva.isEmpty()) {
-					System.out.println("5");
-					//Si SetDTLineaReserva distinto de new HashSet() se crea el DTReserva y se agregan todas las lineas
-					//imprimo
-					DTReserva dtR = r.crearDT();
-					dtR.setLineasReserva(dtLineasReserva);
-					System.out.println(dtR);
-					reservasProv.add(dtR);
-				} else {
-					System.out.println("6");
+					//si se encontraron lineas de reserva del proveedor, se modifica el DTReserva
+					//y se agrega a un set para devolver
+					reserva.setLineasReserva(dtLineasReserva);
+					reservasProv.add(reserva);
 				}
 			}
-			//itere por todas las reservas del proveedor y cree un set de DTReserva con lineas
-			//de reserva q poseen unicamente lineas del proveedor actual
+			//iteré por todas las reservas del proveedor y creé un set de DTReserva con lineas
+			//de reserva q poseen únicamente lineas del proveedor actual
 			resultCliente.reservas = reservasProv;
-			resultCliente.cliente = client.crearDT();
+			resultCliente.cliente = cliente;
 			//se agrega el wrapper de cliente ( que es el dt cliente con las reservas del mismo con lineas del prov)
 			result.reservasCliente.add(resultCliente);
 		}
-
 		return result;
-
 	}
 
 	@WebMethod
@@ -325,22 +301,6 @@ public class Publicador {
 		} catch (Exception ex) {
 			promocionesTodas = new HashSet();
 		}
-
-		/*
-		 // TYPEAHEAD
-		 JsonArray termsArray = new JsonArray();
-		 if (!serviciosTodos.isEmpty()) {
-		 for (DTMinServicio dtMinS : serviciosTodos) {
-		 termsArray.add(dtMinS.getIdServicio());
-		 }
-		 }
-		 if (!promocionesTodas.isEmpty()) {
-		 for (DTMinPromocion dtMinP : promocionesTodas) {
-		 termsArray.add(dtMinP.getIdPromocion());
-		 }
-		 }
-		 result.terminosTypeAhead = termsArray.toString();
-		 */
 		result.terminosTypeAhead = typeahead();
 		// Defino el orden
 		Collection<DTServicio> serviciosResultado;
@@ -542,8 +502,10 @@ public class Publicador {
 				ctrlUsuarios.ingresarDatosProveedor(empresa, web);
 			}
 			ctrlUsuarios.altaUsuario();
+
 		} catch (ParseException ex) {
-			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Publicador.class
+					.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -561,28 +523,14 @@ public class Publicador {
 			@WebParam(name = "nickname") String nickname,
 			@WebParam(name = "idCtrlReservas") int idCtrlReservas) {
 		try {
-
-			//brujeria para convertir string de Json a el set que preciso
-//			Gson gson = new Gson();
-//			Type token = new TypeToken<Set<DTLineaReserva>>() {
-//			}.getType();
-//			Set<DTLineaReserva> lineas = gson.fromJson(lineasReserva, token);
-//			//genero reserva como siempre
-//			ICtrlReservas ctrlReservas = Fabrica.getInstance().getICtrlReservas();
 			ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
-//			ctrlReservas.seleccionarCliente(nickname);
-//			for (DTLineaReserva linea : lineas) {
-//				ctrlReservas.ingresarLineaReserva(
-//						linea.getCantidad(),
-//						linea.getFechaInicio(),
-//						linea.getFechaFin()
-//				);
-//			}
 			ctrlReservas.seleccionarCliente(nickname);
 			ctrlReservas.altaReserva(ctrlReservas.mostrarReservaTemporal());
 			ctrlReservas.liberarMemoriaControlador();
+
 		} catch (Exception ex) {
-			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Publicador.class
+					.getName()).log(Level.SEVERE, null, ex);
 		}
 	}
 
@@ -608,8 +556,11 @@ public class Publicador {
 			Date dateFin = sourceFormat.parse(fechaFin);
 			ctrlReservas.ingresarLineaReserva(cantidad, dateInicio, dateFin);
 			return ctrlReservas.mostrarReservaTemporal();
+
 		} catch (ParseException ex) {
-			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Publicador.class
+					.getName()).log(Level.SEVERE, null, ex);
+
 			return null;
 		}
 	}
@@ -636,8 +587,11 @@ public class Publicador {
 			Date dateFin = sourceFormat.parse(fechaFin);
 			ctrlReservas.ingresarLineaReserva(cantidad, dateInicio, dateFin);
 			return ctrlReservas.mostrarReservaTemporal();
+
 		} catch (ParseException ex) {
-			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(Publicador.class
+					.getName()).log(Level.SEVERE, null, ex);
+
 			return null;
 		}
 	}
@@ -648,15 +602,6 @@ public class Publicador {
 		return o.toString();
 	}
 
-//ésto quedó inutilizado porque ya se hace en verInfoProveedor
-//	@WebMethod
-//	public DTPromocion seleccionarInfoPromocion(DTMinPromocion dt) {
-//		//selecciona y servicio y devuelve su información
-//		//se combinan operaciones para hacerla atómica y evitar problemas
-//		ICtrlProductos ctrlProductos = Fabrica.getInstance().getICtrlProductos();
-//		ctrlProductos.seleccionarPromocion(dt);
-//		return ctrlProductos.infoPromocion();
-//	}
 	@WebMethod
 	public boolean verificarCliente(String idCliente, String contrasena) {
 

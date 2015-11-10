@@ -79,4 +79,12 @@ public class DTReserva implements Comparable<DTReserva> {
 		}
 	}
 
+	public int compareId(DTReserva object) {
+		if (Integer.compare(idReserva, object.getIdReserva()) == 0) {
+			return this.compareTo(object);
+		} else {
+			return Integer.compare(idReserva, object.getIdReserva());
+		}
+	}
+
 }

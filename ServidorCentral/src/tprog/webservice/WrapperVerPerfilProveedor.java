@@ -13,5 +13,5 @@ import tprog.logica.dt.DTProveedor;
 public class WrapperVerPerfilProveedor {
 
 	public DTProveedor dtP;
-	public Set<WrapperVerPerfilCliente> reservasCliente;
+	public Set<WrapperReserva> reservasCliente;
 }

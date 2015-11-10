@@ -28,6 +28,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.SortedSet;
 import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTLineaReserva;
@@ -213,15 +214,12 @@ public class Publicador {
 		result.dtP = dtProveedor;
 		// Creo el wrapper del proveedor pasandole su dt
 		Set<DTMinCliente> clientes = ctrlUsuarios.listarClientes();
-		result.reservasCliente = new HashSet();
+		result.reservasCliente = new TreeSet<>();
 		// obtengo todos los clientes del sistema
 		for (DTMinCliente dtMinC : clientes) {
-			Set<DTReserva> reservasProv = new TreeSet<>(DTReserva::compareId);
-			WrapperVerPerfilCliente resultCliente = new WrapperVerPerfilCliente();
-//			Cliente client = manejadorU.getCliente(dtMinC.getNickname());
 			ctrlUsuarios.seleccionarCliente(dtMinC.getNickname());
-			DTCliente cliente = ctrlUsuarios.infoCliente();
-			Set<DTMinReserva> reservas = cliente.getReservas();
+			String nickCliente = dtMinC.getNickname();
+			Set<DTMinReserva> reservas = ctrlUsuarios.infoCliente().getReservas();
 			for (DTMinReserva r : reservas) {
 				// Para cada cliente itero por sus reservas
 				ctrlUsuarios.seleccionarReserva(r.getIdReserva());
@@ -237,16 +235,17 @@ public class Publicador {
 				if (!dtLineasReserva.isEmpty()) {
 					//si se encontraron lineas de reserva del proveedor, se modifica el DTReserva
 					//y se agrega a un set para devolver
+					WrapperReserva resultCliente = new WrapperReserva();
+					//esto no modifica el total original
 					reserva.setLineasReserva(dtLineasReserva);
-					reservasProv.add(reserva);
+					resultCliente.nickCliente = nickCliente;
+					resultCliente.reserva = reserva;
+					//se agrega el wrapper de cliente ( que es el dt cliente con las reservas del mismo con lineas del prov)
+					result.reservasCliente.add(resultCliente);
 				}
+				//iteré por todas las reservas del proveedor y creé un set de DTReserva con lineas
+				//de reserva q poseen únicamente lineas del proveedor actual
 			}
-			//iteré por todas las reservas del proveedor y creé un set de DTReserva con lineas
-			//de reserva q poseen únicamente lineas del proveedor actual
-			resultCliente.reservas = reservasProv;
-			resultCliente.cliente = cliente;
-			//se agrega el wrapper de cliente ( que es el dt cliente con las reservas del mismo con lineas del prov)
-			result.reservasCliente.add(resultCliente);
 		}
 		return result;
 	}

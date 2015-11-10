@@ -28,6 +28,8 @@ public class Home extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		initSession(request);
+                HttpSession session = request.getSession();
+            if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
 		if (request.getSession().getAttribute("terminos") == null) {
 			webservice.PublicadorService service = new webservice.PublicadorService();
 			webservice.Publicador proxy = service.getPublicadorPort();
@@ -40,6 +42,9 @@ public class Home extends HttpServlet {
 		request.setAttribute("precio", "0");
 
 		request.getRequestDispatcher("Buscar").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/pages/proveedor.jsp").forward(request, response);
+            }
 	}
 
 	@Override

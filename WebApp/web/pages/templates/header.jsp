@@ -24,7 +24,9 @@
 				-->
 				<a href="index.html" class="navbar-brand">Help4Traveling</a>
 			</div>
-
+                <%
+				if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+			%> 
 			<div class="navbar-nav">
 				<form action="Buscar" role="search" class="navbar-form">
 					<div class="input-group">
@@ -35,7 +37,7 @@
 					</div>
 				</form>
 			</div>
-			<%
+			<% }
 				if ((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE)) {
 			%>
 			<div class="navbar-nav navbar-right">
@@ -77,10 +79,7 @@
 					<button class="btn btn-warning" type="submit">
 						<i class="glyphicon glyphicon-user"></i>
 						<%=" " + session.getAttribute("usuario_logueado")%>
-                                                <div class="dropdown navbar-nav navbar-right">
-                                                        
-                                                    
-                                                </div>
+                                                
                                                 </button>
                                                 
                         
@@ -113,19 +112,7 @@
 					</button>
 				</form>
 			</div>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
-				<form action= "IniciarSesion" class="navbar-form" method="POST">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Nickname" name="nickname" autofocus required>
-					</div>
-					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Password" name="password" required>
-					</div>
-					<button class="btn btn-success" type="submit">
-						<i class="glyphicon glyphicon-log-in"></i> Ingresar
-					</button>
-				</form>
-			</div>
+                        
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 
 				<form action= "NuevoCliente" class="navbar-form" >

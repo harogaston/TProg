@@ -1,6 +1,8 @@
 package tprog.logica.interfaces;
 
 import java.util.Set;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import tprog.logica.controladores.CtrlUsuarios;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinCliente;
 import tprog.logica.dt.DTMinPromocion;
@@ -11,6 +13,7 @@ import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUsuario;
 
+@XmlJavaTypeAdapter(CtrlUsuarios.Adapter.class)
 public interface ICtrlUsuarios {
 
 	Set<DTMinCliente> listarClientes() throws Exception;
@@ -40,7 +43,7 @@ public interface ICtrlUsuarios {
 	public DTProveedor infoProveedor() throws Exception;
 
 	public Set<DTMinServicio> listarServiciosProveedor();
-	
+
 	public Set<DTMinPromocion> listarPromocionesProveedor();
 
 	public void seleccionarServicio(String idServicio);
@@ -52,6 +55,14 @@ public interface ICtrlUsuarios {
 	public boolean pwCorrecta(String identificador, String password);
 
 	public String obtenerIdCliente(String identificador, String pass);
-        
-        public void cambiarImagenCliente(String path);
+
+	public void cambiarImagenCliente(String path);
+
+	public boolean idCorrectaProveedor(String identificador);
+
+	public boolean pwCorrectaProveedor(String identificador, String password);
+
+	public String obtenerIdProveedor(String identificador, String pass);
+
+	public void setEsProveedor(boolean esProveedor);
 }

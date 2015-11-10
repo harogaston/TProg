@@ -1,7 +1,10 @@
 package tprog.logica.dt;
 
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTUsuario {
 
 	private String nickname;
@@ -11,6 +14,16 @@ public class DTUsuario {
 	private String email;
 	private String imagen;
 	private Date fechaNacimiento;
+
+	public DTUsuario() {
+		this.nickname = null;
+		this.password = null;
+		this.nombre = null;
+		this.apellido = null;
+		this.email = null;
+		this.imagen = null;
+		this.fechaNacimiento = null;
+	}
 
 	public DTUsuario(String Nickname, String Password, String Nombre, String Apellido, String Email,
 			String Imagen, Date FechaNacimiento) {

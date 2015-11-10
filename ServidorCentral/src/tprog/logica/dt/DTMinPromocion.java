@@ -1,9 +1,18 @@
 package tprog.logica.dt;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTMinPromocion {
 
 	private final String nicknameP;
 	private final String idPromocion;
+
+	public DTMinPromocion() {
+		nicknameP = null;
+		idPromocion = null;
+	}
 
 	public DTMinPromocion(String NicknameP, String IdPromocion) {
 		this.nicknameP = NicknameP;

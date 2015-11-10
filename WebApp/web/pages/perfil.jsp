@@ -1,7 +1,7 @@
-<%@page import="tprog.logica.dt.DTLineaReserva"%>
+<%@page import="webservice.DtLineaReserva"%>
+<%@page import="webservice.DtReserva"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="tprog.logica.dt.DTReserva"%>
 
 <!doctype html>
 <html>
@@ -23,7 +23,9 @@
 				<!-- Nav tabs -->
 				<ul class="nav nav-pills" role="tablist" style="margin-bottom: 50px">
 					<li role="presentation" class="active"><a href="#info" aria-controls="info" role="tab" data-toggle="tab">Información</a></li>
+						<% if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) { %>
 					<li role="presentation"><a href="#reservas" aria-controls="reservas" role="tab" data-toggle="tab">Reservas</a></li>
+						<% } %>
 				</ul>
 
 				<!-- Tab panes -->
@@ -38,7 +40,7 @@
 								<img class="img-thumbnail" src="imagenes/clientes/sinimagen.jpg" style="border-radius: 50%; height: 100px; width: 100px"/>
 								<%}%>
 							</div>
-                                                        <div class="col-md-9">
+							<div class="col-md-9">
 								<div class="panel panel-default">
 									<div class="panel-heading">
 										<h3 class="panel-title">${nick}</h3>
@@ -46,19 +48,24 @@
 									<div class="panel-body">
 										<span class="text-muted">Nombre: </span> ${nombre}<br>
 										<span class="text-muted">Fecha de Nacimiento: </span>${fNac}<br>
-										<span class="text-muted">Email: </span>${email}<br><br>
+										<span class="text-muted">Email: </span>${email}<br>
+										<% if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR) { %>
+										<span class="text-muted">Empresa: </span> ${nombreEmpresa}<br>
+										<span class="text-muted">Link Empresa: </span>${linkEmpresa}<br>
+										<% } %>
+										<br>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
+					<% if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) { %>
 					<!--Reservas-->
 					<div role="tabpanel" class="tab-pane" id="reservas">
 						<% if (request.getAttribute("reservas") != null) {%>
 						<div class="panel-group" id="accordionServicios">
 							<%	int i = 0;
-								for (DTReserva dtR : (Set<DTReserva>) request.getAttribute("reservas")) {
+								for (DtReserva dtR : (Set<DtReserva>) request.getAttribute("reservas")) {
 									i++;
 							%>
 							<div class="accordion-group">
@@ -71,9 +78,9 @@
 									</div>
 									<div id="s<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
-											<span class="text-muted">Estado: </span> <%=dtR.getEstadoReserva().toString()%><br>
+											<span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%><br>
 											<%
-												String fCreacion = Integer.toString(dtR.getFCreacion().getDate()) + "-"
+												String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
 														+ Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"
 														+ Integer.toString(dtR.getFCreacion().getYear()) + "\n";
 											%>
@@ -81,7 +88,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">Detalle de la reserva</div>
 												<%	float subtotal = 0;
-													Set<DTLineaReserva> lineas = dtR.getLineasReserva();
+													Set<DtLineaReserva> lineas = new HashSet(dtR.getLineasReserva());
 												%>
 												<!-- Tabla -->
 												<table class="table">
@@ -97,7 +104,7 @@
 													</thead>
 													<tbody>
 														<%	int j = 0;
-															for (DTLineaReserva linea : lineas) {
+															for (DtLineaReserva linea : lineas) {
 																j++;
 																subtotal += linea.getPrecio() * linea.getCantidad();
 														%>
@@ -122,7 +129,7 @@
 												<div class="panel-footer text-right" style="font-weight: bold">
 													<div>Total $<%=subtotal%></div>
 
-													<%if (dtR.getEstadoReserva().toString().equals("Registrada")) {%>
+													<%if (dtR.getEstado().value().equals("Registrada")) {%>
 													<!-- Trigger the modal with a button -->
 													<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
 														<i class="glyphicon glyphicon-remove"></i>
@@ -166,6 +173,9 @@
 							}
 						%>
 					</div>
+					<% } else {
+
+						}%>
 				</div>
 			</div>
 		</div>

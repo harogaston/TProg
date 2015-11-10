@@ -1,7 +1,8 @@
+<%@page import="java.util.List"%>
+<%@page import="webservice.DtLineaReserva"%>
+<%@page import="webservice.DtReserva"%>
 <%@page import="tprog.logica.interfaces.ICtrlReservas"%>
 <%@page import="java.util.Set"%>
-<%@page import="tprog.logica.dt.DTLineaReserva"%>
-<%@page import="tprog.logica.dt.DTReserva"%>
 
 <!doctype html>
 <html>
@@ -22,10 +23,10 @@
 		<div class="container wrapper" style="border: #000; border-radius: 4px;">
 			<div class="panel panel-warning">
 				<div class="panel-heading"><h2> <span class="glyphicon glyphicon-shopping-cart"></span>  Carrito de compras</h2></div>
-				<%	DTReserva reservaTemporal = (DTReserva) session.getAttribute("reservaTemporal");
+				<%	DtReserva reservaTemporal = (DtReserva) session.getAttribute("reservaTemporal");
 					float subtotal = 0;
 					if (reservaTemporal != null) {
-						Set<DTLineaReserva> lineas = reservaTemporal.getLineasReserva();
+						List<DtLineaReserva> lineas = reservaTemporal.getLineasReserva();
 				%>
 				<!-- Tabla -->
 				<table class="table">
@@ -41,7 +42,7 @@
 					</thead>
 					<tbody>
 						<%	int i = 0;
-							for (DTLineaReserva linea : lineas) {
+							for (DtLineaReserva linea : lineas) {
 								i++;
 								subtotal += (linea.getPrecio() * linea.getCantidad());
 						%>
@@ -75,7 +76,7 @@
 					<div>Total $<%=subtotal%></div>
 					<%
 						//si el carrito no está vacío, habilito el botón de confirmación de reserva
-						if (!((ICtrlReservas) request.getSession().getAttribute("ctrlReservas")).mostrarReservaTemporal().getLineasReserva().isEmpty()) {
+						if (request.getSession().getAttribute("reservaTemporal") != null) {
 					%>
 					<!-- Trigger the modal with a button -->
 					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">

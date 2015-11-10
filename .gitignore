@@ -19,3 +19,5 @@ hs_err_pid*
 /WebApp/build/
 /WebApp/dist/
 /WebApp/nbproject/private/
+/WebService/nbproject/private/
+/WebService/build/

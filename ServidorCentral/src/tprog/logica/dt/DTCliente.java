@@ -3,10 +3,17 @@ package tprog.logica.dt;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTCliente extends DTUsuario {
 
 	private Set<DTMinReserva> reservas;
+
+	public DTCliente() {
+		reservas = null;
+	}
 
 	public DTCliente(String nickname, String password, String nombre, String apellido, String email,
 			String imagen, Date fechaN, Set<DTMinReserva> Reservas) {

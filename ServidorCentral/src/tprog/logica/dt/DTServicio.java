@@ -1,7 +1,10 @@
 package tprog.logica.dt;
 
 import java.util.Set;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTServicio implements Comparable<DTServicio> {
 
 	private final String idServicio;
@@ -11,6 +14,16 @@ public class DTServicio implements Comparable<DTServicio> {
 	private final Set<String> imagenes;
 	private final DTUbicacion origen;
 	private final DTUbicacion destino;
+
+	public DTServicio() {
+		idServicio = null;
+		nicknameProveedor = null;
+		descripcion = null;
+		precio = 0;
+		imagenes = null;
+		origen = null;
+		destino = null;
+	}
 
 	public DTServicio(String IdServicio, String NicknameP, String Descripcion, float Precio,
 			Set<String> Imagenes, DTUbicacion Origen, DTUbicacion Destino) {
@@ -72,7 +85,7 @@ public class DTServicio implements Comparable<DTServicio> {
 			return this.idServicio.compareToIgnoreCase(object.getIdServicio());
 		}
 	}
-	
+
 	public int comparePrecio(DTServicio object) {
 		if (Float.compare(precio, object.getPrecio()) == 0) {
 			return this.compareTo(object);

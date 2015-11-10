@@ -3,7 +3,7 @@
  */
 package tprog.webservice;
 
-import java.util.Collection;
+import java.util.Set;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTReserva;
 
@@ -14,6 +14,6 @@ import tprog.logica.dt.DTReserva;
 public class WrapperVerPerfilCliente {
 
 	public DTCliente cliente;
-	public Collection<DTReserva> reservas;
+	public Set<DTReserva> reservas;
 
 }

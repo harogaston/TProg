@@ -5,7 +5,7 @@
 <xs:complexType name="wrapperVerPerfilProveedor">
 <xs:sequence>
 <xs:element name="dtP" type="tns:dtProveedor" minOccurs="0"></xs:element>
-<xs:element name="reservasCliente" type="tns:wrapperVerPerfilCliente" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="reservasCliente" type="tns:wrapperReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -32,25 +32,11 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="wrapperVerPerfilCliente">
+<xs:complexType name="wrapperReserva">
 <xs:sequence>
-<xs:element name="cliente" type="tns:dtCliente" minOccurs="0"></xs:element>
-<xs:element name="reservas" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="nickCliente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reserva" type="tns:dtReserva" minOccurs="0"></xs:element>
 </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtCliente">
-<xs:complexContent>
-<xs:extension base="tns:dtUsuario">
-<xs:sequence>
-<xs:element name="reservas" type="tns:dtMinReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:extension>
-</xs:complexContent>
-</xs:complexType>
-
-<xs:complexType name="dtMinReserva">
-<xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtReserva">
@@ -79,6 +65,27 @@
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPerfilCliente">
+<xs:sequence>
+<xs:element name="cliente" type="tns:dtCliente" minOccurs="0"></xs:element>
+<xs:element name="reservas" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtCliente">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="reservas" type="tns:dtMinReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtMinReserva">
+<xs:sequence></xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="dtMinServicio">

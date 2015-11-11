@@ -178,6 +178,18 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public DTProveedor verPerfilProveedor(String nickProveedor) {
+		try {
+			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
+			ctrlUsuarios.seleccionarProveedor(nickProveedor);
+			return ctrlUsuarios.infoProveedor();
+		} catch (Exception ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return null;
+	}
+
+	@WebMethod
 	public WrapperVerServiciosProveedor verServiciosProveedor(String nickProveedor) {
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
@@ -248,48 +260,24 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public WrapperVerPerfilProveedor verPerfilProveedor(
+	public WrapperVerReservasProveedor verReservasProveedor(
 			@WebParam(name = "id_proveedor") String idProveedor
 	) throws Exception {
 		ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 		ctrlUsuarios.seleccionarProveedor(idProveedor);
-		DTProveedor dtProveedor = ctrlUsuarios.infoProveedor();
-		WrapperVerPerfilProveedor result = new WrapperVerPerfilProveedor();
-		result.dtP = dtProveedor;
-		// Creo el wrapper del proveedor pasandole su dt
-		Set<DTMinCliente> clientes = ctrlUsuarios.listarClientes();
+		WrapperVerReservasProveedor result = new WrapperVerReservasProveedor();
 		result.reservasCliente = new TreeSet<>();
-		// obtengo todos los clientes del sistema
-		for (DTMinCliente dtMinC : clientes) {
-			ctrlUsuarios.seleccionarCliente(dtMinC.getNickname());
-			String nickCliente = dtMinC.getNickname();
-			Set<DTMinReserva> reservas = ctrlUsuarios.infoCliente().getReservas();
-			for (DTMinReserva r : reservas) {
-				// Para cada cliente itero por sus reservas
-				ctrlUsuarios.seleccionarReserva(r.getIdReserva());
-				DTReserva reserva = ctrlUsuarios.infoReserva();
-				Set<DTLineaReserva> tmp = reserva.getLineasReserva();
-				Set<DTLineaReserva> dtLineasReserva = new HashSet<>();
-				for (DTLineaReserva lineaR : tmp) {
-					//saco toda linea de reserva que no sea del proveedor
-					if (lineaR.getNicknameProveedor().equals(idProveedor)) {
-						dtLineasReserva.add(lineaR);
-					}
-				}
-				if (!dtLineasReserva.isEmpty()) {
-					//si se encontraron lineas de reserva del proveedor, se modifica el DTReserva
-					//y se agrega a un set para devolver
-					WrapperReserva resultCliente = new WrapperReserva();
-					//esto no modifica el total original
-					reserva.setLineasReserva(dtLineasReserva);
-					resultCliente.nickCliente = nickCliente;
-					resultCliente.reserva = reserva;
-					//se agrega el wrapper de cliente ( que es el dt cliente con las reservas del mismo con lineas del prov)
-					result.reservasCliente.add(resultCliente);
-				}
-				//iteré por todas las reservas del proveedor y creé un set de DTReserva con lineas
-				//de reserva q poseen únicamente lineas del proveedor actual
-			}
+		DTProveedor dtProveedor = ctrlUsuarios.infoProveedor();
+		result.dtP = dtProveedor;
+		ICtrlReservas ctrlReservas = Fabrica.getInstance().getICtrlReservas();
+		ctrlReservas.seleccionarProveedor(idProveedor);
+		Set<DTReserva> reservas = ctrlReservas.listarReservasProveedor();
+		for (DTReserva reserva : reservas) {
+			ctrlReservas.seleccionarReserva(reserva.getIdReserva());
+			WrapperReserva tmp = new WrapperReserva();
+			tmp.nickCliente = ctrlReservas.getClienteAsociado().getNickname();
+			tmp.reserva = reserva;
+			result.reservasCliente.add(tmp);
 		}
 		return result;
 	}

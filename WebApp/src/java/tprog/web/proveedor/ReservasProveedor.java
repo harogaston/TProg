@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import webservice.DtProveedor;
 import webservice.Exception_Exception;
-import webservice.WrapperVerPerfilProveedor;
+import webservice.WrapperVerReservasProveedor;
 
 /**
  *
@@ -37,7 +37,7 @@ public class ReservasProveedor extends HttpServlet {
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
-		WrapperVerPerfilProveedor result = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));
+		WrapperVerReservasProveedor result = proxy.verReservasProveedor((String) request.getSession().getAttribute("usuario_logueado"));
 		DtProveedor dtP = result.getDtP();
 		request.setAttribute("nick", dtP.getNickname());
 		String nombreCompleto = dtP.getNombre() + " " + dtP.getApellido();

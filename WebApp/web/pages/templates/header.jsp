@@ -94,9 +94,9 @@
                                                             <i class="glyphicon glyphicon-align-justify"></i>
                                                         </button>
                                                         <u1 class="dropdown-menu" >
-                                                             <li><a href="VerServiciosProveedor">Ver Servicios</a></li>
-                                                            <li><a href="VerReservasProveedor">Ver Reservas</a></li>
-                                                            <li><a href="VerPromociones">Ver Promociones</a></li>
+                                                             <li><a href="ServiciosProveedor">Ver Servicios</a></li>
+                                                            <li><a href="ReservasProveedor">Ver Reservas</a></li>
+                                                            <li><a href="PromocionesProveedor">Ver Promociones</a></li>
                                 
                                                         </u1>
                                                 </div>  

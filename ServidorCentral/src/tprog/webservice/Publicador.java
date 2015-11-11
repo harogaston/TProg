@@ -237,12 +237,12 @@ public class Publicador {
                 for (LineaReserva lineaR : lineas) {
                     // si algunas de sus lineas es del proveedor la agrego a un SetDTLineaReserva
                     if (lineaR.getPromocion() != null) {
-                        if (lineaR.getPromocion().getProveedor().toString().equals(idProveedor)) {
+                        if (lineaR.getPromocion().getProveedor().equals(idProveedor)) {
                             DTLineaReserva dtLinea = lineaR.crearDT();
                             dtLineasReserva.add(dtLinea);
                         }
                     } else if (lineaR.getServicio() != null) {
-                        if (lineaR.getServicio().getProveedor().toString().equals(idProveedor)) {
+                        if (lineaR.getServicio().getProveedor().equals(idProveedor)) {
                             DTLineaReserva dtLinea = lineaR.crearDT();
                             dtLineasReserva.add(dtLinea);
                         }

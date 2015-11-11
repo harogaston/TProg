@@ -5,22 +5,16 @@
  */
 package tprog.web.proveedor;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParser;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import tprog.web.Buscar;
-import webservice.DtPromocion;
+import javax.servlet.http.HttpSession;
 import webservice.DtServicio;
 import webservice.WrapperVerServiciosProveedor;
 
@@ -46,8 +40,10 @@ public class ServiciosProveedor extends HttpServlet {
 		webservice.PublicadorService servicio
 				= new webservice.PublicadorService();
 		webservice.Publicador proxy = servicio.getPublicadorPort();
+		HttpSession session = request.getSession();
+		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		WrapperVerServiciosProveedor result
-				= proxy.verServiciosProveedor((String) request.getSession().getAttribute("usuario_logueado"));
+				= proxy.verServiciosProveedor(idProveedor);
 		//rearmo el map de servicios
 		List<webservice.WrapperVerServiciosProveedor.Servicios.Entry> listServicios
 				= result.getServicios().getEntry();
@@ -57,6 +53,9 @@ public class ServiciosProveedor extends HttpServlet {
 		}
 		//asigno atributos de la request
 		request.setAttribute("servicios", servicios);
+		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
+		session.setAttribute("notificaciones", notificaciones);
+		session.setAttribute("cant_notificaciones", notificaciones.size());
 		//redirijo request
 		request.getRequestDispatcher("/pages/verServiciosProveedor.jsp").forward(request, response);
 	}

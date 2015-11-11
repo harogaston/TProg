@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import webservice.DtPromocion;
 import webservice.DtServicio;
 import webservice.WrapperVerPromocionesProveedor;
@@ -51,7 +52,12 @@ public class PromocionesProveedor extends HttpServlet {
 		for (webservice.WrapperVerPromocionesProveedor.Promociones.Entry entry : listPromociones) {
 			promociones.put(entry.getKey(), entry.getValue());
 		}
+		HttpSession session = request.getSession();
+		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		//asigno atributos de la request
+		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
+		session.setAttribute("notificaciones", notificaciones);
+		session.setAttribute("cant_notificaciones", notificaciones.size());
 		request.setAttribute("promociones", promociones);
 		//redirijo request
 		request.getRequestDispatcher("/pages/verPromocionesProveedor.jsp").forward(request, response);

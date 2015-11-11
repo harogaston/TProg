@@ -53,6 +53,15 @@ public interface ICtrlReservas {
 
 	public void facturarReserva(String idProveedor, int idReserva);
 
+	/**
+	 * Devuelve un set de string con las notificaciones que recibió un proveedor
+	 *
+	 * @return
+	 */
+	public Set<String> listarNotificacionesProveedor();
+
+	public void limpiarNotificacionesProveedor();
+
 	public boolean eliminarReserva();
 
 	public EstadoReserva getEstadoReserva();

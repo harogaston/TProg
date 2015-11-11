@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="tprog.web.TipoUsuario"%>
 <%@page import="tprog.web.EstadoSesion"%>
 
@@ -24,9 +25,9 @@
 				-->
 				<a href="index.html" class="navbar-brand">Help4Traveling</a>
 			</div>
-                <%
+			<%
 				if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
-			%> 
+			%>
 			<div class="navbar-nav">
 				<form action="Buscar" role="search" class="navbar-form">
 					<div class="input-group">
@@ -61,11 +62,11 @@
 						<%=" " + session.getAttribute("usuario_logueado")%>
 					</button>
 				</form>
-			</div>               
+			</div>
 			<%
-			} else if((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
+			} else if ((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)) {
 			%>
-                       
+			<!--Cerrar sesión-->
 			<div class="navbar-nav navbar-right">
 				<form action= "CerrarSesion" class="navbar-form" method="POST">
 					<button class="btn btn-warning" type="submit">
@@ -73,46 +74,69 @@
 					</button>
 				</form>
 			</div>
-			
+			<!--Perfil-->
 			<div class="navbar-nav navbar-right">
 				<form action= "VerPerfil" class="navbar-form" method="GET">
 					<button class="btn btn-warning" type="submit">
 						<i class="glyphicon glyphicon-user"></i>
 						<%=" " + session.getAttribute("usuario_logueado")%>
-                                                
-                                                </button>
-                                                
-                        
-					
+					</button>
 				</form>
-                                              
-			</div> 
-                                                <div class="navbar-nav navbar-right">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-warning"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            <i class="glyphicon glyphicon-align-justify"></i>
-                                                        </button>
-                                                        <u1 class="dropdown-menu" >
-                                                             <li><a href="ServiciosProveedor">Ver Servicios</a></li>
-                                                            <li><a href="ReservasProveedor">Ver Reservas</a></li>
-                                                            <li><a href="PromocionesProveedor">Ver Promociones</a></li>
-                                
-                                                        </u1>
-                                                </div>  
-                                                </div>                        
-                        
-                                                
-        <%
-			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
-        %>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
+			</div>
+			<!--Notificaciones del proveedor-->
+			<div class="navbar-nav navbar-right">
+				<div class="dropdown">
+					<button class="btn btn-warning"  type="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="glyphicon glyphicon-bell"></i><span class="badge">${cant_notificaciones}</span>
+					</button>
+					<%
+						List<String> notificaciones = (List<String>) request.getSession().getAttribute("notificaciones");
+					%>
+					<ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+						<%
+							if (!notificaciones.isEmpty()) {
+						%>
+						<%
+							for (String notificacion : notificaciones) {
+						%>
+						<li><a href="ReservasProveedor"><%=notificacion%></a></li>
+							<%
+								}
+							%>
+							<%
+							} else {
+							%>
+						<li>No hay notificaciones</li>
+							<%
+								}
+							%>
+					</ul>
+				</div>
+			</div>
+			<!--Menu del proveedor-->
+			<div class="navbar-nav navbar-right">
+				<div class="dropdown">
+					<button class="btn btn-warning"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="glyphicon glyphicon-align-justify"></i> Menú
+					</button>
+					<u1 class="dropdown-menu" >
+						<li><a href="ServiciosProveedor">Ver Servicios</a></li>
+						<li><a href="ReservasProveedor">Ver Reservas</a></li>
+						<li><a href="PromocionesProveedor">Ver Promociones</a></li>
+
+					</u1>
+				</div>
+			</div>
+			<%			} else if ((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)) {
+			%>
+			<div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "CambiarUsuario" class="navbar-form" method="POST">
 					<button class="btn btn-success" type="submit">
 						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Cliente
 					</button>
 				</form>
 			</div>
-                        
+
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 
 				<form action= "NuevoCliente" class="navbar-form" >
@@ -122,17 +146,17 @@
 					</button>
 				</form>
 			</div>
-        <%
-			}else {
-        %>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
+			<%
+			} else {
+			%>
+			<div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "CambiarUsuario" class="navbar-form" method="POST">
 					<button class="btn btn-success" type="submit">
 						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Proveedor
 					</button>
 				</form>
 			</div>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
+			<div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "IniciarSesion" class="navbar-form" method="POST">
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Nickname" name="nickname" autofocus required>
@@ -145,7 +169,7 @@
 					</button>
 				</form>
 			</div>
-                        
+
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 
 				<form action= "NuevoCliente" class="navbar-form" >
@@ -155,15 +179,15 @@
 					</button>
 				</form>
 			</div>
-        <%
-			}
-        %>                
-        </div>
-        <!-- script para que funcione el dropdown siempre -->
-        <script>
+			<%
+				}
+			%>
+		</div>
+		<!-- script para que funcione el dropdown siempre -->
+		<script>
 			$(document).ready(function () {
 				$(".dropdown-toggle").dropdown();
 			});
-        </script>
-    </div><!-- /.container -->
+		</script>
+	</div><!-- /.container -->
 </nav><!-- /.navbar -->

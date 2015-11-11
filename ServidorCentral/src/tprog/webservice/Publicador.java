@@ -295,6 +295,22 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public WrapperNotificacionesProveedor listarNotificacionesProveedor(String idProveedor) {
+		ICtrlReservas ctrlReservas = Fabrica.getInstance().getICtrlReservas();
+		ctrlReservas.seleccionarProveedor(idProveedor);
+		WrapperNotificacionesProveedor result = new WrapperNotificacionesProveedor();
+		result.notificaciones = ctrlReservas.listarNotificacionesProveedor();
+		return result;
+	}
+
+	@WebMethod
+	public void limpiarNotificacionesProveedor(String idProveedor) {
+		ICtrlReservas ctrlReservas = Fabrica.getInstance().getICtrlReservas();
+		ctrlReservas.seleccionarProveedor(idProveedor);
+		ctrlReservas.limpiarNotificacionesProveedor();
+	}
+
+	@WebMethod
 	public WrapperBuscar buscar(
 			@WebParam(name = "busqueda_previa") String busquedaPrevia,
 			@WebParam(name = "seleccion_previa") String seleccionPrevia,

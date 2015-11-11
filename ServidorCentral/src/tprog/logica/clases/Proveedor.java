@@ -10,8 +10,9 @@ import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.Observer;
 
-public class Proveedor extends Usuario {
+public class Proveedor extends Usuario implements Observer {
 
 	private String empresa;
 	private String webEmpresa;
@@ -21,6 +22,7 @@ public class Proveedor extends Usuario {
 	private Map<Integer, Reserva> reservas;
 	//para cada reserva, se mantiene un estado local al proveedor
 	private Map<Integer, EstadoReserva> estadosParciales;
+	private Set<String> notificaciones;
 
 	public Proveedor(DTProveedor dtP) {
 		super(dtP.getNickname(), dtP.getPassword(), dtP.getNombre(), dtP.getApellido(), dtP.getEmail(), dtP.getImagen(), dtP.getFechaNacimiento());
@@ -30,6 +32,7 @@ public class Proveedor extends Usuario {
 		this.servicios = new HashMap();
 		this.reservas = new HashMap();
 		this.estadosParciales = new HashMap();
+		this.notificaciones = new HashSet();
 	}
 
 	public DTMinProveedor crearDTMin() {
@@ -108,7 +111,7 @@ public class Proveedor extends Usuario {
 	public void addReserva(Reserva reserva) {
 		reservas.put(reserva.getIdReserva(), reserva);
 		estadosParciales.put(reserva.getIdReserva(), reserva.getEstado());
-		reserva.setCantidadProveedoresAsociados(reserva.getCantidadProveedoresAsociados() + 1);
+		reserva.register(this);
 	}
 
 	public void setEmpresa(String Empresa) {
@@ -141,6 +144,20 @@ public class Proveedor extends Usuario {
 
 	public Map<Integer, EstadoReserva> getEstadosParciales() {
 		return estadosParciales;
+	}
+
+	public Set<String> getNotificaciones() {
+		return notificaciones;
+	}
+
+	@Override
+	public void update(String message) {
+		notificaciones.add(message);
+		System.out.println("Notificacion agregada para " + getNickname() + ": " + message);
+	}
+
+	public void limpiarNotificaciones() {
+		notificaciones.clear();
 	}
 
 }

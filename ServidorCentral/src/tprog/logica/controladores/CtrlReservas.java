@@ -131,6 +131,22 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
+	public Set<String> listarNotificacionesProveedor() {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		Proveedor proveedor = manejadorU.getProveedor(nicknameP);
+		Set<String> notificaciones = proveedor.getNotificaciones();
+		return notificaciones;
+	}
+
+	@Override
+	public void limpiarNotificacionesProveedor() {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		Proveedor proveedor = manejadorU.getProveedor(nicknameP);
+		//limpio las notificaciones del proveedor
+		proveedor.limpiarNotificaciones();
+	}
+
+	@Override
 	public void seleccionarReserva(int IdReserva) {
 		this.idReserva = IdReserva;
 	}

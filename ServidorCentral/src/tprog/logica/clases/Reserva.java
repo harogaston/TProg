@@ -16,7 +16,7 @@ import tprog.logica.interfaces.Observer;
 import tprog.logica.interfaces.Subject;
 import tprog.logica.manejadores.ManejadorProductos;
 
-public class Reserva implements Observer {
+public class Reserva implements Subject {
 
 	private int idReserva;
 	private Cliente cliente;
@@ -101,6 +101,10 @@ public class Reserva implements Observer {
 
 	public void setEstadoReserva(EstadoReserva est) {
 		this.estado = est;
+		if (est == EstadoReserva.Pagada) {
+			//notifico a los proveedores
+			notifyObservers();
+		}
 	}
 
 	public void setPrecioTotal(float precio) {
@@ -160,15 +164,34 @@ public class Reserva implements Observer {
 		return this.lineasReserva;
 	}
 
-	@Override
-	public void update(String message) {
-
-	}
-
 	void facturarReserva() {
 		facturaciones++;
 		if (facturaciones == cantProveedoresAsociados) {
 			setEstadoReserva(EstadoReserva.Facturada);
+		}
+	}
+
+	@Override
+	public void register(Observer obj) {
+		observers.add(obj);
+		//caso en el que la reserva está pagada antes de la suscripción
+		//del proveedor (en su creación)
+		if (estado == EstadoReserva.Pagada) {
+			obj.update("La reserva " + idReserva + " ha sido pagada");
+		}
+		cantProveedoresAsociados++;
+	}
+
+	@Override
+	public void unregister(Observer obj) {
+		observers.remove(obj);
+		cantProveedoresAsociados--;
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (Observer o : observers) {
+			o.update("La reserva " + idReserva + " ha sido pagada.");
 		}
 	}
 

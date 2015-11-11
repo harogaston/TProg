@@ -76,6 +76,16 @@
 <part name="arg0" type="xsd:int"></part>
 </message>
 <message name="pagarReservaResponse"></message>
+<message name="listarNotificacionesProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="listarNotificacionesProveedorResponse">
+<part name="return" type="tns:wrapperNotificacionesProveedor"></part>
+</message>
+<message name="limpiarNotificacionesProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="limpiarNotificacionesProveedorResponse"></message>
 <message name="buscar">
 <part name="busqueda_previa" type="xsd:string"></part>
 <part name="seleccion_previa" type="xsd:string"></part>
@@ -247,6 +257,14 @@
 <input wsam:Action="http://webservice.tprog/Publicador/pagarReservaRequest" message="tns:pagarReserva"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/pagarReservaResponse" message="tns:pagarReservaResponse"></output>
 </operation>
+<operation name="listarNotificacionesProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/listarNotificacionesProveedorRequest" message="tns:listarNotificacionesProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/listarNotificacionesProveedorResponse" message="tns:listarNotificacionesProveedorResponse"></output>
+</operation>
+<operation name="limpiarNotificacionesProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/limpiarNotificacionesProveedorRequest" message="tns:limpiarNotificacionesProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/limpiarNotificacionesProveedorResponse" message="tns:limpiarNotificacionesProveedorResponse"></output>
+</operation>
 <operation name="buscar" parameterOrder="busqueda_previa seleccion_previa tipo_orden busqueda categoria_seleccionada">
 <input wsam:Action="http://webservice.tprog/Publicador/buscarRequest" message="tns:buscar"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/buscarResponse" message="tns:buscarResponse"></output>
@@ -417,6 +435,24 @@
 </output>
 </operation>
 <operation name="pagarReserva">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="listarNotificacionesProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="limpiarNotificacionesProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

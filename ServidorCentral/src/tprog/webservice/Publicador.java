@@ -178,6 +178,50 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public WrapperVerServiciosProveedor verServiciosProveedor(String nickProveedor) {
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		Set<DTMinServicio> serviciosTodos;
+		try {
+			serviciosTodos = ctrlProductos.listarServicios();
+		} catch (Exception ex) {
+			serviciosTodos = new HashSet();
+		}
+		WrapperVerServiciosProveedor result = new WrapperVerServiciosProveedor();
+		result.servicios = new HashMap<>();
+		for (DTMinServicio dt : serviciosTodos) {
+			if (dt.getNicknameP().equals(nickProveedor)) {
+				ctrlProductos.seleccionarServicio(dt);
+				DTServicio servicio = ctrlProductos.infoServicio();
+				result.servicios.put(servicio, servicio.toString());
+			}
+		}
+		return result;
+	}
+
+	@WebMethod
+	public WrapperVerPromocionesProveedor verPromocionesProveedor(String nickProveedor) {
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		Set<DTMinPromocion> promocionesTodas;
+		try {
+			promocionesTodas = ctrlProductos.listarPromociones();
+		} catch (Exception ex) {
+			promocionesTodas = new HashSet();
+		}
+		WrapperVerPromocionesProveedor result = new WrapperVerPromocionesProveedor();
+		result.promociones = new HashMap<>();
+		for (DTMinPromocion dt : promocionesTodas) {
+			if (dt.getNicknameP().equals(nickProveedor)) {
+				ctrlProductos.seleccionarPromocion(dt);
+				DTPromocion promocion = ctrlProductos.infoPromocion();
+				result.promociones.put(promocion, promocion.toString());
+			}
+		}
+		return result;
+	}
+
+	@WebMethod
 	public WrapperVerPerfilCliente verPerfilCliente(
 			@WebParam(name = "id_cliente") String idCliente
 	) {

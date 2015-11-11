@@ -34,6 +34,18 @@
 <message name="verInfoProveedorResponse">
 <part name="return" type="tns:wrapperVerInfoProveedor"></part>
 </message>
+<message name="verServiciosProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="verServiciosProveedorResponse">
+<part name="return" type="tns:wrapperVerServiciosProveedor"></part>
+</message>
+<message name="verPromocionesProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="verPromocionesProveedorResponse">
+<part name="return" type="tns:wrapperVerPromocionesProveedor"></part>
+</message>
 <message name="verPerfilCliente">
 <part name="id_cliente" type="xsd:string"></part>
 </message>
@@ -191,6 +203,14 @@
 <input wsam:Action="http://webservice.tprog/Publicador/verInfoProveedorRequest" message="tns:verInfoProveedor"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verInfoProveedorResponse" message="tns:verInfoProveedorResponse"></output>
 </operation>
+<operation name="verServiciosProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verServiciosProveedorRequest" message="tns:verServiciosProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verServiciosProveedorResponse" message="tns:verServiciosProveedorResponse"></output>
+</operation>
+<operation name="verPromocionesProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorRequest" message="tns:verPromocionesProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorResponse" message="tns:verPromocionesProveedorResponse"></output>
+</operation>
 <operation name="verPerfilCliente">
 <input wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteRequest" message="tns:verPerfilCliente"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteResponse" message="tns:verPerfilClienteResponse"></output>
@@ -304,6 +324,24 @@
 </output>
 </operation>
 <operation name="verInfoProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verServiciosProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verPromocionesProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

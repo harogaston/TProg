@@ -1,8 +1,10 @@
 package tprog.logica.clases;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
@@ -10,9 +12,11 @@ import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.Observer;
+import tprog.logica.interfaces.Subject;
 import tprog.logica.manejadores.ManejadorProductos;
 
-public class Reserva {
+public class Reserva implements Observer {
 
 	private int idReserva;
 	private Cliente cliente;
@@ -21,6 +25,9 @@ public class Reserva {
 	private EstadoReserva estado;
 	private float precioTotal;
 	private Set<LineaReserva> lineasReserva;
+	private List<Observer> observers;
+	int facturaciones = 0;
+	int cantProveedoresAsociados = 0;
 
 	public Reserva(Cliente client, DTReserva dtR) throws Exception {
 		this.idReserva = Reserva.contador;
@@ -30,6 +37,7 @@ public class Reserva {
 		this.estado = dtR.getEstadoReserva();
 		this.lineasReserva = new HashSet();
 		this.precioTotal = dtR.getPrecioTotal();
+		this.observers = new ArrayList<>();
 
 		// Creo y agrego las lineasReserva
 		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
@@ -56,6 +64,14 @@ public class Reserva {
 			}
 			lineasReserva.add(linea);
 		}
+	}
+
+	public void setCantidadProveedoresAsociados(int cant) {
+		this.cantProveedoresAsociados = cant;
+	}
+
+	public int getCantidadProveedoresAsociados() {
+		return cantProveedoresAsociados;
 	}
 
 	public int getIdReserva() {
@@ -115,7 +131,8 @@ public class Reserva {
 		if (nuevoEstado != null) {
 			switch (this.estado) {
 				case Registrada: {
-					if (nuevoEstado == EstadoReserva.Cancelada || nuevoEstado == EstadoReserva.Pagada) {
+					if (nuevoEstado == EstadoReserva.Cancelada
+							|| nuevoEstado == EstadoReserva.Pagada) {
 						setEstadoReserva(nuevoEstado);
 						return true;
 					}
@@ -125,8 +142,9 @@ public class Reserva {
 					if (nuevoEstado == EstadoReserva.Facturada) {
 						setEstadoReserva(nuevoEstado);
 						return true;
+					} else {
+						return false;
 					}
-					return false;
 				}
 			}
 		}
@@ -141,4 +159,17 @@ public class Reserva {
 	public Set<LineaReserva> getLineasReserva() {
 		return this.lineasReserva;
 	}
+
+	@Override
+	public void update(String message) {
+
+	}
+
+	void facturarReserva() {
+		facturaciones++;
+		if (facturaciones == cantProveedoresAsociados) {
+			setEstadoReserva(EstadoReserva.Facturada);
+		}
+	}
+
 }

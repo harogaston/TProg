@@ -61,7 +61,7 @@ public class VerPerfil extends HttpServlet {
 				}
 			}
 		} else {
-			// Si por algún motivo el atributo ya no exite (ej: expiró la sesión) lo mando al inicio
+			// Si por algún motivo el atributo ya no existe (ej: expiró la sesión) lo mando al inicio
 			request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
 		}
 	}

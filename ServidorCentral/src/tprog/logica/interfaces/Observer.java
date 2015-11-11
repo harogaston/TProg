@@ -10,8 +10,8 @@ package tprog.logica.interfaces;
 public interface Observer {
 
 	//method to update the observer, used by subject
-	public void update();
+	public void update(String message);
 
 	//attach with subject to observe
-	public void setSubject(Subject sub);
+//	public void setSubject(Subject sub);
 }

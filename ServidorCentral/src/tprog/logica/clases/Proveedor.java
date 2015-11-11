@@ -10,10 +10,8 @@ import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
-import tprog.logica.interfaces.Observer;
-import tprog.logica.interfaces.Subject;
 
-public class Proveedor extends Usuario implements Observer {
+public class Proveedor extends Usuario {
 
 	private String empresa;
 	private String webEmpresa;
@@ -76,21 +74,27 @@ public class Proveedor extends Usuario implements Observer {
 		for (Reserva reserva : reservas.values()) {
 			DTReserva temp = reserva.crearDT();
 			//asigno el estado que ve localmente el proveedor
-			temp.setEstadoReserva(estadosParciales.get(reserva.getIdReserva()));
+			//SOLO SI ES FACTURADA
+			if (estadosParciales.get(reserva.getIdReserva()) == EstadoReserva.Facturada) {
+				temp.setEstadoReserva(estadosParciales.get(reserva.getIdReserva()));
+			}
 			nuevoSet.add(temp);
 		}
 		return nuevoSet;
 	}
 
 	/**
-	 * Modifica el estado de una reserva a ojos de un proveedor. Para usarse a
-	 * la hora de facturar una reserva localmente.
+	 * Modifica el estado de una reserva, en principio desde el punto de vista
+	 * del proveedor. Si todos los proveedores asociados a una reserva modifican
+	 * su estado parcial a Facturada, entonces el estado global de la reserva
+	 * cambiará a Facturada.
 	 *
 	 * @param idReserva
 	 * @param nuevoEstado
 	 */
-	public void modificarEstadoParcial(int idReserva, EstadoReserva nuevoEstado) {
-		estadosParciales.put(idReserva, nuevoEstado);
+	public void facturarReserva(int idReserva) {
+		estadosParciales.put(idReserva, EstadoReserva.Facturada);
+		reservas.get(idReserva).facturarReserva();
 	}
 
 	public void addServicio(Servicio service) {
@@ -104,6 +108,7 @@ public class Proveedor extends Usuario implements Observer {
 	public void addReserva(Reserva reserva) {
 		reservas.put(reserva.getIdReserva(), reserva);
 		estadosParciales.put(reserva.getIdReserva(), reserva.getEstado());
+		reserva.setCantidadProveedoresAsociados(reserva.getCantidadProveedoresAsociados() + 1);
 	}
 
 	public void setEmpresa(String Empresa) {
@@ -136,16 +141,6 @@ public class Proveedor extends Usuario implements Observer {
 
 	public Map<Integer, EstadoReserva> getEstadosParciales() {
 		return estadosParciales;
-	}
-
-	@Override
-	public void update() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	@Override
-	public void setSubject(Subject sub) {
-		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }

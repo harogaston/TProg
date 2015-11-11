@@ -51,6 +51,8 @@ public interface ICtrlReservas {
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 
+	public void facturarReserva(String idProveedor, int idReserva);
+
 	public boolean eliminarReserva();
 
 	public EstadoReserva getEstadoReserva();

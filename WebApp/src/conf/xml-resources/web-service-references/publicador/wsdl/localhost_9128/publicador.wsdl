@@ -67,6 +67,15 @@
 <message name="Exception">
 <part name="fault" element="tns:Exception"></part>
 </message>
+<message name="facturarReserva">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:int"></part>
+</message>
+<message name="facturarReservaResponse"></message>
+<message name="pagarReserva">
+<part name="arg0" type="xsd:int"></part>
+</message>
+<message name="pagarReservaResponse"></message>
 <message name="buscar">
 <part name="busqueda_previa" type="xsd:string"></part>
 <part name="seleccion_previa" type="xsd:string"></part>
@@ -230,6 +239,14 @@
 <output wsam:Action="http://webservice.tprog/Publicador/verReservasProveedorResponse" message="tns:verReservasProveedorResponse"></output>
 <fault message="tns:Exception" name="Exception" wsam:Action="http://webservice.tprog/Publicador/verReservasProveedor/Fault/Exception"></fault>
 </operation>
+<operation name="facturarReserva" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/facturarReservaRequest" message="tns:facturarReserva"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/facturarReservaResponse" message="tns:facturarReservaResponse"></output>
+</operation>
+<operation name="pagarReserva">
+<input wsam:Action="http://webservice.tprog/Publicador/pagarReservaRequest" message="tns:pagarReserva"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/pagarReservaResponse" message="tns:pagarReservaResponse"></output>
+</operation>
 <operation name="buscar" parameterOrder="busqueda_previa seleccion_previa tipo_orden busqueda categoria_seleccionada">
 <input wsam:Action="http://webservice.tprog/Publicador/buscarRequest" message="tns:buscar"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/buscarResponse" message="tns:buscarResponse"></output>
@@ -389,6 +406,24 @@
 <fault name="Exception">
 <soap:fault name="Exception" use="literal"></soap:fault>
 </fault>
+</operation>
+<operation name="facturarReserva">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="pagarReserva">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
 </operation>
 <operation name="buscar">
 <soap:operation soapAction=""></soap:operation>

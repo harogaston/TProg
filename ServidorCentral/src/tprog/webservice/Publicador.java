@@ -283,6 +283,18 @@ public class Publicador {
 	}
 
 	@WebMethod
+	public void facturarReserva(String idProveedor, int idReserva) {
+		Fabrica.getInstance().getICtrlReservas().facturarReserva(idProveedor, idReserva);
+	}
+
+	@WebMethod
+	public void pagarReserva(int idReserva) {
+		ICtrlReservas ctrlReservas = Fabrica.getInstance().getICtrlReservas();
+		ctrlReservas.seleccionarReserva(idReserva);
+		ctrlReservas.cambiarEstadoReserva(EstadoReserva.Pagada);
+	}
+
+	@WebMethod
 	public WrapperBuscar buscar(
 			@WebParam(name = "busqueda_previa") String busquedaPrevia,
 			@WebParam(name = "seleccion_previa") String seleccionPrevia,

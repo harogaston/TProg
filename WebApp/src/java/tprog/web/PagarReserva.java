@@ -1,27 +1,25 @@
-package tprog.web.proveedor;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package tprog.web;
+
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import webservice.DtProveedor;
-import webservice.Exception_Exception;
-import webservice.WrapperVerReservasProveedor;
 
 /**
  *
- * @author MartinPorta
+ * @author marccio
  */
-public class ReservasProveedor extends HttpServlet {
+@WebServlet(name = "PagarReserva", urlPatterns = {"/PagarReserva"})
+public class PagarReserva extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,25 +31,15 @@ public class ReservasProveedor extends HttpServlet {
 	 * @throws IOException if an I/O error occurs
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, Exception_Exception {
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		int idReserva = Integer.parseInt((String) request.getParameter("idReserva"));
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
-		WrapperVerReservasProveedor result = proxy.verReservasProveedor((String) request.getSession().getAttribute("usuario_logueado"));
-		DtProveedor dtP = result.getDtP();
-		request.setAttribute("nick", dtP.getNickname());
-		String nombreCompleto = dtP.getNombre() + " " + dtP.getApellido();
-		request.setAttribute("nombre", nombreCompleto);
-		String fNac = Integer.toString(dtP.getFechaNacimiento().getDay()) + "-"
-				+ Integer.toString(dtP.getFechaNacimiento().getMonth() + 1) + "-"
-				+ Integer.toString(dtP.getFechaNacimiento().getYear()) + "\n";
-		request.setAttribute("fNac", fNac);
-		request.setAttribute("email", dtP.getEmail());
-		request.setAttribute("imagen", dtP.getImagen());
-		request.setAttribute("linkEmpresa", dtP.getWebEmpresa());
-		request.setAttribute("nombreEmpresa", dtP.getEmpresa());
-		request.setAttribute("reservas", result.getReservasCliente());
-		request.getRequestDispatcher("/pages/reservasProveedor.jsp").forward(request, response);
+		proxy.pagarReserva(idReserva);
+		request.getSession().setAttribute("reservaPagada", "La reserva ha sido pagada con éxito");
+		// volver a la página que llamó al servlet
+		response.sendRedirect("/WebApp/VerPerfil");
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,11 +54,7 @@ public class ReservasProveedor extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			processRequest(request, response);
-		} catch (Exception_Exception ex) {
-			Logger.getLogger(ReservasProveedor.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		processRequest(request, response);
 	}
 
 	/**
@@ -84,11 +68,7 @@ public class ReservasProveedor extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			processRequest(request, response);
-		} catch (Exception_Exception ex) {
-			Logger.getLogger(ReservasProveedor.class.getName()).log(Level.SEVERE, null, ex);
-		}
+		processRequest(request, response);
 	}
 
 	/**

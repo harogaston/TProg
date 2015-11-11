@@ -156,6 +156,41 @@
 
 														</div>
 													</div>
+
+
+													<%i++;%>
+													<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
+														<i class="glyphicon glyphicon-check"></i>
+														<span style="font-weight: bold">Pagar</span>
+													</button>
+
+													<!-- Modal -->
+													<div class="modal fade" id="myModal<%=String.valueOf(i)%>" role="dialog" style="text-align: center">
+														<div class="modal-dialog" style="vertical-align: middle;">
+															<!-- Modal content-->
+															<div class="modal-content">
+																<div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title text-center">Confirmar acción</h4>
+																</div>
+																<div class="modal-body">
+																	<form action="PagarReserva" method="GET">
+																		<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+																		<button type="submit" class="btn btn-danger">Sí, pagar</button>
+																		<input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+																	</form>
+																</div>
+															</div>
+
+														</div>
+													</div>
+
+
+
+
+
+
+
 													<%}%>
 												</div>
 											</div><!-- panel -->

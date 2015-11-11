@@ -98,6 +98,34 @@
                                     </table>
                                     <div class="panel-footer text-right" style="font-weight: bold">
                                         <div>Total $<%=subtotal%></div>
+										<%if (dtR.getEstado().value().equals("Pagada")) {%>
+										<!-- Trigger the modal with a button -->
+										<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
+											<i class="glyphicon glyphicon-check"></i>
+											<span style="font-weight: bold">Facturar</span>
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="myModal<%=String.valueOf(i)%>" role="dialog" style="text-align: center">
+											<div class="modal-dialog" style="vertical-align: middle;">
+												<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title text-center">Confirmar acción</h4>
+													</div>
+													<div class="modal-body">
+														<form action="FacturarReserva" method="GET">
+															<button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+															<button type="submit" class="btn btn-danger">Sí, facturar</button>
+															<input type="number" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+														</form>
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<%}%>
                                     </div>
                                 </div>
                             </div>

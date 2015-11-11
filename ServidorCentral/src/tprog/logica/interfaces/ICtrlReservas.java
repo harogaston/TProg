@@ -2,6 +2,7 @@ package tprog.logica.interfaces;
 
 import java.util.Date;
 import java.util.Set;
+import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
@@ -34,11 +35,23 @@ public interface ICtrlReservas {
 
 	public Set<DTMinReserva> listarReservas() throws Exception;
 
+	/**
+	 * Devuelve el conjunto de reservas asociadas al proveedor seleccionado
+	 * previamente con seleccionarProveedor(nickname)
+	 *
+	 * @return
+	 */
+	public Set<DTReserva> listarReservasProveedor();
+
 	public void seleccionarReserva(int idReserva);
+
+	public DTCliente getClienteAsociado();
 
 	public DTReserva infoReserva();
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
+
+	public void facturarReserva(String idProveedor, int idReserva);
 
 	public boolean eliminarReserva();
 

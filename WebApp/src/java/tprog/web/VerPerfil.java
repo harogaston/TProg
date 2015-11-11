@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import webservice.DtCliente;
 import webservice.DtProveedor;
 import webservice.DtReserva;
+import webservice.Exception_Exception;
 import webservice.WrapperVerPerfilCliente;
+import webservice.WrapperVerPerfilProveedor;
 
 public class VerPerfil extends HttpServlet {
 
@@ -43,7 +45,8 @@ public class VerPerfil extends HttpServlet {
 				request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 			} else {
 				try {
-					DtProveedor dtP = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));
+                                        WrapperVerPerfilProveedor result2 = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));
+					DtProveedor dtP = result2.getDtP();
 					request.setAttribute("nick", dtP.getNickname());
 					String nombreCompleto = dtP.getNombre() + " " + dtP.getApellido();
 					request.setAttribute("nombre", nombreCompleto);
@@ -58,7 +61,9 @@ public class VerPerfil extends HttpServlet {
 					request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 				} catch (ServletException | IOException ex) {
 					Logger.getLogger(VerPerfil.class.getName()).log(Level.SEVERE, null, ex);
-				}
+				} catch (Exception_Exception ex) {
+                                Logger.getLogger(VerPerfil.class.getName()).log(Level.SEVERE, null, ex);
+                            }
 			}
 		} else {
 			// Si por algún motivo el atributo ya no exite (ej: expiró la sesión) lo mando al inicio

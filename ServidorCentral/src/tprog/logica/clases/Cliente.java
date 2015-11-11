@@ -44,4 +44,8 @@ public class Cliente extends Usuario {
 		Cliente c = (Cliente) o;
 		return this.reservas.equals(c.reservas);
 	}
+        
+        public Map<Integer, Reserva> getReservas(){
+            return this.reservas;
+        }
 }

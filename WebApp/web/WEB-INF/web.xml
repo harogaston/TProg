@@ -66,7 +66,7 @@
     </servlet>
     <servlet>
         <servlet-name>ReservasProveedor</servlet-name>
-        <servlet-class>tprog.web.ReservasProveedor</servlet-class>
+        <servlet-class>tprog.web.proveedor.ReservasProveedor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>

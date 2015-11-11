@@ -81,9 +81,10 @@
                 <!-- Parte derecha nombre, descripcion, categorias, agregar al carro, etc -->
                 <div class="col-md-8">
                     <h1><%=infoPromocion.getIdPromocion()%></h1>
-					<!--Solo se muestra agregar al carrito si estoy logueado-->
+					<!--Solo se muestra agregar al carrito si estoy logueado como cliente-->
 					<%
-						if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+						if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN
+								&& session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
 					%>
                     <form action= "Carrito" method="POST">
                         <input type="number" name="cantidad" value="1" min="1" max="99" style="width: 60px">

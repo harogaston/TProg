@@ -22,7 +22,13 @@
 								<span class="icon-bar"></span>
 						</button>
 				-->
+                <%
+				if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+			%> 
 				<a href="index.html" class="navbar-brand">Help4Traveling</a>
+                <%
+                }
+			%> 
 			</div>
                 <%
 				if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
@@ -65,7 +71,7 @@
 			<%
 			} else if((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
 			%>
-                       
+            <%--           
 			<div class="navbar-nav navbar-right">
 				<form action= "CerrarSesion" class="navbar-form" method="POST">
 					<button class="btn btn-warning" type="submit">
@@ -87,11 +93,12 @@
 				</form>
                                               
 			</div> 
-                                                <div class="navbar-nav navbar-right">
+                        <%--                       <div class="navbar-nav navbar-right">
                                                     <div class="dropdown">
-                                                        <button class="btn btn-warning"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             <i class="glyphicon glyphicon-align-justify"></i>
                                                         </button>
+                                                        
                                                         <u1 class="dropdown-menu" >
                                                              <li><a href="ServiciosProveedor">Ver Servicios</a></li>
                                                             <li><a href="ReservasProveedor">Ver Reservas</a></li>
@@ -100,7 +107,42 @@
                                                         </u1>
                                                 </div>  
                                                 </div>                        
-                        
+                        --%>
+         
+            
+            <div class="row row-centered">
+                <div role="tabpanel" class="tab-pane">
+                    <div class="panel-group" id="accordionMenu">
+                        <div class="accordion-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMenu" href="#w1">
+                                    <h4 class="panel-title text-center" >
+                                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                                        Bienvenido  <%=session.getAttribute("usuario_logueado")%>
+                                    </h4>
+                                </div>
+
+                                <div id="w1" class="panel-collapse collapse">
+                                    
+                                        <ul class="nav nav-pills nav-stacked">
+
+
+                                            
+                                            
+                                            <li role="presentation"><a href="VerPerfil">Perfil</a></li>
+                                            <li role="presentation"><a href="ServiciosProveedor">Servicios</a></li>
+                                            <li role="presentation"><a href="ReservasProveedor">Reservas</a></li>
+                                            <li role="presentation"><a href="PromocionesProveedor">Promociones</a></li>
+                                            <li role="presentation"><a href="CerrarSesion">Cerrar sesion</a></li>
+                                            </ul>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                       
                                                 
         <%
 			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){

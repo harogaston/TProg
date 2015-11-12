@@ -23,7 +23,13 @@
 								<span class="icon-bar"></span>
 						</button>
 				-->
+                <%
+				if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+			%> 
 				<a href="index.html" class="navbar-brand">Help4Traveling</a>
+                <%
+                }
+			%> 
 			</div>
 			<%
 				if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
@@ -66,27 +72,10 @@
 			<%
 			} else if ((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)) {
 			%>
-			<!--Cerrar sesión-->
-			<div class="navbar-nav navbar-right">
-				<form action= "CerrarSesion" class="navbar-form" method="POST">
-					<button class="btn btn-warning" type="submit">
-						<i class="glyphicon glyphicon-off"></i> Cerrar Sesión
-					</button>
-				</form>
-			</div>
-			<!--Perfil-->
-			<div class="navbar-nav navbar-right">
-				<form action= "VerPerfil" class="navbar-form" method="GET">
-					<button class="btn btn-warning" type="submit">
-						<i class="glyphicon glyphicon-user"></i>
-						<%=" " + session.getAttribute("usuario_logueado")%>
-					</button>
-				</form>
-			</div>
-			<!--Notificaciones del proveedor-->
+            <!--Notificaciones del proveedor-->
 			<div class="navbar-nav navbar-right">
 				<div class="dropdown">
-					<button class="btn btn-warning"  type="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<button class="btn btn-default"  type="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						<i class="glyphicon glyphicon-bell"></i><span class="badge">${cant_notificaciones}</span>
 					</button>
 					<%
@@ -112,24 +101,49 @@
 							%>
 					</ul>
 				</div>
-			</div>
-			<!--Menu del proveedor-->
-			<div class="navbar-nav navbar-right">
-				<div class="dropdown">
-					<button class="btn btn-warning"  type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="glyphicon glyphicon-align-justify"></i> Menú
-					</button>
-					<u1 class="dropdown-menu" >
-						<li><a href="ServiciosProveedor">Ver Servicios</a></li>
-						<li><a href="ReservasProveedor">Ver Reservas</a></li>
-						<li><a href="PromocionesProveedor">Ver Promociones</a></li>
+			</div>       
+            <div class="row row-centered">
+                <div role="tabpanel" class="tab-pane">
+                    <div class="panel-group" id="accordionMenu">
+                        <div class="accordion-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" data-toggle="collapse" data-parent="#accordionMenu" href="#w1">
+                                    <h4 class="panel-title text-center" >
+                                        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                                        Bienvenido  <%=session.getAttribute("usuario_logueado")%>
+                                    </h4>
+                                </div>
 
-					</u1>
-				</div>
-			</div>
-			<%			} else if ((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)) {
-			%>
-			<div class="navbar-nav navbar-right" style="display: inline-block">
+                                <div id="w1" class="panel-collapse collapse">
+                                    
+                                        <ul class="nav nav-pills nav-stacked">
+
+
+                                            
+                                            
+                                            <li role="presentation"><a href="VerPerfil">Perfil</a></li>
+                                            <li role="presentation"><a href="ServiciosProveedor">Servicios</a></li>
+                                            <li role="presentation"><a href="ReservasProveedor">Reservas</a></li>
+                                            <li role="presentation"><a href="PromocionesProveedor">Promociones</a></li>
+                                            <li role="presentation"><a href="CerrarSesion">Cerrar sesion</a></li>
+                                            </ul>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                
+                                                
+        <%
+			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
+        %>
+                        <div class="navbar-nav navbar-right" style="display: inline-block">
+
+			
+			
+
 				<form action= "CambiarUsuario" class="navbar-form" method="POST">
 					<button class="btn btn-success" type="submit">
 						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Cliente

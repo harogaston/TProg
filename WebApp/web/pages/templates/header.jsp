@@ -72,30 +72,36 @@
 			<%
 			} else if ((session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)) {
 			%>
-
-            <%--           
-
+            <!--Notificaciones del proveedor-->
 			<div class="navbar-nav navbar-right">
-				<form action= "CerrarSesion" class="navbar-form" method="POST">
-					<button class="btn btn-warning" type="submit">
-						<i class="glyphicon glyphicon-off"></i> Cerrar Sesión
+				<div class="dropdown">
+					<button class="btn btn-default"  type="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="glyphicon glyphicon-bell"></i><span class="badge">${cant_notificaciones}</span>
 					</button>
-				</form>
-			</div>
-			<!--Perfil-->
-			<div class="navbar-nav navbar-right">
-				<form action= "VerPerfil" class="navbar-form" method="GET">
-					<button class="btn btn-warning" type="submit">
-						<i class="glyphicon glyphicon-user"></i>
-						<%=" " + session.getAttribute("usuario_logueado")%>
-					</button>
-				</form>
-
-                                              
-			</div> 
-                        
-         
-            
+					<%
+						List<String> notificaciones = (List<String>) request.getSession().getAttribute("notificaciones");
+					%>
+					<ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+						<%
+							if (!notificaciones.isEmpty()) {
+						%>
+						<%
+							for (String notificacion : notificaciones) {
+						%>
+						<li><a href="ReservasProveedor"><%=notificacion%></a></li>
+							<%
+								}
+							%>
+							<%
+							} else {
+							%>
+						<li>No hay notificaciones</li>
+							<%
+								}
+							%>
+					</ul>
+				</div>
+			</div>       
             <div class="row row-centered">
                 <div role="tabpanel" class="tab-pane">
                     <div class="panel-group" id="accordionMenu">
@@ -128,44 +134,15 @@
                     </div>
                 </div>
             </div>
-                       
+                
                                                 
         <%
 			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
         %>
                         <div class="navbar-nav navbar-right" style="display: inline-block">
 
-			</div>
-			<!--Notificaciones del proveedor-->
-			<div class="navbar-nav navbar-right">
-				<div class="dropdown">
-					<button class="btn btn-warning"  type="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="glyphicon glyphicon-bell"></i><span class="badge">${cant_notificaciones}</span>
-					</button>
-					<%
-						List<String> notificaciones = (List<String>) request.getSession().getAttribute("notificaciones");
-					%>
-					<ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-						<%
-							if (!notificaciones.isEmpty()) {
-						%>
-						<%
-							for (String notificacion : notificaciones) {
-						%>
-						<li><a href="ReservasProveedor"><%=notificacion%></a></li>
-							<%
-								}
-							%>
-							<%
-							} else {
-							%>
-						<li>No hay notificaciones</li>
-							<%
-								}
-							%>
-					</ul>
-				</div>
-			</div>
+			
+			
 
 				<form action= "CambiarUsuario" class="navbar-form" method="POST">
 					<button class="btn btn-success" type="submit">

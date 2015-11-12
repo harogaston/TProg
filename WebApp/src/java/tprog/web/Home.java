@@ -44,7 +44,7 @@ public class Home extends HttpServlet {
 		request.getRequestDispatcher("Buscar").forward(request, response);
             }else{
                 if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN){
-                    request.getRequestDispatcher("VerPerfil").forward(request, response);
+                    request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
                 }else{
                     request.getRequestDispatcher("/pages/proveedor.jsp").forward(request, response);
                 }

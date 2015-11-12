@@ -17,8 +17,11 @@ import webservice.WrapperVerPerfilCliente;
 
 public class VerPerfil extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	/*
+	 Se tiene que manejar igual el doPost y el doGet, por eso ambos hacen
+	 el mismo processRequest
+	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
@@ -64,5 +67,16 @@ public class VerPerfil extends HttpServlet {
 			// Si por algún motivo el atributo ya no existe (ej: expiró la sesión) lo mando al inicio
 			request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
 		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
 	}
 }

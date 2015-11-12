@@ -28,27 +28,27 @@ public class Home extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		initSession(request);
-                HttpSession session = request.getSession();
-            if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-		if (request.getSession().getAttribute("terminos") == null) {
-			webservice.PublicadorService service = new webservice.PublicadorService();
-			webservice.Publicador proxy = service.getPublicadorPort();
-			JsonParser jsonParser = new JsonParser();
-			JsonArray termsArray = (JsonArray) jsonParser.parse(proxy.typeahead());
-			request.getSession().setAttribute("terminos", termsArray);
-		}
-		request.setAttribute("categoriaSeleccionada", null);
-		request.setAttribute("busqueda", null);
-		request.setAttribute("precio", "0");
+		HttpSession session = request.getSession();
+		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+			if (request.getSession().getAttribute("terminos") == null) {
+				webservice.PublicadorService service = new webservice.PublicadorService();
+				webservice.Publicador proxy = service.getPublicadorPort();
+				JsonParser jsonParser = new JsonParser();
+				JsonArray termsArray = (JsonArray) jsonParser.parse(proxy.typeahead());
+				request.getSession().setAttribute("terminos", termsArray);
+			}
+			request.setAttribute("categoriaSeleccionada", null);
+			request.setAttribute("busqueda", null);
+			request.setAttribute("precio", "0");
 
-		request.getRequestDispatcher("Buscar").forward(request, response);
-            }else{
-                if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN){
-                    request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
-                }else{
-                    request.getRequestDispatcher("/pages/proveedor.jsp").forward(request, response);
-                }
-            }
+			request.getRequestDispatcher("Buscar").forward(request, response);
+		} else {
+			if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+				request.getRequestDispatcher("VerPerfil").forward(request, response);
+			} else {
+				request.getRequestDispatcher("/pages/proveedor.jsp").forward(request, response);
+			}
+		}
 	}
 
 	@Override

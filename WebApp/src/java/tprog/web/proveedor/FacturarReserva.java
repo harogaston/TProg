@@ -7,6 +7,7 @@ package tprog.web.proveedor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,6 +39,10 @@ public class FacturarReserva extends HttpServlet {
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
 		proxy.facturarReserva(idProveedor, idReserva);
+		//asigno atributos de la request
+		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
+		session.setAttribute("notificaciones", notificaciones);
+		session.setAttribute("cant_notificaciones", notificaciones.size());
 		request.getRequestDispatcher("ReservasProveedor").forward(request, response);
 	}
 

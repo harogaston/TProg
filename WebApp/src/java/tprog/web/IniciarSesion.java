@@ -1,6 +1,7 @@
 package tprog.web;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,16 +44,14 @@ public class IniciarSesion extends HttpServlet {
 
 		if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR) {
 			if (proxy.verificarLoginProveedor(id, contrasena)) {
-				//el proveedor no hace reservas
-//				ICtrlReservas cr = f.getICtrlReservas(); //se lo asocio por la duracion de la sesion
-//				cr.liberarMemoriaControlador();
-//				session.setAttribute("ctrlReservas", cr);
 				nuevoEstado = EstadoSesion.OK_LOGIN;
 				//en caso de que id sea un email
 				id = proxy.obtenerIdProveedor(id, contrasena);
 				request.getSession().setAttribute("usuario_logueado", id);
 				session.setAttribute("estado_sesion", nuevoEstado);
-				session.setAttribute("cant_items", 0);
+				List<String> notificaciones = proxy.listarNotificacionesProveedor(id).getNotificaciones();
+				session.setAttribute("notificaciones", notificaciones);
+				session.setAttribute("cant_notificaciones", notificaciones.size());
 			} else {
 				session.setAttribute("inicioIncorrecto", "Las credenciales que ingresó no corresponden a ningún proveedor registrado en el sistema");
 			}

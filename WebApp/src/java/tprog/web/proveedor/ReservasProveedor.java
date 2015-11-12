@@ -6,6 +6,7 @@ package tprog.web.proveedor;
  * and open the template in the editor.
  */
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -36,7 +37,11 @@ public class ReservasProveedor extends HttpServlet {
 			throws ServletException, IOException, Exception_Exception {
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
+		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		webservice.Publicador proxy = service.getPublicadorPort();
+		//al llegar a la parte de reservas, borro las notificaciones
+		//asumiendo que ya se enteró
+		proxy.limpiarNotificacionesProveedor(idProveedor);
 		WrapperVerReservasProveedor result = proxy.verReservasProveedor((String) request.getSession().getAttribute("usuario_logueado"));
 		DtProveedor dtP = result.getDtP();
 		request.setAttribute("nick", dtP.getNickname());
@@ -51,6 +56,9 @@ public class ReservasProveedor extends HttpServlet {
 		request.setAttribute("linkEmpresa", dtP.getWebEmpresa());
 		request.setAttribute("nombreEmpresa", dtP.getEmpresa());
 		request.setAttribute("reservas", result.getReservasCliente());
+		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
+		session.setAttribute("notificaciones", notificaciones);
+		session.setAttribute("cant_notificaciones", notificaciones.size());
 		request.getRequestDispatcher("/pages/reservasProveedor.jsp").forward(request, response);
 	}
 

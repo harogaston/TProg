@@ -1,24 +1,36 @@
-package tprog.web;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package tprog.web.proveedor;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import tprog.web.EstadoSesion;
+import tprog.web.TipoUsuario;
 
-public class Home extends HttpServlet {
+/**
+ *
+ * @author Martin
+ */
+public class Proveedores extends HttpServlet {
 
-	public static void initSession(HttpServletRequest request) {
+    public static void initSession2(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		System.out.println(request.getParameterMap().toString());
 		if (session.getAttribute("estado_sesion") == null) {
 			session.setAttribute("estado_sesion", EstadoSesion.NO_LOGIN);
 		}
-		if ((session.getAttribute("tipo_usuario") == null) || (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)) {
-			session.setAttribute("tipo_usuario", TipoUsuario.CLIENTE);
+		if ((session.getAttribute("tipo_usuario") == null) || (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE)) {
+			session.setAttribute("tipo_usuario", TipoUsuario.PROVEEDOR);
 		}
 		if (session.getAttribute("datos_cargados") == null) {
 			session.setAttribute("datos_cargados", false);
@@ -27,22 +39,15 @@ public class Home extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		initSession(request);
+		initSession2(request);
 		HttpSession session = request.getSession();
-		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
-			if (request.getSession().getAttribute("terminos") == null) {
-				webservice.PublicadorService service = new webservice.PublicadorService();
-				webservice.Publicador proxy = service.getPublicadorPort();
-				JsonParser jsonParser = new JsonParser();
-				JsonArray termsArray = (JsonArray) jsonParser.parse(proxy.typeahead());
-				request.getSession().setAttribute("terminos", termsArray);
+		if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR) {
+			if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
+				request.getRequestDispatcher("VerPerfil").forward(request, response);
+			} else {
+				request.getRequestDispatcher("/pages/proveedor.jsp").forward(request, response);
 			}
-			request.setAttribute("categoriaSeleccionada", null);
-			request.setAttribute("busqueda", null);
-			request.setAttribute("precio", "0");
-
 		}
-        request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 
 	@Override

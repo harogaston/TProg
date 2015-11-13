@@ -2,6 +2,7 @@ package tprog.logica.controladores;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import tprog.logica.clases.Cliente;
 import tprog.logica.clases.Proveedor;
@@ -89,8 +90,15 @@ public class CtrlReservas implements ICtrlReservas {
         
         @Override
 	public void quitarLineaReserva(int idLineaReserva) {
-                lineasReserva.remove(idLineaReserva);
-	}
+            Iterator<DTLineaReserva> iter = lineasReserva.iterator();
+            while (iter.hasNext()){
+                DTLineaReserva linea = iter.next();
+                if (linea.getIdLineaReserva() == idLineaReserva){
+                    precioTotal =- linea.getPrecio() * linea.getCantidad();
+                    iter.remove();
+                }
+            }
+        }
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
@@ -106,13 +114,20 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public DTReserva mostrarReservaTemporal() {
-		Date fechaTemp = new Date();
-		int anio = fechaTemp.getYear() + 1900;
-		int mes = fechaTemp.getMonth();
-		int dia = fechaTemp.getDate();
-		Date fecha = new Date(anio, mes, dia);
-		EstadoReserva estado = EstadoReserva.Registrada;
-		return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+                
+                    Date fechaTemp = new Date();
+                    int anio = fechaTemp.getYear() + 1900;
+                    int mes = fechaTemp.getMonth();
+                    int dia = fechaTemp.getDate();
+                    Date fecha = new Date(anio, mes, dia);
+                    EstadoReserva estado = EstadoReserva.Registrada;
+                    if (!lineasReserva.isEmpty())
+                        return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+                    else
+                        // -2 bandera para saber que la reserva no tiene lineas de reserva sin pasar null
+                        return new DTReserva(-2, fecha, estado, precioTotal, lineasReserva);
+                
+		
 	}
 
 	@Override

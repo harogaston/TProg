@@ -25,7 +25,7 @@
 				<div class="panel-heading"><h2> <span class="glyphicon glyphicon-shopping-cart"></span>  Carrito de compras</h2></div>
 				<%	DtReserva reservaTemporal = (DtReserva) session.getAttribute("reservaTemporal");
 					float subtotal = 0;
-					if (reservaTemporal != null) {
+					if ((reservaTemporal!= null) && (reservaTemporal.getIdReserva() != -2)) {
 						List<DtLineaReserva> lineas = reservaTemporal.getLineasReserva();
 				%>
 				<!-- Tabla -->
@@ -59,12 +59,13 @@
 							<td>$<%=linea.getPrecio()%></td>
 							<td><%=linea.getCantidad()%></td>
 							<td>$<%=(linea.getPrecio() * linea.getCantidad())%></td>
-                                                        <td><form action="QuitarCarrito" method="POST"></form>
-                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
+                                                        <td><form action="QuitarCarrito" method="POST">
+                                                            <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
 														<i class="glyphicon glyphicon-remove"></i>
 														<span style="font-weight: bold">Quitar</span>
 													</button>
                                                             <input type="text" name="idLineaReserva" value="<%=linea.getIdLineaReserva()%>" style="display: none">                                                    
+                                                        </form>
                                                         </td>
 						</tr>
 						<%
@@ -84,7 +85,7 @@
 					<div>Total $<%=subtotal%></div>
 					<%
 						//si el carrito no está vacío, habilito el botón de confirmación de reserva
-						if (request.getSession().getAttribute("reservaTemporal") != null) {
+						if ((reservaTemporal!= null) && (reservaTemporal.getIdReserva() != -2)) {
 					%>
 					<!-- Trigger the modal with a button -->
 					<button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">

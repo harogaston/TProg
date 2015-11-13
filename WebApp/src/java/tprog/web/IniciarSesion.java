@@ -40,6 +40,8 @@ public class IniciarSesion extends HttpServlet {
 			} else {
 				session.setAttribute("inicioIncorrecto", "Las credenciales que ingresó no corresponden a ningún cliente registrado en el sistema");
 			}
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");
+		dispatcher.forward(request, response);
 		}
 
 		if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR) {
@@ -55,12 +57,13 @@ public class IniciarSesion extends HttpServlet {
 			} else {
 				session.setAttribute("inicioIncorrecto", "Las credenciales que ingresó no corresponden a ningún proveedor registrado en el sistema");
 			}
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Proveedores");
+		dispatcher.forward(request, response);
 		}
 
 		// redirige a la página principal para que luego rediriga a la página
 		// que corresponde
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/Home");
-		dispatcher.forward(request, response);
+		
 	}
 
 	@Override

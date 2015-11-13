@@ -139,18 +139,8 @@
         <%
 			}else if((session.getAttribute("estado_sesion") == EstadoSesion.NO_LOGIN) && (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR)){
         %>
-                        <div class="navbar-nav navbar-right" style="display: inline-block">
-
-			
-			
-
-				<form action= "CambiarUsuario" class="navbar-form" method="POST">
-					<button class="btn btn-success" type="submit">
-						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Cliente
-					</button>
-				</form>
-			</div>
-
+             <%--           <div class="navbar-nav navbar-right" style="display: inline-block">
+               No es necesario pero esta hecho..
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 
 				<form action= "NuevoCliente" class="navbar-form" >
@@ -159,17 +149,11 @@
 						<i class="glyphicon glyphicon-edit"></i> Registrarse
 					</button>
 				</form>
-			</div>
+			</div> --%>
 			<%
 			} else {
 			%>
-			<div class="navbar-nav navbar-right" style="display: inline-block">
-				<form action= "CambiarUsuario" class="navbar-form" method="POST">
-					<button class="btn btn-success" type="submit">
-						<i class="glyphicon glyphicon-arrow-right"></i> Loguear con Proveedor
-					</button>
-				</form>
-			</div>
+			
 			<div class="navbar-nav navbar-right" style="display: inline-block">
 				<form action= "IniciarSesion" class="navbar-form" method="POST">
 					<div class="form-group">

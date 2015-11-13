@@ -623,6 +623,16 @@ public class Publicador {
 			return null;
 		}
 	}
+        
+        @WebMethod
+	public DTReserva quitarlineaReserva(
+			@WebParam(name = "id_ctrl_reservas") int idCtrlReservas,
+			@WebParam(name = "id_LineaReserva") int idLineaReserva
+	) {
+			ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
+			ctrlReservas.quitarLineaReserva(idLineaReserva);
+			return ctrlReservas.mostrarReservaTemporal();
+	}
 
 	@WebMethod
 	public DTReserva agregarPromocionCarrito(

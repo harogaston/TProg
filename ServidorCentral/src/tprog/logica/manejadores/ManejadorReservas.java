@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import tprog.logica.clases.Cliente;
+import tprog.logica.clases.LineaReserva;
 import tprog.logica.clases.Proveedor;
 import tprog.logica.clases.Reserva;
 import tprog.logica.dt.DTLineaReserva;

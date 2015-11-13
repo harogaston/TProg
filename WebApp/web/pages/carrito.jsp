@@ -38,6 +38,7 @@
 							<th>Precio unitario</th>
 							<th>Cantidad</th>
 							<th>Subotal</th>
+                                                        <th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -58,6 +59,13 @@
 							<td>$<%=linea.getPrecio()%></td>
 							<td><%=linea.getCantidad()%></td>
 							<td>$<%=(linea.getPrecio() * linea.getCantidad())%></td>
+                                                        <td><form action="QuitarCarrito" method="POST"></form>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal<%=String.valueOf(i)%>">
+														<i class="glyphicon glyphicon-remove"></i>
+														<span style="font-weight: bold">Quitar</span>
+													</button>
+                                                            <input type="text" name="idLineaReserva" value="<%=linea.getIdLineaReserva()%>" style="display: none">                                                    
+                                                        </td>
 						</tr>
 						<%
 							}

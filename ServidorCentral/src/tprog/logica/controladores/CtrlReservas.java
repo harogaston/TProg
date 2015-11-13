@@ -86,6 +86,11 @@ public class CtrlReservas implements ICtrlReservas {
 			precioTotal += precio * cant;
 		}
 	}
+        
+        @Override
+	public void quitarLineaReserva(int idLineaReserva) {
+                lineasReserva.remove(idLineaReserva);
+	}
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {

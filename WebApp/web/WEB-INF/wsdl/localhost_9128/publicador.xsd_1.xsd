@@ -85,6 +85,7 @@
 
 <xs:complexType name="dtLineaReserva">
 <xs:sequence>
+<xs:element name="idLineaReserva" type="xs:int"></xs:element>
 <xs:element name="cantidad" type="xs:int"></xs:element>
 <xs:element name="fechaInicio" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="fechaFin" type="xs:dateTime" minOccurs="0"></xs:element>

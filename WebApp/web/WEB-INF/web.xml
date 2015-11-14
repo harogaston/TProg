@@ -61,8 +61,12 @@
         <servlet-class>tprog.web.TipoUsuario</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CambiarUsuario</servlet-name>
-        <servlet-class>tprog.web.CambiarUsuario</servlet-class>
+        <servlet-name>ReservasProveedor</servlet-name>
+        <servlet-class>tprog.web.proveedor.ReservasProveedor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Proveedores</servlet-name>
+        <servlet-class>tprog.web.proveedor.Proveedores</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
@@ -169,8 +173,12 @@
         <url-pattern>/TipoUsuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CambiarUsuario</servlet-name>
-        <url-pattern>/CambiarUsuario</url-pattern>
+        <servlet-name>ReservasProveedor</servlet-name>
+        <url-pattern>/ReservasProveedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Proveedores</servlet-name>
+        <url-pattern>/Proveedores</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

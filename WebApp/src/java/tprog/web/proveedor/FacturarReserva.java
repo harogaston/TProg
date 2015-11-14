@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tprog.web;
+package tprog.web.proveedor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +17,10 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Martin
+ * @author marccio
  */
-public class CambiarUsuario extends HttpServlet {
+@WebServlet(name = "FacturarReserva", urlPatterns = {"/FacturarReserva"})
+public class FacturarReserva extends HttpServlet {
 
 	/**
 	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,13 +33,17 @@ public class CambiarUsuario extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession objSesion = request.getSession();
-		if (objSesion.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR) {
-			objSesion.setAttribute("tipo_usuario", TipoUsuario.CLIENTE);
-		} else {
-			objSesion.setAttribute("tipo_usuario", TipoUsuario.PROVEEDOR);
-		}
-		request.getRequestDispatcher("Home").forward(request, response);
+		HttpSession session = request.getSession();
+		String idProveedor = (String) session.getAttribute("usuario_logueado");
+		int idReserva = Integer.parseInt((String) request.getParameter("idReserva"));
+		webservice.PublicadorService service = new webservice.PublicadorService();
+		webservice.Publicador proxy = service.getPublicadorPort();
+		proxy.facturarReserva(idProveedor, idReserva);
+		//asigno atributos de la request
+		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
+		session.setAttribute("notificaciones", notificaciones);
+		session.setAttribute("cant_notificaciones", notificaciones.size());
+		request.getRequestDispatcher("ReservasProveedor").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

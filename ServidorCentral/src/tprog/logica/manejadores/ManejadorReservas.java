@@ -5,7 +5,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import tprog.logica.clases.Cliente;
+import tprog.logica.clases.LineaReserva;
+import tprog.logica.clases.Proveedor;
 import tprog.logica.clases.Reserva;
+import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
@@ -75,6 +78,17 @@ public class ManejadorReservas {
 			Reserva nuevaReserva = new Reserva(cliente, dtR);
 			reservas.put(nuevaReserva.getIdReserva(), nuevaReserva);
 			cliente.agregarReserva(nuevaReserva);
+			//identifico proveedores y los asocio
+			Set<DTLineaReserva> lineasReserva = dtR.getLineasReserva();
+			Set<String> proveedoresAsociados = new HashSet<>();
+			//recolecto los nicknames de los proveedores
+			for (DTLineaReserva dt : lineasReserva) {
+				proveedoresAsociados.add(dt.getNicknameProveedor());
+			}
+			for (String nickname : proveedoresAsociados) {
+				Proveedor proveedor = ManejadorUsuarios.getInstance().getProveedor(nickname);
+				proveedor.addReserva(nuevaReserva);
+			}
 		} else {
 			System.out.println("El DTReserva que se paso hacia agregarReserva era nulo");
 		}

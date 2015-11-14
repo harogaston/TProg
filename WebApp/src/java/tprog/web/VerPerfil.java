@@ -13,14 +13,15 @@ import javax.servlet.http.HttpSession;
 import webservice.DtCliente;
 import webservice.DtProveedor;
 import webservice.DtReserva;
-import webservice.Exception_Exception;
 import webservice.WrapperVerPerfilCliente;
-import webservice.WrapperVerPerfilProveedor;
 
 public class VerPerfil extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	/*
+	 Se tiene que manejar igual el doPost y el doGet, por eso ambos hacen
+	 el mismo processRequest
+	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
@@ -45,8 +46,7 @@ public class VerPerfil extends HttpServlet {
 				request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 			} else {
 				try {
-                                        WrapperVerPerfilProveedor result2 = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));
-					DtProveedor dtP = result2.getDtP();
+					DtProveedor dtP = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));;
 					request.setAttribute("nick", dtP.getNickname());
 					String nombreCompleto = dtP.getNombre() + " " + dtP.getApellido();
 					request.setAttribute("nombre", nombreCompleto);
@@ -61,13 +61,22 @@ public class VerPerfil extends HttpServlet {
 					request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 				} catch (ServletException | IOException ex) {
 					Logger.getLogger(VerPerfil.class.getName()).log(Level.SEVERE, null, ex);
-				} catch (Exception_Exception ex) {
-                                Logger.getLogger(VerPerfil.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+				}
 			}
 		} else {
-			// Si por algún motivo el atributo ya no exite (ej: expiró la sesión) lo mando al inicio
+			// Si por algún motivo el atributo ya no existe (ej: expiró la sesión) lo mando al inicio
 			request.getRequestDispatcher("/pages/inicio.jsp").forward(request, response);
 		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		processRequest(request, response);
 	}
 }

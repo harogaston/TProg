@@ -4,7 +4,9 @@ import java.util.Date;
 import tprog.logica.dt.DTLineaReserva;
 
 public class LineaReserva {
-
+        
+        private int idLineaReserva;
+        public static int contador = 1;
 	private int cantidad;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -15,6 +17,8 @@ public class LineaReserva {
 
 	public LineaReserva(int Cantidad, Date FInicio, Date FFin, Servicio Servicio
             , Promocion Promocion, float Precio) {
+                this.idLineaReserva = contador;
+                contador++;
 		this.cantidad = Cantidad;
 		this.fechaInicio = FInicio;
 		this.fechaFin = FFin;
@@ -22,7 +26,10 @@ public class LineaReserva {
 		this.promocion = Promocion;
 		this.precio = Precio;
 	}
-
+        
+        public int getidLineaReserva(){
+            return this.idLineaReserva;
+        }
 	public int getCantidad() {
 		return this.cantidad;
 	}
@@ -70,13 +77,13 @@ public class LineaReserva {
 	public DTLineaReserva crearDT() {
 		DTLineaReserva dtL = null;
 		if ((this.servicio == null) && (this.promocion != null)) {
-            dtL = new DTLineaReserva(this.getCantidad(), this.getFechaInicio(),
+                    dtL = new DTLineaReserva(this.getCantidad(), this.getFechaInicio(),
                     this.getFechaFin(), null,
                     this.getPromocion().getIdPromocion(), 
                     this.getPromocion().getNicknameProveedor(), 
                     this.getPrecio());
 		} else if ((this.servicio != null) && (this.promocion == null)) {
-			dtL = new DTLineaReserva(this.getCantidad(), this.getFechaInicio(), 
+                    dtL = new DTLineaReserva(this.getCantidad(), this.getFechaInicio(), 
                     this.getFechaFin(), this.getServicio().getIdServicio(), 
                     null, this.getServicio().getNicknameProveedor(), 
                     this.getPrecio());

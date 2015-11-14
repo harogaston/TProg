@@ -1,8 +1,10 @@
 package tprog.logica.clases;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
@@ -10,9 +12,11 @@ import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.Observer;
+import tprog.logica.interfaces.Subject;
 import tprog.logica.manejadores.ManejadorProductos;
 
-public class Reserva {
+public class Reserva implements Subject {
 
 	private int idReserva;
 	private Cliente cliente;
@@ -21,6 +25,9 @@ public class Reserva {
 	private EstadoReserva estado;
 	private float precioTotal;
 	private Set<LineaReserva> lineasReserva;
+	private List<Observer> observers;
+	int facturaciones = 0;
+	int cantProveedoresAsociados = 0;
 
 	public Reserva(Cliente client, DTReserva dtR) throws Exception {
 		this.idReserva = Reserva.contador;
@@ -30,32 +37,41 @@ public class Reserva {
 		this.estado = dtR.getEstadoReserva();
 		this.lineasReserva = new HashSet();
 		this.precioTotal = dtR.getPrecioTotal();
+		this.observers = new ArrayList<>();
 
 		// Creo y agrego las lineasReserva
 		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
-        LineaReserva linea; // debe declararse fuera de los if
+		LineaReserva linea; // debe declararse fuera de los if
 		for (DTLineaReserva dtLinea : dtR.getLineasReserva()) {
 			if (dtLinea.getServicio() != null) {
 				DTMinServicio dtMinS = new DTMinServicio(
-                        dtLinea.getNicknameProveedor(), dtLinea.getServicio());
+						dtLinea.getNicknameProveedor(), dtLinea.getServicio());
 				Servicio servicio = manejadorP.getServicio(dtMinS);
 				linea = new LineaReserva(dtLinea.getCantidad(),
-                        dtLinea.getFechaInicio(), dtLinea.getFechaFin(),
-                        servicio, null, dtLinea.getPrecio());
+						dtLinea.getFechaInicio(), dtLinea.getFechaFin(),
+						servicio, null, dtLinea.getPrecio());
 			} else if (dtLinea.getPromocion() != null) {
-				DTMinPromocion dtMinP = 
-                        new DTMinPromocion(dtLinea.getNicknameProveedor(),
-                        dtLinea.getPromocion());
+				DTMinPromocion dtMinP
+						= new DTMinPromocion(dtLinea.getNicknameProveedor(),
+								dtLinea.getPromocion());
 				Promocion promo = manejadorP.getPromocion(dtMinP);
 				linea = new LineaReserva(dtLinea.getCantidad(),
-                        dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null,
-                        promo, dtLinea.getPrecio());
+						dtLinea.getFechaInicio(), dtLinea.getFechaFin(), null,
+						promo, dtLinea.getPrecio());
 			} else {
 				throw new Exception("DTLineaReserva sin Servicio o Promocion "
-                        + "especificado");
+						+ "especificado");
 			}
 			lineasReserva.add(linea);
 		}
+	}
+
+	public void setCantidadProveedoresAsociados(int cant) {
+		this.cantProveedoresAsociados = cant;
+	}
+
+	public int getCantidadProveedoresAsociados() {
+		return cantProveedoresAsociados;
 	}
 
 	public int getIdReserva() {
@@ -85,6 +101,10 @@ public class Reserva {
 
 	public void setEstadoReserva(EstadoReserva est) {
 		this.estado = est;
+		if (est == EstadoReserva.Pagada) {
+			//notifico a los proveedores
+			notifyObservers();
+		}
 	}
 
 	public void setPrecioTotal(float precio) {
@@ -115,7 +135,8 @@ public class Reserva {
 		if (nuevoEstado != null) {
 			switch (this.estado) {
 				case Registrada: {
-					if (nuevoEstado == EstadoReserva.Cancelada || nuevoEstado == EstadoReserva.Pagada) {
+					if (nuevoEstado == EstadoReserva.Cancelada
+							|| nuevoEstado == EstadoReserva.Pagada) {
 						setEstadoReserva(nuevoEstado);
 						return true;
 					}
@@ -125,8 +146,9 @@ public class Reserva {
 					if (nuevoEstado == EstadoReserva.Facturada) {
 						setEstadoReserva(nuevoEstado);
 						return true;
+					} else {
+						return false;
 					}
-					return false;
 				}
 			}
 		}
@@ -141,4 +163,36 @@ public class Reserva {
 	public Set<LineaReserva> getLineasReserva() {
 		return this.lineasReserva;
 	}
+
+	void facturarReserva() {
+		facturaciones++;
+		if (facturaciones == cantProveedoresAsociados) {
+			setEstadoReserva(EstadoReserva.Facturada);
+		}
+	}
+
+	@Override
+	public void register(Observer obj) {
+		observers.add(obj);
+		//caso en el que la reserva está pagada antes de la suscripción
+		//del proveedor (en su creación)
+		if (estado == EstadoReserva.Pagada) {
+			obj.update("La reserva " + idReserva + " ha sido pagada");
+		}
+		cantProveedoresAsociados++;
+	}
+
+	@Override
+	public void unregister(Observer obj) {
+		observers.remove(obj);
+		cantProveedoresAsociados--;
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (Observer o : observers) {
+			o.update("La reserva " + idReserva + " ha sido pagada.");
+		}
+	}
+
 }

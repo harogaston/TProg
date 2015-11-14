@@ -2,8 +2,11 @@ package tprog.logica.controladores;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import tprog.logica.clases.Cliente;
+import tprog.logica.clases.Proveedor;
+import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -84,6 +87,18 @@ public class CtrlReservas implements ICtrlReservas {
 			precioTotal += precio * cant;
 		}
 	}
+        
+        @Override
+	public void quitarLineaReserva(int idLineaReserva) {
+            Iterator<DTLineaReserva> iter = lineasReserva.iterator();
+            while (iter.hasNext()){
+                DTLineaReserva linea = iter.next();
+                if (linea.getIdLineaReserva() == idLineaReserva){
+                    precioTotal =- linea.getPrecio() * linea.getCantidad();
+                    iter.remove();
+                }
+            }
+        }
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
@@ -99,13 +114,20 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public DTReserva mostrarReservaTemporal() {
-		Date fechaTemp = new Date();
-		int anio = fechaTemp.getYear() + 1900;
-		int mes = fechaTemp.getMonth();
-		int dia = fechaTemp.getDate();
-		Date fecha = new Date(anio, mes, dia);
-		EstadoReserva estado = EstadoReserva.Registrada;
-		return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+                
+                    Date fechaTemp = new Date();
+                    int anio = fechaTemp.getYear() + 1900;
+                    int mes = fechaTemp.getMonth();
+                    int dia = fechaTemp.getDate();
+                    Date fecha = new Date(anio, mes, dia);
+                    EstadoReserva estado = EstadoReserva.Registrada;
+                    if (!lineasReserva.isEmpty())
+                        return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+                    else
+                        // -2 bandera para saber que la reserva no tiene lineas de reserva sin pasar null
+                        return new DTReserva(-2, fecha, estado, precioTotal, lineasReserva);
+                
+		
 	}
 
 	@Override
@@ -123,8 +145,42 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
+	public Set<DTReserva> listarReservasProveedor() {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		return manejadorU.getProveedor(nicknameP).listarReservasParciales();
+	}
+
+	@Override
+	public Set<String> listarNotificacionesProveedor() {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		Proveedor proveedor = manejadorU.getProveedor(nicknameP);
+		Set<String> notificaciones = proveedor.getNotificaciones();
+		return notificaciones;
+	}
+
+	@Override
+	public void limpiarNotificacionesProveedor() {
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		Proveedor proveedor = manejadorU.getProveedor(nicknameP);
+		//limpio las notificaciones del proveedor
+		proveedor.limpiarNotificaciones();
+	}
+
+	@Override
 	public void seleccionarReserva(int IdReserva) {
 		this.idReserva = IdReserva;
+	}
+
+	/**
+	 * Devuelve un DTCliente correspondiente al cliente que realizó la reserva
+	 * seleccionada con seleccionarReserva
+	 *
+	 * @return
+	 */
+	@Override
+	public DTCliente getClienteAsociado() {
+		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
+		return manejadorR.getReservas().get(idReserva).getCliente().crearDT();
 	}
 
 	@Override
@@ -138,6 +194,14 @@ public class CtrlReservas implements ICtrlReservas {
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado) {
 		ManejadorReservas manejadorR = ManejadorReservas.getInstance();
 		return manejadorR.cambiarEstadoReserva(idReserva, nuevoEstado);
+	}
+
+	@Override
+	public void facturarReserva(String idProveedor, int idReserva) {
+		//se tendria que seleccionar la reserva y no pasar el parametro
+		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+		Proveedor proveedor = manejadorU.getProveedor(idProveedor);
+		proveedor.facturarReserva(idReserva);
 	}
 
 	@Override

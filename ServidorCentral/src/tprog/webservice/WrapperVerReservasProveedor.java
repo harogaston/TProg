@@ -5,12 +5,13 @@ package tprog.webservice;
 
 import java.util.Set;
 import tprog.logica.dt.DTProveedor;
+
 /**
  *
  * @author marccio
  */
-public class WrapperVerPerfilProveedor {
+public class WrapperVerReservasProveedor {
 
-        public DTProveedor dtP;
-	public Set<WrapperVerPerfilCliente> reservasCliente;
+	public DTProveedor dtP;
+	public Set<WrapperReserva> reservasCliente;
 }

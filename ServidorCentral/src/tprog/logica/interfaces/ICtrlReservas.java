@@ -26,7 +26,7 @@ public interface ICtrlReservas {
 
 	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal);
         
-        public void quitarLineaReserva(int idLineaReserva);
+    public void quitarLineaReserva(int idLineaReserva);
 
 	public Set<DTMinServicio> listarServiciosProveedor();
 
@@ -56,6 +56,8 @@ public interface ICtrlReservas {
 
 	public void facturarReserva(String idProveedor, int idReserva);
 
+    public void confirmarFactura(int idReserva);
+    
 	/**
 	 * Devuelve un set de string con las notificaciones que recibió un proveedor
 	 *

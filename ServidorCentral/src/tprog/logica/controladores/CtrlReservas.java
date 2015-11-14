@@ -203,7 +203,11 @@ public class CtrlReservas implements ICtrlReservas {
 		Proveedor proveedor = manejadorU.getProveedor(idProveedor);
 		proveedor.facturarReserva(idReserva);
 	}
-
+    @Override
+    public void confirmarFactura(int idReserva){
+        //persistir la wea
+    }
+    
 	@Override
 	public boolean eliminarReserva() {
 		ManejadorReservas manejadorR = ManejadorReservas.getInstance();

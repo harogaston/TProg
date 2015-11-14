@@ -1,9 +1,16 @@
 package tprog.logica.controladores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import persistencia.Factura;
+import persistencia.PromocionF;
+import persistencia.ServicioF;
 import tprog.logica.clases.Cliente;
 import tprog.logica.clases.Proveedor;
 import tprog.logica.dt.DTCliente;
@@ -206,6 +213,56 @@ public class CtrlReservas implements ICtrlReservas {
     @Override
     public void confirmarFactura(int idReserva){
         //persistir la wea
+        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("Facturando");
+        EntityManager entityM = entityMF.createEntityManager();
+        seleccionarReserva(idReserva);
+        DTReserva dtReserva = infoReserva();
+        Set<DTLineaReserva> lineasR = dtReserva.getLineasReserva();
+        Iterator<DTLineaReserva> iter = lineasR.iterator();
+        //agrego todas las lineas a la base y la factura en la misma transaccion
+        try{
+            entityM.getTransaction().begin();
+            ArrayList<ServicioF> serviciosF = new ArrayList<ServicioF>();
+            ArrayList<PromocionF> promocionesF = new ArrayList<PromocionF>();
+            while (iter.hasNext()){
+            DTLineaReserva linea = iter.next();
+            if (linea.getServicio() != null){
+                ServicioF servicio = new ServicioF();
+                servicio.setCantidad(linea.getCantidad());
+                servicio.setNicknameProveedor(linea.getNicknameProveedor());
+                servicio.setNombre(linea.getServicio());
+                servicio.setPrecio(linea.getPrecio());
+                serviciosF.add(servicio);
+                entityM.persist(servicio);
+            }else if (linea.getPromocion() != null){
+                PromocionF promocion = new PromocionF();
+                promocion.setCantidad(linea.getCantidad());
+                promocion.setNicknameProveedor(linea.getNicknameProveedor());
+                promocion.setNombre(linea.getPromocion());
+                promocion.setPrecio(linea.getPrecio());
+                promocionesF.add(promocion);
+                entityM.persist(promocion);
+             }
+        }
+            // agrego la factura asociada a las lineas que ya persisti
+            Factura factura = new Factura();
+            factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
+            factura.setIdReserva(idReserva);
+            factura.setMonto(dtReserva.getPrecioTotal());
+            factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
+            factura.setServicios(serviciosF);
+            factura.setPromociones(promocionesF);
+            entityM.persist(factura);
+            entityM.flush();
+            entityM.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            entityM.getTransaction().rollback();
+        } finally {
+            entityM.close();
+            entityM.close();
+        }
+        
     }
     
 	@Override

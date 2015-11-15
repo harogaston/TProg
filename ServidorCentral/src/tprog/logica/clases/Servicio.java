@@ -160,4 +160,20 @@ public class Servicio {
 		}
 		return output;
 	}
+    
+    public boolean contieneTermino(String termino){
+        boolean contains = false;
+        if (idServicio.toLowerCase().contains(termino.toLowerCase()) 
+                || descripcion.toLowerCase().contains(termino.toLowerCase())){
+            contains = true;
+        } else {
+            for (Simple categoria : categorias) {
+                if (categoria.getIdCategoria().toLowerCase().contains(termino.toLowerCase())){
+                    contains = true;
+                    break;
+                }
+            }
+        }
+        return contains;
+    }
 }

@@ -277,12 +277,30 @@ public class CtrlReservas implements ICtrlReservas {
         Query query = entityM.createQuery("Select f.id from Factura f where f.idReserva = ?1");
         query.setParameter(1, idR);
         int idFactura = (int) query.getSingleResult();         
-        //obtengo los id's de los servicios asociados al id de la factura      
+        //obtengo los id's de los servicios asociados al id de la factura 
+        Set<ServicioF> servicios = new HashSet();
         Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
-        query.setParameter(1, idFactura);
-        List facturas = query2.getResultList();
-        
-        
+        query2.setParameter(1, idFactura);
+        //obtengo los servicios a partir de sus id's
+        for (Object obj : query2.getResultList()){
+                int idS = (int) obj;
+                Query query3 = entityM.createQuery("Select s from ServicioF s where s.id = ?1");
+                query3.setParameter(1, idS);
+                ServicioF servicio = (ServicioF) query3.getSingleResult();
+                servicios.add(servicio);
+            }
+        //obtengo los id's de las promociones asociadas al id de la factura 
+        Set<PromocionF> promociones = new HashSet();
+        Query query4 = entityM.createQuery("Select fp.PROM_ID from FACT_PROM fp where fp.FACT_ID = ?1");
+        query4.setParameter(1, idFactura);
+        //obtengo las promociones a partir de sus id's
+        for (Object obj2 : query4.getResultList()){
+                int idP = (int) obj2;
+                Query query5 = entityM.createQuery("Select p from PromocionP s where p.id = ?1");
+                query5.setParameter(1, idP);
+                PromocionF promocion = (PromocionF) query5.getSingleResult();
+                promociones.add(promocion);
+            }
     }
     
 	@Override

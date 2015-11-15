@@ -3,6 +3,7 @@ package tprog.logica.interfaces;
 import java.util.Date;
 import java.util.Set;
 import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
@@ -24,6 +25,8 @@ public interface ICtrlReservas {
 	public void seleccionarServicio(DTMinServicio dtS);
 
 	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal);
+        
+        public void quitarLineaReserva(int idLineaReserva);
 
 	public Set<DTMinServicio> listarServiciosProveedor();
 

@@ -175,6 +175,13 @@
 <message name="agregarServicioCarritoResponse">
 <part name="return" type="tns:dtReserva"></part>
 </message>
+<message name="quitarlineaReserva">
+<part name="id_ctrl_reservas" type="xsd:int"></part>
+<part name="id_LineaReserva" type="xsd:int"></part>
+</message>
+<message name="quitarlineaReservaResponse">
+<part name="return" type="tns:dtReserva"></part>
+</message>
 <message name="agregarPromocionCarrito">
 <part name="id_ctrl_reservas" type="xsd:int"></part>
 <part name="nickname" type="xsd:string"></part>
@@ -312,6 +319,10 @@
 <operation name="agregarServicioCarrito" parameterOrder="id_ctrl_reservas nickname id_servicio id_proveedor cantidad fecha_inicio fecha_fin">
 <input wsam:Action="http://webservice.tprog/Publicador/agregarServicioCarritoRequest" message="tns:agregarServicioCarrito"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/agregarServicioCarritoResponse" message="tns:agregarServicioCarritoResponse"></output>
+</operation>
+<operation name="quitarlineaReserva" parameterOrder="id_ctrl_reservas id_LineaReserva">
+<input wsam:Action="http://webservice.tprog/Publicador/quitarlineaReservaRequest" message="tns:quitarlineaReserva"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/quitarlineaReservaResponse" message="tns:quitarlineaReservaResponse"></output>
 </operation>
 <operation name="agregarPromocionCarrito" parameterOrder="id_ctrl_reservas nickname id_promocion id_proveedor cantidad fecha_inicio fecha_fin">
 <input wsam:Action="http://webservice.tprog/Publicador/agregarPromocionCarritoRequest" message="tns:agregarPromocionCarrito"></input>
@@ -561,6 +572,15 @@
 </output>
 </operation>
 <operation name="agregarServicioCarrito">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="quitarlineaReserva">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

@@ -8,12 +8,12 @@
 <!doctype html>
 <html>
     <head>
-        <%@include file="templates/head.jspf" %>
+        <%@include file="/pages/templates/head.jspf" %>
         <title>Tus servicios</title>
         <script src="js/vakata-jstree/dist/jstree.min.js"></script>
     </head>
     <header>
-        <%@include file="templates/header.jsp" %>
+        <%@include file="/pages/templates/header.jsp" %>
         <link rel="stylesheet" href="js/vakata-jstree/dist/themes/default/style.min.css">
     </header>
     <body>
@@ -75,7 +75,7 @@
             </div>
         </div>
     </body>
-    <%@include file="templates/footer.jspf" %>
+    <%@include file="/pages/templates/footer.jspf" %>
 </html>
 
 <script>

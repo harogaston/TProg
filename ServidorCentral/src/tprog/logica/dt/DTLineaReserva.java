@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DTLineaReserva {
 
+        private int idLineaReserva;
+        public static int contador = 1;
 	private int cantidad;
 	private Date fechaInicio;
 	private Date fechaFin;
@@ -16,7 +18,9 @@ public class DTLineaReserva {
 	private float precio;
 
 	public DTLineaReserva(int Cantidad, Date FechaInicio, Date FechaFin, String Servicio, String Promocion, String NicknameProveedor, float Precio) {
-		this.cantidad = Cantidad;
+		this.idLineaReserva = contador;
+                contador++;
+                this.cantidad = Cantidad;
 		this.fechaInicio = FechaInicio;
 		this.fechaFin = FechaFin;
 		this.servicio = Servicio;
@@ -24,7 +28,11 @@ public class DTLineaReserva {
 		this.nicknameProveedor = NicknameProveedor;
 		this.precio = Precio;
 	}
-
+        
+        public int getIdLineaReserva(){
+            return this.idLineaReserva;
+        }
+        
 	public int getCantidad() {
 		return this.cantidad;
 	}

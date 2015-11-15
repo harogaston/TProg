@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import webservice.DtMinServicio;
 import webservice.WrapperVerPromocion;
 
@@ -25,6 +26,7 @@ public class VerPromocion extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idPromocion = request.getParameter("idPromocion");
@@ -41,7 +43,11 @@ public class VerPromocion extends HttpServlet {
 		request.setAttribute("idProveedor", idProveedor);
 		//y el resto de la info del servicio
 		request.setAttribute("infoPromocion", result.getPromocion());
-		request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
+        if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
+            request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/pages/proveedor/verPromocionProveedor.jsp").forward(request, response);
+        }
 	}
 
 	@Override

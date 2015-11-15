@@ -60,7 +60,7 @@ public class ReservasProveedor extends HttpServlet {
 		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
 		session.setAttribute("notificaciones", notificaciones);
 		session.setAttribute("cant_notificaciones", notificaciones.size());
-		request.getRequestDispatcher("/pages/reservasProveedor.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/proveedor/reservasProveedor.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

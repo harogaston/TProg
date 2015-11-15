@@ -46,7 +46,7 @@ public class Proveedores extends HttpServlet {
 			if (session.getAttribute("estado_sesion") == EstadoSesion.OK_LOGIN) {
 				request.getRequestDispatcher("VerPerfil").forward(request, response);
 			} else {
-				request.getRequestDispatcher("/pages/proveedor.jsp").forward(request, response);
+				request.getRequestDispatcher("/pages/proveedor/proveedor.jsp").forward(request, response);
 			}
 		}
 	}

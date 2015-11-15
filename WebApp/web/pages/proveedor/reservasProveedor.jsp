@@ -9,13 +9,13 @@
 <!doctype html>
 <html>
     <head>
-        <%@include file="templates/head.jspf" %>
+        <%@include file="/pages/templates/head.jspf" %>
         <!-- Acá se puede especificar el título de ESTA jsp de la siguiente forma:
                         <title>El título</title>
         -->
     </head>
     <header>
-        <%@include file="templates/header.jsp" %>
+        <%@include file="/pages/templates/header.jsp" %>
         <!-- ACA .css que se requieran en esta jsp
         (sin incluir bootstrap.css ni bootstrap-theme.css que ya estan en head.jsp)
         -->
@@ -136,7 +136,7 @@
 
         </div>
 
-    </body><%@include file="templates/footer.jspf" %>
+    </body><%@include file="/pages/templates/footer.jspf" %>
 </html>
 <script>
     /**

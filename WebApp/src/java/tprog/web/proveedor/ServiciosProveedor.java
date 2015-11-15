@@ -58,7 +58,7 @@ public class ServiciosProveedor extends HttpServlet {
 		session.setAttribute("notificaciones", notificaciones);
 		session.setAttribute("cant_notificaciones", notificaciones.size());
 		//redirijo request
-		request.getRequestDispatcher("/pages/verServiciosProveedor.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/proveedor/verServiciosProveedor.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

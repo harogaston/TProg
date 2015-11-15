@@ -61,7 +61,7 @@ public class PromocionesProveedor extends HttpServlet {
 		session.setAttribute("cant_notificaciones", notificaciones.size());
 		request.setAttribute("promociones", promociones);
 		//redirijo request
-		request.getRequestDispatcher("/pages/verPromocionesProveedor.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/proveedor/verPromocionesProveedor.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,10 +4,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@include file="templates/head.jspf" %>
+        <%@include file="/pages/templates/head.jspf" %>
     </head>
     <header>
-        <%@include file="templates/header.jsp" %>
+        <%@include file="/pages/templates/header.jsp" %>
     </header>
     <body>
         <!-- MENSAJE SI SE INTENTÓ ENTRAR A UNA CUENTA NO REGISTRADA -->

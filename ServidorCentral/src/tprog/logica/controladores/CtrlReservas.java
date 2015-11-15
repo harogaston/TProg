@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import persistencia.Factura;
 import persistencia.PromocionF;
 import persistencia.ServicioF;
@@ -262,6 +264,24 @@ public class CtrlReservas implements ICtrlReservas {
             entityM.close();
             entityM.close();
         }
+        
+    }
+    
+    @Override
+    public void verFactura(int idReserva){
+        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("Facturando");
+        EntityManager entityM = entityMF.createEntityManager();
+        seleccionarReserva(idReserva);
+        String idR = Integer.toString(idReserva);
+        //obtengo el id de la factura asociada al idReserva
+        Query query = entityM.createQuery("Select f.id from Factura f where f.idReserva = ?1");
+        query.setParameter(1, idR);
+        int idFactura = (int) query.getSingleResult();         
+        //obtengo los id's de los servicios asociados al id de la factura      
+        Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
+        query.setParameter(1, idFactura);
+        List facturas = query2.getResultList();
+        
         
     }
     

@@ -58,6 +58,8 @@ public interface ICtrlReservas {
 
     public void confirmarFactura(int idReserva);
     
+    public void verFactura(int idReserva);
+    
 	/**
 	 * Devuelve un set de string con las notificaciones que recibió un proveedor
 	 *

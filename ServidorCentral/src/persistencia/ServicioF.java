@@ -4,10 +4,13 @@
 package persistencia;
 
 import java.io.Serializable;
+import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -23,6 +26,8 @@ public class ServicioF implements Serializable {
     private double precio;
     private String nombre;
     private String nicknameProveedor;
+    @ManyToMany(cascade=CascadeType.PERSIST)
+    private Collection<Factura> facturas;
     
 
     public Long getId() {
@@ -63,6 +68,14 @@ public class ServicioF implements Serializable {
 
     public void setNicknameProveedor(String nicknameProveedor) {
         this.nicknameProveedor = nicknameProveedor;
+    }
+    
+    public Collection<Factura> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(Collection<Factura> facturas) {
+        this.facturas = facturas;
     }
     
     @Override

@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -30,8 +32,10 @@ public class Factura implements Serializable {
     private double monto;
     private String nicknameCliente;
     @ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+    @JoinTable(name="FACT_SERV", joinColumns=@JoinColumn(name="FACT_ID"), inverseJoinColumns=@JoinColumn(name="SERV_ID"))
     private Collection<ServicioF> servicios;
     @ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
+    @JoinTable(name="FACT_PROM", joinColumns=@JoinColumn(name="FACT_ID"), inverseJoinColumns=@JoinColumn(name="PROM_ID"))
     private Collection<PromocionF> promociones;
 
     public int getIdReserva() {

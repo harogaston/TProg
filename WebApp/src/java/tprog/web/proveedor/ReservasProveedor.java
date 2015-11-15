@@ -35,6 +35,7 @@ public class ReservasProveedor extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, Exception_Exception {
+        response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		String idProveedor = (String) session.getAttribute("usuario_logueado");

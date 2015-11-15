@@ -39,6 +39,7 @@ public class Proveedores extends HttpServlet {
 
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 		initSession2(request);
 		HttpSession session = request.getSession();
 		if (session.getAttribute("tipo_usuario") == TipoUsuario.PROVEEDOR) {

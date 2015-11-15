@@ -25,6 +25,7 @@ public class RegistrarCliente extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         webservice.PublicadorService service = new webservice.PublicadorService();
         webservice.Publicador proxy = service.getPublicadorPort();

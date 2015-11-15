@@ -37,6 +37,7 @@ public class ServiciosProveedor extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//establezco proxy con el web service
+        response.setContentType("text/html;charset=UTF-8");
 		webservice.PublicadorService servicio
 				= new webservice.PublicadorService();
 		webservice.Publicador proxy = servicio.getPublicadorPort();

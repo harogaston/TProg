@@ -455,16 +455,8 @@ public class ManejadorProductos {
         Set<DTServicio> result = new HashSet<DTServicio>();
         for (Map<String, Servicio> map : servicios.values()){
             for (Servicio serv : map.values()){
-                if (serv.getIdServicio().toLowerCase().contains(termino.toLowerCase()) 
-                        || serv.getDescripcion().toLowerCase().contains(termino.toLowerCase())){
+                if (serv.contieneTermino(termino)){
                     result.add(serv.crearDT());
-                } else {
-                    for (String categoria : serv.listarCategorias()){
-                        if (categoria.toLowerCase().contains(termino.toLowerCase())){
-                            result.add(serv.crearDT());
-                            break;
-                        }
-                    }
                 }
             }
         }
@@ -473,9 +465,23 @@ public class ManejadorProductos {
     
     public Set<DTPromocion> listarPromocionesPorTermino(String termino){
         Set<DTPromocion> result = new HashSet<DTPromocion>();
+        boolean listarPromo;
         for (Map<String, Promocion> map : promociones.values()){
             for (Promocion promo : map.values()){
+                listarPromo = false;
                 if (promo.getIdPromocion().toLowerCase().contains(termino.toLowerCase())){
+                    listarPromo = true;
+                } else {
+                    Map<String, Integer> serviciosPromocion = promo.getServicios();
+                    for (String idServicio : serviciosPromocion.keySet()){
+                        Servicio serv = servicios.get(promo.getNicknameProveedor()).get(idServicio);
+                        if (serv.contieneTermino(termino)){
+                            listarPromo = true;
+                            break;
+                        }   
+                    }
+                }
+                if (listarPromo){
                     result.add(promo.crearDT());
                 }
             }

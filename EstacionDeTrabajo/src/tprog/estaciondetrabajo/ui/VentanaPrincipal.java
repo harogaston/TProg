@@ -13,6 +13,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import tprog.estaciondetrabajo.carga.CtrlCarga;
 import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlReservas;
 
 public class VentanaPrincipal extends javax.swing.JFrame {
 
@@ -120,8 +121,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         menuAltas.add(menuItemAltaPromocion);
 
-        menuItemRealizarReserva.setText("Realizar Reserva");
-        menuItemRealizarReserva.setEnabled(false);
+        menuItemRealizarReserva.setText("jpa");
+        menuItemRealizarReserva.setEnabled(true);
         menuItemRealizarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemRealizarReservaActionPerformed(evt);
@@ -286,8 +287,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemAltaCategoriaActionPerformed
 
     private void menuItemRealizarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRealizarReservaActionPerformed
-        RealizarReserva1 realizarReserva = new RealizarReserva1(fabrica.getICtrlUsuarios(), fabrica.getICtrlReservas());
-        center(realizarReserva);
+        //RealizarReserva1 realizarReserva = new RealizarReserva1(fabrica.getICtrlUsuarios(), fabrica.getICtrlReservas());
+        //center(realizarReserva);
+        ICtrlReservas ddd = fabrica.getICtrlReservas();
+        ddd.confirmarFactura(6);
+        
     }//GEN-LAST:event_menuItemRealizarReservaActionPerformed
 
     private void menuItemActualizarEstadoReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemActualizarEstadoReservaActionPerformed

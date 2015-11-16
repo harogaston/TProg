@@ -215,7 +215,7 @@ public class CtrlReservas implements ICtrlReservas {
     @Override
     public void confirmarFactura(int idReserva){
         //persistir la wea
-        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("Facturando");
+        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("EjemploJPAPU");
         EntityManager entityM = entityMF.createEntityManager();
         seleccionarReserva(idReserva);
         DTReserva dtReserva = infoReserva();
@@ -301,6 +301,7 @@ public class CtrlReservas implements ICtrlReservas {
                 PromocionF promocion = (PromocionF) query5.getSingleResult();
                 promociones.add(promocion);
             }
+        System.out.println("factura" + idFactura);
     }
     
 	@Override

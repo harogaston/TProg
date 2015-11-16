@@ -64,8 +64,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="menuItemRealizarReserva">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Realizar Reserva"/>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="&quot;jpa&quot;" type="code"/>
+                </Property>
+                <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="true" type="code"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemRealizarReservaActionPerformed"/>

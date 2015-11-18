@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import tprog.logica.dt.DTServicioF;
 
 /**
  *
@@ -101,6 +102,11 @@ public class ServicioF implements Serializable {
     @Override
     public String toString() {
         return "persistencia.ServicioF[ id=" + id + " ]";
+    }
+
+    DTServicioF crearDTServicioF() {
+        DTServicioF dtS = new DTServicioF(cantidad, precio, nombre, nicknameProveedor);
+        return dtS;
     }
     
 }

@@ -17,6 +17,7 @@ import persistencia.ServicioF;
 import tprog.logica.clases.Cliente;
 import tprog.logica.clases.Proveedor;
 import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTFacturaF;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -271,7 +272,7 @@ public class CtrlReservas implements ICtrlReservas {
     }
     
     @Override
-    public void verFactura(int idReserva){
+    public DTFacturaF verFactura(int idReserva){
         EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
         EntityManager entityM = entityMF.createEntityManager();
         seleccionarReserva(idReserva);
@@ -295,6 +296,10 @@ public class CtrlReservas implements ICtrlReservas {
             query.setParameter(1, idReserva);
             //long idFactura = (long) query.getSingleResult();
             FacturaF factura = (FacturaF) query.getSingleResult();
+            
+            
+            
+            
             
             // ver facturas del id
             /*List facturas = query.getResultList();
@@ -331,6 +336,12 @@ public class CtrlReservas implements ICtrlReservas {
                 promociones.add(promo);
                 System.out.println("promo " + promo.getNombre());
             }
+            //armo el DTFacturaF
+
+            
+            DTFacturaF dtF = new DTFacturaF(factura.getIdReserva(), factura.getMonto(), factura.getNicknameCliente(), servicios,
+                                            promociones);
+            
             entityM.getTransaction().commit();
             //Set<ServicioF> servicios = new HashSet();
             /*Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");

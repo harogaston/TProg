@@ -3,6 +3,7 @@ package tprog.logica.interfaces;
 import java.util.Date;
 import java.util.Set;
 import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTFacturaF;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
@@ -57,7 +58,7 @@ public interface ICtrlReservas {
 
     public void confirmarFactura(int idReserva);
     
-    public void verFactura(int idReserva);
+    public DTFacturaF verFactura(int idReserva);
     
 	/**
 	 * Devuelve un set de string con las notificaciones que recibió un proveedor

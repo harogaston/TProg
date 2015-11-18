@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import tprog.logica.dt.DTPromocionF;
 
 /**
  *
@@ -100,6 +101,11 @@ public class PromocionF implements Serializable {
     @Override
     public String toString() {
         return "persistencia.PromocionF[ id=" + id + " ]";
+    }
+
+    DTPromocionF crearDTPromocionF() {
+               DTPromocionF dtP = new DTPromocionF(cantidad, precio, nombre, nicknameProveedor);
+        return dtP;
     }
     
 }

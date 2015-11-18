@@ -188,10 +188,12 @@ public class Publicador {
 		}
 		return null;
 	}
+    
 
 	@WebMethod
-	public WrapperVerServiciosProveedor verServiciosProveedor(String nickProveedor) {
+	public WrapperVerFactura verFactura(int idReserva) {
 		Fabrica f = Fabrica.getInstance();
+        ICtrlReservas ctrlReservas = f.getICtrlReservas();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
 		Set<DTMinServicio> serviciosTodos;
 		try {

@@ -79,10 +79,11 @@
 									<div id="s<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
 											<span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%> 
-                                                                                        <form action="VerFactura" method="GET">
+                                                                                        <form action="VerFactura" method="POST">
 												<button type="submit" >														
                                                                                                     <span style="font-weight: bold">Ver Factura</span>
-												</button><br>
+                                                                                                    <input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+                                                                                                </button><br>
 											</form>
                                                                                                 
 											<%

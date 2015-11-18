@@ -1,6 +1,7 @@
 package tprog.logica.controladores;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -277,13 +278,34 @@ public class CtrlReservas implements ICtrlReservas {
         try{
             entityM.getTransaction().begin();
             //obtengo el id de la factura asociada al idReserva
+            Query qu = entityM.createQuery("Delete from ServicioF where idReserva = 6");
+            Query que = entityM.createQuery("Delete from PromocionF where idReserva = 6");
+            Query quer = entityM.createQuery("Delete from FacturaF where idReserva = 6");
             Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
             query.setParameter(1, idReserva);
             //long idFactura = (long) query.getSingleResult();
             FacturaF factura = (FacturaF) query.getSingleResult();
             long idFactura = factura.getId();
-            //obtengo los id's de los servicios asociados al id de la factura 
+            System.out.println("factura " + idFactura);
+            //obtengo los id's de los servicios asociados al id de la factura
+            Collection<ServicioF> servis =  factura.getServicios();
             Set<ServicioF> servicios = new HashSet();
+            Iterator<ServicioF> iter = servis.iterator();
+            while(iter.hasNext()){
+                ServicioF servi = iter.next();
+                servicios.add(servi);
+                System.out.println("servi " + servi.getNombre());
+            }
+            //obtengo los id's de las promociones asociadas al id de la factura 
+            Collection<PromocionF> promos =  factura.getPromociones();
+            Set<PromocionF> promociones = new HashSet();
+            Iterator<PromocionF> iter2 = promos.iterator();
+            while(iter.hasNext()){
+                PromocionF promo = iter2.next();
+                promociones.add(promo);
+                System.out.println("promo " + promo.getNombre());
+            }
+            //Set<ServicioF> servicios = new HashSet();
             /*Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
             query2.setParameter(1, idFactura);
             //obtengo los servicios a partir de sus id's
@@ -306,7 +328,7 @@ public class CtrlReservas implements ICtrlReservas {
                     PromocionF promocion = (PromocionF) query5.getSingleResult();
                     promociones.add(promocion);
                 }*/
-            System.out.println("factura" + idFactura);
+            
     } catch (Exception e) {
             e.printStackTrace();
             entityM.getTransaction().rollback();

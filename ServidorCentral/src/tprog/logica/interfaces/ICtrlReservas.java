@@ -53,7 +53,7 @@ public interface ICtrlReservas {
 
 	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 
-	public void facturarReserva(String idProveedor, int idReserva);
+	public void facturarReserva(String idProveedor, String nickCliente, int idReserva);
 
     public void confirmarFactura(int idReserva);
     

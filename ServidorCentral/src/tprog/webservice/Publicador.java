@@ -283,8 +283,8 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public void facturarReserva(String idProveedor, int idReserva) {
-		Fabrica.getInstance().getICtrlReservas().facturarReserva(idProveedor, idReserva);
+	public void facturarReserva(String idProveedor, String nickCliente, int idReserva) {
+		Fabrica.getInstance().getICtrlReservas().facturarReserva(idProveedor, nickCliente, idReserva);
 	}
 
 	@WebMethod

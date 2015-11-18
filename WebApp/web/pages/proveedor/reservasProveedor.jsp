@@ -112,6 +112,7 @@
                                                         <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
                                                         <button type="submit" class="btn btn-danger">Sí, facturar</button>
                                                         <input type="number" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+                                                        <input type="text" name="nickCliente" value="<%=wrapper.getNickCliente()%>" style="display: none">
                                                     </form>
                                                 </div>
                                             </div>

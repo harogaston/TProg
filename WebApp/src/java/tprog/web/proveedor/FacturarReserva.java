@@ -37,9 +37,10 @@ public class FacturarReserva extends HttpServlet {
 		HttpSession session = request.getSession();
 		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		int idReserva = Integer.parseInt((String) request.getParameter("idReserva"));
+        String nickCliente = request.getParameter("nickCliente");
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
-		proxy.facturarReserva(idProveedor, idReserva);
+		proxy.facturarReserva(idProveedor, nickCliente, idReserva);
 		//asigno atributos de la request
 		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
 		session.setAttribute("notificaciones", notificaciones);

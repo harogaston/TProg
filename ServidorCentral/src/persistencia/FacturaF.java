@@ -30,8 +30,8 @@ public class FacturaF implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int idReserva;
-    @Temporal(TemporalType.TIME)
-    private Date fecha;
+    //@Temporal(TemporalType.DATE)
+    //private Date fecha;
     private double monto;
     private String nicknameCliente;
     @ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
@@ -44,11 +44,11 @@ public class FacturaF implements Serializable {
     public int getIdReserva() {
         return idReserva;
     }
-
+/*
     public Date getFecha() {
         return fecha;
     }
-
+*/
     public double getMonto() {
         return monto;
     }
@@ -60,11 +60,11 @@ public class FacturaF implements Serializable {
     public void setIdReserva(int idReserva) {
         this.idReserva = idReserva;
     }
-
+/*
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-
+*/
     public void setMonto(double monto) {
         this.monto = monto;
     }

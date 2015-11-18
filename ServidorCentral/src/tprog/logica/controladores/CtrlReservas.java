@@ -248,7 +248,7 @@ public class CtrlReservas implements ICtrlReservas {
         }
             // agrego la factura asociada a las lineas que ya persisti
             FacturaF factura = new FacturaF();
-            factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
+           // factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
             factura.setIdReserva(idReserva);
             factura.setMonto(dtReserva.getPrecioTotal());
             factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
@@ -277,12 +277,14 @@ public class CtrlReservas implements ICtrlReservas {
         try{
             entityM.getTransaction().begin();
             //obtengo el id de la factura asociada al idReserva
-            Query query = entityM.createQuery("Select f.id from FacturaF f where f.idReserva = ?1");
+            Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
             query.setParameter(1, idReserva);
-            int idFactura = (int) query.getSingleResult();         
+            //long idFactura = (long) query.getSingleResult();
+            FacturaF factura = (FacturaF) query.getSingleResult();
+            long idFactura = factura.getId();
             //obtengo los id's de los servicios asociados al id de la factura 
             Set<ServicioF> servicios = new HashSet();
-            Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
+            /*Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
             query2.setParameter(1, idFactura);
             //obtengo los servicios a partir de sus id's
             for (Object obj : query2.getResultList()){
@@ -303,7 +305,7 @@ public class CtrlReservas implements ICtrlReservas {
                     query5.setParameter(1, idP);
                     PromocionF promocion = (PromocionF) query5.getSingleResult();
                     promociones.add(promocion);
-                }
+                }*/
             System.out.println("factura" + idFactura);
     } catch (Exception e) {
             e.printStackTrace();

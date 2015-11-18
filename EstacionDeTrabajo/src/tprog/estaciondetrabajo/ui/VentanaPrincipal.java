@@ -290,9 +290,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //RealizarReserva1 realizarReserva = new RealizarReserva1(fabrica.getICtrlUsuarios(), fabrica.getICtrlReservas());
         //center(realizarReserva);
         ICtrlReservas ddd = fabrica.getICtrlReservas();
-        ddd.confirmarFactura(6);
+        ddd.confirmarFactura(1);
         System.out.println("oh");
-        ddd.verFactura(6);
+        ddd.verFactura(1);
         System.out.println("ooohh");
         
     }//GEN-LAST:event_menuItemRealizarReservaActionPerformed

@@ -278,10 +278,10 @@ public class CtrlReservas implements ICtrlReservas {
         seleccionarReserva(idReserva);
         String idR = Integer.toString(idReserva);
         System.out.println("uosa");
+        DTFacturaF dtF = null;
         try{
             entityM.getTransaction().begin();
-            //obtengo el id de la factura asociada al idReserva
-            
+                        
             /* BORRAR TODO
             Query qu = entityM.createQuery("DELETE FROM ServicioF");
             Query que = entityM.createQuery("DELETE FROM PromocionF");
@@ -291,16 +291,12 @@ public class CtrlReservas implements ICtrlReservas {
             qude.executeUpdate();
             entityM.getTransaction().commit();*/
             
-            
+            //obtengo el id de la factura asociada al idReserva
             Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
             query.setParameter(1, idReserva);
             //long idFactura = (long) query.getSingleResult();
             FacturaF factura = (FacturaF) query.getSingleResult();
-            
-            
-            
-            
-            
+
             // ver facturas del id
             /*List facturas = query.getResultList();
             Iterator wea = facturas.iterator();
@@ -310,8 +306,7 @@ public class CtrlReservas implements ICtrlReservas {
                int idReservoide = factura.getIdReserva();
             System.out.println("factura " + idFactura+ " " + idReservoide); 
             }*/
-            
-           
+              
             long idFactura = factura.getId();
             System.out.println("factura " + idFactura);
             System.out.println("reserva "+factura.getIdReserva());
@@ -337,12 +332,9 @@ public class CtrlReservas implements ICtrlReservas {
                 System.out.println("promo " + promo.getNombre());
             }
             //armo el DTFacturaF
-
-            
-            DTFacturaF dtF = new DTFacturaF(factura.getIdReserva(), factura.getMonto(), factura.getNicknameCliente(), servicios,
-                                            promociones);
-            
+            dtF = factura.crearDTFacturaF();
             entityM.getTransaction().commit();
+            
             //Set<ServicioF> servicios = new HashSet();
             /*Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
             query2.setParameter(1, idFactura);
@@ -374,6 +366,7 @@ public class CtrlReservas implements ICtrlReservas {
             entityM.close();
             entityMF.close();
         }
+        return dtF;
     }
     
 	@Override

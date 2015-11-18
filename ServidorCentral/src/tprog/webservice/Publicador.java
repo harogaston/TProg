@@ -31,6 +31,7 @@ import java.util.Date;
 import java.util.SortedSet;
 import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTFacturaF;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinCliente;
 import tprog.logica.dt.DTMinPromocion;
@@ -40,6 +41,7 @@ import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
+import tprog.logica.dt.DTServicioF;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.dt.EstadoReserva;
 import tprog.logica.interfaces.Fabrica;
@@ -194,22 +196,10 @@ public class Publicador {
 	public WrapperVerFactura verFactura(int idReserva) {
 		Fabrica f = Fabrica.getInstance();
         ICtrlReservas ctrlReservas = f.getICtrlReservas();
-		ICtrlProductos ctrlProductos = f.getICtrlProductos();
-		Set<DTMinServicio> serviciosTodos;
-		try {
-			serviciosTodos = ctrlProductos.listarServicios();
-		} catch (Exception ex) {
-			serviciosTodos = new HashSet();
-		}
-		WrapperVerServiciosProveedor result = new WrapperVerServiciosProveedor();
-		result.servicios = new HashMap<>();
-		for (DTMinServicio dt : serviciosTodos) {
-			if (dt.getNicknameP().equals(nickProveedor)) {
-				ctrlProductos.seleccionarServicio(dt);
-				DTServicio servicio = ctrlProductos.infoServicio();
-				result.servicios.put(servicio, servicio.toString());
-			}
-		}
+		DTFacturaF dtF = ctrlReservas.verFactura(idReserva);
+		WrapperVerFactura result = new WrapperVerFactura();
+		result.servicios = dtF.getServicios();
+        result.promociones = dtF.getPromociones();
 		return result;
 	}
 

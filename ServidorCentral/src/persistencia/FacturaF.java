@@ -114,9 +114,9 @@ public class FacturaF implements Serializable {
         Set<DTPromocionF> dtPromociones = new HashSet();
 		Iterator<PromocionF> iterador2 = promociones.iterator();
 		while (iterador2.hasNext()) {
-            PromocionF promocion = iterador.next();
-			DTServicioF temp = servicio.crearDTServicioF();
-			dtServicios.add(temp);
+            PromocionF promocion = iterador2.next();
+			DTPromocionF temp2 = promocion.crearDTPromocionF();
+			dtPromociones.add(temp2);
 		}
         //ahora si creo el dt de la factura
         DTFacturaF dtF = new DTFacturaF(idReserva, monto, nicknameCliente, dtServicios, dtPromociones);

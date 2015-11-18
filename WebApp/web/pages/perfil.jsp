@@ -78,7 +78,13 @@
 									</div>
 									<div id="s<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
-											<span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%><br>
+											<span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%> 
+                                                                                        <form action="VerFactura" method="GET">
+												<button type="submit" >														
+                                                                                                    <span style="font-weight: bold">Ver Factura</span>
+												</button><br>
+											</form>
+                                                                                                
 											<%
 												String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
 														+ Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"

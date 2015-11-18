@@ -33,6 +33,7 @@ public class FacturarReserva extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
 		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		int idReserva = Integer.parseInt((String) request.getParameter("idReserva"));

@@ -50,9 +50,9 @@
 									<div class="panel-body">
 										<span class="text-muted">Nombre: </span> ${nombre}<br>
 										<span class="text-muted">Fecha de Nacimiento: </span>${fNac}<br>
-										<span class="text-muted">Email: </span>${email}<br><br>
-										<span class="text-muted">Empresa: </span>${empresa}<br><br>
-										<span class="text-muted"><a href="<%=(String) request.getAttribute("webempresa")%>"></a>Web: </span>${webempresa}<br><br>
+										<span class="text-muted">Email: </span>${email}<br>
+										<span class="text-muted">Empresa: </span>${empresa}<br>
+										<span class="text-muted"><a href="<%=(String) request.getAttribute("webempresa")%>"></a>Web: </span>${webempresa}<br>
 									</div>
 								</div>
 							</div>

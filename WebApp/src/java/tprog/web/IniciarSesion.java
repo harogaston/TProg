@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ public class IniciarSesion extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
@@ -48,12 +50,21 @@ public class IniciarSesion extends HttpServlet {
 			if (proxy.verificarLoginProveedor(id, contrasena)) {
 				nuevoEstado = EstadoSesion.OK_LOGIN;
 				//en caso de que id sea un email
+                if (request.getParameter("remember") != null){
+                    response.addCookie(new Cookie("cookieName", "cookie1"));
+                    response.addCookie(new Cookie("cookie1Value", id));
+                    response.addCookie(new Cookie("cookie1Timeout", "60*60*24*365"));
+                    response.addCookie(new Cookie("cookiePass", "cookie2"));
+                    response.addCookie(new Cookie("cookie2Value", contrasena));
+                    response.addCookie(new Cookie("cookie2Timeout", "60*60*24*365"));
+                }
 				id = proxy.obtenerIdProveedor(id, contrasena);
 				request.getSession().setAttribute("usuario_logueado", id);
 				session.setAttribute("estado_sesion", nuevoEstado);
 				List<String> notificaciones = proxy.listarNotificacionesProveedor(id).getNotificaciones();
 				session.setAttribute("notificaciones", notificaciones);
 				session.setAttribute("cant_notificaciones", notificaciones.size());
+                
 			} else {
 				session.setAttribute("inicioIncorrecto", "Las credenciales que ingresó no corresponden a ningún proveedor registrado en el sistema");
 			}

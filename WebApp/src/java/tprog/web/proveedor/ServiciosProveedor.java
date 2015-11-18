@@ -37,6 +37,7 @@ public class ServiciosProveedor extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//establezco proxy con el web service
+        response.setContentType("text/html;charset=UTF-8");
 		webservice.PublicadorService servicio
 				= new webservice.PublicadorService();
 		webservice.Publicador proxy = servicio.getPublicadorPort();
@@ -57,7 +58,7 @@ public class ServiciosProveedor extends HttpServlet {
 		session.setAttribute("notificaciones", notificaciones);
 		session.setAttribute("cant_notificaciones", notificaciones.size());
 		//redirijo request
-		request.getRequestDispatcher("/pages/verServiciosProveedor.jsp").forward(request, response);
+		request.getRequestDispatcher("/pages/proveedor/verServiciosProveedor.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

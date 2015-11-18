@@ -62,4 +62,11 @@ public class DTPromocionTest {
 		Map<DTMinServicio, Integer>  result = instance.getServicios();
 		assertEquals(expResult.size(), result.size());
 	}
+    
+    @Test
+	public void testGetNicknameProveedor() {
+		System.out.println("getNicknameProveedor");
+        DTPromocion instance = new DTPromocion("id", null, 0.25F, 550.0F, set);
+		assertEquals("id", instance.getNicknameProveedor());
+	}
 }

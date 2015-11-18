@@ -3,7 +3,6 @@ package tprog.logica.interfaces;
 import java.util.Date;
 import java.util.Set;
 import tprog.logica.dt.DTCliente;
-import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;

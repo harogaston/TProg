@@ -21,6 +21,7 @@ public class DTServicioTest {
 	private Set<String> imagenes;
 
 	public DTServicioTest() {
+        
 	}
 
 	@Before
@@ -33,7 +34,21 @@ public class DTServicioTest {
 		imagenes.add("Im3");
 		instance = new DTServicio("id", "desc", null, 480.23F, imagenes, origen, destino);
 	}
-
+    
+    @Test
+	public void testDTServicio() {
+		System.out.println("DTServicio");
+		DTServicio expResult = new DTServicio(null,null,null,0,null,null,null);
+		DTServicio result = new DTServicio();
+		assertEquals(expResult, result);
+	}
+    
+    @Test
+	public void testGetNicknameProveedor() {
+		System.out.println("getNicknameProveedor");
+		assertEquals("desc", instance.getNicknameProveedor());
+	}
+    
 	@Test
 	public void testGetIdServicio() {
 		System.out.println("getIdServicio");

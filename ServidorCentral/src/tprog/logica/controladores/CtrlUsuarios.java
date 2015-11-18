@@ -211,13 +211,13 @@ public class CtrlUsuarios implements ICtrlUsuarios {
 	public static class Adapter extends XmlAdapter<CtrlUsuarios, ICtrlUsuarios> {
 
 		@Override
-		public ICtrlUsuarios unmarshal(CtrlUsuarios v) {
-			return v;
+		public ICtrlUsuarios unmarshal(CtrlUsuarios valor) {
+			return valor;
 		}
 
 		@Override
-		public CtrlUsuarios marshal(ICtrlUsuarios v) {
-			return (CtrlUsuarios) v;
+		public CtrlUsuarios marshal(ICtrlUsuarios valor) {
+			return (CtrlUsuarios) valor;
 		}
 
 	}

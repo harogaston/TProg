@@ -39,4 +39,11 @@ public class DTMinServicioTest {
 		assertEquals(expResult, result);
 	}
 	
+    @Test
+	public void testDTMinServicio() {
+		System.out.println("DTMinServicio");
+		DTMinServicio expResult = new DTMinServicio(null,null);
+		DTMinServicio result = new DTMinServicio();
+		assertEquals(expResult, result);
+	}
 }

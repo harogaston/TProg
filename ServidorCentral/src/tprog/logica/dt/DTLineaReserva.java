@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class DTLineaReserva {
 
         private int idLineaReserva;
-        public static int contador = 1;
+        private static int contador = 1;
 	private int cantidad;
 	private Date fechaInicio;
 	private Date fechaFin;

@@ -27,7 +27,7 @@ public class ServicioF implements Serializable {
     private String nombre;
     private String nicknameProveedor;
     @ManyToMany(cascade=CascadeType.PERSIST)
-    private Collection<Factura> facturas;
+    private Collection<FacturaF> facturas;
     
 
     public Long getId() {
@@ -70,11 +70,11 @@ public class ServicioF implements Serializable {
         this.nicknameProveedor = nicknameProveedor;
     }
     
-    public Collection<Factura> getFacturas() {
+    public Collection<FacturaF> getFacturas() {
         return facturas;
     }
 
-    public void setFacturas(Collection<Factura> facturas) {
+    public void setFacturas(Collection<FacturaF> facturas) {
         this.facturas = facturas;
     }
     

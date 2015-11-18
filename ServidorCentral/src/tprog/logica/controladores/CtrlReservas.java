@@ -278,15 +278,39 @@ public class CtrlReservas implements ICtrlReservas {
         try{
             entityM.getTransaction().begin();
             //obtengo el id de la factura asociada al idReserva
-            Query qu = entityM.createQuery("Delete from ServicioF where idReserva = 6");
-            Query que = entityM.createQuery("Delete from PromocionF where idReserva = 6");
-            Query quer = entityM.createQuery("Delete from FacturaF where idReserva = 6");
+            
+            /* BORRAR TODO
+            Query qu = entityM.createQuery("DELETE FROM ServicioF");
+            Query que = entityM.createQuery("DELETE FROM PromocionF");
+            Query qude = entityM.createQuery("DELETE FROM FacturaF");
+            qu.executeUpdate();
+            que.executeUpdate();
+            qude.executeUpdate();
+            entityM.getTransaction().commit();*/
+            
+            
             Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
             query.setParameter(1, idReserva);
             //long idFactura = (long) query.getSingleResult();
             FacturaF factura = (FacturaF) query.getSingleResult();
+            
+            // ver facturas del id
+            /*List facturas = query.getResultList();
+            Iterator wea = facturas.iterator();
+            while(wea.hasNext()){
+                FacturaF factura = (FacturaF) wea.next();
+               long idFactura = factura.getId();
+               int idReservoide = factura.getIdReserva();
+            System.out.println("factura " + idFactura+ " " + idReservoide); 
+            }*/
+            
+           
             long idFactura = factura.getId();
             System.out.println("factura " + idFactura);
+            System.out.println("reserva "+factura.getIdReserva());
+            System.out.println("monto "+factura.getMonto());
+            System.out.println("cliente "+factura.getNicknameCliente());
+            
             //obtengo los id's de los servicios asociados al id de la factura
             Collection<ServicioF> servis =  factura.getServicios();
             Set<ServicioF> servicios = new HashSet();
@@ -300,11 +324,12 @@ public class CtrlReservas implements ICtrlReservas {
             Collection<PromocionF> promos =  factura.getPromociones();
             Set<PromocionF> promociones = new HashSet();
             Iterator<PromocionF> iter2 = promos.iterator();
-            while(iter.hasNext()){
+            while(iter2.hasNext()){
                 PromocionF promo = iter2.next();
                 promociones.add(promo);
                 System.out.println("promo " + promo.getNombre());
             }
+            entityM.getTransaction().commit();
             //Set<ServicioF> servicios = new HashSet();
             /*Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
             query2.setParameter(1, idFactura);

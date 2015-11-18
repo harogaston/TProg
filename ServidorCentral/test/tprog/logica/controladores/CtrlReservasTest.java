@@ -637,8 +637,9 @@ public class CtrlReservasTest {
 
 			//R3    P7
 			lineas = new HashSet();
-			lineas.add(new DTLineaReserva(1, new Date(2015, 3 - 1, 5),
-					new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", "mHooch", 135));
+            DTLineaReserva aux = new DTLineaReserva(1, new Date(2015, 3 - 1, 5),
+					new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", "mHooch", 135);
+			lineas.add(aux);
 			dtR = new DTReserva(0, new Date(2015, 3 - 1, 5),
 					EstadoReserva.Pagada, 135, lineas);
 			mr.agregarReserva(mu.getCliente("BruceS"), dtR);
@@ -658,7 +659,7 @@ public class CtrlReservasTest {
 			dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
 					EstadoReserva.Registrada, 200, lineas);
 			mr.agregarReserva(mu.getCliente("oWood"), dtR);
-
+            instance.quitarLineaReserva(1);
 			//R6    P8 S7
 			lineas = new HashSet();
 			lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),
@@ -680,7 +681,11 @@ public class CtrlReservasTest {
 			instance.seleccionarPromocion(new DTMinPromocion("moody", "Euro-Cars-E-S"));
 			instance.ingresarLineaReserva(2, fecha, fecha);
 			mr.agregarReserva(mu.getCliente("BruceS"), dtR);
-
+            Set<DTReserva> ssset = instance.listarReservasProveedor();
+            Set<String>  list = instance.listarNotificacionesProveedor();
+            instance.listarNotificacionesProveedor();
+            instance.limpiarNotificacionesProveedor();
+            DTCliente habra = instance.getClienteAsociado();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -855,5 +860,7 @@ public class CtrlReservasTest {
 		assertEquals(instance.getLineasReserva(), set);
 
 	}
+    
+    
 
 }

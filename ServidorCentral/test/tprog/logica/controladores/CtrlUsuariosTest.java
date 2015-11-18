@@ -19,6 +19,7 @@ import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTUsuario;
+import tprog.logica.manejadores.ManejadorUsuarios;
 
 public class CtrlUsuariosTest {
 
@@ -314,5 +315,31 @@ public class CtrlUsuariosTest {
 		System.out.println("infoServicio");
 		assertEquals("jorge1", ctrlUsuarios.obtenerIdCliente("jorge1@gmail.com", "pass"));
 	}
+
+    @Test
+    public void testIdCorrectaProveedor() {
+        System.out.println("idCorrectaProveedor");
+        assertTrue(ctrlUsuarios.idCorrectaProveedor("asdf"));
+    }
+
+    @Test
+    public void testPwCorrectaProveedor() {
+        System.out.println("pwCorrectaProveedor");
+        assertTrue(ctrlUsuarios.pwCorrectaProveedor("je", "je"));
+    }
+
+    @Test
+    public void testObtenerIdProveedor() {
+        //en caso de que id sea un email, se devuelve el id asociado a ese cliente
+        System.out.println("obtenerIdProveedor");
+        assertEquals(ctrlUsuarios.obtenerIdProveedor("je","je"), null);
+    }
+
+    @Test
+    public void testSetEsProveedor() {
+        System.out.println("setEsProveedor");
+        ctrlUsuarios.setEsProveedor(true);
+        
+    }
 
 }

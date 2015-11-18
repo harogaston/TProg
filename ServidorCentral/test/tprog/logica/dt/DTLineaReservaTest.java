@@ -75,7 +75,7 @@ public class DTLineaReservaTest {
         Date fInicio = new Date();
         Date fFin = new Date();
         DTLineaReserva instance = new DTLineaReserva(5, fInicio, fFin, "servicio", null, null, (float) 1.5);
-        String expResult = "Cantidad: " + Integer.toString(5)
+        String expResult1 = "Cantidad: " + Integer.toString(5)
                 + "\n" + "Fecha de inicio: "
                 + Integer.toString(fInicio.getDate()) + "-"
                 + Integer.toString(fInicio.getMonth() + 1) + "-"
@@ -86,13 +86,14 @@ public class DTLineaReservaTest {
                 + Integer.toString(fFin.getYear())
                 + "\n" + "Servicio: " + "servicio"
                 + "\n" + "Precio: " + Float.toString((float) 1.5) + "\n";
-        String result = instance.toString();
-        assertEquals(expResult, result);
+        String result1 = instance.toString();
+        
         //promocion
         fInicio = new Date();
         fFin = new Date();
+        
         instance = new DTLineaReserva(5, fInicio, fFin, null, "promo", null, (float) 1.5);
-        expResult = "Cantidad: " + Integer.toString(5)
+        String expResult = "Cantidad: " + Integer.toString(5)
                 + "\n" + "Fecha de inicio: "
                 + Integer.toString(fInicio.getDate()) + "-"
                 + Integer.toString(fInicio.getMonth() + 1) + "-"
@@ -103,7 +104,17 @@ public class DTLineaReservaTest {
                 + Integer.toString(fFin.getYear())
                 + "\n" + "Promocion: " + "promo"
                 + "\n" + "Precio: " + Float.toString((float) 1.5) + "\n";
-        result = instance.toString();
+        String result = instance.toString();
+        assertEquals(expResult1, result1);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGetIdLineaReserva(){
+        System.out.println("getIdLineaReserva");
+        DTLineaReserva instance = new DTLineaReserva(5, new Date(), new Date(), "servicio", "promo", null, 186.53F);
+        int expResult = 1;
+        int result = instance.getIdLineaReserva();
         assertEquals(expResult, result);
     }
 

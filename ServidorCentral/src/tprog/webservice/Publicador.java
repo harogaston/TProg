@@ -203,6 +203,28 @@ public class Publicador {
         result.promociones = dtF.getPromociones();
 		return result;
 	}
+    
+    @WebMethod
+	public WrapperVerServiciosProveedor verServiciosProveedor(String nickProveedor) {
+		Fabrica f = Fabrica.getInstance();
+		ICtrlProductos ctrlProductos = f.getICtrlProductos();
+		Set<DTMinServicio> serviciosTodos;
+		try {
+			serviciosTodos = ctrlProductos.listarServicios();
+		} catch (Exception ex) {
+			serviciosTodos = new HashSet();
+		}
+		WrapperVerServiciosProveedor result = new WrapperVerServiciosProveedor();
+		result.servicios = new HashMap<>();
+		for (DTMinServicio dt : serviciosTodos) {
+			if (dt.getNicknameP().equals(nickProveedor)) {
+				ctrlProductos.seleccionarServicio(dt);
+				DTServicio servicio = ctrlProductos.infoServicio();
+				result.servicios.put(servicio, servicio.toString());
+			}
+		}
+		return result;
+	}
 
 	@WebMethod
 	public WrapperVerPromocionesProveedor verPromocionesProveedor(String nickProveedor) {

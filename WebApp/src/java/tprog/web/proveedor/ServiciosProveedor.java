@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import webservice.DtServicio;
-//import webservice.WrapperVerServiciosProveedor;
+import webservice.WrapperVerServiciosProveedor;
 
 /**
  *
@@ -37,14 +37,12 @@ public class ServiciosProveedor extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//establezco proxy con el web service
-        /*response.setContentType("text/html;charset=UTF-8");
-		webservice.PublicadorService servicio
-				= new webservice.PublicadorService();
+        response.setContentType("text/html;charset=UTF-8");
+		webservice.PublicadorService servicio = new webservice.PublicadorService();
 		webservice.Publicador proxy = servicio.getPublicadorPort();
 		HttpSession session = request.getSession();
 		String idProveedor = (String) session.getAttribute("usuario_logueado");
-		WrapperVerServiciosProveedor result
-				= proxy.verServiciosProveedor(idProveedor);
+		WrapperVerServiciosProveedor result	= proxy.verServiciosProveedor(idProveedor);
 		//rearmo el map de servicios
 		List<webservice.WrapperVerServiciosProveedor.Servicios.Entry> listServicios
 				= result.getServicios().getEntry();
@@ -58,7 +56,7 @@ public class ServiciosProveedor extends HttpServlet {
 		session.setAttribute("notificaciones", notificaciones);
 		session.setAttribute("cant_notificaciones", notificaciones.size());
 		//redirijo request
-		request.getRequestDispatcher("/pages/proveedor/verServiciosProveedor.jsp").forward(request, response);*/
+		request.getRequestDispatcher("/pages/proveedor/verServiciosProveedor.jsp").forward(request, response);
 	}
 
 	// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

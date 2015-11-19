@@ -164,11 +164,14 @@ public class Reserva implements Subject {
 		return this.lineasReserva;
 	}
 
-	void facturarReserva() {
+	boolean facturarReserva() {
+                boolean facturaGlobal = false;
 		facturaciones++;
 		if (facturaciones == cantProveedoresAsociados) {
 			setEstadoReserva(EstadoReserva.Facturada);
+                        facturaGlobal = true;       
 		}
+                return facturaGlobal;
 	}
 
 	@Override

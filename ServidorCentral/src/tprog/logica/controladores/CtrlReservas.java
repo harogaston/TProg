@@ -212,55 +212,91 @@ public class CtrlReservas implements ICtrlReservas {
 		//se tendria que seleccionar la reserva y no pasar el parametro
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		Proveedor proveedor = manejadorU.getProveedor(idProveedor);
-		proveedor.facturarReserva(idReserva);
-        seleccionarCliente(nickCliente);
-        confirmarFactura(idReserva);
+		if (proveedor.facturarReserva(idReserva)){
+                    seleccionarCliente(nickCliente);
+                    confirmarFactura(idReserva);
+                }
+        
 	}
     @Override
     public void confirmarFactura(int idReserva){
         //persistir la wea
         EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
         EntityManager entityM = entityMF.createEntityManager();
-        seleccionarReserva(idReserva);
-        DTReserva dtReserva = infoReserva();
-        Set<DTLineaReserva> lineasR = dtReserva.getLineasReserva();
-        Iterator<DTLineaReserva> iter = lineasR.iterator();
-        //agrego todas las lineas a la base y la factura en la misma transaccion
+        
+        //verifico que la factura no esté en la bd
+        //obtengo el id de la factura asociada al idReserva
+        Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
+        query.setParameter(1, idReserva);
+          //asumimos que hay una sola factura por reserva
+        if (query.getResultList() != null){
+            seleccionarReserva(idReserva);
+            DTReserva dtReserva = infoReserva();
+            Set<DTLineaReserva> lineasR = dtReserva.getLineasReserva();
+            Iterator<DTLineaReserva> iter = lineasR.iterator();
+            //agrego todas las lineas a la base y la factura en la misma transaccion
+            try{
+                entityM.getTransaction().begin();
+                ArrayList<ServicioF> serviciosF = new ArrayList<ServicioF>();
+                ArrayList<PromocionF> promocionesF = new ArrayList<PromocionF>();
+                while (iter.hasNext()){
+                    DTLineaReserva linea = iter.next();
+                    if (linea.getServicio() != null){
+                        ServicioF servicio = new ServicioF();
+                        servicio.setCantidad(linea.getCantidad());
+                        servicio.setNicknameProveedor(linea.getNicknameProveedor());
+                        servicio.setNombre(linea.getServicio());
+                        servicio.setPrecio(linea.getPrecio());
+                        serviciosF.add(servicio);
+                        entityM.persist(servicio);
+                    }else if (linea.getPromocion() != null){
+                        PromocionF promocion = new PromocionF();
+                        promocion.setCantidad(linea.getCantidad());
+                        promocion.setNicknameProveedor(linea.getNicknameProveedor());
+                        promocion.setNombre(linea.getPromocion());
+                        promocion.setPrecio(linea.getPrecio());
+                        promocionesF.add(promocion);
+                        entityM.persist(promocion);
+                    }
+                }
+                // agrego la factura asociada a las lineas que ya persisti
+                FacturaF factura = new FacturaF();
+               // factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
+                factura.setIdReserva(idReserva);
+                factura.setMonto(dtReserva.getPrecioTotal());
+                factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
+                factura.setServicios(serviciosF);
+                factura.setPromociones(promocionesF);
+                entityM.persist(factura);
+                entityM.flush();
+                entityM.getTransaction().commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                entityM.getTransaction().rollback();
+            } finally {
+                entityM.close();
+                entityMF.close();
+            }
+        }
+        else{
+            System.out.println("la factura ya se encuentra persistida");
+        }
+    }
+    
+    @Override
+    public void limpiarBD(){
+        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
+        EntityManager entityM = entityMF.createEntityManager();
         try{
             entityM.getTransaction().begin();
-            ArrayList<ServicioF> serviciosF = new ArrayList<ServicioF>();
-            ArrayList<PromocionF> promocionesF = new ArrayList<PromocionF>();
-            while (iter.hasNext()){
-            DTLineaReserva linea = iter.next();
-            if (linea.getServicio() != null){
-                ServicioF servicio = new ServicioF();
-                servicio.setCantidad(linea.getCantidad());
-                servicio.setNicknameProveedor(linea.getNicknameProveedor());
-                servicio.setNombre(linea.getServicio());
-                servicio.setPrecio(linea.getPrecio());
-                serviciosF.add(servicio);
-                entityM.persist(servicio);
-            }else if (linea.getPromocion() != null){
-                PromocionF promocion = new PromocionF();
-                promocion.setCantidad(linea.getCantidad());
-                promocion.setNicknameProveedor(linea.getNicknameProveedor());
-                promocion.setNombre(linea.getPromocion());
-                promocion.setPrecio(linea.getPrecio());
-                promocionesF.add(promocion);
-                entityM.persist(promocion);
-             }
-        }
-            // agrego la factura asociada a las lineas que ya persisti
-            FacturaF factura = new FacturaF();
-           // factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
-            factura.setIdReserva(idReserva);
-            factura.setMonto(dtReserva.getPrecioTotal());
-            factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
-            factura.setServicios(serviciosF);
-            factura.setPromociones(promocionesF);
-            entityM.persist(factura);
-            entityM.flush();
+            Query qu = entityM.createQuery("DELETE FROM ServicioF");
+            Query que = entityM.createQuery("DELETE FROM PromocionF");
+            Query qude = entityM.createQuery("DELETE FROM FacturaF");
+            qu.executeUpdate();
+            que.executeUpdate();
+            qude.executeUpdate();
             entityM.getTransaction().commit();
+            System.out.println("Se borraron todas las facturas de la base");
         } catch (Exception e) {
             e.printStackTrace();
             entityM.getTransaction().rollback();
@@ -268,11 +304,11 @@ public class CtrlReservas implements ICtrlReservas {
             entityM.close();
             entityMF.close();
         }
-        
     }
     
     @Override
     public DTFacturaF verFactura(int idReserva){
+        //si se llamó a esta operación es porque la factura de ese idReserva está en la base
         EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
         EntityManager entityM = entityMF.createEntityManager();
         seleccionarReserva(idReserva);
@@ -281,31 +317,12 @@ public class CtrlReservas implements ICtrlReservas {
         DTFacturaF dtF = null;
         try{
             entityM.getTransaction().begin();
-                        
-            /* BORRAR TODO
-            Query qu = entityM.createQuery("DELETE FROM ServicioF");
-            Query que = entityM.createQuery("DELETE FROM PromocionF");
-            Query qude = entityM.createQuery("DELETE FROM FacturaF");
-            qu.executeUpdate();
-            que.executeUpdate();
-            qude.executeUpdate();
-            entityM.getTransaction().commit();*/
             
             //obtengo el id de la factura asociada al idReserva
             Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
             query.setParameter(1, idReserva);
             //long idFactura = (long) query.getSingleResult();
-            FacturaF factura = (FacturaF) query.getSingleResult();
-
-            // ver facturas del id
-            /*List facturas = query.getResultList();
-            Iterator wea = facturas.iterator();
-            while(wea.hasNext()){
-                FacturaF factura = (FacturaF) wea.next();
-               long idFactura = factura.getId();
-               int idReservoide = factura.getIdReserva();
-            System.out.println("factura " + idFactura+ " " + idReservoide); 
-            }*/
+            FacturaF factura = (FacturaF) query.getSingleResult(); //asumimos que hay una sola factura por reserva
               
             long idFactura = factura.getId();
             System.out.println("factura " + idFactura);
@@ -335,31 +352,8 @@ public class CtrlReservas implements ICtrlReservas {
             dtF = factura.crearDTFacturaF();
             entityM.getTransaction().commit();
             
-            //Set<ServicioF> servicios = new HashSet();
-            /*Query query2 = entityM.createQuery("Select fs.SERV_ID from FACT_SERV fs where fs.FACT_ID = ?1");
-            query2.setParameter(1, idFactura);
-            //obtengo los servicios a partir de sus id's
-            for (Object obj : query2.getResultList()){
-                    int idS = (int) obj;
-                    Query query3 = entityM.createQuery("Select s from ServicioF s where s.id = ?1");
-                    query3.setParameter(1, idS);
-                    ServicioF servicio = (ServicioF) query3.getSingleResult();
-                    servicios.add(servicio);
-                }
-            //obtengo los id's de las promociones asociadas al id de la factura 
-            Set<PromocionF> promociones = new HashSet();
-            Query query4 = entityM.createQuery("Select fp.PROM_ID from FACT_PROM fp where fp.FACT_ID = ?1");
-            query4.setParameter(1, idFactura);
-            //obtengo las promociones a partir de sus id's
-            for (Object obj2 : query4.getResultList()){
-                    int idP = (int) obj2;
-                    Query query5 = entityM.createQuery("Select p from PromocionP s where p.id = ?1");
-                    query5.setParameter(1, idP);
-                    PromocionF promocion = (PromocionF) query5.getSingleResult();
-                    promociones.add(promocion);
-                }*/
             
-    } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             entityM.getTransaction().rollback();
         } finally {

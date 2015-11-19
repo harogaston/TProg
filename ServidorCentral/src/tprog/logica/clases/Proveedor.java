@@ -95,9 +95,10 @@ public class Proveedor extends Usuario implements Observer {
 	 * @param idReserva
 	 * @param nuevoEstado
 	 */
-	public void facturarReserva(int idReserva) {
+	public boolean facturarReserva(int idReserva) {
 		estadosParciales.put(idReserva, EstadoReserva.Facturada);
-		reservas.get(idReserva).facturarReserva();
+		boolean facturaGlobal = reservas.get(idReserva).facturarReserva();
+                return facturaGlobal;
 	}
 
 	public void addServicio(Servicio service) {

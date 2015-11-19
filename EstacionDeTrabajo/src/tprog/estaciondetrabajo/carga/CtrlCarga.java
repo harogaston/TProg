@@ -19,6 +19,8 @@ import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
 import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
@@ -331,6 +333,10 @@ public class CtrlCarga {
 				DTReserva dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Facturada, 1100, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
+                                Fabrica fabrica = Fabrica.getInstance();
+                                ICtrlReservas ctrlR = fabrica.getICtrlReservas();
+                                ctrlR.confirmarFactura(dtR.getIdReserva());
+                                
 				//R2    S1 S2
 				lineas = new HashSet<>();
 				lineas.add(new DTLineaReserva(2, calendar.getTime(),

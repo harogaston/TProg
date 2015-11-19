@@ -127,6 +127,39 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="wrapperVerServicio">
+<xs:sequence>
+<xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
+<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtServicio">
+<xs:sequence>
+<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtUbicacion">
+<xs:sequence>
+<xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pais" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperNotificacionesProveedor">
+<xs:sequence>
+<xs:element name="notificaciones" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="wrapperBuscar">
 <xs:sequence>
 <xs:element name="servicios">
@@ -162,39 +195,6 @@
 <xs:element name="tipoOrden" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="arbolCategorias" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="terminosTypeAhead" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtServicio">
-<xs:sequence>
-<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="precio" type="xs:float"></xs:element>
-<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
-<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtUbicacion">
-<xs:sequence>
-<xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="pais" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="wrapperNotificacionesProveedor">
-<xs:sequence>
-<xs:element name="notificaciones" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="wrapperVerServicio">
-<xs:sequence>
-<xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
-<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

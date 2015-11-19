@@ -79,13 +79,14 @@
 									<div id="s<%=i%>" class="panel-collapse collapse">
 										<div class="panel-body">
 											<span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%> 
-                                                                                        <form action="VerFactura" method="POST">
-												<button type="submit" >														
-                                                                                                    <span style="font-weight: bold">Ver Factura</span>
-                                                                                                    <input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
-                                                                                                </button><br>
-											</form>
-                                                                                                
+                                                                                        <%if (dtR.getEstado().value() == "Facturada"){%>
+                                                                                            <form action="VerFactura" method="POST">
+                                                                                                    <button type="submit" >														
+                                                                                                        <span style="font-weight: bold">Ver Factura</span>
+                                                                                                        <input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
+                                                                                                    </button><br>
+                                                                                            </form>
+                                                                                        <%}%>        
 											<%
 												String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
 														+ Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"

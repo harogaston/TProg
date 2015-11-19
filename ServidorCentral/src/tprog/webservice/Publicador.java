@@ -198,6 +198,7 @@ public class Publicador {
         ICtrlReservas ctrlReservas = f.getICtrlReservas();
 		DTFacturaF dtF = ctrlReservas.verFactura(idReserva);
 		WrapperVerFactura result = new WrapperVerFactura();
+        result.factura = dtF;
 		result.servicios = dtF.getServicios();
         result.promociones = dtF.getPromociones();
 		return result;

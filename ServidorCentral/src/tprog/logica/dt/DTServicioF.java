@@ -6,12 +6,15 @@ package tprog.logica.dt;
 import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import persistencia.FacturaF;
 
 /**
  *
  * @author User
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTServicioF {
     //private Long id;
     private int cantidad;

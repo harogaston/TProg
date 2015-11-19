@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import webservice.DtPromocion;
 import webservice.DtServicio;
 import webservice.WrapperVerPromocionesProveedor;
-import webservice.WrapperVerServiciosProveedor;
+//import webservice.WrapperVerServiciosProveedor;
 
 /**
  *

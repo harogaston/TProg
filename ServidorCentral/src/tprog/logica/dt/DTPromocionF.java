@@ -3,10 +3,14 @@
  */
 package tprog.logica.dt;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
 /**
  *
  * @author User
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTPromocionF {
     //private Long id;
     private int cantidad;

@@ -10,6 +10,12 @@
 <message name="toStringResponse">
 <part name="return" type="xsd:string"></part>
 </message>
+<message name="verFactura">
+<part name="arg0" type="xsd:int"></part>
+</message>
+<message name="verFacturaResponse">
+<part name="return" type="tns:wrapperVerFactura"></part>
+</message>
 <message name="verPerfilCliente">
 <part name="id_cliente" type="xsd:string"></part>
 </message>
@@ -71,6 +77,47 @@
 <part name="id_reserva" type="xsd:string"></part>
 </message>
 <message name="cancelarReservaResponse"></message>
+<message name="pedirNumeroCtrlReservas"></message>
+<message name="pedirNumeroCtrlReservasResponse">
+<part name="return" type="xsd:int"></part>
+</message>
+<message name="seleccionarInfoServicio">
+<part name="dt" type="tns:dtMinServicio"></part>
+</message>
+<message name="seleccionarInfoServicioResponse">
+<part name="return" type="tns:dtServicio"></part>
+</message>
+<message name="verPerfilProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="verPerfilProveedorResponse">
+<part name="return" type="tns:dtProveedor"></part>
+</message>
+<message name="verPromocionesProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="verPromocionesProveedorResponse">
+<part name="return" type="tns:wrapperVerPromocionesProveedor"></part>
+</message>
+<message name="verReservasProveedor">
+<part name="id_proveedor" type="xsd:string"></part>
+</message>
+<message name="verReservasProveedorResponse">
+<part name="return" type="tns:wrapperVerReservasProveedor"></part>
+</message>
+<message name="Exception">
+<part name="fault" element="tns:Exception"></part>
+</message>
+<message name="listarNotificacionesProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="listarNotificacionesProveedorResponse">
+<part name="return" type="tns:wrapperNotificacionesProveedor"></part>
+</message>
+<message name="limpiarNotificacionesProveedor">
+<part name="arg0" type="xsd:string"></part>
+</message>
+<message name="limpiarNotificacionesProveedorResponse"></message>
 <message name="verificarNickname">
 <part name="nickname" type="xsd:string"></part>
 </message>
@@ -148,53 +195,6 @@
 <message name="verificarClienteResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
-<message name="pedirNumeroCtrlReservas"></message>
-<message name="pedirNumeroCtrlReservasResponse">
-<part name="return" type="xsd:int"></part>
-</message>
-<message name="seleccionarInfoServicio">
-<part name="dt" type="tns:dtMinServicio"></part>
-</message>
-<message name="seleccionarInfoServicioResponse">
-<part name="return" type="tns:dtServicio"></part>
-</message>
-<message name="verPerfilProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="verPerfilProveedorResponse">
-<part name="return" type="tns:dtProveedor"></part>
-</message>
-<message name="verServiciosProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="verServiciosProveedorResponse">
-<part name="return" type="tns:wrapperVerServiciosProveedor"></part>
-</message>
-<message name="verPromocionesProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="verPromocionesProveedorResponse">
-<part name="return" type="tns:wrapperVerPromocionesProveedor"></part>
-</message>
-<message name="verReservasProveedor">
-<part name="id_proveedor" type="xsd:string"></part>
-</message>
-<message name="verReservasProveedorResponse">
-<part name="return" type="tns:wrapperVerReservasProveedor"></part>
-</message>
-<message name="Exception">
-<part name="fault" element="tns:Exception"></part>
-</message>
-<message name="listarNotificacionesProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="listarNotificacionesProveedorResponse">
-<part name="return" type="tns:wrapperNotificacionesProveedor"></part>
-</message>
-<message name="limpiarNotificacionesProveedor">
-<part name="arg0" type="xsd:string"></part>
-</message>
-<message name="limpiarNotificacionesProveedorResponse"></message>
 <message name="verServicio">
 <part name="id_servicio" type="xsd:string"></part>
 <part name="id_proveedor" type="xsd:string"></part>
@@ -219,6 +219,10 @@
 <operation name="toString">
 <input wsam:Action="http://webservice.tprog/Publicador/toStringRequest" message="tns:toString"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/toStringResponse" message="tns:toStringResponse"></output>
+</operation>
+<operation name="verFactura">
+<input wsam:Action="http://webservice.tprog/Publicador/verFacturaRequest" message="tns:verFactura"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verFacturaResponse" message="tns:verFacturaResponse"></output>
 </operation>
 <operation name="verPerfilCliente">
 <input wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteRequest" message="tns:verPerfilCliente"></input>
@@ -255,6 +259,35 @@
 <operation name="cancelarReserva" parameterOrder="id_ctrl_reservas id_reserva">
 <input wsam:Action="http://webservice.tprog/Publicador/cancelarReservaRequest" message="tns:cancelarReserva"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/cancelarReservaResponse" message="tns:cancelarReservaResponse"></output>
+</operation>
+<operation name="pedirNumeroCtrlReservas">
+<input wsam:Action="http://webservice.tprog/Publicador/pedirNumeroCtrlReservasRequest" message="tns:pedirNumeroCtrlReservas"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/pedirNumeroCtrlReservasResponse" message="tns:pedirNumeroCtrlReservasResponse"></output>
+</operation>
+<operation name="seleccionarInfoServicio">
+<input wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioRequest" message="tns:seleccionarInfoServicio"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioResponse" message="tns:seleccionarInfoServicioResponse"></output>
+</operation>
+<operation name="verPerfilProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorRequest" message="tns:verPerfilProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorResponse" message="tns:verPerfilProveedorResponse"></output>
+</operation>
+<operation name="verPromocionesProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorRequest" message="tns:verPromocionesProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorResponse" message="tns:verPromocionesProveedorResponse"></output>
+</operation>
+<operation name="verReservasProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/verReservasProveedorRequest" message="tns:verReservasProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verReservasProveedorResponse" message="tns:verReservasProveedorResponse"></output>
+<fault message="tns:Exception" name="Exception" wsam:Action="http://webservice.tprog/Publicador/verReservasProveedor/Fault/Exception"></fault>
+</operation>
+<operation name="listarNotificacionesProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/listarNotificacionesProveedorRequest" message="tns:listarNotificacionesProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/listarNotificacionesProveedorResponse" message="tns:listarNotificacionesProveedorResponse"></output>
+</operation>
+<operation name="limpiarNotificacionesProveedor">
+<input wsam:Action="http://webservice.tprog/Publicador/limpiarNotificacionesProveedorRequest" message="tns:limpiarNotificacionesProveedor"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/limpiarNotificacionesProveedorResponse" message="tns:limpiarNotificacionesProveedorResponse"></output>
 </operation>
 <operation name="verificarNickname">
 <input wsam:Action="http://webservice.tprog/Publicador/verificarNicknameRequest" message="tns:verificarNickname"></input>
@@ -296,39 +329,6 @@
 <input wsam:Action="http://webservice.tprog/Publicador/verificarClienteRequest" message="tns:verificarCliente"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verificarClienteResponse" message="tns:verificarClienteResponse"></output>
 </operation>
-<operation name="pedirNumeroCtrlReservas">
-<input wsam:Action="http://webservice.tprog/Publicador/pedirNumeroCtrlReservasRequest" message="tns:pedirNumeroCtrlReservas"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/pedirNumeroCtrlReservasResponse" message="tns:pedirNumeroCtrlReservasResponse"></output>
-</operation>
-<operation name="seleccionarInfoServicio">
-<input wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioRequest" message="tns:seleccionarInfoServicio"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/seleccionarInfoServicioResponse" message="tns:seleccionarInfoServicioResponse"></output>
-</operation>
-<operation name="verPerfilProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorRequest" message="tns:verPerfilProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verPerfilProveedorResponse" message="tns:verPerfilProveedorResponse"></output>
-</operation>
-<operation name="verServiciosProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/verServiciosProveedorRequest" message="tns:verServiciosProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verServiciosProveedorResponse" message="tns:verServiciosProveedorResponse"></output>
-</operation>
-<operation name="verPromocionesProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorRequest" message="tns:verPromocionesProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorResponse" message="tns:verPromocionesProveedorResponse"></output>
-</operation>
-<operation name="verReservasProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/verReservasProveedorRequest" message="tns:verReservasProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verReservasProveedorResponse" message="tns:verReservasProveedorResponse"></output>
-<fault message="tns:Exception" name="Exception" wsam:Action="http://webservice.tprog/Publicador/verReservasProveedor/Fault/Exception"></fault>
-</operation>
-<operation name="listarNotificacionesProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/listarNotificacionesProveedorRequest" message="tns:listarNotificacionesProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/listarNotificacionesProveedorResponse" message="tns:listarNotificacionesProveedorResponse"></output>
-</operation>
-<operation name="limpiarNotificacionesProveedor">
-<input wsam:Action="http://webservice.tprog/Publicador/limpiarNotificacionesProveedorRequest" message="tns:limpiarNotificacionesProveedor"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/limpiarNotificacionesProveedorResponse" message="tns:limpiarNotificacionesProveedorResponse"></output>
-</operation>
 <operation name="verServicio" parameterOrder="id_servicio id_proveedor">
 <input wsam:Action="http://webservice.tprog/Publicador/verServicioRequest" message="tns:verServicio"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verServicioResponse" message="tns:verServicioResponse"></output>
@@ -345,6 +345,15 @@
 <binding name="PublicadorPortBinding" type="tns:Publicador">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc"></soap:binding>
 <operation name="toString">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verFactura">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
@@ -426,6 +435,72 @@
 </output>
 </operation>
 <operation name="cancelarReserva">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="pedirNumeroCtrlReservas">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="seleccionarInfoServicio">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verPerfilProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verPromocionesProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verReservasProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+<fault name="Exception">
+<soap:fault name="Exception" use="literal"></soap:fault>
+</fault>
+</operation>
+<operation name="listarNotificacionesProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="limpiarNotificacionesProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
@@ -516,81 +591,6 @@
 </output>
 </operation>
 <operation name="verificarCliente">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="pedirNumeroCtrlReservas">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="seleccionarInfoServicio">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="verPerfilProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="verServiciosProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="verPromocionesProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="verReservasProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-<fault name="Exception">
-<soap:fault name="Exception" use="literal"></soap:fault>
-</fault>
-</operation>
-<operation name="listarNotificacionesProveedor">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
-<operation name="limpiarNotificacionesProveedor">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

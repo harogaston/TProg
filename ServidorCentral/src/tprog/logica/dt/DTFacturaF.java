@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import persistencia.PromocionF;
 import persistencia.ServicioF;
 
@@ -17,6 +19,7 @@ import persistencia.ServicioF;
  *
  * @author User
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DTFacturaF {
     //private Long id;
     private int idReserva;

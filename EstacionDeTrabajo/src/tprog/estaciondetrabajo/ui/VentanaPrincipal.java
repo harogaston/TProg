@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import tprog.estaciondetrabajo.carga.CtrlCarga;
+import tprog.logica.dt.DTFacturaF;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlReservas;
 
@@ -292,7 +293,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ICtrlReservas ddd = fabrica.getICtrlReservas();
         //ddd.confirmarFactura(6);
         System.out.println("oh");
-        ddd.verFactura(4);
+        DTFacturaF dtf = ddd.verFactura(4);
         System.out.println("ooohh");
         
     }//GEN-LAST:event_menuItemRealizarReservaActionPerformed

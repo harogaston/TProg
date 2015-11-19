@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import webservice.DtFacturaF;
+import webservice.WrapperVerFactura;
 
 /**
  *
@@ -31,7 +33,12 @@ public class VerFactura extends HttpServlet {
         System.out.println("Llego hasta el servlet");
         String idReservaString = request.getParameter("idReserva");
         Integer idReserva = Integer.parseInt(idReservaString);
-        
+        WrapperVerFactura wrapper = proxy.verFactura(idReserva);
+        DtFacturaF dtF = wrapper.getFactura();
+        request.setAttribute("factura", dtF);
+        System.out.println("factura "+dtF.getIdReserva());
+        System.out.println("cliente "+dtF.getNicknameCliente());
+        request.getRequestDispatcher("/pages/factura.jsp").forward(request, response);
     }
 
     /**

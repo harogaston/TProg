@@ -122,8 +122,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         menuAltas.add(menuItemAltaPromocion);
 
-        menuItemRealizarReserva.setText("jpa");
-        menuItemRealizarReserva.setEnabled(true);
+        menuItemRealizarReserva.setText("Realizar Reserva");
+        menuItemRealizarReserva.setEnabled(false);
         menuItemRealizarReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuItemRealizarReservaActionPerformed(evt);

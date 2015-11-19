@@ -335,7 +335,8 @@ public class CtrlCarga {
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
                                 Fabrica fabrica = Fabrica.getInstance();
                                 ICtrlReservas ctrlR = fabrica.getICtrlReservas();
-                                ctrlR.confirmarFactura(dtR.getIdReserva());
+                                ctrlR.seleccionarCliente("oWood");
+                                ctrlR.confirmarFactura(1);
                                 
 				//R2    S1 S2
 				lineas = new HashSet<>();

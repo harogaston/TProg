@@ -39,7 +39,7 @@
                     <div class="panel panel-default">
                     <div class="panel-heading">Servicios</div>
                     <br>
-                    <% if (servicios != null){ %>
+                    <% if (!servicios.isEmpty()){ %>
                     <table class="table">
                         <thead>
                             <tr>
@@ -78,7 +78,7 @@
                     <div class="panel panel-default">    
                     <div class="panel-heading">Promociones</div>
                     <br>
-                    <% if (promociones != null){ %>
+                    <% if (!promociones.isEmpty()){ %>
                     <table class="table">
                         <thead>
                             <tr>

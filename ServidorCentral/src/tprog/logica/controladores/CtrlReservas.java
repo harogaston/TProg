@@ -229,7 +229,7 @@ public class CtrlReservas implements ICtrlReservas {
         Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
         query.setParameter(1, idReserva);
           //asumimos que hay una sola factura por reserva
-        if (query.getResultList() != null){
+        if (query.getResultList().isEmpty()){
             seleccionarReserva(idReserva);
             DTReserva dtReserva = infoReserva();
             Set<DTLineaReserva> lineasR = dtReserva.getLineasReserva();

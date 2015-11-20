@@ -5,8 +5,11 @@
  */
 package tprog.web;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -58,20 +61,63 @@ public class DescargarPDF extends HttpServlet {
             // step 3
             document.open();
             // step 4
-            document.add(new Paragraph("Detalles de la Factura"));
+            document.add(new Paragraph("Detalles de la Factura", FontFactory.getFont("arial", 22, Font.ITALIC, BaseColor.BLACK)));
+            document.add(new Paragraph(" "));
 
             document.add(new Paragraph("Id de la Reserva: " + idReservaString));
             document.add(new Paragraph("Fecha: " + fecha));
             document.add(new Paragraph("Cliente: " + dtf.getNicknameCliente()));
             document.add(new Paragraph("Monto: $" + dtf.getMonto()));
+            document.add(new Paragraph(" "));
+            
+            
             if (!servicios.isEmpty()) {
+                document.add( new Paragraph("Servicios"));
+                document.add(new Paragraph(" "));
                 PdfPTable table = new PdfPTable(5);
+                table.getDefaultCell().setBackgroundColor(BaseColor.LIGHT_GRAY);
                 table.addCell("Item");
                 table.addCell("Nombre");
                 table.addCell("Cantidad");
                 table.addCell("Precio");
                 table.addCell("Proveedor");
+                table.getDefaultCell().setBackgroundColor(null);
+                int i = 1;
+                for(DtServicioF servicio: servicios){
+                    table.addCell(Integer.toString(i));
+                    table.addCell(servicio.getNombre());
+                    table.addCell(Integer.toString(servicio.getCantidad()));
+                    table.addCell(Double.toString(servicio.getPrecio()));
+                    table.addCell(servicio.getNicknameProveedor());
+                    i++;
+                }
+                
                 document.add(table);
+                document.add(new Paragraph(" "));
+            }
+             if (!promociones.isEmpty()) {
+                document.add( new Paragraph("Promociones"));
+                document.add(new Paragraph(" "));
+                PdfPTable table = new PdfPTable(5);
+                table.getDefaultCell().setBackgroundColor(BaseColor.LIGHT_GRAY);
+                table.addCell("Item");
+                table.addCell("Nombre");
+                table.addCell("Cantidad");
+                table.addCell("Precio");
+                table.addCell("Proveedor");
+                table.getDefaultCell().setBackgroundColor(null);
+                int i = 1;
+                for(DtPromocionF promocion: promociones){
+                    table.addCell(Integer.toString(i));
+                    table.addCell(promocion.getNombre());
+                    table.addCell(Integer.toString(promocion.getCantidad()));
+                    table.addCell(Double.toString(promocion.getPrecio()));
+                    table.addCell(promocion.getNicknameProveedor());
+                    i++;
+                }
+                
+                document.add(table);
+                document.add(new Paragraph(" "));
             }
 
             // step 5

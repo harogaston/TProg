@@ -23,7 +23,7 @@
         <!-- ACÁ .css que se requieran en ESTA página -->
     </header>
     <body>
-
+        <div class="container wrapper" style="padding: 30px">
         <div class="col-md-9">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -39,7 +39,7 @@
                     <span class="text-muted">Id de Reserva: </span> <%=Integer.toString(dtf.getIdReserva())%><br>
                     <span class="text-muted">Fecha: </span><%=fecha%><br>
                     <span class="text-muted">Cliente: </span><%=(dtf.getNicknameCliente())%><br>
-                    <span class="text-muted">Monto:  </span><%=Double.toString(dtf.getMonto())%><br>
+                    <span class="text-muted">Monto:  </span>$<%=Double.toString(dtf.getMonto())%><br>
                     <div class="panel panel-default">
                         <div class="panel-heading">Servicios</div>
                         <br>
@@ -121,7 +121,7 @@
                     </div>
                 </div>
             </div>
-
+        </div>
     </body>
     <%@include file="templates/footer.jspf" %>
 </html>

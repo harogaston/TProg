@@ -54,23 +54,20 @@ public class DescargarPDF extends HttpServlet {
             String fecha = Integer.toString(dtf.getFecha().getDay()) + "-"
                     + Integer.toString(dtf.getFecha().getMonth()) + "-"
                     + Integer.toString(dtf.getFecha().getYear()) + "\n";
-            // step 1
+            //creo el documento pdf
             Document document = new Document();
-            // step 2
             PdfWriter.getInstance(document, response.getOutputStream());
-            // step 3
             document.open();
-            // step 4
             document.add(new Paragraph("Detalles de la Factura", FontFactory.getFont("arial", 22, Font.ITALIC, BaseColor.BLACK)));
             document.add(new Paragraph(" "));
-
+            //ingreso los datos de la factura
             document.add(new Paragraph("Id de la Reserva: " + idReservaString));
             document.add(new Paragraph("Fecha: " + fecha));
             document.add(new Paragraph("Cliente: " + dtf.getNicknameCliente()));
             document.add(new Paragraph("Monto: $" + dtf.getMonto()));
             document.add(new Paragraph(" "));
             
-            
+            //tabla para los servicios
             if (!servicios.isEmpty()) {
                 document.add( new Paragraph("Servicios"));
                 document.add(new Paragraph(" "));
@@ -95,6 +92,7 @@ public class DescargarPDF extends HttpServlet {
                 document.add(table);
                 document.add(new Paragraph(" "));
             }
+            //tabla para las promos
              if (!promociones.isEmpty()) {
                 document.add( new Paragraph("Promociones"));
                 document.add(new Paragraph(" "));
@@ -123,91 +121,6 @@ public class DescargarPDF extends HttpServlet {
             // step 5
             document.close();
             //request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response); 
-/*
-             ="panel-heading">Servicios</div>
-             <br>
-             <% if (!servicios.isEmpty()) { %>
-             <table
-
-             class  
-
-             ="table">
-             <thead>
-             <tr>
-             <th>Item</th>
-             <th>Nombre</th>
-             <th>Cantidad</th>
-             <th>Precio</th>
-             <th>Proveedor</th>
-
-             </tr>
-             </thead>
-             <tbody>
-             <%	int j = 0;
-             for (DtServicioF servicio : servicios
-
-                                    
-             ) {
-             j++;
-             %
-             > <tr>
-             < th scope = "row" > <  %= j % > <  / th
-             > <td> < %= servicio.getNombre() % > <  / td
-             > <td> < %= servicio.getCantidad() % > <  / td
-             > <td>$<  %= servicio.getPrecio() % > <  / td
-             > <td> < %= servicio.getNicknameProveedor() % > <  / td
-             > <  / tr
-             > <  %
-             }
-             %>
-             </table
-                                    
-                                
-             >
-             <%}%>
-             </div
-             >
-             <div
-
-             class  
-
-             ="panel panel-default">    
-             <div class  
-
-             ="panel-heading">Promociones</div>
-             <br>
-             <% if (!promociones.isEmpty()) { %>
-             <table
-
-             class  
-
-             ="table">
-             <thead>
-             <tr>
-             <th>Item</th>
-             <th>Nombre</th>
-             <th>Cantidad</th>
-             <th>Precio</th>
-             <th>Proveedor</th>
-
-             </tr>
-             </thead>
-             <tbody>
-             <%	int i = 0;
-             for (DtPromocionF promocion : promociones
-
-                                            
-             ) {
-             i++;
-             %
-             > <tr>
-             < th scope = "row" > <  %= i % > <  / th
-             > <td> < %= promocion.getNombre() % > <  / td
-             > <td> < %= promocion.getCantidad() % > <  / td
-             > <td>
-             $<  %= promocion.getPrecio() % > <  / td
-             > <td> < %= promocion.getNicknameProveedor() % > <  / td
-             */
 
         } catch (DocumentException de) {
             throw new IOException(de.getMessage());

@@ -4,6 +4,7 @@
 package tprog.logica.dt;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
@@ -23,14 +24,15 @@ import persistencia.ServicioF;
 public class DTFacturaF {
     //private Long id;
     private int idReserva;
-    //private Date fecha;
+    private Date fecha;
     private double monto;
     private String nicknameCliente;
     private Set<DTServicioF> servicios;
     private Set<DTPromocionF> promociones;
 
-    public DTFacturaF(int idReserva, double monto, String nicknameCliente, Set<DTServicioF> servicios, Set<DTPromocionF> promociones) {
+    public DTFacturaF(int idReserva, Date fecha, double monto, String nicknameCliente, Set<DTServicioF> servicios, Set<DTPromocionF> promociones) {
         this.idReserva = idReserva;
+        this.fecha = fecha;
         this.monto = monto;
         this.nicknameCliente = nicknameCliente;
         this.servicios = servicios;

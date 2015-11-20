@@ -263,6 +263,7 @@ public class CtrlReservas implements ICtrlReservas {
                 FacturaF factura = new FacturaF();
                // factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
                 factura.setIdReserva(idReserva);
+                factura.setFecha(new Date());
                 factura.setMonto(dtReserva.getPrecioTotal());
                 factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
                 factura.setServicios(serviciosF);
@@ -313,7 +314,7 @@ public class CtrlReservas implements ICtrlReservas {
         EntityManager entityM = entityMF.createEntityManager();
         seleccionarReserva(idReserva);
         String idR = Integer.toString(idReserva);
-        System.out.println("uosa");
+        //System.out.println("uosa");
         DTFacturaF dtF = null;
         try{
             entityM.getTransaction().begin();

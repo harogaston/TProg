@@ -2,6 +2,44 @@
 
 <xs:element name="Exception" type="tns:Exception"></xs:element>
 
+<xs:complexType name="wrapperVerServiciosProveedor">
+<xs:sequence>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtServicio">
+<xs:sequence>
+<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtUbicacion">
+<xs:sequence>
+<xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pais" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="wrapperVerPerfilCliente">
 <xs:sequence>
 <xs:element name="cliente" type="tns:dtCliente" minOccurs="0"></xs:element>
@@ -135,25 +173,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="dtServicio">
-<xs:sequence>
-<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="precio" type="xs:float"></xs:element>
-<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
-<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="dtUbicacion">
-<xs:sequence>
-<xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
-<xs:element name="pais" type="xs:string" minOccurs="0"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="wrapperNotificacionesProveedor">
 <xs:sequence>
 <xs:element name="notificaciones" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -274,6 +293,7 @@
 <xs:complexType name="dtFacturaF">
 <xs:sequence>
 <xs:element name="idReserva" type="xs:int"></xs:element>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"></xs:element>
 <xs:element name="monto" type="xs:double"></xs:element>
 <xs:element name="nicknameCliente" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="servicios" type="tns:dtServicioF" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>

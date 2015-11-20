@@ -31,92 +31,96 @@
                 </div>
                 <div class="panel-body">
                     <%DtFacturaF dtf = (DtFacturaF) request.getAttribute("factura");
-                    Set<DtServicioF> servicios = new HashSet(dtf.getServicios());
-                    Set<DtPromocionF> promociones = new HashSet(dtf.getPromociones());%>
+                        Set<DtServicioF> servicios = new HashSet(dtf.getServicios());
+                        Set<DtPromocionF> promociones = new HashSet(dtf.getPromociones());
+                        String fecha = Integer.toString(dtf.getFecha().getDay()) + "-"
+                                + Integer.toString(dtf.getFecha().getMonth()) + "-"
+                                + Integer.toString(dtf.getFecha().getYear()) + "\n";%>
                     <span class="text-muted">Id de Reserva: </span> <%=Integer.toString(dtf.getIdReserva())%><br>
+                    <span class="text-muted">Fecha: </span><%=fecha%><br>
                     <span class="text-muted">Cliente: </span><%=(dtf.getNicknameCliente())%><br>
                     <span class="text-muted">Monto:  </span><%=Double.toString(dtf.getMonto())%><br>
                     <div class="panel panel-default">
-                    <div class="panel-heading">Servicios</div>
-                    <br>
-                    <% if (!servicios.isEmpty()){ %>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Nombre</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Proveedor</th>
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%	int j = 0;
-                                for (DtServicioF servicio : servicios) {
-                                    j++;
-                                    
-                            %>
-                            <tr>
-                                <th scope="row"><%=j%></th>
-                                    
-                               
-                                <td><%=servicio.getNombre()%></td>
-                               
-                                <td><%=servicio.getCantidad()%></td>
-                               
-                                <td>$<%=servicio.getPrecio()%></td>
-                                <td><%=servicio.getNicknameProveedor()%></td>
-                                
-                            </tr>
-                            <%
-                                }
-                            %>
+                        <div class="panel-heading">Servicios</div>
+                        <br>
+                        <% if (!servicios.isEmpty()) { %>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Proveedor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%	int j = 0;
+                                    for (DtServicioF servicio : servicios) {
+                                        j++;
+
+                                %>
+                                <tr>
+                                    <th scope="row"><%=j%></th>
+
+
+                                    <td><%=servicio.getNombre()%></td>
+
+                                    <td><%=servicio.getCantidad()%></td>
+
+                                    <td>$<%=servicio.getPrecio()%></td>
+                                    <td><%=servicio.getNicknameProveedor()%></td>
+
+                                </tr>
+                                <%
+                                    }
+                                %>
                         </table>
                         <%}%>
                     </div>
                     <div class="panel panel-default">    
-                    <div class="panel-heading">Promociones</div>
-                    <br>
-                    <% if (!promociones.isEmpty()){ %>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Nombre</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                                <th>Proveedor</th>
-                               
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%	int i = 0;
-                                for (DtPromocionF promocion : promociones) {
-                                    i++;
-                                    
-                            %>
-                            <tr>
-                                <th scope="row"><%=i%></th>
-                                    
-                               
-                                <td><%=promocion.getNombre()%></td>
-                               
-                                <td><%=promocion.getCantidad()%></td>
-                               
-                                <td>$<%=promocion.getPrecio()%></td>
-                                <td><%=promocion.getNicknameProveedor()%></td>
-                                
-                            </tr>
-                            <%
-                                }
-                            %>
-                        </tbody>
-                    </table>
-                    <%}%>
+                        <div class="panel-heading">Promociones</div>
+                        <br>
+                        <% if (!promociones.isEmpty()) { %>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Nombre</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio</th>
+                                    <th>Proveedor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%	int i = 0;
+                                    for (DtPromocionF promocion : promociones) {
+                                        i++;
+
+                                %>
+                                <tr>
+                                    <th scope="row"><%=i%></th>
+
+
+                                    <td><%=promocion.getNombre()%></td>
+
+                                    <td><%=promocion.getCantidad()%></td>
+
+                                    <td>$<%=promocion.getPrecio()%></td>
+                                    <td><%=promocion.getNicknameProveedor()%></td>
+
+                                </tr>
+                                <%
+                                    }
+                                %>
+                            </tbody>
+                        </table>
+                        <%}%>
+                    </div>
                 </div>
             </div>
-        </div>
 
     </body>
     <%@include file="templates/footer.jspf" %>

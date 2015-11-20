@@ -36,8 +36,8 @@ public class FacturaF implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private int idReserva;
-    //@Temporal(TemporalType.DATE)
-    //private Date fecha;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     private double monto;
     private String nicknameCliente;
     @ManyToMany(cascade=CascadeType.PERSIST, fetch=FetchType.LAZY)
@@ -119,8 +119,16 @@ public class FacturaF implements Serializable {
 			dtPromociones.add(temp2);
 		}
         //ahora si creo el dt de la factura
-        DTFacturaF dtF = new DTFacturaF(idReserva, monto, nicknameCliente, dtServicios, dtPromociones);
+        DTFacturaF dtF = new DTFacturaF(idReserva, fecha, monto, nicknameCliente, dtServicios, dtPromociones);
         return dtF;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
     @Override

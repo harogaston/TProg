@@ -65,7 +65,7 @@ public class FacturarReserva extends HttpServlet {
             Properties properties = System.getProperties();
 
             // Setup mail server
-            properties.setProperty("mail.smtp.host", host);
+            properties.setProperty("mail.smtp.host", "smtp.gmail.com");
 
             // Get the default Session object.
             Session sesion = Session.getDefaultInstance(properties);

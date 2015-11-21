@@ -13,6 +13,7 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -35,7 +36,8 @@ import webservice.WrapperVerFactura;
  */
 @WebServlet(name = "DescargarPDF", urlPatterns = {"/DescargarPDF"})
 public class DescargarPDF extends HttpServlet {
-
+    private String RESULT = "";
+        
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -43,9 +45,11 @@ public class DescargarPDF extends HttpServlet {
         webservice.PublicadorService service = new webservice.PublicadorService();
         webservice.Publicador proxy = service.getPublicadorPort();
         System.out.println("Llego hasta el servlet");
-        response.setContentType("application/pdf");
+        //response.setContentType("application/pdf");
         try {
             String idReservaString = request.getParameter("idReserva");
+            //asigno ruta donde quiero descargar la imagen --hay que cambiarlo
+            RESULT = "C:\\Kun\\tallerino\\TProg\\WebApp\\facturas/factura"+idReservaString+".pdf";
             Integer idReserva = Integer.parseInt(idReservaString);
             WrapperVerFactura wrapper = proxy.verFactura(idReserva);
             DtFacturaF dtf = wrapper.getFactura();
@@ -56,7 +60,7 @@ public class DescargarPDF extends HttpServlet {
                     + Integer.toString(dtf.getFecha().getYear()) + "\n";
             //creo el documento pdf
             Document document = new Document();
-            PdfWriter.getInstance(document, response.getOutputStream());
+            PdfWriter.getInstance(document, new FileOutputStream(RESULT));
             document.open();
             document.add(new Paragraph("Detalles de la Factura", FontFactory.getFont("arial", 22, Font.ITALIC, BaseColor.BLACK)));
             document.add(new Paragraph(" "));
@@ -120,8 +124,8 @@ public class DescargarPDF extends HttpServlet {
 
             // step 5
             document.close();
-            //request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response); 
-
+            session.setAttribute("descargaOK", "La descarga se completó correctamente.");
+            response.sendRedirect("VerPerfil");
         } catch (DocumentException de) {
             throw new IOException(de.getMessage());
         }

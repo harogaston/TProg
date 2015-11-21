@@ -49,6 +49,7 @@ public class DescargarPDF extends HttpServlet {
         try {
             String idReservaString = request.getParameter("idReserva");
             //asigno ruta donde quiero descargar la imagen --hay que cambiarlo
+            //el path por defecto esta en glassfish no se que, en tomcat debe ser igual
             RESULT = "C:\\Kun\\tallerino\\TProg\\WebApp\\facturas/factura"+idReservaString+".pdf";
             Integer idReserva = Integer.parseInt(idReservaString);
             WrapperVerFactura wrapper = proxy.verFactura(idReserva);

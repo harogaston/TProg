@@ -12,68 +12,68 @@ import tprog.logica.dt.EstadoReserva;
 
 public interface ICtrlReservas {
 
-	public void seleccionarCliente(String nickname);
+    public void seleccionarCliente(String nickname);
 
-	public void seleccionarProveedor(String nicknameP);
+    public void seleccionarProveedor(String nicknameP);
 
-	public Set<DTMinPromocion> listarPromociones() throws Exception;
+    public Set<DTMinPromocion> listarPromociones() throws Exception;
 
-	public Set<DTMinServicio> listarServicios() throws Exception;
+    public Set<DTMinServicio> listarServicios() throws Exception;
 
-	public void seleccionarPromocion(DTMinPromocion dtP);
+    public void seleccionarPromocion(DTMinPromocion dtP);
 
-	public void seleccionarServicio(DTMinServicio dtS);
+    public void seleccionarServicio(DTMinServicio dtS);
 
-	public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal);
-        
-        public void quitarLineaReserva(int idLineaReserva);
+    public void ingresarLineaReserva(int cant, Date fInicial, Date fFinal);
 
-	public Set<DTMinServicio> listarServiciosProveedor();
+    public void quitarLineaReserva(int idLineaReserva);
 
-	public Set<DTMinPromocion> listarPromocionesProveedor();
+    public Set<DTMinServicio> listarServiciosProveedor();
 
-	public DTReserva mostrarReservaTemporal();
+    public Set<DTMinPromocion> listarPromocionesProveedor();
 
-	public void altaReserva(DTReserva dtR) throws Exception;
+    public DTReserva mostrarReservaTemporal();
 
-	public Set<DTMinReserva> listarReservas() throws Exception;
+    public void altaReserva(DTReserva dtR) throws Exception;
 
-	/**
-	 * Devuelve el conjunto de reservas asociadas al proveedor seleccionado
-	 * previamente con seleccionarProveedor(nickname)
-	 *
-	 * @return
-	 */
-	public Set<DTReserva> listarReservasProveedor();
+    public Set<DTMinReserva> listarReservas() throws Exception;
 
-	public void seleccionarReserva(int idReserva);
+    /**
+     * Devuelve el conjunto de reservas asociadas al proveedor seleccionado
+     * previamente con seleccionarProveedor(nickname)
+     *
+     * @return
+     */
+    public Set<DTReserva> listarReservasProveedor();
 
-	public DTCliente getClienteAsociado();
+    public void seleccionarReserva(int idReserva);
 
-	public DTReserva infoReserva();
+    public DTCliente getClienteAsociado();
 
-	public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
+    public DTReserva infoReserva();
 
-	public void facturarReserva(String idProveedor, String nickCliente, int idReserva);
-        
-        public void limpiarBD();
+    public boolean cambiarEstadoReserva(EstadoReserva nuevoEstado);
 
-        public void confirmarFactura(int idReserva);
-    
-        public DTFacturaF verFactura(int idReserva);
-    
-	/**
-	 * Devuelve un set de string con las notificaciones que recibió un proveedor
-	 *
-	 * @return
-	 */
-	public Set<String> listarNotificacionesProveedor();
+    public boolean facturarReserva(String idProveedor, String nickCliente, int idReserva);
 
-	public void limpiarNotificacionesProveedor();
+    public void limpiarBD();
 
-	public boolean eliminarReserva();
+    public void confirmarFactura(int idReserva);
 
-	public EstadoReserva getEstadoReserva();
+    public DTFacturaF verFactura(int idReserva);
 
-	public void liberarMemoriaControlador();
+    /**
+     * Devuelve un set de string con las notificaciones que recibió un proveedor
+     *
+     * @return
+     */
+    public Set<String> listarNotificacionesProveedor();
+
+    public void limpiarNotificacionesProveedor();
+
+    public boolean eliminarReserva();
+
+    public EstadoReserva getEstadoReserva();
+
+    public void liberarMemoriaControlador();
 }

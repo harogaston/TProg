@@ -133,7 +133,9 @@
 <part name="arg1" type="xsd:string"></part>
 <part name="arg2" type="xsd:int"></part>
 </message>
-<message name="facturarReservaResponse"></message>
+<message name="facturarReservaResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
 <message name="pagarReserva">
 <part name="arg0" type="xsd:int"></part>
 </message>
@@ -188,13 +190,6 @@
 <part name="idCtrlReservas" type="xsd:int"></part>
 </message>
 <message name="generarReservaResponse"></message>
-<message name="verificarCliente">
-<part name="arg0" type="xsd:string"></part>
-<part name="arg1" type="xsd:string"></part>
-</message>
-<message name="verificarClienteResponse">
-<part name="return" type="xsd:boolean"></part>
-</message>
 <message name="quitarlineaReserva">
 <part name="id_ctrl_reservas" type="xsd:int"></part>
 <part name="id_LineaReserva" type="xsd:int"></part>
@@ -219,6 +214,13 @@
 <part name="arg1" type="xsd:string"></part>
 </message>
 <message name="verificarProveedorResponse">
+<part name="return" type="xsd:boolean"></part>
+</message>
+<message name="verificarCliente">
+<part name="arg0" type="xsd:string"></part>
+<part name="arg1" type="xsd:string"></part>
+</message>
+<message name="verificarClienteResponse">
 <part name="return" type="xsd:boolean"></part>
 </message>
 <portType name="Publicador">
@@ -335,10 +337,6 @@
 <input wsam:Action="http://webservice.tprog/Publicador/generarReservaRequest" message="tns:generarReserva"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/generarReservaResponse" message="tns:generarReservaResponse"></output>
 </operation>
-<operation name="verificarCliente" parameterOrder="arg0 arg1">
-<input wsam:Action="http://webservice.tprog/Publicador/verificarClienteRequest" message="tns:verificarCliente"></input>
-<output wsam:Action="http://webservice.tprog/Publicador/verificarClienteResponse" message="tns:verificarClienteResponse"></output>
-</operation>
 <operation name="quitarlineaReserva" parameterOrder="id_ctrl_reservas id_LineaReserva">
 <input wsam:Action="http://webservice.tprog/Publicador/quitarlineaReservaRequest" message="tns:quitarlineaReserva"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/quitarlineaReservaResponse" message="tns:quitarlineaReservaResponse"></output>
@@ -350,6 +348,10 @@
 <operation name="verificarProveedor" parameterOrder="arg0 arg1">
 <input wsam:Action="http://webservice.tprog/Publicador/verificarProveedorRequest" message="tns:verificarProveedor"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verificarProveedorResponse" message="tns:verificarProveedorResponse"></output>
+</operation>
+<operation name="verificarCliente" parameterOrder="arg0 arg1">
+<input wsam:Action="http://webservice.tprog/Publicador/verificarClienteRequest" message="tns:verificarCliente"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/verificarClienteResponse" message="tns:verificarClienteResponse"></output>
 </operation>
 </portType>
 <binding name="PublicadorPortBinding" type="tns:Publicador">
@@ -609,15 +611,6 @@
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
 </output>
 </operation>
-<operation name="verificarCliente">
-<soap:operation soapAction=""></soap:operation>
-<input>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</input>
-<output>
-<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
-</output>
-</operation>
 <operation name="quitarlineaReserva">
 <soap:operation soapAction=""></soap:operation>
 <input>
@@ -637,6 +630,15 @@
 </output>
 </operation>
 <operation name="verificarProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="verificarCliente">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

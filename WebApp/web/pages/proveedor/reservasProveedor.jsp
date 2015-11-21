@@ -113,6 +113,7 @@
                                                         <button type="submit" class="btn btn-danger">Sí, facturar</button>
                                                         <input type="number" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
                                                         <input type="text" name="nickCliente" value="<%=wrapper.getNickCliente()%>" style="display: none">
+                                                        <input type="text" name="emailCliente" value="<%=wrapper.getEmailCliente()%>" style="display: none">
                                                     </form>
                                                 </div>
                                             </div>

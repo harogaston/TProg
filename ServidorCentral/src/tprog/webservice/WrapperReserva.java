@@ -12,6 +12,7 @@ import tprog.logica.dt.DTReserva;
 public class WrapperReserva implements Comparable<WrapperReserva> {
 
 	public String nickCliente;
+    public String emailCliente;
 	public DTReserva reserva;
 
 	@Override

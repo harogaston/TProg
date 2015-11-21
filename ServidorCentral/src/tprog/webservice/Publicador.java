@@ -291,6 +291,7 @@ public class Publicador {
 			ctrlReservas.seleccionarReserva(reserva.getIdReserva());
 			WrapperReserva tmp = new WrapperReserva();
 			tmp.nickCliente = ctrlReservas.getClienteAsociado().getNickname();
+            tmp.emailCliente = ctrlReservas.getClienteAsociado().getEmail();
 			tmp.reserva = reserva;
 			result.reservasCliente.add(tmp);
 		}
@@ -298,8 +299,8 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public void facturarReserva(String idProveedor, String nickCliente, int idReserva) {
-		Fabrica.getInstance().getICtrlReservas().facturarReserva(idProveedor, nickCliente, idReserva);
+	public boolean facturarReserva(String idProveedor, String nickCliente, int idReserva) {
+		return Fabrica.getInstance().getICtrlReservas().facturarReserva(idProveedor, nickCliente, idReserva);
 	}
 
 	@WebMethod

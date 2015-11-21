@@ -208,14 +208,17 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	@Override
-	public void facturarReserva(String idProveedor, String nickCliente, int idReserva) {
+	public boolean facturarReserva(String idProveedor, String nickCliente, int idReserva) {
 		//se tendria que seleccionar la reserva y no pasar el parametro
+        boolean facturaGlobal = false;
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		Proveedor proveedor = manejadorU.getProveedor(idProveedor);
 		if (proveedor.facturarReserva(idReserva)){
                     seleccionarCliente(nickCliente);
                     confirmarFactura(idReserva);
+                    facturaGlobal = true;
                 }
+        return facturaGlobal;
         
 	}
     @Override

@@ -1,8 +1,14 @@
 package tprog.web;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,8 +20,8 @@ public class VerServicio extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
+		response.setContentType("text/html;charset=UTF-8");
+		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idServicio = request.getParameter("idServicio");
@@ -27,12 +33,28 @@ public class VerServicio extends HttpServlet {
 		System.out.println("Web App");
 		System.out.println("Ciudad origen : " + wrapper.getDtServicio().getOrigen().getCiudad());
 		System.out.println("Pais origen : " + wrapper.getDtServicio().getOrigen().getPais());
+
+		List<byte[]> imagenes = wrapper.getImagenes();
+		if (imagenes != null) {
+			List<String> rutasImagenes = new ArrayList<>();
+			int i = 0;
+			for (byte[] imagen : imagenes) {
+				BufferedImage img = ImageIO.read(new ByteArrayInputStream(imagen));
+				String rutaRelativaImagen = "imagenes/" + Integer.toString(i) + ".jpg";
+				String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
+				ImageIO.write(img, "jpg", new File(rutaCompletaImagen));
+				rutasImagenes.add(rutaRelativaImagen);
+				i++;
+			}
+			request.setAttribute("imagenes", rutasImagenes);
+		}
+
 		request.setAttribute("categorias", categorias);
-        if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-            request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
-        } else{
-            request.getRequestDispatcher("/pages/proveedor/verServicioProveedor.jsp").forward(request, response);
-        }
+		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+			request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/pages/proveedor/verServicioProveedor.jsp").forward(request, response);
+		}
 	}
 
 	@Override

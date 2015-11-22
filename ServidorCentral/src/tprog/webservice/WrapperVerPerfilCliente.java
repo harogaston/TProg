@@ -15,5 +15,6 @@ public class WrapperVerPerfilCliente {
 
 	public DTCliente cliente;
 	public Set<DTReserva> reservas;
+	public byte[] imagen;
 
 }

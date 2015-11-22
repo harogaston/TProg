@@ -45,6 +45,7 @@
 <xs:sequence>
 <xs:element name="cliente" type="tns:dtCliente" minOccurs="0"></xs:element>
 <xs:element name="reservas" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="imagen" type="xs:base64Binary" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 
@@ -281,6 +282,13 @@
 <xs:complexType name="Exception">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPerfilProveedor">
+<xs:sequence>
+<xs:element name="proveedor" type="tns:dtProveedor" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:base64Binary" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

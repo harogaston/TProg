@@ -38,7 +38,7 @@
 <part name="arg0" type="xsd:string"></part>
 </message>
 <message name="verPerfilProveedorResponse">
-<part name="return" type="tns:dtProveedor"></part>
+<part name="return" type="tns:wrapperVerPerfilProveedor"></part>
 </message>
 <message name="verFactura">
 <part name="arg0" type="xsd:int"></part>

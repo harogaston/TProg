@@ -24,7 +24,7 @@
         <%			//obtengo el atributo de info servicio para usar en toda la página
 			DtServicio infoServicio = (DtServicio) request.getAttribute("infoServicio");
 			String idProveedor = (String) request.getAttribute("idProveedor");
-			List< String> imagenes = infoServicio.getImagenes();
+			List< String> imagenes = (List<String>) request.getAttribute("imagenes");
         %>
         <div class="container wrapper">
             <div class="row">

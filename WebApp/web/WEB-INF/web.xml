@@ -7,6 +7,9 @@
 			Ubicación de archivos manejados por la Web App
 		</description>
 	</context-param>
+	<Context docBase="/tmp/" path="/WebApp/images"/>
+
+
 	<servlet>
 		<servlet-name>About</servlet-name>
 		<servlet-class>tprog.web.About</servlet-class>

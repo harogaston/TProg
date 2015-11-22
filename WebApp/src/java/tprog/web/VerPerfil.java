@@ -1,10 +1,14 @@
 package tprog.web;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +18,7 @@ import webservice.DtCliente;
 import webservice.DtProveedor;
 import webservice.DtReserva;
 import webservice.WrapperVerPerfilCliente;
+import webservice.WrapperVerPerfilProveedor;
 
 public class VerPerfil extends HttpServlet {
 
@@ -23,7 +28,7 @@ public class VerPerfil extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
 		webservice.PublicadorService service = new webservice.PublicadorService();
 		webservice.Publicador proxy = service.getPublicadorPort();
@@ -40,14 +45,25 @@ public class VerPerfil extends HttpServlet {
 						+ Integer.toString(dtC.getFechaNacimiento().getYear()) + "\n";
 				request.setAttribute("fNac", fNac);
 				request.setAttribute("email", dtC.getEmail());
-				request.setAttribute("imagen", dtC.getImagen());
+
+				byte[] bytesImagen = result.getImagen();
+				if (bytesImagen != null) {
+					BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytesImagen));
+					String rutaRelativaImagen = "imagenes/clientes/" + dtC.getNickname() + ".jpg";
+					String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
+					ImageIO.write(img, "jpg", new File(rutaCompletaImagen));
+					System.out.println("Ruta imagen original = " + dtC.getImagen());
+					System.out.println("Ruta relativa = " + rutaCompletaImagen);
+					request.setAttribute("imagen", rutaRelativaImagen);
+				}
 				// Voy a crear un Set<DTReserva> para pasarle a la jsp
 				Set<DtReserva> reservas = new HashSet(result.getReservas());
 				request.setAttribute("reservas", reservas);
 				request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);
 			} else {
 				try {
-					DtProveedor dtP = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));;
+					WrapperVerPerfilProveedor result = proxy.verPerfilProveedor((String) request.getSession().getAttribute("usuario_logueado"));
+					DtProveedor dtP = result.getProveedor();
 					request.setAttribute("nick", dtP.getNickname());
 					String nombreCompleto = dtP.getNombre() + " " + dtP.getApellido();
 					request.setAttribute("nombre", nombreCompleto);
@@ -56,7 +72,18 @@ public class VerPerfil extends HttpServlet {
 							+ Integer.toString(dtP.getFechaNacimiento().getYear()) + "\n";
 					request.setAttribute("fNac", fNac);
 					request.setAttribute("email", dtP.getEmail());
-					request.setAttribute("imagen", dtP.getImagen());
+
+					byte[] bytesImagen = result.getImagen();
+					if (bytesImagen != null) {
+						BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytesImagen));
+						String rutaRelativaImagen = "imagenes/proveedores/" + dtP.getNickname() + ".jpg";
+						String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
+						ImageIO.write(img, "jpg", new File(rutaCompletaImagen));
+						System.out.println("Ruta imagen original = " + dtP.getImagen());
+						System.out.println("Ruta relativa = " + rutaCompletaImagen);
+						//si la imagen es nula, directamente no se asigna el atributo
+						request.setAttribute("imagen", rutaRelativaImagen);
+					}
 					request.setAttribute("linkEmpresa", dtP.getWebEmpresa());
 					request.setAttribute("nombreEmpresa", dtP.getEmpresa());
 					request.getRequestDispatcher("/pages/perfil.jsp").forward(request, response);

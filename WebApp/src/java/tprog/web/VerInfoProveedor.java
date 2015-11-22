@@ -78,6 +78,7 @@ public class VerInfoProveedor extends HttpServlet {
 			request.setAttribute("fNac", fNac);
 			request.setAttribute("email", dt.getEmail());
 			request.setAttribute("imagen", dt.getImagen());
+
 			request.setAttribute("imagen", null);
 			request.setAttribute("empresa", dt.getEmpresa());
 			request.setAttribute("webempresa", dt.getWebEmpresa());

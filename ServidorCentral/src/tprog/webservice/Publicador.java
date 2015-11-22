@@ -28,12 +28,9 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.SortedSet;
 import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTFacturaF;
-import tprog.logica.dt.DTLineaReserva;
-import tprog.logica.dt.DTMinCliente;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
@@ -41,7 +38,6 @@ import tprog.logica.dt.DTPromocion;
 import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
-import tprog.logica.dt.DTServicioF;
 import tprog.logica.dt.DTUsuario;
 import tprog.logica.dt.EstadoReserva;
 import tprog.logica.interfaces.Fabrica;
@@ -180,31 +176,44 @@ public class Publicador {
 	}
 
 	@WebMethod
-	public DTProveedor verPerfilProveedor(String nickProveedor) {
+	public WrapperVerPerfilProveedor verPerfilProveedor(String nickProveedor) {
+		WrapperVerPerfilProveedor result = new WrapperVerPerfilProveedor();
 		try {
 			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
 			ctrlUsuarios.seleccionarProveedor(nickProveedor);
-			return ctrlUsuarios.infoProveedor();
+			result.proveedor = ctrlUsuarios.infoProveedor();
+			//mando los bytes de la imagen por separado, ya que el string
+			//de ubicacion de la imagen queda obsoleto desde el lado de la
+			//web app
+			if (result.proveedor.getImagen() != null) {
+				File file = new File(result.proveedor.getImagen());
+				FileInputStream streamer = new FileInputStream(file);
+				byte[] imagen = new byte[streamer.available()];
+				streamer.read(imagen);
+				result.imagen = imagen;
+			} else {
+				result.imagen = null;
+			}
+			return result;
 		} catch (Exception ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		return null;
+		return result;
 	}
-    
 
 	@WebMethod
 	public WrapperVerFactura verFactura(int idReserva) {
 		Fabrica f = Fabrica.getInstance();
-        ICtrlReservas ctrlReservas = f.getICtrlReservas();
+		ICtrlReservas ctrlReservas = f.getICtrlReservas();
 		DTFacturaF dtF = ctrlReservas.verFactura(idReserva);
 		WrapperVerFactura result = new WrapperVerFactura();
-        result.factura = dtF;
+		result.factura = dtF;
 		result.servicios = dtF.getServicios();
-        result.promociones = dtF.getPromociones();
+		result.promociones = dtF.getPromociones();
 		return result;
 	}
-    
-    @WebMethod
+
+	@WebMethod
 	public WrapperVerServiciosProveedor verServiciosProveedor(String nickProveedor) {
 		Fabrica f = Fabrica.getInstance();
 		ICtrlProductos ctrlProductos = f.getICtrlProductos();
@@ -267,6 +276,18 @@ public class Publicador {
 			WrapperVerPerfilCliente result = new WrapperVerPerfilCliente();
 			result.cliente = dtC;
 			result.reservas = reservas;
+			//mando los bytes de la imagen por separado, ya que el string
+			//de ubicacion de la imagen queda obsoleto desde el lado de la
+			//web app
+			if (result.cliente.getImagen() != null) {
+				File file = new File(result.cliente.getImagen());
+				FileInputStream streamer = new FileInputStream(file);
+				byte[] imagen = new byte[streamer.available()];
+				streamer.read(imagen);
+				result.imagen = imagen;
+			} else {
+				result.imagen = null;
+			}
 			return result;
 		} catch (Exception ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
@@ -291,7 +312,7 @@ public class Publicador {
 			ctrlReservas.seleccionarReserva(reserva.getIdReserva());
 			WrapperReserva tmp = new WrapperReserva();
 			tmp.nickCliente = ctrlReservas.getClienteAsociado().getNickname();
-            tmp.emailCliente = ctrlReservas.getClienteAsociado().getEmail();
+			tmp.emailCliente = ctrlReservas.getClienteAsociado().getEmail();
 			tmp.reserva = reserva;
 			result.reservasCliente.add(tmp);
 		}
@@ -562,7 +583,7 @@ public class Publicador {
 			DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateNac = sourceFormat.parse(fechaNac);
 			ICtrlUsuarios ctrlUsuarios = Fabrica.getInstance().getICtrlUsuarios();
-			//se crea un nuevo dt por quilombos con la fecha
+			//se crea un nuevo proveedor por quilombos con la fecha
 			DTUsuario dtNuevo = new DTUsuario(
 					id,
 					contrasena,
@@ -639,15 +660,15 @@ public class Publicador {
 			return null;
 		}
 	}
-        
-        @WebMethod
+
+	@WebMethod
 	public DTReserva quitarlineaReserva(
 			@WebParam(name = "id_ctrl_reservas") int idCtrlReservas,
 			@WebParam(name = "id_LineaReserva") int idLineaReserva
 	) {
-			ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
-			ctrlReservas.quitarLineaReserva(idLineaReserva);
-			return ctrlReservas.mostrarReservaTemporal();
+		ICtrlReservas ctrlReservas = mapControladoresReserva.get(idCtrlReservas);
+		ctrlReservas.quitarLineaReserva(idLineaReserva);
+		return ctrlReservas.mostrarReservaTemporal();
 	}
 
 	@WebMethod

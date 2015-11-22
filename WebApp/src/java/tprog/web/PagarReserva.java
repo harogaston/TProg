@@ -5,8 +5,10 @@
  */
 package tprog.web;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +36,13 @@ public class PagarReserva extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int idReserva = Integer.parseInt((String) request.getParameter("idReserva"));
-		webservice.PublicadorService service = new webservice.PublicadorService();
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		proxy.pagarReserva(idReserva);
 		request.getSession().setAttribute("reservaPagada", "La reserva ha sido pagada con éxito");

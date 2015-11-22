@@ -1,7 +1,10 @@
 package tprog.web;
 
+import java.io.FileInputStream;
 import org.apache.commons.validator.EmailValidator;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +17,13 @@ public class AjaxMail extends HttpServlet {
 			throws ServletException, IOException {
 		String id = request.getParameter("mail");
 		String resultado;
-		webservice.PublicadorService service = new webservice.PublicadorService();
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		if (id.matches("^\\s*$")) {
 			resultado = "";

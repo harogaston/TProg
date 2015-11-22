@@ -5,10 +5,13 @@
  */
 package tprog.web;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +28,15 @@ public class VerPromocion extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-		webservice.PublicadorService service = new webservice.PublicadorService();
+		response.setContentType("text/html;charset=UTF-8");
+		HttpSession session = request.getSession();
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idPromocion = request.getParameter("idPromocion");
 		String idProveedor = request.getParameter("idProveedor");
@@ -43,11 +52,11 @@ public class VerPromocion extends HttpServlet {
 		request.setAttribute("idProveedor", idProveedor);
 		//y el resto de la info del servicio
 		request.setAttribute("infoPromocion", result.getPromocion());
-        if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
-            request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("/pages/proveedor/verPromocionProveedor.jsp").forward(request, response);
-        }
+		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+			request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/pages/proveedor/verPromocionProveedor.jsp").forward(request, response);
+		}
 	}
 
 	@Override

@@ -2,10 +2,13 @@ package tprog.web;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -21,9 +24,14 @@ public class Buscar extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			//establezco proxy con el web service
-			webservice.PublicadorService servicio
-					= new webservice.PublicadorService();
-			webservice.Publicador proxy = servicio.getPublicadorPort();
+			Properties properties = new Properties();
+			String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+			FileInputStream file = new FileInputStream(ruta);
+			properties.load(file);
+			file.close();
+			URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+			webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
+			webservice.Publicador proxy = service.getPublicadorPort();
 			//preparo los parametros para pasar al web service
 			//porque no se pueden pasar nulls
 			String busquedaPrevia = (request.getParameter("busquedaPrevia") == null) ? "null" : request.getParameter("busquedaPrevia");

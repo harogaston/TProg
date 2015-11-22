@@ -3,10 +3,13 @@ package tprog.web;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -22,7 +25,13 @@ public class VerServicio extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-		webservice.PublicadorService service = new webservice.PublicadorService();
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idServicio = request.getParameter("idServicio");
 		String idProveedor = request.getParameter("idProveedor");

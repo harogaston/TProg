@@ -13,8 +13,11 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +43,13 @@ public class DescargarPDF extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
-		webservice.PublicadorService service = new webservice.PublicadorService();
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		System.out.println("Llego hasta el servlet");
 		//response.setContentType("application/pdf");

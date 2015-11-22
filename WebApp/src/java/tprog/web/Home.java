@@ -2,7 +2,10 @@ package tprog.web;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +34,14 @@ public class Home extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
 			if (request.getSession().getAttribute("terminos") == null) {
-				webservice.PublicadorService service = new webservice.PublicadorService();
+				Properties properties = new Properties();
+				String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+				FileInputStream file = new FileInputStream(ruta);
+				properties.load(file);
+				file.close();
+				URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+				webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
+				System.out.println("URL del coso : " + wsdlLocation.toString());
 				webservice.Publicador proxy = service.getPublicadorPort();
 				JsonParser jsonParser = new JsonParser();
 				JsonArray termsArray = (JsonArray) jsonParser.parse(proxy.typeahead());
@@ -42,7 +52,7 @@ public class Home extends HttpServlet {
 			request.setAttribute("precio", "0");
 
 		}
-        request.getRequestDispatcher("Buscar").forward(request, response);
+		request.getRequestDispatcher("Buscar").forward(request, response);
 	}
 
 	@Override

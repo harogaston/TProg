@@ -28,6 +28,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Properties;
 import javax.jws.WebParam;
 import tprog.logica.dt.DTCliente;
 import tprog.logica.dt.DTFacturaF;
@@ -59,7 +60,16 @@ public class Publicador {
 
 	@WebMethod(exclude = true)
 	public void publicar() {
-		endpoint = Endpoint.publish("http://localhost:9128/publicador", this);
+		try {
+			Properties properties = new Properties();
+			String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+			FileInputStream file = new FileInputStream(ruta);
+			properties.load(file);
+			file.close();
+			endpoint = Endpoint.publish(properties.getProperty("publicador"), this);
+		} catch (IOException ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 
 	@WebMethod(exclude = true)
@@ -90,7 +100,7 @@ public class Publicador {
 		//necesito el nickname del proveedor
 		//y el resto de la info del servicio
 		ctrlProductos.agregarAccesoAServicio(dtMin);
-        WrapperVerServicio result = new WrapperVerServicio();
+		WrapperVerServicio result = new WrapperVerServicio();
 		result.dtServicio = ctrlProductos.infoServicio();;
 		//busco categorias y las seteo como atributo a pasarle a la pagina jsp
 		result.categorias = ctrlProductos.listarCategoriasServicio();

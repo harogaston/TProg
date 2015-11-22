@@ -1,3 +1,6 @@
+<%@page import="java.net.URL"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.util.Properties"%>
 <%@page import="java.util.List"%>
 <%@page import="webservice.DtServicio"%>
 <%@page import="java.net.URLEncoder"%>
@@ -81,39 +84,45 @@
                         <div class="panel-body">
                             <div class="panel-body">
                                 <span class="text-muted">Proveedor </span> <%=idProveedor%><br><br>
-								<span class="text-muted">Precio unitario: </span> $<%=Float.toString(infoServicio.getPrecio())%>		
-                            </div>	
-									
-										
-                            <div class="panel-body">	
-									<span class="text-muted">Origen </span> 
-										
-										<%
-											webservice.PublicadorService service = new webservice.PublicadorService();
-											webservice.Publicador proxy = service.getPublicadorPort();
-										%>
-										<%=proxy.toString(infoServicio.getOrigen())%>
-                                        <%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(), "UTF-8");%><br>
-											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=origenSafe%>
-												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
-												 <%=origenSafe%>" alt="Google Map of caracas" style="padding-top: 10px;">
-										
+								<span class="text-muted">Precio unitario: </span> $<%=Float.toString(infoServicio.getPrecio())%>
                             </div>
-                                                 
-									<%if (infoServicio.getDestino() != null) {%>
-                                    <div class="pane-body">
-									
-										<span class="text-muted">Destino </span> 
-										<%=proxy.toString(infoServicio.getDestino())%>
-                                        <%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(), "UTF-8");%><br>
-											<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=destinoSafe%>
-												 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
-												 <%=destinoSafe%>" alt="Google Map of caracas"  style="padding-top: 10px;">
-										
-                                    </div>
-									<%}%>
-                                
-                            
+
+
+                            <div class="panel-body">
+								<span class="text-muted">Origen </span>
+
+								<%
+									Properties properties = new Properties();
+									String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+									FileInputStream file = new FileInputStream(ruta);
+									properties.load(file);
+									file.close();
+									URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+									webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
+									webservice.Publicador proxy = service.getPublicadorPort();
+								%>
+								<%=proxy.toString(infoServicio.getOrigen())%>
+								<%String origenSafe = URLEncoder.encode(infoServicio.getOrigen().getCiudad(), "UTF-8");%><br>
+								<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=origenSafe%>
+									 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
+									 <%=origenSafe%>" alt="Google Map of caracas" style="padding-top: 10px;">
+
+                            </div>
+
+							<%if (infoServicio.getDestino() != null) {%>
+							<div class="pane-body">
+
+								<span class="text-muted">Destino </span>
+								<%=proxy.toString(infoServicio.getDestino())%>
+								<%String destinoSafe = URLEncoder.encode(infoServicio.getDestino().getCiudad(), "UTF-8");%><br>
+								<img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=destinoSafe%>
+									 &zoom=2&scale=1&size=100x100&maptype=terrain&format=png&visual_refresh=true&markers=size:small%7Ccolor:0xff0000%7Clabel:0%7C
+									 <%=destinoSafe%>" alt="Google Map of caracas"  style="padding-top: 10px;">
+
+							</div>
+							<%}%>
+
+
                         </div>
                     </div>
 
@@ -125,7 +134,7 @@
                     <h4><%=infoServicio.getIdServicio()%></h4>
                     <p><h5>Descripción</h5> <%=infoServicio.getDescripcion()%></p>
 
-                    
+
 
 					<h5>Categorías</h5>
                     <%Set<String> categorias = (Set<String>) request.getAttribute("categorias");
@@ -133,10 +142,10 @@
 						for (String categoria : categorias) {
 							i++;
                     %>
-					
-						<h6><a style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-warning"><%=categoria%></span></a></h6>
-						<input name="categoriaSeleccionada" value="<%=categoria%>" style="display: none">
-					
+
+					<h6><a style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-warning"><%=categoria%></span></a></h6>
+					<input name="categoriaSeleccionada" value="<%=categoria%>" style="display: none">
+
 					<%}%>
                 </div>
             </div>

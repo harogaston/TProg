@@ -1,3 +1,6 @@
+<%@page import="java.net.URL"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.util.Properties"%>
 <%@page import="webservice.DtPromocion"%>
 <%@page import="webservice.DtMinServicio"%>
 <%@page import="webservice.DtServicio"%>
@@ -108,7 +111,13 @@
 
 							for (Map.Entry<DtMinServicio, Integer> nodo : servicios.entrySet()) {
 //                                System.out.println(nodo.getKey() + "/" + nodo.getValue());
-								webservice.PublicadorService service = new webservice.PublicadorService();
+								Properties properties = new Properties();
+								String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+								FileInputStream file = new FileInputStream(ruta);
+								properties.load(file);
+								file.close();
+								URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+								webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 								webservice.Publicador proxy = service.getPublicadorPort();
 								DtServicio servicio = proxy.seleccionarInfoServicio(nodo.getKey());
 								i++;

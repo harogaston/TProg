@@ -1,3 +1,6 @@
+<%@page import="java.net.URL"%>
+<%@page import="java.io.FileInputStream"%>
+<%@page import="java.util.Properties"%>
 <%@page import="java.util.List"%>
 <%@page import="webservice.DtServicio"%>
 <%@page import="java.net.URLEncoder"%>
@@ -97,7 +100,13 @@
 									<tr>
 										<td>Origen</td>
 										<%
-											webservice.PublicadorService service = new webservice.PublicadorService();
+											Properties properties = new Properties();
+											String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+											FileInputStream file = new FileInputStream(ruta);
+											properties.load(file);
+											file.close();
+											URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+											webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 											webservice.Publicador proxy = service.getPublicadorPort();
 										%>
 										<td><%=proxy.toString(infoServicio.getOrigen())%>

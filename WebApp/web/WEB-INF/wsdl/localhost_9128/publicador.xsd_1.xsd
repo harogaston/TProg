@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://webservice.tprog/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.tprog/">
 
 <xs:element name="Exception" type="tns:Exception"></xs:element>
@@ -329,3 +330,299 @@
 </xs:restriction>
 </xs:simpleType>
 </xs:schema>
+||||||| merged common ancestors
+=======
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is JAX-WS RI 2.2.9-b130926.1035 svn-revision#5f6196f2b90e9460065a4c2f4e30e065b245e51e. --><xs:schema xmlns:tns="http://webservice.tprog/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.tprog/">
+
+<xs:element name="Exception" type="tns:Exception"></xs:element>
+
+<xs:complexType name="wrapperVerServiciosProveedor">
+<xs:sequence>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtServicio">
+<xs:sequence>
+<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descripcion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+<xs:element name="imagenes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="origen" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+<xs:element name="destino" type="tns:dtUbicacion" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtUbicacion">
+<xs:sequence>
+<xs:element name="ciudad" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="pais" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPerfilCliente">
+<xs:sequence>
+<xs:element name="cliente" type="tns:dtCliente" minOccurs="0"></xs:element>
+<xs:element name="reservas" type="tns:dtReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtCliente">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="reservas" type="tns:dtMinReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="dtUsuario">
+<xs:sequence>
+<xs:element name="nickname" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nombre" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="apellido" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="password" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="email" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="imagen" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="fechaNacimiento" type="xs:dateTime" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtMinReserva">
+<xs:sequence></xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtReserva">
+<xs:sequence>
+<xs:element name="idReserva" type="xs:int"></xs:element>
+<xs:element name="fCreacion" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="estado" type="tns:estadoReserva" minOccurs="0"></xs:element>
+<xs:element name="precioTotal" type="xs:float"></xs:element>
+<xs:element name="lineasReserva" type="tns:dtLineaReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtLineaReserva">
+<xs:sequence>
+<xs:element name="idLineaReserva" type="xs:int"></xs:element>
+<xs:element name="cantidad" type="xs:int"></xs:element>
+<xs:element name="fechaInicio" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="fechaFin" type="xs:dateTime" minOccurs="0"></xs:element>
+<xs:element name="servicio" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="promocion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="precio" type="xs:float"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPromocion">
+<xs:sequence>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtMinServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="promocion" type="tns:dtPromocion" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtMinServicio">
+<xs:sequence>
+<xs:element name="nicknameP" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="idServicio" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtPromocion">
+<xs:sequence>
+<xs:element name="idPromocion" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="nicknameProveedor" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="descuento" type="xs:float"></xs:element>
+<xs:element name="total" type="xs:float"></xs:element>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtMinServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:int"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerPromocionesProveedor">
+<xs:sequence>
+<xs:element name="promociones">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtPromocion"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerServicio">
+<xs:sequence>
+<xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
+<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperBuscar">
+<xs:sequence>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="promociones">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtPromocion"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="categoriaPrevia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="busquedaPrevia" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="tipoOrden" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="arbolCategorias" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="terminosTypeAhead" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperNotificacionesProveedor">
+<xs:sequence>
+<xs:element name="notificaciones" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerInfoProveedor">
+<xs:sequence>
+<xs:element name="proveedor" type="tns:dtProveedor" minOccurs="0"></xs:element>
+<xs:element name="servicios">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtServicio"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="promociones">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="entry" minOccurs="0" maxOccurs="unbounded">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="key" minOccurs="0" type="tns:dtPromocion"></xs:element>
+<xs:element name="value" minOccurs="0" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="dtProveedor">
+<xs:complexContent>
+<xs:extension base="tns:dtUsuario">
+<xs:sequence>
+<xs:element name="empresa" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="webEmpresa" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerReservasProveedor">
+<xs:sequence>
+<xs:element name="dtP" type="tns:dtProveedor" minOccurs="0"></xs:element>
+<xs:element name="reservasCliente" type="tns:wrapperReserva" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperReserva">
+<xs:sequence>
+<xs:element name="nickCliente" type="xs:string" minOccurs="0"></xs:element>
+<xs:element name="reserva" type="tns:dtReserva" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="estadoReserva">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Registrada"></xs:enumeration>
+<xs:enumeration value="Cancelada"></xs:enumeration>
+<xs:enumeration value="Pagada"></xs:enumeration>
+<xs:enumeration value="Facturada"></xs:enumeration>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
+>>>>>>> sofi

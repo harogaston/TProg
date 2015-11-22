@@ -13,6 +13,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import tprog.estaciondetrabajo.carga.CtrlCarga;
 import tprog.logica.dt.DTFacturaF;
+import tprog.logica.clases.RegistroAccesos;
 import tprog.logica.interfaces.Fabrica;
 import tprog.logica.interfaces.ICtrlReservas;
 
@@ -70,6 +71,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemActualizarEstadoReserva = new javax.swing.JMenuItem();
         menuItemActualizarServicio = new javax.swing.JMenuItem();
         menuItemCancelarReserva = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        registroAccesos = new javax.swing.JMenuItem();
+        rankingServicios = new javax.swing.JMenuItem();
 
         jMenuItem6.setText("jMenuItem6");
 
@@ -213,6 +217,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menu.add(menuModificaciones);
 
+        jMenu1.setText("Estadísticas");
+
+        registroAccesos.setText("Registro de Accesos");
+        registroAccesos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registroAccesosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(registroAccesos);
+
+        rankingServicios.setText("Ranking Servicios");
+        rankingServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rankingServiciosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(rankingServicios);
+
+        menu.add(jMenu1);
+
         setJMenuBar(menu);
 
         pack();
@@ -326,10 +350,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void menuItemAltaPromocionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAltaPromocionActionPerformed
-        AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(), fabrica.getICtrlProductos());
+        AltaDePromocion altaDePromocion = new AltaDePromocion(fabrica.getICtrlUsuarios(),
+                fabrica.getICtrlProductos());
         center(altaDePromocion);
         altaDePromocion.initCheck();
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
+
+    private void registroAccesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroAccesosActionPerformed
+        for (int i = 0; i < 10001; i++) {
+            registro.agregarAcceso("123 - " + i, "www.unacosamuymuymuymuylargaymolestamuymaslargatodaviaymasymasquehorror" + i + ".com", "Mozilla", "Linuss");
+        }
+        RegistroDeAccesos registroAccesos = new RegistroDeAccesos(registro.getAccesos());
+        center(registroAccesos);
+    }//GEN-LAST:event_registroAccesosActionPerformed
+
+    private void rankingServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingServiciosActionPerformed
+        RankingDeServicios rankingDeServicios = new RankingDeServicios(fabrica.getICtrlProductos());
+        center(rankingDeServicios);
+    }//GEN-LAST:event_rankingServiciosActionPerformed
 
     public static void main(String args[]) {
         VentanaPrincipal v = new VentanaPrincipal();
@@ -337,9 +375,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     Fabrica fabrica = Fabrica.getInstance();
+    RegistroAccesos registro = RegistroAccesos.getInstance();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cargarDatos;
     private javax.swing.JDesktopPane desktop;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuBar menu;
@@ -359,5 +399,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemVerInfoReserva;
     private javax.swing.JMenuItem menuItemVerInfoServicio;
     private javax.swing.JMenu menuModificaciones;
+    private javax.swing.JMenuItem rankingServicios;
+    private javax.swing.JMenuItem registroAccesos;
     // End of variables declaration//GEN-END:variables
 }

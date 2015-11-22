@@ -10,9 +10,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import tprog.logica.clases.Categoria;
 import tprog.logica.clases.Ciudad;
 import tprog.logica.clases.Compuesta;
+import tprog.logica.clases.ItemRanking;
 import tprog.logica.clases.Pais;
 import tprog.logica.clases.Promocion;
 import tprog.logica.clases.Proveedor;
+import tprog.logica.clases.RankingServicios;
 import tprog.logica.clases.Servicio;
 import tprog.logica.clases.Simple;
 import tprog.logica.dt.DTMinPromocion;
@@ -485,6 +487,32 @@ public class ManejadorProductos {
                     result.add(promo.crearDT());
                 }
             }
+        }
+        return result;
+    }
+
+    public void agregarAccesoAServicio(DTMinServicio dtMinServicio){
+        String proveedor = dtMinServicio.getNicknameP();
+        String idServicio = dtMinServicio.getIdServicio();
+        if(!servicios.isEmpty() 
+                && servicios.containsKey(proveedor)
+                && !servicios.get(proveedor).isEmpty()
+                && servicios.get(proveedor).containsKey(idServicio)){
+            servicios.get(proveedor).get(idServicio).agregarAcceso();
+        }
+    }
+    
+    public RankingServicios obtenerRankingDeServicios(){
+        RankingServicios result = new RankingServicios();
+        if (!servicios.isEmpty()) {
+			for (Map<String, Servicio> mapaServicio : servicios.values()) {
+				if (!mapaServicio.isEmpty()) {
+					for (Servicio serv : mapaServicio.values()) {
+                        ItemRanking itemR = new ItemRanking(serv);
+                        result.insertarItemOrdenado(itemR);
+                    }
+                }
+            }    
         }
         return result;
     }

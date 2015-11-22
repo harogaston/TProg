@@ -4,9 +4,9 @@ import java.util.Date;
 import tprog.logica.dt.DTLineaReserva;
 
 public class LineaReserva {
-        
-        private int idLineaReserva;
-        private static int contador = 1;
+
+    private int idLineaReserva;
+    private static int contador = 1;
 	private int cantidad;
 	private Date fechaInicio;
 	private Date fechaFin;

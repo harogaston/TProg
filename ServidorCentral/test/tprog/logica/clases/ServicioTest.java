@@ -6,6 +6,8 @@ import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -341,8 +343,16 @@ public class ServicioTest {
 		Proveedor expResult = proveedor;
 		Proveedor result = instance.getProveedor();
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-
+	}
+    
+    /**
+	 * Test of getNicknameProveedor method, of class Servicio.
+	 */
+	@Test
+	public void testGetNicknameProveedor() {
+		System.out.println("getNicknameProveedor");
+		String expResult = instance.getProveedor().getNickname();
+		assertEquals(expResult, instance.getNicknameProveedor());
 	}
 
 	/**
@@ -354,7 +364,64 @@ public class ServicioTest {
 		proveedor = null;
 
 		instance.setProveedor(proveedor);
-
+	}
+    
+    /**
+	 * Tests of contieneTermino method, of class Servicio.
+	 */
+    @Test
+	public void testContieneTermino0() {
+		System.out.println("contieneTermino Positivo en IdServicio");
+        assertTrue(instance.contieneTermino("serv"));
+	}
+    
+	@Test
+	public void testContieneTermino1() {
+		System.out.println("contieneTermino Positivo en Descripcion");
+		assertTrue(instance.contieneTermino("escrip"));
+	}
+    
+    @Test
+	public void testContieneTermino2() {
+		System.out.println("contieneTermino Negativo");
+		assertFalse(instance.contieneTermino("un termino que no este"));
+	}
+    
+    @Test
+	public void testContieneTermino3() {
+		System.out.println("contieneTermino Positivo en Cateoria");
+		instance.agregarCategoria(new Simple("Relax"));
+        assertTrue(instance.contieneTermino("Relax"));
+	}
+    
+    @Test
+	public void testContieneTermino4() {
+		System.out.println("contieneTermino Negativo en Cateoria");
+		instance.agregarCategoria(new Simple("Relax"));
+        assertFalse(instance.contieneTermino("Fiesta"));
 	}
 
+    /**
+     * Test of getCantAccesos method, of class Servicio.
+     */
+    @Test
+    public void testGetCantAccesos() {
+        System.out.println("getCantAccesos");
+        int expResult = 0;
+        int result = instance.getCantAccesos();
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Test of agregarAcceso method, of class Servicio.
+     */
+    @Test
+    public void testAgregarAcceso() {
+        System.out.println("agregarAcceso");
+        instance.agregarAcceso();
+        assertEquals(1, instance.getCantAccesos());
+    }
+    
+    
 }

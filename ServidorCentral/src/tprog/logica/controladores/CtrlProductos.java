@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
+import tprog.logica.clases.ItemRanking;
+import tprog.logica.clases.RankingServicios;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
@@ -252,6 +254,12 @@ public class CtrlProductos implements ICtrlProductos {
 		manejadorP.altaPromocion(this.dtP.getIdPromocion(), descuento, this.dtP.getNicknameP(), this.listaServicios);
 	}
 
+    @Override
+    public ArrayList<ItemRanking> obtenerRankingServicios(){
+        ManejadorProductos manejadorP = ManejadorProductos.getInstace();
+        return manejadorP.obtenerRankingDeServicios().getRanking();
+    }
+    
 	public DTUbicacion getDestino() {
 		return this.destino;
 	}
@@ -289,4 +297,5 @@ public class CtrlProductos implements ICtrlProductos {
         ManejadorProductos manejadorP = ManejadorProductos.getInstance();
 		return manejadorP.listarPromocionesPorTermino(termino);
     }
+    
 }

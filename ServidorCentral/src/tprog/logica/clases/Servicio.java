@@ -11,7 +11,7 @@ public class Servicio {
 	private String descripcion;
 	private float precio;
 	private Set<String> imagenes;
-
+    private int cantAccesos = 0;
 	private Ciudad origen;
 	private Ciudad destino;
 	private Proveedor proveedor;
@@ -160,7 +160,7 @@ public class Servicio {
 		}
 		return output;
 	}
-    
+
     public boolean contieneTermino(String termino){
         boolean contains = false;
         if (idServicio.toLowerCase().contains(termino.toLowerCase()) 
@@ -175,5 +175,13 @@ public class Servicio {
             }
         }
         return contains;
+    }
+    
+    public int getCantAccesos(){
+        return cantAccesos;
+    }
+    
+    public void agregarAcceso(){
+        cantAccesos ++;
     }
 }

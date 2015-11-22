@@ -42,7 +42,9 @@ public class VerServicio extends HttpServlet {
 				BufferedImage img = ImageIO.read(new ByteArrayInputStream(imagen));
 				String rutaRelativaImagen = "imagenes/" + Integer.toString(i) + ".jpg";
 				String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
-				ImageIO.write(img, "jpg", new File(rutaCompletaImagen));
+				File outputFile = new File(rutaCompletaImagen);
+				outputFile.getParentFile().mkdirs();
+				ImageIO.write(img, "jpg", outputFile);
 				rutasImagenes.add(rutaRelativaImagen);
 				i++;
 			}

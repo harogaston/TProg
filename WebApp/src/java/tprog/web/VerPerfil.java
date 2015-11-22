@@ -51,7 +51,9 @@ public class VerPerfil extends HttpServlet {
 					BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytesImagen));
 					String rutaRelativaImagen = "imagenes/clientes/" + dtC.getNickname() + ".jpg";
 					String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
-					ImageIO.write(img, "jpg", new File(rutaCompletaImagen));
+					File outputFile = new File(rutaCompletaImagen);
+					outputFile.getParentFile().mkdirs();
+					ImageIO.write(img, "jpg", outputFile);
 					System.out.println("Ruta imagen original = " + dtC.getImagen());
 					System.out.println("Ruta relativa = " + rutaCompletaImagen);
 					request.setAttribute("imagen", rutaRelativaImagen);
@@ -78,7 +80,9 @@ public class VerPerfil extends HttpServlet {
 						BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytesImagen));
 						String rutaRelativaImagen = "imagenes/proveedores/" + dtP.getNickname() + ".jpg";
 						String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
-						ImageIO.write(img, "jpg", new File(rutaCompletaImagen));
+						File outputFile = new File(rutaCompletaImagen);
+						outputFile.getParentFile().mkdirs();
+						ImageIO.write(img, "jpg", outputFile);
 						System.out.println("Ruta imagen original = " + dtP.getImagen());
 						System.out.println("Ruta relativa = " + rutaCompletaImagen);
 						//si la imagen es nula, directamente no se asigna el atributo

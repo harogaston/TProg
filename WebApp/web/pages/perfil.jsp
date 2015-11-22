@@ -19,32 +19,36 @@
     </header>
     <body>
         <!-- MENSAJE SI SE DESCARGÓ el PDF-->
+		<!-- Está comentado porque ahora el pdf se sirve dinámicamente, pero el código puede servir para otra cosa -->
+		<?php /*
         <%if (request.getSession().getAttribute("descargaOK") != null) {%>
         <script type="text/javascript">
-            $(window).load(function () {
-                $('#myModal').modal('show');
-            });
+		$(window).load(function () {
+		$('#myModal').modal('show');
+		});
         </script>
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog" style="text-align: center;">
-            <div class="modal-dialog" style="vertical-align: middle;">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title text-center">Descarga completada</h4>
-                    </div>
-                    <div class="modal-body">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-                    </div>
-                </div>
+		<div class="modal-dialog" style="vertical-align: middle;">
+		<!-- Modal content-->
+		<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title text-center">Descarga completada</h4>
+		</div>
+		<div class="modal-body">
+		<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+		</div>
+		</div>
 
-            </div>
+		</div>
         </div>
         <%
-                request.getSession().setAttribute("descargaOK", null);
-            }
+				request.getSession().setAttribute("descargaOK", null);
+			}
         %>
+		*/?>
+
         <div class="container wrapper" style="padding: 30px">
             <div class="row">
                 <!-- Nav tabs -->
@@ -92,8 +96,8 @@
                         <% if (request.getAttribute("reservas") != null) {%>
                         <div class="panel-group" id="accordionServicios">
                             <%	int i = 0;
-                                for (DtReserva dtR : (Set<DtReserva>) request.getAttribute("reservas")) {
-                                    i++;
+								for (DtReserva dtR : (Set<DtReserva>) request.getAttribute("reservas")) {
+									i++;
                             %>
                             <div class="accordion-group">
                                 <div class="panel panel-warning">
@@ -105,10 +109,10 @@
                                     </div>
                                     <div id="s<%=i%>" class="panel-collapse collapse">
                                         <div class="panel-body">
-                                            <span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%> 
+                                            <span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%>
                                             <%if (dtR.getEstado().value() == "Facturada") {%>
                                             <form action="VerFactura" method="POST">
-                                                <button class="btn btn-default" type="submit" >														
+                                                <button class="btn btn-default" type="submit" >
                                                     <i class="glyphicon glyphicon-file"></i> Ver Factura
                                                     <input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
                                                 </button>
@@ -119,17 +123,17 @@
                                                     <input type="text" name="idReserva" value="<%=dtR.getIdReserva()%>" style="display: none">
                                                 </button>
                                             </form>
-                                            <%}%>        
+                                            <%}%>
                                             <%
-                                                String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
-                                                        + Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"
-                                                        + Integer.toString(dtR.getFCreacion().getYear()) + "\n";
+												String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
+														+ Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"
+														+ Integer.toString(dtR.getFCreacion().getYear()) + "\n";
                                             %>
                                             <span class="text-muted">Fecha de Creación: </span><%=fCreacion%><br>
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">Detalle de la reserva</div>
                                                 <%	float subtotal = 0;
-                                                    Set<DtLineaReserva> lineas = new HashSet(dtR.getLineasReserva());
+													Set<DtLineaReserva> lineas = new HashSet(dtR.getLineasReserva());
                                                 %>
                                                 <!-- Tabla -->
                                                 <table class="table">
@@ -145,9 +149,9 @@
                                                     </thead>
                                                     <tbody>
                                                         <%	int j = 0;
-                                                            for (DtLineaReserva linea : lineas) {
-                                                                j++;
-                                                                subtotal += linea.getPrecio() * linea.getCantidad();
+															for (DtLineaReserva linea : lineas) {
+																j++;
+																subtotal += linea.getPrecio() * linea.getCantidad();
                                                         %>
                                                         <tr>
                                                             <th scope="row"><%=j%></th>
@@ -163,7 +167,7 @@
                                                             <td>$<%=(linea.getPrecio() * linea.getCantidad())%></td>
                                                         </tr>
                                                         <%
-                                                            }
+															}
                                                         %>
                                                     </tbody>
                                                 </table>
@@ -240,18 +244,18 @@
                                 </div>
                             </div>
                             <%
-                                }// cierra for
+								}// cierra for
                             %>
                         </div>
                         <% } else { %>
                         <p> Usted no posee reservas </p>
                         <%
-                            }
+							}
                         %>
                     </div>
                     <% } else {
 
-                        }%>
+						}%>
                 </div>
             </div>
         </div>
@@ -259,25 +263,25 @@
     <%@include file="templates/footer.jspf" %>
 </html>
 <script>
-    /**
-     * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
-     */
-    $(function () {
-        function reposition() {
-            var modal = $(this),
-                    dialog = modal.find('.modal-dialog');
-            modal.css('display', 'block');
+	/**
+	 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+	 */
+	$(function () {
+		function reposition() {
+			var modal = $(this),
+					dialog = modal.find('.modal-dialog');
+			modal.css('display', 'block');
 
-            // Dividing by two centers the modal exactly, but dividing by three
-            // or four works better for larger screens.
-            dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
-        }
-        // Reposition when a modal is shown
-        $('.modal').on('show.bs.modal', reposition);
-        // Reposition when the window is resized
-        $(window).on('resize', function () {
-            $('.modal:visible').each(reposition);
-        });
+			// Dividing by two centers the modal exactly, but dividing by three
+			// or four works better for larger screens.
+			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+		}
+		// Reposition when a modal is shown
+		$('.modal').on('show.bs.modal', reposition);
+		// Reposition when the window is resized
+		$(window).on('resize', function () {
+			$('.modal:visible').each(reposition);
+		});
 
-    });
+	});
 </script>

@@ -13,10 +13,7 @@ import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.ServletException;
@@ -49,9 +46,7 @@ public class DescargarPDF extends HttpServlet {
 		//response.setContentType("application/pdf");
 		try {
 			String idReservaString = request.getParameter("idReserva");
-            //asigno ruta donde quiero descargar la imagen --hay que cambiarlo
-			//el path por defecto esta en glassfish no se que, en tomcat debe ser igual
-			RESULT = "C:\\Kun\\tallerino\\TProg\\WebApp\\facturas/factura" + idReservaString + ".pdf";
+			response.setContentType("application/pdf");
 			Integer idReserva = Integer.parseInt(idReservaString);
 			WrapperVerFactura wrapper = proxy.verFactura(idReserva);
 			DtFacturaF dtf = wrapper.getFactura();
@@ -60,9 +55,10 @@ public class DescargarPDF extends HttpServlet {
 			String fecha = Integer.toString(dtf.getFecha().getDay()) + "-"
 					+ Integer.toString(dtf.getFecha().getMonth()) + "-"
 					+ Integer.toString(dtf.getFecha().getYear()) + "\n";
-			//creo el documento pdf
+			//creo el documento pdf dinámicamente : no sé donde se guarda
+			//pero se genera a demanda siempre
 			Document document = new Document();
-			PdfWriter.getInstance(document, new FileOutputStream(RESULT));
+			PdfWriter.getInstance(document, response.getOutputStream());
 			document.open();
 			document.add(new Paragraph("Detalles de la Factura", FontFactory.getFont("arial", 22, Font.ITALIC, BaseColor.BLACK)));
 			document.add(new Paragraph(" "));
@@ -72,7 +68,6 @@ public class DescargarPDF extends HttpServlet {
 			document.add(new Paragraph("Cliente: " + dtf.getNicknameCliente()));
 			document.add(new Paragraph("Monto: $" + dtf.getMonto()));
 			document.add(new Paragraph(" "));
-
 			//tabla para los servicios
 			if (!servicios.isEmpty()) {
 				document.add(new Paragraph("Servicios"));
@@ -94,7 +89,6 @@ public class DescargarPDF extends HttpServlet {
 					table.addCell(servicio.getNicknameProveedor());
 					i++;
 				}
-
 				document.add(table);
 				document.add(new Paragraph(" "));
 			}
@@ -123,15 +117,12 @@ public class DescargarPDF extends HttpServlet {
 				document.add(table);
 				document.add(new Paragraph(" "));
 			}
-
-			// step 5
 			document.close();
-			session.setAttribute("descargaOK", "La descarga se completó correctamente.");
+//			session.setAttribute("descargaOK", "La descarga se completó correctamente.");
 			response.sendRedirect("VerPerfil");
 		} catch (DocumentException de) {
 			throw new IOException(de.getMessage());
 		}
-
 	}
 
 	@Override

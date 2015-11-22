@@ -89,7 +89,8 @@ public class Publicador {
 		ctrlProductos.seleccionarServicio(dtMin);
 		//necesito el nickname del proveedor
 		//y el resto de la info del servicio
-		WrapperVerServicio result = new WrapperVerServicio();
+		ctrlProductos.agregarAccesoAServicio(dtMin);
+        WrapperVerServicio result = new WrapperVerServicio();
 		result.dtServicio = ctrlProductos.infoServicio();;
 		//busco categorias y las seteo como atributo a pasarle a la pagina jsp
 		result.categorias = ctrlProductos.listarCategoriasServicio();

@@ -297,5 +297,9 @@ public class CtrlProductos implements ICtrlProductos {
         ManejadorProductos manejadorP = ManejadorProductos.getInstance();
 		return manejadorP.listarPromocionesPorTermino(termino);
     }
-    
+    @Override
+    public void agregarAccesoAServicio(DTMinServicio dtMin) {
+        ManejadorProductos manejadorP = ManejadorProductos.getInstace();
+        manejadorP.agregarAccesoAServicio(dtMin);
+    }
 }

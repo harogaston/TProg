@@ -85,4 +85,6 @@ public interface ICtrlProductos {
     public Set<DTPromocion> listarPromocionesPorTermino(String termino);
 
     public ArrayList<ItemRanking> obtenerRankingServicios();
+
+    public void agregarAccesoAServicio(DTMinServicio dtMin);
 }

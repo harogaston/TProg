@@ -107,10 +107,10 @@ public class FacturaF implements Serializable {
 			DTServicioF temp = servicio.crearDTServicioF();
 			dtServicios.add(temp);
 		}
-        Set<DTPromocionF> dtPromociones = new HashSet();
+		Set<DTPromocionF> dtPromociones = new HashSet();
 		Iterator<PromocionF> iterador2 = promociones.iterator();
 		while (iterador2.hasNext()) {
-            PromocionF promocion = iterador2.next();
+			PromocionF promocion = iterador2.next();
 			DTPromocionF temp2 = promocion.crearDTPromocionF();
 			dtPromociones.add(temp2);
 		}

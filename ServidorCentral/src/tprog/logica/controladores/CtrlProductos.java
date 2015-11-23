@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import tprog.logica.clases.ItemRanking;
-import tprog.logica.clases.RankingServicios;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;

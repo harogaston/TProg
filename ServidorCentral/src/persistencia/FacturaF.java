@@ -18,7 +18,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import tprog.logica.dt.DTFacturaF;
-import tprog.logica.dt.DTPromocionF;
 import tprog.logica.dt.DTServicioF;
 
 /**

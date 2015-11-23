@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import tprog.logica.dt.DTFacturaF;
+import tprog.logica.dt.DTPromocionF;
 import tprog.logica.dt.DTServicioF;
 
 /**
@@ -29,7 +30,7 @@ public class FacturaF implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long identificador;
+    private Long id;
     private int idReserva;
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -90,11 +91,11 @@ public class FacturaF implements Serializable {
         return promociones;
     }
     public Long getId() {
-        return identificador;
+        return id;
     }
 
-    public void setId(Long identificador) {
-        this.identificador = identificador;
+    public void setId(Long id) {
+        this.id = id;
     }
     
     public DTFacturaF crearDTFacturaF(){
@@ -129,7 +130,7 @@ public class FacturaF implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (identificador != null ? identificador.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -140,7 +141,7 @@ public class FacturaF implements Serializable {
             return false;
         }
         FacturaF other = (FacturaF) object;
-        if ((this.identificador== null && other.identificador!= null) || (this.identificador!= null && !this.identificador.equals(other.identificador))) {
+        if ((this.id== null && other.id!= null) || (this.id!= null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -148,7 +149,7 @@ public class FacturaF implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Factura[ id=" + identificador+ " ]";
+        return "persistencia.Factura[ id=" + id+ " ]";
     }
     
 }

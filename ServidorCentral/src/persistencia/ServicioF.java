@@ -22,7 +22,7 @@ public class ServicioF implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long identificador;
+    private Long id;
     private int cantidad;
     private double precio;
     private String nombre;
@@ -32,11 +32,11 @@ public class ServicioF implements Serializable {
     
 
     public Long getId() {
-        return identificador;
+        return id;
     }
 
-    public void setId(Long identificador) {
-        this.identificador =  identificador ;
+    public void setId(Long id) {
+        this.id =  id ;
     }
 
     public int getCantidad() {
@@ -82,7 +82,7 @@ public class ServicioF implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += ( identificador  != null ?  identificador .hashCode() : 0);
+        hash += ( id  != null ?  id .hashCode() : 0);
         return hash;
     }
 
@@ -93,7 +93,7 @@ public class ServicioF implements Serializable {
             return false;
         }
         ServicioF other = (ServicioF) object;
-        if ((this. identificador  == null && other. identificador  != null) || (this. identificador  != null && !this. identificador .equals(other. identificador ))) {
+        if ((this. id  == null && other. id  != null) || (this. id  != null && !this. id .equals(other. id ))) {
             return false;
         }
         return true;
@@ -101,7 +101,7 @@ public class ServicioF implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.ServicioF[ id=" + identificador + " ]";
+        return "persistencia.ServicioF[ id=" + id + " ]";
     }
 
     DTServicioF crearDTServicioF() {

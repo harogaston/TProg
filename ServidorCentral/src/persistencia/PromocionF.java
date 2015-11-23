@@ -23,7 +23,7 @@ public class PromocionF implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long identificador;
+	private Long id;
 	private int cantidad;
 	private double precio;
 	private String nombre;
@@ -40,11 +40,11 @@ public class PromocionF implements Serializable {
 	}
 
 	public Long getId() {
-		return identificador;
+		return id;
 	}
 
 	public void setId(Long id) {
-		this.identificador = identificador;
+		this.id = id;
 	}
 
 	public int getCantidad() {
@@ -82,7 +82,7 @@ public class PromocionF implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += ( identificador  != null ?  identificador .hashCode() : 0);
+		hash += ( id  != null ?  id .hashCode() : 0);
 		return hash;
 	}
 
@@ -93,7 +93,7 @@ public class PromocionF implements Serializable {
 			return false;
 		}
 		PromocionF other = (PromocionF) object;
-		if ((this.identificador == null && other.identificador != null) || (this.identificador != null && !this.identificador.equals(other.identificador))) {
+		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
 			return false;
 		}
 		return true;
@@ -101,7 +101,7 @@ public class PromocionF implements Serializable {
 
 	@Override
 	public String toString() {
-		return "persistencia.PromocionF[ id=" + identificador + " ]";
+		return "persistencia.PromocionF[ id=" + id + " ]";
 	}
 
 	DTPromocionF crearDTPromocionF() {

@@ -91,7 +91,16 @@ public class UsuarioTest {
     @Test
     public void testGetPassword() {
         System.out.println("getPassword");
-        String expResult = "password";
+        String expResult = "pass";
+        String result = instance.getPassword();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testSetPassword() {
+        System.out.println("getPassword");
+        instance.setPassword("NewPassword");
+        String expResult = "NewPassword";
         String result = instance.getPassword();
         assertEquals(expResult, result);
     }

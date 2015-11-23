@@ -43,14 +43,22 @@ public class RankingServiciosTest {
         List<ItemRanking> listaResultado = instance.getRanking();
         assertEquals(10, listaResultado.size());
         for (int i = 0; i<10; i++){
-            System.out.println("iteracion" + i);
             assertFalse(listaResultado.get(i) == null);
             assertEquals(11-i, listaResultado.get(i).getCantAccesos());
         }
         for (int i = 0; i < 10; i++) {
             assertFalse(listaResultado.get(i).getServicio().getIdServicio().equals("Servicio0"));
         }
-                
+        DTMinServicio dataS = new DTMinServicio("ProvInTheMiddle", "ServicioInTheMiddle");
+        instance.insertarItemOrdenado(new ItemRanking (dataS, 5));
+        listaResultado = instance.getRanking();
+        assertEquals(10, listaResultado.size());
+        assertEquals("ServicioInTheMiddle", listaResultado.get(7).getServicio().getIdServicio());
+        for (int i = 0; i < 10; i++) {
+            System.out.println(listaResultado.get(i).getServicio().getIdServicio() + " - " +
+                    listaResultado.get(i).getServicio().getNicknameP() + " - Accesos: " +
+                    listaResultado.get(i).getCantAccesos());
+        }
     }
 
     

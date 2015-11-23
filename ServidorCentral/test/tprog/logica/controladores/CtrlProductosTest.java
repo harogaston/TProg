@@ -3,6 +3,7 @@ package tprog.logica.controladores;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.junit.After;
@@ -12,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import tprog.logica.clases.Ciudad;
-import tprog.logica.clases.ItemRanking;
 import tprog.logica.clases.Pais;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
@@ -507,8 +507,11 @@ public class CtrlProductosTest {
 	@Test
 	public void testQuitarCategoriaListada() {
         System.out.println("quitarCategoriaListada");
-        String idCategoria = "";
+        String idCategoria = "Relax y confort";
+        instance.seleccionarCategoriaSimple(idCategoria);
+        assertTrue(instance.getListaCategorias().contains("Relax y Confort"));
         instance.quitarCategoriaListada(idCategoria);
+        assertFalse(instance.getListaCategorias().contains("Relax y Confort"));
 	}
 
 	 /**
@@ -527,13 +530,15 @@ public class CtrlProductosTest {
 	 * Test of agregarServicio method, of class CtrlProductos.
 	 */
 	@Test
-	 public void testAgregarServicio() {
-	 System.out.println("agregarServicio");
-	 DTMinServicio dtS = null;
-	 
-	 instance.agregarServicio(dtS);
-	 // TODO review the generated test code and remove the default call to fail.
-	 
+	public void testAgregarServicio() {
+        System.out.println("agregarServicio");
+        DTMinServicio dtS = new DTMinServicio("Prov", "Servi");
+        instance.agregarServicio(dtS);
+        boolean estaElServicio = false;
+        for (String nombreServicio : instance.getListaServicios()){
+            estaElServicio = estaElServicio || nombreServicio.equals("Servi");
+        }
+        assertTrue(estaElServicio);
 	 }
 
 	 /**
@@ -691,7 +696,34 @@ public class CtrlProductosTest {
     @Test
     public void testAgregarAccesoAServicio() {
         System.out.println("agregarAccesoAServicio");
+        instance.agregarAccesoAServicio(new DTMinServicio("Proveedor", "EsteServicio"));
+        assertEquals("EsteServicio", instance.obtenerRankingServicios().get(0).getServicio().getIdServicio());
+        assertEquals(1, instance.obtenerRankingServicios().get(0).getCantAccesos());
+    }
+
+    /**
+     * Test of getListaCategorias method, of class CtrlProductos.
+     */
+    @Test 
+    public void testGetListaCategorias() {
+        System.out.println("getListaCategorias");
+        CtrlProductos instance = new CtrlProductos();
+        Set<String> expResult = new HashSet<String>();
+        Set<String> result = instance.getListaCategorias();
+        assertEquals(expResult, result);
         
+    }
+
+    /**
+     * Test of getListaServicios method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetListaServicios() {
+        System.out.println("getListaServicios");
+        CtrlProductos instance = new CtrlProductos();
+        List<String> expResult = new ArrayList<String>();
+        List<String> result = instance.getListaServicios();
+        assertEquals(expResult, result);
     }
 	 
 }

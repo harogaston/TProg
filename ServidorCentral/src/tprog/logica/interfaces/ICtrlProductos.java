@@ -1,6 +1,7 @@
 package tprog.logica.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import tprog.logica.clases.ItemRanking;
@@ -87,4 +88,8 @@ public interface ICtrlProductos {
     public ArrayList<ItemRanking> obtenerRankingServicios();
 
     public void agregarAccesoAServicio(DTMinServicio dtMin);
+    
+    public List<String> getListaServicios();
+    
+    public Set<String> getListaCategorias();
 }

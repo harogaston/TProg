@@ -51,8 +51,7 @@ public class ServicioTest {
 				"imagen", fecha, "empresa", "webEmpresa");
 		proveedor = new Proveedor(dtP);
 		instance.setProveedor(proveedor);
-
-	}
+    }
 
 	@After
 	public void tearDown() {

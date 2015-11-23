@@ -23,13 +23,13 @@ public class PromocionF implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private Long identificador;
 	private int cantidad;
 	private double precio;
 	private String nombre;
 	private String nicknameProveedor;
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	private Collection<FacturaF> facturas;
+	private Collection<FacturaF> facturas; 
 
 	public Collection<FacturaF> getFacturas() {
 		return facturas;
@@ -40,11 +40,11 @@ public class PromocionF implements Serializable {
 	}
 
 	public Long getId() {
-		return id;
+		return identificador;
 	}
 
 	public void setId(Long id) {
-		this.id = id;
+		this.identificador = identificador;
 	}
 
 	public int getCantidad() {
@@ -82,7 +82,7 @@ public class PromocionF implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (id != null ? id.hashCode() : 0);
+		hash += ( identificador  != null ?  identificador .hashCode() : 0);
 		return hash;
 	}
 
@@ -93,7 +93,7 @@ public class PromocionF implements Serializable {
 			return false;
 		}
 		PromocionF other = (PromocionF) object;
-		if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+		if ((this.identificador == null && other.identificador != null) || (this.identificador != null && !this.identificador.equals(other.identificador))) {
 			return false;
 		}
 		return true;
@@ -101,7 +101,7 @@ public class PromocionF implements Serializable {
 
 	@Override
 	public String toString() {
-		return "persistencia.PromocionF[ id=" + id + " ]";
+		return "persistencia.PromocionF[ id=" + identificador + " ]";
 	}
 
 	DTPromocionF crearDTPromocionF() {

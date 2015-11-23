@@ -1,6 +1,3 @@
-/*
- * Header Test
- */
 package persistencia;
 
 import java.io.Serializable;
@@ -18,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import tprog.logica.dt.DTFacturaF;
@@ -34,7 +30,7 @@ public class FacturaF implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long identificador;
     private int idReserva;
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -95,11 +91,11 @@ public class FacturaF implements Serializable {
         return promociones;
     }
     public Long getId() {
-        return id;
+        return identificador;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long identificador) {
+        this.identificador = identificador;
     }
     
     public DTFacturaF crearDTFacturaF(){
@@ -134,18 +130,18 @@ public class FacturaF implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (identificador != null ? identificador.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
+        // TODO: Warning - this method won't work in the case the identificador fields are not set
         if (!(object instanceof FacturaF)) {
             return false;
         }
         FacturaF other = (FacturaF) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.identificador== null && other.identificador!= null) || (this.identificador!= null && !this.identificador.equals(other.identificador))) {
             return false;
         }
         return true;
@@ -153,7 +149,7 @@ public class FacturaF implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Factura[ id=" + id + " ]";
+        return "persistencia.Factura[ id=" + identificador+ " ]";
     }
     
 }

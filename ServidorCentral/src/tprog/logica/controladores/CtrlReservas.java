@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -293,12 +292,12 @@ public class CtrlReservas implements ICtrlReservas {
         EntityManager entityM = entityMF.createEntityManager();
         try{
             entityM.getTransaction().begin();
-            Query qu = entityM.createQuery("DELETE FROM ServicioF");
-            Query que = entityM.createQuery("DELETE FROM PromocionF");
-            Query qude = entityM.createQuery("DELETE FROM FacturaF");
-            qu.executeUpdate();
-            que.executeUpdate();
-            qude.executeUpdate();
+            Query queryS = entityM.createQuery("DELETE FROM ServicioF");
+            Query queryP = entityM.createQuery("DELETE FROM PromocionF");
+            Query queryF = entityM.createQuery("DELETE FROM FacturaF");
+            queryS.executeUpdate();
+            queryP.executeUpdate();
+            queryF.executeUpdate();
             entityM.getTransaction().commit();
             System.out.println("Se borraron todas las facturas de la base");
         } catch (Exception e) {

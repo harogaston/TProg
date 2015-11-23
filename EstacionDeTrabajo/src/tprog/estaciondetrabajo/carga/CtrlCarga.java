@@ -338,14 +338,14 @@ public class CtrlCarga {
                                 ctrlR.seleccionarCliente("oWood");
                                 ctrlR.confirmarFactura(1);
                                 
-				//R2    S1 S2
+				//R2    S1 S2 --> S1 S4
 				lineas = new HashSet<>();
 				lineas.add(new DTLineaReserva(2, calendar.getTime(),
 						calendar.getTime(), "Euro-Vuelo-S", null, "remus", 1100));
 				lineas.add(new DTLineaReserva(1, calendar.getTime(),
-						calendar.getTime(), "Euro-Vuelo-LC", null, "remus", 850));
+						calendar.getTime(), "Euro-Car-1", null, "moody", 300));
 				dtR = new DTReserva(0, calendar.getTime(),
-						EstadoReserva.Cancelada, 3050, lineas);
+						EstadoReserva.Pagada, 2500, lineas);
 				mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 
 				//R3    P7
@@ -362,7 +362,7 @@ public class CtrlCarga {
 				calendar.set(2015, 3 - 1, 5);
 
 				dtR = new DTReserva(0, calendar.getTime(),
-						EstadoReserva.Pagada, 135, lineas);
+						EstadoReserva.Cancelada, 135, lineas);
 				mr.agregarReserva(mu.getCliente("BruceS"), dtR);
 				//R4    S5 S6
 				lineas = new HashSet<>();
@@ -405,7 +405,7 @@ public class CtrlCarga {
 						EstadoReserva.Registrada, 200, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
 
-				//R6    P8 S7
+				//R6    P8 S7 --> P8 S9
 				lineas = new HashSet<>();
 
 				calendar.set(2015, 8 - 1, 7);
@@ -414,7 +414,7 @@ public class CtrlCarga {
 				fin = calendar.getTime();
 
 				lineas.add(new DTLineaReserva(1, inicio,
-						fin, null, "Miami-Viaje", "mHooch", 462));
+						fin, null, "Miami-Viaje", "mHooch", 330));
 
 				calendar.set(2015, 8 - 1, 14);
 				inicio = calendar.getTime();
@@ -422,12 +422,12 @@ public class CtrlCarga {
 				fin = calendar.getTime();
 
 				lineas.add(new DTLineaReserva(1, inicio,
-						fin, "Casa para p4 BsAs", null, "mHooch", 80));
+						fin, "Air-France-FC", null, "tCook", 100));
 
 				calendar.set(2015, 8 - 1, 7);
 
 				dtR = new DTReserva(0, calendar.getTime(),
-						EstadoReserva.Registrada, 542, lineas);
+						EstadoReserva.Registrada, 430, lineas);
 				mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 				//R7    S2
 				lineas = new HashSet<>();

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
 import tprog.logica.clases.ItemRanking;
-import tprog.logica.clases.RankingServicios;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
@@ -227,7 +226,11 @@ public class CtrlProductos implements ICtrlProductos {
 			listaCategorias.remove(IdCategoria);
 		}
 	}
-
+    @Override
+    public Set<String> getListaCategorias(){
+        return this.listaCategorias;
+    }
+    
 	@Override
 	public void altaServicio(String descripcion, float precio, Set<String> imagenes) {
 		ManejadorProductos manejadorP = ManejadorProductos.getInstance();
@@ -240,7 +243,12 @@ public class CtrlProductos implements ICtrlProductos {
 	public void agregarServicio(DTMinServicio DTS) {
 		this.listaServicios.add(DTS.getIdServicio());
 	}
-
+    
+    @Override
+    public List<String> getListaServicios(){
+        return this.listaServicios;
+    }
+    
 	@Override
 	public boolean idPromocionDisponible(String idPromocion) {
 		this.dtP = new DTMinPromocion(this.nicknameP, idPromocion);

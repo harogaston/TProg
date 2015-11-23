@@ -395,6 +395,13 @@ public class CtrlReservasTest {
 				dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
 						EstadoReserva.Facturada, 1100, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
+                                instance.seleccionarCliente("oWood");
+                                instance.seleccionarReserva(0);
+                                instance.seleccionarCliente("oWood");
+                                instance.facturarReserva("remus", "oWood", 1);
+                                instance.confirmarFactura(1);
+                                
+                                
 				//R2    S1 S2
 				lineas = new HashSet();
 				lineas.add(new DTLineaReserva(2, new Date(2015, 1 - 1, 1),
@@ -468,6 +475,7 @@ public class CtrlReservasTest {
 
 			instance.seleccionarProveedor("nick");
 			//mp.altaServicio(ser.crearDT(),"nick",vacio);
+                        instance.limpiarBD();
 
 		} catch (IOException ex) {
 			Logger.getLogger(CtrlReservasTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -685,6 +693,7 @@ public class CtrlReservasTest {
             Set<String>  list = instance.listarNotificacionesProveedor();
             instance.listarNotificacionesProveedor();
             instance.limpiarNotificacionesProveedor();
+            instance.quitarLineaReserva(1);
             DTCliente habra = instance.getClienteAsociado();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -840,13 +849,13 @@ public class CtrlReservasTest {
 	}
 
 	@Test
-	public void getEstadoReserva() {
+	public void testGetEstadoReserva() {
 		System.out.println("getEstadoReserva");
 		instance.getEstadoReserva();
 	}
 
 	@Test
-	public void liberarMemoriaControlador() {
+	public void testLiberarMemoriaControlador() {
 		System.out.println("liberarMemoriaControlador");
 		instance.liberarMemoriaControlador();
 		assertEquals(instance.getNickname(), null);
@@ -860,7 +869,7 @@ public class CtrlReservasTest {
 		assertEquals(instance.getLineasReserva(), set);
 
 	}
-    
-    
+        
+            
 
 }

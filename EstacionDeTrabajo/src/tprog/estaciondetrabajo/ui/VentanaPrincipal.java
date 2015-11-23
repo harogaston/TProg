@@ -357,9 +357,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
     private void registroAccesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroAccesosActionPerformed
-        for (int i = 0; i < 10001; i++) {
-            registro.agregarAcceso("123 - " + i, "www.unacosamuymuymuymuylargaymolestamuymaslargatodaviaymasymasquehorror" + i + ".com", "Mozilla", "Linuss");
-        }
         RegistroDeAccesos registroAccesos = new RegistroDeAccesos(registro.getAccesos());
         center(registroAccesos);
     }//GEN-LAST:event_registroAccesosActionPerformed

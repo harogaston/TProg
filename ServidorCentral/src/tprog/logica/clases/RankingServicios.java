@@ -25,7 +25,7 @@ public class RankingServicios {
                     ranking.add(indice, item);
                     agregado = true;
                 } else if (ranking.get(indice) == null){
-                    ranking.add(indice,item);
+                    ranking.add(indice, item);
                     agregado = true;
                 } else {
                     indice++;

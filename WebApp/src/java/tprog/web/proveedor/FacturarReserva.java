@@ -58,46 +58,7 @@ public class FacturarReserva extends HttpServlet {
 		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		//enviar mail
-		if (proxy.facturarReserva(idProveedor, nickCliente, idReserva)) {
-			System.out.println("estoy");
-			// Recipient's email ID needs to be mentioned.
-			String to = "nachoprbd@gmail.com";
-
-			// Sender's email ID needs to be mentioned
-			String from = "web@gmail.com";
-
-			// Assuming you are sending email from localhost
-			String host = "localhost";
-
-			// Setup mail server
-			properties.setProperty("mail.smtp.host", "smtp.gmail.com");
-
-			// Get the default Session object.
-			Session sesion = Session.getDefaultInstance(properties);
-
-			try {
-				// Create a default MimeMessage object.
-				MimeMessage message = new MimeMessage(sesion);
-
-				// Set From: header field of the header.
-				message.setFrom(new InternetAddress(from));
-
-				// Set To: header field of the header.
-				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-				// Set Subject: header field
-				message.setSubject("Help4Traveling");
-
-				// Now set the actual message
-				message.setText("el mensaje wea");
-
-				// Send message
-				Transport.send(message);
-				System.out.println("Sent message successfully....");
-			} catch (MessagingException mex) {
-				mex.printStackTrace();
-			}
-		}
+		proxy.facturarReserva(idProveedor, nickCliente, idReserva);
 
 		//asigno atributos de la request
 		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();

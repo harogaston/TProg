@@ -38,7 +38,7 @@ public class DTServicioTest {
     @Test
 	public void testDTServicio() {
 		System.out.println("DTServicio");
-		DTServicio expResult = new DTServicio(null,null,null,0,null,null,null);
+		DTServicio expResult = new DTServicio(null, null, null, 0 ,null, null, null);
 		DTServicio result = new DTServicio();
 		assertEquals(expResult, result);
 	}

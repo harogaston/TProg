@@ -71,7 +71,7 @@ public class Publicador {
 			properties.load(file);
 			file.close();
 			endpoint = Endpoint.publish(properties.getProperty("publicador"), this);
-			Endpoint.publish("http://localhost:9128/publicador", this);
+			Endpoint.publish("http://localhost:9127/publicador", this);
 		} catch (IOException ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
 		}

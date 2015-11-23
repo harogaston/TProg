@@ -5,8 +5,11 @@ package tprog.web.proveedor;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -35,9 +38,15 @@ public class ReservasProveedor extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, Exception_Exception {
-        response.setContentType("text/html;charset=UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-		webservice.PublicadorService service = new webservice.PublicadorService();
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		webservice.Publicador proxy = service.getPublicadorPort();
 		//al llegar a la parte de reservas, borro las notificaciones

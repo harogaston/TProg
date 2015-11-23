@@ -5,10 +5,13 @@
  */
 package tprog.web.proveedor;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,12 +40,18 @@ public class ServiciosProveedor extends HttpServlet {
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		//establezco proxy con el web service
-        response.setContentType("text/html;charset=UTF-8");
-		webservice.PublicadorService servicio = new webservice.PublicadorService();
-		webservice.Publicador proxy = servicio.getPublicadorPort();
+		response.setContentType("text/html;charset=UTF-8");
+		Properties properties = new Properties();
+		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
+		FileInputStream file = new FileInputStream(ruta);
+		properties.load(file);
+		file.close();
+		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
+		webservice.Publicador proxy = service.getPublicadorPort();
 		HttpSession session = request.getSession();
 		String idProveedor = (String) session.getAttribute("usuario_logueado");
-		WrapperVerServiciosProveedor result	= proxy.verServiciosProveedor(idProveedor);
+		WrapperVerServiciosProveedor result = proxy.verServiciosProveedor(idProveedor);
 		//rearmo el map de servicios
 		List<webservice.WrapperVerServiciosProveedor.Servicios.Entry> listServicios
 				= result.getServicios().getEntry();

@@ -58,6 +58,10 @@
 <message name="verPromocionesProveedorResponse">
 <part name="return" type="tns:wrapperVerPromocionesProveedor"></part>
 </message>
+<message name="cambiarImagenCliente">
+<part name="arg0" type="tns:wrapperImagen"></part>
+</message>
+<message name="cambiarImagenClienteResponse"></message>
 <message name="verPerfilCliente">
 <part name="id_cliente" type="xsd:string"></part>
 </message>
@@ -260,6 +264,10 @@
 <input wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorRequest" message="tns:verPromocionesProveedor"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verPromocionesProveedorResponse" message="tns:verPromocionesProveedorResponse"></output>
 </operation>
+<operation name="cambiarImagenCliente">
+<input wsam:Action="http://webservice.tprog/Publicador/cambiarImagenClienteRequest" message="tns:cambiarImagenCliente"></input>
+<output wsam:Action="http://webservice.tprog/Publicador/cambiarImagenClienteResponse" message="tns:cambiarImagenClienteResponse"></output>
+</operation>
 <operation name="verPerfilCliente">
 <input wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteRequest" message="tns:verPerfilCliente"></input>
 <output wsam:Action="http://webservice.tprog/Publicador/verPerfilClienteResponse" message="tns:verPerfilClienteResponse"></output>
@@ -429,6 +437,15 @@
 </output>
 </operation>
 <operation name="verPromocionesProveedor">
+<soap:operation soapAction=""></soap:operation>
+<input>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</input>
+<output>
+<soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>
+</output>
+</operation>
+<operation name="cambiarImagenCliente">
 <soap:operation soapAction=""></soap:operation>
 <input>
 <soap:body use="literal" namespace="http://webservice.tprog/"></soap:body>

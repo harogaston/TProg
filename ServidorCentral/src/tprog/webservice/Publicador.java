@@ -24,6 +24,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.xml.ws.Endpoint;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import static java.lang.System.out;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -276,6 +280,25 @@ public class Publicador {
 			}
 		}
 		return result;
+	}
+
+	@WebMethod
+	public void cambiarImagenCliente(WrapperImagen img) {
+		try {
+			String ruta = System.getProperty("user.dir") + "/imagenes/clientes/" + img.nombre;
+			OutputStream out = new BufferedOutputStream(new FileOutputStream(ruta));
+			out.write(img.imagen);
+			Fabrica fabrica = Fabrica.getInstance();
+			ICtrlUsuarios ctrlU = fabrica.getICtrlUsuarios();
+			ctrlU.seleccionarCliente(img.nombre);
+			ctrlU.cambiarImagenCliente(ruta);
+		} catch (IOException ex) {
+			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			if (out != null) {
+				out.close();
+			}
+		}
 	}
 
 	@WebMethod

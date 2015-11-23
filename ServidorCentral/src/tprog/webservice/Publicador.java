@@ -67,6 +67,7 @@ public class Publicador {
 			properties.load(file);
 			file.close();
 			endpoint = Endpoint.publish(properties.getProperty("publicador"), this);
+			Endpoint.publish("http://localhost:9128/publicador", this);
 		} catch (IOException ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);
 		}
@@ -179,6 +180,15 @@ public class Publicador {
 			result.promociones = mapPromociones;
 			result.servicios = mapServicios;
 			result.proveedor = dtProveedor;
+			if (result.proveedor.getImagen() != null) {
+				File file = new File(result.proveedor.getImagen());
+				FileInputStream streamer = new FileInputStream(file);
+				byte[] imagen = new byte[streamer.available()];
+				streamer.read(imagen);
+				result.imagen = imagen;
+			} else {
+				result.imagen = null;
+			}
 			return result;
 		} catch (Exception ex) {
 			Logger.getLogger(Publicador.class.getName()).log(Level.SEVERE, null, ex);

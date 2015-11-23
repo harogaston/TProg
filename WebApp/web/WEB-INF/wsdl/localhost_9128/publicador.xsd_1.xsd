@@ -249,6 +249,7 @@
 </xs:sequence>
 </xs:complexType>
 </xs:element>
+<xs:element name="imagen" type="xs:base64Binary" minOccurs="0"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

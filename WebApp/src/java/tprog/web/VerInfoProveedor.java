@@ -5,6 +5,9 @@
  */
 package tprog.web;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +18,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -86,9 +90,18 @@ public class VerInfoProveedor extends HttpServlet {
 					+ Integer.toString(fechaNacimiento.getYear()) + "\n";
 			request.setAttribute("fNac", fNac);
 			request.setAttribute("email", dt.getEmail());
-			request.setAttribute("imagen", dt.getImagen());
-
-			request.setAttribute("imagen", null);
+			byte[] bytesImagen = result.getImagen();
+			if (bytesImagen != null) {
+				BufferedImage img = ImageIO.read(new ByteArrayInputStream(bytesImagen));
+				String rutaRelativaImagen = "imagenes/clientes/" + dt.getNickname() + ".jpg";
+				String rutaCompletaImagen = getServletContext().getRealPath("/") + "/" + rutaRelativaImagen;
+				File outputFile = new File(rutaCompletaImagen);
+				outputFile.getParentFile().mkdirs();
+				ImageIO.write(img, "jpg", outputFile);
+				System.out.println("Ruta imagen original = " + dt.getImagen());
+				System.out.println("Ruta relativa = " + rutaCompletaImagen);
+				request.setAttribute("imagen", rutaRelativaImagen);
+			}
 			request.setAttribute("empresa", dt.getEmpresa());
 			request.setAttribute("webempresa", dt.getWebEmpresa());
 			//forwardeo request

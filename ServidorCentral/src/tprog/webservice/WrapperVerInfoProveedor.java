@@ -18,4 +18,5 @@ public class WrapperVerInfoProveedor {
 	//map de dt con su representacion en string
 	public Map<DTServicio, String> servicios;
 	public Map<DTPromocion, String> promociones;
+	public byte[] imagen;
 }

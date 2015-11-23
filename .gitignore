@@ -18,6 +18,5 @@ hs_err_pid*
 /ServidorCentral/.jacocoverage/
 /WebApp/build/
 /WebApp/dist/
-/WebApp/nbproject/private/
-/WebService/nbproject/private/
+# esto se deja because reasons /WebService/nbproject/private/
 /WebService/build/

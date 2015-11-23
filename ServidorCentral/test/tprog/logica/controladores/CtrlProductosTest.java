@@ -1,5 +1,6 @@
 package tprog.logica.controladores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +12,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import tprog.logica.clases.Ciudad;
+import tprog.logica.clases.ItemRanking;
 import tprog.logica.clases.Pais;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
@@ -31,61 +33,61 @@ public class CtrlProductosTest {
 	@Before
 	public void setUp() {
 		instance = new CtrlProductos();
-                DTProveedor dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
-					"/imagenes/proveedores/adippet.jpg",
-					new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
-                ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+        DTProveedor dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
+                "/imagenes/proveedores/adippet.jpg",
+                new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
+        ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		manejadorU.altaProveedor(dtP);
-                ManejadorProductos manejadorP = ManejadorProductos.getInstance();
-			manejadorP.altaCategoria("Vuelos", null);
-			manejadorP.altaCategoria("Empresas", "Vuelos");
-			manejadorP.altaCategoria("Iberia", "Empresas");
-			manejadorP.altaCategoria("American Airlines", "Empresas");
-			manejadorP.altaCategoria("Air France", "Empresas");
-			manejadorP.altaCategoria("TAM", "Empresas");
-			manejadorP.altaCategoria("Tipo vuelo", "Vuelos");
-			manejadorP.altaCategoria("LowCost", "Tipo vuelo");
-			manejadorP.altaCategoria("Standard", "Tipo vuelo");
-			manejadorP.altaCategoria("First Class", "Tipo vuelo");
-			manejadorP.altaCategoria("Alojamientos", null);
-			manejadorP.altaCategoria("Tipo alojamiento", "Alojamientos");
-			manejadorP.altaCategoria("Hotel", "Tipo alojamiento");
-			manejadorP.altaCategoria("Hostal", "Tipo alojamiento");
-			manejadorP.altaCategoria("Apartamento", "Tipo alojamiento");
-			manejadorP.altaCategoria("Casa", "Tipo alojamiento");
-			manejadorP.altaCategoria("Ubicación", "Alojamientos");
-			manejadorP.altaCategoria("Playa", "Ubicación");
-			manejadorP.altaCategoria("Rural", "Ubicación");
-			manejadorP.altaCategoria("Montaña", "Ubicación");
-			manejadorP.altaCategoria("Habitaciones", "Alojamientos");
-			manejadorP.altaCategoria("1 ambiente", "Habitaciones");
-			manejadorP.altaCategoria("1 dormitorio", "Habitaciones");
-			manejadorP.altaCategoria("2 dormitorios", "Habitaciones");
-			manejadorP.altaCategoria("Automóviles", null);
-			manejadorP.altaCategoria("Tarifa", "Automóviles");
-			manejadorP.altaCategoria("Mini", "Tarifa");
-			manejadorP.altaCategoria("Económico", "Tarifa");
-			manejadorP.altaCategoria("Común", "Tarifa");
-			manejadorP.altaCategoria("Full", "Tarifa");
-			manejadorP.altaCategoria("Tipo vehículo", "Automóviles");
-			manejadorP.altaCategoria("Auto", "Tipo vehículo");
-			manejadorP.altaCategoria("Camioneta", "Tipo vehículo");
-			manejadorP.altaCategoria("Camión", "Tipo vehículo");
-			manejadorP.altaCategoria("Moto", "Tipo vehículo");
-			manejadorP.altaCategoria("Marca", "Automóviles");
-			manejadorP.altaCategoria("Chevrolet", "Marca");
-			manejadorP.altaCategoria("Peugeot", "Marca");
-			manejadorP.altaCategoria("Daihatsu", "Marca");
-			manejadorP.altaCategoria("Fiat", "Marca");
-			manejadorP.altaCategoria("Ford", "Marca");
-			manejadorP.altaCategoria("Cruceros", null);
-			manejadorP.altaCategoria("Mediterráneo", "Cruceros");
-			manejadorP.altaCategoria("Mar Negro", "Cruceros");
-			manejadorP.altaCategoria("Caribe", "Cruceros");
-			manejadorP.altaCategoria("Nilo", "Cruceros");
-			manejadorP.altaCategoria("Alaska", "Cruceros");
-            Set<DTServicio> nulo = instance.listarServiciosPorTermino("sad");
-            Set<DTPromocion> nulo1 = instance.listarPromocionesPorTermino("das");
+        ManejadorProductos manejadorP = ManejadorProductos.getInstance();
+        manejadorP.altaCategoria("Vuelos", null);
+        manejadorP.altaCategoria("Empresas", "Vuelos");
+        manejadorP.altaCategoria("Iberia", "Empresas");
+        manejadorP.altaCategoria("American Airlines", "Empresas");
+        manejadorP.altaCategoria("Air France", "Empresas");
+        manejadorP.altaCategoria("TAM", "Empresas");
+        manejadorP.altaCategoria("Tipo vuelo", "Vuelos");
+        manejadorP.altaCategoria("LowCost", "Tipo vuelo");
+        manejadorP.altaCategoria("Standard", "Tipo vuelo");
+        manejadorP.altaCategoria("First Class", "Tipo vuelo");
+        manejadorP.altaCategoria("Alojamientos", null);
+        manejadorP.altaCategoria("Tipo alojamiento", "Alojamientos");
+        manejadorP.altaCategoria("Hotel", "Tipo alojamiento");
+        manejadorP.altaCategoria("Hostal", "Tipo alojamiento");
+        manejadorP.altaCategoria("Apartamento", "Tipo alojamiento");
+        manejadorP.altaCategoria("Casa", "Tipo alojamiento");
+        manejadorP.altaCategoria("Ubicación", "Alojamientos");
+        manejadorP.altaCategoria("Playa", "Ubicación");
+        manejadorP.altaCategoria("Rural", "Ubicación");
+        manejadorP.altaCategoria("Montaña", "Ubicación");
+        manejadorP.altaCategoria("Habitaciones", "Alojamientos");
+        manejadorP.altaCategoria("1 ambiente", "Habitaciones");
+        manejadorP.altaCategoria("1 dormitorio", "Habitaciones");
+        manejadorP.altaCategoria("2 dormitorios", "Habitaciones");
+        manejadorP.altaCategoria("Automóviles", null);
+        manejadorP.altaCategoria("Tarifa", "Automóviles");
+        manejadorP.altaCategoria("Mini", "Tarifa");
+        manejadorP.altaCategoria("Económico", "Tarifa");
+        manejadorP.altaCategoria("Común", "Tarifa");
+        manejadorP.altaCategoria("Full", "Tarifa");
+        manejadorP.altaCategoria("Tipo vehículo", "Automóviles");
+        manejadorP.altaCategoria("Auto", "Tipo vehículo");
+        manejadorP.altaCategoria("Camioneta", "Tipo vehículo");
+        manejadorP.altaCategoria("Camión", "Tipo vehículo");
+        manejadorP.altaCategoria("Moto", "Tipo vehículo");
+        manejadorP.altaCategoria("Marca", "Automóviles");
+        manejadorP.altaCategoria("Chevrolet", "Marca");
+        manejadorP.altaCategoria("Peugeot", "Marca");
+        manejadorP.altaCategoria("Daihatsu", "Marca");
+        manejadorP.altaCategoria("Fiat", "Marca");
+        manejadorP.altaCategoria("Ford", "Marca");
+        manejadorP.altaCategoria("Cruceros", null);
+        manejadorP.altaCategoria("Mediterráneo", "Cruceros");
+        manejadorP.altaCategoria("Mar Negro", "Cruceros");
+        manejadorP.altaCategoria("Caribe", "Cruceros");
+        manejadorP.altaCategoria("Nilo", "Cruceros");
+        manejadorP.altaCategoria("Alaska", "Cruceros");
+        Set<DTServicio> nulo = instance.listarServiciosPorTermino("sad");
+        Set<DTPromocion> nulo1 = instance.listarPromocionesPorTermino("das");
 	}
 
 	@After
@@ -113,7 +115,6 @@ public class CtrlProductosTest {
 		Set<DTMinPromocion> expResult = new HashSet();
 		Set<DTMinPromocion> result = instance.listarPromociones();
 		assertEquals(expResult, result);
-
 	}
 
 	/**
@@ -125,8 +126,7 @@ public class CtrlProductosTest {
 		DTPromocion expResult = null;
 		DTPromocion result = instance.infoPromocion();
 		assertEquals(expResult, result);
-
-	}
+    }
 
 	/**
 	 * Test of infoMinPromocion method, of class CtrlProductos.
@@ -137,8 +137,7 @@ public class CtrlProductosTest {
 		DTMinPromocion expResult = null;
 		DTMinPromocion result = instance.infoMinPromocion();
 		assertEquals(expResult, result);
-
-	}
+    }
 
 	/**
 	 * Test of seleccionarServicio method, of class CtrlProductos.
@@ -161,8 +160,7 @@ public class CtrlProductosTest {
 		DTServicio expResult = null;
 		DTServicio result = instance.infoServicio();
 		assertEquals(expResult, result);
-
-	}
+    }
 
 	/**
 	 * Test of infoMinServicio method, of class CtrlProductos.
@@ -173,22 +171,18 @@ public class CtrlProductosTest {
 		DTMinServicio expResult = null;
 		DTMinServicio result = instance.infoMinServicio();
 		assertEquals(expResult, result);
-
-	}
+    }
 
 	/**
 	 * Test of listarCategorias method, of class CtrlProductos.
 	 */
 	@Test
-	 public void testListarCategorias() {
-	 System.out.println("listarCategorias");
-	 
-	 DefaultMutableTreeNode expResult = null;
-	 DefaultMutableTreeNode result = instance.listarCategorias();
-	 assertEquals(expResult, result);
-	 // TODO review the generated test code and remove the default call to fail.
-	 
-	 }
+	public void testListarCategorias() {
+        System.out.println("listarCategorias");
+        DefaultMutableTreeNode expResult = null;
+        DefaultMutableTreeNode result = instance.listarCategorias();
+        assertEquals(expResult, result);
+	}
 
 	 /**
 	 * Test of listarServiciosCategoria method, of class CtrlProductos.
@@ -201,8 +195,7 @@ public class CtrlProductosTest {
 		Set<DTMinServicio> expResult = new HashSet();
 		Set<DTMinServicio> result = instance.listarServiciosCategoria(idCategoria);
 		assertEquals(expResult, result);
-
-	}
+    }
 
 	/**
 	 * Test of listarServicios method, of class CtrlProductos.
@@ -213,23 +206,20 @@ public class CtrlProductosTest {
 		Set<DTMinServicio> expResult = new HashSet();
 		Set<DTMinServicio> result = instance.listarServicios();
 		assertEquals(expResult, result);
-
-	}
+    }
 
 	/**
 	 * Test of cambiarPrecio method, of class CtrlProductos.
 	 */
 	@Test
 	public void testCambiarPrecio() {
-                System.out.println("cambiarPrecio");
-                
-                Set<String> cats = new HashSet();
-                cats.add("Económico");
+        System.out.println("cambiarPrecio");
+        Set<String> cats = new HashSet();
+        cats.add("Económico");
 		cats.add("Auto");
-                Pais pais = new Pais("Uruguay");
-                ManejadorProductos manejadorP = ManejadorProductos.getInstace();
-                Ciudad ciudad = new Ciudad("Montevideo");
-
+        Pais pais = new Pais("Uruguay");
+        ManejadorProductos manejadorP = ManejadorProductos.getInstace();
+        Ciudad ciudad = new Ciudad("Montevideo");
 		pais.agregarCiudad(ciudad);
 		manejadorP.agregarPais(pais);
         DTUbicacion dtU = new DTUbicacion("Montevideo", "Uruguay");
@@ -242,7 +232,6 @@ public class CtrlProductosTest {
         float nuevoPrecio = 0.0F;
         instance.cambiarPrecio(nuevoPrecio);
         assertEquals(nuevoPrecio, instance.infoServicio().getPrecio(), 0.0F);
-	// TODO review the generated test code and remove the default call to fail.
 	}
 
 	 /**
@@ -516,29 +505,23 @@ public class CtrlProductosTest {
 	 * Test of quitarCategoriaListada method, of class CtrlProductos.
 	 */
 	@Test
-	 public void testQuitarCategoriaListada() {
-	 System.out.println("quitarCategoriaListada");
-	 String idCategoria = "";
-	 
-	 instance.quitarCategoriaListada(idCategoria);
-	 // TODO review the generated test code and remove the default call to fail.
-	 
-	 }
+	public void testQuitarCategoriaListada() {
+        System.out.println("quitarCategoriaListada");
+        String idCategoria = "";
+        instance.quitarCategoriaListada(idCategoria);
+	}
 
 	 /**
 	 * Test of altaServicio method, of class CtrlProductos.
 	 */
 	@Test
-	 public void testAltaServicio() {
-	 System.out.println("altaServicio");
-	 String descripcion = "";
-	 float precio = 0.0F;
-	 Set<String> imagenes = null;
-	 
-	 instance.altaServicio(descripcion, precio, imagenes);
-	 // TODO review the generated test code and remove the default call to fail.
-	 
-	 }
+	public void testAltaServicio() {
+        System.out.println("altaServicio");
+        String descripcion = "";
+        float precio = 0.0F;
+        Set<String> imagenes = null;
+        instance.altaServicio(descripcion, precio, imagenes);
+	}
 
 	/**
 	 * Test of agregarServicio method, of class CtrlProductos.
@@ -578,5 +561,137 @@ public class CtrlProductosTest {
 	 // TODO review the generated test code and remove the default call to fail.
 	 
 	 }
+
+    /**
+     * Test of obtenerRankingServicios method, of class CtrlProductos.
+     */
+    @Test
+    public void testObtenerRankingServicios() {
+        System.out.println("obtenerRankingServicios");
+        CtrlProductos instance = new CtrlProductos();
+        assertFalse(instance.obtenerRankingServicios().isEmpty());
+    }
+
+    /**
+     * Test of getDestino method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetDestino() {
+        System.out.println("getDestino");
+        CtrlProductos instance = new CtrlProductos();
+        instance.seleccionarDestino(new DTUbicacion("Minnesota", "EEUU"));
+        DTUbicacion destiny = instance.getDestino();
+        assertFalse(destiny == null);
+        assertEquals("Minnesota", destiny.getCiudad());
+        assertEquals("EEUU", destiny.getPais());
+    }
+
+    /**
+     * Test of getOrigen method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetOrigen() {
+        System.out.println("getOrigen");
+        CtrlProductos instance = new CtrlProductos();
+        instance.seleccionarOrigen(new DTUbicacion("Minnesota", "EEUU"));
+        DTUbicacion origin = instance.getDestino();
+        assertFalse(origin == null);
+        assertEquals("Minnesota", origin.getCiudad());
+        assertEquals("EEUU", origin.getPais());
+    }
+
+    /**
+     * Test of getDtP method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetDtP() {
+        System.out.println("getDtP");
+        CtrlProductos instance = new CtrlProductos();
+    }
+
+    /**
+     * Test of getDtS method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetDtS() {
+        System.out.println("getDtS");
+        CtrlProductos instance = new CtrlProductos();
+        DTMinServicio expResult = null;
+        DTMinServicio result = instance.getDtS();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getCategoriaPadre method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetCategoriaPadre() {
+        System.out.println("getCategoriaPadre");
+        CtrlProductos instance = new CtrlProductos();
+        instance.seleccionarCategoriaPadre("Daddy");
+        String expResult = "Daddy";
+        String result = instance.getCategoriaPadre();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getIdCategoria method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetIdCategoria() {
+        System.out.println("getIdCategoria");
+        CtrlProductos instance = new CtrlProductos();
+        instance.seleccionarCategoriaSimple("UnaCategoria");
+        String expResult = "UnaCategoria";
+        String result = instance.getIdCategoria();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of getNicknameP method, of class CtrlProductos.
+     */
+    @Test
+    public void testGetNicknameP() {
+        System.out.println("getNicknameP");
+        CtrlProductos instance = new CtrlProductos();
+        instance.seleccionarProveedor("ProveedorRandom");
+        String expResult = "ProveedorRandom";
+        String result = instance.getNicknameP();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of listarServiciosPorTermino method, of class CtrlProductos.
+     */
+    @Test
+    public void testListarServiciosPorTermino() {
+        System.out.println("listarServiciosPorTermino");
+        String termino = "Un termino que no este";
+        Set<DTServicio> expResult = new HashSet<DTServicio>();
+        Set<DTServicio> result = instance.listarServiciosPorTermino(termino);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of listarPromocionesPorTermino method, of class CtrlProductos.
+     */
+    @Test
+    public void testListarPromocionesPorTermino() {
+        System.out.println("listarPromocionesPorTermino");
+        String termino = "Nothing to do here";
+        CtrlProductos instance = new CtrlProductos();
+        Set<DTPromocion> expResult = new HashSet<DTPromocion>();
+        Set<DTPromocion> result = instance.listarPromocionesPorTermino(termino);
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of agregarAccesoAServicio method, of class CtrlProductos.
+     */
+    @Test
+    public void testAgregarAccesoAServicio() {
+        System.out.println("agregarAccesoAServicio");
+        
+    }
 	 
 }

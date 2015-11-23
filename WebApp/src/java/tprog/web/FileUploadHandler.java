@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import tprog.logica.interfaces.Fabrica;
-import tprog.logica.interfaces.ICtrlUsuarios;
+//import tprog.logica.interfaces.Fabrica;
+//import tprog.logica.interfaces.ICtrlUsuarios;
 
 public class FileUploadHandler extends HttpServlet {
 
@@ -41,11 +41,10 @@ public class FileUploadHandler extends HttpServlet {
 							name = new File(item.getName()).getName();
 							item.write(new File(f.getAbsolutePath() + File.separator + name));
 
-							Fabrica fabrica = Fabrica.getInstance();
-							ICtrlUsuarios ctrlU = fabrica.getICtrlUsuarios();
-							ctrlU.seleccionarCliente((String) request.getSession().getAttribute("usuario_logueado"));
-							ctrlU.cambiarImagenCliente("imagenes/clientes/" + name);
-
+//							Fabrica fabrica = Fabrica.getInstance();
+//							ICtrlUsuarios ctrlU = fabrica.getICtrlUsuarios();
+//							ctrlU.seleccionarCliente((String) request.getSession().getAttribute("usuario_logueado"));
+//							ctrlU.cambiarImagenCliente("imagenes/clientes/" + name);
 						} else {
 							response.sendRedirect("VerPerfil");
 						}

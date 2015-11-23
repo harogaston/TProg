@@ -20,3 +20,4 @@ hs_err_pid*
 /WebApp/dist/
 # esto se deja because reasons /WebService/nbproject/private/
 /WebService/build/
+/WebApp/nbproject/private/

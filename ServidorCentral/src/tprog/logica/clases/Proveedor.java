@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinProveedor;
 import tprog.logica.dt.DTMinServicio;
@@ -74,14 +75,38 @@ public class Proveedor extends Usuario implements Observer {
 		//devuelve reservas considerando el estado parcial de la reserva
 		//por sobre el estado real
 		Set<DTReserva> nuevoSet = new HashSet();
-		for (Reserva reserva : reservas.values()) {
-			DTReserva temp = reserva.crearDT();
+        for (Reserva reserva : reservas.values()) {
+                // Para cada cliente itero por sus reservas
+                Set<LineaReserva> lineas = reserva.getLineasReserva();
+                Set<DTLineaReserva> dtLineasReserva = new HashSet();
+                for (LineaReserva lineaR : lineas) {
+                    // si algunas de sus lineas es del proveedor la agrego a un SetDTLineaReserva
+                    if (lineaR.getPromocion() != null) {
+                        if (lineaR.getPromocion().getProveedor().getNickname().toString().equals(this.getNickname())) {
+                            DTLineaReserva dtLinea = lineaR.crearDT();
+                            dtLineasReserva.add(dtLinea);
+                        }
+                    } else if (lineaR.getServicio() != null) {
+                        if (lineaR.getServicio().getProveedor().getNickname().toString().equals(this.getNickname())) {
+                            DTLineaReserva dtLinea = lineaR.crearDT();
+                            dtLineasReserva.add(dtLinea);
+                        }
+                    }
+                }
+                if (dtLineasReserva != (new HashSet())) {
+                    //Si SetDTLineaReserva distinto de new HashSet() se crea el DTReserva y se agregan todas las lineas
+                    DTReserva dtR = reserva.crearDT();
+                    dtR.setLineasReserva(dtLineasReserva);
+                    if (estadosParciales.get(reserva.getIdReserva()) == EstadoReserva.Facturada) {
+                        dtR.setEstadoReserva(estadosParciales.get(reserva.getIdReserva()));
+                    }
+                    nuevoSet.add(dtR);
+                }
+			
 			//asigno el estado que ve localmente el proveedor
 			//SOLO SI ES FACTURADA
-			if (estadosParciales.get(reserva.getIdReserva()) == EstadoReserva.Facturada) {
-				temp.setEstadoReserva(estadosParciales.get(reserva.getIdReserva()));
-			}
-			nuevoSet.add(temp);
+			
+			
 		}
 		return nuevoSet;
 	}

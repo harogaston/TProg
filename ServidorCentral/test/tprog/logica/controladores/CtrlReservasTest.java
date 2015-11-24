@@ -3,6 +3,7 @@ package tprog.logica.controladores;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ import tprog.logica.clases.Promocion;
 import tprog.logica.clases.Proveedor;
 import tprog.logica.clases.Servicio;
 import tprog.logica.dt.DTCliente;
+import tprog.logica.dt.DTFacturaF;
 import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
@@ -31,6 +33,8 @@ import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.DTServicio;
 import tprog.logica.dt.DTUbicacion;
 import tprog.logica.dt.EstadoReserva;
+import tprog.logica.interfaces.Fabrica;
+import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
@@ -64,43 +68,51 @@ public class CtrlReservasTest {
 	@Before
 	public void setUp() {
 		try {
-			File dir = new File(".");
-			String directorioImagenes = dir.getCanonicalPath();
+			Calendar calendar = Calendar.getInstance();
+			String directorioImagenes = (new File(".")).getCanonicalPath();
+			System.out.println("Dir imagenes: " + directorioImagenes);
 			ManejadorUsuarios mu = ManejadorUsuarios.getInstance();
-			DTCliente dtC = new DTCliente("oWood", "pass", "Oliver", "Wood", "quidditch28@gmail.com",
-					directorioImagenes + "/imagenes/clientes/oWood.jpg", new Date(1988, 12 - 1, 28), new HashSet());
+			calendar.set(1988, 12 - 1, 28);
+			DTCliente dtC = new DTCliente("oWood", "123", "Oliver", "Wood", "quidditch28@gmail.com",
+					directorioImagenes + "/imagenes/clientes/oWood.jpg", calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
-			dtC = new DTCliente("eWatson", "pass", "Emma", "Watson", "e.watson@gmail.com",
-					directorioImagenes + "/imagenes/clientes/eWatson.jpg", new Date(1990, 4 - 1, 15), new HashSet());
+			calendar.set(1990, 4 - 1, 15);
+			dtC = new DTCliente("eWatson", "123", "Emma", "Watson", "e.watson@gmail.com",
+					directorioImagenes + "/imagenes/clientes/eWatson.jpg", calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
-			dtC = new DTCliente("BruceS", "pass", "Bruce", "Sewell", "bruce.sewell@gmail.com",
-					null, new Date(1978, 12 - 1, 3), new HashSet());
+			calendar.set(1978, 12 - 1, 3);
+			dtC = new DTCliente("BruceS", "123", "Bruce", "Sewell", "bruce.sewell@gmail.com",
+					null, calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
-			dtC = new DTCliente("JeffW", "pass", "Jeff", "Williams", "jeff.williams@gmail.com",
-					null, new Date(1984, 11 - 1, 27), new HashSet());
+			calendar.set(1984, 11 - 1, 27);
+			dtC = new DTCliente("JeffW", "123", "Jeff", "Williams", "jeff.williams@gmail.com",
+					null, calendar.getTime(), new HashSet<>());
 			mu.altaCliente(dtC);
-			//AltaProveedores
-			dtP = new DTProveedor("tCook", "pass", "Tim", "Cook", "air.f@gmail.com",
+			calendar.set(1960, 11 - 1, 1);
+			DTProveedor dtP = new DTProveedor("tCook", "123", "Tim", "Cook", "air.f@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/tCook.jpg",
-					new Date(1960, 11 - 1, 1), "AirFrance", "http://www.airfrance.com/");
+					calendar.getTime(), "AirFrance", "http://www.airfrance.com/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("moody", "pass", "Alastor", "Moody", "eu.car@eucar.com",
+			calendar.set(1965, 9 - 1, 2);
+			dtP = new DTProveedor("moody", "123", "Alastor", "Moody", "eu.car@eucar.com",
 					directorioImagenes + "/imagenes/proveedores/moody.jpg",
-					new Date(1965, 9 - 1, 2), "EuropCar", "http://www.europcar.com.uy/");
+					calendar.getTime(), "EuropCar", "http://www.europcar.com.uy/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("remus", "pass", "Remus", "Lupin", "iberia@gmail.com",
+			calendar.set(1970, 5 - 1, 4);
+			dtP = new DTProveedor("remus", "123", "Remus", "Lupin", "iberia@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/remus.jpg",
-					new Date(1970, 5 - 1, 4), "Iberia", "http://www.iberia.com/uy/");
+					calendar.getTime(), "Iberia", "http://www.iberia.com/uy/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("adippet", "pass", "Armando", "Dippet", "tam@outlook.com",
+			calendar.set(1967, 2 - 1, 12);
+			dtP = new DTProveedor("adippet", "123", "Armando", "Dippet", "tam@outlook.com",
 					directorioImagenes + "/imagenes/proveedores/adippet.jpg",
-					new Date(1967, 2 - 1, 12), "Tam", "http://www.tam.com.br/");
+					calendar.getTime(), "Tam", "http://www.tam.com.br/");
 			mu.altaProveedor(dtP);
-			dtP = new DTProveedor("mHooch", "pass", "Madam", "Hooch", "segHogar@gmail.com",
+			calendar.set(1963, 8 - 1, 5);
+			dtP = new DTProveedor("mHooch", "123", "Madam", "Hooch", "segHogar@gmail.com",
 					directorioImagenes + "/imagenes/proveedores/mHooch.jpg",
-					new Date(1963, 8 - 1, 5), "Segundo Hogar", "http://www.segundohogar.com/");
+					calendar.getTime(), "Segundo Hogar", "http://www.segundohogar.com/");
 			mu.altaProveedor(dtP);
-			//Alta Categorias
 			ManejadorProductos mp = ManejadorProductos.getInstance();
 			mp.altaCategoria("Vuelos", null);
 			mp.altaCategoria("Empresas", "Vuelos");
@@ -130,7 +142,7 @@ public class CtrlReservasTest {
 			mp.altaCategoria("Tarifa", "Automóviles");
 			mp.altaCategoria("Mini", "Tarifa");
 			mp.altaCategoria("Económico", "Tarifa");
-			mp.altaCategoria("Común", "Tarifa");
+			mp.altaCategoria("Standard", "Tarifa");
 			mp.altaCategoria("Full", "Tarifa");
 			mp.altaCategoria("Tipo vehículo", "Automóviles");
 			mp.altaCategoria("Auto", "Tipo vehículo");
@@ -149,7 +161,6 @@ public class CtrlReservasTest {
 			mp.altaCategoria("Caribe", "Cruceros");
 			mp.altaCategoria("Nilo", "Cruceros");
 			mp.altaCategoria("Alaska", "Cruceros");
-			//Ciudades y Países
 			Pais p = new Pais("Uruguay");
 			p.agregarCiudad(new Ciudad("Montevideo"));
 			mp.agregarPais(p);
@@ -186,270 +197,288 @@ public class CtrlReservasTest {
 			p.agregarCiudad(new Ciudad("Pekín"));
 			p.agregarCiudad(new Ciudad("Cantón"));
 			mp.agregarPais(p);
-
-            //Alta Servicios
-			//S1
-			Set<String> imgs = new HashSet();
+			Set<String> imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
-			DTServicio dtS = new DTServicio("Euro-Vuelo-S", "Vuelo con excelente atención y comodidad", null,
+			DTServicio dtS = new DTServicio("Euro-Vuelo-S", "remus", "Vuelo con excelente atención y comodidad",
 					1100, imgs, new DTUbicacion("Montevideo", "Uruguay"),
 					new DTUbicacion("Valencia", "España"));
-			Set<String> cats = new HashSet() {
-			};
+			Set<String> cats = new HashSet<>();
 			cats.add("Iberia");
 			cats.add("Standard");
 			mp.altaServicio(dtS, "remus", cats);
-			//S2
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
-			dtS = new DTServicio("Euro-Vuelo-LC", "Vuelo con excelente "
-					+ "atención y comodidad a un precio accesible.", null, 850, imgs,
+			dtS = new DTServicio("Euro-Vuelo-LC", "remus", "Vuelo con excelente "
+					+ "atención y comodidad a un precio accesible.", 850, imgs,
 					new DTUbicacion("Montevideo", "Uruguay"),
 					new DTUbicacion("Valencia", "España"));
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Iberia");
 			cats.add("LowCost");
 			mp.altaServicio(dtS, "remus", cats);
-			//S3
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG7.jpg");
-			dtS = new DTServicio("Euro-Vuelo-FC", "Vuelo de primera clase. "
-					+ "Excelente atención, comodidad y servicio.", null, 1300, imgs,
+			dtS = new DTServicio("Euro-Vuelo-FC", "remus", "Vuelo de primera clase. "
+					+ "Excelente atención, comodidad y servicio.", 1300, imgs,
 					new DTUbicacion("Montevideo", "Uruguay"),
 					new DTUbicacion("Valencia", "España"));
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Iberia");
 			cats.add("First Class");
 			mp.altaServicio(dtS, "remus", cats);
-			//S4
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG8.jpg");
-			dtS = new DTServicio("Euro-Car-1", "Euro-Car. Autos de buena calidad "
-					+ "y comodidad. Versión Económica", null, 300, imgs,
+			dtS = new DTServicio("Euro-Car-1", "moody", "Euro-Car. Autos de buena calidad "
+					+ "y comodidad. Versión Económica", 300, imgs,
 					new DTUbicacion("Madrid", "España"),
 					new DTUbicacion("Valencia", "España"));
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Económico");
 			cats.add("Auto");
 			cats.add("Chevrolet");
 			mp.altaServicio(dtS, "moody", cats);
-			//S5
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG9.jpg");
-			dtS = new DTServicio("Euro-Car-2", "Euro-Car. Autos de buena calidad"
-					+ " y comodidad. Versión Standard.", null, 300, imgs,
+			dtS = new DTServicio("Euro-Car-2", "moody", "Euro-Car. Autos de buena calidad"
+					+ " y comodidad. Versión Standard.", 300, imgs,
 					new DTUbicacion("Madrid", "España"),
 					new DTUbicacion("Valencia", "España"));
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Común");
 			cats.add("Auto");
 			cats.add("Chevrolet");
 			mp.altaServicio(dtS, "moody", cats);
-			//S6
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG10.jpg");
-			dtS = new DTServicio("Euro-Car-3", "Euro-Car. Autos de buena calidad "
-					+ "y comodidad. Una camioneta para toda la familia.", null, 300, imgs,
+			dtS = new DTServicio("Euro-Car-3", "moody", "Euro-Car. Autos de buena calidad "
+					+ "y comodidad. Una camioneta para toda la familia.", 300, imgs,
 					new DTUbicacion("Valencia", "España"), null);
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Full");
 			cats.add("Camioneta");
 			cats.add("Chevrolet");
 			mp.altaServicio(dtS, "moody", cats);
-			//S7
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG1.jpg");
 			imgs.add(directorioImagenes + "/imagenes/IMG2.jpg");
-			dtS = new DTServicio("Casa para p4 BsAs", "Esta hermosa casa, se "
+			dtS = new DTServicio("Casa para p4 BsAs", "mHooch", "Esta hermosa casa, se "
 					+ "encuentra ubicada en el corazón de Buenos Aires y ofrece una "
 					+ "capacidad para cuatro personas. La propiedad cuenta con un "
 					+ "dormitorio con dos camas simples, que pueden transformarse en "
-					+ "una matrimonial y dos baños completos, que incluyen toallas.", null,
+					+ "una matrimonial y dos baños completos, que incluyen toallas.",
 					80, imgs, new DTUbicacion("Buenos Aires", "Argentina"), null);
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Casa");
 			cats.add("2 dormitorios");
 			mp.altaServicio(dtS, "mHooch", cats);
-			//S8
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG3.jpg");
 			imgs.add(directorioImagenes + "/imagenes/IMG4.jpg");
 			imgs.add(directorioImagenes + "/imagenes/IMG5.jpg");
-			dtS = new DTServicio("Floripa G. House", "Estamos a sólo unos pasos "
+			dtS = new DTServicio("Floripa G. House", "mHooch", "Estamos a sólo unos pasos "
 					+ "de un supermercado, restaurantes, cajero automático, "
 					+ "gasolinera, farmacia, gimnasio, etc. Lagoa da Conceição es 7"
 					+ " km de nuestra casa de huéspedes y tarda sólo 10-15 minutos "
 					+ "en el transporte público. Allí se encuentra una buena vida "
-					+ "nocturna con bares y música en vivo.", null, 190, imgs,
+					+ "nocturna con bares y música en vivo.", 190, imgs,
 					new DTUbicacion("Florianópolis", "Brasil"), null);
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Casa");
 			cats.add("2 dormitorios");
 			mp.altaServicio(dtS, "mHooch", cats);
-			//S9
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG6.jpg");
-			dtS = new DTServicio("Air-France-FC", "¡Un vuelo de primera! "
-					+ "Excelencia y experiencia en mejorar sus viajes.", null, 100, imgs,
+			dtS = new DTServicio("Air-France-FC", "tCook", "¡Un vuelo de primera! "
+					+ "Excelencia y experiencia en mejorar sus viajes.", 100, imgs,
 					new DTUbicacion("París", "Francia"),
 					new DTUbicacion("Berlín", "Alemania"));
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Air France");
 			cats.add("First Class");
 			mp.altaServicio(dtS, "tCook", cats);
-			//S10
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG11.jpg");
-			dtS = new DTServicio("TAM-FC", "¡Un vuelo de primera! Excelencia y "
-					+ "experiencia.", null, 150, imgs, new DTUbicacion("Florianópolis",
+			dtS = new DTServicio("TAM-FC", "adippet", "¡Un vuelo de primera! Excelencia y "
+					+ "experiencia.", 150, imgs, new DTUbicacion("Florianópolis",
 							"Brasil"), new DTUbicacion("Pekín", "China"));
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("TAM");
 			cats.add("First Class");
 			mp.altaServicio(dtS, "adippet", cats);
-			//S11
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG12.jpg");
-			dtS = new DTServicio("Luxury south beach corner apartament",
+			dtS = new DTServicio("Luxury south beach corner apartament", "mHooch",
 					"Beautiful large 2 bedrooms 2 bathrooms apartment CORNER UNIT. "
 					+ "Marble floor throughout, beautiful open kitchen, granite "
 					+ "counter top, spacious dining room area and living room area."
-					+ "Spectacular views of Miami from all windows and balcony.", null,
+					+ "Spectacular views of Miami from all windows and balcony.",
 					300, imgs, new DTUbicacion("Miami", "EEUU"), null);
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Hotel");
 			cats.add("Playa");
 			cats.add("2 dormitorios");
 			mp.altaServicio(dtS, "mHooch", cats);
-			//S12
-			imgs = new HashSet();
+			imgs = new HashSet<>();
 			imgs.add(directorioImagenes + "/imagenes/IMG8.jpg");
-			dtS = new DTServicio("Coche-Miami",
-					"A useful car to travel around Miami", null, 360, imgs,
+			dtS = new DTServicio("Coche-Miami", "mHooch",
+					"A useful car to travel around Miami", 360, imgs,
 					new DTUbicacion("Miami", "EEUU"), null);
-			cats = new HashSet() {
-			};
+			cats = new HashSet<>();
 			cats.add("Económico");
 			cats.add("Auto");
 			cats.add("Chevrolet");
 			mp.altaServicio(dtS, "mHooch", cats);
-            //Alta de Promociones
-			//P1 4 5
-			List<String> servs = new ArrayList();
+			List<String> servs = new ArrayList<>();
 			servs.add("Euro-Car-1");
 			servs.add("Euro-Car-1");
 			mp.altaPromocion("Euro-Cars-E-S", 30, "moody", servs);
-			//P2 4 6
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Euro-Car-1");
 			servs.add("Euro-Car-3");
 			mp.altaPromocion("Euro-Cars-E-F", 30, "moody", servs);
-			//P3 5 6
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Euro-Car-2");
 			servs.add("Euro-Car-3");
 			mp.altaPromocion("Euro-Cars-ES-F", 30, "moody", servs);
-			//P4 1 2
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Euro-Vuelo-S");
 			servs.add("Euro-Vuelo-LC");
 			mp.altaPromocion("Euro-Vuelos-S-LC", 40, "remus", servs);
-			//P5 1 3
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Euro-Vuelo-S");
 			servs.add("Euro-Vuelo-FC");
 			mp.altaPromocion("Euro-Vuelos-S-FC", 40, "remus", servs);
-			//P6 2 3
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Euro-Vuelo-LC");
 			servs.add("Euro-Vuelo-FC");
 			mp.altaPromocion("Euro-Vuelos-LC-FC", 40, "remus", servs);
-			//P7 7 8
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Casa para p4 BsAs");
 			servs.add("Floripa G. House");
 			mp.altaPromocion("Sudamerica-Casas", 50, "mHooch", servs);
-			//P8 11 12
-			servs = new ArrayList();
+			servs = new ArrayList<>();
 			servs.add("Luxury south beach corner apartament");
 			servs.add("Coche-Miami");
 			mp.altaPromocion("Miami-Viaje", 30, "mHooch", servs);
-
-			//Alta Reservas
 			ManejadorReservas mr = ManejadorReservas.getInstance();
 			try {
 				//R1 S1
-				Set<DTLineaReserva> lineas = new HashSet();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
-						new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, "remus", 1100));
-				dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
+
+				calendar.set(2015, 1 - 1, 1);
+
+				Set<DTLineaReserva> lineas = new HashSet<>();
+				lineas.add(new DTLineaReserva(1, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-S", null, "remus", 1100));
+				DTReserva dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Facturada, 1100, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
-                                instance.seleccionarCliente("oWood");
-                                instance.seleccionarReserva(0);
-                                instance.seleccionarCliente("oWood");
-                                instance.facturarReserva("remus", "oWood", 1);
-                                instance.confirmarFactura(1);
+                                Fabrica fabrica = Fabrica.getInstance();
+                                ICtrlReservas ctrlR = fabrica.getICtrlReservas();
+                                ctrlR.seleccionarCliente("oWood");
+                                ctrlR.confirmarFactura(1);
+                                DTFacturaF dt = ctrlR.verFactura(1);
                                 
-                                
-				//R2    S1 S2
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 1 - 1, 1),
-						new Date(2015, 1 - 1, 1), "Euro-Vuelo-S", null, "remus", 1100));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 1 - 1, 1),
-						new Date(2015, 1 - 1, 1), "Euro-Vuelo-LC", null, "remus", 850));
-				dtR = new DTReserva(0, new Date(2015, 1 - 1, 1),
-						EstadoReserva.Cancelada, 3050, lineas);
+				//R2    S1 S2 --> S1 S4
+				lineas = new HashSet<>();
+				lineas.add(new DTLineaReserva(2, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-S", null, "remus", 1100));
+				lineas.add(new DTLineaReserva(1, calendar.getTime(),
+						calendar.getTime(), "Euro-Car-1", null, "moody", 300));
+				dtR = new DTReserva(0, calendar.getTime(),
+						EstadoReserva.Pagada, 2500, lineas);
 				mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 
 				//R3    P7
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 3 - 1, 5),
-						new Date(2015, 4 - 1, 2), null, "Sudamerica-Casas", "mHooch", 135));
-				dtR = new DTReserva(0, new Date(2015, 3 - 1, 5),
-						EstadoReserva.Pagada, 135, lineas);
+				lineas = new HashSet<>();
+
+				calendar.set(2015, 3 - 1, 5);
+				Date inicio = calendar.getTime();
+				calendar.set(2015, 4 - 1, 2);
+				Date fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, null, "Sudamerica-Casas", "mHooch", 135));
+
+				calendar.set(2015, 3 - 1, 5);
+
+				dtR = new DTReserva(0, calendar.getTime(),
+						EstadoReserva.Cancelada, 135, lineas);
 				mr.agregarReserva(mu.getCliente("BruceS"), dtR);
+                ctrlR.seleccionarCliente("BruceS");
+                                ctrlR.confirmarFactura(3);
 				//R4    S5 S6
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
-						new Date(2015, 5 - 1, 12), "Euro-Car-2", null, "moody", 300));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
-						new Date(2015, 5 - 1, 12), "Euro-Car-3", null, "moody", 300));
-				dtR = new DTReserva(0, new Date(2015, 5 - 1, 8),
+				lineas = new HashSet<>();
+
+				calendar.set(2015, 5 - 1, 8);
+				inicio = calendar.getTime();
+				calendar.set(2015, 5 - 1, 12);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, "Euro-Car-2", null, "moody", 300));
+
+				calendar.set(2015, 5 - 1, 8);
+				inicio = calendar.getTime();
+				calendar.set(2015, 5 - 1, 12);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, "Euro-Car-3", null, "moody", 300));
+
+				calendar.set(2015, 5 - 1, 8);
+
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Pagada, 600, lineas);
 				mr.agregarReserva(mu.getCliente("JeffW"), dtR);
 				//R5    S9
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
-						new Date(2015, 8 - 1, 10), "Air-France-FC", null, "tCook", 100));
-				dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
+				lineas = new HashSet<>();
+
+				calendar.set(2015, 8 - 1, 7);
+				inicio = calendar.getTime();
+				calendar.set(2015, 8 - 1, 10);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(2, inicio,
+						fin, "Air-France-FC", null, "tCook", 100));
+
+				calendar.set(2015, 8 - 1, 7);
+
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Registrada, 200, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
 
-				//R6    P8 S7
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 7),
-						new Date(2015, 8 - 1, 14), null, "Miami-Viaje", "mHooch", 462));
-				lineas.add(new DTLineaReserva(1, new Date(2015, 8 - 1, 14),
-						new Date(2015, 8 - 1, 21), "Casa para p4 BsAs", null, "mHooch", 80));
-				dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
-						EstadoReserva.Registrada, 542, lineas);
+				//R6    P8 S7 --> P8 S9
+				lineas = new HashSet<>();
+
+				calendar.set(2015, 8 - 1, 7);
+				inicio = calendar.getTime();
+				calendar.set(2015, 8 - 1, 14);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, null, "Miami-Viaje", "mHooch", 330));
+
+				calendar.set(2015, 8 - 1, 14);
+				inicio = calendar.getTime();
+				calendar.set(2015, 8 - 1, 21);
+				fin = calendar.getTime();
+
+				lineas.add(new DTLineaReserva(1, inicio,
+						fin, "Air-France-FC", null, "tCook", 100));
+
+				calendar.set(2015, 8 - 1, 7);
+
+				dtR = new DTReserva(0, calendar.getTime(),
+						EstadoReserva.Registrada, 430, lineas);
 				mr.agregarReserva(mu.getCliente("eWatson"), dtR);
 				//R7    S2
-				lineas = new HashSet();
-				lineas.add(new DTLineaReserva(2, new Date(2015, 8 - 1, 7),
-						new Date(2015, 8 - 1, 7), "Euro-Vuelo-LC", null, "remus", 850));
-				dtR = new DTReserva(0, new Date(2015, 8 - 1, 7),
+				lineas = new HashSet<>();
+
+				calendar.set(2015, 8 - 1, 7);
+
+				lineas.add(new DTLineaReserva(2, calendar.getTime(),
+						calendar.getTime(), "Euro-Vuelo-LC", null, "remus", 850));
+				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Registrada, 1700, lineas);
 				mr.agregarReserva(mu.getCliente("BruceS"), dtR);
 			} catch (Exception e) {
@@ -869,7 +898,22 @@ public class CtrlReservasTest {
 		assertEquals(instance.getLineasReserva(), set);
 
 	}
-        
+    
+    @Test
+	public void testFacturarReserva() throws Exception {
+        System.out.println("facturarReserva");
+        Set<DTLineaReserva> lineas = new HashSet();
+				lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
+						new Date(2015, 5 - 1, 12), "Euro-Car-2", null, "moody", 300));
+				lineas.add(new DTLineaReserva(1, new Date(2015, 5 - 1, 8),
+						new Date(2015, 5 - 1, 12), "Euro-Car-3", null, "moody", 300));
+				dtR = new DTReserva(0, new Date(2015, 5 - 1, 8),
+						EstadoReserva.Pagada, 600, lineas);
+                instance.seleccionarCliente("JeffW");
+                instance.altaReserva(dtR);
+				
+        assertTrue(instance.facturarReserva("moody", "JeffW", 1));
+    }
             
 
 }

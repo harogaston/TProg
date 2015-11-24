@@ -3,7 +3,7 @@ package tprog.logica.clases;
 import java.util.ArrayList;
 
 public class RankingServicios {
-    ArrayList<ItemRanking> ranking;
+    private ArrayList<ItemRanking> ranking;
     
     public RankingServicios() {
         ranking = new ArrayList();
@@ -11,7 +11,7 @@ public class RankingServicios {
             ranking.add(null);
     }
     
-    public ArrayList <ItemRanking> getRanking(){
+    public ArrayList <ItemRanking> getRanking() {
         return ranking;
     }
     

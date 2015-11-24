@@ -82,4 +82,9 @@ public class DTFacturaF {
 		this.promociones = promociones;
 	}
 
+    public Date getFecha() {
+        return fecha;
+    }
+
+    
 }

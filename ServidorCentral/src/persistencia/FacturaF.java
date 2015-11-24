@@ -30,7 +30,7 @@ public class FacturaF implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long identi;
     private int idReserva;
     @Temporal(TemporalType.DATE)
     private Date fecha;
@@ -91,11 +91,11 @@ public class FacturaF implements Serializable {
         return promociones;
     }
     public Long getId() {
-        return id;
+        return identi;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long identificador) {
+        this.identi = identificador;
     }
     
     public DTFacturaF crearDTFacturaF(){
@@ -130,7 +130,7 @@ public class FacturaF implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (identi != null ? identi.hashCode() : 0);
         return hash;
     }
 
@@ -141,7 +141,7 @@ public class FacturaF implements Serializable {
             return false;
         }
         FacturaF other = (FacturaF) object;
-        if ((this.id== null && other.id!= null) || (this.id!= null && !this.id.equals(other.id))) {
+        if ((this.identi == null && other.identi != null) || (this.identi != null && !this.identi.equals(other.identi))) {
             return false;
         }
         return true;
@@ -149,7 +149,7 @@ public class FacturaF implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Factura[ id=" + id+ " ]";
+        return "persistencia.Factura[ id=" + identi + " ]";
     }
     
 }

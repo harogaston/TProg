@@ -1,5 +1,6 @@
 package tprog.logica.controladores;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -27,6 +28,14 @@ import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class CtrlReservas implements ICtrlReservas {
 
@@ -215,11 +224,67 @@ public class CtrlReservas implements ICtrlReservas {
 		if (proveedor.facturarReserva(idReserva)){
                     seleccionarCliente(nickCliente);
                     confirmarFactura(idReserva);
+					sendEmail(idReserva);
                     facturaGlobal = true;
                 }
         return facturaGlobal;
         
 	}
+	
+	public void sendEmail(int idReserva) {
+		try {
+			seleccionarReserva(idReserva);
+            DTReserva dtReserva = infoReserva();
+			DTCliente dtCliente = getClienteAsociado();
+			
+			Properties props = System.getProperties();
+
+			props.setProperty("mail.smtp.host", "localhost");
+			props.setProperty("mail.smtp.port", "4321");
+			Session session = Session.getDefaultInstance(props, null);
+
+			// -- Crear un mensaje nuevo --
+			Message msg = new MimeMessage(session);
+
+			// -- Setear remitente y destinatario --
+			msg.setFrom(new InternetAddress("help4Traveling@mail.com"));
+			msg.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(dtCliente.getEmail(), false));
+
+			// Fecha 
+			Date miFecha = new Date();
+			// -- Asunto y cuerpo del mensaje --
+			String asunto = "[help4Traveling] [" + new SimpleDateFormat("dd-MM-yyyy H:m").format(miFecha) + "]";
+			msg.setSubject(asunto);
+			String cuerpo = "Estimado " + dtCliente.getNombre() + " " + dtCliente.getApellido() + 
+					". Su compra ha sido facturada con exito:\n\n" + "---Detalles de la Compra\n";
+			
+			cuerpo = cuerpo.concat("-Servicios:\n");
+			for (DTLineaReserva linea : dtReserva.getLineasReserva()) {
+				if (linea.getServicio() != null) {
+					cuerpo = cuerpo.concat("Nombre: " + linea.getServicio() + "- Cantidad: " + linea.getCantidad() + "- $" + linea.getCantidad() + "*" + linea.getPrecio() + "- Proveedor: " + linea.getNicknameProveedor() + "\n");
+				}
+			}
+			
+			cuerpo = cuerpo.concat("-Promociones:\n");
+			for (DTLineaReserva linea : dtReserva.getLineasReserva()) {
+				if (linea.getPromocion() != null) {
+					cuerpo = cuerpo.concat("Nombre: " + linea.getPromocion() + "- Cantidad: " + linea.getCantidad() + "- $" + linea.getCantidad() + "*" + linea.getPrecio() + "- Proveedor: " + linea.getNicknameProveedor() + "\n");
+				}
+			}
+			cuerpo = cuerpo.concat("Precio Total: $" + dtReserva.getPrecioTotal() + "\n\nGracias por preferirnos.\nSaludos\nhelp4Traveling");
+			msg.setText(cuerpo);
+
+			msg.setSentDate(miFecha);
+
+			// -- Enviar el email --
+			Transport.send(msg);
+			System.out.println("Email enviado.");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
     @Override
     public void confirmarFactura(int idReserva){
         //persistir la wea

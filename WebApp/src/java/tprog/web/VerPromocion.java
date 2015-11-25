@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +31,7 @@ public class VerPromocion extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-		Properties properties = new Properties();
-		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
-		FileInputStream file = new FileInputStream(ruta);
-		properties.load(file);
-		file.close();
-		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idPromocion = request.getParameter("idPromocion");

@@ -48,18 +48,11 @@ public class FacturarReserva extends HttpServlet {
 		int idReserva = Integer.parseInt((String) request.getParameter("idReserva"));
 		String nickCliente = request.getParameter("nickCliente");
 		String emailCliente = request.getParameter("emailCliente");
-		//System.out.println(emailCliente);
-		Properties properties = new Properties();
-		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
-		FileInputStream file = new FileInputStream(ruta);
-		properties.load(file);
-		file.close();
-		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		//enviar mail
 		proxy.facturarReserva(idProveedor, nickCliente, idReserva);
-
 		//asigno atributos de la request
 		List<String> notificaciones = proxy.listarNotificacionesProveedor(idProveedor).getNotificaciones();
 		session.setAttribute("notificaciones", notificaciones);

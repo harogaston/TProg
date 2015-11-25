@@ -84,6 +84,7 @@
                         <div class="panel-body">
                             <table class="table table-hover" style="margin-bottom: 0px">
                                 <tbody>
+									<%if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {%>
                                     <tr>
                                         <td>Proveedor</td>
 										<td>
@@ -93,6 +94,7 @@
 											</form>
 										</td>
 									</tr>
+									<%}%>
 									<tr>
 										<td>Precio</td>
 										<td>$<%=Float.toString(infoServicio.getPrecio())%></td>
@@ -168,10 +170,16 @@
 						for (String categoria : categorias) {
 							i++;
                     %>
+					<%if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {%>
 					<form action="Buscar" id="myform<%=i%>" method="POST" style="display: inline-block">
 						<h4><a href="#" style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-warning"><%=categoria%></span></a></h4>
 						<input name="categoriaSeleccionada" value="<%=categoria%>" style="display: none">
 					</form>
+					<% } else {%>
+					<h4><a style="text-decoration: none" onclick="document.getElementById('myform<%=i%>').submit()"><span class="label label-warning"><%=categoria%></span></a></h4>
+					<input name="categoriaSeleccionada" value="<%=categoria%>" style="display: none">
+					<% } %>
+
 					<%}%>
                 </div>
             </div>

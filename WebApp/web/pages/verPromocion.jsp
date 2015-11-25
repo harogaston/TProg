@@ -56,6 +56,7 @@
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <tbody>
+									<% if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {%>
                                     <tr>
                                         <td>Proveedor</td>
                                         <td>
@@ -65,6 +66,7 @@
 											</form>
 										</td>
                                     </tr>
+									<% }%>
                                     <tr>
                                         <td>Descuento</td>
                                         <td><%=Float.toString(infoPromocion.getDescuento())%>%</td>

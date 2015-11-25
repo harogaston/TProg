@@ -59,13 +59,8 @@ public class VerServicio extends HttpServlet {
 			}
 			request.setAttribute("imagenes", rutasImagenes);
 		}
-
 		request.setAttribute("categorias", categorias);
-		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
-			request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("/pages/proveedor/verServicioProveedor.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
 	}
 
 	@Override

@@ -52,11 +52,7 @@ public class VerPromocion extends HttpServlet {
 		request.setAttribute("idProveedor", idProveedor);
 		//y el resto de la info del servicio
 		request.setAttribute("infoPromocion", result.getPromocion());
-		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
-			request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("/pages/proveedor/verPromocionProveedor.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("/pages/verPromocion.jsp").forward(request, response);
 	}
 
 	@Override

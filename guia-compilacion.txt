@@ -1,0 +1,4 @@
+1) Comentar todo private.properties ajeno, y descomentar (o agregar) el contenido del private.properties propio
+2) Hay que tener ant descargado en ~/apache-ant-1.9.6/ (el script compilar.sh se encarga de setear la variable de entorno)
+3) Si se pretende compilar/ejecutar la estación de trabajo, se tiene que tener el archivo ~/.Help4Travel/config.properties configurado para usar la IP privada de la computadora que vaya a hostear el servicio (ej: http://192.168.1.31:9128/publicador)
+4) No es necesario configurar la dirección del publicador en el web.xml de la Web App para compilar, pero si para deployear el war en Tomcat; si se quiere cambiar la dirección del publicador en el war ya empaquetado, se tiene que descomprimir, se modifica el web.xml (la primera propiedad tiene la dirección del publicador), comprimirse nuevamente (en .zip), y se renombra a .war

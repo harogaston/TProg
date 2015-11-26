@@ -31,7 +31,7 @@ echo "$STR" > ./WebApp/nbproject/private/private.properties
 # build servidor central
 ant -buildfile ./ServidorCentral/build.xml compile jar
 # build de web app
-ant -lib ~/apache-ant-1.9.6/lib/ -buildfile ./WebApp/build.xml compile do-dist
+ant -buildfile ./WebApp/build.xml compile do-dist
 # build y run de estacion de trabajo
 ant -buildfile ./EstacionDeTrabajo/build.xml compile jar
 

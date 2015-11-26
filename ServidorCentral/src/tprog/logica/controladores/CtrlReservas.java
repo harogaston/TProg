@@ -6,7 +6,13 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -22,20 +28,13 @@ import tprog.logica.dt.DTLineaReserva;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinReserva;
 import tprog.logica.dt.DTMinServicio;
+import tprog.logica.dt.DTProveedor;
 import tprog.logica.dt.DTReserva;
 import tprog.logica.dt.EstadoReserva;
 import tprog.logica.interfaces.ICtrlReservas;
 import tprog.logica.manejadores.ManejadorProductos;
 import tprog.logica.manejadores.ManejadorReservas;
 import tprog.logica.manejadores.ManejadorUsuarios;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 public class CtrlReservas implements ICtrlReservas {
 
@@ -106,18 +105,18 @@ public class CtrlReservas implements ICtrlReservas {
 			precioTotal += precio * cant;
 		}
 	}
-        
-        @Override
+
+	@Override
 	public void quitarLineaReserva(int idLineaReserva) {
-            Iterator<DTLineaReserva> iter = lineasReserva.iterator();
-            while (iter.hasNext()){
-                DTLineaReserva linea = iter.next();
-                if (linea.getIdLineaReserva() == idLineaReserva){
-                    precioTotal =- linea.getPrecio() * linea.getCantidad();
-                    iter.remove();
-                }
-            }
-        }
+		Iterator<DTLineaReserva> iter = lineasReserva.iterator();
+		while (iter.hasNext()) {
+			DTLineaReserva linea = iter.next();
+			if (linea.getIdLineaReserva() == idLineaReserva) {
+				precioTotal = -linea.getPrecio() * linea.getCantidad();
+				iter.remove();
+			}
+		}
+	}
 
 	@Override
 	public Set<DTMinServicio> listarServiciosProveedor() {
@@ -133,20 +132,20 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public DTReserva mostrarReservaTemporal() {
-                
-                    Date fechaTemp = new Date();
-                    int anio = fechaTemp.getYear() + 1900;
-                    int mes = fechaTemp.getMonth();
-                    int dia = fechaTemp.getDate();
-                    Date fecha = new Date(anio, mes, dia);
-                    EstadoReserva estado = EstadoReserva.Registrada;
-                    if (!lineasReserva.isEmpty())
-                        return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
-                    else
-                        // -2 bandera para saber que la reserva no tiene lineas de reserva sin pasar null
-                        return new DTReserva(-2, fecha, estado, precioTotal, lineasReserva);
-                
-		
+
+		Date fechaTemp = new Date();
+		int anio = fechaTemp.getYear() + 1900;
+		int mes = fechaTemp.getMonth();
+		int dia = fechaTemp.getDate();
+		Date fecha = new Date(anio, mes, dia);
+		EstadoReserva estado = EstadoReserva.Registrada;
+		if (!lineasReserva.isEmpty()) {
+			return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+		} else // -2 bandera para saber que la reserva no tiene lineas de reserva sin pasar null
+		{
+			return new DTReserva(-2, fecha, estado, precioTotal, lineasReserva);
+		}
+
 	}
 
 	@Override
@@ -191,8 +190,7 @@ public class CtrlReservas implements ICtrlReservas {
 	}
 
 	/**
-	 * Devuelve un DTCliente correspondiente al cliente que realizó la reserva
-	 * seleccionada con seleccionarReserva
+	 * Devuelve un DTCliente correspondiente al cliente que realizó la reserva seleccionada con seleccionarReserva
 	 *
 	 * @return
 	 */
@@ -218,23 +216,25 @@ public class CtrlReservas implements ICtrlReservas {
 	@Override
 	public boolean facturarReserva(String idProveedor, String nickCliente, int idReserva) {
 		//se tendria que seleccionar la reserva y no pasar el parametro
-        boolean facturaGlobal = false;
+		boolean facturaGlobal = false;
 		ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
 		Proveedor proveedor = manejadorU.getProveedor(idProveedor);
-		if (proveedor.facturarReserva(idReserva)){
-                    seleccionarCliente(nickCliente);
-                    confirmarFactura(idReserva);
-					sendEmail(idReserva);
-                    facturaGlobal = true;
-                }
-        return facturaGlobal;
-        
+		if (proveedor.facturarReserva(idReserva)) {
+			seleccionarCliente(nickCliente);
+			confirmarFactura(idReserva);
+			sendEmail(idReserva);
+			facturaGlobal = true;
+		}
+		return facturaGlobal;
+
 	}
-	
+
 	public void sendEmail(int idReserva) {
 		try {
+			ManejadorUsuarios manejadorU = ManejadorUsuarios.getInstance();
+			
 			seleccionarReserva(idReserva);
-            DTReserva dtReserva = infoReserva();
+			DTReserva dtReserva = infoReserva();
 			DTCliente dtCliente = getClienteAsociado();
 			
 			Properties props = System.getProperties();
@@ -256,23 +256,48 @@ public class CtrlReservas implements ICtrlReservas {
 			// -- Asunto y cuerpo del mensaje --
 			String asunto = "[help4Traveling] [" + new SimpleDateFormat("dd-MM-yyyy H:m").format(miFecha) + "]";
 			msg.setSubject(asunto);
-			String cuerpo = "Estimado " + dtCliente.getNombre() + " " + dtCliente.getApellido() + 
-					". Su compra ha sido facturada con exito:\n\n" + "---Detalles de la Compra\n";
-			
-			cuerpo = cuerpo.concat("-Servicios:\n");
+			String cuerpo = "<!DOCTYPE html>\n"
+					+ "<html>\n"
+					+ "<body>\n"
+					+ "Estimado <i>" + dtCliente.getNombre() + " " + dtCliente.getApellido() + "</i>"
+					+ ". Su compra ha sido facturada con exito:\n\n"
+					+ "---Detalles de la Compra\n";
+			boolean yahayservicios = false;
+
 			for (DTLineaReserva linea : dtReserva.getLineasReserva()) {
 				if (linea.getServicio() != null) {
-					cuerpo = cuerpo.concat("Nombre: " + linea.getServicio() + "- Cantidad: " + linea.getCantidad() + "- $" + linea.getCantidad() + "*" + linea.getPrecio() + "- Proveedor: " + linea.getNicknameProveedor() + "\n");
+					if (!yahayservicios) {
+						yahayservicios = true;
+						cuerpo = cuerpo.concat("-Servicios:\n");
+					}
+					cuerpo = cuerpo.concat("Nombre: <i>" + linea.getServicio() + "</i> - Cantidad: <i>" + linea.getCantidad() + "</i>");
+					if (linea.getCantidad() > 1) {
+						cuerpo = cuerpo.concat(" - $:<i>" + linea.getCantidad() + "*" + linea.getPrecio() + "</i> ");
+					} else {
+						cuerpo = cuerpo.concat("- $<i>" + linea.getPrecio() + "</i> ");
+					}
+					cuerpo = cuerpo.concat("- Proveedor: <i>" + manejadorU.infoProveedor(linea.getNicknameProveedor()).getNombre() + " " + manejadorU.infoProveedor(linea.getNicknameProveedor()).getApellido() + "</i>\n");
 				}
 			}
-			
-			cuerpo = cuerpo.concat("-Promociones:\n");
+
+			boolean yahaypromociones = false;
 			for (DTLineaReserva linea : dtReserva.getLineasReserva()) {
 				if (linea.getPromocion() != null) {
-					cuerpo = cuerpo.concat("Nombre: " + linea.getPromocion() + "- Cantidad: " + linea.getCantidad() + "- $" + linea.getCantidad() + "*" + linea.getPrecio() + "- Proveedor: " + linea.getNicknameProveedor() + "\n");
+					if (!yahaypromociones) {
+						yahaypromociones = true;
+						cuerpo = cuerpo.concat("-Promociones:\n");
+					}
+					cuerpo = cuerpo.concat("Nombre: <i>" + linea.getServicio() + "</i> - Cantidad: <i>" + linea.getCantidad() + "</i>");
+					if (linea.getCantidad() > 1) {
+						cuerpo = cuerpo.concat(" - $:<i>" + linea.getCantidad() + "*" + linea.getPrecio() + "</i> ");
+					} else {
+						cuerpo = cuerpo.concat("- $<i>" + linea.getPrecio() + "</i> ");
+					}
+					cuerpo = cuerpo.concat("- Proveedor: <i>" + manejadorU.infoProveedor(linea.getNicknameProveedor()).getNombre() + " " + manejadorU.infoProveedor(linea.getNicknameProveedor()).getApellido() + "</i>\n");
 				}
 			}
-			cuerpo = cuerpo.concat("Precio Total: $" + dtReserva.getPrecioTotal() + "\n\nGracias por preferirnos.\nSaludos\nhelp4Traveling");
+
+			cuerpo = cuerpo.concat("Precio Total: $" + dtReserva.getPrecioTotal() + "\n\nGracias por preferirnos.\nSaludos.\n<i>help4Traveling</i>");
 			msg.setText(cuerpo);
 
 			msg.setSentDate(miFecha);
@@ -284,153 +309,151 @@ public class CtrlReservas implements ICtrlReservas {
 			ex.printStackTrace();
 		}
 	}
-	
-    @Override
-    public void confirmarFactura(int idReserva){
-        //persistir la wea
-        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
-        EntityManager entityM = entityMF.createEntityManager();
-        
-        //verifico que la factura no esté en la bd
-        //obtengo el id de la factura asociada al idReserva
-        Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
-        query.setParameter(1, idReserva);
-          //asumimos que hay una sola factura por reserva
-        if (query.getResultList().isEmpty()){
-            seleccionarReserva(idReserva);
-            DTReserva dtReserva = infoReserva();
-            Set<DTLineaReserva> lineasR = dtReserva.getLineasReserva();
-            Iterator<DTLineaReserva> iter = lineasR.iterator();
-            //agrego todas las lineas a la base y la factura en la misma transaccion
-            try{
-                entityM.getTransaction().begin();
-                ArrayList<ServicioF> serviciosF = new ArrayList<ServicioF>();
-                ArrayList<PromocionF> promocionesF = new ArrayList<PromocionF>();
-                while (iter.hasNext()){
-                    DTLineaReserva linea = iter.next();
-                    if (linea.getServicio() != null){
-                        ServicioF servicio = new ServicioF();
-                        servicio.setCantidad(linea.getCantidad());
-                        servicio.setNicknameProveedor(linea.getNicknameProveedor());
-                        servicio.setNombre(linea.getServicio());
-                        servicio.setPrecio(linea.getPrecio());
-                        serviciosF.add(servicio);
-                        entityM.persist(servicio);
-                    }else if (linea.getPromocion() != null){
-                        PromocionF promocion = new PromocionF();
-                        promocion.setCantidad(linea.getCantidad());
-                        promocion.setNicknameProveedor(linea.getNicknameProveedor());
-                        promocion.setNombre(linea.getPromocion());
-                        promocion.setPrecio(linea.getPrecio());
-                        promocionesF.add(promocion);
-                        entityM.persist(promocion);
-                    }
-                }
-                // agrego la factura asociada a las lineas que ya persisti
-                FacturaF factura = new FacturaF();
-               // factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
-                factura.setIdReserva(idReserva);
-                factura.setFecha(new Date());
-                factura.setMonto(dtReserva.getPrecioTotal());
-                factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
-                factura.setServicios(serviciosF);
-                factura.setPromociones(promocionesF);
-                entityM.persist(factura);
-                entityM.flush();
-                entityM.getTransaction().commit();
-            } catch (Exception e) {
-                e.printStackTrace();
-                entityM.getTransaction().rollback();
-            } finally {
-                entityM.close();
-                entityMF.close();
-            }
-        }
-        else{
-            System.out.println("la factura ya se encuentra persistida");
-        }
-    }
-    
-    @Override
-    public void limpiarBD(){
-        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
-        EntityManager entityM = entityMF.createEntityManager();
-        try{
-            entityM.getTransaction().begin();
-            Query queryS = entityM.createQuery("DELETE FROM ServicioF");
-            Query queryP = entityM.createQuery("DELETE FROM PromocionF");
-            Query queryF = entityM.createQuery("DELETE FROM FacturaF");
-            queryS.executeUpdate();
-            queryP.executeUpdate();
-            queryF.executeUpdate();
-            entityM.getTransaction().commit();
-            System.out.println("Se borraron todas las facturas de la base");
-        } catch (Exception e) {
-            e.printStackTrace();
-            entityM.getTransaction().rollback();
-        } finally {
-            entityM.close();
-            entityMF.close();
-        }
-    }
-    
-    @Override
-    public DTFacturaF verFactura(int idReserva){
-        //si se llamó a esta operación es porque la factura de ese idReserva está en la base
-        EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
-        EntityManager entityM = entityMF.createEntityManager();
-        seleccionarReserva(idReserva);
-        String idR = Integer.toString(idReserva);
-        //System.out.println("uosa");
-        DTFacturaF dtF = null;
-        try{
-            entityM.getTransaction().begin();
-            
-            //obtengo el id de la factura asociada al idReserva
-            Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
-            query.setParameter(1, idReserva);
-            //long idFactura = (long) query.getSingleResult();
-            FacturaF factura = (FacturaF) query.getSingleResult(); //asumimos que hay una sola factura por reserva
-              
-            long idFactura = factura.getId();
-            System.out.println("factura " + idFactura);
-            System.out.println("reserva "+factura.getIdReserva());
-            System.out.println("monto "+factura.getMonto());
-            System.out.println("cliente "+factura.getNicknameCliente());
-            
-            //obtengo los id's de los servicios asociados al id de la factura
-            Collection<ServicioF> servis =  factura.getServicios();
-            Set<ServicioF> servicios = new HashSet();
-            Iterator<ServicioF> iter = servis.iterator();
-            while(iter.hasNext()){
-                ServicioF servi = iter.next();
-                servicios.add(servi);
-                System.out.println("servi " + servi.getNombre());
-            }
-            //obtengo los id's de las promociones asociadas al id de la factura 
-            Collection<PromocionF> promos =  factura.getPromociones();
-            Set<PromocionF> promociones = new HashSet();
-            Iterator<PromocionF> iter2 = promos.iterator();
-            while(iter2.hasNext()){
-                PromocionF promo = iter2.next();
-                promociones.add(promo);
-                System.out.println("promo " + promo.getNombre());
-            }
-            //armo el DTFacturaF
-            dtF = factura.crearDTFacturaF();
-            entityM.getTransaction().commit();
-            
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            entityM.getTransaction().rollback();
-        } finally {
-            entityM.close();
-            entityMF.close();
-        }
-        return dtF;
-    }
-    
+
+	@Override
+	public void confirmarFactura(int idReserva) {
+		//persistir la wea
+		EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
+		EntityManager entityM = entityMF.createEntityManager();
+
+		//verifico que la factura no esté en la bd
+		//obtengo el id de la factura asociada al idReserva
+		Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
+		query.setParameter(1, idReserva);
+		//asumimos que hay una sola factura por reserva
+		if (query.getResultList().isEmpty()) {
+			seleccionarReserva(idReserva);
+			DTReserva dtReserva = infoReserva();
+			Set<DTLineaReserva> lineasR = dtReserva.getLineasReserva();
+			Iterator<DTLineaReserva> iter = lineasR.iterator();
+			//agrego todas las lineas a la base y la factura en la misma transaccion
+			try {
+				entityM.getTransaction().begin();
+				ArrayList<ServicioF> serviciosF = new ArrayList<ServicioF>();
+				ArrayList<PromocionF> promocionesF = new ArrayList<PromocionF>();
+				while (iter.hasNext()) {
+					DTLineaReserva linea = iter.next();
+					if (linea.getServicio() != null) {
+						ServicioF servicio = new ServicioF();
+						servicio.setCantidad(linea.getCantidad());
+						servicio.setNicknameProveedor(linea.getNicknameProveedor());
+						servicio.setNombre(linea.getServicio());
+						servicio.setPrecio(linea.getPrecio());
+						serviciosF.add(servicio);
+						entityM.persist(servicio);
+					} else if (linea.getPromocion() != null) {
+						PromocionF promocion = new PromocionF();
+						promocion.setCantidad(linea.getCantidad());
+						promocion.setNicknameProveedor(linea.getNicknameProveedor());
+						promocion.setNombre(linea.getPromocion());
+						promocion.setPrecio(linea.getPrecio());
+						promocionesF.add(promocion);
+						entityM.persist(promocion);
+					}
+				}
+				// agrego la factura asociada a las lineas que ya persisti
+				FacturaF factura = new FacturaF();
+				// factura.setFecha(dtReserva.getFCreacion()); //es la fecha de la reserva o la fecha del momento en que se factura??
+				factura.setIdReserva(idReserva);
+				factura.setFecha(new Date());
+				factura.setMonto(dtReserva.getPrecioTotal());
+				factura.setNicknameCliente(nickname); // y el cliente en la reserva??? suponemos que esta marcado en nickname
+				factura.setServicios(serviciosF);
+				factura.setPromociones(promocionesF);
+				entityM.persist(factura);
+				entityM.flush();
+				entityM.getTransaction().commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				entityM.getTransaction().rollback();
+			} finally {
+				entityM.close();
+				entityMF.close();
+			}
+		} else {
+			System.out.println("la factura ya se encuentra persistida");
+		}
+	}
+
+	@Override
+	public void limpiarBD() {
+		EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
+		EntityManager entityM = entityMF.createEntityManager();
+		try {
+			entityM.getTransaction().begin();
+			Query queryS = entityM.createQuery("DELETE FROM ServicioF");
+			Query queryP = entityM.createQuery("DELETE FROM PromocionF");
+			Query queryF = entityM.createQuery("DELETE FROM FacturaF");
+			queryS.executeUpdate();
+			queryP.executeUpdate();
+			queryF.executeUpdate();
+			entityM.getTransaction().commit();
+			System.out.println("Se borraron todas las facturas de la base");
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityM.getTransaction().rollback();
+		} finally {
+			entityM.close();
+			entityMF.close();
+		}
+	}
+
+	@Override
+	public DTFacturaF verFactura(int idReserva) {
+		//si se llamó a esta operación es porque la factura de ese idReserva está en la base
+		EntityManagerFactory entityMF = Persistence.createEntityManagerFactory("ServidorCentralPU");
+		EntityManager entityM = entityMF.createEntityManager();
+		seleccionarReserva(idReserva);
+		String idR = Integer.toString(idReserva);
+		//System.out.println("uosa");
+		DTFacturaF dtF = null;
+		try {
+			entityM.getTransaction().begin();
+
+			//obtengo el id de la factura asociada al idReserva
+			Query query = entityM.createQuery("Select f from FacturaF f where f.idReserva = ?1");
+			query.setParameter(1, idReserva);
+			//long idFactura = (long) query.getSingleResult();
+			FacturaF factura = (FacturaF) query.getSingleResult(); //asumimos que hay una sola factura por reserva
+
+			long idFactura = factura.getId();
+			System.out.println("factura " + idFactura);
+			System.out.println("reserva " + factura.getIdReserva());
+			System.out.println("monto " + factura.getMonto());
+			System.out.println("cliente " + factura.getNicknameCliente());
+
+			//obtengo los id's de los servicios asociados al id de la factura
+			Collection<ServicioF> servis = factura.getServicios();
+			Set<ServicioF> servicios = new HashSet();
+			Iterator<ServicioF> iter = servis.iterator();
+			while (iter.hasNext()) {
+				ServicioF servi = iter.next();
+				servicios.add(servi);
+				System.out.println("servi " + servi.getNombre());
+			}
+			//obtengo los id's de las promociones asociadas al id de la factura 
+			Collection<PromocionF> promos = factura.getPromociones();
+			Set<PromocionF> promociones = new HashSet();
+			Iterator<PromocionF> iter2 = promos.iterator();
+			while (iter2.hasNext()) {
+				PromocionF promo = iter2.next();
+				promociones.add(promo);
+				System.out.println("promo " + promo.getNombre());
+			}
+			//armo el DTFacturaF
+			dtF = factura.crearDTFacturaF();
+			entityM.getTransaction().commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entityM.getTransaction().rollback();
+		} finally {
+			entityM.close();
+			entityMF.close();
+		}
+		return dtF;
+	}
+
 	@Override
 	public boolean eliminarReserva() {
 		ManejadorReservas manejadorR = ManejadorReservas.getInstance();

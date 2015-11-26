@@ -20,17 +20,24 @@ public class Carrito extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		processRequest(request, response);
-		//solo redirige al carrito
-		request.getRequestDispatcher("/pages/carrito.jsp").forward(request, response);
+        HttpSession session = request.getSession();
+		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
+            processRequest(request, response);
+            //solo redirige al carrito
+            request.getRequestDispatcher("/pages/carrito.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/Errores").forward(request, response);
+        }
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+        HttpSession session = request.getSession();
+		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
 		processRequest(request, response);
 		//aca se reciben parametros y se modifica la reserva (agregando lineas)
-		HttpSession session = request.getSession(false);
+		
 		URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
@@ -74,5 +81,8 @@ public class Carrito extends HttpServlet {
 		session.setAttribute("cant_items", ((Integer) session.getAttribute("cant_items")) + 1);
 		session.setAttribute("reservaTemporal", reservaTemporal);
 		request.getRequestDispatcher("/pages/carrito.jsp").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/Errores").forward(request, response);
+        }
 	}
 }

@@ -95,7 +95,8 @@ public class Publicador {
 	@WebMethod
 	public WrapperVerServicio verServicio(
 			@WebParam(name = "id_servicio") String idServicio,
-			@WebParam(name = "id_proveedor") String idProveedor
+			@WebParam(name = "id_proveedor") String idProveedor,
+            @WebParam(name = "esCliente") Boolean esCliente
 	) {
 		//hay que ver como pido las clases de la lógica cuando se saca el .jar
 		Fabrica f = Fabrica.getInstance();
@@ -104,9 +105,11 @@ public class Publicador {
 		ctrlProductos.seleccionarServicio(dtMin);
 		//necesito el nickname del proveedor
 		//y el resto de la info del servicio
-		ctrlProductos.agregarAccesoAServicio(dtMin);
+		if (esCliente){
+            ctrlProductos.agregarAccesoAServicio(dtMin);
+        }
 		WrapperVerServicio result = new WrapperVerServicio();
-		result.dtServicio = ctrlProductos.infoServicio();;
+		result.dtServicio = ctrlProductos.infoServicio();
 		//busco categorias y las seteo como atributo a pasarle a la pagina jsp
 		result.categorias = ctrlProductos.listarCategoriasServicio();
 		//devuelvo una lista con bytes para generar las imagenes
@@ -763,11 +766,9 @@ public class Publicador {
 
 	@WebMethod
 	public boolean verificarProveedor(String idProveedor, String contrasena) {
-
-		Fabrica f = Fabrica.getInstance();
+    	Fabrica f = Fabrica.getInstance();
 		ICtrlUsuarios ctrlU = f.getICtrlUsuarios();
 		return ctrlU.idCorrectaProveedor(idProveedor) && ctrlU.pwCorrectaProveedor(idProveedor, contrasena);
-
-	}
+    }
 
 }

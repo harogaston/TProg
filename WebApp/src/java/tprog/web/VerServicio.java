@@ -30,7 +30,13 @@ public class VerServicio extends HttpServlet {
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idServicio = request.getParameter("idServicio");
 		String idProveedor = request.getParameter("idProveedor");
-		WrapperVerServicio wrapper = proxy.verServicio(idServicio, idProveedor);
+        boolean esCliente;
+        if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE){
+            esCliente = true;
+        } else {
+            esCliente = false;
+        }
+		WrapperVerServicio wrapper = proxy.verServicio(idServicio, idProveedor, esCliente);
 		request.setAttribute("idProveedor", idProveedor);
 		request.setAttribute("infoServicio", wrapper.getDtServicio());
 		Set<String> categorias = new HashSet<>(wrapper.getCategorias());

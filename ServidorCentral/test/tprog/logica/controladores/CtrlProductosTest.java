@@ -574,7 +574,7 @@ public class CtrlProductosTest {
     public void testObtenerRankingServicios() {
         System.out.println("obtenerRankingServicios");
         CtrlProductos instance = new CtrlProductos();
-        assertFalse(instance.obtenerRankingServicios().isEmpty());
+        assertFalse(instance.obtenerRankingServicios().getRanking().isEmpty());
     }
 
     /**
@@ -697,8 +697,8 @@ public class CtrlProductosTest {
     public void testAgregarAccesoAServicio() {
         System.out.println("agregarAccesoAServicio");
         instance.agregarAccesoAServicio(new DTMinServicio("Proveedor", "EsteServicio"));
-        assertEquals("EsteServicio", instance.obtenerRankingServicios().get(0).getServicio().getIdServicio());
-        assertEquals(1, instance.obtenerRankingServicios().get(0).getCantAccesos());
+        assertEquals("EsteServicio", instance.obtenerRankingServicios().getRanking().get(0).getServicio().getIdServicio());
+        assertEquals(1, instance.obtenerRankingServicios().getRanking().get(0).getCantAccesos());
     }
 
     /**

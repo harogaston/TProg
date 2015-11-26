@@ -16,4 +16,5 @@ public class WrapperVerServicio {
 	public DTServicio dtServicio;
 	public Set<String> categorias;
 	public List<byte[]> imagenes;
+    public boolean esCliente;
 }

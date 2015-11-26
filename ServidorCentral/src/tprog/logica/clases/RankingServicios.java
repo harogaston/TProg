@@ -7,8 +7,6 @@ public class RankingServicios {
     
     public RankingServicios() {
         ranking = new ArrayList();
-        for (int i = 0; i < 10; i++)
-            ranking.add(null);
     }
     
     public ArrayList <ItemRanking> getRanking() {
@@ -16,22 +14,26 @@ public class RankingServicios {
     }
     
     public void insertarItemOrdenado(ItemRanking item){
-        if (ranking.get(9) == null || ranking.get(9).getCantAccesos() < item.getCantAccesos()) {
+        if (item.getCantAccesos() != 0 
+                && (ranking.size() < 10 || ranking.get(9).getCantAccesos() < item.getCantAccesos())) {
             boolean agregado = false;
             int indice = 0;
             while(!agregado && indice < ranking.size()) {
-                if (ranking.get(indice) != null
-                        && ranking.get(indice).getCantAccesos() < item.getCantAccesos()){
+                if (ranking.get(indice).getCantAccesos() < item.getCantAccesos()){
                     ranking.add(indice, item);
                     agregado = true;
-                } else if (ranking.get(indice) == null){
+                } else if (ranking.get(indice).getCantAccesos() == item.getCantAccesos() 
+                        && ranking.get(indice).getServicio().getIdServicio().compareTo(
+                                item.getServicio().getIdServicio()) > 0) {
                     ranking.add(indice, item);
                     agregado = true;
                 } else {
                     indice++;
                 }
             }
-            ranking.remove(10);
+            if (!agregado && indice == ranking.size() && ranking.size() < 10){
+                ranking.add(indice, item);
+            }
         }
     }
 }

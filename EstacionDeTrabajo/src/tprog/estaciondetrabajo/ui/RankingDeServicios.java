@@ -8,6 +8,7 @@ package tprog.estaciondetrabajo.ui;
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -29,8 +30,12 @@ public class RankingDeServicios extends javax.swing.JInternalFrame {
     RankingDeServicios(ICtrlProductos ctrlProductos) {
         initComponents();
         this.ctrlProductos = ctrlProductos;
-        ArrayList<ItemRanking> ranking = ctrlProductos.obtenerRankingServicios();
-        cargarTablaBonita(ranking);
+        ArrayList<ItemRanking> ranking = ctrlProductos.obtenerRankingServicios().getRanking();
+        if (ranking.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Los Servicios del Sistema no hay sido accedidos por ningún cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            cargarTablaBonita(ranking);
+        }
         
     }
     private void cargarTablaBonita(ArrayList<ItemRanking> listaAccesos){

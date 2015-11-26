@@ -1,10 +1,9 @@
 package tprog.logica.interfaces;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.swing.tree.DefaultMutableTreeNode;
-import tprog.logica.clases.ItemRanking;
+import tprog.logica.clases.RankingServicios;
 import tprog.logica.dt.DTMinPromocion;
 import tprog.logica.dt.DTMinServicio;
 import tprog.logica.dt.DTPromocion;
@@ -85,7 +84,7 @@ public interface ICtrlProductos {
     
     public Set<DTPromocion> listarPromocionesPorTermino(String termino);
 
-    public ArrayList<ItemRanking> obtenerRankingServicios();
+    public RankingServicios obtenerRankingServicios();
 
     public void agregarAccesoAServicio(DTMinServicio dtMin);
     

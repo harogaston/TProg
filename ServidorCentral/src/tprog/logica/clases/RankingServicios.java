@@ -24,7 +24,7 @@ public class RankingServicios {
                     agregado = true;
                 } else if (ranking.get(indice).getCantAccesos() == item.getCantAccesos() 
                         && ranking.get(indice).getServicio().getIdServicio().compareTo(
-                                item.getServicio().getIdServicio()) < 0) {
+                                item.getServicio().getIdServicio()) > 0) {
                     ranking.add(indice, item);
                     agregado = true;
                 } else {

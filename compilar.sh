@@ -1,4 +1,4 @@
-# seteo de ANT_HOME
+﻿# seteo de ANT_HOME
 export ANT_HOME=~/apache-ant-1.9.6/
 
 # seteo de private.properties
@@ -15,7 +15,7 @@ STR=$'deploy.ant.properties.file=/ens/home01/m/marccio.silva/.netbeans/8.0/tomca
 # STR=$'deploy.ant.properties.file=/home/marccio/.netbeans/8.0.2/tomcat80.properties\nj2ee.server.domain=/home/marccio/.netbeans/8.0.2/apache-tomcat-8.0.15.0_base\nj2ee.server.home=/usr/local/apache-tomcat-8.0.15\nj2ee.server.instance=tomcat80:home=/usr/local/apache-tomcat-8.0.15:base=apache-tomcat-8.0.15.0_base\njavac.debug=true\njavadoc.preview=true\nselected.browser=default\nuser.properties.file=/home/marccio/.netbeans/8.0.2/build.properties'
 
 # martin fing
-#STR=$'deploy.ant.properties.file=/ens/home01/m/martin.rucci/.netbeans/8.0/tomcat80.properties\nj2ee.server.home=/ens/home01/m/martin.rucci/apache-tomcat-8.0.28\nj2ee.server.instance=tomcat80:home=/ens/home01/m/martin.rucci/apache-tomcat-8.0.28\nj2ee.server.instance=tomcat80:home=/ens/home01/m/martin.rucci/apache-tomcat-8.0.28/\njavac.debug=true\njavadoc.preview=true\nselected.browser=default'
+#STR=$'deploy.ant.properties.file=/ens/home01/m/martin.rucci/.netbeans/8.0.2/tomcat80.properties\nj2ee.server.home=/ens/home01/m/martin.rucci/apache-tomcat-8.0.28\nj2ee.server.instance=tomcat80:home=/ens/home01/m/martin.rucci/apache-tomcat-8.0.28\njavac.debug=true\njavadoc.preview=true\nselected.browser=default\nuser.properties.file=/ens/home01/m/martin.rucci/.netbeans/8.0.2/build.properties'
 
 # gaston
 #STR=$''

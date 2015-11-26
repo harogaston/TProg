@@ -10,16 +10,6 @@
 <project name="WebApp" default="default" basedir=".">
     <description>Builds, tests, and runs the project WebApp.</description>
     <import file="nbproject/build-impl.xml"/>
-    <target name="wsimport-init" depends="init">
-        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
-        <taskdef name="wsimport" classname="com.sun.tools.ws.Ant.WsImport">
-            <classpath>
-                <fileset dir="./extra-lib">
-                    <include name="**/*.jar"/>
-                </fileset>
-            </classpath>
-        </taskdef>
-    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 

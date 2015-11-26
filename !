@@ -1,7 +1,0 @@
-deploy.ant.properties.file=/ens/home01/m/marccio.silva/.netbeans/8.0/tomcat80.properties
-j2ee.server.home=/ens/home01/m/marccio.silva/apache-tomcat-8.0.28
-j2ee.server.instance=tomcat80:home=/ens/home01/m/marccio.silva/apache-tomcat-8.0.28
-j2ee.server.instance=tomcat80:home=/ens/home01/m/marccio.silva/apache-tomcat-8.0.28/
-javac.debug=true
-javadoc.preview=true
-selected.browser=default ./WebApp/nbproject/private/private.properties

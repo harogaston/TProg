@@ -3,6 +3,8 @@
 # esto es para que cada uno descomente su private.properties dependiendo de la cuenta
 # o maquina en la que esté
 
+mkdir ./WebApp/nbproject/private/
+
 # marccio fing
 # STR=$'deploy.ant.properties.file=/ens/home01/m/marccio.silva/.netbeans/8.0/tomcat80.properties\nj2ee.server.home=/ens/home01/m/marccio.silva/apache-tomcat-8.0.28\nj2ee.server.instance=tomcat80:home=/ens/home01/m/marccio.silva/apache-tomcat-8.0.28\nj2ee.server.instance=tomcat80:home=/ens/home01/m/marccio.silva/apache-tomcat-8.0.28/\njavac.debug=true\njavadoc.preview=true\nselected.browser=default'
 # marccio casa

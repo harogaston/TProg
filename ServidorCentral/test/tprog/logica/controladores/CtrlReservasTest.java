@@ -372,11 +372,12 @@ public class CtrlReservasTest {
 				DTReserva dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Facturada, 1100, lineas);
 				mr.agregarReserva(mu.getCliente("oWood"), dtR);
-                                Fabrica fabrica = Fabrica.getInstance();
-                                ICtrlReservas ctrlR = fabrica.getICtrlReservas();
-                                ctrlR.seleccionarCliente("oWood");
-                                ctrlR.confirmarFactura(1);
-                                DTFacturaF dt = ctrlR.verFactura(1);
+                                
+                                instance = new CtrlReservas();
+                                instance.seleccionarCliente("oWood");
+                                instance.confirmarFactura(1);
+                                DTFacturaF dt = instance.verFactura(1);
+                                instance.sendEmail(1);
                                 
 				//R2    S1 S2 --> S1 S4
 				lineas = new HashSet<>();
@@ -404,8 +405,8 @@ public class CtrlReservasTest {
 				dtR = new DTReserva(0, calendar.getTime(),
 						EstadoReserva.Cancelada, 135, lineas);
 				mr.agregarReserva(mu.getCliente("BruceS"), dtR);
-                ctrlR.seleccionarCliente("BruceS");
-                                ctrlR.confirmarFactura(3);
+                instance.seleccionarCliente("BruceS");
+                                instance.confirmarFactura(3);
 				//R4    S5 S6
 				lineas = new HashSet<>();
 

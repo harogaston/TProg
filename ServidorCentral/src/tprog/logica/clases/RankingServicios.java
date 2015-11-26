@@ -7,8 +7,6 @@ public class RankingServicios {
     
     public RankingServicios() {
         ranking = new ArrayList();
-        for (int i = 0; i < 10; i++)
-            ranking.add(null);
     }
     
     public ArrayList <ItemRanking> getRanking() {

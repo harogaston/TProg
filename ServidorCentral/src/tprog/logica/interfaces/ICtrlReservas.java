@@ -76,4 +76,6 @@ public interface ICtrlReservas {
     public EstadoReserva getEstadoReserva();
 
     public void liberarMemoriaControlador();
+    
+    public void sendEmail(int idReserva);
 }

@@ -25,12 +25,7 @@ public class VerServicio extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-		Properties properties = new Properties();
-		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
-		FileInputStream file = new FileInputStream(ruta);
-		properties.load(file);
-		file.close();
-		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		webservice.Publicador proxy = service.getPublicadorPort();
 		String idServicio = request.getParameter("idServicio");
@@ -59,13 +54,8 @@ public class VerServicio extends HttpServlet {
 			}
 			request.setAttribute("imagenes", rutasImagenes);
 		}
-
 		request.setAttribute("categorias", categorias);
-		if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {
-			request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
-		} else {
-			request.getRequestDispatcher("/pages/proveedor/verServicioProveedor.jsp").forward(request, response);
-		}
+		request.getRequestDispatcher("/pages/verServicio.jsp").forward(request, response);
 	}
 
 	@Override

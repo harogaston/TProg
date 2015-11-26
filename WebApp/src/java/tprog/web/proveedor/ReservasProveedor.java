@@ -40,12 +40,7 @@ public class ReservasProveedor extends HttpServlet {
 			throws ServletException, IOException, Exception_Exception {
 		response.setContentType("text/html;charset=UTF-8");
 		HttpSession session = request.getSession();
-		Properties properties = new Properties();
-		String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
-		FileInputStream file = new FileInputStream(ruta);
-		properties.load(file);
-		file.close();
-		URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+		URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 		webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 		String idProveedor = (String) session.getAttribute("usuario_logueado");
 		webservice.Publicador proxy = service.getPublicadorPort();

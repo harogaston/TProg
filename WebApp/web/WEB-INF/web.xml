@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<context-param>
-		<param-name>archivos</param-name>
-		<param-value>/tmp/</param-value>
+		<param-name>wsdl</param-name>
+		<param-value>http://localhost:9128/publicador?wsdl</param-value>
 		<description>
-			Ubicación de archivos manejados por la Web App
+			Direccion donde va a estar publicado el wsdl del web service
 		</description>
 	</context-param>
-	<Context docBase="/tmp/" path="/WebApp/images"/>
-
-
 	<servlet>
 		<servlet-name>About</servlet-name>
 		<servlet-class>tprog.web.About</servlet-class>

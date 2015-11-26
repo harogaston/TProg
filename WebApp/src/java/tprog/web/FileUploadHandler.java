@@ -33,7 +33,6 @@ public class FileUploadHandler extends HttpServlet {
 				String id = (String) request.getSession().getAttribute("usuario_logueado");
 				List<FileItem> multiparts = new ServletFileUpload(
 						new DiskFileItemFactory()).parseRequest(request);
-//				String id;
 				if (!multiparts.isEmpty()) {
 					for (FileItem item : multiparts) {
 						if (!item.isFormField()) {
@@ -42,16 +41,10 @@ public class FileUploadHandler extends HttpServlet {
 							if (!f.exists()) {
 								f.mkdir();
 							}
-//							name = new File(item.getName()).getName();
 							String rutaImagen = f.getAbsolutePath() + File.separator + id + ".jpg";
 							item.write(new File(rutaImagen));
 							byte[] data = Files.readAllBytes(Paths.get(rutaImagen));
-							Properties properties = new Properties();
-							String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
-//							FileInputStream file = new FileInputStream(ruta);
-//							properties.load(file);
-//							file.close();
-							URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+							URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 							webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 							webservice.Publicador proxy = service.getPublicadorPort();
 							ObjectFactory factory = new ObjectFactory();
@@ -60,21 +53,11 @@ public class FileUploadHandler extends HttpServlet {
 							wrapper.setNombre(id + ".jpg");
 							proxy.cambiarImagenCliente(new WrapperImagen());
 
-//							Fabrica fabrica = Fabrica.getInstance();
-//							ICtrlUsuarios ctrlU = fabrica.getICtrlUsuarios();
-//							ctrlU.seleccionarCliente((String) request.getSession().getAttribute("usuario_logueado"));
-//							ctrlU.cambiarImagenCliente("imagenes/clientes/" + id);
 						} else {
 							response.sendRedirect("VerPerfil");
 						}
 					}
-//					Path path = Paths.get(getServletContext().getRealPath("/")
-//							+ File.separator + "imagenes"
-//							+ File.separator + "clientes"
-//							+ File.separator + (id));
-
 				}
-				//File uploaded successfully
 				response.sendRedirect("VerPerfil");
 			} catch (Exception ex) {
 				response.sendRedirect("VerPerfil");

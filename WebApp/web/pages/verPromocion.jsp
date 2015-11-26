@@ -56,6 +56,7 @@
                         <div class="panel-body">
                             <table class="table table-hover">
                                 <tbody>
+									<% if (session.getAttribute("tipo_usuario") == TipoUsuario.CLIENTE) {%>
                                     <tr>
                                         <td>Proveedor</td>
                                         <td>
@@ -65,6 +66,7 @@
 											</form>
 										</td>
                                     </tr>
+									<% }%>
                                     <tr>
                                         <td>Descuento</td>
                                         <td><%=Float.toString(infoPromocion.getDescuento())%>%</td>
@@ -110,13 +112,7 @@
 							int i = 0;
 
 							for (Map.Entry<DtMinServicio, Integer> nodo : servicios.entrySet()) {
-//                                System.out.println(nodo.getKey() + "/" + nodo.getValue());
-								Properties properties = new Properties();
-								String ruta = System.getProperty("user.home") + "/.Help4Travel/config.properties";
-								FileInputStream file = new FileInputStream(ruta);
-								properties.load(file);
-								file.close();
-								URL wsdlLocation = new URL(properties.getProperty("publicador") + "?wsdl");
+								URL wsdlLocation = new URL(getServletContext().getInitParameter("wsdl"));
 								webservice.PublicadorService service = new webservice.PublicadorService(wsdlLocation);
 								webservice.Publicador proxy = service.getPublicadorPort();
 								DtServicio servicio = proxy.seleccionarInfoServicio(nodo.getKey());

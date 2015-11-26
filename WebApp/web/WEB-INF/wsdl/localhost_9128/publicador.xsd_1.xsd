@@ -166,14 +166,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="wrapperVerServicio">
-<xs:sequence>
-<xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
-<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="wrapperNotificacionesProveedor">
 <xs:sequence>
 <xs:element name="notificaciones" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
@@ -215,6 +207,15 @@
 <xs:element name="tipoOrden" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="arbolCategorias" type="xs:string" minOccurs="0"></xs:element>
 <xs:element name="terminosTypeAhead" type="xs:string" minOccurs="0"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="wrapperVerServicio">
+<xs:sequence>
+<xs:element name="dtServicio" type="tns:dtServicio" minOccurs="0"></xs:element>
+<xs:element name="categorias" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="imagenes" type="xs:base64Binary" nillable="true" minOccurs="0" maxOccurs="unbounded"></xs:element>
+<xs:element name="esCliente" type="xs:boolean"></xs:element>
 </xs:sequence>
 </xs:complexType>
 

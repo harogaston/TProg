@@ -9,7 +9,7 @@ public class RankingServicios {
         ranking = new ArrayList();
     }
     
-    public ArrayList <ItemRanking> getRanking() {
+    public ArrayList<ItemRanking> getRanking(){
         return ranking;
     }
     

@@ -2,7 +2,7 @@
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <context-param>
         <param-name>wsdl</param-name>
-        <param-value>http://localhost:9128/publicador?wsdl</param-value>
+        <param-value>http://192.168.1.31:9128/publicador?wsdl</param-value>
         <description>
 			Direccion donde va a estar publicado el wsdl del web service
 		</description>

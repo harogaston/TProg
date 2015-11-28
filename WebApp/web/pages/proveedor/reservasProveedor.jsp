@@ -30,9 +30,9 @@
                 <div class="panel-group" id="accordionReservas">
                     <%	int i = 0;
 
-                        for (WrapperReserva wrapper : (List<WrapperReserva>) request.getAttribute("reservas")) {
-                            i++;
-                            DtReserva dtR = wrapper.getReserva();
+						for (WrapperReserva wrapper : (List<WrapperReserva>) request.getAttribute("reservas")) {
+							i++;
+							DtReserva dtR = wrapper.getReserva();
 
 
                     %>
@@ -49,23 +49,23 @@
                                     <span class="text-muted">Estado: </span> <%=dtR.getEstado().value()%><br>
                                     <span class="text-muted">Cliente: </span> <%=wrapper.getNickCliente()%><br>
                                     <%
-                                        String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
-                                                + Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"
-                                                + Integer.toString(dtR.getFCreacion().getYear()) + "\n";
+										String fCreacion = Integer.toString(dtR.getFCreacion().getDay()) + "-"
+												+ Integer.toString(dtR.getFCreacion().getMonth() + 1) + "-"
+												+ Integer.toString(dtR.getFCreacion().getYear()) + "\n";
                                     %>
                                     <span class="text-muted">Fecha de Creación: </span><%=fCreacion%><br>
-                                    <span class="text-muted">Precio Total: </span><%=dtR.getPrecioTotal()%><br>
+                                    <!--<span class="text-muted">Precio Total: </span><%=dtR.getPrecioTotal()%><br>-->
                                     <div class="panel-group" id=accordionLineas">
                                         <div class="accordion-group">
                                             <div class="panel panel-warning">
                                                 <%	int w = 0;
-                                                    float subtotal = 0;
-                                                    List<DtLineaReserva> lineas = dtR.getLineasReserva();
-                                                    int j = 0;
-                                                    for (DtLineaReserva linea : lineas) {
-                                                        j++;
-                                                        subtotal += linea.getPrecio() * linea.getCantidad();
-                                                        w++;
+													float subtotal = 0;
+													List<DtLineaReserva> lineas = dtR.getLineasReserva();
+													int j = 0;
+													for (DtLineaReserva linea : lineas) {
+														j++;
+														subtotal += linea.getPrecio() * linea.getCantidad();
+														w++;
 
                                                 %>
                                                 <div class="panel-heading" data-toggle="collapse" data-parent="#accordionLineas" href="#h<%=i%><%=j%>">
@@ -76,14 +76,14 @@
                                                 <div id="h<%=i%><%=j%>" class="panel-collapse collapse">
                                                     <div class="panel-body">
                                                         <span class="text-muted">Tipo: </span> <% if (linea.getServicio() != null) {%> Servicio <%} else {%> Promoción <%} %><br>
-                                                        <span class="text-muted">Descripcion: </span> <% if (linea.getServicio() != null) {%> <%=linea.getServicio()%> <%} else {%> <%=linea.getPromocion()%> <%}%> <br>  
-                                                        <span class="text-muted">Precio unitario: </span> $<%=linea.getPrecio()%><br>                    
-                                                        <span class="text-muted">Cantidad: </span> <%=linea.getCantidad()%><br>                     
-                                                        <span class="text-muted">Subtotal: </span> $<%=(linea.getPrecio() * linea.getCantidad())%><br>      
+                                                        <span class="text-muted">Descripcion: </span> <% if (linea.getServicio() != null) {%> <%=linea.getServicio()%> <%} else {%> <%=linea.getPromocion()%> <%}%> <br>
+                                                        <span class="text-muted">Precio unitario: </span> $<%=linea.getPrecio()%><br>
+                                                        <span class="text-muted">Cantidad: </span> <%=linea.getCantidad()%><br>
+                                                        <span class="text-muted">Subtotal: </span> $<%=(linea.getPrecio() * linea.getCantidad())%><br>
                                                     </div>
                                                 </div>
                                                 <%
-                                                    }
+													}
                                                 %>
                                             </div>
                                         </div>
@@ -126,13 +126,13 @@
                         </div>
                     </div>
                     <%
-                        }// cierra for
+						}// cierra for
                     %>
                 </div>
                 <%  } else { %>
                 <p> Usted no posee reservas </p>
                 <%
-                    }
+					}
                 %>
             </div>
 
@@ -141,25 +141,25 @@
     </body><%@include file="/pages/templates/footer.jspf" %>
 </html>
 <script>
-    /**
-     * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
-     */
-    $(function () {
-        function reposition() {
-            var modal = $(this),
-                    dialog = modal.find('.modal-dialog');
-            modal.css('display', 'block');
+	/**
+	 * Vertically center Bootstrap 3 modals so they aren't always stuck at the top
+	 */
+	$(function () {
+		function reposition() {
+			var modal = $(this),
+					dialog = modal.find('.modal-dialog');
+			modal.css('display', 'block');
 
-            // Dividing by two centers the modal exactly, but dividing by three
-            // or four works better for larger screens.
-            dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
-        }
-        // Reposition when a modal is shown
-        $('.modal').on('show.bs.modal', reposition);
-        // Reposition when the window is resized
-        $(window).on('resize', function () {
-            $('.modal:visible').each(reposition);
-        });
+			// Dividing by two centers the modal exactly, but dividing by three
+			// or four works better for larger screens.
+			dialog.css("margin-top", Math.max(0, ($(window).height() - dialog.height()) / 2));
+		}
+		// Reposition when a modal is shown
+		$('.modal').on('show.bs.modal', reposition);
+		// Reposition when the window is resized
+		$(window).on('resize', function () {
+			$('.modal:visible').each(reposition);
+		});
 
-    });
+	});
 </script>

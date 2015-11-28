@@ -71,7 +71,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemActualizarServicio = new javax.swing.JMenuItem();
         menuItemCancelarReserva = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        registroAccesos = new javax.swing.JMenuItem();
         rankingServicios = new javax.swing.JMenuItem();
 
         jMenuItem6.setText("jMenuItem6");
@@ -218,14 +217,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Estadísticas");
 
-        registroAccesos.setText("Registro de Accesos");
-        registroAccesos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registroAccesosActionPerformed(evt);
-            }
-        });
-        jMenu1.add(registroAccesos);
-
         rankingServicios.setText("Ranking Servicios");
         rankingServicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -355,11 +346,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 		altaDePromocion.initCheck();
     }//GEN-LAST:event_menuItemAltaPromocionActionPerformed
 
-    private void registroAccesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroAccesosActionPerformed
-		RegistroDeAccesos registroAccesos = new RegistroDeAccesos(registro.getAccesos());
-		center(registroAccesos);
-    }//GEN-LAST:event_registroAccesosActionPerformed
-
     private void rankingServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankingServiciosActionPerformed
 		RankingDeServicios rankingDeServicios = new RankingDeServicios(fabrica.getICtrlProductos());
 		center(rankingDeServicios);
@@ -396,6 +382,5 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemVerInfoServicio;
     private javax.swing.JMenu menuModificaciones;
     private javax.swing.JMenuItem rankingServicios;
-    private javax.swing.JMenuItem registroAccesos;
     // End of variables declaration//GEN-END:variables
 }

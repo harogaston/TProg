@@ -2,6 +2,7 @@ package tprog.logica.controladores;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -131,18 +132,13 @@ public class CtrlReservas implements ICtrlReservas {
 
 	@Override
 	public DTReserva mostrarReservaTemporal() {
-
-		Date fechaTemp = new Date();
-		int anio = fechaTemp.getYear() + 1900;
-		int mes = fechaTemp.getMonth();
-		int dia = fechaTemp.getDate();
-		Date fecha = new Date(anio, mes, dia);
+		Calendar calendar = Calendar.getInstance();
 		EstadoReserva estado = EstadoReserva.Registrada;
 		if (!lineasReserva.isEmpty()) {
-			return new DTReserva(-1, fecha, estado, precioTotal, lineasReserva);
+			return new DTReserva(-1, calendar.getTime(), estado, precioTotal, lineasReserva);
 		} else // -2 bandera para saber que la reserva no tiene lineas de reserva sin pasar null
 		{
-			return new DTReserva(-2, fecha, estado, precioTotal, lineasReserva);
+			return new DTReserva(-2, calendar.getTime(), estado, precioTotal, lineasReserva);
 		}
 
 	}
